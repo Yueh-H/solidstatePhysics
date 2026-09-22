@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>固態物理導論 — 資格考備考 ＆ Phys7018 修課全站總入口門戶</title>
+<title>固態物理導論 — 修課與備考入口</title>
 <style>
   :root {
     --primary: #1a4d7c;
@@ -119,17 +119,17 @@
   .section-title { font-size: 1.45em; font-weight: 800; color: var(--primary-dark); display: flex; align-items: center; gap: 0.4em; }
   .section-sub { font-size: 0.88em; color: var(--text-muted); }
 
-  /* SVG Pathway Diagram */
-  .diagram-container {
-    background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius);
-    padding: 1.5em; margin: 1.2em 0 2em; box-shadow: var(--shadow-sm); overflow-x: auto;
+  /* Flat group titles inside merged sections */
+  .group-title {
+    font-size: 1.02em; font-weight: 700; color: var(--primary-dark);
+    margin: 1.6em 0 0.7em; display: flex; align-items: center; justify-content: space-between;
   }
-  .diagram-title { font-weight: 700; font-size: 0.95em; color: var(--primary); margin-bottom: 1em; display: flex; align-items: center; gap: 0.5em; }
+  .group-title:first-of-type { margin-top: 0.4em; }
+  .group-title a { font-size: 0.82em; color: var(--primary); text-decoration: none; font-weight: 600; }
+  .group-title a:hover { text-decoration: underline; }
 
   /* Bento Grid Layouts */
-  .bento-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2em; margin-bottom: 1.5em; }
   .bento-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2em; margin-bottom: 1.5em; }
-  .bento-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1em; margin-bottom: 1.5em; }
   .bento-grid-auto { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1em; margin-bottom: 1.5em; }
 
   /* Cards */
@@ -152,10 +152,6 @@
     background: #f0f7fd; border: 1.5px solid #7dd3fc;
   }
   .card-featured-blue:hover { border-color: var(--primary); box-shadow: var(--shadow-hover); }
-  .card-featured-gold {
-    background: #fffdf5; border: 1.5px solid #fde047;
-  }
-
   .card-badge {
     display: inline-flex; align-items: center; gap: 0.3em; font-size: 0.72em; font-weight: 700;
     padding: 2px 8px; border-radius: 12px; margin-bottom: 0.8em; align-self: flex-start;
@@ -182,20 +178,6 @@
   .nav-pill b { color: var(--primary); font-weight: 700; }
   .nav-pill span { color: #64748b; font-size: 0.82em; }
 
-  /* Callout Banner */
-  .info-callout {
-    background: #ffffff; border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0;
-    padding: 1em 1.4em; margin: 1.6em 0; box-shadow: var(--shadow-sm); font-size: 0.9em;
-    display: flex; align-items: center; justify-content: space-between; gap: 1em;
-  }
-  .info-callout-text { color: #334155; }
-  .info-callout-btn {
-    background: var(--primary); color: #fff; padding: 6px 14px; border-radius: 6px;
-    font-size: 0.85em; font-weight: 600; text-decoration: none; white-space: nowrap;
-    transition: background 0.15s;
-  }
-  .info-callout-btn:hover { background: var(--primary-light); }
-
   /* Footer */
   footer {
     margin-top: 4em; padding-top: 2em; border-top: 1px solid var(--border-color);
@@ -212,7 +194,7 @@
     #sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
     #sidebar-toggle { display: block; }
     #main { padding: 4.5em 1.4em 4em; }
-    .bento-grid-3, .bento-grid-2, .bento-grid-4 { grid-template-columns: 1fr; }
+    .bento-grid-2 { grid-template-columns: 1fr; }
     .hero-title { font-size: 1.6em; }
   }
   @media print {
@@ -238,15 +220,12 @@
     <input type="text" id="portal-search" class="search-input" placeholder="搜尋模組、概念或年份..." autocomplete="off">
   </div>
 
-  <div class="nav-group-title">快捷跳轉</div>
-  <a class="nav-link" href="#featured">⚡ 重點快速啟動</a>
-  <a class="nav-link" href="#pathway">🧭 學習備考路線圖</a>
-  <a class="nav-link" href="#units">🎓 單元教學（10 單元）</a>
-  <a class="nav-link" href="#exams">✍️ 歷年資格考詳解</a>
-  <a class="nav-link" href="#labs-sims">📐 數學 Lab ＆ 模擬器</a>
-  <a class="nav-link" href="#kittel">📑 Kittel 導讀與習題</a>
-  <a class="nav-link" href="#maps">🗺️ 考點圖 ＆ 學習卡</a>
-  <a class="nav-link" href="#textbooks">📖 經典教材 ＆ 先備知識</a>
+  <div class="nav-group-title">站內單元</div>
+  <a class="nav-link" href="#start">修課作戰室</a>
+  <a class="nav-link" href="#units">單元教學</a>
+  <a class="nav-link" href="#exams">考古題詳解</a>
+  <a class="nav-link" href="#practice">教材與練習</a>
+  <a class="nav-link" href="#review">複習工具</a>
 
   <div class="nav-group-title">核心單元直達</div>
   <a class="nav-link" href="單元教學/unit01_晶體結構.html">01 晶體結構 <span class="nav-badge">必考</span></a>
@@ -260,10 +239,6 @@
   <a class="nav-link" href="單元教學/unit09_超導.html">09 超導現象</a>
   <a class="nav-link" href="單元教學/unit10_實驗與進階.html">10 實驗與進階</a>
 
-  <div class="nav-group-title">專案外部學科</div>
-  <a class="nav-link" href="../QFT/index.html">⚛️ 量子場論 I 門戶</a>
-  <a class="nav-link" href="../QFTII/index.html">🌀 量子場論 II 門戶</a>
-  <a class="nav-link" href="../README.md">🏠 AItotur 專案總覽</a>
 </nav>
 
 <!-- Main Portal Body -->
@@ -271,118 +246,40 @@
 
   <!-- Hero Header -->
   <section class="hero-banner">
-    <div class="hero-tag">🌟 NTU 應用物理所博士班資格考 ＆ Phys7018 全科系統</div>
-    <h1 class="hero-title">固態物理導論 — 全方位學習與資格考備考入口</h1>
+    <div class="hero-tag">Phys7018 修課入口 · 目標 B+</div>
+    <h1 class="hero-title">固態物理導論 — 修課與備考入口</h1>
     <p class="hero-desc">
-      專為臺大資格考與研究所課程量身打造的高等固態物理全方位門戶。
-      嚴密整合 Kittel 8th 原文與林盛煇權威教材、2013～2025 歷屆 13 卷逐題全解析、
-      10 大高中起步單元教學、8 篇數學推導 Lab 與 7 款互動物理模擬器。
+      期中考 11/02（Ch1–5）→ 期末考 12/21。單元講義、考古題、習題詳解與練習工具都在這一頁。
     </p>
     <div class="hero-metrics">
-      <div class="metric-chip">🎓 10 大核心單元（高中→資格考）</div>
-      <div class="metric-chip">✍️ 13 年資格考全詳解（2013–2025）</div>
-      <div class="metric-chip">🧮 全公式速查大全（含 Kittel 出處 Ref）</div>
-      <div class="metric-chip">🔬 7 款互動模擬器 ＆ 8 篇數學 Lab</div>
-      <div class="metric-chip">⚡ 100% 本機自包含零依賴</div>
+      <div class="metric-chip">期中 11/02 · Ch1–5</div>
+      <div class="metric-chip">期末 12/21</div>
+      <div class="metric-chip">配分：期中 40% ＋ 期末 40% ＋ Quiz 20%</div>
     </div>
   </section>
 
-  <!-- Featured Bento Actions -->
-  <section id="featured">
-    <div class="bento-grid-3">
-      <!-- Card 1: 115-1 Course Credit -->
+  <!-- Course War Room -->
+  <section id="start">
+    <div class="bento-grid-2">
       <a class="bento-card card-featured-red" href="修課折抵115-1/index.html">
         <div>
-          <span class="card-badge badge-red">🎯 修課替代方案</span>
           <div class="card-title">115-1 修課折抵 — Phys7018 作戰室</div>
           <div class="card-desc">
-            不考資格考、改修課折抵（成績 $\ge \text{B+}$ = 77 分）：評分期中 40% ＋ 期末 40% ＋ Quiz 20%，含分數逆推試算器、16 週進度推進表與停修決策樹。
+            分數逆推試算器、16 週進度推進表與停修決策樹。
           </div>
         </div>
         <div class="card-action" style="color:var(--accent-red);">進入作戰室 →</div>
       </a>
 
-      <!-- Card 2: Master Formula Sheet & Unit Tutorials -->
       <a class="bento-card card-featured-blue" href="單元教學/index.html">
         <div>
-          <span class="card-badge badge-blue">🧮 核心推薦</span>
           <div class="card-title">單元教學 ＆ 全公式速查大全</div>
           <div class="card-desc">
-            10 大單元核心公式速查（Master Formula Sheet），全部 TeX 精確渲染，包含 Kittel 8e 原文出處、林盛煇教材章節、歷年真題出處與一鍵複製 LaTeX 代碼。
+            10 大單元講義＋核心公式速查（含 Kittel 出處與一鍵複製 LaTeX）。
           </div>
         </div>
         <div class="card-action">進入單元教學與公式速查 →</div>
       </a>
-
-      <!-- Card 3: Guide & Onboarding -->
-      <a class="bento-card card-featured-gold" href="導覽.html">
-        <div>
-          <span class="card-badge badge-amber">🧭 起手式導引</span>
-          <div class="card-title">現況盤點 × 起手式導覽</div>
-          <div class="card-desc">
-            不知道從何開始？從這裡啟動：全站資源現況盤點、第一週該做什麼、單元循環六步 SOP、28 週完整複習路線圖與卡住時的求助指南。
-          </div>
-        </div>
-        <div class="card-action" style="color:var(--accent-amber);">查看起手式導覽 →</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- Inline SVG Learning Pathway -->
-  <section id="pathway">
-    <div class="diagram-container">
-      <div class="diagram-title">🧭 固態物理全科五步循環學習路線（Learning Pathway）</div>
-      <svg viewBox="0 0 980 130" width="100%" height="130" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="shadow" x="-5%" y="-10%" width="110%" height="130%">
-            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
-          </filter>
-        </defs>
-
-        <!-- Step 1 -->
-        <g transform="translate(10, 20)">
-          <rect width="170" height="85" rx="10" fill="#f0f7fd" stroke="#7dd3fc" stroke-width="1.5" filter="url(#shadow)"/>
-          <text x="16" y="32" font-size="12" font-weight="700" fill="#0369a1">STEP 1 · 錨定地基</text>
-          <text x="16" y="52" font-size="14" font-weight="800" fill="#0f2b48">考點地圖 ＆ 先備</text>
-          <text x="16" y="72" font-size="11" fill="#64748b">先備知識補帖 / 考點地圖</text>
-        </g>
-        <path d="M 185 62 L 205 62" stroke="#94a3b8" stroke-width="2"/>
-
-        <!-- Step 2 -->
-        <g transform="translate(210, 20)">
-          <rect width="170" height="85" rx="10" fill="#f0f7fd" stroke="#7dd3fc" stroke-width="1.5" filter="url(#shadow)"/>
-          <text x="16" y="32" font-size="12" font-weight="700" fill="#0369a1">STEP 2 · 觀念建立</text>
-          <text x="16" y="52" font-size="14" font-weight="800" fill="#0f2b48">單元教學 ＆ 導讀</text>
-          <text x="16" y="72" font-size="11" fill="#64748b">高中起步推導 / Kittel 導讀</text>
-        </g>
-        <path d="M 385 62 L 405 62" stroke="#94a3b8" stroke-width="2"/>
-
-        <!-- Step 3 -->
-        <g transform="translate(410, 20)">
-          <rect width="170" height="85" rx="10" fill="#fffdf5" stroke="#fde047" stroke-width="1.5" filter="url(#shadow)"/>
-          <text x="16" y="32" font-size="12" font-weight="700" fill="#9a6a1e">STEP 3 · 手算模擬</text>
-          <text x="16" y="52" font-size="14" font-weight="800" fill="#78350f">數學 Lab ＆ 模擬</text>
-          <text x="16" y="72" font-size="11" fill="#854d0e">填空推導 / 7 大物理模擬器</text>
-        </g>
-        <path d="M 585 62 L 605 62" stroke="#94a3b8" stroke-width="2"/>
-
-        <!-- Step 4 -->
-        <g transform="translate(610, 20)">
-          <rect width="170" height="85" rx="10" fill="#eef9ee" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)"/>
-          <text x="16" y="32" font-size="12" font-weight="700" fill="#15803d">STEP 4 · 真題驗收</text>
-          <text x="16" y="52" font-size="14" font-weight="800" fill="#14532d">資格考逐題詳解</text>
-          <text x="16" y="72" font-size="11" fill="#166534">2013–2025 符號就地展開</text>
-        </g>
-        <path d="M 785 62 L 805 62" stroke="#94a3b8" stroke-width="2"/>
-
-        <!-- Step 5 -->
-        <g transform="translate(810, 20)">
-          <rect width="160" height="85" rx="10" fill="#fff8f8" stroke="#fca5a5" stroke-width="1.5" filter="url(#shadow)"/>
-          <text x="16" y="32" font-size="12" font-weight="700" fill="#b91c1c">STEP 5 · 默寫通關</text>
-          <text x="16" y="52" font-size="14" font-weight="800" fill="#7f1d1d">默寫卡 ＆ 實戰</text>
-          <text x="16" y="72" font-size="11" fill="#991b1b">核心公式卡 / 修課折抵</text>
-        </g>
-      </svg>
     </div>
   </section>
 
@@ -493,13 +390,6 @@
       <a href="考古題/詳解/index.html" class="section-sub" style="color:var(--primary);text-decoration:none;font-weight:600;">進入詳解總目錄 →</a>
     </div>
 
-    <div class="info-callout">
-      <div class="info-callout-text">
-        📌 <b>三世代風格對照</b>：2013–2016 為硬核證明題庫（Bloch/KP/WF/Langevin）；2017–2018 為概念導向；2019–2025 為固定四段式架構（晶體結構、繞射、聲子、電子）。
-      </div>
-      <a href="考古題/單元整理.html" class="info-callout-btn">出題頻率分析 →</a>
-    </div>
-
     <div class="pill-grid">
       <a class="nav-pill" href="考古題/詳解/固態_2025_詳解.html"><b>2025 年詳解</b> <span>最新試題</span></a>
       <a class="nav-pill" href="考古題/詳解/固態_2024_詳解.html"><b>2024 年詳解</b> <span>四段經典</span></a>
@@ -520,204 +410,95 @@
     </div>
   </section>
 
-  <!-- Module Category 3: Math Labs & Interactive Simulations -->
-  <section id="labs-sims">
+  <!-- Textbooks & Practice Tools -->
+  <section id="practice">
     <div class="section-header">
-      <div class="section-title">📐 數學推導 Lab ＆ 🔬 物理系統互動模擬器</div>
-      <div class="section-sub">可拖參數與手動填空推導之互動工具</div>
+      <div class="section-title">教材、習題與練習工具</div>
+      <div class="section-sub">導讀 → 習題 → 動手算 → 模擬驗證</div>
     </div>
 
-    <div class="bento-grid-2">
-      <!-- Sub-Grid A: Math Labs -->
-      <div style="background:#fff;border:1px solid var(--border-color);border-radius:var(--radius);padding:1.4em;">
-        <div style="font-weight:700;color:#e65100;font-size:1.05em;margin-bottom:0.8em;display:flex;align-items:center;justify-content:space-between;">
-          <span>📐 數學推導 Lab（逐步揭露 ＋ 填空驗收）</span>
-          <a href="數學lab/index.html" style="font-size:0.8em;color:#e65100;text-decoration:none;">查看全體 8 頁 →</a>
-        </div>
-        <div class="pill-grid" style="margin-bottom:0;">
-          <a class="nav-pill" href="數學lab/lab_reciprocal.html"><b>倒晶格</b> <span>向量外積</span></a>
-          <a class="nav-pill" href="數學lab/lab_packing.html"><b>填充率</b> <span>剛球相切</span></a>
-          <a class="nav-pill" href="數學lab/lab_structure_factor.html"><b>消光</b> <span>結構因子</span></a>
-          <a class="nav-pill" href="數學lab/lab_dispersion.html"><b>色散關係</b> <span>簡正震盪</span></a>
-          <a class="nav-pill" href="數學lab/lab_nfe.html"><b>能隙</b> <span>近自由電子</span></a>
-          <a class="nav-pill" href="數學lab/lab_dos.html"><b>態密度</b> <span>1D/2D/3D</span></a>
-          <a class="nav-pill" href="數學lab/lab_madelung.html"><b>馬德隆</b> <span>交錯級數</span></a>
-          <a class="nav-pill" href="數學lab/lab_langevin.html"><b>朗之萬</b> <span>統計積分</span></a>
-        </div>
-      </div>
+    <h3 class="group-title">Kittel 章節導讀 <a href="教材/Kittel章節導讀/index.html">總目錄 →</a></h3>
+    <div class="pill-grid">
+      <a class="nav-pill" href="教材/Kittel章節導讀/ch01_晶體結構.html"><b>Ch.1</b> 晶體結構</a>
+      <a class="nav-pill" href="教材/Kittel章節導讀/ch02_倒晶格與繞射.html"><b>Ch.2</b> 倒晶格繞射</a>
+      <a class="nav-pill" href="教材/Kittel章節導讀/ch03_晶體鍵結.html"><b>Ch.3</b> 晶體鍵結</a>
+      <a class="nav-pill" href="教材/Kittel章節導讀/ch04_聲子.html"><b>Ch.4–5</b> 聲子振動</a>
+      <a class="nav-pill" href="教材/Kittel章節導讀/ch05_自由電子費米氣體.html"><b>Ch.6</b> 自由電子氣</a>
+      <a class="nav-pill" href="教材/Kittel章節導讀/ch06_能帶.html"><b>Ch.7</b> 能帶理論</a>
+      <a class="nav-pill" href="教材/Kittel章節導讀/ch07_半導體.html"><b>Ch.8</b> 半導體晶體</a>
+      <a class="nav-pill" href="教材/Kittel章節導讀/ch08_磁性.html"><b>Ch.11–12</b> 磁性物理</a>
+      <a class="nav-pill" href="教材/Kittel章節導讀/ch09_超導.html"><b>Ch.10</b> 超導現象</a>
+      <a class="nav-pill" href="教材/Kittel章節導讀/ch10_費米面與進階.html"><b>Ch.9+</b> 費米面進階</a>
+    </div>
 
-      <!-- Sub-Grid B: Simulations -->
-      <div style="background:#fff;border:1px solid var(--border-color);border-radius:var(--radius);padding:1.4em;">
-        <div style="font-weight:700;color:#5e35b1;font-size:1.05em;margin-bottom:0.8em;display:flex;align-items:center;justify-content:space-between;">
-          <span>🔬 系統互動模擬器（HTML5 Canvas 參數即時互動）</span>
-          <a href="模擬/index.html" style="font-size:0.8em;color:#5e35b1;text-decoration:none;">查看 7 大模擬 →</a>
-        </div>
-        <div class="pill-grid" style="margin-bottom:0;">
-          <a class="nav-pill" href="模擬/sim_bragg_ewald.html"><b>Ewald 球</b> <span>Bragg 繞射</span></a>
-          <a class="nav-pill" href="模擬/sim_dispersion.html"><b>晶格色散</b> <span>單雙原子鏈</span></a>
-          <a class="nav-pill" href="模擬/sim_nfe_gap.html"><b>NFE 能隙</b> <span>駐波分裂</span></a>
-          <a class="nav-pill" href="模擬/sim_tight_binding.html"><b>緊束縛</b> <span>能帶展寬</span></a>
-          <a class="nav-pill" href="模擬/sim_fermi_dos.html"><b>FD 分佈</b> <span>態密度積分</span></a>
-          <a class="nav-pill" href="模擬/sim_semiconductor.html"><b>半導體</b> <span>載子濃度</span></a>
-          <a class="nav-pill" href="模擬/sim_langevin_curie.html"><b>磁化曲線</b> <span>Langevin</span></a>
-        </div>
-      </div>
+    <h3 class="group-title">Kittel 課本習題詳解 <a href="教材/Kittel習題詳解/index.html">總目錄 →</a></h3>
+    <div class="pill-grid">
+      <a class="nav-pill" href="教材/Kittel習題詳解/ch01_晶體結構.html"><b>Ch.1 習題</b> 晶體結構</a>
+      <a class="nav-pill" href="教材/Kittel習題詳解/ch02_倒晶格與繞射.html"><b>Ch.2 習題</b> 倒晶格繞射</a>
+      <a class="nav-pill" href="教材/Kittel習題詳解/ch03_晶體鍵結.html"><b>Ch.3 習題</b> 晶體鍵結</a>
+      <a class="nav-pill" href="教材/Kittel習題詳解/ch04_聲子.html"><b>Ch.4–5 習題</b> 聲子振動</a>
+      <a class="nav-pill" href="教材/Kittel習題詳解/ch05_自由電子費米氣體.html"><b>Ch.6 習題</b> 費米氣體</a>
+      <a class="nav-pill" href="教材/Kittel習題詳解/ch06_能帶.html"><b>Ch.7 習題</b> 能帶理論</a>
+      <a class="nav-pill" href="教材/Kittel習題詳解/ch07_半導體.html"><b>Ch.8 習題</b> 半導體</a>
+      <a class="nav-pill" href="教材/Kittel習題詳解/ch08_磁性.html"><b>Ch.11–12 習題</b> 磁性</a>
+      <a class="nav-pill" href="教材/Kittel習題詳解/ch09_超導.html"><b>Ch.10 習題</b> 超導現象</a>
+      <a class="nav-pill" href="教材/Kittel習題詳解/ch10_費米面與進階.html"><b>Ch.9+ 習題</b> 費米面</a>
+    </div>
+
+    <h3 class="group-title">數學 Lab <a href="數學lab/index.html">全部 8 頁 →</a></h3>
+    <div class="pill-grid">
+      <a class="nav-pill" href="數學lab/lab_reciprocal.html"><b>倒晶格</b> <span>向量外積</span></a>
+      <a class="nav-pill" href="數學lab/lab_packing.html"><b>填充率</b> <span>剛球相切</span></a>
+      <a class="nav-pill" href="數學lab/lab_structure_factor.html"><b>消光</b> <span>結構因子</span></a>
+      <a class="nav-pill" href="數學lab/lab_dispersion.html"><b>色散關係</b> <span>簡正震盪</span></a>
+      <a class="nav-pill" href="數學lab/lab_nfe.html"><b>能隙</b> <span>近自由電子</span></a>
+      <a class="nav-pill" href="數學lab/lab_dos.html"><b>態密度</b> <span>1D/2D/3D</span></a>
+      <a class="nav-pill" href="數學lab/lab_madelung.html"><b>馬德隆</b> <span>交錯級數</span></a>
+      <a class="nav-pill" href="數學lab/lab_langevin.html"><b>朗之萬</b> <span>統計積分</span></a>
+    </div>
+
+    <h3 class="group-title">互動模擬器 <a href="模擬/index.html">7 大模擬 →</a></h3>
+    <div class="pill-grid">
+      <a class="nav-pill" href="模擬/sim_bragg_ewald.html"><b>Ewald 球</b> <span>Bragg 繞射</span></a>
+      <a class="nav-pill" href="模擬/sim_dispersion.html"><b>晶格色散</b> <span>單雙原子鏈</span></a>
+      <a class="nav-pill" href="模擬/sim_nfe_gap.html"><b>NFE 能隙</b> <span>駐波分裂</span></a>
+      <a class="nav-pill" href="模擬/sim_tight_binding.html"><b>緊束縛</b> <span>能帶展寬</span></a>
+      <a class="nav-pill" href="模擬/sim_fermi_dos.html"><b>FD 分佈</b> <span>態密度積分</span></a>
+      <a class="nav-pill" href="模擬/sim_semiconductor.html"><b>半導體</b> <span>載子濃度</span></a>
+      <a class="nav-pill" href="模擬/sim_langevin_curie.html"><b>磁化曲線</b> <span>Langevin</span></a>
     </div>
   </section>
 
-  <!-- Module Category 4: Kittel Reading & Exercises -->
-  <section id="kittel">
+  <!-- Review Tools -->
+  <section id="review">
     <div class="section-header">
-      <div class="section-title">📑 Kittel 經典教材導讀 ＆ 課本習題完整詳解</div>
-      <div class="section-sub">各含 10 大章節 · 搭配中譯本與例題解析</div>
+      <div class="section-title">複習工具與參考書</div>
+      <div class="section-sub">考前自評、默寫、查書都在這裡</div>
     </div>
 
-    <div class="bento-grid-2">
-      <!-- Kittel Guides -->
-      <div style="background:#fff;border:1px solid var(--border-color);border-radius:var(--radius);padding:1.4em;">
-        <div style="font-weight:700;color:var(--primary);font-size:1.05em;margin-bottom:0.8em;display:flex;align-items:center;justify-content:space-between;">
-          <span>📑 Kittel 章節導讀（每章含 3 個精選例題）</span>
-          <a href="教材/Kittel章節導讀/index.html" style="font-size:0.8em;color:var(--primary);text-decoration:none;">導讀總目錄 →</a>
-        </div>
-        <div class="pill-grid" style="margin-bottom:0;">
-          <a class="nav-pill" href="教材/Kittel章節導讀/ch01_晶體結構.html"><b>Ch.1</b> 晶體結構</a>
-          <a class="nav-pill" href="教材/Kittel章節導讀/ch02_倒晶格與繞射.html"><b>Ch.2</b> 倒晶格繞射</a>
-          <a class="nav-pill" href="教材/Kittel章節導讀/ch03_晶體鍵結.html"><b>Ch.3</b> 晶體鍵結</a>
-          <a class="nav-pill" href="教材/Kittel章節導讀/ch04_聲子.html"><b>Ch.4–5</b> 聲子振動</a>
-          <a class="nav-pill" href="教材/Kittel章節導讀/ch05_自由電子費米氣體.html"><b>Ch.6</b> 自由電子氣</a>
-          <a class="nav-pill" href="教材/Kittel章節導讀/ch06_能帶.html"><b>Ch.7</b> 能帶理論</a>
-          <a class="nav-pill" href="教材/Kittel章節導讀/ch07_半導體.html"><b>Ch.8</b> 半導體晶體</a>
-          <a class="nav-pill" href="教材/Kittel章節導讀/ch08_磁性.html"><b>Ch.11–12</b> 磁性物理</a>
-          <a class="nav-pill" href="教材/Kittel章節導讀/ch09_超導.html"><b>Ch.10</b> 超導現象</a>
-          <a class="nav-pill" href="教材/Kittel章節導讀/ch10_費米面與進階.html"><b>Ch.9+</b> 費米面進階</a>
-        </div>
-      </div>
-
-      <!-- Kittel Solutions -->
-      <div style="background:#fff;border:1px solid var(--border-color);border-radius:var(--radius);padding:1.4em;">
-        <div style="font-weight:700;color:#9a6a1e;font-size:1.05em;margin-bottom:0.8em;display:flex;align-items:center;justify-content:space-between;">
-          <span>🧮 Kittel 課本習題詳解（~90 題逐步算式）</span>
-          <a href="教材/Kittel習題詳解/index.html" style="font-size:0.8em;color:#9a6a1e;text-decoration:none;">習題總目錄 →</a>
-        </div>
-        <div class="pill-grid" style="margin-bottom:0;">
-          <a class="nav-pill" href="教材/Kittel習題詳解/ch01_晶體結構.html"><b>Ch.1 習題</b> 晶體結構</a>
-          <a class="nav-pill" href="教材/Kittel習題詳解/ch02_倒晶格與繞射.html"><b>Ch.2 習題</b> 倒晶格繞射</a>
-          <a class="nav-pill" href="教材/Kittel習題詳解/ch03_晶體鍵結.html"><b>Ch.3 習題</b> 晶體鍵結</a>
-          <a class="nav-pill" href="教材/Kittel習題詳解/ch04_聲子.html"><b>Ch.4–5 習題</b> 聲子振動</a>
-          <a class="nav-pill" href="教材/Kittel習題詳解/ch05_自由電子費米氣體.html"><b>Ch.6 習題</b> 費米氣體</a>
-          <a class="nav-pill" href="教材/Kittel習題詳解/ch06_能帶.html"><b>Ch.7 習題</b> 能帶理論</a>
-          <a class="nav-pill" href="教材/Kittel習題詳解/ch07_半導體.html"><b>Ch.8 習題</b> 半導體</a>
-          <a class="nav-pill" href="教材/Kittel習題詳解/ch08_磁性.html"><b>Ch.11–12 習題</b> 磁性</a>
-          <a class="nav-pill" href="教材/Kittel習題詳解/ch09_超導.html"><b>Ch.10 習題</b> 超導現象</a>
-          <a class="nav-pill" href="教材/Kittel習題詳解/ch10_費米面與進階.html"><b>Ch.9+ 習題</b> 費米面</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Module Category 5: Concept Maps & Flashcards -->
-  <section id="maps">
-    <div class="section-header">
-      <div class="section-title">🗺️ 考點地圖、知識圖譜 ＆ 學習複習卡片</div>
-      <div class="section-sub">複習自評與知識依賴追蹤</div>
-    </div>
-
-    <div class="bento-grid-4">
-      <a class="bento-card" href="考點地圖.html">
-        <div>
-          <span class="card-badge badge-blue">全科地圖</span>
-          <div class="card-title">考點 × 數學地圖</div>
-          <div class="card-desc">整本固態可考內容、梯隊分級、微積分與線性代數原理對照總表。</div>
-        </div>
-        <div class="card-action">查看考點地圖 →</div>
-      </a>
-
-      <a class="bento-card" href="知識地圖.html">
-        <div>
-          <span class="card-badge badge-green">依賴圖譜</span>
-          <div class="card-title">考古題知識地圖</div>
-          <div class="card-desc">13 卷考古題反推的知識網絡：單元依賴實線與六門外部學科輸入。</div>
-        </div>
-        <div class="card-action">查看知識網絡 →</div>
-      </a>
-
-      <a class="bento-card" href="學習卡片.html">
-        <div>
-          <span class="card-badge badge-amber">翻卡自評</span>
-          <div class="card-title">57 張從零學習卡</div>
-          <div class="card-desc">數學軌 M1–M6（向量→傅立葉→統計）＋九單元必背概念抽認測驗。</div>
-        </div>
-        <div class="card-action">開始翻卡測驗 →</div>
-      </a>
-
-      <a class="bento-card" href="默寫/ch01_原子結構_默寫卡.html">
-        <div>
-          <span class="card-badge badge-red">考前默寫</span>
-          <div class="card-title">原子結構默寫卡</div>
-          <div class="card-desc">12 格高頻公式默寫卡 ＋ 第一章全部橋框，手寫複習必備工具。</div>
-        </div>
-        <div class="card-action">開始默寫練習 →</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- Module Category 6: Raw Textbooks & Prerequisites -->
-  <section id="textbooks">
-    <div class="section-header">
-      <div class="section-title">📖 權威教科書庫 ＆ 先備知識補帖</div>
-      <div class="section-sub">直讀原文、繁中對照與數理先備修補</div>
-    </div>
-
-    <div class="bento-grid-3">
-      <a class="bento-card" href="教材/index.html">
-        <div>
-          <span class="card-badge badge-blue">經典書庫</span>
-          <div class="card-title">教材直讀庫</div>
-          <div class="card-desc">
-            C. Kittel 原文全書、繁體中文翻譯版、林盛煇教授《固態物理導論》全書、經典講義與簡報（支援全文瀏覽）。
-          </div>
-        </div>
-        <div class="card-action">進入教材庫 →</div>
-      </a>
-
-      <a class="bento-card" href="教材/先備知識/index.html">
-        <div>
-          <span class="card-badge badge-green">先備補帖</span>
-          <div class="card-title">數學 ＆ 物理先備知識</div>
-          <div class="card-desc">
-            讀教材卡住時先看：向量內外積、複數波函數、傅立葉轉換、波茲曼分佈、簡諧震盪與庫侖位能，高中起點零門檻補足。
-          </div>
-        </div>
-        <div class="card-action">查看先備補帖 →</div>
-      </a>
-
-      <a class="bento-card" href="教材/課程指定參考書.html">
-        <div>
-          <span class="card-badge badge-amber">修課書目</span>
-          <div class="card-title">Phys7018 指定參考書對照</div>
-          <div class="card-desc">
-            Kittel / Ashcroft / Simon / Cohen-Louie / Jülich：深入剖析各名著章節差異與選讀策略。
-          </div>
-        </div>
-        <div class="card-action">查看書目對照 →</div>
-      </a>
+    <div class="pill-grid">
+      <a class="nav-pill" href="考點地圖.html"><b>考點地圖</b> <span>梯隊分級</span></a>
+      <a class="nav-pill" href="知識地圖.html"><b>知識地圖</b> <span>單元依賴</span></a>
+      <a class="nav-pill" href="學習卡片.html"><b>學習卡片</b> <span>翻卡自評</span></a>
+      <a class="nav-pill" href="默寫/ch01_原子結構_默寫卡.html"><b>默寫卡</b> <span>公式默寫</span></a>
+      <a class="nav-pill" href="教材/index.html"><b>教材庫</b> <span>Kittel/中譯</span></a>
+      <a class="nav-pill" href="教材/先備知識/index.html"><b>先備補帖</b> <span>數理先修</span></a>
+      <a class="nav-pill" href="教材/課程指定參考書.html"><b>參考書對照</b> <span>書目選讀</span></a>
+      <a class="nav-pill" href="導覽.html"><b>起手式導覽</b> <span>第一週指南</span></a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
     <div>
-      <b>固態物理導論 2027 資格考 ＆ Phys7018 備考系統</b> · 
+      <b>固態物理導論 Phys7018 修課系統</b> ·
       全套自包含純前端架構 · 由 <code>solidstatePhysics/考古題/詳解/_build_html.py</code> 與專案核心維護。
     </div>
     <div class="footer-links">
-      <a href="單元教學/index.html">🎓 單元教學</a>
-      <a href="考古題/詳解/index.html">✍️ 逐題詳解</a>
-      <a href="修課折抵115-1/index.html">🎯 修課作戰室</a>
-      <a href="數學lab/index.html">📐 數學 Lab</a>
-      <a href="模擬/index.html">🔬 系統模擬</a>
-      <a href="教材/index.html">📖 教材庫</a>
-      <a href="../README.md">🏠 AItotur 專案首頁</a>
+      <a href="單元教學/index.html">單元教學</a>
+      <a href="考古題/詳解/index.html">逐題詳解</a>
+      <a href="修課折抵115-1/index.html">修課作戰室</a>
+      <a href="教材/index.html">教材庫</a>
     </div>
   </footer>
 
