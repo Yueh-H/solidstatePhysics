@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="184.635pt" height="194.926312pt" viewBox="0 0 184.635 194.926312" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-06-11T12:43:54.326242</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.6, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 194.926312 
+L 184.635 194.926312 
+L 184.635 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 40.3425 156.541313 
+L 144.2925 156.541313 
+L 144.2925 52.591313 
+L 40.3425 52.591313 
+L 40.3425 156.541313 
+z
+" clip-path="url(#pa426a099c7)" style="fill: none; stroke: #e67e22; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 92.3175 163.298062 
+C 107.893342 163.298062 122.833335 157.109715 133.847119 146.095931 
+C 144.860902 135.082148 151.04925 120.142155 151.04925 104.566312 
+C 151.04925 88.99047 144.860902 74.050477 133.847119 63.036694 
+C 122.833335 52.02291 107.893342 45.834563 92.3175 45.834563 
+C 76.741658 45.834563 61.801665 52.02291 50.787881 63.036694 
+C 39.774098 74.050477 33.58575 88.99047 33.58575 104.566312 
+C 33.58575 120.142155 39.774098 135.082148 50.787881 146.095931 
+C 61.801665 157.109715 76.741658 163.298062 92.3175 163.298062 
+L 92.3175 163.298062 
+z
+" clip-path="url(#pa426a099c7)" style="fill: none; stroke: #1a4d7c; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="92.3175" y="104.566312" transform="rotate(-0 92.3175 104.566312)">1st zone</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 6px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #1a4d7c" transform="translate(133.8975 48.471375)">into</text>
+    <text style="font-size: 6px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #1a4d7c" transform="translate(133.8975 55.190063)">2nd zone</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="92.3175" y="15.406313" transform="rotate(-0 92.3175 15.406313)">Free-electron Fermi circle vs BZ</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pa426a099c7">
+   <rect x="9.1575" y="21.406313" width="166.32" height="166.32"/>
+  </clipPath>
+ </defs>
+</svg>

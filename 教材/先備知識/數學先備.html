@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理先備知識 — 🔢 數學先備知識</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">先備知識目錄</a> &nbsp;·&nbsp; <a href="../index.html">← 教材直讀</a> &nbsp;·&nbsp; <a href="../Kittel章節導讀/index.html">📑 章節導讀</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- 固態物理數學先備 -->
+# 🔢 固態物理 — 數學先備知識
+> 讀 Kittel（[教材直讀](../index.html)）卡在數學時來這。每個概念：高中起點→為什麼 Kittel 要→範例→圖→用在哪。
+
+本頁假設你只有「高中數學 + 單變數微積分 + 基本矩陣／向量」的底子。每個概念都從你已經會的東西出發，再補上 Kittel 真正會用到的一小步。展開三角形 ▸ 看細節。
+
+---
+
+## 1. 向量內積與外積（Dot & Cross Product）
+
+<details>
+<summary><b>▸ 向量內積與外積（Dot & Cross Product）</b></summary>
+
+**你高中學過的**：
+你已經會把向量寫成分量 $\mathbf a=(a_x,a_y,a_z)$、$\mathbf b=(b_x,b_y,b_z)$，並做兩種乘法。把它們寫清楚——
+- 內積（dot product）有**分量式**與**幾何式**兩種寫法，兩者相等：
+$$\mathbf a\cdot\mathbf b = a_xb_x+a_yb_y+a_zb_z = \lvert\mathbf a\rvert\,\lvert\mathbf b\rvert\cos\theta$$
+結果是一個**純量（scalar）**。$\theta$ 是兩向量夾角；$\mathbf a\cdot\mathbf b$ 量的是「$\mathbf b$ 在 $\mathbf a$ 方向上的投影 $\times\lvert\mathbf a\rvert$」。兩向量垂直時 $\cos90^\circ=0$，內積為 $0$。
+- 外積（cross product）$\mathbf a\times\mathbf b$ 是一個**向量**，方向垂直於 $\mathbf a$、$\mathbf b$ 所在平面，指向由**右手定則**決定（右手四指從 $\mathbf a$ 掃向 $\mathbf b$，大拇指即方向 $\hat n$）；大小
+$$\lvert\mathbf a\times\mathbf b\rvert=\lvert\mathbf a\rvert\,\lvert\mathbf b\rvert\sin\theta$$
+正好等於 $\mathbf a$、$\mathbf b$ 張成的**平行四邊形面積**。分量式為 $\mathbf a\times\mathbf b=(a_yb_z-a_zb_y,\ a_zb_x-a_xb_z,\ a_xb_y-a_yb_x)$。
+
+一句話：**內積給「投影」（純量），外積給「面積與垂直方向」（向量）。**
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $\mathbf a,\mathbf b$ | 一般向量（vector），粗體表示 |
+| $a_x,a_y,a_z$ | $\mathbf a$ 的三個分量（components）；$b_x,b_y,b_z$ 同理為 $\mathbf b$ 的分量 |
+| $\lvert\mathbf a\rvert$ | 向量 $\mathbf a$ 的長度（magnitude），$\lvert\mathbf a\rvert=\sqrt{a_x^2+a_y^2+a_z^2}$ |
+| $\theta$ | 兩向量之間的夾角（angle between vectors） |
+| $\hat n$ | 單位法向量（unit normal）：垂直於 $\mathbf a,\mathbf b$ 平面、長度為 $1$，方向由右手定則定 |
+| $\hat x,\hat y,\hat z$ | 三個座標軸方向的單位向量（unit vectors） |
+| $\mathbf a_1,\mathbf a_2,\mathbf a_3$ | 晶格的三個基本平移向量（primitive translation vectors） |
+| $\mathbf b_1,\mathbf b_2,\mathbf b_3$ | 倒晶格基向量（reciprocal lattice basis），由 $\mathbf a_i$ 算出 |
+| $V$ | 原胞體積（primitive cell volume），$V=\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)$ |
+| $\delta_{ij}$ | Kronecker delta：$i=j$ 時為 $1$，否則為 $0$ |
+| $a$ | 晶格常數（lattice constant），立方晶格的邊長 |
+| $\pi$ | 圓周率（範例中 $2\pi$ 來自倒晶格定義） |
+
+**為什麼 Kittel 需要**：
+晶體由三個基本平移向量 $\mathbf a_1,\mathbf a_2,\mathbf a_3$ 撐起。只用內積與外積，就能算出兩件貫穿全書的關鍵量：
+1. **原胞體積 $V$**——決定密度、結構因子歸一化、態數計數（第 5 章）都要它。
+2. **倒晶格基向量 $\mathbf b_1,\mathbf b_2,\mathbf b_3$**——第 2 章繞射理論、Bragg 條件 $\mathbf k'-\mathbf k=\mathbf G$、以及第 6 章週期位能展開的整個「倒空間」地基。
+這兩者**沒有新物理**，全是「內積給投影、外積給面積」這兩招直接組出來的。
+
+**第一步：純量三重積就是晶胞體積**
+把外積 $\mathbf a_2\times\mathbf a_3$ 想成「底面平行四邊形」：它是一個向量，方向垂直底面、大小等於底面積。再和第三邊 $\mathbf a_1$ 做**內積**，等於「把 $\mathbf a_1$ 投影到底面法向 × 底面積」＝高 × 底面積，正是平行六面體（晶胞）的體積：
+$$V=\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)$$
+這個「外積得面積向量、再內積取高」的組合叫**純量三重積（scalar triple product）**。交換次序只差正負號，取絕對值即體積：$V=\lvert\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)\rvert$。
+
+**第二步：用同樣兩招建倒晶格**
+倒晶格基向量定義為（$i,j,k$ 為 $1,2,3$ 的輪換）：
+$$\mathbf b_1 = 2\pi\,\frac{\mathbf a_2 \times \mathbf a_3}{V},\qquad \mathbf b_2 = 2\pi\,\frac{\mathbf a_3 \times \mathbf a_1}{V},\qquad \mathbf b_3 = 2\pi\,\frac{\mathbf a_1 \times \mathbf a_2}{V}$$
+讀法：$\mathbf b_1$ 的方向 ＝ $\mathbf a_2\times\mathbf a_3$（垂直於 $\mathbf a_2,\mathbf a_3$ 平面），大小經 $2\pi/V$ 正規化。它們滿足貫穿第 2、6 章的**關鍵正交性質**：
+$$\boxed{\,\mathbf a_i\cdot\mathbf b_j = 2\pi\,\delta_{ij}\,}$$
+意思是 $i=j$ 時內積為 $2\pi$，$i\neq j$ 時為 $0$。下面〈多一步〉會把這條**從定義直接證出來**——它不是硬塞的，是外積的幾何逼出來的。
+
+**範例（每個符號都代進去算）**：
+取最簡單的簡單立方晶格（simple cubic），$\mathbf a_1=a\hat x,\ \mathbf a_2=a\hat y,\ \mathbf a_3=a\hat z$，邊長 $a$。
+- **體積**：先算外積 $\mathbf a_2\times\mathbf a_3=a\hat y\times a\hat z=a^2(\hat y\times\hat z)=a^2\hat x$，再內積
+$$V=\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)=a\hat x\cdot a^2\hat x=a^3$$
+正是立方體體積 ✓。
+- **倒晶格**：$\mathbf b_1=2\pi\dfrac{\mathbf a_2\times\mathbf a_3}{V}=2\pi\dfrac{a^2\hat x}{a^3}=\dfrac{2\pi}{a}\hat x$。同理 $\mathbf b_2=\dfrac{2\pi}{a}\hat y$、$\mathbf b_3=\dfrac{2\pi}{a}\hat z$。倒晶格也是立方，邊長 $\dfrac{2\pi}{a}$。
+- **驗證正交性質**：$\mathbf a_1\cdot\mathbf b_1=a\hat x\cdot\dfrac{2\pi}{a}\hat x=2\pi$ ✓（$i=j$）；$\mathbf a_1\cdot\mathbf b_2=a\hat x\cdot\dfrac{2\pi}{a}\hat y=0$ ✓（$i\neq j$，因 $\hat x\cdot\hat y=0$）。
+
+**🔍 多一步（證 $\mathbf b_1$ 為何自動滿足正交性質）**：
+這步把 $\mathbf a_i\cdot\mathbf b_j=2\pi\delta_{ij}$「為什麼一定成立」補滿——關鍵只有一條外積性質：**任何向量與「含它自己的外積」內積為 $0$**。
+
+1. **對角項 $\mathbf a_1\cdot\mathbf b_1=2\pi$**：直接代定義
+$$\mathbf a_1\cdot\mathbf b_1=\mathbf a_1\cdot\left(2\pi\frac{\mathbf a_2\times\mathbf a_3}{V}\right)=\frac{2\pi}{V}\,\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)=\frac{2\pi}{V}\cdot V=2\pi$$
+最後一步用了第一步的結論 $V=\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)$，分子分母的 $V$ 約掉，剩 $2\pi$ ✓。
+
+2. **非對角項 $\mathbf a_2\cdot\mathbf b_1=0$**：同樣代定義
+$$\mathbf a_2\cdot\mathbf b_1=\frac{2\pi}{V}\,\mathbf a_2\cdot(\mathbf a_2\times\mathbf a_3)$$
+現在看核心：$\mathbf a_2\times\mathbf a_3$ 這個向量**垂直於 $\mathbf a_2$**（外積結果必垂直於兩個輸入向量），所以它和 $\mathbf a_2$ 內積為 $0$——白話說就是「**$\mathbf a_2$ 與『自己參與的外積』方向互相垂直，投影為零**」。於是 $\mathbf a_2\cdot(\mathbf a_2\times\mathbf a_3)=0$，整項 $=0$ ✓。同理 $\mathbf a_3\cdot\mathbf b_1=\dfrac{2\pi}{V}\mathbf a_3\cdot(\mathbf a_2\times\mathbf a_3)=0$（這次是 $\mathbf a_3$ 與含 $\mathbf a_3$ 的外積垂直）。
+
+把三條合起來就是 $\mathbf a_i\cdot\mathbf b_1=2\pi\delta_{i1}$，對 $\mathbf b_2,\mathbf b_3$ 完全同理。**結論**：倒晶格的正交性質是「外積垂直於其輸入」這條幾何事實自動保證的，這也是為什麼後面 $\mathbf G\cdot\mathbf T=2\pi\times$整數 會那麼乾淨。
+
+**圖**：`![內積投影與外積面積](../../figs/f00_dotcross.svg)`
+
+**用在 Kittel**：第 1 章定義晶胞與堆積、第 2 章用 $\mathbf b_i$ 建倒晶格、寫 Bragg 條件 $\mathbf k'-\mathbf k=\mathbf G$。詳見 [單元 01 晶體結構](../../單元教學/unit01_晶體結構.html)、[單元 02 倒晶格與繞射](../../單元教學/unit02_倒晶格與繞射.html)（章節版：[ch01](../Kittel章節導讀/ch01_晶體結構.html)、[ch02](../Kittel章節導讀/ch02_倒晶格與繞射.html)）。
+</details>
+
+---
+
+## 2. 複數與 Euler 公式（Complex Numbers & Euler's Formula）
+
+<details>
+<summary><b>▸ 複數與 Euler 公式（Complex Numbers & Euler's Formula）</b></summary>
+
+**你高中學過的**：
+複數（complex number）$z=x+iy$，其中 $i$ 是虛數單位（imaginary unit），定義為 $i^2=-1$。$x$ 叫**實部（real part）**、$y$ 叫**虛部（imaginary part）**。把 $z$ 畫在「複平面（complex plane）」上：橫軸是實部、縱軸是虛部，$z$ 就是一個點（或從原點指過去的箭頭）。
+
+同一個點也可以用「距離 + 角度」描述，這叫**極式（polar form）**：
+$$z=r(\cos\theta+i\sin\theta)$$
+- $r=\lvert z\rvert=\sqrt{x^2+y^2}$：$z$ 到原點的長度，叫**模（modulus）**。
+- $\theta$：箭頭與正實軸的夾角，叫**輻角（argument）**，滿足 $x=r\cos\theta$、$y=r\sin\theta$。
+
+一句話：**複數＝平面上的一個箭頭，可以用「實部＋虛部」或「長度＋角度」兩種方式寫。**
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $z$ | 複數（complex number），$z=x+iy$ |
+| $x$ | $z$ 的實部（real part），$x=\operatorname{Re}z$（實數） |
+| $y$ | $z$ 的虛部（imaginary part），$y=\operatorname{Im}z$（實數） |
+| $i$ | 虛數單位（imaginary unit），$i^2=-1$ |
+| $r$ | $z$ 的模（modulus），$r=\lvert z\rvert=\sqrt{x^2+y^2}\ge 0$ |
+| $\theta$ | $z$ 的輻角（argument）＝與正實軸的夾角（弧度） |
+| $\bar z$ | $z$ 的共軛複數（complex conjugate），$\bar z=x-iy$（虛部變號） |
+| $\lvert z\rvert$ | $z$ 的模（長度），$\lvert z\rvert^2=z\bar z=x^2+y^2$ |
+| $e^{i\theta}$ | 複指數（complex exponential），$e^{i\theta}=\cos\theta+i\sin\theta$，模恆為 $1$ |
+| $\mathbf k$ | 波向量（wavevector），標記平面波的方向與「每單位長度的相位增量」 |
+| $\mathbf r$ | 位置向量（position vector） |
+| $\mathbf k\cdot\mathbf r$ | 波向量與位置的內積（見概念 1）＝平面波在 $\mathbf r$ 處的相位（phase） |
+| $e^{i\mathbf k\cdot\mathbf r}$ | 三維平面波（plane wave） |
+
+**為什麼 Kittel 需要**：
+固態物理裡的「波」幾乎都用複指數寫，因為它**微分、相乘、相位求和特別好算**。平面波（plane wave）$e^{i\mathbf k\cdot\mathbf r}$、Bloch 函數、結構因子（structure factor）裡的相位疊加，全靠 Euler 公式把笨重的三角函數變成乾淨的指數。最關鍵的好處有兩個：（1）微分指數只是「乘一個常數」；（2）一堆「不同相位的波相加」可以一次算完，三角函數做不到。
+
+**第一步：Euler 公式（把指數和三角綁在一起）**
+Euler 公式（Euler's formula）說：
+$$\boxed{\,e^{i\theta}=\cos\theta+i\sin\theta\,}$$
+它把「複指數」和「三角函數」畫上等號。對照前面的極式 $z=r(\cos\theta+i\sin\theta)$，立刻得到極式的乾淨寫法：
+$$z=r\,e^{i\theta}$$
+也就是「長度 $r$ × 方向 $e^{i\theta}$」。
+
+**第二步：從 Euler 反推 $\cos,\sin$（很常用）**
+把 $\theta$ 換成 $-\theta$，因為 $\cos(-\theta)=\cos\theta$、$\sin(-\theta)=-\sin\theta$：
+$$e^{i\theta}=\cos\theta+i\sin\theta,\qquad e^{-i\theta}=\cos\theta-i\sin\theta$$
+兩式**相加**消掉 $\sin$、**相減**消掉 $\cos$：
+$$\boxed{\,\cos\theta=\frac{e^{i\theta}+e^{-i\theta}}{2}\,},\qquad \boxed{\,\sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i}\,}$$
+這兩條「三角←→指數」的互換在傅立葉分析（概念 3）裡會一直用到。
+
+**第三步：模恆為 1（$e^{i\theta}$ 只轉方向、不改長度）**
+由定義 $\lvert e^{i\theta}\rvert=\sqrt{\cos^2\theta+\sin^2\theta}=1$。所以 $e^{i\theta}$ 永遠落在複平面的**單位圓**上，乘上它只是把箭頭**旋轉 $\theta$**、長度不變。這就是為什麼 $e^{i\theta}$ 是描述「相位」的天然語言。
+
+**第四步：三維平面波**
+把指數裡換成內積 $\mathbf k\cdot\mathbf r$（見概念 1），就得到固態物理的主角——平面波：
+$$\psi(\mathbf r)=e^{i\mathbf k\cdot\mathbf r}=\cos(\mathbf k\cdot\mathbf r)+i\sin(\mathbf k\cdot\mathbf r)$$
+這裡 $\mathbf k\cdot\mathbf r$ 就是該點的**相位**：沿著 $\mathbf k$ 方向每走一步，相位就線性增加。
+
+**第五步：為什麼複指數「好微分」（物理愛用它的真正原因）**
+對 $x$ 微分一維平面波：
+$$\frac{d}{dx}\,e^{ikx}=ik\,e^{ikx}$$
+微分的效果**只是乘上 $ik$**，函數形狀完全不變。對照三角函數：
+$$\frac{d}{dx}\cos kx=-k\sin kx\quad(\cos\text{ 變成了 }\sin)$$
+三角函數微分會「換成另一個函數」，複指數則永遠是自己 ×（常數）。解微分方程、算群速度、做傅立葉變換時，這個「微分＝乘常數」的性質讓計算乾淨太多——這正是物理一律改用複指數的原因。
+
+**範例**：
+
+1. **$e^{i\pi}=-1$**：代入 $\theta=\pi$，$e^{i\pi}=\cos\pi+i\sin\pi=-1+i\cdot 0=-1$，即著名的恆等式 $e^{i\pi}+1=0$。
+
+2. **微分 $e^{ikx}$**：$\dfrac{d}{dx}e^{ikx}=ik\,e^{ikx}$（只乘 $ik$）；再微一次 $\dfrac{d^2}{dx^2}e^{ikx}=(ik)^2e^{ikx}=-k^2e^{ikx}$——所以 $e^{ikx}$ 是 $\dfrac{d^2}{dx^2}\psi=-k^2\psi$ 的解，這正是波動方程的標準解法。
+
+3. **共軛與模平方**：取 $z=x+iy$，共軛 $\bar z=x-iy$。相乘時虛部互相抵消：
+$$z\bar z=(x+iy)(x-iy)=x^2-(iy)^2=x^2+y^2=\lvert z\rvert^2$$
+所以 $\lvert z\rvert^2=z\bar z$ 永遠是**非負實數**。對平面波 $z=e^{i\theta}$：$\bar z=e^{-i\theta}$，$\lvert z\rvert^2=e^{i\theta}e^{-i\theta}=e^{0}=1$ ✓。「乘自己的共軛 → 得到實數強度」是物理把複數量變成可量測量的標準動作。
+
+**🔍 多一步（相位求和為什麼非用複數不可）**：
+這一步是整個概念的物理價值所在。繞射時，第 $j$ 個原子散射的波帶有相位 $\mathbf G\cdot\mathbf r_j$，總散射振幅是把所有原子的波**連同各自的相位**加起來，這就是**結構因子（structure factor）**：
+$$S=\sum_j f_j\,e^{i\mathbf G\cdot\mathbf r_j}$$
+- $f_j$：第 $j$ 個原子的散射本領（form factor）。
+- $e^{i\mathbf G\cdot\mathbf r_j}$：該原子位置帶來的相位因子。
+- 求和跑遍晶胞內所有原子 $j$。
+
+關鍵在於：每一項是「長度 $f_j$、方向 $e^{i\mathbf G\cdot\mathbf r_j}$」的箭頭，**複數加法就是箭頭的向量相加**，一次就把所有相位幹涉算進去。若硬用三角函數，得分開追蹤 $\sum f_j\cos(\mathbf G\cdot\mathbf r_j)$ 和 $\sum f_j\sin(\mathbf G\cdot\mathbf r_j)$ 兩串和，再拼回去——又臭又長，還容易漏掉交叉項。複數把這兩串**打包成一個式子**，這是它不可取代的地方。
+
+實驗量到的「繞射強度」是振幅的模平方（複數 → 實數）：
+$$I\propto \lvert S\rvert^2=S\,\bar S=\Big(\sum_j f_j e^{i\mathbf G\cdot\mathbf r_j}\Big)\Big(\sum_k f_k e^{-i\mathbf G\cdot\mathbf r_k}\Big)$$
+某些 $\mathbf G$ 會讓相位剛好相消、$S=0$（繞射「消光」），這正是判斷晶體類型（BCC、FCC 哪些峰會消失）的依據——而這整套判斷，只有用複數相位求和才寫得乾淨。
+
+**圖**：`![複平面與 Euler 公式](../../figs/f00_euler.svg)`
+
+**用在 Kittel**：第 2 章繞射振幅與結構因子的相位 $e^{i\mathbf G\cdot\mathbf r_j}$、第 6 章 Bloch 定理 $\psi_{\mathbf k}=e^{i\mathbf k\cdot\mathbf r}u_{\mathbf k}(\mathbf r)$。詳見 [單元 02](../../單元教學/unit02_倒晶格與繞射.html)、[單元 06 能帶與 Bloch 電子](../../單元教學/unit06_能帶與Bloch電子.html)（章節版：[ch02](../Kittel章節導讀/ch02_倒晶格與繞射.html)、[ch06](../Kittel章節導讀/ch06_能帶.html)）。
+</details>
+
+---
+
+## 3. 傅立葉分析（Fourier Analysis）
+
+<details>
+<summary><b>▸ 傅立葉分析（Fourier Analysis）</b></summary>
+
+**你高中學過的**：
+你可能看過這句話：「**任何週期函數都能拆成一堆 $\sin$、$\cos$ 的疊加**」。把它寫清楚——設函數 $f(x)$ 的週期是 $L$（意思是 $f(x+L)=f(x)$，每隔 $L$ 重複一次），則
+$$f(x)=a_0+\sum_{n=1}^{\infty}\left[a_n\cos\frac{2\pi n x}{L}+b_n\sin\frac{2\pi n x}{L}\right]$$
+這就是傅立葉級數（Fourier series）。各符號：
+- $x$：位置（自變數）。$L$：週期（一個重複單元的長度）。
+- $n$：**諧波階數（harmonic order）**，從 $1$ 數到 $\infty$ 的整數；$n=1$ 是最長的波（基頻 fundamental），$n$ 越大波越短、補越細的細節。
+- $\dfrac{2\pi n}{L}$：第 $n$ 個諧波的**波數（wavenumber）**＝每單位長度增加的相位；注意它只能是 $\dfrac{2\pi}{L}$ 的**整數倍**。
+- $a_0$：平均值（直流成分）；$a_n,b_n$：第 $n$ 個 $\cos$、$\sin$ 的權重（實數係數），由積分定出 $a_n=\dfrac{2}{L}\displaystyle\int_0^L f(x)\cos\dfrac{2\pi nx}{L}\,dx$（$b_n$ 同理改用 $\sin$）。
+
+一句話：**週期形狀 ＝ 一堆「整數倍頻率」的波，各乘一個權重，加起來。**
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $f(x)$ / $n(\mathbf r)$ | 要展開的週期函數（1D 任意函數 / 3D 電子數密度 number density） |
+| $x$ / $\mathbf r$ | 位置（1D 座標 / 3D 位置向量） |
+| $L$ / $a$ | 週期（1D 一般週期 / 晶格常數 lattice constant） |
+| $n,m,h,k,l,u_i$ | 整數指標（求和或標號用） |
+| $i$ | 虛數單位，$i^2=-1$ |
+| $e^{i\theta}$ | 複指數，$=\cos\theta+i\sin\theta$（見概念 2 Euler） |
+| $\mathbf a_1,\mathbf a_2,\mathbf a_3$ | 晶格的三個基本平移向量（primitive translation vectors） |
+| $\mathbf T$ | 晶格平移向量，$\mathbf T=u_1\mathbf a_1+u_2\mathbf a_2+u_3\mathbf a_3$（$u_i$ 為整數）；晶體平移 $\mathbf T$ 後完全重合 |
+| $\mathbf b_1,\mathbf b_2,\mathbf b_3$ | 倒晶格基向量（由 $\mathbf a_i$ 算出，滿足 $\mathbf a_i\cdot\mathbf b_j=2\pi\delta_{ij}$，見概念 1） |
+| $\mathbf G$ | 倒晶格向量（reciprocal lattice vector），$\mathbf G=h\mathbf b_1+k\mathbf b_2+l\mathbf b_3$（$h,k,l$ 整數） |
+| $\mathbf G\cdot\mathbf r$ | 向量內積（見概念 1） |
+| $n_{\mathbf G}$ | 對應某個 $\mathbf G$ 的**複數**傅立葉係數 |
+| $V$ | 一個原胞（primitive cell）的體積 |
+| $\displaystyle\int_{\text{cell}}\!dV$ | 對單一原胞的體積積分 |
+| $\delta_{\mathbf G,\mathbf G'}$ | Kronecker delta：$\mathbf G=\mathbf G'$ 時為 $1$，否則為 $0$ |
+
+**為什麼 Kittel 需要**：
+晶體裡的電子數密度 $n(\mathbf r)$ 與位能 $U(\mathbf r)$ 都是**晶格週期函數**：平移任一晶格向量 $\mathbf T$ 後不變，$n(\mathbf r+\mathbf T)=n(\mathbf r)$。傅立葉分析會告訴我們一件很強的事——**這種函數只能用「倒晶格向量 $\mathbf G$」當頻率來展開**。這正是倒晶格為什麼存在、以及結構因子（structure factor）與週期位能展開為什麼長那樣的根本原因。
+
+**第一步：先把 1D 級數改寫成複指數（更好算）**
+用 Euler 公式（概念 2）把 $\cos,\sin$ 併成 $e^{\pm i(\cdots)}$，1D 級數變乾淨：
+$$f(x)=\sum_{m=-\infty}^{\infty} c_m\,e^{i\frac{2\pi m}{L}x}$$
+- $m$：整數（可正、可負、可零），取代原本的 $n$；負的 $m$ 來自 $\sin$ 拆出的 $e^{-i(\cdots)}$ 項。
+- $c_m$：第 $m$ 個**複數**係數，$c_m=\dfrac1L\displaystyle\int_0^L f(x)\,e^{-i\frac{2\pi m}{L}x}\,dx$。
+- 容許的波數只能是 $\dfrac{2\pi m}{L}$（基本量 $\frac{2\pi}{L}$ 的整數倍）。**這個「只能是某基本量整數倍」的特性，推廣到 3D 就是倒晶格。**
+
+**第二步：推廣到 3D 晶格週期函數**
+把「週期 $L$」換成「晶格」、「容許波數 $\frac{2\pi m}{L}$」換成「倒晶格向量 $\mathbf G$」，就得到 Kittel 用的式子：
+$$\boxed{\,n(\mathbf r)=\sum_{\mathbf G} n_{\mathbf G}\,e^{i\mathbf G\cdot\mathbf r}\,},\qquad n_{\mathbf G}=\frac1V\int_{\text{cell}} n(\mathbf r)\,e^{-i\mathbf G\cdot\mathbf r}\,dV$$
+逐項對照 1D：
+- $\mathbf G\cdot\mathbf r$ 取代相位 $\frac{2\pi m}{L}x$。
+- $\displaystyle\sum_{\mathbf G}$ 跑遍**所有**倒晶格向量 $\mathbf G=h\mathbf b_1+k\mathbf b_2+l\mathbf b_3$（三個整數 $h,k,l$）。
+- $n_{\mathbf G}$ 是複數係數，用「整個函數乘 $e^{-i\mathbf G\cdot\mathbf r}$、對一個原胞積分、再除以體積 $V$」算出（下面〈多一步〉證）。
+
+**範例（每個符號都代進去算）**：
+一維、晶格常數 $a$，電子密度 $n(x)=n_0+2n_1\cos\dfrac{2\pi x}{a}$。其中 $n_0$＝平均密度（常數項）、$n_1$＝第一諧波振幅、$a$＝週期。用 Euler 把 $\cos$ 拆開（$\cos\phi=\frac{e^{i\phi}+e^{-i\phi}}{2}$）：
+$$n(x)=n_0+n_1\,e^{i(2\pi/a)x}+n_1\,e^{-i(2\pi/a)x}$$
+對照 $n(x)=\sum_G n_G\,e^{iGx}$，逐一讀出非零係數：
+- $G=0$：$n_G=n_0$；
+- $G=+\dfrac{2\pi}{a}$：$n_G=n_1$；$\;G=-\dfrac{2\pi}{a}$：$n_G=n_1$；
+- 其餘 $G$ 全為 $0$。
+
+果然只用到倒晶格點 $G=\dfrac{2\pi}{a}m$（$m$ 整數），完全符合理論。
+
+**🔍 多一步（把兩個關鍵「為什麼」證清楚）**：
+1. **為什麼頻率只能是 $\mathbf G$？** 要求 $n(\mathbf r+\mathbf T)=n(\mathbf r)$。把展開式整體平移 $\mathbf T$：
+$$n(\mathbf r+\mathbf T)=\sum_{\mathbf G}n_{\mathbf G}\,e^{i\mathbf G\cdot(\mathbf r+\mathbf T)}=\sum_{\mathbf G}n_{\mathbf G}\,e^{i\mathbf G\cdot\mathbf r}\,e^{i\mathbf G\cdot\mathbf T}$$
+要它等於原式，**每一項**都得滿足 $e^{i\mathbf G\cdot\mathbf T}=1$，即 $\mathbf G\cdot\mathbf T=2\pi\times$整數。對所有晶格 $\mathbf T$ 都成立的 $\mathbf G$ 集合，**定義上就是倒晶格**——倒晶格不是硬塞的，是「週期性」逼出來的。
+2. **係數 $n_{\mathbf G}$ 怎麼來？** 靠**正交性**：不同諧波對一個原胞積分會互相抵消，只有相同的留下體積 $V$：
+$$\int_{\text{cell}} e^{i(\mathbf G-\mathbf G')\cdot\mathbf r}\,dV=V\,\delta_{\mathbf G,\mathbf G'}$$
+把展開式兩邊乘 $e^{-i\mathbf G'\cdot\mathbf r}$ 再對原胞積分：
+$$\int_{\text{cell}} n(\mathbf r)\,e^{-i\mathbf G'\cdot\mathbf r}\,dV=\sum_{\mathbf G}n_{\mathbf G}\underbrace{\int_{\text{cell}}e^{i(\mathbf G-\mathbf G')\cdot\mathbf r}dV}_{=\,V\delta_{\mathbf G,\mathbf G'}}=V\,n_{\mathbf G'}$$
+兩邊除以 $V$，立刻得 $n_{\mathbf G'}=\dfrac1V\displaystyle\int_{\text{cell}}n(\mathbf r)\,e^{-i\mathbf G'\cdot\mathbf r}\,dV$。這招「乘共軛諧波、積分挑係數」在繞射與量子力學裡會一再出現。
+
+**圖**：`![方波的傅立葉合成](../../figs/f00_fourier.svg)`
+圖中用越來越多諧波（$\sin$ 項：1、3、9 項…）逼近方波——項數越多越貼合，正是「週期形狀＝諧波疊加」的視覺版。
+
+**用在 Kittel**：第 2 章倒晶格與結構因子、第 6 章把週期位能 $U(\mathbf r)=\sum_{\mathbf G}U_{\mathbf G}e^{i\mathbf G\cdot\mathbf r}$ 展開以建 central equation。詳見 [單元 02](../../單元教學/unit02_倒晶格與繞射.html)、[單元 06](../../單元教學/unit06_能帶與Bloch電子.html)（章節版：[ch02](../Kittel章節導讀/ch02_倒晶格與繞射.html)、[ch06](../Kittel章節導讀/ch06_能帶.html)）。
+</details>
+
+---
+
+## 4. 等比級數（Geometric Series）
+
+<details>
+<summary><b>▸ 等比級數（Geometric Series）</b></summary>
+
+**你高中學過的**：
+等比級數（geometric series）：每一項都是前一項乘上同一個固定比值 $r$（公比，common ratio）。從首項 $1$ 開始、共 $N$ 項的有限和，你背過這條公式：
+$$1+r+r^2+\cdots+r^{N-1}=\sum_{n=0}^{N-1}r^n=\frac{1-r^N}{1-r}$$
+各符號：
+- $r$：**公比（common ratio）**，相鄰兩項的固定比值；可以是實數，也可以是複數。
+- $N$：**項數**（從第 $0$ 項 $r^0=1$ 數到第 $N-1$ 項 $r^{N-1}$，共 $N$ 項）。
+- $n$：求和指標（dummy index），從 $0$ 跑到 $N-1$ 的整數。
+- $S$：和（sum），這裡 $S=\sum_{n=0}^{N-1}r^n$。
+
+當 $\lvert r\rvert<1$ 且項數變成無限多時，$r^N\to0$，和收斂（converge）到一個有限值：
+$$\sum_{n=0}^{\infty}r^n=\frac{1}{1-r}\qquad(\lvert r\rvert<1)$$
+
+一句話：**一堆「等比例縮放」的項相加，有一條一行的封閉公式（closed form）可用。**
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $r$ | 公比（common ratio），相鄰兩項的固定比值；可為實數或複數 $e^{ix}$ |
+| $N$ | 項數（共幾項，從第 $0$ 項數到第 $N-1$ 項） |
+| $n$ | 求和指標（dummy index），整數，從 $0$ 跑到 $N-1$ |
+| $S$ | 等比級數的和，$S=\sum_{n=0}^{N-1}r^n$ |
+| $x$ | 取 $r=e^{ix}$ 時的相位（phase）；散射裡 $x=\phi=Ga$ |
+| $\phi$ | 單一晶胞間相鄰散射波的相位差，$\phi=Ga$ |
+| $G$ | 倒晶格向量大小（1D），散射波向量（見概念 1） |
+| $a$ | 晶格常數（lattice constant），原子（晶胞）間距 |
+| $A$ | 散射總振幅（amplitude），$A=\sum_{n=0}^{N-1}e^{inGa}$ |
+| $\lvert A\rvert^2$ | 散射強度（intensity），實驗測到的量；$=\dfrac{\sin^2(N\phi/2)}{\sin^2(\phi/2)}$ |
+| $m$ | 整數（標記倒晶格點 $\phi=2\pi m$） |
+| $\sin^2(N\phi/2)$ | 峰函數分子；隨 $\phi$ 快速振盪，控制峰的細結構 |
+| $\sin^2(\phi/2)$ | 峰函數分母；在 $\phi=2\pi m$ 處 $\to0$，製造巨大主峰 |
+| $\ln(1+x)$ | 自然對數，泰勒展開 $=x-\dfrac{x^2}{2}+\dfrac{x^3}{3}-\cdots$（見概念 5） |
+
+**為什麼 Kittel 需要**：
+繞射（diffraction）時，要把 $N$ 個晶胞散射出來的波**相位相加**：第 $n$ 個晶胞的相位是 $e^{inGa}$，相鄰兩項比值固定為 $e^{iGa}$——這正是一個**公比為複指數**的等比級數。Madelung 常數（離子晶體的靜電結合能）與 Debye 模型對模態求和，也都歸結成幾何項相加。會這條公式，這些求和就一行解決；更重要的是，取 $r=e^{ix}$ 後它會自然長出繞射的「峰」函數，把「為什麼會有 Bragg 亮點」算得清清楚楚。
+
+**第一步：取 $r=e^{ix}$，級數變成繞射峰函數**
+把公比換成單位圓上的複數 $r=e^{ix}$（$\lvert r\rvert=1$，所以**不能**用無限和，必須用有限和公式），代入 $\sum_{n=0}^{N-1}r^n=\dfrac{1-r^N}{1-r}$：
+$$\sum_{n=0}^{N-1}e^{inx}=\frac{1-e^{iNx}}{1-e^{ix}}$$
+取它的模平方（強度），化簡後（完整過程見下面〈多一步〉）得到對稱的實數函數：
+$$\left\lvert\sum_{n=0}^{N-1}e^{inx}\right\rvert^2=\frac{\sin^2(Nx/2)}{\sin^2(x/2)}$$
+這個 $\dfrac{\sin^2(Nx/2)}{\sin^2(x/2)}$ 就是繞射、單狹縫、光柵共用的「峰」函數：分母在 $x=2\pi m$ 處趨近 $0$，製造一連串高度 $\approx N^2$ 的**主峰（principal maxima）**；分子的快速振盪則填出主峰之間的細小副峰。
+
+**第二步：有限 vs 無限——什麼時候用哪一條**
+- $\lvert r\rvert<1$（每項越加越小，例如 Madelung 的 $\frac12,\frac13,\cdots$ 交錯項）：可取 $N\to\infty$，用 $\dfrac{1}{1-r}$ 或其變形（如 $\ln(1+x)$ 展開）。
+- $\lvert r\rvert=1$（$r=e^{ix}$，散射相位）：項不衰減，**只能**用有限和 $\dfrac{1-r^N}{1-r}$，這也正是峰函數的來源。
+
+**範例①（一維 $N$ 原子鏈散射）**：
+一維鏈共 $N$ 個原子、間距 $a$，入射經散射後波向量改變量為 $G$。第 $n$ 個原子（位置 $na$）貢獻相位 $e^{inGa}$，總散射振幅是這些相位的和：
+$$A=\sum_{n=0}^{N-1}e^{inGa}=\frac{1-e^{iNGa}}{1-e^{iGa}}$$
+令 $\phi=Ga$（相鄰兩原子的相位差），實驗測到的強度是模平方：
+$$\lvert A\rvert^2=\frac{\sin^2(N\phi/2)}{\sin^2(\phi/2)}=\frac{\sin^2(NGa/2)}{\sin^2(Ga/2)}$$
+當 $Ga=2\pi m$（$m$ 整數，即 $G$ 落在倒晶格點上）時，分母 $\sin^2(\phi/2)\to0$，用洛必達或小角近似可得 $\lvert A\rvert^2\to N^2$——出現一個高度正比於 $N^2$ 的**巨大亮峰**。這就是 **Bragg 峰**的數學來源：$N$ 越大（晶體越完美、越大），峰越尖越亮。
+
+**範例②（Madelung 常數 $=2\ln 2$）**：
+一維交錯離子鏈（$+,-,+,-,\cdots$，間距 $a$），把參考離子（取為 $+$）感受到的靜電位能對所有其他離子求和。同號（隔一個，距離 $2a,4a,\cdots$）為斥力、異號（最近鄰，距離 $a,3a,\cdots$）為引力，兩側對稱故乘 $2$，得到交錯級數：
+$$\text{Madelung 和}=2\left(\frac11-\frac12+\frac13-\frac14+\cdots\right)=2\sum_{k=1}^{\infty}\frac{(-1)^{k-1}}{k}$$
+這個交錯調和級數正是 $\ln(1+x)$ 在 $x=1$ 的值。用泰勒展開（概念 5）
+$$\ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\cdots$$
+代 $x=1$：$\ln 2=1-\dfrac12+\dfrac13-\dfrac14+\cdots$。因此
+$$\text{Madelung 常數（1D）}=2\ln 2\approx1.386$$
+（這個 $\ln(1+x)$ 本身就是 $\frac{1}{1+x}=1-x+x^2-\cdots$ 這條等比級數逐項積分來的，所以仍是「幾何項求和」的一員。）
+
+**🔍 多一步（$\lvert A\rvert^2$ 是怎麼化出來的）**：
+這一步課本常常「跳過」，這裡完整補滿。令 $\phi=Ga$，則
+$$A=\frac{1-e^{iN\phi}}{1-e^{i\phi}}$$
+訣竅是分子、分母各**提出「一半角」的指數**（提半角指數），好把 $1-e^{i\theta}$ 變成 $\sin$。分子：
+$$1-e^{iN\phi}=e^{iN\phi/2}\Big(e^{-iN\phi/2}-e^{iN\phi/2}\Big)=-2i\,e^{iN\phi/2}\sin\frac{N\phi}{2}$$
+這裡用了 $e^{-i\alpha}-e^{i\alpha}=-2i\sin\alpha$（Euler 公式，概念 2）。分母同理：
+$$1-e^{i\phi}=e^{i\phi/2}\Big(e^{-i\phi/2}-e^{i\phi/2}\Big)=-2i\,e^{i\phi/2}\sin\frac{\phi}{2}$$
+相除時，$-2i$ 互相約掉、兩個半角指數合併成一個總相位因子：
+$$A=\frac{-2i\,e^{iN\phi/2}\sin(N\phi/2)}{-2i\,e^{i\phi/2}\sin(\phi/2)}=e^{i(N-1)\phi/2}\,\frac{\sin(N\phi/2)}{\sin(\phi/2)}$$
+最後取模平方。那個 $e^{i(N-1)\phi/2}$ 的模為 $1$，**直接消失**，剩下純實數的強度：
+$$\boxed{\,\lvert A\rvert^2=\frac{\sin^2(N\phi/2)}{\sin^2(\phi/2)}\,}$$
+這個「提半角指數 → 變成 $\sin$ → 取模消掉總相位」是把**複數和變成實數強度**的標準動作，繞射、單狹縫、光柵的強度公式全都靠它。
+
+**圖**：`![等比級數收斂與部分和](../../figs/f00_geometric.svg)`
+圖中畫出有限部分和如何隨項數逼近封閉值（$\lvert r\rvert<1$ 收斂），以及取 $r=e^{ix}$ 後峰函數在 $x=2\pi m$ 處堆出主峰——正是「幾何項求和＝一行封閉公式＝繞射亮點」的視覺版。
+
+**用在 Kittel**：第 2 章繞射振幅求和（峰函數、Bragg 主峰）、第 3 章 Madelung 常數（離子晶體靜電和）、第 4 章 Debye 模型對模態求和。詳見 [單元 02](../../單元教學/unit02_倒晶格與繞射.html)、[單元 03 晶體鍵結](../../單元教學/unit03_晶體鍵結.html)、[單元 04 聲子與晶格振動](../../單元教學/unit04_聲子與晶格振動.html)（章節版：[ch02](../Kittel章節導讀/ch02_倒晶格與繞射.html)、[ch03](../Kittel章節導讀/ch03_晶體鍵結.html)、[ch04](../Kittel章節導讀/ch04_聲子.html)）。
+</details>
+
+---
+
+## 5. 泰勒展開與小角近似（Taylor Expansion / Small-Angle Approximation）
+
+<details>
+<summary><b>▸ 泰勒展開與小角近似（Taylor Expansion / Small-Angle Approximation）</b></summary>
+
+**你高中學過的**：
+你會用**切線**去近似一條曲線——在某一點 $x=a$ 畫切線，附近的曲線跟切線「幾乎重合」。泰勒展開（Taylor expansion）只是把這想法**做到底**：不只用切線（一次式），還加上二次、三次……更高次項，逼得越來越準。最常見的小角近似 $\sin\theta\approx\theta$、$\cos\theta\approx1-\frac{\theta^2}{2}$（$\theta$ 很小時）就是它最有名的特例。一句話：**把難算的函數，在某點附近換成好算的多項式。**
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $f(x)$ | 要展開（被近似）的函數 |
+| $x$ | 自變數（位置或角度等） |
+| $a$ | 展開的**基準點**（在這點附近做近似） |
+| $f'(a)$ | $f$ 在 $a$ 的一階導數（切線斜率＝變化率） |
+| $f''(a)$ | $f$ 在 $a$ 的二階導數（曲率＝彎曲程度） |
+| $f^{(n)}(a)$ | $f$ 在 $a$ 的第 $n$ 階導數 |
+| $n!$ | $n$ 階乘，$n!=1\cdot2\cdots n$（$0!=1$） |
+| $\theta$ | 角度（弧度制 radian）；小角近似中要求 $\theta\ll1$ |
+| $U(x)$ | 位能函數（potential energy） |
+| $x_0$ | 平衡點（equilibrium position）：位能的極小點，滿足 $U'(x_0)=0$ |
+| $k_{\text{eff}}$ | 等效彈簧常數（effective spring constant），$k_{\text{eff}}=U''(x_0)$ |
+| $\omega$ | 振動角頻率，$\omega=\sqrt{k_{\text{eff}}/m}$ |
+| $m$ | 振動粒子（原子）的質量 |
+| $\coth x$ | 雙曲餘切，$\coth x=\dfrac{\cosh x}{\sinh x}=\dfrac{e^x+e^{-x}}{e^x-e^{-x}}$ |
+
+**為什麼 Kittel 需要**：
+這條工具撐起 Kittel 的兩大塊。第一塊是**聲子（phonon）**：原子在平衡位置附近的位能，泰勒展到二階就變成彈簧位能 $\frac12 k x^2$——這叫**簡諧近似（harmonic approximation）**，是整個晶格振動理論的起點（沒有它，運動方程不是線性的，解不出簡正模）。第二塊是**磁性（magnetism）**：把 $\coth$、$\tanh$ 在「小磁場 / 高溫」展開，順勢得到 Langevin 函數的線性近似與 Curie 定律 $\chi\propto1/T$。兩處都是「把複雜函數在某點換成多項式，只留前一兩項」。
+
+**第一步：泰勒級數的長相（每一項是什麼）**
+函數 $f(x)$ 在基準點 $x=a$ 附近展開：
+$$f(x)=\sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(x-a)^n=f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2+\frac{f'''(a)}{3!}(x-a)^3+\cdots$$
+逐項讀懂它在做什麼：
+- 第 0 項 $f(a)$：基準點的**高度**（常數，把曲線「對準」起點）。
+- 第 1 項 $f'(a)(x-a)$：**切線**修正（斜率 × 走了多遠）——這就是高中那條切線。
+- 第 2 項 $\frac{f''(a)}{2!}(x-a)^2$：**彎曲**修正（曲率），讓近似從直線升級成拋物線。
+- 越後面的項，$(x-a)^n$ 在 $x$ 接近 $a$ 時越小（$0.1^2=0.01$、$0.1^3=0.001$…），所以**離基準點越近、可以越早截斷**。
+
+**第二步：把它變成「常用近似表」（直接背這幾條）**
+把基準點取在 $a=0$（最常用），只留前一兩項，就得到物理裡反覆出現的近似（左邊精確、右邊是小量 $x$ 或小角 $\theta$ 的近似）：
+
+| 函數 | 小量近似 | 怎麼來的 |
+|---|---|---|
+| $e^x$ | $\approx 1+x$ | $f'(0)=1$，留到一階 |
+| $\dfrac{1}{1-x}$ | $\approx 1+x$ | 即等比級數 $1+x+x^2+\cdots$ 留首兩項 |
+| $\sin\theta$ | $\approx \theta$ | $\sin0=0,\ \cos0=1$，留到一階 |
+| $\cos\theta$ | $\approx 1-\dfrac{\theta^2}{2}$ | 一階項為 $0$，二階項由 $f''(0)=-1$ 給出 |
+| $\coth x$ | $\approx \dfrac1x+\dfrac{x}{3}$ | $\coth$ 在 $0$ 發散，主項 $\frac1x$ 後接 $\frac{x}{3}$（磁性會用） |
+
+注意 $\cos\theta$ 為什麼**沒有一次項**：$\cos$ 在 $\theta=0$ 是「平的」（$\sin0=0$ 即斜率為 0），所以第一個非零修正是**二次**的——這個「偶函數只剩偶次項」的事實，等下在位能展開會再出現一次。
+
+**第三步：平衡點的位能展開 → 簡諧近似（Kittel 的主菜）**
+把位能 $U(x)$ 在**平衡點 $x_0$** 展開：
+$$U(x)=U(x_0)+U'(x_0)(x-x_0)+\tfrac12\,U''(x_0)(x-x_0)^2+\cdots$$
+關鍵在中間那項：**平衡點 $x_0$ 的定義就是 $U'(x_0)=0$**（理由見下方〈多一步〉），所以一階項**直接消失**，剩下：
+$$\boxed{\,U(x)\approx U(x_0)+\tfrac12\,U''(x_0)\,(x-x_0)^2\,}\quad\Rightarrow\quad k_{\text{eff}}=U''(x_0)$$
+對照彈簧位能 $\frac12 k\,(\text{位移})^2$，立刻認出**等效彈簧常數** $k_{\text{eff}}=U''(x_0)$（位能的二階導＝彎曲程度），振動角頻率 $\omega=\sqrt{k_{\text{eff}}/m}$。也就是說：**任何位能在它的谷底附近，都長得像一個彈簧**——這就是簡諧近似，聲子能存在的根本原因。
+
+**範例（每個符號都代進去算）**：
+
+① **Lennard–Jones 位能 → 彈簧常數與頻率。**
+兩原子的 Lennard–Jones 位能 $U(r)=4\epsilon\!\left[\left(\frac{\sigma}{r}\right)^{12}-\left(\frac{\sigma}{r}\right)^{6}\right]$，在最低點 $r_0$ 處 $U'(r_0)=0$。我們不必算出 $\epsilon,\sigma$ 的細節，只要承認「最低點＝一階導為零」這件事，泰勒到二階就得
+$$U(r)\approx U(r_0)+\tfrac12\,U''(r_0)\,(r-r_0)^2$$
+- 讀出彈簧常數：$k_{\text{eff}}=U''(r_0)$（位能谷底的曲率）。
+- 振動頻率：$\omega=\sqrt{k_{\text{eff}}/m}=\sqrt{U''(r_0)/m}$。
+谷越「陡」（$U''$ 越大）→ 鍵越硬 → 振動越快。這正是把分子鍵當成彈簧、把固體當成「一堆彈簧連起來」的數學依據。
+
+② **Langevin 函數小場展開 → Curie 定律。**
+順磁性裡，磁化沿磁場排列的程度由 Langevin 函數描述
+$$L(x)=\coth x-\frac1x,\qquad x=\frac{\mu B}{k_B T}\ (\text{磁能／熱能之比})$$
+其中 $\mu$＝磁矩、$B$＝磁場、$T$＝溫度。小場或高溫時 $x\ll1$。代入近似表那條 $\coth x\approx\frac1x+\frac{x}{3}$：
+$$L(x)=\Big(\frac1x+\frac{x}{3}\Big)-\frac1x=\frac{x}{3}$$
+那個發散的 $\frac1x$ **剛好被減掉**，只剩線性項 $\frac{x}{3}$。於是磁化 $M\propto L(x)\propto x=\frac{\mu B}{k_B T}$，磁化率
+$$\chi=\frac{M}{B}\propto\frac{1}{T}\qquad(\textbf{Curie 定律})$$
+「磁化率反比於溫度」這個實驗定律，數學上就是一條 $\coth$ 的小量泰勒展開。
+
+**🔍 多一步（為什麼一階項一定消失？）**：
+這是簡諧近似全部魔力的來源，補清楚。**平衡點**的物理意義是「放在這裡的原子不受淨力、可以靜止」。而力是位能的負斜率：
+$$F(x)=-\frac{dU}{dx}=-U'(x)$$
+平衡 ⟺ 淨力為零 ⟺ $U'(x_0)=0$ ⟺ 位能在 $x_0$ 是**水平切線**。再者，穩定平衡要求 $x_0$ 是位能的**極小**（谷底，不是山頂），由極值判定 $U'(x_0)=0$ 且 $U''(x_0)>0$。所以泰勒展開時：
+- **一階項** $U'(x_0)(x-x_0)$：係數 $U'(x_0)=0$，**整項消失**——這不是巧合，是「平衡＝極小」的必然。
+- **二階項** $\frac12U''(x_0)(x-x_0)^2$：係數 $U''(x_0)>0$，成為**第一個非零、且主導**的修正項。
+
+結論：在平衡點附近，位能的領頭行為**一定是二次的**（拋物線谷），所以微小振動**一定是簡諧的**，頻率由曲率 $U''(x_0)$ 決定。這也呼應了上面 $\cos\theta$「偶函數在極值點只剩偶次項」的同一個道理——只要展開點是極值，一次項必為零，物理就由**二階曲率**接管。
+
+**圖**：`![泰勒逐階逼近](../../figs/f00_taylor.svg)`
+圖中用一階（切線）、二階（拋物線）、三階……逐步逼近原函數——階數越高、貼合範圍越廣，正是「離基準點越近、越少項就夠準」的視覺版。
+
+**用在 Kittel**：第 4 章簡諧近似建立晶格振動（聲子），第 8 章 Langevin/Curie 的小場展開。詳見 [單元 04](../../單元教學/unit04_聲子與晶格振動.html)、[單元 08 磁性](../../單元教學/unit08_磁性.html)（章節版：[ch04](../Kittel章節導讀/ch04_聲子.html)、[ch08](../Kittel章節導讀/ch08_磁性.html)）。
+</details>
+
+---
+
+## 6. 偏微分（Partial Derivatives）
+
+<details>
+<summary><b>▸ 偏微分（Partial Derivatives）</b></summary>
+
+**你高中學過的**：
+單變數微分 $\dfrac{df}{dx}$ 是「函數對唯一變數的變化率」——曲線在某點的切線斜率。偏微分（partial derivative）只是把它推到多變數：對多變數函數 $f(x,y)$ 而言，對 $x$ 偏微分 $\dfrac{\partial f}{\partial x}$ 時，**把 $y$ 當成不動的常數**，其餘和普通微分完全一樣（符號從正體 $d$ 換成彎彎的 $\partial$，唸作「partial」，只是提醒你「還有別的變數被當常數凍住了」）。各符號：
+- $f(x,y)$：兩個（或更多）自變數的函數。$x,y$：兩個獨立的自變數。
+- $\dfrac{\partial f}{\partial x}$：固定 $y$、只讓 $x$ 動時 $f$ 的變化率；同理 $\dfrac{\partial f}{\partial y}$ 固定 $x$、只讓 $y$ 動。
+
+一句話：**偏微分 ＝ 只動一個變數、其餘全當常數的普通微分。**
+
+把這想法收集成一個向量，就是梯度（gradient）：$\nabla_{\mathbf k}E=\left(\dfrac{\partial E}{\partial k_x},\dfrac{\partial E}{\partial k_y},\dfrac{\partial E}{\partial k_z}\right)$——它指向 $E$ 上升最快的方向，大小是最陡的斜率。
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $f(x,y)$ | 多變數函數（這裡用兩變數示範） |
+| $x,y$ | 兩個獨立的自變數（位置 / 參數） |
+| $\dfrac{\partial f}{\partial x}$ | $f$ 對 $x$ 的偏微分：固定其餘變數、只讓 $x$ 動的變化率 |
+| $\nabla_{\mathbf k}$ | 對波向量 $\mathbf k$ 的梯度算子，$\nabla_{\mathbf k}=\left(\frac{\partial}{\partial k_x},\frac{\partial}{\partial k_y},\frac{\partial}{\partial k_z}\right)$ |
+| $E(\mathbf k)$ | 能帶（energy band）：電子能量隨波向量 $\mathbf k$ 變化的函數 |
+| $k$ | 波向量大小（一維時即 $\mathbf k$ 的座標） |
+| $v_g$ | 群速度（group velocity）：波包（電子）實際移動的速度 |
+| $m^*$ | 有效質量（effective mass）：把晶格反作用打包後的等效質量 |
+| $\hbar$ | 約化普朗克常數（reduced Planck constant） |
+| $m$ | 電子的真實（自由）質量 |
+| $p$ | 動量（momentum），自由電子 $p=\hbar k$ |
+| $F$ / $F_{\text{ext}}$ | 作用在電子上的外力 |
+
+**為什麼 Kittel 需要**：
+能帶 $E(\mathbf k)$ 是 $k_x,k_y,k_z$ 三個變數的函數。電子在晶體裡的兩個關鍵動力學量——群速度（group velocity）與有效質量（effective mass）——都是 $E$ 對 $\mathbf k$ 的（偏）微分：**一階導**給你速度，**二階導**給你質量。沒有偏微分，第 6 章的能帶輸運、半導體載子動力學、乃至「電洞」概念都寫不下去。
+
+**第一步：群速度 ＝ 能帶的一階斜率**
+電子在晶體裡其實是個波包（wave packet），它整體移動的速度叫群速度 $v_g$。一維時
+$$v_g=\frac{1}{\hbar}\frac{\partial E}{\partial k}\quad\text{(一維)}$$
+推廣到三維，把「斜率」換成「梯度」即可：
+$$\mathbf v_g=\frac1\hbar\nabla_{\mathbf k}E=\frac1\hbar\left(\frac{\partial E}{\partial k_x},\frac{\partial E}{\partial k_y},\frac{\partial E}{\partial k_z}\right)$$
+- $\nabla_{\mathbf k}E$ 就是把 $E$ 分別對 $k_x,k_y,k_z$ 偏微分、收成向量。
+- 因子 $\dfrac1\hbar$ 來自波包理論（群速度 $=\dfrac{d\omega}{dk}$，而 $E=\hbar\omega$）。
+- 直覺：能帶**越陡**（斜率越大）→ 電子跑越快；能帶**平坦**（斜率 $0$，如帶頂、帶底）→ $v_g=0$，電子停住。
+
+**第二步：有效質量 ＝ 能帶曲率的倒數**
+把能帶的**二階導**（曲率，curvature）取倒數，就得到有效質量：
+$$\frac{1}{m^*}=\frac{1}{\hbar^2}\frac{d^2E}{dk^2}$$
+- $\dfrac{d^2E}{dk^2}$ 是 $E(k)$ 曲線「彎多少」：越彎（二階導越大）曲率越大。
+- 直覺：曲線**越彎** → $m^*$ 越**小**（電子越「輕」、越好加速）；近拋物線**開口向上**（帶底）→ $m^*>0$；**開口向下**（能帶頂）→ $\dfrac{d^2E}{dk^2}<0$ → $m^*<0$，出現「負質量」的電洞（hole）行為（下面〈多一步〉證）。
+
+**範例（每個符號都代進去算）**：
+自由電子，能量 $E=\dfrac{\hbar^2k^2}{2m}$（一條標準開口向上的拋物線）。
+- **群速度**：先對 $k$ 微分，$\dfrac{dE}{dk}=\dfrac{\hbar^2\cdot2k}{2m}=\dfrac{\hbar^2 k}{m}$，代入
+$$v_g=\frac1\hbar\frac{dE}{dk}=\frac1\hbar\cdot\frac{\hbar^2 k}{m}=\frac{\hbar k}{m}=\frac{p}{m}\quad(\text{用 }p=\hbar k)$$
+正好等於古典的 $p/m$（動量除以質量）✓。
+- **有效質量**：再微一次，$\dfrac{d^2E}{dk^2}=\dfrac{\hbar^2}{m}$（常數，因為拋物線曲率處處相同），代入
+$$\frac{1}{m^*}=\frac1{\hbar^2}\frac{d^2E}{dk^2}=\frac1{\hbar^2}\cdot\frac{\hbar^2}{m}=\frac1m\quad\Rightarrow\quad m^*=m$$
+自由電子的有效質量就是真實質量 ✓。
+在真實能帶裡 $E(k)$ 不是純拋物線，曲率隨 $k$ 改變，$m^*$ 才會偏離 $m$（甚至變號）。
+
+**🔍 多一步（有效質量為什麼長這樣、為什麼能是負的）**：
+$m^*$ 不是電子真的變胖變瘦，而是把「晶格週期位能的反作用」整包打進一個等效質量，讓你還能繼續用牛頓式 $a=F/m^*$ 思考。推導只要把兩條已知式合起來：
+- 半古典運動方程：$\hbar\dfrac{dk}{dt}=F_{\text{ext}}$（外力改變晶體動量 $\hbar k$）。
+- 群速度：$v_g=\dfrac1\hbar\dfrac{dE}{dk}$。
+
+對時間微分 $v_g$，並用連鎖律（$E$ 透過 $k$ 隨時間變）：
+$$\frac{dv_g}{dt}=\frac1\hbar\frac{d^2E}{dk^2}\frac{dk}{dt}=\frac{1}{\hbar^2}\frac{d^2E}{dk^2}\,F_{\text{ext}}$$
+（第二個等號把 $\dfrac{dk}{dt}=\dfrac{F_{\text{ext}}}{\hbar}$ 代進去。）左邊 $\dfrac{dv_g}{dt}$ 就是加速度 $a$。對照牛頓式 $a=\dfrac{F_{\text{ext}}}{m^*}$，立刻認出
+$$\boxed{\;\frac1{m^*}=\frac1{\hbar^2}\frac{d^2E}{dk^2}\;}$$
+**為什麼能是負的**：在能帶**頂部**，$E(k)$ 開口向下，$\dfrac{d^2E}{dk^2}<0$，所以 $m^*<0$。物理意義是——外力往右推，電子卻往**左**加速。這個「負質量」狀態用電子描述很彆扭，於是物理改用一個帶**正電荷、正質量**的虛擬粒子來代替，就是**電洞（hole）**。電洞不是新粒子，而是「接近填滿的能帶裡少了一個電子」這件事的方便記法——它的整套動力學正是從這個負曲率推出來的。
+
+**圖**（無專屬圖，借能帶曲率）：`![近自由電子能隙](../../figs/f06_nfe_gap.svg)`——這條近自由電子能帶上，**斜率**讀出群速度 $v_g$、**曲率**讀出有效質量 $m^*$：帶底開口向上（$m^*>0$）、帶頂開口向下（$m^*<0$，電洞）。
+
+**用在 Kittel**：第 6 章群速度 $\mathbf v_g=\frac1\hbar\nabla_{\mathbf k}E$、有效質量張量、半古典運動方程與電洞概念。詳見 [單元 06](../../單元教學/unit06_能帶與Bloch電子.html)（章節版：[ch06](../Kittel章節導讀/ch06_能帶.html)）。
+</details>
+
+---
+
+## 7. 行列式與本徵值／久期方程（Determinant, Eigenvalue, Secular Equation）
+
+<details>
+<summary><b>▸ 行列式與本徵值／久期方程（Determinant, Eigenvalue, Secular Equation）</b></summary>
+
+**你高中學過的**：
+$2\times2$ 行列式（determinant）就是「主對角相乘減去副對角相乘」：
+$$\det\begin{pmatrix}a&b\\c&d\end{pmatrix}=ad-bc$$
+你也解過二元一次聯立方程。把這兩件事接起來，會冒出一個很關鍵的延伸：**齊次聯立方程 $M\mathbf x=0$ 要有「非零」解，必須 $\det M=0$**（後面〈多一步〉證）。再加一個概念——本徵值（eigenvalue）$\lambda$ 是滿足 $M\mathbf x=\lambda\mathbf x$ 的特殊數，意思是「矩陣 $M$ 作用在某個方向 $\mathbf x$ 上，只是把它拉長 $\lambda$ 倍、不轉向」。
+
+一句話：**「有沒有非零解」由行列式是不是 $0$ 決定；找本徵值 ＝ 解一條讓行列式歸零的方程。**
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $M$ | 一個方陣（square matrix）；此處主要是 $2\times2$ |
+| $\mathbf x$ | 行向量（column vector），代表未知的振幅組合（兩個波或兩個原子的位移） |
+| $\det$ / $\det M$ | 行列式運算 / 矩陣 $M$ 的行列式值（一個純量） |
+| $\lambda$ | 本徵值（eigenvalue）：滿足 $M\mathbf x=\lambda\mathbf x$ 的純量 |
+| $I$ | 單位矩陣（identity matrix），$2\times2$ 時 $I=\begin{pmatrix}1&0\\0&1\end{pmatrix}$；$I\mathbf x=\mathbf x$ |
+| $M-\lambda I$ | 把 $M$ 對角線各減 $\lambda$ 得到的矩陣；其行列式歸零給出本徵值 |
+| $E$ | 電子能量（待解的本徵值；NFE 久期方程裡扮演 $\lambda$ 的角色） |
+| $E_0^{(1)},E_0^{(2)}$ | 兩個近簡併（near-degenerate）平面波在「沒有耦合」時的能量（未微擾能） |
+| $U_G$ | 週期位能的傅立葉係數（Fourier component，見概念 3）；耦合兩個平面波的「混合強度」 |
+| $U_G^{*}$ | $U_G$ 的複共軛；矩陣是厄米（Hermitian）的，故對角外兩元互為共軛 |
+| $\varepsilon$ | 能隙處兩平面波相等的未微擾能，$E_0^{(1)}=E_0^{(2)}=\varepsilon$ |
+| $\lvert U\rvert$ | 耦合強度 $U_G$ 的絕對值（modulus）；能隙大小由它決定 |
+
+**為什麼 Kittel 需要**：
+固態物理裡好幾個「找頻率／找能量」的問題，最後都長成**同一個形狀**：寫出一個齊次方程 $M\mathbf x=0$（或 $(M-\lambda I)\mathbf x=0$），然後**令它的行列式 $=0$**。這條方程有個專有名字——久期方程（secular equation）。找簡正模（normal modes）的振動頻率、近自由電子（nearly-free-electron, NFE）能隙、雙原子鏈的聲學／光學支、緊束縛能帶，全都歸結到「解一個 $2\times2$ 久期行列式」。只要會這一招，能隙與分裂的振動頻率就能用紙筆算出來。
+
+**第一步：本徵值問題如何化成久期方程**
+本徵值定義 $M\mathbf x=\lambda\mathbf x$。把右邊搬過來、用 $\lambda\mathbf x=\lambda I\mathbf x$ 補回矩陣形式：
+$$M\mathbf x=\lambda\mathbf x\ \Rightarrow\ (M-\lambda I)\mathbf x=0\ \Rightarrow\ \det(M-\lambda I)=0$$
+最後一步用的就是「齊次方程要有非零解 ⟺ 行列式為零」（下面〈多一步〉證清楚）。$\det(M-\lambda I)=0$ 展開後是一條 $\lambda$ 的多項式，叫**特徵方程／久期方程**；它的根就是全部本徵值。
+
+**第二步：NFE 兩平面波耦合 → $2\times2$ 久期行列式**
+在布里淵區邊界附近，兩個波向量近簡併的平面波會被週期位能 $U_G$ 混在一起。把能量 $E$ 當成要解的本徵值（扮演 $\lambda$），耦合後的久期行列式是：
+$$\det\begin{pmatrix}E_0^{(1)}-E & U_G \\ U_G^{*} & E_0^{(2)}-E\end{pmatrix}=0$$
+逐項讀：對角線 $E_0^{(1)}-E$、$E_0^{(2)}-E$ 來自「各自的未微擾能減去待解能量」；對角線外的 $U_G$、$U_G^{*}$ 是兩波之間的耦合（互為複共軛，矩陣厄米）。解這條方程就得到上、下兩個能量，中間夾出能隙。
+
+**範例（每個符號都代進去算）**：
+
+**① 能隙處（NFE，$2\times2$ 久期方程）。**
+布里淵區邊界上兩平面波能量相等，取 $E_0^{(1)}=E_0^{(2)}=\varepsilon$，耦合寫成 $U$。久期行列式用 $ad-bc$ 展開：
+$$\det\begin{pmatrix}\varepsilon-E & U \\ U^{*} & \varepsilon-E\end{pmatrix}=(\varepsilon-E)(\varepsilon-E)-U\,U^{*}=(\varepsilon-E)^2-\lvert U\rvert^2=0$$
+（用到 $U\,U^{*}=\lvert U\rvert^2$。）這是 $E$ 的二次式，開根號：
+$$(\varepsilon-E)^2=\lvert U\rvert^2\ \Rightarrow\ \varepsilon-E=\pm\lvert U\rvert\ \Rightarrow\ E=\varepsilon\pm\lvert U\rvert$$
+兩個解一上一下，相距 $E_+ - E_- = 2\lvert U\rvert$。這就是**能隙 $E_g=2\lvert U\rvert$**——能隙正比於週期位能的傅立葉係數 $U_G$（位能越強、能隙越寬）。
+
+**② 雙原子鏈（聲子，同一招換符號）。**
+一維雙原子鏈把「能量 $E$」換成「$\omega^2$」、把上面那個矩陣換成 $2\times2$ **動力學矩陣（dynamical matrix）**，行向量 $\mathbf x$ 改成兩個原子的振幅。一樣令 $\det=0$、解出 $\omega^2$ 的二次式，得到**兩個頻率分支**：低頻的**聲學支（acoustic branch）**（兩原子同相擺動）與高頻的**光學支（optical branch）**（兩原子反相擺動）。能隙的「上下兩能帶」與聲子的「光學／聲學兩支」，在數學上是同一個 $2\times2$ 久期方程的雙根。
+
+**🔍 多一步（為什麼是「令 $\det=0$」）**：
+這是整個技巧的靈魂，補清楚。齊次方程 $(M-\lambda I)\mathbf x=0$ **永遠**有平凡解 $\mathbf x=0$（什麼波都不混、什麼都不振）。我們要的是**非零**解（兩個波真的混成能隙、兩個原子真的振起來）。關鍵邏輯只有兩條：
+- 若 $M-\lambda I$ **可逆**（行列式不為 $0$），兩邊同時左乘它的逆矩陣，得 $\mathbf x=(M-\lambda I)^{-1}\,0=0$ → **只剩平凡解**，沒有我們要的非零解。
+- 所以要有非零解，$M-\lambda I$ 就必須**不可逆**（它把某個方向「壓扁」成零，存在 $\mathbf x\ne0$ 被打到 $0$）。矩陣不可逆 ⟺ $\det(M-\lambda I)=0$。
+
+於是「找能隙 / 找頻率」就變成「解一條 $E$（或 $\omega^2$）的多項式」。$2\times2$ 時 $\det=(\varepsilon-E)^2-\lvert U\rvert^2$ 是 $E$ 的二次式，兩根 $E=\varepsilon\pm\lvert U\rvert$ 就是上、下能帶緣，間距 $2\lvert U\rvert$ 即能隙。雙原子鏈把 $E$ 換成 $\omega^2$、矩陣換成動力學矩陣，同一招解出聲學支與光學支。「寫齊次方程 → 令行列式為零 → 解多項式取雙根」這套流程，在簡正模、NFE、緊束縛裡會一再出現。
+
+**圖**（無專屬圖）：可參考 `![近自由電子能隙](../../figs/f06_nfe_gap.svg)`（NFE 上下能帶緣間距 $2\lvert U\rvert$）與 `![雙原子色散](../../figs/f04_diatomic_dispersion.svg)`（雙原子鏈聲學支與光學支兩分支）。
+
+**用在 Kittel**：第 4 章簡正模／雙原子色散（動力學矩陣 $2\times2$ 久期方程 → 聲學支＋光學支）、第 6 章 central equation 與 NFE $2\times2$ 能隙（$E_g=2\lvert U_G\rvert$）。詳見 [單元 04](../../單元教學/unit04_聲子與晶格振動.html)、[單元 06](../../單元教學/unit06_能帶與Bloch電子.html)（章節版：[ch04](../Kittel章節導讀/ch04_聲子.html)、[ch06](../Kittel章節導讀/ch06_能帶.html)）。
+</details>
+
+---
+
+## 8. k 空間態數計數與球積分（Counting States in k-Space）
+
+<details>
+<summary><b>▸ k 空間態數計數與球積分（Counting States in k-Space）</b></summary>
+
+**你高中學過的**：
+你會算圓面積 $\pi r^2$、球體積 $\frac43\pi r^3$、球表面積 $4\pi r^2$；也會用積分把「密度 × 體積」加總。**k 空間計數**就是把這些幾何，套到「波向量 $\mathbf k$ 住的空間」上——把每個允許的 $\mathbf k$ 當成一個格點，數球裡有幾個。
+
+**📖 本節符號一覽（先看這個）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $\mathbf k$ | 波向量（wavevector），$\mathbf k=(k_x,k_y,k_z)$；標記一個平面波 $e^{i\mathbf k\cdot\mathbf r}$ 的方向與「每長度相位」 |
+| $k$ | $\mathbf k$ 的大小，$k=\lvert\mathbf k\rvert$ |
+| $k_x,k_y,k_z$ | $\mathbf k$ 的三個分量 |
+| $L$ | 樣品（立方體）邊長 |
+| $V$ | 樣品體積，$V=L^3$ |
+| $\hbar$ | 約化普朗克常數（reduced Planck constant） |
+| $m$ | 電子質量 |
+| $E$ | 電子能量；自由電子 $E=\dfrac{\hbar^2k^2}{2m}$ |
+| $N$ | 半徑 $k$ 球內的「態數」，也＝填到該球的電子總數 |
+| $n$ | 電子數密度，$n=N/V$ |
+| $k_F$ | 費米波向量（Fermi wavevector）：$T=0$ 時填到的最大 $k$ |
+| $E_F$ | 費米能，$E_F=\dfrac{\hbar^2k_F^2}{2m}$ |
+| $g(E)$ | 能態密度（density of states, DOS）＝每單位能量的態數，$g=\dfrac{dN}{dE}$ |
+| 因子 $2$ | 自旋簡併（spin degeneracy）：每個 $\mathbf k$ 可放自旋上、下共 2 個電子 |
+
+**為什麼 Kittel 需要**：
+自由電子氣體要算費米能 $E_F$、能態密度 $g(E)$，核心動作就是「**數 $\mathbf k$**」：半徑 $k$ 的球裡有幾個允許的 $\mathbf k$？每個 $\mathbf k$ 一個態（再乘自旋 2）。會數，就能算 $k_F$、$E_F$、$g(E)$——這是第 5 章整章的地基。
+
+**第一步：為什麼每個 $\mathbf k$ 佔 $(2\pi/L)^3$？（這步課本最常跳過）**
+把電子裝進邊長 $L$ 的立方盒，用**週期性邊界條件（Born–von Kármán）**：波函數每走一個 $L$ 要接回自己，$e^{ik_x(x+L)}=e^{ik_x x}$。這逼出
+$$e^{ik_xL}=1\ \Rightarrow\ k_xL=2\pi\times\text{整數}\ \Rightarrow\ k_x=\frac{2\pi}{L}\,n_x\quad(n_x\in\mathbb{Z})$$
+三個方向同理。所以允許的 $\mathbf k$ 排成一個**間距 $\frac{2\pi}{L}$ 的格子**，每個 $\mathbf k$ 點各自佔一小塊體積
+$$\Delta k_x\,\Delta k_y\,\Delta k_z=\left(\frac{2\pi}{L}\right)^3=\frac{(2\pi)^3}{V}$$
+
+**第二步：數球內態數 $N$，反解 $k_F$**
+半徑 $k_F$ 的球體積 $\frac43\pi k_F^3$，除以「每態體積」$(2\pi)^3/V$，再乘自旋因子 $2$：
+$$N=2\cdot\frac{\frac43\pi k_F^3}{(2\pi)^3/V}=\frac{V}{3\pi^2}\,k_F^3$$
+用 $n=N/V$ 反解費米波向量與費米能：
+$$\boxed{\,k_F=(3\pi^2 n)^{1/3}\,},\qquad E_F=\frac{\hbar^2 k_F^2}{2m}=\frac{\hbar^2}{2m}(3\pi^2 n)^{2/3}$$
+
+**第三步：能態密度 $g(E)$ 三步推（別跳）**
+1. **用 $E$ 取代 $k$**：$E=\dfrac{\hbar^2k^2}{2m}\Rightarrow k=\dfrac{\sqrt{2mE}}{\hbar}$，代入 $N=\frac{V}{3\pi^2}k^3$：
+$$N(E)=\frac{V}{3\pi^2}\left(\frac{2mE}{\hbar^2}\right)^{3/2}\propto E^{3/2}$$
+2. **對 $E$ 微分**（$\dfrac{d}{dE}E^{3/2}=\dfrac32E^{1/2}$）：
+$$g(E)=\frac{dN}{dE}=\frac{V}{3\pi^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\cdot\frac32E^{1/2}=\frac{V}{2\pi^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\sqrt{E}$$
+3. **$\sqrt E$ 從哪來**：它 ＝「3D 球殼面積 $\propto k^2$」配上 $k\propto\sqrt E$。
+
+**維度比較（換球殼幾何，就換能量冪次）**：
+數球殼時，3D 用球殼體積 $4\pi k^2\,dk$、2D 用圓環 $2\pi k\,dk$、1D 用 $2\,dk$（$\pm k$ 兩端）。配上 $k\propto\sqrt E$、$dk\propto E^{-1/2}dE$：
+$$g_{3D}\propto\sqrt{E},\qquad g_{2D}=\text{常數},\qquad g_{1D}\propto\frac{1}{\sqrt{E}}$$
+這就是低維材料（量子井、奈米線）行為迥異的數學根源——根全在那個「球殼幾何因子」。
+
+**範例（代真實數值）**：金屬鈉，電子數密度 $n=2.65\times10^{28}\ \text{m}^{-3}$。
+- 費米波向量：$k_F=(3\pi^2 n)^{1/3}=(3\pi^2\times2.65\times10^{28})^{1/3}\approx9.2\times10^{9}\ \text{m}^{-1}$。
+- 費米能：$E_F=\dfrac{\hbar^2k_F^2}{2m}\approx5.1\times10^{-19}\ \text{J}\approx3.2\ \text{eV}$（與實驗值相符 ✓）。
+- 費米溫度：$T_F=E_F/k_B\approx3.7\times10^{4}\ \text{K}$——遠高於室溫，所以室溫下電子氣是「高度簡併」的，這正是要用費米–狄拉克而非古典分布的原因。
+
+**圖**：`![不同維度的能態密度](../../figs/f05_dos_dims.svg)`（亦可參考費米球 `![費米球](../../figs/f05_fermi_sphere.svg)`）
+
+**用在 Kittel**：第 5 章自由電子費米氣體——費米能、費米球、DOS、形狀因子。詳見 [單元 05 自由電子費米氣體](../../單元教學/unit05_自由電子費米氣體.html)（章節版：[ch05](../Kittel章節導讀/ch05_自由電子費米氣體.html)）。
+</details>
+
+---
+
+> 卡在哪個概念，就回到對應單元再讀一次。數學是工具，物理才是目的——先看懂「為什麼要這個工具」，公式自然就記得住。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

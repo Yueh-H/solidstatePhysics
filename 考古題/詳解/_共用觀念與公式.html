@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理導論詳解 — 共用觀念與公式</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">← 詳解目錄</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- 固態物理導論詳解 — 共用觀念與公式（仿 QFT tutorials 的「共用符號說明」） -->
+
+# 共用觀念與公式
+
+> 用法:各年詳解開頭引用本檔。每個觀念都用 `你高中/普物學過的 → 為什麼要這個 → 定義 → 範例` 四段,
+> 範例會指出**哪一卷哪一題**用到。慣例:2D 用 $\hat e_x,\hat e_y$;倒晶格用 $\mathbf a_i\cdot\mathbf b_j=2\pi\delta_{ij}$;
+> $\hbar=h/2\pi$;自由電子 $E=\hbar^2k^2/2m$。
+
+---
+
+<details open>
+<summary><b>▸ Bravais lattice、primitive cell、basis(晶格 vs 基元)</b></summary>
+
+### 你普物學過的
+晶體是「同一個單元」一直複製排出來的。
+
+### 為什麼要這個
+要把「無限多顆原子」壓縮成「一組重複向量 + 一小撮原子」。**Bravais lattice** 管「重複的格點」,
+**basis(基元)** 管「每個格點掛幾顆、什麼原子」。兩者相乘 = 整個晶體。
+
+### 定義
+- **Bravais lattice**:所有 $\mathbf R=n_1\mathbf a_1+n_2\mathbf a_2$($n_i\in\mathbb Z$)構成的點集,
+  且**從任何一個格點看出去的環境都一模一樣**。$\mathbf a_1,\mathbf a_2$ 稱 primitive vectors。
+- **Primitive cell(原胞)**:每個重複單元只含 **1 個格點**的最小區域,面積 $=|\mathbf a_1\times\mathbf a_2|$。
+- **Basis(基元)**:掛在每個格點上的原子組;**基元原子數 = 原胞內原子數**。
+- 判斷基元數的鐵則:**兩顆原子屬同一基元(算 2 顆) ⟺ 它們之間的位移「不是」一個晶格向量 $\mathbf R$**。
+  若位移剛好 $=\tfrac12$ 晶格向量之類使「環境相同」,則其實是更小的 Bravais lattice,basis 可縮為 1。
+
+### 範例
+1. 正方晶格 $\mathbf a_1=a\hat e_x,\mathbf a_2=a\hat e_y$,每格點 1 顆 → basis = 1。
+2. 二維蜂巢(graphene):格點是三角晶格,但每格點掛 2 顆 C → **basis = 2**(2023 卷第 1 題)。
+3. **2025 卷第 1 題**:α、β 兩套互相插入的矩形格,位移 $(b,\,a/3)$ 不是晶格向量 → **basis = 2**。
+
+</details>
+
+<details>
+<summary><b>▸ 二維倒晶格(reciprocal lattice)</b></summary>
+
+### 你普物學過的
+繞射、傅立葉:空間裡的週期 $a$,在「頻率空間」對應 $2\pi/a$。
+
+### 為什麼要這個
+晶體的繞射、能帶、布里淵區全都活在倒空間。倒晶格 = 把實空間週期翻成波向量。
+
+### 定義(2D)
+給實空間 $\mathbf a_1,\mathbf a_2$,倒晶格 $\mathbf b_1,\mathbf b_2$ 由
+$$\mathbf a_i\cdot\mathbf b_j=2\pi\,\delta_{ij}$$
+唯一決定。**矩形情形**($\mathbf a_1=a_1\hat e_x,\ \mathbf a_2=a_2\hat e_y$)最簡單:
+$$\mathbf b_1=\frac{2\pi}{a_1}\hat e_x,\qquad \mathbf b_2=\frac{2\pi}{a_2}\hat e_y.$$
+一般(非正交)可用 3D 公式 $\mathbf b_1=2\pi\dfrac{\mathbf a_2\times\hat z}{\mathbf a_1\cdot(\mathbf a_2\times\hat z)}$ 等。
+
+### 範例
+1. $\mathbf a_1=a\hat e_x,\mathbf a_2=\tfrac{2a}{3}\hat e_y\Rightarrow \mathbf b_1=\tfrac{2\pi}{a}\hat e_x,\ \mathbf b_2=\tfrac{3\pi}{a}\hat e_y$(**2025 第 2(a) 題**)。
+2. 倒晶格的單元(BZ)= Wigner–Seitz cell of reciprocal lattice。
+
+</details>
+
+<details>
+<summary><b>▸ 繞射條件:Laue $\Delta\mathbf k=\mathbf G$ 與 Bragg $2d\sin\theta=\lambda$</b></summary>
+
+### 你普物學過的
+雙狹縫:路徑差 = 整數波長才亮。晶體繞射同理,只是三維週期。
+
+### 為什麼要這個
+判斷「某波長的 X 光會不會被某晶面繞射」、繞射角多少。
+
+### 定義
+- **Laue**:彈性散射 $|\mathbf k'|=|\mathbf k|=2\pi/\lambda$,建設性干涉要求動量轉移等於倒晶格向量:
+  $$\Delta\mathbf k=\mathbf k'-\mathbf k=\mathbf G.$$
+- **可繞射的必要條件**:存在非零 $\mathbf G$ 使 $|\mathbf G|\le 2|\mathbf k|=\dfrac{4\pi}{\lambda}$
+  (因 $|\mathbf G|=2k\sin\theta\le 2k$)。
+- **角度**:$\sin\theta=\dfrac{|\mathbf G|}{2k}=\dfrac{|\mathbf G|\,\lambda}{4\pi}$;
+  **入射束與繞射束夾角 $=2\theta$**。等價於 Bragg $2d\sin\theta=\lambda$,$d=2\pi/|\mathbf G|$。
+
+### 範例
+**2025 第 2(c) 題**:$\lambda=2a/5$,最短 $|\mathbf G|=2\pi/a$ →
+$\sin\theta=\dfrac{(2\pi/a)(2a/5)}{4\pi}=\dfrac15$,夾角 $2\theta=2\arcsin\tfrac15\approx23^\circ$。
+
+</details>
+
+<details>
+<summary><b>▸ Bloch 定理與 Bloch 波函數</b></summary>
+
+### 你學過的
+週期位能下,電子波函數「形狀每個原胞重複,只差一個相位」。
+
+### 為什麼要這個
+週期晶體中電子態的普遍形式;能帶、晶體動量 $\hbar\mathbf k$ 都從這來。
+
+### 定義
+週期位能 $V(\mathbf r+\mathbf R)=V(\mathbf r)$ 下,本徵態可寫成
+$$\psi_{\mathbf k}(\mathbf r)=e^{\,i\mathbf k\cdot\mathbf r}\,u_{\mathbf k}(\mathbf r),\qquad u_{\mathbf k}(\mathbf r+\mathbf R)=u_{\mathbf k}(\mathbf r).$$
+等價敘述:$\psi_{\mathbf k}(\mathbf r+\mathbf R)=e^{\,i\mathbf k\cdot\mathbf R}\psi_{\mathbf k}(\mathbf r)$。
+
+### 範例
+**2025 第 3(a) 題**:直接寫上式(3D),$u_{\mathbf k}$ 為週期部分。
+
+</details>
+
+<details>
+<summary><b>▸ Born–von Kármán 邊界條件 與 允許 $\mathbf k$ 的間距</b></summary>
+
+### 你學過的
+無限晶體沒法算;改用「週期性箱子」:走到邊界就接回另一邊(像貪食蛇)。
+
+### 為什麼要這個
+讓 $\mathbf k$ 變成可數的離散格點,才能數態、算 DOS。
+
+### 定義
+邊長 $L$ 的立方,要求 $\psi(\mathbf r+L\hat e_i)=\psi(\mathbf r)$。對 Bloch 態 $\Rightarrow e^{ik_iL}=1\Rightarrow$
+$$k_i=\frac{2\pi}{L}n_i,\quad n_i\in\mathbb Z.$$
+允許 $\mathbf k$ 在每方向間距 $\Delta k=\dfrac{2\pi}{L}$;每個 $\mathbf k$ 態占 $k$ 空間體積 $(2\pi/L)^d$。
+
+### 範例
+**2025 第 3(b) 題**:相鄰 $\mathbf k$ 最短距離 $=2\pi/L$。
+
+</details>
+
+<details>
+<summary><b>▸ 自由電子的態密度 DOS(維度很重要)</b></summary>
+
+### 你學過的
+「能量區間裡有幾個座位」= DOS。
+
+### 為什麼要這個
+比熱、磁化率、載子數全靠它。**2D 的 DOS 是常數**,是經典考點。
+
+### 定義(自由電子 $E=\hbar^2k^2/2m$)
+每個 $\mathbf k$ 態占 $(2\pi/L)^d=(2\pi)^d/V_d$。數 $|\mathbf k|<k$ 的態(**單一自旋**):
+$$N=\frac{(\text{}k\text{ 球體積})}{(2\pi)^d/V_d}.$$
+- **2D**(面積 $A=L^2$):$N=\dfrac{\pi k^2}{(2\pi)^2/A}=\dfrac{A k^2}{4\pi}$,代 $k^2=2mE/\hbar^2$ →
+  $$g(E)=\frac{dN}{dE}=\frac{A\,m}{2\pi\hbar^2}\quad(\text{每自旋,與 }E\text{ 無關}).$$
+  兩種自旋再乘 2:$g_{\text{tot}}=\dfrac{Am}{\pi\hbar^2}$。
+- 對照:1D $g\propto E^{-1/2}$、3D $g\propto E^{1/2}$。
+
+### 範例
+**2025 第 3(c) 題**:2D 正方、邊長 $L$、**只算 spin-up** → $g(E)=\dfrac{L^2 m}{2\pi\hbar^2}$。
+
+</details>
+
+<details>
+<summary><b>▸ 緊束縛(tight-binding)能帶</b></summary>
+
+### 你學過的
+原子各自有能階;靠近後能階「裂開、展寬」成能帶。
+
+### 為什麼要這個
+從原子軌道出發得到能帶最直觀;1D 結果可默寫。
+
+### 定義(1D、最近鄰、單一 s 軌道)
+$$E(k)=\varepsilon_0-\alpha-2\gamma\cos(ka),$$
+$\alpha$ = 同點修正,$\gamma$ = 最近鄰**hopping/overlap 積分**。對 s 軌道 $\gamma>0$:
+能帶**最低在 $k=0$**、**最高在 $k=\pm\pi/a$(布里淵區邊界)**。頻寬 $=4\gamma$。
+
+### 範例
+**2025 第 3(d) 題**:1D、H 原子 $1s$ → 最高能量在 $k=\pm\pi/a$(區邊界)。
+
+</details>
+
+<details>
+<summary><b>▸ 鐵磁、Curie 溫度;Type I / II 超導</b></summary>
+
+### 你學過的
+磁鐵加熱會失磁;超導體會排磁場(Meissner)。
+
+### 為什麼要這個
+相變與臨界行為的定性題年年可能冒出(2025 又考)。
+
+### 定義
+- **鐵磁**:$T<T_C$ 有自發磁化 $M_s(T)>0$;$T>T_C$ 轉順磁,**零外場下 $M_s=0$**,總磁矩 $\mu=M_sV\to0$。
+- **超導 Meissner**:完全排磁(零電阻 + $B=0$ 內部)。
+  - **Type I**:單一臨界場 $H_c$,超過即整體破超導,**不允許**磁通部分穿透。
+  - **Type II**:有 $H_{c1}<H<H_{c2}$ 的**混合態**,磁場以**量子化磁通渦旋(vortex)**穿透,
+    每個 vortex 周圍仍是超導區。
+
+### 範例
+**2025 第 4 題**:(a) $T>T_C$ 總磁矩 $=0$;(b) 允許磁通 vortex 穿透的是 **Type II**。
+
+</details>
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 習題詳解 — 第2章 倒晶格與繞射 — 習題詳解＋範例</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">習題詳解目錄</a> &nbsp;·&nbsp; <a href="../Kittel章節導讀/index.html">章節導讀</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../../考古題/詳解/index.html">逐題詳解</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- Kittel 習題詳解：第2章 倒晶格與繞射 -->
+
+# Kittel 第2章 習題詳解 ＋ 加碼範例 — 倒晶格與繞射（Reciprocal Lattice & Diffraction）
+
+> **這頁是什麼**：本章的「練習題庫＋完整解答」。先做 **加碼範例** 熱身，再把 **Kittel 課本習題** 全部練過。觀念見 [章節導讀](../Kittel章節導讀/ch02_倒晶格與繞射.html)、[單元學科](../../單元教學/unit02_倒晶格與繞射.html)；歷年考題見 [逐題詳解](../../考古題/詳解/index.html)。
+
+---
+
+## 0. 開工前先記住的工具箱（Toolbox）
+
+做這章每一題前，先把這幾條公式背起來，後面會反覆用到：
+
+- **倒晶格基矢（reciprocal lattice vectors）**：由實晶格基矢 $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ 定義
+$$\mathbf{b}_1=2\pi\frac{\mathbf{a}_2\times\mathbf{a}_3}{\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3)},\quad
+\mathbf{b}_2=2\pi\frac{\mathbf{a}_3\times\mathbf{a}_1}{\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3)},\quad
+\mathbf{b}_3=2\pi\frac{\mathbf{a}_1\times\mathbf{a}_2}{\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3)}.$$
+- **正交關係（orthogonality）**：$\mathbf{a}_i\cdot\mathbf{b}_j=2\pi\,\delta_{ij}$（$i=j$ 時為 $2\pi$，否則為 $0$）。
+- **倒晶格向量（reciprocal lattice vector）**：$\mathbf{G}=h\mathbf{b}_1+k\mathbf{b}_2+l\mathbf{b}_3$。
+- **布拉格定律（Bragg's law）**：$2d\sin\theta=n\lambda$。
+- **勞厄條件（Laue condition）/ 繞射條件**：$\Delta\mathbf{k}=\mathbf{G}$，亦即 $\mathbf{a}_i\cdot\Delta\mathbf{k}=2\pi\times(\text{整數})$。
+- **結構因子（structure factor）**：$S_{\mathbf G}=\sum_{j}f_j\,\exp\!\big[-i\,2\pi(x_j v_1+y_j v_2+z_j v_3)\big]$，其中 $(x_j,y_j,z_j)$ 是 basis 中第 $j$ 個原子在習用胞（conventional cell）的分數座標、$(v_1,v_2,v_3)\equiv(h,k,l)$ 是 Miller 指標。
+- **原子形狀因子（atomic form factor）**：$f_{\mathbf G}=\int n(\mathbf r)\,e^{-i\mathbf{G}\cdot\mathbf r}\,d^3r$。
+
+> 觀念上一句話：**繞射（diffraction）就是在量倒晶格（reciprocal lattice）。** 看到亮點（峰）就代表 $\Delta\mathbf{k}$ 剛好等於某個 $\mathbf{G}$。
+
+---
+
+## 🔥 加碼範例題目（先熱身）
+
+### 範例 A：Bragg 數值 — 銅粉末繞射（Bragg numerical）
+**題目**：用波長 $\lambda=1.54\ \text{Å}$（Cu $K_\alpha$）的 X 光照射面心立方（fcc）銅，晶格常數 $a=3.615\ \text{Å}$。求 $(111)$ 面的一階布拉格角 $\theta$，與對應的偵測器角 $2\theta$。
+
+**Step 1**　先算 $(111)$ 面的面間距。立方晶系（cubic）公式：
+$$d_{hkl}=\frac{a}{\sqrt{h^2+k^2+l^2}}.$$
+
+**Step 2**　代入 $h=k=l=1$：
+$$d_{111}=\frac{3.615}{\sqrt{1^2+1^2+1^2}}=\frac{3.615}{\sqrt{3}}=\frac{3.615}{1.732}=2.087\ \text{Å}.$$
+
+**Step 3**　用布拉格定律 $2d\sin\theta=n\lambda$，取一階 $n=1$：
+$$\sin\theta=\frac{n\lambda}{2d}=\frac{1\times1.54}{2\times2.087}=\frac{1.54}{4.174}=0.3690.$$
+
+**Step 4**　反三角求角度：
+$$\theta=\arcsin(0.3690)=21.65^\circ.$$
+
+**Step 5**　偵測器讀的是 $2\theta$：
+$$2\theta=2\times21.65^\circ=43.3^\circ.$$
+
+$$\boxed{\;\theta\approx21.7^\circ,\qquad 2\theta\approx43.3^\circ\;}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:640px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arc2a" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a4d7c"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif">
+<line x1="90" y1="95" x2="410" y2="95" stroke="#888" stroke-width="1.3"/>
+<line x1="90" y1="160" x2="410" y2="160" stroke="#888" stroke-width="1.3"/>
+<g fill="#cfe0f0"><circle cx="120" cy="95" r="3"/><circle cx="160" cy="95" r="3"/><circle cx="200" cy="95" r="3"/><circle cx="290" cy="95" r="3"/><circle cx="330" cy="95" r="3"/><circle cx="370" cy="95" r="3"/><circle cx="120" cy="160" r="3"/><circle cx="160" cy="160" r="3"/><circle cx="200" cy="160" r="3"/><circle cx="290" cy="160" r="3"/><circle cx="330" cy="160" r="3"/><circle cx="370" cy="160" r="3"/></g>
+<g stroke="#1a4d7c" stroke-width="1.9" fill="none"><line x1="150" y1="33" x2="247" y2="93" marker-end="url(#arc2a)"/><line x1="250" y1="95" x2="350" y2="33" marker-end="url(#arc2a)"/><line x1="150" y1="98" x2="247" y2="158" marker-end="url(#arc2a)"/><line x1="250" y1="160" x2="350" y2="98" marker-end="url(#arc2a)"/></g>
+<g stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"><line x1="250" y1="95" x2="226" y2="145"/><line x1="250" y1="95" x2="274" y2="145"/></g>
+<g stroke="#c0392b" stroke-width="2.6" fill="none"><line x1="226" y1="145" x2="250" y2="160"/><line x1="250" y1="160" x2="274" y2="145"/></g>
+<rect x="223" y="138" width="7" height="7" fill="none" stroke="#c0392b" stroke-width="0.8" transform="rotate(32 226 145)"/>
+<rect x="270" y="138" width="7" height="7" fill="none" stroke="#c0392b" stroke-width="0.8" transform="rotate(-32 274 145)"/>
+<circle cx="250" cy="95" r="3.5" fill="#1a4d7c"/><circle cx="250" cy="160" r="3.5" fill="#1a4d7c"/>
+<path d="M226,95 A24,24 0 0,0 233,82" fill="none" stroke="#333" stroke-width="1"/>
+<text x="224" y="89" font-size="11" fill="#333">θ</text>
+<line x1="108" y1="95" x2="108" y2="160" stroke="#1a4d7c" stroke-width="1"/>
+<line x1="104" y1="99" x2="108" y2="95" stroke="#1a4d7c" stroke-width="1"/><line x1="112" y1="99" x2="108" y2="95" stroke="#1a4d7c" stroke-width="1"/>
+<line x1="104" y1="156" x2="108" y2="160" stroke="#1a4d7c" stroke-width="1"/><line x1="112" y1="156" x2="108" y2="160" stroke="#1a4d7c" stroke-width="1"/>
+<text x="78" y="131" font-size="11" fill="#1a4d7c">d₁₁₁</text>
+<text x="150" y="29" font-size="11" fill="#1a4d7c">入射 X 光</text>
+<text x="320" y="29" font-size="11" fill="#1a4d7c">繞射</text>
+<text x="206" y="158" font-size="10" fill="#c0392b">d sinθ</text>
+<text x="278" y="158" font-size="10" fill="#c0392b">d sinθ</text>
+<text x="240" y="190" text-anchor="middle" font-size="12.5" fill="#333">2 d₁₁₁ sinθ = nλ → sinθ = 1.54 / (2×2.087)</text>
+<text x="240" y="210" text-anchor="middle" font-size="12.5" fill="#333">θ ≈ 21.7° ；偵測器讀 2θ ≈ 43.3°</text>
+<text x="240" y="232" text-anchor="middle" font-size="11" fill="#777">θ 量自晶面、入射–繞射夾角 = 2θ（範例 A 易錯點）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 A（Bragg 數值）的幾何</b>：fcc 銅的 (111) 面間距 d₁₁₁=a/√3=2.087 Å。下層那道波多走「進＋出」兩段紅線各 d·sinθ，相加 2d·sinθ=nλ 時相鄰晶面同相疊加。代 λ=1.54 Å、n=1 得 sinθ=0.369→θ≈21.7°。注意 θ <b>量自晶面</b>，偵測器讀的是入射–繞射夾角 <b>2θ≈43.3°</b>——粉末繞射最常把 θ 與 2θ 搞混。</figcaption>
+</figure>
+
+> **重點**：粉末繞射（powder diffraction）讀的角度是 $2\theta$，別把 $\theta$ 跟 $2\theta$ 搞混。$d=a/\sqrt{h^2+k^2+l^2}$ 只對**立方**晶系成立。
+
+<details>
+<summary><b>📝 更多範例（點開）：Bragg 數值多算幾題</b></summary>
+
+**範例 A1（同晶體換面：fcc 銅的 (200)）**：仍取 $\lambda=1.54\,$Å、$a=3.615\,$Å。
+先算面間距 $d_{200}=\dfrac{a}{\sqrt{2^2+0^2+0^2}}=\dfrac{3.615}{\sqrt4}=\dfrac{3.615}{2}=1.8075\,$Å。
+代布拉格 $\sin\theta=\dfrac{n\lambda}{2d}=\dfrac{1\times1.54}{2\times1.8075}=\dfrac{1.54}{3.615}=0.4260$。
+取反三角 $\theta=\arcsin(0.4260)=25.2^\circ$，偵測器 $2\theta=50.4^\circ$。
+比較範例 A 的 $(111)$（$2\theta=43.3^\circ$）：$(200)$ 面更密（$d$ 較小）⇒ 同階繞射角更大，符合「$d$ 小、$\theta$ 大」。
+
+**範例 A2（二階繞射 $n=2$）**：仍用 $(111)$ 面、$d_{111}=2.087\,$Å。
+取 $n=2$：$\sin\theta=\dfrac{n\lambda}{2d}=\dfrac{2\times1.54}{2\times2.087}=\dfrac{3.08}{4.174}=0.7379$。
+$\theta=\arcsin(0.7379)=47.5^\circ$，故 $2\theta=95.1^\circ$。
+檢核 $n$ 上限：要 $\sin\theta\le1$ 須 $n\le\dfrac{2d}{\lambda}=\dfrac{2\times2.087}{1.54}=2.71$，所以 $(111)$ 面最多到 $n=2$，沒有三階。
+
+**範例 A3（反推波長）**：某立方晶體 $a=4.00\,$Å，量到 $(110)$ 面一階峰在 $2\theta=30.0^\circ$，求 $\lambda$。
+先 $\theta=15.0^\circ$，$d_{110}=\dfrac{4.00}{\sqrt2}=2.828\,$Å。
+代 $\lambda=2d\sin\theta=2\times2.828\times\sin15^\circ=2\times2.828\times0.2588=1.464\,$Å。
+（這正是用已知晶體當「波長計」的標準作法。）
+
+**範例 A4（數值健全性：$2\theta$ vs $\theta$）**：若不小心把 $0.3690$ 當成 $\sin(2\theta)$ 而非 $\sin\theta$，會得 $2\theta=\arcsin(0.369)=21.7^\circ$、$\theta=10.8^\circ$，與正解 $\theta=21.7^\circ$ 差一倍。
+判斷法：粉末繞射儀的角度刻度（goniometer）是入射–繞射夾角 $=2\theta$，布拉格式裡的 $\theta$ 才是「量自晶面」的半角，務必先除以 2 再丟進 $\sin\theta$。
+</details>
+
+---
+
+### 範例 B：bcc 與 fcc 的消光規則（extinction / selection rules）
+**題目**：用結構因子說明：體心立方（bcc）只在 $h+k+l=$ 偶數時有繞射；面心立方（fcc）只在 $h,k,l$ 同奇或同偶時有繞射。
+
+**Step 1**　寫結構因子。把 bcc / fcc 視為「simple cubic 晶格 ＋ 一個 basis」，於是
+$$S_{hkl}=f\sum_{j}\exp\!\big[-i\,2\pi\,(x_j h+y_j k+z_j l)\big].$$
+$f$ 為單一原子形狀因子（同種原子）。
+
+**Step 2（bcc）**　basis 兩顆原子：$(0,0,0)$ 與 $(\tfrac12,\tfrac12,\tfrac12)$。
+$$S=f\Big[1+e^{-i\pi(h+k+l)}\Big].$$
+
+**Step 3（bcc 判讀）**　因 $e^{-i\pi m}=(-1)^m$：
+- $h+k+l=$ 偶 ⇒ $S=f(1+1)=2f$（**有反射**）；
+- $h+k+l=$ 奇 ⇒ $S=f(1-1)=0$（**消光**）。
+$$\boxed{\text{bcc 允許：}\ h+k+l=\text{偶數}}$$
+
+**Step 4（fcc）**　basis 四顆原子：$(0,0,0),(\tfrac12,\tfrac12,0),(\tfrac12,0,\tfrac12),(0,\tfrac12,\tfrac12)$。
+$$S=f\Big[1+e^{-i\pi(h+k)}+e^{-i\pi(h+l)}+e^{-i\pi(k+l)}\Big].$$
+
+**Step 5（fcc 判讀）**　
+- 若 $h,k,l$ **全同奇或全同偶**：三個指數的兩兩和都是偶數 ⇒ 四項皆 $+1$ ⇒ $S=4f$（**有反射**）；
+- 若 $h,k,l$ **奇偶混合**（例如兩偶一奇）：四項變成 $1+1-1-1=0$ ⇒ $S=0$（**消光**）。
+$$\boxed{\text{fcc 允許：}\ h,k,l\ \text{同奇或同偶}}$$
+
+> **重點**：bcc 與 fcc 的「消光規則」是資格考最愛考的速記。bcc → 看 $h+k+l$ 奇偶；fcc → 看三個指標**同奇同偶**。記法：bcc 第一個被消的是 $(100)$、fcc 第一個被消的是 $(100),(110)$，第一個出現的是 $(111)$。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 200" width="100%" style="max-width:640px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg" id="svgBccFcc">
+<g font-family="-apple-system,sans-serif">
+<text x="240" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">bcc 與 fcc 允許反射（峰位 ∝ √(h²+k²+l²)）</text>
+<line x1="50" y1="100" x2="455" y2="100" stroke="#888" stroke-width="1.2"/>
+<line x1="50" y1="150" x2="455" y2="150" stroke="#888" stroke-width="1.2"/>
+<text x="455" y="172" text-anchor="end" font-size="10.5" fill="#777">→ √(h²+k²+l²)</text>
+<g font-size="11" font-weight="bold"><text x="18" y="78" fill="#c0392b">bcc</text><text x="18" y="128" fill="#1a4d7c">fcc</text></g>
+<g stroke="#c0392b" stroke-width="2.6"><line x1="95" y1="100" x2="95" y2="64"/><line x1="150" y1="100" x2="150" y2="64"/><line x1="210" y1="100" x2="210" y2="64"/><line x1="260" y1="100" x2="260" y2="64"/><line x1="320" y1="100" x2="320" y2="64"/></g>
+<g font-size="9" fill="#c0392b"><text x="95" y="58" text-anchor="middle">110</text><text x="150" y="58" text-anchor="middle">200</text><text x="210" y="58" text-anchor="middle">211</text><text x="260" y="58" text-anchor="middle">220</text><text x="320" y="58" text-anchor="middle">310</text></g>
+<g stroke="#1a4d7c" stroke-width="2.6"><line x1="120" y1="150" x2="120" y2="114"/><line x1="185" y1="150" x2="185" y2="114"/><line x1="245" y1="150" x2="245" y2="114"/><line x1="320" y1="150" x2="320" y2="114"/></g>
+<g font-size="9" fill="#1a4d7c"><text x="120" y="167" text-anchor="middle">111</text><text x="185" y="167" text-anchor="middle">200</text><text x="245" y="167" text-anchor="middle">220</text><text x="320" y="167" text-anchor="middle">311</text></g>
+<text x="240" y="192" text-anchor="middle" font-size="11" fill="#777">bcc：留 h+k+l 偶（無 100、111）；fcc：留同奇/同偶（無 100、110）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 B：bcc 與 fcc 的允許反射梳狀圖</b>。bcc（紅）只留 h+k+l 為偶的反射：第一根是 (110)，沒有 (100)、(111)。fcc（藍）只留三指標同奇或同偶：第一根是 (111)，沒有 (100)、(110)。兩者第一條峰的位置不同，正是粉末繞射用來區分 bcc/fcc 的指紋。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：消光規則逐一代入驗算</b></summary>
+
+**範例 B1（bcc 把前幾個 $hkl$ 全判一遍）**：bcc 條件 $S=f[1+(-1)^{h+k+l}]$。
+$(100)$：$h+k+l=1$ 奇 ⇒ $S=f(1-1)=0$ 消；
+$(110)$：和 $=2$ 偶 ⇒ $S=2f$ 留（bcc 第一條峰）；
+$(111)$：和 $=3$ 奇 ⇒ $S=0$ 消；
+$(200)$：和 $=2$ 偶 ⇒ 留；$(210)$：和 $=3$ 奇 ⇒ 消；$(211)$：和 $=4$ 偶 ⇒ 留。
+所以 bcc 序列為 $110,200,211,220,310,\dots$，對應 $h^2+k^2+l^2=2,4,6,8,10,\dots$（全偶）。
+
+**範例 B2（fcc 把前幾個 $hkl$ 全判一遍）**：fcc 留「同奇或同偶」。
+$(100)$ 兩偶一奇 → 混合 ⇒ 消；$(110)$ 一偶兩... 實為兩奇一偶 → 混合 ⇒ 消；
+$(111)$ 三奇 ⇒ 留（fcc 第一條峰，$S=4f$）；$(200)$ 三偶 ⇒ 留；
+$(210)$ 混合 ⇒ 消；$(211)$ 混合 ⇒ 消；$(220)$ 三偶 ⇒ 留；$(311)$ 三奇 ⇒ 留。
+fcc 序列 $111,200,220,311,222,400,\dots$，對應 $h^2+k^2+l^2=3,4,8,11,12,16,\dots$。
+
+**範例 B3（用「缺哪根」反推結構，考題常見）**：某立方金屬粉末繞射，量到峰序列對應 $h^2+k^2+l^2=2,4,6,8,10,12$（即 $110,200,211,220,310,222$），全為偶數、無 $111$。
+$\Rightarrow$ 這是 **bcc**（若是 fcc，第一條會是 $111$ 對應 $h^2+k^2+l^2=3$）。再由第一峰角度反推 $a$ 即完成定性＋定量。
+
+**範例 B4（simple cubic 當對照組）**：simple cubic 的 basis 只有 $(0,0,0)$ 一顆 ⇒ $S=f$，**任何 $hkl$ 都不消光**。
+所以 sc 序列含 $100,110,111,200,210,211,\dots$（$h^2+k^2+l^2=1,2,3,4,5,6,\dots$，但缺 $7$，因 $7$ 無法寫成三整數平方和）。對照可見：bcc 把 sc 序列中「和為奇」的那些（$100,111,210,\dots$）全消掉。
+</details>
+
+---
+
+### 範例 C：由 $\mathbf{a}_i$ 算 $\mathbf{b}_i$（fcc 的倒晶格是 bcc）
+**題目**：fcc 的原始平移向量（primitive vectors）可取為
+$$\mathbf{a}_1=\tfrac{a}{2}(\hat{\mathbf y}+\hat{\mathbf z}),\quad
+\mathbf{a}_2=\tfrac{a}{2}(\hat{\mathbf z}+\hat{\mathbf x}),\quad
+\mathbf{a}_3=\tfrac{a}{2}(\hat{\mathbf x}+\hat{\mathbf y}).$$
+求倒晶格基矢 $\mathbf{b}_1,\mathbf{b}_2,\mathbf{b}_3$，並指出倒晶格是什麼結構。
+
+**Step 1**　先算原始胞體積 $V_c=\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3)$。先算 $\mathbf{a}_2\times\mathbf{a}_3$：
+$$\mathbf{a}_2\times\mathbf{a}_3=\frac{a^2}{4}(\hat{\mathbf z}+\hat{\mathbf x})\times(\hat{\mathbf x}+\hat{\mathbf y}).$$
+
+**Step 2**　展開外積（用 $\hat{\mathbf x}\times\hat{\mathbf y}=\hat{\mathbf z}$ 等）：
+$$(\hat{\mathbf z}+\hat{\mathbf x})\times(\hat{\mathbf x}+\hat{\mathbf y})
+=\hat{\mathbf z}\times\hat{\mathbf x}+\hat{\mathbf z}\times\hat{\mathbf y}+\underbrace{\hat{\mathbf x}\times\hat{\mathbf x}}_{0}+\hat{\mathbf x}\times\hat{\mathbf y}
+=\hat{\mathbf y}-\hat{\mathbf x}+\hat{\mathbf z}.$$
+所以 $\mathbf{a}_2\times\mathbf{a}_3=\dfrac{a^2}{4}(-\hat{\mathbf x}+\hat{\mathbf y}+\hat{\mathbf z})$。
+
+**Step 3**　點乘 $\mathbf{a}_1=\tfrac{a}{2}(\hat{\mathbf y}+\hat{\mathbf z})$：
+$$V_c=\frac{a}{2}(\hat{\mathbf y}+\hat{\mathbf z})\cdot\frac{a^2}{4}(-\hat{\mathbf x}+\hat{\mathbf y}+\hat{\mathbf z})
+=\frac{a^3}{8}(0+1+1)=\frac{a^3}{4}.$$
+（合理：fcc 習用立方體積 $a^3$ 內含 4 個格點，故原始胞體積 $=a^3/4$。）
+
+**Step 4**　套公式 $\mathbf{b}_1=2\pi\dfrac{\mathbf{a}_2\times\mathbf{a}_3}{V_c}$：
+$$\mathbf{b}_1=2\pi\cdot\frac{\frac{a^2}{4}(-\hat{\mathbf x}+\hat{\mathbf y}+\hat{\mathbf z})}{a^3/4}
+=\frac{2\pi}{a}(-\hat{\mathbf x}+\hat{\mathbf y}+\hat{\mathbf z}).$$
+
+**Step 5**　同法（循環對稱）得另外兩個：
+$$\mathbf{b}_2=\frac{2\pi}{a}(\hat{\mathbf x}-\hat{\mathbf y}+\hat{\mathbf z}),\qquad
+\mathbf{b}_3=\frac{2\pi}{a}(\hat{\mathbf x}+\hat{\mathbf y}-\hat{\mathbf z}).$$
+
+**Step 6**　辨認結構：這三個 $\mathbf{b}_i$ 正是邊長 $\frac{4\pi}{a}$ 立方體的 **bcc** 原始向量。
+$$\boxed{\;\mathbf{b}_i=\frac{2\pi}{a}(\text{對應的}\pm\hat{\mathbf x}\pm\hat{\mathbf y}\pm\hat{\mathbf z}),\quad\text{fcc 的倒晶格 = bcc}\;}$$
+
+> **重點**：fcc ↔ bcc 互為倒晶格。算 $\mathbf{b}_i$ 的標準流程：先算 $V_c=\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3)$，再套三條公式。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 460 200" width="100%" style="max-width:600px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg" id="svgFccBccRecip">
+<g font-family="-apple-system,sans-serif">
+<text x="230" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">fcc（實空間）的倒晶格 = bcc（倒空間）</text>
+<g transform="translate(0,0)">
+<text x="115" y="44" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1a4d7c">實空間 fcc</text>
+<rect x="55" y="60" width="100" height="100" fill="none" stroke="#888" stroke-width="1.2"/>
+<g fill="#1a4d7c"><circle cx="55" cy="60" r="3.5"/><circle cx="155" cy="60" r="3.5"/><circle cx="55" cy="160" r="3.5"/><circle cx="155" cy="160" r="3.5"/></g>
+<g fill="#c0392b"><circle cx="105" cy="60" r="3.5"/><circle cx="105" cy="160" r="3.5"/><circle cx="55" cy="110" r="3.5"/><circle cx="155" cy="110" r="3.5"/><circle cx="105" cy="110" r="3.5"/></g>
+<text x="105" y="180" text-anchor="middle" font-size="9.5" fill="#777">角點+面心，邊 a</text>
+</g>
+<g transform="translate(220,90)"><text x="0" y="0" text-anchor="middle" font-size="22" fill="#2e8b2e">→</text><text x="0" y="20" text-anchor="middle" font-size="9.5" fill="#2e8b2e">bᵢ=2π aⱼ×aₖ/Vc</text></g>
+<g transform="translate(0,0)">
+<text x="375" y="44" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1a4d7c">倒空間 bcc</text>
+<rect x="320" y="60" width="100" height="100" fill="none" stroke="#888" stroke-width="1.2"/>
+<g fill="#1a4d7c"><circle cx="320" cy="60" r="3.5"/><circle cx="420" cy="60" r="3.5"/><circle cx="320" cy="160" r="3.5"/><circle cx="420" cy="160" r="3.5"/></g>
+<circle cx="370" cy="110" r="4.5" fill="#c0392b"/>
+<text x="370" y="180" text-anchor="middle" font-size="9.5" fill="#777">角點+體心，邊 4π/a</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 C：fcc 與 bcc 互為倒晶格</b>。左邊實空間 fcc（角點藍＋面心紅）。代入 bᵢ=2π aⱼ×aₖ/Vc 後，三個倒晶格基矢恰好張出一個邊長 4π/a 立方體的 <b>bcc</b>（右，角點藍＋體心紅）。反之 bcc 的倒晶格是 fcc——這對「互為倒晶格」是資格考最常被追問的一組。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：倒晶格基矢計算與互逆關係</b></summary>
+
+**範例 C1（bcc → fcc，反向驗證）**：bcc 原始向量
+$\mathbf{a}_1=\tfrac a2(-\hat x+\hat y+\hat z),\ \mathbf{a}_2=\tfrac a2(\hat x-\hat y+\hat z),\ \mathbf{a}_3=\tfrac a2(\hat x+\hat y-\hat z)$。
+原始胞體積 $V_c=\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3)$。先算
+$\mathbf{a}_2\times\mathbf{a}_3=\tfrac{a^2}{4}(\hat x-\hat y+\hat z)\times(\hat x+\hat y-\hat z)$。
+展開（$\hat x\times\hat y=\hat z$ 等）：$(\hat x-\hat y+\hat z)\times(\hat x+\hat y-\hat z)=\hat z+\hat y+\hat z+\hat x+\hat y+\hat x=2\hat x+2\hat y+2\hat z$（逐項：$\hat x\times\hat y=\hat z,\ \hat x\times(-\hat z)=\hat y,\ (-\hat y)\times\hat x=\hat z,\ (-\hat y)\times(-\hat z)=\hat x,\ \hat z\times\hat x=\hat y,\ \hat z\times\hat y=-\hat x$，相加 $=2\hat x+2\hat y+2\hat z$）。
+故 $\mathbf{a}_2\times\mathbf{a}_3=\tfrac{a^2}{4}\cdot2(\hat x+\hat y+\hat z)=\tfrac{a^2}{2}(\hat x+\hat y+\hat z)$。
+$V_c=\tfrac a2(-\hat x+\hat y+\hat z)\cdot\tfrac{a^2}{2}(\hat x+\hat y+\hat z)=\tfrac{a^3}{4}(-1+1+1)=\tfrac{a^3}{2}$（bcc 一個立方含 2 格點 ✓）。
+$\mathbf{b}_1=2\pi\dfrac{\tfrac{a^2}{2}(\hat x+\hat y+\hat z)}{a^3/2}=\dfrac{2\pi}{a}(\hat x+\hat y+\hat z)$——這正是 fcc 的倒晶格基矢形式（面心型）⇒ **bcc 的倒晶格是 fcc**。
+
+**範例 C2（simple cubic 自倒）**：$\mathbf{a}_i=a\hat x_i$，$V_c=a^3$。
+$\mathbf{b}_1=2\pi\dfrac{a\hat y\times a\hat z}{a^3}=2\pi\dfrac{a^2\hat x}{a^3}=\dfrac{2\pi}{a}\hat x$，同理 $\mathbf{b}_2=\tfrac{2\pi}{a}\hat y,\ \mathbf{b}_3=\tfrac{2\pi}{a}\hat z$。
+倒晶格仍是簡單立方、邊長 $\tfrac{2\pi}{a}$ ⇒ **sc 的倒晶格還是 sc**（只是邊長變倒數乘 $2\pi$）。
+
+**範例 C3（正交關係自我驗算）**：拿範例 C 的 $\mathbf{b}_1=\tfrac{2\pi}{a}(-\hat x+\hat y+\hat z)$ 與 $\mathbf{a}_1=\tfrac a2(\hat y+\hat z)$ 點乘：
+$\mathbf{a}_1\cdot\mathbf{b}_1=\tfrac a2\cdot\tfrac{2\pi}{a}(\hat y+\hat z)\cdot(-\hat x+\hat y+\hat z)=\pi(0+1+1)=2\pi$ ✓（$i=j$ 應為 $2\pi$）。
+再驗 $\mathbf{a}_2\cdot\mathbf{b}_1$：$\mathbf{a}_2=\tfrac a2(\hat z+\hat x)$，
+$\mathbf{a}_2\cdot\mathbf{b}_1=\pi(\hat z+\hat x)\cdot(-\hat x+\hat y+\hat z)=\pi(-1+0+1)=0$ ✓（$i\ne j$ 應為 $0$）。算完倒晶格一定用 $\mathbf{a}_i\cdot\mathbf{b}_j=2\pi\delta_{ij}$ 抽查兩三組，最能抓到符號錯。
+
+**範例 C4（晶格常數比例感）**：fcc 邊 $a$ → 倒 bcc 立方邊 $\tfrac{4\pi}{a}$；bcc 邊 $a$ → 倒 fcc 立方邊 $\tfrac{4\pi}{a}$。
+記法：「實空間越小、倒空間越大」，比例都帶 $2\pi$（這裡 fcc/bcc 因原始胞與習用立方差 $\tfrac14$/$\tfrac12$，習用立方邊出現 $4\pi/a$ 而非 $2\pi/a$）。
+</details>
+
+---
+
+### 範例 D：第一布里淵區（first Brillouin zone）— 一維與正方晶格
+**題目**：(a) 一維晶格常數 $a$，求第一 BZ。(b) 二維正方晶格（square lattice）邊長 $a$，求第一 BZ 並算其面積。
+
+**Step 1（一維）**　一維倒晶格點間距 $b=\dfrac{2\pi}{a}$。第一 BZ 是「離原點最近的格點所夾」的區域 ⇒ 兩側中垂點在 $\pm\dfrac{\pi}{a}$。
+$$\boxed{\text{1D 第一 BZ：}\ -\frac{\pi}{a}\le k\le\frac{\pi}{a},\ \text{寬度}=\frac{2\pi}{a}}$$
+
+**Step 2（二維倒晶格）**　正方晶格 $\mathbf{a}_1=a\hat{\mathbf x}$、$\mathbf{a}_2=a\hat{\mathbf y}$，其倒晶格仍是正方格：
+$$\mathbf{b}_1=\frac{2\pi}{a}\hat{\mathbf x},\qquad\mathbf{b}_2=\frac{2\pi}{a}\hat{\mathbf y}.$$
+
+**Step 3（畫 BZ）**　最近四個倒晶格點在 $(\pm\frac{2\pi}{a},0),(0,\pm\frac{2\pi}{a})$。它們連線的中垂線是 $k_x=\pm\frac{\pi}{a}$、$k_y=\pm\frac{\pi}{a}$，圍成一個邊長 $\frac{2\pi}{a}$ 的**正方形**。
+
+**Step 4（面積）**
+$$A_{\text{BZ}}=\Big(\frac{2\pi}{a}\Big)^2=\frac{(2\pi)^2}{a^2}.$$
+與「$A_{\text{BZ}}=(2\pi)^2/A_{\text{cell}}$」一致（$A_{\text{cell}}=a^2$）。
+$$\boxed{\;A_{\text{BZ}}=\frac{(2\pi)^2}{a^2}\;}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 320 300" width="100%" style="max-width:400px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arc2bz" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a4d7c"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif">
+<text x="160" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">正方倒晶格 → 正方第一 BZ</text>
+<g stroke="#bbb" stroke-width="1" stroke-dasharray="4,3">
+<line x1="92" y1="98" x2="228" y2="98"/><line x1="92" y1="234" x2="228" y2="234"/>
+<line x1="92" y1="98" x2="92" y2="234"/><line x1="228" y1="98" x2="228" y2="234"/></g>
+<rect x="126" y="132" width="68" height="68" fill="#6aa1d6" fill-opacity="0.2" stroke="#1a4d7c" stroke-width="1.6"/>
+<g fill="#2f6ba3"><circle cx="160" cy="98" r="4.5"/><circle cx="160" cy="234" r="4.5"/><circle cx="92" cy="166" r="4.5"/><circle cx="228" cy="166" r="4.5"/><circle cx="92" cy="98" r="3.5"/><circle cx="228" cy="98" r="3.5"/><circle cx="92" cy="234" r="3.5"/><circle cx="228" cy="234" r="3.5"/></g>
+<circle cx="160" cy="166" r="5.5" fill="#c0392b"/>
+<line x1="160" y1="166" x2="160" y2="106" stroke="#1a4d7c" stroke-width="1.8" marker-end="url(#arc2bz)"/>
+<line x1="160" y1="166" x2="220" y2="166" stroke="#1a4d7c" stroke-width="1.8" marker-end="url(#arc2bz)"/>
+<text x="168" y="130" font-size="11" fill="#1a4d7c">b₂ = 2π/a</text>
+<text x="186" y="183" font-size="11" fill="#1a4d7c">b₁ = 2π/a</text>
+<text x="160" y="180" text-anchor="middle" font-size="10.5" fill="#c0392b">Γ</text>
+<text x="160" y="167" text-anchor="middle" font-size="9.5" fill="#fff" font-weight="bold"></text>
+<line x1="126" y1="252" x2="194" y2="252" stroke="#1a4d7c" stroke-width="1.2" marker-end="url(#arc2bz)"/>
+<line x1="126" y1="248" x2="126" y2="256" stroke="#1a4d7c" stroke-width="1.2"/>
+<text x="160" y="270" text-anchor="middle" font-size="11" fill="#1a4d7c">邊長 2π/a</text>
+<text x="160" y="290" text-anchor="middle" font-size="11" fill="#777">面積 = (2π/a)² = (2π)²/A_cell</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 D(b)：二維正方晶格的第一 BZ</b>。倒晶格仍是正方格、基矢 b₁=b₂=2π/a。對最近的四個倒格點（紅 Γ 點的上下左右）作中垂線 k_x=±π/a、k_y=±π/a，圍出邊長 2π/a 的<b>正方 BZ</b>（藍框），面積 (2π/a)²。這正是「BZ 面積 = (2π)²/A_cell」反比關係的最簡實例（接習題 3 的三維版 V_BZ=(2π)³/V_c）。</figcaption>
+</figure>
+
+> **重點**：第一 BZ＝倒晶格的 Wigner–Seitz 胞（畫法：對最近鄰倒晶格點做中垂面/線，圍出的最小區域）。其體積（面積）永遠 $=(2\pi)^d/V_{\text{cell}}$。
+
+<details>
+<summary><b>📝 更多範例（點開）：各種晶格的第一 BZ 與面積/體積</b></summary>
+
+**範例 D1（一維 BZ 邊界數值）**：晶格常數 $a=2.5\,$Å。
+倒晶格點間距 $b=\dfrac{2\pi}{a}=\dfrac{2\pi}{2.5}=2.513\,\text{Å}^{-1}$。
+第一 BZ 邊界（zone boundary）$k=\pm\dfrac{\pi}{a}=\pm\dfrac{\pi}{2.5}=\pm1.257\,\text{Å}^{-1}$，總寬度 $\dfrac{2\pi}{a}=2.513\,\text{Å}^{-1}$。
+（電子能帶在 $k=\pm\pi/a$ 處開能隙，就是這個邊界。）
+
+**範例 D2（長方晶格 BZ 是長方）**：$\mathbf{a}_1=a\hat x,\ \mathbf{a}_2=b\hat y$（$a\ne b$）。
+倒晶格 $\mathbf{b}_1=\dfrac{2\pi}{a}\hat x,\ \mathbf{b}_2=\dfrac{2\pi}{b}\hat y$。
+中垂線在 $k_x=\pm\dfrac{\pi}{a},\ k_y=\pm\dfrac{\pi}{b}$，圍出邊長 $\dfrac{2\pi}{a}\times\dfrac{2\pi}{b}$ 的長方 BZ。
+面積 $A_{\text{BZ}}=\dfrac{2\pi}{a}\cdot\dfrac{2\pi}{b}=\dfrac{(2\pi)^2}{ab}=\dfrac{(2\pi)^2}{A_{\text{cell}}}$（$A_{\text{cell}}=ab$）✓。
+
+**範例 D3（面積反比關係的數值驗證）**：正方晶格 $a=3\,$Å。
+$A_{\text{cell}}=a^2=9\,\text{Å}^2$，$A_{\text{BZ}}=\Big(\dfrac{2\pi}{a}\Big)^2=\Big(\dfrac{2\pi}{3}\Big)^2=\dfrac{4\pi^2}{9}=4.386\,\text{Å}^{-2}$。
+反向核對 $\dfrac{(2\pi)^2}{A_{\text{cell}}}=\dfrac{39.48}{9}=4.386\,\text{Å}^{-2}$ ✓——兩種算法一致。
+
+**範例 D4（三維簡單立方 BZ）**：sc 晶格 $a$，倒晶格亦 sc、邊 $\dfrac{2\pi}{a}$。
+最近鄰 6 個倒格點在 $(\pm\tfrac{2\pi}{a},0,0)$ 等，6 個中垂面 $k_{x,y,z}=\pm\dfrac{\pi}{a}$ 圍出邊長 $\dfrac{2\pi}{a}$ 的**立方 BZ**。
+體積 $V_{\text{BZ}}=\Big(\dfrac{2\pi}{a}\Big)^3=\dfrac{(2\pi)^3}{a^3}=\dfrac{(2\pi)^3}{V_c}$（$V_c=a^3$）✓，正是習題 3 的特例。
+</details>
+
+---
+
+## 📚 Kittel 第2章 課本習題 — 完整解答
+
+---
+
+### 習題 1：面間距（Interplanar separation）（Kittel Prob. 2.1）
+**題目（English, Kittel Prob. 2.1）**：Consider a plane $hkl$ in a crystal lattice. (a) Prove that the reciprocal lattice vector $\mathbf{G}=h\mathbf{b}_1+k\mathbf{b}_2+l\mathbf{b}_3$ is perpendicular to this plane. (b) Prove that the distance between two adjacent parallel planes of the lattice is $d(hkl)=2\pi/|\mathbf{G}|$. (c) Show for a simple cubic lattice that $d^2=a^2/(h^2+k^2+l^2)$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+考慮晶格中 Miller 指標為 $hkl$ 的平面。(a) 證明倒晶格向量 $\mathbf{G}=h\mathbf{b}_1+k\mathbf{b}_2+l\mathbf{b}_3$ 垂直於此平面。(b) 證明相鄰兩平行晶面的間距為 $d(hkl)=2\pi/|\mathbf{G}|$。(c) 對簡單立方（simple cubic）晶格，證明 $d^2=a^2/(h^2+k^2+l^2)$。
+
+</details>
+
+**(a) 證 $\mathbf{G}\perp(hkl)$ 面**
+
+**Step 1**　$(hkl)$ 面依定義通過三點 $\dfrac{\mathbf{a}_1}{h},\dfrac{\mathbf{a}_2}{k},\dfrac{\mathbf{a}_3}{l}$（晶面在三軸的截距）。取兩條躺在面內的向量：
+$$\mathbf{u}=\frac{\mathbf{a}_1}{h}-\frac{\mathbf{a}_2}{k},\qquad \mathbf{v}=\frac{\mathbf{a}_1}{h}-\frac{\mathbf{a}_3}{l}.$$
+
+**Step 2**　用正交關係 $\mathbf{a}_i\cdot\mathbf{b}_j=2\pi\delta_{ij}$ 算 $\mathbf{G}\cdot\mathbf{u}$：
+$$\mathbf{G}\cdot\mathbf{u}=(h\mathbf{b}_1+k\mathbf{b}_2+l\mathbf{b}_3)\cdot\Big(\frac{\mathbf{a}_1}{h}-\frac{\mathbf{a}_2}{k}\Big)
+=\frac{h}{h}(2\pi)-\frac{k}{k}(2\pi)=2\pi-2\pi=0.$$
+
+**Step 3**　同理
+$$\mathbf{G}\cdot\mathbf{v}=2\pi-2\pi=0.$$
+
+**Step 4**　$\mathbf{G}$ 與面內兩條不平行向量都垂直 ⇒ $\mathbf{G}$ 垂直整個平面。
+$$\boxed{\mathbf{G}\perp(hkl)}$$
+
+**(b) 證 $d(hkl)=2\pi/|\mathbf{G}|$**
+
+**Step 5**　設 $\hat{\mathbf n}$ 是平面的單位法向量。由 (a)，$\hat{\mathbf n}=\dfrac{\mathbf{G}}{|\mathbf{G}|}$。
+
+**Step 6**　面間距＝「原點」到「過 $\mathbf{a}_1/h$ 那片相鄰面」沿法向的投影長度。相鄰面距原點的位置向量取 $\mathbf{a}_1/h$，故
+$$d=\hat{\mathbf n}\cdot\frac{\mathbf{a}_1}{h}=\frac{\mathbf{G}}{|\mathbf{G}|}\cdot\frac{\mathbf{a}_1}{h}.$$
+
+**Step 7**　展開 $\mathbf{G}\cdot\mathbf{a}_1=(h\mathbf{b}_1+k\mathbf{b}_2+l\mathbf{b}_3)\cdot\mathbf{a}_1=h(2\pi)=2\pi h$。代回：
+$$d=\frac{2\pi h}{h\,|\mathbf{G}|}=\frac{2\pi}{|\mathbf{G}|}.$$
+$$\boxed{d(hkl)=\frac{2\pi}{|\mathbf{G}|}}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 430 290" width="100%" style="max-width:520px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arc2g" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+<marker id="arc2u" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2e8b2e"/></marker>
+<marker id="arc2a1" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif">
+<text x="215" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">習題 1：G ⊥ (hkl) 面，且 d = 2π/|G|</text>
+<line x1="55" y1="250" x2="370" y2="250" stroke="#aaa" stroke-width="1"/>
+<line x1="55" y1="250" x2="55" y2="45" stroke="#aaa" stroke-width="1"/>
+<line x1="55" y1="250" x2="150" y2="280" stroke="#aaa" stroke-width="1"/>
+<text x="375" y="254" font-size="11" fill="#888">x</text><text x="48" y="42" font-size="11" fill="#888">y</text><text x="155" y="283" font-size="11" fill="#888">z</text>
+<line x1="220" y1="250" x2="55" y2="120" stroke="#2f6ba3" stroke-width="2"/>
+<line x1="220" y1="250" x2="135" y2="270" stroke="#2f6ba3" stroke-width="2"/>
+<line x1="55" y1="120" x2="135" y2="270" stroke="#2f6ba3" stroke-width="2"/>
+<polygon points="220,250 55,120 135,270" fill="#6aa1d6" fill-opacity="0.14"/>
+<g fill="#1a4d7c"><circle cx="220" cy="250" r="4"/><circle cx="55" cy="120" r="4"/><circle cx="135" cy="270" r="4"/></g>
+<text x="226" y="248" font-size="10.5" fill="#1a4d7c">a₁/h</text>
+<text x="30" y="120" font-size="10.5" fill="#1a4d7c">a₂/k</text>
+<text x="138" y="284" font-size="10.5" fill="#1a4d7c">a₃/l</text>
+<line x1="220" y1="250" x2="55" y2="120" stroke="#2e8b2e" stroke-width="0" />
+<line x1="180" y1="218" x2="118" y2="170" stroke="#2e8b2e" stroke-width="1.8" marker-end="url(#arc2u)"/>
+<text x="120" y="208" font-size="11" fill="#2e8b2e">u = a₁/h − a₂/k</text>
+<line x1="55" y1="250" x2="195" y2="135" stroke="#c0392b" stroke-width="2.4" marker-end="url(#arc2g)"/>
+<text x="198" y="132" font-size="13" font-weight="bold" fill="#c0392b">G</text>
+<rect x="106" y="173" width="8" height="8" fill="none" stroke="#c0392b" stroke-width="0.9" transform="rotate(-38 110 177)"/>
+<text x="118" y="250" font-size="11.5" fill="#c0392b">G·u = 0 ⇒ G ⊥ 面</text>
+<text x="240" y="200" font-size="11.5" fill="#333">d = n̂·(a₁/h)</text>
+<text x="240" y="222" font-size="11.5" fill="#333">  = (G/|G|)·(a₁/h)</text>
+<text x="240" y="244" font-size="11.5" fill="#333">  = 2π/|G|</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 1(a)(b) 的幾何骨架</b>：一族 (hkl) 晶面交三軸於截距 a₁/h、a₂/k、a₃/l（藍三角面）。面內任取兩條向量如 u=a₁/h−a₂/k，用 aᵢ·bⱼ=2πδᵢⱼ 算得 G·u=2π−2π=0、G·v=0，故 <b>G 垂直整個平面</b>（紅箭與面成直角）。再把面間距寫成原點沿單位法向 n̂=G/|G| 到相鄰面的投影 d=n̂·(a₁/h)=2π/|G|。</figcaption>
+</figure>
+
+**(c) 簡單立方的 $d^2=a^2/(h^2+k^2+l^2)$**
+
+**Step 8**　簡單立方 $\mathbf{a}_i=a\hat{\mathbf x}_i$，倒晶格也是立方：$\mathbf{b}_i=\dfrac{2\pi}{a}\hat{\mathbf x}_i$。故
+$$\mathbf{G}=\frac{2\pi}{a}(h\hat{\mathbf x}+k\hat{\mathbf y}+l\hat{\mathbf z}).$$
+
+**Step 9**　取模長平方：
+$$|\mathbf{G}|^2=\Big(\frac{2\pi}{a}\Big)^2(h^2+k^2+l^2).$$
+
+**Step 10**　代入 (b)：
+$$d^2=\frac{(2\pi)^2}{|\mathbf{G}|^2}=\frac{(2\pi)^2}{(2\pi/a)^2(h^2+k^2+l^2)}=\frac{a^2}{h^2+k^2+l^2}.$$
+$$\boxed{d^2=\frac{a^2}{h^2+k^2+l^2}}$$
+
+> **重點**：這題是整章地基。$d=2\pi/|\mathbf{G}|$ 把「實空間面間距」與「倒空間向量長度」綁在一起；證明只靠 $\mathbf{a}_i\cdot\mathbf{b}_j=2\pi\delta_{ij}$。
+
+<details>
+<summary><b>📝 更多範例（點開）：面間距公式套各種晶系</b></summary>
+
+**範例 1A（立方面間距數值，逐步）**：$a=5.43\,$Å（矽）的 cubic 公式 $d=\dfrac{a}{\sqrt{h^2+k^2+l^2}}$。
+$d_{111}=\dfrac{5.43}{\sqrt3}=\dfrac{5.43}{1.732}=3.135\,$Å；
+$d_{220}=\dfrac{5.43}{\sqrt{4+4+0}}=\dfrac{5.43}{\sqrt8}=\dfrac{5.43}{2.828}=1.920\,$Å；
+$d_{311}=\dfrac{5.43}{\sqrt{9+1+1}}=\dfrac{5.43}{\sqrt{11}}=\dfrac{5.43}{3.317}=1.637\,$Å。
+驗證單調性：$h^2+k^2+l^2$ 越大 ⇒ $d$ 越小（面越密）✓。
+
+**範例 1B（正方晶系 tetragonal）**：$\mathbf{a}_1=a\hat x,\mathbf{a}_2=a\hat y,\mathbf{a}_3=c\hat z$（$a\ne c$）。
+倒晶格 $\mathbf{G}=\dfrac{2\pi}{a}(h\hat x+k\hat y)+\dfrac{2\pi}{c}l\hat z$。
+$|\mathbf G|^2=(2\pi)^2\Big[\dfrac{h^2+k^2}{a^2}+\dfrac{l^2}{c^2}\Big]$，代 $d=2\pi/|\mathbf G|$：
+$$\dfrac{1}{d^2}=\dfrac{h^2+k^2}{a^2}+\dfrac{l^2}{c^2}.$$
+退化檢核：$c=a$ 時回到 cubic 的 $\dfrac{1}{d^2}=\dfrac{h^2+k^2+l^2}{a^2}$ ✓。
+
+**範例 1C（正交晶系 orthorhombic）**：$\mathbf a_i$ 三軸垂直但 $a\ne b\ne c$。同法 $\mathbf b_i=\tfrac{2\pi}{a_i}\hat x_i$：
+$$\dfrac{1}{d^2}=\dfrac{h^2}{a^2}+\dfrac{k^2}{b^2}+\dfrac{l^2}{c^2}.$$
+數值：$a=3,b=4,c=5\,$Å 的 $(111)$：$\dfrac{1}{d^2}=\dfrac19+\dfrac1{16}+\dfrac1{25}=0.1111+0.0625+0.0400=0.2136$，$d=\dfrac{1}{\sqrt{0.2136}}=2.164\,$Å。
+
+**範例 1D（六方晶系面間距公式）**：用習題 2 的 $\mathbf b_i$，可得六方的標準式
+$$\dfrac{1}{d^2}=\dfrac43\dfrac{h^2+hk+k^2}{a^2}+\dfrac{l^2}{c^2}.$$
+代 $a=2.46\,$Å、$c=6.71\,$Å（石墨）的 $(002)$：$\dfrac{1}{d^2}=0+\dfrac{4}{6.71^2}=\dfrac{4}{45.02}=0.0888$，$d_{002}=3.355\,$Å（正是石墨層間距的一半 ×2，石墨層距 $c/2=3.355\,$Å ✓）。
+</details>
+
+---
+
+### 習題 2：六方空間晶格（Hexagonal space lattice）（Kittel Prob. 2.2）
+**題目（English, Kittel Prob. 2.2）**：The primitive translation vectors of the hexagonal space lattice may be taken as
+$$\mathbf{a}_1=\frac{\sqrt3\,a}{2}\hat{\mathbf x}+\frac{a}{2}\hat{\mathbf y},\quad
+\mathbf{a}_2=-\frac{\sqrt3\,a}{2}\hat{\mathbf x}+\frac{a}{2}\hat{\mathbf y},\quad
+\mathbf{a}_3=c\hat{\mathbf z}.$$
+(a) Show that the volume of the primitive cell is $\frac{\sqrt3}{2}\,a^2 c$. (b) Show that the primitive translations of the reciprocal lattice are
+$$\mathbf{b}_1=\frac{2\pi}{a}\Big(\tfrac{1}{\sqrt3}\hat{\mathbf x}+\hat{\mathbf y}\Big),\quad
+\mathbf{b}_2=\frac{2\pi}{a}\Big(-\tfrac{1}{\sqrt3}\hat{\mathbf x}+\hat{\mathbf y}\Big),\quad
+\mathbf{b}_3=\frac{2\pi}{c}\hat{\mathbf z},$$
+so that the lattice is its own reciprocal, but with a rotation of axes. (c) Describe and sketch the first Brillouin zone of the hexagonal space lattice.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+六方（hexagonal）空間晶格的原始平移向量可取為
+$$\mathbf{a}_1=\frac{\sqrt3\,a}{2}\hat{\mathbf x}+\frac{a}{2}\hat{\mathbf y},\quad
+\mathbf{a}_2=-\frac{\sqrt3\,a}{2}\hat{\mathbf x}+\frac{a}{2}\hat{\mathbf y},\quad
+\mathbf{a}_3=c\hat{\mathbf z}.$$
+(a) 求原始胞體積；(b) 求倒晶格基矢；(c) 描述並畫出六方晶格的第一布里淵區。
+
+</details>
+
+**(a) 原始胞體積**
+
+**Step 1**　先算 $\mathbf{a}_1\times\mathbf{a}_2$。兩者皆在 $xy$ 平面，外積沿 $\hat{\mathbf z}$：
+$$\mathbf{a}_1\times\mathbf{a}_2=\Big(a_{1x}a_{2y}-a_{1y}a_{2x}\Big)\hat{\mathbf z}.$$
+
+**Step 2**　代數值 $a_{1x}=\frac{\sqrt3 a}{2},\,a_{1y}=\frac a2,\,a_{2x}=-\frac{\sqrt3 a}{2},\,a_{2y}=\frac a2$：
+$$a_{1x}a_{2y}-a_{1y}a_{2x}=\frac{\sqrt3 a}{2}\cdot\frac a2-\frac a2\cdot\Big(-\frac{\sqrt3 a}{2}\Big)=\frac{\sqrt3 a^2}{4}+\frac{\sqrt3 a^2}{4}=\frac{\sqrt3}{2}a^2.$$
+所以 $\mathbf{a}_1\times\mathbf{a}_2=\dfrac{\sqrt3}{2}a^2\,\hat{\mathbf z}$。
+
+**Step 3**　點乘 $\mathbf{a}_3=c\hat{\mathbf z}$：
+$$V_c=\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3)=(\mathbf{a}_1\times\mathbf{a}_2)\cdot\mathbf{a}_3=\frac{\sqrt3}{2}a^2\cdot c.$$
+$$\boxed{V_c=\frac{\sqrt3}{2}\,a^2 c}$$
+
+**(b) 倒晶格基矢**
+
+**Step 4**　$\mathbf{b}_3=2\pi\dfrac{\mathbf{a}_1\times\mathbf{a}_2}{V_c}=2\pi\dfrac{\frac{\sqrt3}{2}a^2\hat{\mathbf z}}{\frac{\sqrt3}{2}a^2 c}=\dfrac{2\pi}{c}\hat{\mathbf z}.$
+
+**Step 5**　算 $\mathbf{a}_2\times\mathbf{a}_3=\mathbf{a}_2\times c\hat{\mathbf z}$。用 $\hat{\mathbf x}\times\hat{\mathbf z}=-\hat{\mathbf y}$、$\hat{\mathbf y}\times\hat{\mathbf z}=\hat{\mathbf x}$：
+$$\mathbf{a}_2\times c\hat{\mathbf z}=c\Big(-\frac{\sqrt3 a}{2}\hat{\mathbf x}+\frac a2\hat{\mathbf y}\Big)\times\hat{\mathbf z}
+=c\Big(-\frac{\sqrt3 a}{2}(-\hat{\mathbf y})+\frac a2(\hat{\mathbf x})\Big)
+=c\Big(\frac a2\hat{\mathbf x}+\frac{\sqrt3 a}{2}\hat{\mathbf y}\Big).$$
+
+**Step 6**　$\mathbf{b}_1=2\pi\dfrac{\mathbf{a}_2\times\mathbf{a}_3}{V_c}=2\pi\dfrac{c(\frac a2\hat{\mathbf x}+\frac{\sqrt3 a}{2}\hat{\mathbf y})}{\frac{\sqrt3}{2}a^2 c}=\dfrac{2\pi}{a}\Big(\dfrac{1}{\sqrt3}\hat{\mathbf x}+\hat{\mathbf y}\Big).$
+
+**Step 7**　同法算 $\mathbf{a}_3\times\mathbf{a}_1=c\hat{\mathbf z}\times\mathbf{a}_1=c\big(\frac{\sqrt3 a}{2}\hat{\mathbf z}\times\hat{\mathbf x}+\frac a2\hat{\mathbf z}\times\hat{\mathbf y}\big)=c\big(\frac{\sqrt3 a}{2}\hat{\mathbf y}-\frac a2\hat{\mathbf x}\big)$，再除 $V_c$：
+$$\mathbf{b}_2=\frac{2\pi}{a}\Big(-\frac{1}{\sqrt3}\hat{\mathbf x}+\hat{\mathbf y}\Big).$$
+
+$$\boxed{\;\mathbf{b}_1=\frac{2\pi}{a}\Big(\tfrac{1}{\sqrt3}\hat{\mathbf x}+\hat{\mathbf y}\Big),\quad
+\mathbf{b}_2=\frac{2\pi}{a}\Big(-\tfrac{1}{\sqrt3}\hat{\mathbf x}+\hat{\mathbf y}\Big),\quad
+\mathbf{b}_3=\frac{2\pi}{c}\hat{\mathbf z}\;}$$
+
+**Step 8（觀察）**　$\mathbf{b}_1,\mathbf{b}_2$ 的夾角不是原本的 $120^\circ$，而是 $60^\circ$：倒晶格仍是六方，但相對實晶格**轉了 $30^\circ$**。
+
+**(c) 第一布里淵區**
+
+**Step 9**　在 $\mathbf{b}_1,\mathbf{b}_2$ 平面上，找原點周圍最近的 6 個倒晶格點，對每條連線作中垂線（perpendicular bisector）。
+
+**Step 10**　6 條中垂線圍出一個**正六邊形**（hexagon），這就是 $k_z=0$ 截面的第一 BZ；沿 $k_z$ 方向夾在 $\pm\dfrac{\pi}{c}$ 之間。整體第一 BZ 是一個**六角柱（hexagonal prism）**，高 $\dfrac{2\pi}{c}$。
+$$\boxed{\text{第一 BZ：底為正六邊形、沿 }k_z\text{ 為高 }2\pi/c\text{ 的六角柱}}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:640px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arc2h" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a4d7c"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif">
+<g transform="translate(0,0)">
+<text x="100" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">實六方 aᵢ（夾 120°）</text>
+<line x1="100" y1="135" x2="155" y2="103" stroke="#1a4d7c" stroke-width="1.8" marker-end="url(#arc2h)"/>
+<line x1="100" y1="135" x2="45" y2="103" stroke="#1a4d7c" stroke-width="1.8" marker-end="url(#arc2h)"/>
+<text x="158" y="100" font-size="11" fill="#1a4d7c">a₁</text>
+<text x="28" y="100" font-size="11" fill="#1a4d7c">a₂</text>
+<g fill="#cfe0f0"><circle cx="100" cy="135" r="3.5"/><circle cx="155" cy="103" r="3"/><circle cx="45" cy="103" r="3"/><circle cx="155" cy="167" r="3"/><circle cx="45" cy="167" r="3"/><circle cx="100" cy="71" r="3"/><circle cx="100" cy="199" r="3"/></g>
+<path d="M100,135 L137,114" fill="none" stroke="#888" stroke-width="0" />
+<path d="M118,124 A22,22 0 0,1 82,124" fill="none" stroke="#666" stroke-width="0.9"/>
+<text x="92" y="118" font-size="9.5" fill="#666">120°</text>
+</g>
+<g transform="translate(165,110)">
+<text x="20" y="-6" text-anchor="middle" font-size="20" fill="#666">→</text>
+<text x="20" y="22" text-anchor="middle" font-size="9.5" fill="#666">倒晶格</text>
+<text x="20" y="36" text-anchor="middle" font-size="9.5" fill="#666">轉 30°</text>
+</g>
+<g transform="translate(250,0)">
+<text x="130" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">第一 BZ＝六角柱</text>
+<polygon points="100,55 160,55 190,107 160,159 100,159 70,107" fill="#6aa1d6" fill-opacity="0.22" stroke="#1a4d7c" stroke-width="1.6"/>
+<polygon points="120,80 180,80 210,132 180,184 120,184 90,132" fill="#6aa1d6" fill-opacity="0.1" stroke="#1a4d7c" stroke-width="1.2" stroke-dasharray="4,3"/>
+<g stroke="#1a4d7c" stroke-width="1" stroke-dasharray="3,3"><line x1="100" y1="55" x2="120" y2="80"/><line x1="160" y1="55" x2="180" y2="80"/><line x1="190" y1="107" x2="210" y2="132"/><line x1="160" y1="159" x2="180" y2="184"/><line x1="100" y1="159" x2="120" y2="184"/><line x1="70" y1="107" x2="90" y2="132"/></g>
+<line x1="130" y1="107" x2="190" y2="107" stroke="#c0392b" stroke-width="1.6" marker-end="url(#arc2h)"/>
+<circle cx="130" cy="107" r="4" fill="#c0392b"/>
+<text x="120" y="103" font-size="10.5" fill="#c0392b">Γ</text>
+<text x="148" y="100" font-size="10" fill="#c0392b">b₁,b₂</text>
+<line x1="226" y1="80" x2="226" y2="184" stroke="#2e8b2e" stroke-width="1.4"/>
+<line x1="222" y1="84" x2="226" y2="80" stroke="#2e8b2e" stroke-width="1.4"/><line x1="230" y1="84" x2="226" y2="80" stroke="#2e8b2e" stroke-width="1.4"/>
+<line x1="222" y1="180" x2="226" y2="184" stroke="#2e8b2e" stroke-width="1.4"/><line x1="230" y1="180" x2="226" y2="184" stroke="#2e8b2e" stroke-width="1.4"/>
+<text x="232" y="136" font-size="10.5" fill="#2e8b2e">2π/c</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 2(b)(c)：六方晶格的倒晶格與第一 BZ</b>。實空間 a₁,a₂ 夾 120°；算出的 b₁,b₂ 夾 60°，等價於倒六方相對實六方<b>轉 30°</b>（自身為倒晶格、僅旋轉軸）。底面是 6 條中垂線圍出的<b>正六邊形</b>，沿 k_z 夾在 ±π/c（高 2π/c），整體第一 BZ 是<b>六角柱（hexagonal prism）</b>。</figcaption>
+</figure>
+
+```
+          k_y
+           |        正六邊形截面（k_z = 0）：
+        __ | __      6 條中垂線圍出，
+       /   |   \     相對實空間六邊形轉 30°
+      /    |    \
+ ----+-----+-----+----  k_x
+      \    |    /
+       \__ | __/
+           |
+```
+
+> **重點**：六方晶格的第一 BZ 是「六角柱」。算 $\mathbf{b}_i$ 別忘了倒六方相對實六方旋轉 $30^\circ$。
+
+---
+
+### 習題 3：布里淵區體積（Volume of Brillouin zone）（Kittel Prob. 2.3）
+**題目（English, Kittel Prob. 2.3）**：Show that the volume of the first Brillouin zone is $(2\pi)^3/V_c$, where $V_c$ is the volume of a crystal primitive cell. Hint: The volume of a Brillouin zone is equal to the volume of the primitive parallelepiped in Fourier space. Recall the vector identity $(\mathbf{c}\times\mathbf{a})\times(\mathbf{a}\times\mathbf{b})=(\mathbf{c}\cdot\mathbf{a}\times\mathbf{b})\,\mathbf{a}$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+證明第一布里淵區的體積為 $(2\pi)^3/V_c$，其中 $V_c$ 為晶體原始胞（primitive cell）體積。提示：BZ 體積＝傅立葉空間中原始平行六面體的體積；並用向量恆等式 $(\mathbf{c}\times\mathbf{a})\times(\mathbf{a}\times\mathbf{b})=(\mathbf{c}\cdot\mathbf{a}\times\mathbf{b})\,\mathbf{a}$。
+
+</details>
+
+**Step 1**　BZ 體積 $=$ 倒晶格原始胞體積 $V_{\text{BZ}}=\mathbf{b}_1\cdot(\mathbf{b}_2\times\mathbf{b}_3)$。記實空間體積 $V_c=\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3)$。
+
+**Step 2**　代入定義
+$$\mathbf{b}_1=\frac{2\pi}{V_c}(\mathbf{a}_2\times\mathbf{a}_3),\quad
+\mathbf{b}_2=\frac{2\pi}{V_c}(\mathbf{a}_3\times\mathbf{a}_1),\quad
+\mathbf{b}_3=\frac{2\pi}{V_c}(\mathbf{a}_1\times\mathbf{a}_2).$$
+
+**Step 3**　先算 $\mathbf{b}_2\times\mathbf{b}_3$：
+$$\mathbf{b}_2\times\mathbf{b}_3=\frac{(2\pi)^2}{V_c^2}\,(\mathbf{a}_3\times\mathbf{a}_1)\times(\mathbf{a}_1\times\mathbf{a}_2).$$
+
+**Step 4**　套提示的恆等式（令 $\mathbf{c}\to\mathbf{a}_3,\ \mathbf{a}\to\mathbf{a}_1,\ \mathbf{b}\to\mathbf{a}_2$）：
+$$(\mathbf{a}_3\times\mathbf{a}_1)\times(\mathbf{a}_1\times\mathbf{a}_2)=\big(\mathbf{a}_3\cdot(\mathbf{a}_1\times\mathbf{a}_2)\big)\,\mathbf{a}_1=V_c\,\mathbf{a}_1.$$
+（因 $\mathbf{a}_3\cdot(\mathbf{a}_1\times\mathbf{a}_2)=\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3)=V_c$，三重積循環不變。）
+
+**Step 5**　所以
+$$\mathbf{b}_2\times\mathbf{b}_3=\frac{(2\pi)^2}{V_c^2}\,V_c\,\mathbf{a}_1=\frac{(2\pi)^2}{V_c}\,\mathbf{a}_1.$$
+
+**Step 6**　再點乘 $\mathbf{b}_1=\dfrac{2\pi}{V_c}(\mathbf{a}_2\times\mathbf{a}_3)$：
+$$V_{\text{BZ}}=\mathbf{b}_1\cdot(\mathbf{b}_2\times\mathbf{b}_3)
+=\frac{2\pi}{V_c}(\mathbf{a}_2\times\mathbf{a}_3)\cdot\frac{(2\pi)^2}{V_c}\,\mathbf{a}_1
+=\frac{(2\pi)^3}{V_c^2}\,\mathbf{a}_1\cdot(\mathbf{a}_2\times\mathbf{a}_3).$$
+
+**Step 7**　最後那個三重積就是 $V_c$：
+$$V_{\text{BZ}}=\frac{(2\pi)^3}{V_c^2}\cdot V_c=\frac{(2\pi)^3}{V_c}.$$
+$$\boxed{V_{\text{BZ}}=\frac{(2\pi)^3}{V_c}}$$
+
+> **重點**：倒空間與實空間體積成反比，比例係數 $(2\pi)^3$。這保證「每個原始胞對應一個 $k$ 態」的計數（之後算態密度會用到）。
+
+---
+
+### 習題 4：繞射峰寬度（Width of diffraction maximum）（Kittel Prob. 2.4）
+**題目（English, Kittel Prob. 2.4）**：We suppose that in a linear crystal there are identical point scattering centers at every lattice point $\mathbf{x}_m=m\mathbf{a}$, where $m$ is an integer. By analogy with Eq. (20), the total scattered radiation amplitude will be proportional to $F=\sum_{m=0}^{M-1}\exp[-im\,\mathbf{a}\cdot\Delta\mathbf{k}]$. (a) The sum over $M$ lattice points is
+$$F=\frac{1-\exp[-iM(\mathbf{a}\cdot\Delta\mathbf{k})]}{1-\exp[-i(\mathbf{a}\cdot\Delta\mathbf{k})]},$$
+by the use of the series $\sum_{m=0}^{M-1}x^m=\frac{1-x^M}{1-x}$. Show that $|F|^2=\dfrac{\sin^2\tfrac12 M(\mathbf{a}\cdot\Delta\mathbf{k})}{\sin^2\tfrac12(\mathbf{a}\cdot\Delta\mathbf{k})}$. (b) We know that a diffraction maximum appears when $\mathbf{a}\cdot\Delta\mathbf{k}=2\pi h$, where $h$ is an integer. We change $\Delta\mathbf{k}$ slightly and define $\varepsilon$ in $\mathbf{a}\cdot\Delta\mathbf{k}=2\pi h+\varepsilon$ such that $\varepsilon$ gives the position of the first zero in $\sin\frac12 M(\mathbf{a}\cdot\Delta\mathbf{k})$. Show that $\varepsilon=2\pi/M$, so that the width of the diffraction maximum is proportional to $1/M$ and can be extremely narrow for macroscopic values of $M$. The same result holds true for a three-dimensional crystal.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+一維晶體在每個格點 $\mathbf{x}_m=m\mathbf{a}$（$m$ 為整數）有相同的點散射中心。仿照課本式 (20)，散射振幅正比於 $F=\sum_{m=0}^{M-1}\exp[-im\,\mathbf{a}\cdot\Delta\mathbf{k}]$。(a) 求 $|F|^2$。(b) 已知繞射峰出現於 $\mathbf{a}\cdot\Delta\mathbf{k}=2\pi h$（$h$ 為整數）。令 $\mathbf{a}\cdot\Delta\mathbf{k}=2\pi h+\varepsilon$，其中 $\varepsilon$ 給出 $\sin\frac12 M(\mathbf{a}\cdot\Delta\mathbf{k})$ 的第一個零點位置。證明 $\varepsilon=2\pi/M$，故峰寬正比於 $1/M$，對宏觀的 $M$ 可極窄。
+
+</details>
+
+**(a) 求 $|F|^2$**
+
+**Step 1**　令 $\phi\equiv\mathbf{a}\cdot\Delta\mathbf{k}$。則 $F$ 是公比 $e^{-i\phi}$、共 $M$ 項的等比級數：
+$$F=\sum_{m=0}^{M-1}e^{-im\phi}=\frac{1-e^{-iM\phi}}{1-e^{-i\phi}}.$$
+
+**Step 2**　取模長平方 $|F|^2=F F^*$。用 $|1-e^{-i\theta}|^2=(1-\cos\theta)^2+\sin^2\theta=2(1-\cos\theta)=4\sin^2\frac\theta2$：
+$$|F|^2=\frac{|1-e^{-iM\phi}|^2}{|1-e^{-i\phi}|^2}=\frac{4\sin^2(M\phi/2)}{4\sin^2(\phi/2)}.$$
+$$\boxed{|F|^2=\frac{\sin^2(\tfrac12 M\,\mathbf{a}\cdot\Delta\mathbf{k})}{\sin^2(\tfrac12\,\mathbf{a}\cdot\Delta\mathbf{k})}}$$
+（此即所謂的「衍射光柵函數」；在 $\phi=2\pi h$ 處峰值為 $M^2$。）
+
+**(b) 峰寬 $\propto 1/M$**
+
+**Step 3**　把 $\phi=2\pi h+\varepsilon$ 代入分子的相位：
+$$\frac12 M\phi=\frac12 M(2\pi h+\varepsilon)=\pi M h+\frac12 M\varepsilon.$$
+
+**Step 4**　$\sin(\pi Mh+x)=\pm\sin x$（$Mh$ 為整數），所以分子 $\propto\sin\!\big(\tfrac12 M\varepsilon\big)$。峰旁第一個零點（first zero）發生在
+$$\frac12 M\varepsilon=\pi\quad\Longrightarrow\quad \varepsilon=\frac{2\pi}{M}.$$
+$$\boxed{\varepsilon=\frac{2\pi}{M}\ \Rightarrow\ \text{峰寬}\propto\frac1M}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:640px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arc2w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+<marker id="arc2w2" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="#c0392b"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif">
+<text x="240" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">|F|² 隨 φ = a·Δk 變化（光柵函數）</text>
+<line x1="50" y1="200" x2="455" y2="200" stroke="#888" stroke-width="1.2"/>
+<line x1="50" y1="200" x2="50" y2="45" stroke="#888" stroke-width="1.2"/>
+<text x="455" y="222" text-anchor="end" font-size="11" fill="#777">φ = a·Δk →</text>
+<text x="44" y="52" text-anchor="end" font-size="10.5" fill="#777">M²</text>
+<line x1="46" y1="55" x2="455" y2="55" stroke="#eee" stroke-width="1"/>
+<polyline points="50,199 70,196 90,190 110,180 130,165 150,140 165,105 178,70 190,58 195,55 200,58 212,70 225,105 240,140 260,165 280,180 300,190 320,196 340,199" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<polyline points="340,199 350,197 360,192 372,184 380,193 388,184 398,192 408,197 418,199" fill="none" stroke="#1a4d7c" stroke-width="1.6"/>
+<polyline points="50,199 40,197" fill="none" stroke="#1a4d7c" stroke-width="1"/>
+<circle cx="195" cy="55" r="3" fill="#c0392b"/>
+<line x1="195" y1="55" x2="195" y2="200" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="195" y="216" text-anchor="middle" font-size="11" fill="#1a4d7c">2πh</text>
+<text x="200" y="50" font-size="10.5" fill="#c0392b">主峰 ∝ M²</text>
+<circle cx="240" cy="200" r="3" fill="#2e8b2e"/>
+<line x1="240" y1="200" x2="240" y2="150" stroke="#2e8b2e" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="248" y="232" text-anchor="middle" font-size="10.5" fill="#2e8b2e">第一零點</text>
+<line x1="195" y1="135" x2="240" y2="135" stroke="#c0392b" stroke-width="1.4" marker-start="url(#arc2w2)" marker-end="url(#arc2w)"/>
+<text x="270" y="131" font-size="11.5" fill="#c0392b">ε = 2π/M</text>
+<text x="240" y="247" text-anchor="middle" font-size="11" fill="#777">峰寬 ∝ ε = 2π/M：M 越大（晶體越大）峰越尖</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 4：繞射峰寬 ∝ 1/M</b>。|F|²=sin²(Mφ/2)/sin²(φ/2) 在 φ=2πh 處達主峰 M²（M 個散射體完全同相）。令 φ=2πh+ε，分子 ∝ sin(Mε/2)，第一個零點在 Mε/2=π 即 <b>ε=2π/M</b>——這就是主峰半寬。宏觀晶體 M~10⁸ → ε~10⁻⁸，峰極銳，正是 X 光繞射峰非常尖的由來。</figcaption>
+</figure>
+
+**Step 5（量級檢查）**　宏觀晶體 $M\sim10^8$，則 $\varepsilon\sim10^{-8}$ 量級 ⇒ 峰極銳（這就是 X 光繞射峰非常尖的原因）。
+
+> **重點**：$N$ 個散射體的干涉 → 主峰高度 $\propto M^2$、峰寬 $\propto1/M$。峰越尖、晶體越大越完美。
+
+<details>
+<summary><b>📝 更多範例（點開）：光柵函數 |F|² 的數值與極限</b></summary>
+
+**範例 4A（主峰高度 = $M^2$ 的極限）**：$|F|^2=\dfrac{\sin^2(M\phi/2)}{\sin^2(\phi/2)}$ 在 $\phi\to2\pi h$ 時分子分母同趨 0。
+令 $\phi=2\pi h+\delta$（$\delta\to0$）：分子 $\sin^2(\tfrac{M\delta}{2})\approx(\tfrac{M\delta}{2})^2$，分母 $\sin^2(\tfrac{\delta}{2})\approx(\tfrac{\delta}{2})^2$。
+比值 $\to\dfrac{(M\delta/2)^2}{(\delta/2)^2}=M^2$。
+數值：$M=5$ 時主峰 $=25$；$M=100$ 時主峰 $=10^4$——峰高隨 $M^2$ 暴增。
+
+**範例 4B（小峰：次峰位置與高度）**：分子 $\sin^2(M\phi/2)$ 的次極大約在 $\dfrac{M\phi}{2}=\dfrac{3\pi}{2},\dfrac{5\pi}{2},\dots$。
+取 $M=5$、$h=0$，第一個次峰在 $\phi=\dfrac{3\pi}{M}=\dfrac{3\pi}{5}$。
+分子 $\sin^2(\tfrac{5}{2}\cdot\tfrac{3\pi}{5})=\sin^2(\tfrac{3\pi}{2})=1$；分母 $\sin^2(\tfrac{3\pi}{10})=\sin^2(54^\circ)=0.6545$。
+$|F|^2=\dfrac{1}{0.6545}=1.528$，相對主峰 $\dfrac{1.528}{25}=6.1\%$——次峰比主峰小一兩個量級，且 $M$ 越大越被壓低。
+
+**範例 4C（半高全寬 FWHM 估計）**：主峰第一個零點在 $\varepsilon=\dfrac{2\pi}{M}$（峰底半寬）。
+半高位置約在 $\dfrac{M\varepsilon_{1/2}}{2}\approx\dfrac{\pi}{2.27}$（由 $\dfrac{\sin^2 x}{x^2}=\tfrac12$ 的解 $x\approx1.392$），得 $\varepsilon_{1/2}\approx\dfrac{2\times1.392}{M}=\dfrac{2.78}{M}$，FWHM $=2\varepsilon_{1/2}\approx\dfrac{5.57}{M}$。
+仍是 $\propto\dfrac1M$：峰寬正比於 $1/M$ 的結論不依賴用「第一零點」還是「半高」量度。
+
+**範例 4D（量級：肉眼晶粒 vs 奈米晶粒）**：$a=3\,$Å。
+肉眼晶體 $L=1\,$mm $\Rightarrow M=\dfrac{L}{a}=\dfrac{10^{-3}}{3\times10^{-10}}\approx3.3\times10^{6}$，峰半寬 $\varepsilon\approx\dfrac{2\pi}{M}\approx1.9\times10^{-6}$（極銳）。
+奈米晶粒 $L=3\,$nm $\Rightarrow M=10$，$\varepsilon\approx0.63$（峰明顯變寬）——這就是 Scherrer 公式「晶粒越小、繞射峰越寬」的物理來源。
+</details>
+
+---
+
+### 習題 5：鑽石的結構因子（Structure factor of diamond）（Kittel Prob. 2.5）
+**題目（English, Kittel Prob. 2.5）**：The crystal structure of diamond is described in Chapter 1. The basis consists of eight atoms if the cell is taken as the conventional cube. (a) Find the structure factor $S$ of this basis. (b) Find the zeros of $S$ and show that the allowed reflections of the diamond structure satisfy $v_1+v_2+v_3=4n$, where all indices are even and $n$ is any integer, or else all indices are odd (Fig. 18). (Notice that $h,k,l$ may be written for $v_1,v_2,v_3$ and this is often done.)
+
+<details>
+<summary>▸ 中文題目</summary>
+
+鑽石（diamond）結構若取習用立方胞，basis 含 8 個原子。(a) 求此 basis 的結構因子 $S$。(b) 求 $S$ 的零點，並證明允許反射須滿足：$v_1,v_2,v_3$ 全為偶數且 $v_1+v_2+v_3=4n$（$n$ 為整數），或三者全為奇數。
+
+</details>
+
+**(a) 結構因子**
+
+**Step 1**　鑽石 = fcc ＋ 2 原子 basis：一顆在 $(0,0,0)$、一顆在 $(\tfrac14,\tfrac14,\tfrac14)$。因此可寫成
+$$S=\underbrace{S_{\text{fcc}}}_{\text{晶格}}\times\underbrace{S_{\text{basis}}}_{\text{2 原子}}.$$
+
+**Step 2**　fcc 晶格因子（四個 fcc 位置 $(0,0,0),(\tfrac12\tfrac12 0),(\tfrac12 0\tfrac12),(0\tfrac12\tfrac12)$）：
+$$S_{\text{fcc}}=1+e^{-i\pi(v_1+v_2)}+e^{-i\pi(v_1+v_3)}+e^{-i\pi(v_2+v_3)}.$$
+
+**Step 3**　2 原子 basis 因子（$(0,0,0)$ 與 $(\tfrac14,\tfrac14,\tfrac14)$，同為碳，$f$ 相同）：
+$$S_{\text{basis}}=1+e^{-i\frac{\pi}{2}(v_1+v_2+v_3)}.$$
+
+**Step 4**　合併：
+$$\boxed{\,S=f\Big[1+e^{-i\frac{\pi}{2}(v_1+v_2+v_3)}\Big]\Big[1+e^{-i\pi(v_1+v_2)}+e^{-i\pi(v_1+v_3)}+e^{-i\pi(v_2+v_3)}\Big]\,}$$
+
+**(b) 零點與允許反射**
+
+**Step 5**　由範例 B，fcc 因子 $S_{\text{fcc}}\ne0$ 的條件是 $v_1,v_2,v_3$ **同奇或同偶**；混合奇偶時 $S_{\text{fcc}}=0$（直接禁戒）。
+
+**Step 6**　接著看 basis 因子 $1+e^{-i\frac{\pi}{2}s}$，其中 $s=v_1+v_2+v_3$：
+- $s\equiv0\ (\text{mod }4)$：$e^{-i\frac{\pi}{2}s}=1\Rightarrow$ 因子 $=2$（**允許**）；
+- $s\equiv2\ (\text{mod }4)$：$e^{-i\pi}=-1\Rightarrow$ 因子 $=0$（**禁戒**）；
+- $s$ 為奇數：$e^{\mp i\pi/2}=\mp i\Rightarrow$ 因子 $=1\mp i$，$|1\mp i|^2=2\ne0$（**允許**）。
+
+**Step 7**　把兩個條件交集：
+- **全偶**：須再滿足 $v_1+v_2+v_3=4n$（否則 $s\equiv2$ 被 basis 因子消掉）；
+- **全奇**：三奇之和必為奇數 ⇒ basis 因子非零 ⇒ 全奇恆允許。
+$$\boxed{\text{允許反射：}(v_1,v_2,v_3)\text{ 全奇，或全偶且 }v_1+v_2+v_3=4n}$$
+
+**Step 8（驗證 (222) 禁戒）**　$(2,2,2)$ 全偶但 $s=6\equiv2\ (\text{mod }4)$，basis 因子 $=1+e^{-i3\pi}=1-1=0$ ⇒ **(222) 消光**，與課本 Fig. 18 中觀察到的反射 $(111),(220),(311),(400)$（注意沒有 $(222)$）一致。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 215" width="100%" style="max-width:640px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif">
+<text x="240" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">鑽石允許反射 vs fcc（缺 200、222）</text>
+<line x1="50" y1="150" x2="455" y2="150" stroke="#888" stroke-width="1.2"/>
+<text x="455" y="172" text-anchor="end" font-size="10.5" fill="#777">→ √(h²+k²+l²)（∝ sinθ）</text>
+<g font-size="11" font-weight="bold"><text x="20" y="98" fill="#c0392b">fcc</text><text x="14" y="148" fill="#1a4d7c">鑽石</text></g>
+<line x1="50" y1="100" x2="455" y2="100" stroke="#ddd" stroke-width="1"/>
+<g stroke="#c0392b" stroke-width="2.6"><line x1="90" y1="100" x2="90" y2="62"/><line x1="135" y1="100" x2="135" y2="62"/><line x1="175" y1="100" x2="175" y2="62"/><line x1="225" y1="100" x2="225" y2="62"/><line x1="262" y1="100" x2="262" y2="62"/><line x1="320" y1="100" x2="320" y2="62"/></g>
+<g stroke="#1a4d7c" stroke-width="2.8"><line x1="90" y1="150" x2="90" y2="108"/><line x1="175" y1="150" x2="175" y2="108"/><line x1="262" y1="150" x2="262" y2="108"/><line x1="320" y1="150" x2="320" y2="108"/></g>
+<g stroke="#aaa" stroke-width="1.4" stroke-dasharray="3,3"><line x1="135" y1="150" x2="135" y2="108"/><line x1="225" y1="150" x2="225" y2="108"/></g>
+<g font-size="9" fill="#c0392b"><text x="90" y="56" text-anchor="middle">111</text><text x="135" y="56" text-anchor="middle">200</text><text x="175" y="56" text-anchor="middle">220</text><text x="225" y="56" text-anchor="middle">222</text><text x="262" y="56" text-anchor="middle">311</text><text x="320" y="56" text-anchor="middle">400</text></g>
+<g font-size="9" font-weight="bold" fill="#1a4d7c"><text x="90" y="167" text-anchor="middle">111</text><text x="175" y="167" text-anchor="middle">220</text><text x="262" y="167" text-anchor="middle">311</text><text x="320" y="167" text-anchor="middle">400</text></g>
+<g font-size="9" fill="#999"><text x="135" y="167" text-anchor="middle">×200</text><text x="225" y="167" text-anchor="middle">×222</text></g>
+<rect x="120" y="103" width="30" height="44" fill="#999" fill-opacity="0.12"/>
+<rect x="210" y="103" width="30" height="44" fill="#999" fill-opacity="0.12"/>
+<text x="240" y="195" text-anchor="middle" font-size="11" fill="#777">鑽石在 fcc 允許之上，全偶須 h+k+l=4n → (200) s=2、(222) s=6≡2 被多消掉</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 5：鑽石比 fcc 多一層消光</b>。fcc（紅）允許全奇/全偶；鑽石（藍）在此之上，<b>全偶還須 h+k+l=4n</b>。於是 (200)（s=2）、(222)（s=6≡2 mod 4）被鑽石的 (¼¼¼) 原子反相消掉（灰陰影、×），只剩 (111)、(220)、(311)、(400)…，與課本 Fig. 18 一致。</figcaption>
+</figure>
+
+> **重點**：鑽石的禁戒比 fcc 更嚴：在 fcc 允許（全奇/全偶）之上，全偶還得 $h+k+l=4n$。$(200),(222),(420)$ 都被消掉，$(111),(220),(311),(400)$ 才出現。
+
+<details>
+<summary><b>📝 更多範例（點開）：結構因子消光逐一代入驗算</b></summary>
+
+**範例 5A（鑽石把前幾個反射全判一遍）**：規則「全奇」或「全偶且 $h+k+l=4n$」。
+$(111)$ 三奇 ⇒ 允許（$|S|^2=|1+e^{-i3\pi/2}|^2|S_{\text{fcc}}|^2=|1+i|^2\cdot16=2\cdot16=32f^2$）；
+$(200)$ 全偶、$s=2$ 非 $4n$ ⇒ basis 因子 $1+e^{-i\pi}=0$ ⇒ **消**；
+$(220)$ 全偶、$s=4=4n$ ⇒ 允許；
+$(311)$ 三奇 ⇒ 允許；$(222)$ 全偶、$s=6\equiv2$ ⇒ **消**；$(400)$ 全偶、$s=4n$ ⇒ 允許。
+序列 $111,220,311,400,331,422,\dots$，缺 $200,222$——與課本 Fig. 18 完全一致。
+
+**範例 5B（NaCl 型：兩種原子的 fcc）**：Na 在 fcc $(0,0,0)$、Cl 在 $(\tfrac12,\tfrac12,\tfrac12)$ 的 fcc。
+$S=S_{\text{fcc}}\big[f_{\text{Na}}+f_{\text{Cl}}e^{-i\pi(h+k+l)}\big]$。
+全偶（$h+k+l$ 偶）⇒ basis 因子 $f_{\text{Na}}+f_{\text{Cl}}$（強峰，如 $200,220$）；
+全奇（$h+k+l$ 奇）⇒ basis 因子 $f_{\text{Na}}-f_{\text{Cl}}$（弱峰，如 $111$）。
+所以 NaCl 的 $(111)$ 微弱、$(200)$ 強——這正是「離子對比」在繞射上的指紋。
+
+**範例 5C（CsCl 型：simple cubic 不是 bcc）**：Cs 在 $(0,0,0)$、Cl 在 $(\tfrac12,\tfrac12,\tfrac12)$，但兩原子不同 ⇒ 晶格是 **simple cubic**＋2 原子 basis。
+$S=f_{\text{Cs}}+f_{\text{Cl}}e^{-i\pi(h+k+l)}$。
+$h+k+l$ 偶 ⇒ $f_{\text{Cs}}+f_{\text{Cl}}$；奇 ⇒ $f_{\text{Cs}}-f_{\text{Cl}}\ne0$（因兩者不等）。
+對比純 bcc（同原子，奇階全消）：CsCl 的 $(100),(111)$ **不消**、只是較弱——常考的「為何 CsCl 看得到 (100) 峰」。
+
+**範例 5D（hcp 的 $(001)$ 消光）**：hcp basis $(0,0,0)$ 與 $(\tfrac13,\tfrac23,\tfrac12)$，同原子 $f$。
+$S=f\big[1+e^{-i2\pi(\tfrac13 h+\tfrac23 k+\tfrac12 l)}\big]$。
+取 $(001)$：相位 $2\pi(\tfrac12)=\pi$，$S=f(1+e^{-i\pi})=f(1-1)=0$ ⇒ **(001) 消光**。
+取 $(002)$：相位 $2\pi(1)=2\pi$，$S=f(1+1)=2f$ ⇒ 允許。這就是 hcp 沿 $c$ 軸只見偶階 $00l$ 的由來。
+</details>
+
+---
+
+### 習題 6：原子氫的形狀因子（Form factor of atomic hydrogen）（Kittel Prob. 2.6）
+**題目（English, Kittel Prob. 2.6）**：For the hydrogen atom in its ground state, the number density is $n(r)=(\pi a_0^3)^{-1}\exp(-2r/a_0)$, where $a_0$ is the Bohr radius. Show that the form factor is $f_G=\dfrac{16}{(4+G^2a_0^2)^2}$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+基態氫原子的數密度為 $n(r)=(\pi a_0^3)^{-1}\exp(-2r/a_0)$，$a_0$ 為波耳半徑（Bohr radius）。證明形狀因子為 $f_G=\dfrac{16}{(4+G^2a_0^2)^2}$。
+
+</details>
+
+**Step 1**　形狀因子定義
+$$f_G=\int n(\mathbf r)\,e^{-i\mathbf{G}\cdot\mathbf r}\,d^3r.$$
+因 $n(r)$ 球對稱，先對角度積分。
+
+**Step 2**　球座標下 $\int e^{-i\mathbf{G}\cdot\mathbf r}d\Omega$ 給出標準結果（令極軸沿 $\mathbf{G}$，$\mathbf{G}\cdot\mathbf r=Gr\cos\theta$）：
+$$\int_0^\pi e^{-iGr\cos\theta}\,2\pi\sin\theta\,d\theta=\frac{4\pi\sin(Gr)}{Gr}.$$
+
+**Step 3**　於是
+$$f_G=\int_0^\infty n(r)\,\frac{4\pi\sin(Gr)}{Gr}\,r^2\,dr
+=\frac{4\pi}{G}\int_0^\infty n(r)\,r\sin(Gr)\,dr.$$
+
+**Step 4**　代入 $n(r)=\dfrac{1}{\pi a_0^3}e^{-2r/a_0}$：
+$$f_G=\frac{4\pi}{G}\cdot\frac{1}{\pi a_0^3}\int_0^\infty r\,e^{-2r/a_0}\sin(Gr)\,dr
+=\frac{4}{G a_0^3}\int_0^\infty r\,e^{-2r/a_0}\sin(Gr)\,dr.$$
+
+**Step 5**　用標準積分（Dwight 860.81）：令 $\alpha=2/a_0$，
+$$\int_0^\infty r\,e^{-\alpha r}\sin(Gr)\,dr=\frac{2\alpha G}{(\alpha^2+G^2)^2}.$$
+（推導：$\int_0^\infty e^{-\alpha r}\sin(Gr)dr=\dfrac{G}{\alpha^2+G^2}$，再對 $\alpha$ 取 $-\dfrac{d}{d\alpha}$ 即得上式。）
+
+**Step 6**　代回 $\alpha=2/a_0$：
+$$\int_0^\infty r\,e^{-2r/a_0}\sin(Gr)\,dr=\frac{2(2/a_0)G}{\big((2/a_0)^2+G^2\big)^2}=\frac{(4/a_0)G}{\big(4/a_0^2+G^2\big)^2}.$$
+
+**Step 7**　代入 Step 4：
+$$f_G=\frac{4}{Ga_0^3}\cdot\frac{(4/a_0)G}{\big(4/a_0^2+G^2\big)^2}
+=\frac{16/a_0^4}{\big(4/a_0^2+G^2\big)^2}.$$
+
+**Step 8**　把分母提出 $1/a_0^4$：$\big(4/a_0^2+G^2\big)^2=\dfrac{(4+G^2a_0^2)^2}{a_0^4}$。約分：
+$$f_G=\frac{16/a_0^4}{(4+G^2a_0^2)^2/a_0^4}=\frac{16}{(4+G^2a_0^2)^2}.$$
+$$\boxed{f_G=\frac{16}{(4+G^2a_0^2)^2}}$$
+
+**Step 9（兩個檢核）**
+- $G=0$：$f_0=\dfrac{16}{4^2}=1$ ✓（總電子數歸一，$\int n\,d^3r=1$）。
+- $Ga_0\gg1$：$f_G\to\dfrac{16}{G^4a_0^4}\propto G^{-4}$ ✓（與課本敘述一致）。
+
+> **重點**：形狀因子＝電荷分布的傅立葉變換。球對稱密度的角度積分一定給 $\dfrac{4\pi\sin Gr}{Gr}$；$G\to0$ 時 $f\to Z$（電子數）是必檢的健全性檢查。
+
+---
+
+### 習題 7：雙原子線（Diatomic line）（Kittel Prob. 2.7）
+**題目（English, Kittel Prob. 2.7）**：Consider a line of atoms $ABAB\ldots AB$, with an $A$–$B$ bond length of $\tfrac12 a$. The form factors are $f_A,f_B$ for atoms $A,B$, respectively. The incident beam of x-rays is perpendicular to the line of atoms. (a) Show that the interference condition is $n\lambda=a\cos\theta$, where $\theta$ is the angle between the diffracted beam and the line of atoms. (b) Show that the intensity of the diffracted beam is proportional to $|f_A-f_B|^2$ for $n$ odd, and to $|f_A+f_B|^2$ for $n$ even. (c) Explain what happens if $f_A=f_B$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+考慮一列原子 $ABAB\ldots AB$，$A$–$B$ 鍵長為 $\tfrac12 a$，形狀因子分別為 $f_A,f_B$。入射 X 光垂直於原子列。(a) 證明干涉條件為 $n\lambda=a\cos\theta$，$\theta$ 為繞射束與原子列的夾角。(b) 證明繞射強度對 $n$ 奇時正比於 $|f_A-f_B|^2$、對 $n$ 偶時正比於 $|f_A+f_B|^2$。(c) 解釋 $f_A=f_B$ 時會發生什麼。
+
+</details>
+
+**(a) 干涉條件**
+
+**Step 1**　晶格週期（一個 $AB$ 為一個 unit cell）為 $a$，沿原子列方向。入射波垂直原子列，故入射波在原子列方向的相位差為 $0$。
+
+**Step 2**　散射束與原子列夾角 $\theta$ ⇒ 相鄰 unit cell（相距 $a$）散射的程差為 $a\cos\theta$。相長干涉（constructive interference）要求程差是整數倍波長：
+$$\boxed{n\lambda=a\cos\theta}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:640px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="c2A" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#84b4df"/><stop offset="1" stop-color="#1a4d7c"/></radialGradient>
+<radialGradient id="c2B" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#f0a79b"/><stop offset="1" stop-color="#c0392b"/></radialGradient>
+<marker id="arc2d" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2e8b2e"/></marker>
+<marker id="arc2i" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif">
+<text x="240" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">習題 7：ABAB… 原子列（鍵長 a/2）</text>
+<line x1="40" y1="170" x2="455" y2="170" stroke="#ccc" stroke-width="1"/>
+<g stroke="#888" stroke-width="1.4" fill="none"><line x1="120" y1="55" x2="120" y2="160" marker-end="url(#arc2i)"/><line x1="240" y1="55" x2="240" y2="160" marker-end="url(#arc2i)"/></g>
+<text x="120" y="48" text-anchor="middle" font-size="10.5" fill="#888">入射⊥列</text>
+<circle cx="120" cy="170" r="9" fill="url(#c2A)" stroke="#13395d" stroke-width="0.7"/>
+<circle cx="180" cy="170" r="9" fill="url(#c2B)" stroke="#7d2418" stroke-width="0.7"/>
+<circle cx="240" cy="170" r="9" fill="url(#c2A)" stroke="#13395d" stroke-width="0.7"/>
+<circle cx="300" cy="170" r="9" fill="url(#c2B)" stroke="#7d2418" stroke-width="0.7"/>
+<circle cx="360" cy="170" r="9" fill="url(#c2A)" stroke="#13395d" stroke-width="0.7"/>
+<g font-size="11" font-weight="bold"><text x="120" y="174" text-anchor="middle" fill="#fff">A</text><text x="180" y="174" text-anchor="middle" fill="#fff">B</text><text x="240" y="174" text-anchor="middle" fill="#fff">A</text><text x="300" y="174" text-anchor="middle" fill="#fff">B</text><text x="360" y="174" text-anchor="middle" fill="#fff">A</text></g>
+<line x1="120" y1="194" x2="240" y2="194" stroke="#1a4d7c" stroke-width="1.2"/>
+<line x1="120" y1="190" x2="120" y2="198" stroke="#1a4d7c" stroke-width="1.2"/><line x1="240" y1="190" x2="240" y2="198" stroke="#1a4d7c" stroke-width="1.2"/>
+<text x="180" y="210" text-anchor="middle" font-size="11" fill="#1a4d7c">a（A–A 週期）</text>
+<line x1="120" y1="222" x2="180" y2="222" stroke="#c0392b" stroke-width="1.1"/>
+<line x1="120" y1="218" x2="120" y2="226" stroke="#c0392b" stroke-width="1.1"/><line x1="180" y1="218" x2="180" y2="226" stroke="#c0392b" stroke-width="1.1"/>
+<text x="150" y="238" text-anchor="middle" font-size="10.5" fill="#c0392b">a/2</text>
+<line x1="240" y1="170" x2="345" y2="100" stroke="#2e8b2e" stroke-width="2" marker-end="url(#arc2d)"/>
+<text x="350" y="98" font-size="11" fill="#2e8b2e">繞射束</text>
+<path d="M280,170 A40,40 0 0,0 268,146" fill="none" stroke="#333" stroke-width="1"/>
+<text x="284" y="158" font-size="11" fill="#333">θ</text>
+<line x1="120" y1="170" x2="208" y2="111" stroke="#2e8b2e" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="208" y1="111" x2="240" y2="170" stroke="#c0392b" stroke-width="2" />
+<rect x="201" y="111" width="7" height="7" fill="none" stroke="#c0392b" stroke-width="0.8" transform="rotate(-34 204 114)"/>
+<text x="150" y="100" font-size="11" fill="#c0392b">程差 = a cosθ = nλ</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 7(a)：ABAB 原子列的干涉幾何</b>。入射 X 光垂直原子列（沿列方向相位差 0），繞射束與原子列夾角 θ。相鄰同類原子（週期 a）的<b>程差 = a cosθ</b>（紅垂足段），相長要 a cosθ=nλ。(b)：一個 AB 胞內 B 在 a/2，結構因子 S=f_A+f_B e^{−iπn}，<b>n 奇 → f_A−f_B、n 偶 → f_A+f_B</b>；(c) 若 f_A=f_B 則奇階全消、週期等效減半為 a/2。</figcaption>
+</figure>
+
+**(b) 強度**
+
+**Step 3**　一個 unit cell 含 $A$ 在 $0$、$B$ 在 $\tfrac12 a$。沿原子列的散射波向量分量 $\Delta k_\parallel$ 滿足勞厄條件 $a\,\Delta k_\parallel=2\pi n$。結構因子
+$$S(n)=f_A\,e^{-i\,0}+f_B\,e^{-i\,\Delta k_\parallel\cdot(a/2)}=f_A+f_B\,e^{-i\pi n}.$$
+（因 $\Delta k_\parallel\cdot\tfrac a2=\tfrac12\cdot2\pi n=\pi n$。）
+
+**Step 4**　用 $e^{-i\pi n}=(-1)^n$：
+- $n$ 偶：$S=f_A+f_B$；
+- $n$ 奇：$S=f_A-f_B$。
+
+**Step 5**　強度 $\propto|S|^2$：
+$$\boxed{I\propto\begin{cases}|f_A+f_B|^2, & n\ \text{偶}\\[4pt]|f_A-f_B|^2, & n\ \text{奇}\end{cases}}$$
+
+**(c) $f_A=f_B$ 的情形**
+
+**Step 6**　若 $f_A=f_B\equiv f$：奇 $n$ 的強度 $\propto|f-f|^2=0$ ⇒ **所有奇階反射消光**。只剩偶 $n$。
+
+**Step 7**　物理解讀：$f_A=f_B$ 時 $A$、$B$ 散射完全相同，整列看起來週期變成 $\tfrac12 a$（原子間距），有效晶格常數減半 ⇒ 繞射條件變成 $(\tfrac12 a)\cos\theta=n'\lambda$，即只留下原來的偶階。
+$$\boxed{f_A=f_B\ \Rightarrow\ \text{奇階消失，週期等效為 }\tfrac12 a}$$
+
+> **重點**：兩種原子→出現「奇階（反映 $f_A-f_B$ 的對比）」與「偶階（反映 $f_A+f_B$）」。兩者一樣時奇階消失，這正是「超晶格反射（superlattice reflection）」概念的一維雛形。
+
+<details>
+<summary><b>📝 更多範例（點開）：ABAB 散射強度的數值與變形</b></summary>
+
+**範例 7A（給定形狀因子比，算奇偶強度比）**：設 $f_A=2f_B$（例如 A 原子序約為 B 的兩倍）。
+偶階 $I_{\text{even}}\propto|f_A+f_B|^2=|2f_B+f_B|^2=9f_B^2$；
+奇階 $I_{\text{odd}}\propto|f_A-f_B|^2=|2f_B-f_B|^2=f_B^2$。
+比值 $\dfrac{I_{\text{odd}}}{I_{\text{even}}}=\dfrac{1}{9}\approx0.11$——奇階弱、偶階強，但奇階不為零（因 $f_A\ne f_B$）。
+
+**範例 7B（干涉條件解角度，數值）**：$a=4\,$Å、$\lambda=1.5\,$Å，入射垂直原子列，求各階繞射角（$n\lambda=a\cos\theta$）。
+$n=1$：$\cos\theta=\dfrac{1\times1.5}{4}=0.375$ ⇒ $\theta=68.0^\circ$；
+$n=2$：$\cos\theta=\dfrac{3.0}{4}=0.75$ ⇒ $\theta=41.4^\circ$；
+$n=3$：$\cos\theta=\dfrac{4.5}{4}=1.125>1$ ⇒ **無解**（階數上限 $n\le\dfrac a\lambda=2.67$，故只有 $n=1,2$）。
+
+**範例 7C（$f_A=f_B$ 奇階全消的數值確認）**：令 $f_A=f_B=f$。
+奇階 $I\propto|f-f|^2=0$（全消）；偶階 $I\propto|2f|^2=4f^2$。
+保留的偶階 $n=2,4,\dots$ 對應 $\cos\theta=\dfrac{2\lambda}{a},\dfrac{4\lambda}{a},\dots$，等價於用「半週期 $\tfrac a2$」寫的 $\tfrac a2\cos\theta=n'\lambda$（$n'=1,2,\dots$）。
+物理：A、B 變得無法區分，鏈的有效週期縮為 $\tfrac a2$，倒晶格點間距加倍，奇階位置上「本來就沒有格點」。
+
+**範例 7D（部分對比：合金無序化的縮影）**：若 B 位置以機率 $p$ 放 A、$(1-p)$ 放 B，平均形狀因子 $\bar f_B=p f_A+(1-p)f_B$。
+奇階強度 $\propto|f_A-\bar f_B|^2=|f_A-pf_A-(1-p)f_B|^2=(1-p)^2|f_A-f_B|^2$。
+$p=0$（純 ABAB）：回到 $|f_A-f_B|^2$；$p=1$（B 全換成 A）：奇階 $\to0$。
+奇階強度 $\propto(1-p)^2$ 隨無序度連續下降——這是「長程有序參數」用超晶格峰強度量測的一維原型。
+</details>
+
+---
+
+## ✅ 本章計算題自我檢核
+
+做完這章，你應該能**獨立、不看解答**完成下列各項：
+
+1. 會由 $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ 用 $\mathbf{b}_i=2\pi\dfrac{\mathbf{a}_j\times\mathbf{a}_k}{V_c}$ 算出三個倒晶格基矢，並驗證 $\mathbf{a}_i\cdot\mathbf{b}_j=2\pi\delta_{ij}$。
+2. 會證明 $\mathbf{G}(hkl)\perp(hkl)$ 面、且 $d(hkl)=2\pi/|\mathbf{G}|$；立方時化成 $d=a/\sqrt{h^2+k^2+l^2}$。
+3. 會用布拉格定律 $2d\sin\theta=n\lambda$ 做數值題（給 $\lambda,a,hkl$ 求 $\theta$ 或 $2\theta$），並注意 $\theta$ vs $2\theta$。
+4. 會背並推導 bcc（$h+k+l=$ 偶）、fcc（同奇同偶）、diamond（全奇 或 全偶且 $h+k+l=4n$）的消光規則。
+5. 會寫結構因子 $S=\sum_j f_j e^{-i2\pi(x_jh+y_jk+z_jl)}$，並判斷哪些反射被消（含驗 $(222)$ 在 diamond 禁戒）。
+6. 會算等比級數型散射振幅 $|F|^2=\sin^2(M\phi/2)/\sin^2(\phi/2)$，並由第一零點得峰寬 $\propto1/M$。
+7. 會做球對稱密度的形狀因子積分（角度給 $4\pi\sin(Gr)/Gr$），推出 $f_G=16/(4+G^2a_0^2)^2$，並驗 $f_0=1$、$f\propto G^{-4}$。
+8. 會證明 $V_{\text{BZ}}=(2\pi)^3/V_c$，並能畫一維、正方、六方晶格的第一布里淵區（含六角柱）。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理導論 2022 資格考 — 詳解</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">← 詳解目錄</a> &nbsp;·&nbsp; <a href="_共用觀念與公式.html">🧰 共用觀念與公式</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- source: 歷年原卷/固態物理導論_2022.md -->
+
+# 固態物理導論 2022 資格考 — 教學版逐題詳解（從普物起建 · 代數不跳步）
+
+> **這份是「計算偏多」的一卷**:7 小題分屬四個區塊——Crystal structure(20%)、Diffraction(30%)、Phonons(10%)、Electrons(40%)。重點計算題是 **Q1 CaF₂ 的 Ca–F 距離、Q2 tetragonal 倒晶格 + BZ、Q5 Al 的 Fermi energy/temperature、Q6 Si pn junction(化學勢/built-in voltage/電場圖)**;Q3(蛋白質結晶)、Q4(Ag/Au 聲子)、Q7(量 DOS 技術)是觀念題。寫法同既有模板(每題 `📋原題 → 🎯核心訊息 →(推導重題才有)📚前情提要 → 🔍符號說明 → 解答 Step → ✅自我檢核 → 🔀變化 → 信心`)。共用觀念見 [`_共用觀念與公式.html`](_共用觀念與公式.html)。
+> **想看更長的純推導**(Bloch 定理、Kronig–Penney)見 [`固態_2016_詳解`](固態_2016_詳解.md);**想看 2D 晶格 basis 縮格定理**見 [`固態_2025_詳解`](固態_2025_詳解.md)。
+
+## 🧭 全卷約定
+- 倒晶格定義 $\mathbf a_i\cdot\mathbf b_j=2\pi\delta_{ij}$;cubic/tetragonal 正交 → $\mathbf b_i=\dfrac{2\pi}{a_i}\hat e_i$。
+- 自由電子 $E=\dfrac{\hbar^2k^2}{2m}$,含自旋簡併 2;$E_F=\dfrac{\hbar^2}{2m}(3\pi^2 n)^{2/3}$。
+- **單位警示**:本卷 Q5/Q6 故意混用 cm⁻³ 與 m⁻³,**先換到同一單位再代**(donor $10^{17}\,\text{cm}^{-3}=10^{23}\,\text{m}^{-3}$)。
+- 題目給定常數:$\varepsilon_0=8.85\times10^{-12}\,\text{F/m}$、$1\,\text{Å}=10^{-10}\,\text{m}$、$e=1.602\times10^{-19}\,\text{C}$、$1\,\text{eV}=1.602\times10^{-19}\,\text{J}$、$m_e=9.1\times10^{-31}\,\text{kg}$。
+
+---
+
+# 📘 第 1 題 — 晶體結構:CaF₂ 螢石結構（Crystal structure 20%）
+
+## 📋 原題
+> CaF₂ 為 **fcc Bravais lattice** + basis:Ca 在 $000$、兩個 F 在 conventional(cubic)cell 的分數座標 $\tfrac14\tfrac14\tfrac14$ 與 $\tfrac34\tfrac34\tfrac34$。畫一個 conventional cubic cell;畫一個 primitive cell。晶格常數 $a=5.451\,\text{Å}$。**Ca 到 F 的距離是多少 Å?**
+
+## 🎯 核心訊息
+> CaF₂ = 螢石(fluorite)結構:**Ca 排成 fcc**,**F 填滿全部 8 個 tetrahedral hole**。最近 Ca–F 距離就是從角落 Ca$(0,0,0)$ 到體內 F$(\tfrac14,\tfrac14,\tfrac14)$ 的對角線 $=\dfrac{\sqrt3}{4}a$。Bravais 是 fcc(峰位置),basis 3 顆(1 Ca + 2 F)是「每個 fcc 格點掛什麼」。
+
+## 📚 前情提要(從普物串上來)
+- **普物**:NaCl/鑽石都是「fcc 格 + 一組 basis」。CaF₂ 同套路,只是 basis 變 3 顆。
+- **fcc 慣用胞**:立方邊 $a$,格點在 8 角 + 6 面心 → 每立方含 $8\times\tfrac18+6\times\tfrac12=4$ 個 Ca。
+- **tetrahedral hole**:把立方切成 8 個小立方($\tfrac a2$ 邊),每個小立方中心 $(\tfrac14,\tfrac14,\tfrac14)$ 型座標就是一個四面體洞,共 8 個 → 8 個 F。
+- **數一數**:慣用胞 4 Ca + 8 F = 4 個「CaF₂」式單位 ✓(與 basis 3 顆 × fcc 每胞 4 格點一致)。
+> **留存**:距離題的核心是「把分數座標乘 $a$ 變成真實 Å,再用畢氏」。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ conventional cell vs primitive cell、tetrahedral hole、座標→距離</b></summary>
+
+### 為什麼要這個
+fcc 用 conventional(立方,好畫好看對稱)或 primitive(菱面體,含 1 格點,最小)兩種胞描述;距離計算只要把分數座標 $(u,v,w)$ 換成 $\mathbf r=(ua,va,wa)$ 再取模差。
+
+### 定義
+- fcc primitive vectors:$\mathbf a_1=\tfrac a2(\hat y+\hat z),\ \mathbf a_2=\tfrac a2(\hat x+\hat z),\ \mathbf a_3=\tfrac a2(\hat x+\hat y)$,原胞體積 $\tfrac{a^3}{4}$(每立方 4 格點)。
+- 兩原子距離 $|\Delta\mathbf r|=a\sqrt{(\Delta u)^2+(\Delta v)^2+(\Delta w)^2}$。
+
+**範例 1(熱身)**:bcc 角→體心 $(\tfrac12,\tfrac12,\tfrac12)$ 距離 $=\tfrac{\sqrt3}{2}a$。
+**範例 2(中階)**:fcc 角→面心 $(\tfrac12,\tfrac12,0)$ 距離 $=\tfrac{1}{\sqrt2}a$(fcc 最近鄰)。
+**範例 3(本題)**:Ca$(0,0,0)$→F$(\tfrac14,\tfrac14,\tfrac14)$ 距離 $=a\sqrt{3\cdot(\tfrac14)^2}=\tfrac{\sqrt3}{4}a$。
+</details>
+
+## 解答
+
+### (a) 畫 conventional cubic cell（文字描述,作答時畫立體圖）
+- **Ca(fcc)**:8 個角 + 6 個面心。
+- **F(tetrahedral holes)**:把立方分成 $2\times2\times2=8$ 個邊長 $\tfrac a2$ 的小立方,每個小立方**中心**各一個 F,座標型 $(\tfrac14,\tfrac14,\tfrac14),(\tfrac34,\tfrac14,\tfrac14),\dots$ 共 8 個,全在胞**內部**(不被鄰胞分享)。
+- 計數:$4$ Ca $+8$ F → 4 個 CaF₂ 單位。每個 F 被 4 個 Ca 四面體配位;每個 Ca 被 8 個 F 立方配位(配位數 8:4,fluorite 標誌)。
+
+```
+conventional cell（示意,● = Ca 在 fcc 位、○ = F 在 8 個 1/4-型內點）
+        ●────────●
+       /|        /|
+      ● |   ○   ● |      Ca: 角 + 面心 (fcc)
+      | ●──○────|─●      F : 8 個 (¼¼¼) 型內點
+      |/    ○   |/         （每個小立方中心一顆）
+      ●────────●
+```
+
+### (b) 畫 primitive cell
+取 fcc 的 primitive vectors $\mathbf a_1=\tfrac a2(\hat y+\hat z),\ \mathbf a_2=\tfrac a2(\hat x+\hat z),\ \mathbf a_3=\tfrac a2(\hat x+\hat y)$(菱面體,夾角 $60°$,體積 $\tfrac{a^3}{4}$)。
+- **basis = 3 顆**:Ca$(0,0,0)$、F$(\tfrac14,\tfrac14,\tfrac14)$、F$(\tfrac34,\tfrac34,\tfrac34)$(這正是 primitive cell 內含的 1 Ca + 2 F)。
+> **小結**:conventional 看對稱(立方、4 式單位),primitive 看最小(1 格點 / 3 原子 basis)。
+
+### (c) Ca–F 距離（完整代數）
+**Step 1 — 分數座標化成真實向量。** Ca 在 $\mathbf r_{\rm Ca}=(0,0,0)$,最近的 F 在 $\mathbf r_{\rm F}=(\tfrac14,\tfrac14,\tfrac14)\,a$。
+**Step 2 — 取差。**
+$$\Delta\mathbf r=\mathbf r_{\rm F}-\mathbf r_{\rm Ca}=\Big(\tfrac a4,\tfrac a4,\tfrac a4\Big).$$
+**Step 3 — 取模。**
+$$d_{\rm CaF}=|\Delta\mathbf r|=\sqrt{\Big(\tfrac a4\Big)^2+\Big(\tfrac a4\Big)^2+\Big(\tfrac a4\Big)^2}=\frac a4\sqrt3=\frac{\sqrt3}{4}\,a.$$
+**Step 4 — 代數值。** $a=5.451\,\text{Å}$,$\dfrac{\sqrt3}{4}=0.43301$:
+$$d_{\rm CaF}=0.43301\times5.451\,\text{Å}=\boxed{2.36\,\text{Å}.}$$
+> **小結**:4 個最近 Ca(角 $000$ 與三個面心 $\tfrac12\tfrac120$ 等)到該 F 等距,都是 $\tfrac{\sqrt3}{4}a=2.36\,\text{Å}$ → F 為四面體配位。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 230" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif">
+<g transform="translate(0,0)">
+<text x="135" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">conventional 立方胞</text>
+<path d="M40,180 160,180 M160,180 215,140 M40,80 160,80 M160,80 215,40 M215,40 95,40 M95,40 40,80 M40,180 40,80 M160,180 160,80 M215,140 215,40" fill="none" stroke="#666" stroke-width="1.4"/>
+<path d="M215,140 95,140 M95,140 40,180 M95,140 95,40" fill="none" stroke="#bbb" stroke-width="1.1" stroke-dasharray="4,3"/>
+<g fill="#1a4d7c" stroke="#13395d" stroke-width="0.6"><circle cx="40" cy="180" r="7"/><circle cx="160" cy="180" r="7"/><circle cx="160" cy="80" r="7"/><circle cx="40" cy="80" r="7"/><circle cx="95" cy="140" r="7"/><circle cx="215" cy="140" r="7"/><circle cx="215" cy="40" r="7"/><circle cx="95" cy="40" r="7"/></g>
+<g fill="#1a4d7c" stroke="#13395d" stroke-width="0.6"><circle cx="100" cy="180" r="6"/><circle cx="187" cy="110" r="6"/><circle cx="100" cy="80" r="6"/><circle cx="127" cy="110" r="6"/><circle cx="155" cy="60" r="6"/><circle cx="72" cy="110" r="6"/></g>
+<g fill="#e67e22" stroke="#a85710" stroke-width="0.6"><circle cx="83" cy="138" r="4.5"/><circle cx="143" cy="138" r="4.5"/><circle cx="83" cy="98" r="4.5"/><circle cx="143" cy="98" r="4.5"/><circle cx="118" cy="158" r="4.5"/><circle cx="178" cy="158" r="4.5"/><circle cx="118" cy="118" r="4.5"/><circle cx="178" cy="118" r="4.5"/></g>
+<text x="135" y="212" text-anchor="middle" font-size="11.5" fill="#555">藍 Ca(fcc)・橘 F(8 個 ¼-洞)</text>
+</g>
+<g transform="translate(300,0)">
+<text x="130" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">Ca→F 最近距離</text>
+<line x1="55" y1="170" x2="205" y2="170" stroke="#888" stroke-width="1.2"/>
+<line x1="55" y1="170" x2="55" y2="60" stroke="#888" stroke-width="1.2"/>
+<line x1="55" y1="170" x2="120" y2="120" stroke="#888" stroke-width="1.1" stroke-dasharray="4,3"/>
+<line x1="55" y1="170" x2="170" y2="100" stroke="#c0392b" stroke-width="2"/>
+<circle cx="55" cy="170" r="7" fill="#1a4d7c"/>
+<circle cx="170" cy="100" r="6" fill="#e67e22" stroke="#a85710" stroke-width="0.6"/>
+<text x="48" y="188" text-anchor="middle" font-size="11" fill="#1a4d7c">Ca(0,0,0)</text>
+<text x="178" y="94" font-size="11" fill="#e67e22">F(¼,¼,¼)</text>
+<text x="125" y="128" font-size="11.5" fill="#c0392b" font-weight="bold">d = (√3 / 4) a</text>
+<text x="130" y="208" text-anchor="middle" font-size="11.5" fill="#555">= 0.4330 × 5.451 = 2.36 Å</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">左:CaF₂ conventional 立方胞,<b style="color:#1a4d7c">藍＝Ca</b> 排成 fcc(角＋面心)、<b style="color:#e67e22">橘＝F</b> 填滿 8 個 ¼-型四面體洞。右:最近 Ca–F 是由角 Ca(0,0,0) 到體內 F(¼,¼,¼) 的小立方體對角線(紅),長 (√3/4)a,代入 a=5.451 Å 得 2.36 Å。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：分數座標→真實距離、配位數、密度反推</b></summary>
+
+**範例 A(diamond 鑽石的最近鄰鍵長)**:鑽石 = fcc + basis 兩個 C 在 $(0,0,0)$ 與 $(\tfrac14,\tfrac14,\tfrac14)$。最近鄰鍵就是這兩顆的連線。
+$$\Delta\mathbf r=(\tfrac14,\tfrac14,\tfrac14)a-(0,0,0)=\Big(\tfrac a4,\tfrac a4,\tfrac a4\Big),$$
+$$d=\sqrt{3\Big(\tfrac a4\Big)^2}=\frac{\sqrt3}{4}a.$$
+代鑽石 $a=3.567\,\text{Å}$:$d=0.43301\times3.567=\boxed{1.544\,\text{Å}}$(文獻 C–C 鍵長 $1.54\,\text{Å}$ ✓)。**與 CaF₂ 的 Ca–F 公式一模一樣**,只是 $a$ 不同——因為兩者都是「角到 $\tfrac14$-洞」的幾何。
+
+**範例 B(ZnS 閃鋅礦 Zn–S 距離)**:ZnS = fcc(Zn 在 $000$)+ basis,S 在 $(\tfrac14,\tfrac14,\tfrac14)$。同樣
+$$d_{\rm ZnS}=\frac{\sqrt3}{4}a.$$
+$a=5.41\,\text{Å}$ → $d=0.43301\times5.41=\boxed{2.34\,\text{Å}}$。比較三者:CaF₂ $2.36$、ZnS $2.34$、diamond $1.54\,\text{Å}$——**$\tfrac14$-洞家族距離全是 $\tfrac{\sqrt3}{4}a$,差別只在晶格常數**。
+
+**範例 C(CaF₂ 質量密度反推)**:慣用胞含 $Z=4$ 個 CaF₂ 式單位,$M_{\rm CaF_2}=40.08+2\times19.00=78.08\,\text{g/mol}$。
+$$\rho=\frac{Z\,M}{N_A\,a^3}.$$
+先算 $a^3$:$a=5.451\times10^{-8}\,\text{cm}$,
+$$a^3=(5.451\times10^{-8})^3=1.620\times10^{-22}\,\text{cm}^3.$$
+代入:
+$$\rho=\frac{4\times78.08}{6.022\times10^{23}\times1.620\times10^{-22}}=\frac{312.3}{97.56}=\boxed{3.20\,\text{g/cm}^3}$$
+(文獻 fluorite $3.18\,\text{g/cm}^3$ ✓,微差來自 $a$、$M$ 取捨)。
+
+**範例 D(配位數驗證:F 的 4 個最近 Ca)**:取體內某 F 在 $(\tfrac14,\tfrac14,\tfrac14)$,周圍 Ca 在角 $(0,0,0)$、面心 $(\tfrac12,\tfrac12,0)$、$(\tfrac12,0,\tfrac12)$、$(0,\tfrac12,\tfrac12)$。逐一算距離:
+$$d_1=|(\tfrac14,\tfrac14,\tfrac14)|a=\tfrac{\sqrt3}4a,$$
+$$d_2=|(\tfrac14-\tfrac12,\tfrac14-\tfrac12,\tfrac14-0)|a=|(-\tfrac14,-\tfrac14,\tfrac14)|a=\sqrt{3\Big(\tfrac14\Big)^2}a=\tfrac{\sqrt3}4a.$$
+其餘兩個同理也是 $\tfrac{\sqrt3}4a$ → **4 個 Ca 等距**,故 F 為四面體配位(配位數 4);反過來每 Ca 被 8 個 F 立方配位(配位數 8),fluorite 標誌 8:4 ✓。
+</details>
+
+## ✅ 自我檢核
+- 量綱:距離 $\propto a$,$0<\tfrac{\sqrt3}{4}=0.433<\tfrac1{\sqrt2}=0.707$(fcc 最近鄰 Ca–Ca)→ Ca–F 比 Ca–Ca$(=a/\sqrt2=3.85\,\text{Å})$ 短,合理(F 在洞裡更靠近)✓。
+- 計數自洽:慣用胞 4 Ca + 8 F、primitive 1 Ca + 2 F,比例都 1:2 ✓。
+
+## 🔀 變化的可能情況
+- **問密度**:$\rho=\dfrac{4\,M_{\rm CaF_2}}{N_A a^3}$,$M=78.07\,\text{g/mol}$,$a^3=(5.451\text{Å})^3$ → $\rho\approx3.18\,\text{g/cm}^3$(文獻 $3.18$ ✓)。
+- **問 anti-fluorite**(如 Li₂O):陰陽離子角色對調,basis 同 3 顆。
+- **歷年同型**:2025/2023 數 basis、本題的「fcc + 多原子 basis」即 NaCl/diamond/ZnS 同家族。
+
+## 信心:**高**(距離 $\tfrac{\sqrt3}{4}a=2.36\,\text{Å}$ 為標準 fluorite 結果,Kittel Ch1)。
+
+---
+
+# 📗 第 2 題 — 繞射:tetragonal 倒晶格與第一布里淵區（Diffraction 30%,與第 3 題合計）
+
+## 📋 原題
+> 求 tetragonal 晶體(所有夾角 $=90°$,$a=b=5\,\text{Å}$、$c=8\,\text{Å}$)的**倒晶格**。畫圖示意「實空間 unit cell」與「倒空間第一 Brillouin zone」。**標出 BZ 各邊長度**。標出實空間與倒空間的方向。
+
+## 🎯 核心訊息
+> 正交晶系(cubic/tetragonal/orthorhombic)的倒晶格超簡單:$\mathbf b_i=\dfrac{2\pi}{a_i}\hat e_i$,**逐軸取倒數再乘 $2\pi$**。simple tetragonal 的倒晶格仍是 simple tetragonal,其 Wigner–Seitz cell(=第一 BZ)是個**長方體盒子**,邊長 $\dfrac{2\pi}{a},\dfrac{2\pi}{a},\dfrac{2\pi}{c}$。**實空間長軸($c$ 大)→ 倒空間短軸($c^\*$ 小)**。
+
+## 📚 前情提要(從普物串上來)
+- **傅立葉**:實空間週期 $a$ ↔ 倒空間 $2\pi/a$。三個正交方向各自獨立取倒數。
+- **第一 BZ**:倒晶格的 Wigner–Seitz cell——以一個倒格點為中心,到所有最近倒格點連線的**中垂面**圍出的最小區域。對 simple(P)正交格,最近鄰就沿三個軸 $\pm\mathbf b_i$,中垂面在 $\pm\tfrac12\mathbf b_i=\pm\tfrac\pi{a_i}\hat e_i$ → 圍出**長方盒**。
+> **留存**:simple 正交格的 BZ 永遠是盒子;只有面心/體心格(像 fcc→截角八面體)才會變複雜多面體。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 正交倒晶格、BZ 邊長、實空間↔倒空間軸反比</b></summary>
+
+### 定義
+正交($\mathbf a_1=a\hat x,\mathbf a_2=b\hat y,\mathbf a_3=c\hat z$)→ $\mathbf b_1=\tfrac{2\pi}a\hat x,\ \mathbf b_2=\tfrac{2\pi}b\hat y,\ \mathbf b_3=\tfrac{2\pi}c\hat z$。
+BZ(simple P)= 盒子,沿 $k_i$ 從 $-\tfrac\pi{a_i}$ 到 $+\tfrac\pi{a_i}$,**邊長 $=\tfrac{2\pi}{a_i}$**。
+
+**範例 1(熱身)**:cubic $a$ → BZ 是邊長 $\tfrac{2\pi}a$ 的立方盒。
+**範例 2(中階)**:orthorhombic $a\ne b\ne c$ → BZ 為三邊不等的長方盒。
+**範例 3(本題)**:tetragonal $a=b=5,\ c=8$ → BZ 為底 $\tfrac{2\pi}5\times\tfrac{2\pi}5$、高 $\tfrac{2\pi}8$ 的扁長方盒。
+</details>
+
+## 解答
+
+### (a) 倒晶格向量（完整）
+**Step 1 — 寫實空間 primitive vectors。** simple tetragonal:
+$$\mathbf a_1=a\hat x=5\hat x\,\text{Å},\quad \mathbf a_2=b\hat y=5\hat y\,\text{Å},\quad \mathbf a_3=c\hat z=8\hat z\,\text{Å}.$$
+**Step 2 — 用 $\mathbf b_i=\dfrac{2\pi}{a_i}\hat e_i$(正交,各軸獨立)。**
+$$\mathbf b_1=\frac{2\pi}{5}\hat x,\quad \mathbf b_2=\frac{2\pi}{5}\hat y,\quad \mathbf b_3=\frac{2\pi}{8}\hat z\quad(\text{單位 Å}^{-1}).$$
+**Step 3 — 代數值。**
+$$\boxed{\;|\mathbf b_1|=|\mathbf b_2|=\frac{2\pi}{5}=1.257\,\text{Å}^{-1},\qquad |\mathbf b_3|=\frac{2\pi}{8}=0.785\,\text{Å}^{-1}.\;}$$
+**Step 4 — 驗。** $\mathbf a_1\cdot\mathbf b_1=5\cdot\tfrac{2\pi}5=2\pi$ ✓,交叉項 $=0$ ✓。倒晶格仍為 simple tetragonal($a^\*=b^\*=\tfrac{2\pi}5,\ c^\*=\tfrac{2\pi}8$)。
+> **小結**:實空間 $c=8>a=5$(沿 $z$ 較長),倒空間反過來 $c^\*=0.785<a^\*=1.257$(沿 $k_z$ 較短)——**反比**。
+
+### (b) 第一 BZ + 邊長 + 方向標示
+第一 BZ = 倒晶格 WS cell = 長方盒,沿各軸從 $-\tfrac12|\mathbf b_i|$ 到 $+\tfrac12|\mathbf b_i|$:
+- $k_x$:$-\tfrac\pi5$ 到 $+\tfrac\pi5$,**邊長 $\tfrac{2\pi}5=1.257\,\text{Å}^{-1}$**。
+- $k_y$:同上,**$1.257\,\text{Å}^{-1}$**。
+- $k_z$:$-\tfrac\pi8$ 到 $+\tfrac\pi8$,**邊長 $\tfrac{2\pi}8=0.785\,\text{Å}^{-1}$**。
+
+$$\boxed{\text{BZ 為長方盒,邊長 }1.257\times1.257\times0.785\ \text{Å}^{-1}\ (k_x\times k_y\times k_z).}$$
+
+```
+實空間 unit cell（5×5×8 Å,長軸沿 z=c）        倒空間 第一 BZ（扁盒,沿 k_z 最短）
+        ┌─────────┐  ↑                          ┌───────────┐  ↑
+        │         │  │ c=8 Å (ẑ)                 │           │  │ 2π/c
+        │         │  │                           └───────────┘  ↓ =0.785 Å⁻¹
+        └─────────┘  ↓                          ←─ 2π/a=1.257 Å⁻¹ ─→
+        ←─ a=5 Å (x̂) ─→  (b=5 Å 沿 ŷ 入紙面)     Γ 在盒中心;X 在 ±π/a 面心,Z 在 ±π/c 面心
+```
+- **實空間方向**:$\hat x\!\parallel\!\mathbf a\,(5\text{Å})$、$\hat y\!\parallel\!\mathbf b\,(5\text{Å})$、$\hat z\!\parallel\!\mathbf c\,(8\text{Å})$。
+- **倒空間方向**:$k_x\!\parallel\!\mathbf b_1$、$k_y\!\parallel\!\mathbf b_2$、$k_z\!\parallel\!\mathbf b_3$;中心 $\Gamma$,高對稱點 $X,M$(在 $k_z=0$ 面)、$Z,R,A$(在 $k_z=\tfrac\pi c$ 面)。
+> **小結**:盒子在 $k_z$ 方向「扁」(只到 $0.785$),在 $k_x,k_y$ 方向「寬」(到 $1.257$),正對應實空間 $z$ 軸最長。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 220" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif">
+<g transform="translate(0,0)">
+<text x="135" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">實空間 unit cell（高瘦）</text>
+<path d="M55,190 145,190 M145,190 185,162 M55,60 145,60 M145,60 185,32 M185,32 95,32 M95,32 55,60 M55,190 55,60 M145,190 145,60 M185,162 185,32" fill="none" stroke="#1a4d7c" stroke-width="1.5"/>
+<path d="M185,162 95,162 M95,162 55,190 M95,162 95,32" fill="none" stroke="#9ab" stroke-width="1.1" stroke-dasharray="4,3"/>
+<line x1="35" y1="190" x2="35" y2="60" stroke="#c0392b" stroke-width="1.3"/>
+<line x1="55" y1="205" x2="145" y2="205" stroke="#2e8b2e" stroke-width="1.3"/>
+<text x="22" y="128" text-anchor="middle" font-size="11" fill="#c0392b">c = 8</text>
+<text x="100" y="219" text-anchor="middle" font-size="11" fill="#2e8b2e">a = 5</text>
+<text x="170" y="118" font-size="11" fill="#888">b = 5</text>
+</g>
+<g transform="translate(295,0)">
+<text x="135" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">第一 BZ（扁盒）</text>
+<path d="M55,150 145,150 M145,150 185,122 M55,90 145,90 M145,90 185,62 M185,62 95,62 M95,62 55,90 M55,150 55,90 M145,150 145,90 M185,122 185,62" fill="none" stroke="#1a4d7c" stroke-width="1.5"/>
+<path d="M185,122 95,122 M95,122 55,150 M95,122 95,62" fill="none" stroke="#9ab" stroke-width="1.1" stroke-dasharray="4,3"/>
+<circle cx="118" cy="105" r="3.5" fill="#c0392b"/>
+<text x="126" y="103" font-size="11" fill="#c0392b">Γ</text>
+<line x1="35" y1="150" x2="35" y2="90" stroke="#c0392b" stroke-width="1.3"/>
+<line x1="55" y1="165" x2="145" y2="165" stroke="#2e8b2e" stroke-width="1.3"/>
+<text x="20" y="124" text-anchor="middle" font-size="10" fill="#c0392b">2π/c=0.785</text>
+<text x="100" y="179" text-anchor="middle" font-size="10" fill="#2e8b2e">2π/a=1.257</text>
+<text x="174" y="100" font-size="10" fill="#888">2π/b</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">實空間長軸沿 c=8 Å(<b style="color:#c0392b">紅</b>),倒空間就在對應方向變短:k_z 邊長只有 2π/c=0.785 Å⁻¹,而 k_x,k_y 邊長 2π/a=1.257 Å⁻¹(<b style="color:#2e8b2e">綠</b>)。Γ 在 BZ 中心。實長↔倒短的反比是正交晶系倒晶格的核心。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：正交倒晶格、BZ 邊長、面間距、體積對照</b></summary>
+
+**範例 A(cubic 倒晶格與 BZ)**:simple cubic 邊 $a=4\,\text{Å}$,$\mathbf a_i=a\hat e_i$。逐軸取倒數乘 $2\pi$:
+$$\mathbf b_1=\frac{2\pi}{a}\hat x,\quad \mathbf b_2=\frac{2\pi}{a}\hat y,\quad \mathbf b_3=\frac{2\pi}{a}\hat z,\qquad |\mathbf b_i|=\frac{2\pi}{4}=1.571\,\text{Å}^{-1}.$$
+BZ 是邊長 $|\mathbf b_i|=1.571\,\text{Å}^{-1}$ 的**立方盒**(三邊相等),$k_i$ 從 $-\tfrac\pi a=-0.785$ 到 $+0.785\,\text{Å}^{-1}$。驗:$\mathbf a_1\cdot\mathbf b_1=4\times\tfrac{2\pi}4=2\pi$ ✓。
+
+**範例 B(orthorhombic 三邊全不等)**:$a=3,\ b=4,\ c=6\,\text{Å}$。
+$$|\mathbf b_1|=\frac{2\pi}{3}=2.094,\quad |\mathbf b_2|=\frac{2\pi}{4}=1.571,\quad |\mathbf b_3|=\frac{2\pi}{6}=1.047\ (\text{Å}^{-1}).$$
+BZ 是三邊**全不等**的長方盒 $2.094\times1.571\times1.047\,\text{Å}^{-1}$。實空間最短軸($a=3$)對應倒空間最長邊($2.094$)——**最短↔最長**,反比。
+
+**範例 C(tetragonal 某面間距,接本題)**:本題 $a=b=5,\ c=8\,\text{Å}$。正交面間距通式
+$$\frac1{d_{hkl}^2}=\frac{h^2+k^2}{a^2}+\frac{l^2}{c^2}.$$
+算 $(1,0,1)$ 面:
+$$\frac1{d_{101}^2}=\frac{1^2+0}{5^2}+\frac{1^2}{8^2}=\frac1{25}+\frac1{64}=0.0400+0.01563=0.05563\,\text{Å}^{-2},$$
+$$d_{101}=\frac1{\sqrt{0.05563}}=\frac1{0.2359}=\boxed{4.24\,\text{Å}}.$$
+再算 $(0,0,1)$:$\tfrac1{d^2}=\tfrac1{64}\Rightarrow d_{001}=8\,\text{Å}$(就是 $c$ ✓);$(1,0,0)$:$d_{100}=5\,\text{Å}$($=a$ ✓)。
+
+**範例 D(BZ 體積兩法對照)**:BZ 體積應等於 $\dfrac{(2\pi)^3}{V_{\rm cell}}$。本題實胞體積 $V_{\rm cell}=a\cdot b\cdot c=5\times5\times8=200\,\text{Å}^3$。
+- 直接乘 BZ 三邊:$|\mathbf b_1||\mathbf b_2||\mathbf b_3|=\dfrac{2\pi}5\cdot\dfrac{2\pi}5\cdot\dfrac{2\pi}8=\dfrac{(2\pi)^3}{200}$。
+- 公式:$\dfrac{(2\pi)^3}{V_{\rm cell}}=\dfrac{(2\pi)^3}{200}$。
+兩者相同 ✓。數值 $\dfrac{(2\pi)^3}{200}=\dfrac{248.05}{200}=1.240\,\text{Å}^{-3}$。
+</details>
+
+## ✅ 自我檢核
+- $a=b$ → $\mathbf b_1,\mathbf b_2$ 等長 ✓;倒晶格保持 tetragonal 對稱 ✓。
+- 反比檢查:$a^\*/c^\*=(2\pi/5)/(2\pi/8)=8/5=c/a$ ✓。
+- BZ 體積 $=\tfrac{2\pi}5\!\cdot\!\tfrac{2\pi}5\!\cdot\!\tfrac{2\pi}8=\tfrac{(2\pi)^3}{200}$;對照 $\tfrac{(2\pi)^3}{V_{\rm cell}}=\tfrac{(2\pi)^3}{5\cdot5\cdot8}=\tfrac{(2\pi)^3}{200}$ ✓。
+
+## 🔀 變化的可能情況
+- **改 body-centered tetragonal**:倒晶格變 fct,BZ 不再是盒子(複雜多面體)。
+- **問某 $(hkl)$ 面間距**:$d_{hkl}=\big(\tfrac{h^2+k^2}{a^2}+\tfrac{l^2}{c^2}\big)^{-1/2}$(正交通式)。
+- **歷年同型**:2025 第 2 題(2D 倒晶格 + Ewald 繞射角)、2024 倒晶格 + BZ。
+
+## 信心:**高**(正交倒晶格 + simple tetragonal BZ 為盒子,標準結果)。
+
+---
+
+# 📙 第 3 題 — 繞射:蛋白質結晶如何定出「形狀」（Diffraction 30%,與第 2 題合計）
+
+## 📋 原題
+> 對結晶化的蛋白質做 X 光繞射,可定出「形成何種晶體」與「蛋白質的形狀」。晶體結構對蛋白質的生物功能不重要,但形狀很重要。**X 光繞射如何定出蛋白質的形狀?**
+
+## 🎯 核心訊息
+> **峰的「位置」只認 lattice(晶胞大小/對稱),峰的「強度」才認 basis(晶胞內的電子密度=蛋白質本體)。** 蛋白質形狀藏在**結構因子的強度** $I(\mathbf G)\propto|F(\mathbf G)|^2$ 裡;$F(\mathbf G)$ 是晶胞內電子密度 $\rho(\mathbf r)$ 的傅立葉變換。**反傅立葉**把一堆 $F(\mathbf G)$ 變回 $\rho(\mathbf r)$(電子密度圖)→ 看出形狀。麻煩在繞射只量到 $|F|$、丟了相位(**phase problem**),要靠額外手段補回。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 結構因子 = 晶胞電子密度的傅立葉變換、相位問題</b></summary>
+
+### 定義
+$$F(\mathbf G)=\int_{\text{cell}}\rho(\mathbf r)\,e^{\,i\mathbf G\cdot\mathbf r}\,d^3r,\qquad \rho(\mathbf r)=\frac1{V}\sum_{\mathbf G}F(\mathbf G)\,e^{-i\mathbf G\cdot\mathbf r}.$$
+繞射量到的是強度 $I(\mathbf G)\propto|F(\mathbf G)|^2$ → 只得 $|F|$,**相位 $\phi$($F=|F|e^{i\phi}$)遺失**。
+
+**範例 1(峰位置=lattice)**:晶格常數/對稱由 Bragg 峰**位置**定 → 知道是哪種晶體(本題前半)。
+**範例 2(峰強度=basis)**:每顆原子/每段電子密度貢獻 $f_j e^{i\mathbf G\cdot\mathbf r_j}$ → 強度編碼「晶胞內長什麼樣」。
+**範例 3(補相位)**:重原子同晶置換(MIR)、異常散射(MAD/SAD)、分子置換(MR)→ 取回 $\phi$。
+</details>
+
+## 解答
+
+### Step 1 — 兩件事分開:晶體種類 vs 蛋白質形狀
+- **晶體種類**(題目說「對功能不重要」)由 Bragg 峰**位置**決定 → 給出倒晶格 → 晶胞大小、對稱、空間群。
+- **蛋白質形狀**(題目說「很重要」)由 Bragg 峰**強度**決定 → 編碼晶胞內的電子密度分布。
+
+### Step 2 — 形狀 = 晶胞內電子密度 $\rho(\mathbf r)$
+蛋白質佔據晶胞內部(basis),其電子密度 $\rho(\mathbf r)$ 就是「形狀」。量到的每個反射強度
+$$I(hkl)\propto|F(hkl)|^2,\qquad F(hkl)=\int_{\text{cell}}\rho(\mathbf r)\,e^{\,i\mathbf G_{hkl}\cdot\mathbf r}\,d^3r$$
+是 $\rho$ 的傅立葉係數(模)。**收集大量 $(hkl)$ 反射** = 收集 $\rho$ 的大量傅立葉分量。
+
+### Step 3 — 反傅立葉重建電子密度圖
+$$\boxed{\rho(\mathbf r)=\frac1V\sum_{hkl}|F(hkl)|\,e^{\,i\phi(hkl)}\,e^{-i\mathbf G_{hkl}\cdot\mathbf r}.}$$
+把所有反射加總(反傅立葉)→ 得到 3D 電子密度圖 → 描出主鏈/側鏈 → **蛋白質形狀**。
+
+### Step 4 — 相位問題(關鍵障礙與解法)
+繞射只給 $|F|$,**相位 $\phi$ 丟失**。實務補相位:
+- **同晶置換(MIR)**:浸入重原子,比較強度變化反推相位。
+- **異常散射(MAD/SAD)**:用調諧波長(同步輻射)在吸收邊附近取異常訊號定相位。
+- **分子置換(MR)**:用已知相似結構當初始相位。
+補回 $\phi$ 後做反傅立葉 → 電子密度圖 → 建模 → 形狀。
+
+> **小結**:**形狀在強度(結構因子)裡,不在峰位置裡;反傅立葉 $|F|e^{i\phi}$ 還原 $\rho(\mathbf r)$,但要先解決相位問題。**
+
+## ✅ 自我檢核
+- 「位置=lattice、強度=basis」與 Q2/Kittel 一致 ✓。
+- 形狀↔$\rho(\mathbf r)$↔傅立葉↔$F(\mathbf G)$ 的鏈條閉合 ✓;只量 $|F|$ 確實不足以唯一反推 → 必須補相位 ✓。
+
+## 🔀 變化的可能情況
+- **問解析度**:可達的最高 $|\mathbf G|$(最短 $d$)決定電子密度圖解析度;高解析度需更短波長/更多高角度反射。
+- **問為何要結晶**:單分子散射太弱,晶體把 $N$ 個同向分子的訊號**相干放大** $N^2$ 才量得到(也是 cryo-EM 的對照)。
+
+## 信心:**高**(結構因子=電子密度傅立葉、相位問題為晶體學標準觀念)。
+
+---
+
+# 📕 第 4 題 — 聲子:為何 Ag 與 Au 的聲子色散長得像（Phonons 10%）
+
+## 📋 原題
+> 為什麼銀(Ag)的聲子色散關係看起來像金(Au)的聲子色散關係?
+
+## 🎯 核心訊息
+> 聲子色散由兩件事決定:**(1) 晶體結構(決定曲線「形狀」、分支數、BZ 幾何)** 與 **(2) 頻率尺度 $\omega\sim\sqrt{K/M}$(力常數對質量比)**。Ag、Au 同屬第 11 族貴金屬、都是 **fcc 且晶格常數幾乎相同**($a_{\rm Ag}=4.09$、$a_{\rm Au}=4.08\,\text{Å}$)→ **BZ 與曲線形狀一致**;化學鍵結相近 → 力常數 $K$ 量級相近。雖然 Au 質量大很多($197$ vs $108$),但 Au 的鍵也更硬($K$ 更大),$K/M$ 部分抵消,故整體**曲線同形、頻率尺度相近**(Au 略低)。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 色散 $\omega(k)$ 拆成「形狀(結構)×尺度 $\sqrt{K/M}$」</b></summary>
+
+### 定義
+單原子鏈 $\omega(k)=2\sqrt{\dfrac{K}{M}}\,\big|\sin\tfrac{ka}{2}\big|$:**形狀**(隨 $k$ 的函數)由晶格幾何定,**高度**由 $\sqrt{K/M}$ 定。3D 同理:結構定分支與形狀,$\sqrt{K/M}$ 定頻率尺度。
+
+**範例 1(同結構不同尺度)**:同 fcc、不同 $K/M$ → 曲線同形、整體上下縮放。
+**範例 2(本題)**:Ag、Au 同 fcc、$a$ 幾乎相同 → 同形;$K/M$ 相近 → 尺度相近。
+**範例 3(對照 Debye 溫度)**:$\Theta_D\propto\omega_D\propto\sqrt{K/M}$;Ag $\Theta_D\approx225\,\text{K}$、Au $\approx165\,\text{K}$ → Au 略軟、頻率略低。
+</details>
+
+## 解答
+
+### Step 1 — 色散形狀由結構定 → Ag、Au 同形
+- Ag、Au **都是 fcc**,晶格常數幾乎相同($4.09$ vs $4.08\,\text{Å}$)→ **同樣的第一 BZ、同樣的高對稱方向**。
+- 每原胞 1 原子 → 都是 **3 條 acoustic 分支(2 橫 1 縱)、無 optical 分支**。
+- 故沿 $\Gamma\!\to\!X\!\to\!L$ 等方向,兩者曲線的**形狀(走勢、分支結構)幾乎重疊**。
+
+### Step 2 — 頻率尺度由 $\sqrt{K/M}$ 定 → 量級相近
+聲子頻率 $\omega\sim\sqrt{K/M}$。
+- **化學鍵結相近**:同屬第 11 族貴金屬,成鍵性質類似 → 原子間力常數 $K$ 量級相近。
+- **質量差被鍵硬度抵消**:$M_{\rm Au}/M_{\rm Ag}\approx197/108\approx1.8$,若 $K$ 相等,Au 頻率本應低 $\sqrt{1.8}\approx1.35$ 倍;但 Au 鍵更硬(bulk modulus 較大),$K$ 也較大,兩者在 $K/M$ 上**部分抵消**,使頻率尺度落在相近範圍。
+
+### Step 3 — 結論(與細微差異)
+$$\boxed{\text{同 fcc + 同 }a\Rightarrow\text{ 色散「形狀」相同;}\ K/M\text{ 相近}\Rightarrow\text{頻率尺度相近}\Rightarrow\text{兩者色散長得像。}}$$
+> **小結**:細看 Au 仍**略低**(Debye 溫度 $165\,\text{K}<225\,\text{K}$),因質量差未被完全抵消;但「整體形狀 + 量級」夠像,故看起來相像。
+
+## ✅ 自我檢核
+- 形狀(結構)與尺度($\sqrt{K/M}$)分離的邏輯與單原子鏈一致 ✓。
+- 量級檢查:純質量比預測 Au 低 $35\%$,實際 Debye 溫度低約 $27\%$ → 鍵硬度確實補了一部分 ✓。
+
+## 🔀 變化的可能情況
+- **對照「不像」的例子**:Ag 與 NaCl 結構不同(後者有 optical 分支)→ 色散完全不同。
+- **問 Debye/比熱**:$\Theta_D$ 較低的 Au 在同溫下晶格比熱略高(更多模被激發)。
+- **同型推廣**:同族同結構金屬(如 Cu/Ag/Au)色散家族相似。
+
+## 信心:**中高**(結構→形狀、$\sqrt{K/M}$→尺度的論證穩;「$K$ 抵消質量差」屬半定量,Au 細部略低為已知事實,故不打滿分)。
+
+---
+
+# 📒 第 5 題 — 電子:鋁的電子密度、Fermi energy 與 Fermi temperature（Electrons 40%,與 6、7 合計）
+
+## 📋 原題
+> 鋁:莫耳質量 $26.98\,\text{g/mol}$、質量密度 $\rho=2.70\,\text{g/cm}^3$。假設**每個原子貢獻 3 個價電子**。算電子密度,並算 Al 的 **Fermi energy 與 Fermi temperature**($k_BT_F=E_F$)。
+
+## 🎯 核心訊息
+> 三步:**(1) 電子密度 $n=Z\cdot\dfrac{\rho N_A}{M}$**(每原子 $Z=3$ 電子);**(2) $E_F=\dfrac{\hbar^2}{2m}(3\pi^2n)^{2/3}$**;**(3) $T_F=E_F/k_B$**。代數注意把 cm⁻³ 換 m⁻³(或全用 SI)。標準答案:$n\approx1.81\times10^{29}\,\text{m}^{-3}$、$E_F\approx11.7\,\text{eV}$、$T_F\approx1.36\times10^5\,\text{K}$。
+
+## 📚 前情提要(從普物串上來)
+- **每原子幾個電子**:鋁 Al(三價)→ 每原子 3 個自由電子。原子數密度 $=\dfrac{\rho N_A}{M}$,乘 3 得電子密度。
+- **自由電子氣 $T=0$**:電子填滿 $k$ 空間半徑 $k_F$ 的球。含自旋,$n=\dfrac{k_F^3}{3\pi^2}\Rightarrow k_F=(3\pi^2n)^{1/3}$。
+- **Fermi energy** $=$ 球面動能 $E_F=\dfrac{\hbar^2k_F^2}{2m}$;**Fermi temperature** $T_F=E_F/k_B$ 是「把 $E_F$ 換成溫度」的尺度,$T_F\gg300\,\text{K}$ → 金屬電子在室溫高度簡併。
+> **留存**:這題沒有近似、純代入,**全程顧好單位**(cm↔m、eV↔J)就拿滿分。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ $n=Z\rho N_A/M$、$k_F=(3\pi^2n)^{1/3}$、$E_F$、$T_F$</b></summary>
+
+### 定義
+- 電子密度 $n=Z\dfrac{\rho N_A}{M}$($Z$=每原子價電子數,$N_A=6.022\times10^{23}/\text{mol}$)。
+- $k_F=(3\pi^2 n)^{1/3}$,$E_F=\dfrac{\hbar^2k_F^2}{2m}=\dfrac{\hbar^2}{2m}(3\pi^2n)^{2/3}$,$T_F=E_F/k_B$。
+
+**範例 1(熱身,Na 一價)**:$n\approx2.5\times10^{28}\,\text{m}^{-3}\Rightarrow E_F\approx3.2\,\text{eV}$。
+**範例 2(中階,Cu 一價)**:$n\approx8.5\times10^{28}\Rightarrow E_F\approx7.0\,\text{eV}$。
+**範例 3(本題,Al 三價)**:$n\approx1.81\times10^{29}\Rightarrow E_F\approx11.7\,\text{eV}$。
+</details>
+
+## 解答
+
+### Step 1 — 電子密度 $n$（完整代數,顧單位）
+原子數密度:
+$$n_{\rm atom}=\frac{\rho N_A}{M}=\frac{2.70\,\text{g/cm}^3\times6.022\times10^{23}\,\text{mol}^{-1}}{26.98\,\text{g/mol}}=6.03\times10^{22}\,\text{cm}^{-3}.$$
+每原子 3 個電子:
+$$n=3\,n_{\rm atom}=1.81\times10^{23}\,\text{cm}^{-3}=\boxed{1.81\times10^{29}\,\text{m}^{-3}.}$$
+> **小結**:換到 SI($1\,\text{cm}^{-3}=10^6\,\text{m}^{-3}$)是後面不出錯的關鍵。
+
+### Step 2 — Fermi 波數 $k_F$
+$$k_F=(3\pi^2 n)^{1/3}=\big(3\pi^2\times1.808\times10^{29}\big)^{1/3}\,\text{m}^{-1}.$$
+括號內:$3\pi^2=29.61$,$29.61\times1.808\times10^{29}=5.353\times10^{30}$。開立方:
+$$k_F=(5.353\times10^{30})^{1/3}=1.75\times10^{10}\,\text{m}^{-1}.$$
+
+### Step 3 — Fermi energy $E_F$
+$$E_F=\frac{\hbar^2k_F^2}{2m}=\frac{(1.0546\times10^{-34})^2\,(1.75\times10^{10})^2}{2\times9.1\times10^{-31}}\,\text{J}.$$
+分子:$\hbar^2=1.112\times10^{-68}$,$k_F^2=3.061\times10^{20}$ → $1.112\times10^{-68}\times3.061\times10^{20}=3.404\times10^{-48}$。
+分母:$2m=1.82\times10^{-30}$。
+$$E_F=\frac{3.404\times10^{-48}}{1.82\times10^{-30}}=1.870\times10^{-18}\,\text{J}=\frac{1.870\times10^{-18}}{1.602\times10^{-19}}\,\text{eV}=\boxed{11.7\,\text{eV}.}$$
+
+### Step 4 — Fermi temperature $T_F$
+用 $k_B=1.38\times10^{-23}\,\text{J/K}$:
+$$T_F=\frac{E_F}{k_B}=\frac{1.870\times10^{-18}}{1.38\times10^{-23}}=\boxed{1.36\times10^{5}\,\text{K}.}$$
+(等價:$E_F=11.7\,\text{eV}$、$k_B=8.62\times10^{-5}\,\text{eV/K}$ → $T_F=11.7/8.62\times10^{-5}=1.36\times10^5\,\text{K}$。)
+> **小結**:$T_F\approx1.36\times10^5\,\text{K}\gg300\,\text{K}$ → 室溫下 Al 電子是高度簡併的 Fermi 氣。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 230" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif">
+<g transform="translate(0,0)">
+<text x="130" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">k 空間：Fermi 球</text>
+<line x1="40" y1="120" x2="230" y2="120" stroke="#888" stroke-width="1"/>
+<line x1="135" y1="200" x2="135" y2="40" stroke="#888" stroke-width="1"/>
+<circle cx="135" cy="120" r="68" fill="#6aa1d6" fill-opacity="0.35" stroke="#1a4d7c" stroke-width="1.8"/>
+<line x1="135" y1="120" x2="203" y2="120" stroke="#c0392b" stroke-width="2"/>
+<circle cx="135" cy="120" r="2.5" fill="#1a4d7c"/>
+<text x="170" y="113" font-size="11.5" fill="#c0392b" font-weight="bold">k_F</text>
+<text x="225" y="135" font-size="11" fill="#888">k_x</text>
+<text x="195" y="195" text-anchor="middle" font-size="10.5" fill="#1a4d7c">填滿態：|k|≤k_F</text>
+<text x="130" y="222" text-anchor="middle" font-size="11" fill="#555">k_F=(3π²n)^⅓=1.75×10¹⁰ m⁻¹</text>
+</g>
+<g transform="translate(290,0)">
+<text x="130" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">DOS：填到 E_F</text>
+<line x1="40" y1="190" x2="240" y2="190" stroke="#888" stroke-width="1"/>
+<line x1="40" y1="190" x2="40" y2="40" stroke="#888" stroke-width="1"/>
+<polyline points="40,190 60,175 90,158 130,138 175,118 225,98" fill="none" stroke="#1a4d7c" stroke-width="2"/>
+<line x1="175" y1="190" x2="175" y2="118" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4,3"/>
+<polygon points="40,190 60,175 90,158 130,138 175,118 175,190" fill="#6aa1d6" fill-opacity="0.4"/>
+<text x="248" y="100" font-size="11" fill="#1a4d7c">g(E)∝√E</text>
+<text x="175" y="206" text-anchor="middle" font-size="11.5" fill="#c0392b" font-weight="bold">E_F=11.7 eV</text>
+<text x="32" y="44" text-anchor="end" font-size="11" fill="#888">g</text>
+<text x="100" y="178" text-anchor="middle" font-size="10" fill="#1a4d7c">佔據</text>
+<text x="130" y="226" text-anchor="middle" font-size="11" fill="#555">T_F=E_F/k_B=1.36×10⁵ K</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">左:T=0 時電子填滿 k 空間半徑 k_F 的球(<b style="color:#c0392b">紅</b>=k_F);n 與 k_F 由 n=k_F³/3π² 相連。右:自由電子 DOS g(E)∝√E,電子由底填到 E_F(藍色填充區),E_F=11.7 eV 對應 T_F=E_F/k_B=1.36×10⁵ K ≫ 300 K → 室溫高度簡併。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：電子密度→k_F→E_F→T_F 全鏈，多金屬練手</b></summary>
+
+**範例 A(Na 鈉,一價)**:$\rho=0.971\,\text{g/cm}^3$、$M=22.99\,\text{g/mol}$、$Z=1$。
+$$n=Z\frac{\rho N_A}{M}=1\times\frac{0.971\times6.022\times10^{23}}{22.99}=2.543\times10^{22}\,\text{cm}^{-3}=2.543\times10^{28}\,\text{m}^{-3}.$$
+$$k_F=(3\pi^2n)^{1/3}=(29.61\times2.543\times10^{28})^{1/3}=(7.530\times10^{29})^{1/3}=9.10\times10^{9}\,\text{m}^{-1}.$$
+$$E_F=\frac{\hbar^2k_F^2}{2m}=\frac{(1.0546\times10^{-34})^2(9.10\times10^{9})^2}{2\times9.1\times10^{-31}}=\frac{1.112\times10^{-68}\times8.28\times10^{19}}{1.82\times10^{-30}}=5.06\times10^{-19}\,\text{J}.$$
+換 eV:$E_F=\dfrac{5.06\times10^{-19}}{1.602\times10^{-19}}=\boxed{3.16\,\text{eV}}$(Kittel 表 $3.24\,\text{eV}$,微差來自捨入)。$T_F=E_F/k_B=\dfrac{5.06\times10^{-19}}{1.38\times10^{-23}}=3.67\times10^4\,\text{K}$。
+
+**範例 B(Cu 銅,一價)**:$\rho=8.96\,\text{g/cm}^3$、$M=63.55\,\text{g/mol}$、$Z=1$。
+$$n=\frac{8.96\times6.022\times10^{23}}{63.55}=8.49\times10^{22}\,\text{cm}^{-3}=8.49\times10^{28}\,\text{m}^{-3}.$$
+$$k_F=(29.61\times8.49\times10^{28})^{1/3}=(2.514\times10^{30})^{1/3}=1.360\times10^{10}\,\text{m}^{-1}.$$
+$$E_F=\frac{1.112\times10^{-68}\times(1.360\times10^{10})^2}{1.82\times10^{-30}}=\frac{1.112\times10^{-68}\times1.850\times10^{20}}{1.82\times10^{-30}}=1.130\times10^{-18}\,\text{J}=\boxed{7.06\,\text{eV}}$$
+(Kittel $7.00\,\text{eV}$ ✓)。$T_F=1.130\times10^{-18}/1.38\times10^{-23}=8.19\times10^4\,\text{K}$。
+
+**範例 C(本題 Al 鋁,三價，整鏈一次走完)**:$\rho=2.70$、$M=26.98$、$Z=3$。
+$$n=3\times\frac{2.70\times6.022\times10^{23}}{26.98}=3\times6.026\times10^{22}=1.808\times10^{23}\,\text{cm}^{-3}=1.808\times10^{29}\,\text{m}^{-3}.$$
+$$k_F=(29.61\times1.808\times10^{29})^{1/3}=(5.353\times10^{30})^{1/3}=1.750\times10^{10}\,\text{m}^{-1}.$$
+$$E_F=\frac{1.112\times10^{-68}\times(1.750\times10^{10})^2}{1.82\times10^{-30}}=\frac{1.112\times10^{-68}\times3.063\times10^{20}}{1.82\times10^{-30}}=1.871\times10^{-18}\,\text{J}=\boxed{11.7\,\text{eV}},$$
+$$T_F=\frac{1.871\times10^{-18}}{1.38\times10^{-23}}=\boxed{1.36\times10^{5}\,\text{K}}.$$
+**對照三者**:Na(1 價)$3.2$、Cu(1 價)$7.0$、Al(3 價)$11.7\,\text{eV}$——**$E_F\propto n^{2/3}$**,價數越高、密度越大 → $E_F$ 越高。
+
+**範例 D(用 $E_F\propto n^{2/3}$ 比例法快算)**:已知 Cu($n=8.49\times10^{28}$,$E_F=7.06\,\text{eV}$),不重算積分,直接比例推 Al($n=1.808\times10^{29}$):
+$$\frac{E_F^{\rm Al}}{E_F^{\rm Cu}}=\Big(\frac{n_{\rm Al}}{n_{\rm Cu}}\Big)^{2/3}=\Big(\frac{1.808\times10^{29}}{8.49\times10^{28}}\Big)^{2/3}=(2.130)^{2/3}.$$
+算 $(2.130)^{2/3}$:$\ln2.130=0.7561$,$\times\tfrac23=0.5041$,$e^{0.5041}=1.655$。
+$$E_F^{\rm Al}=7.06\times1.655=\boxed{11.7\,\text{eV}}\ ✓$$
+與直接計算一致——**比例法是檢驗數值有沒有算錯的最快手段**。
+</details>
+
+## ✅ 自我檢核
+- 與 Kittel 表對照:Al $n=1.81\times10^{29}\,\text{m}^{-3}$、$E_F=11.7\,\text{eV}$、$T_F=1.36\times10^5\,\text{K}$ — **完全吻合** ✓。
+- 量綱:$[\hbar^2k^2/m]=\text{J}$ ✓;$E_F$ 介於典型金屬 $2\text{–}15\,\text{eV}$ ✓(Al 三價、密度高 → 偏高端,合理)。
+- 一致性:$E_F=k_BT_F$ 定義自洽 ✓。
+
+## 🔀 變化的可能情況
+- **問 Fermi 速度**:$v_F=\hbar k_F/m=1.0546\times10^{-34}\times1.75\times10^{10}/9.1\times10^{-31}\approx2.03\times10^6\,\text{m/s}$。
+- **問 DOS 在 $E_F$**:$g(E_F)=\dfrac{3n}{2E_F}$ → 可接電子比熱 $\gamma=\tfrac{\pi^2}3k_B^2g(E_F)$。
+- **問每原子貢獻數改變**:一價金屬(Na/Cu)$n$ 小、$E_F$ 小;本題三價故 $E_F$ 高。
+- **歷年同型**:自由電子 $E_F$/$T_F$/$v_F$ 數值題年年可能出。
+
+## 信心:**高**(獨立重算且與標準文獻值完全一致)。
+
+---
+
+# 📓 第 6 題 — 電子:Si pn junction 的化學勢、built-in voltage 與電場（Electrons 40%）
+
+## 📋 原題
+> Si pn junction:n 側摻 $10^{17}\,\text{cm}^{-3}$ donors、p 側摻 $10^{17}\,\text{cm}^{-3}$ acceptors。Si 資料:band gap $1.12\,\text{eV}$、導帶有效態密度 $N_c=2.8\times10^{25}\,\text{m}^{-3}$(300 K)、價帶有效態密度 $N_v=9.84\times10^{24}\,\text{m}^{-3}$(300 K)、$k_B=8.6\times10^{-5}\,\text{eV/K}$。
+> **(a)** 算兩側 300 K 的化學勢(能量零點設在價帶頂)。
+> **(b)** 算此二極體 300 K 的 built-in voltage。
+> **(c)** 畫電場對位置的函數,標出方向。
+
+## 🎯 核心訊息
+> **核心是「化學勢由載子數定」**:$n=N_ce^{-(E_c-\mu)/k_BT}$、$p=N_ve^{-(\mu-E_v)/k_BT}$,反解得 $\mu$。兩側 $\mu$ 差就是 **built-in 電位** $eV_{\rm bi}=\mu_n-\mu_p$。電場在空乏區呈**三角形**,峰在接面,**由 n 側指向 p 側**。**單位陷阱**:摻雜 $10^{17}\,\text{cm}^{-3}=10^{23}\,\text{m}^{-3}$,要與 $N_c,N_v$(m⁻³)同單位。
+
+## 📚 前情提要(從普物串上來)
+- **能量零點**:題目設在價帶頂 $E_v=0$,故導帶底 $E_c=E_g=1.12\,\text{eV}$。
+- **完全游離**:300 K 下淺施體/受體全游離 → n 側 $n\approx N_D$、p 側 $p\approx N_A$。
+- **Boltzmann 近似**(非簡併):$n=N_ce^{-(E_c-\mu)/k_BT}$、$p=N_ve^{-(\mu-E_v)/k_BT}$。反解出 $\mu$。
+- **built-in voltage**:兩塊半導體接觸前 Fermi 能差,接觸後變成能帶彎曲量 $eV_{\rm bi}=\mu_n-\mu_p$。
+- **$k_BT$ 值**:$k_BT=8.6\times10^{-5}\times300=0.0258\,\text{eV}$。
+> **留存**:先把摻雜換成 m⁻³,$N_c/n$、$N_v/p$ 才是純數,$\ln$ 才算得對。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 載子數↔化學勢、built-in voltage、空乏區三角電場</b></summary>
+
+### 定義
+- $n=N_c e^{-(E_c-\mu)/k_BT}\Rightarrow \mu=E_c-k_BT\ln(N_c/n)$。
+- $p=N_v e^{-(\mu-E_v)/k_BT}\Rightarrow \mu-E_v=k_BT\ln(N_v/p)$。
+- $eV_{\rm bi}=\mu_n-\mu_p=E_g-k_BT\ln\dfrac{N_cN_v}{N_DN_A}$。
+- 空乏區 Poisson $\dfrac{dE}{dx}=\dfrac{\rho}{\varepsilon}$ → 電場線性、接面處峰值,$\int E\,dx=V_{\rm bi}$。
+
+**範例 1(熱身,單位)**:$10^{17}\,\text{cm}^{-3}=10^{17}\times10^{6}\,\text{m}^{-3}=10^{23}\,\text{m}^{-3}$。
+**範例 2(中階,n 側)**:$N_c/n=2.8\times10^{25}/10^{23}=280$,$\ln280=5.63$。
+**範例 3(本題,p 側)**:$N_v/p=9.84\times10^{24}/10^{23}=98.4$,$\ln98.4=4.59$。
+</details>
+
+## 解答
+
+### (a) 兩側化學勢（$E_v=0$,$E_c=E_g=1.12\,\text{eV}$;$k_BT=0.0258\,\text{eV}$）
+
+**Step 1 — 換單位、定載子數。** $N_D=N_A=10^{17}\,\text{cm}^{-3}=10^{23}\,\text{m}^{-3}$;完全游離 → n 側 $n=10^{23}\,\text{m}^{-3}$、p 側 $p=10^{23}\,\text{m}^{-3}$。
+
+**Step 2 — n 側化學勢。** 由 $n=N_ce^{-(E_c-\mu_n)/k_BT}$:
+$$\mu_n=E_c-k_BT\ln\frac{N_c}{n}=1.12-0.0258\times\ln\!\frac{2.8\times10^{25}}{10^{23}}.$$
+$\dfrac{N_c}{n}=280$,$\ln280=5.635$,$0.0258\times5.635=0.1454\,\text{eV}$:
+$$\boxed{\mu_n=1.12-0.1454=0.975\,\text{eV}\ (\text{價帶頂上方});}$$
+即在導帶底**下方** $0.145\,\text{eV}$。
+
+**Step 3 — p 側化學勢。** 由 $p=N_ve^{-(\mu_p-E_v)/k_BT}=N_ve^{-\mu_p/k_BT}$:
+$$\mu_p=k_BT\ln\frac{N_v}{p}=0.0258\times\ln\!\frac{9.84\times10^{24}}{10^{23}}.$$
+$\dfrac{N_v}{p}=98.4$,$\ln98.4=4.589$:
+$$\boxed{\mu_p=0.0258\times4.589=0.118\,\text{eV}\ (\text{價帶頂上方}).}$$
+> **小結**:n 側 Fermi 貼近導帶($0.975\,\text{eV}$),p 側貼近價帶($0.118\,\text{eV}$),符合 n/p 型直覺。
+
+### (b) Built-in voltage
+**Step 1 — 兩側化學勢差。**
+$$eV_{\rm bi}=\mu_n-\mu_p=0.975-0.118=0.856\,\text{eV}.$$
+**Step 2 — 換成電壓。** 因 $\mu$ 已以 eV 計,$V_{\rm bi}=(\mu_n-\mu_p)/e$ 的數值即:
+$$\boxed{V_{\rm bi}=0.856\,\text{V}.}$$
+**Step 3 — 用閉式驗。**
+$$eV_{\rm bi}=E_g-k_BT\ln\frac{N_cN_v}{N_DN_A}=1.12-0.0258\ln\!\frac{(2.8\times10^{25})(9.84\times10^{24})}{(10^{23})(10^{23})}.$$
+括號 $=\dfrac{2.755\times10^{50}}{10^{46}}=2.755\times10^4$,$\ln=10.22$,$0.0258\times10.22=0.264$ → $1.12-0.264=0.856\,\text{V}$ ✓。
+> **小結**:兩法一致,$V_{\rm bi}\approx0.856\,\text{V}$。
+
+### (c) 電場對位置（方向 + 形狀）
+**設定**:n 側在左($x<0$)、p 側在右($x>0$)。完全游離後:
+- n 側空乏區:離化施體留下**正電荷** $+eN_D$;
+- p 側空乏區:離化受體留下**負電荷** $-eN_A$。
+
+**Poisson** $\dfrac{dE}{dx}=\dfrac{\rho}{\varepsilon}$,邊界 $E=0$ 於空乏邊緣 → 電場在 n 側($\rho>0$)線性上升、p 側($\rho<0$)線性下降,**接面 $x=0$ 達峰值**。$N_D=N_A$ → 兩側空乏寬相等,三角形對稱。
+
+**方向**:電場由**正電荷(n 側)指向負電荷(p 側)**,即**從 n 側指向 p 側**(此圖中 $+x$ 方向)。此 built-in 場恰好**抵抗載子擴散**(把電子推回 n 側、電洞推回 p 側)。
+
+```
+電荷密度 ρ(x)                電場 |E(x)|（方向 n→p，即 +x）
+  +eN_D ┌──┐                      /\        ← 峰在接面 x=0
+        │  │                     /  \
+ ───────┼──┼────── x      ──────/────\────── x
+        │  │  └──┐             -x_n  0  +x_p
+        └──┘ -eN_A          E=0     E_max     E=0
+   (n 側)│(p 側)            （三角形，對稱，因 N_D=N_A）
+            x=0  接面            箭頭 → 由 n 指向 p
+```
+
+**(選配)峰值與空乏寬**(題目未給 Si 介電常數;取文獻 $\varepsilon_r\approx11.7$ 作數值示意):
+$\varepsilon=11.7\times8.85\times10^{-12}=1.04\times10^{-10}\,\text{F/m}$。對稱接面 $N=10^{23}\,\text{m}^{-3}$:
+$$W=\sqrt{\frac{2\varepsilon V_{\rm bi}}{e}\Big(\frac1{N_A}+\frac1{N_D}\Big)}=\sqrt{\frac{2\varepsilon V_{\rm bi}}{e}\cdot\frac2N}\approx1.49\times10^{-7}\,\text{m}=0.15\,\mu\text{m},$$
+$$E_{\max}=\frac{2V_{\rm bi}}{W}\approx1.15\times10^{7}\,\text{V/m}.$$
+(此小段需額外 $\varepsilon_r$,非題目給定,僅供量級參考;主答案是上面的三角形形狀與方向。)
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 270" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif">
+<text x="280" y="18" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">pn 接面：電荷密度與電場</text>
+<text x="105" y="40" text-anchor="middle" font-size="12" fill="#1a4d7c">n 側（左）</text>
+<text x="455" y="40" text-anchor="middle" font-size="12" fill="#c0392b">p 側（右）</text>
+<line x1="280" y1="34" x2="280" y2="250" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="280" y="262" text-anchor="middle" font-size="10.5" fill="#888">接面 x=0</text>
+<text x="40" y="66" font-size="11.5" fill="#333" font-weight="bold">ρ(x)</text>
+<line x1="55" y1="90" x2="505" y2="90" stroke="#888" stroke-width="1"/>
+<rect x="205" y="62" width="75" height="28" fill="#1a4d7c" fill-opacity="0.5" stroke="#1a4d7c" stroke-width="1.2"/>
+<rect x="280" y="90" width="75" height="28" fill="#c0392b" fill-opacity="0.5" stroke="#c0392b" stroke-width="1.2"/>
+<text x="242" y="58" text-anchor="middle" font-size="10.5" fill="#1a4d7c">+eN_D</text>
+<text x="318" y="130" text-anchor="middle" font-size="10.5" fill="#c0392b">−eN_A</text>
+<text x="40" y="165" font-size="11.5" fill="#333" font-weight="bold">E(x)</text>
+<line x1="55" y1="230" x2="505" y2="230" stroke="#888" stroke-width="1"/>
+<polyline points="55,230 205,230 280,160 355,230 505,230" fill="none" stroke="#2e8b2e" stroke-width="2.2"/>
+<line x1="280" y1="230" x2="280" y2="160" stroke="#2e8b2e" stroke-width="0.8" stroke-dasharray="3,2"/>
+<circle cx="280" cy="160" r="3" fill="#2e8b2e"/>
+<text x="298" y="160" font-size="10.5" fill="#2e8b2e">E_max（峰在接面）</text>
+<line x1="150" y1="200" x2="210" y2="200" stroke="#e67e22" stroke-width="2" marker-end="url(#ar22)"/>
+<text x="180" y="194" text-anchor="middle" font-size="10.5" fill="#e67e22">E 由 n→p（+x）</text>
+<text x="205" y="246" text-anchor="middle" font-size="10" fill="#888">−x_n</text>
+<text x="355" y="246" text-anchor="middle" font-size="10" fill="#888">+x_p</text>
+<defs><marker id="ar22" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e67e22"/></marker></defs>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">上:空乏區電荷密度 ρ(x)——n 側留下正的離化施體 +eN_D(<b style="color:#1a4d7c">藍</b>)、p 側留下負的離化受體 −eN_A(<b style="color:#c0392b">紅</b>)。下:由 Poisson 方程 dE/dx=ρ/ε 積分,電場呈三角形(<b style="color:#2e8b2e">綠</b>),峰在接面 x=0;N_D=N_A 故對稱。方向由 n 指向 p(+x,<b style="color:#e67e22">橘箭頭</b>),三角形面積 ∫E dx = V_bi = 0.856 V。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：化學勢、built-in voltage、單位換算多練</b></summary>
+
+**範例 A(本題 n 側化學勢,逐步)**:$N_c=2.8\times10^{25}\,\text{m}^{-3}$、$n=N_D=10^{17}\,\text{cm}^{-3}=10^{23}\,\text{m}^{-3}$、$E_c=1.12\,\text{eV}$、$k_BT=0.0258\,\text{eV}$。
+$$\frac{N_c}{n}=\frac{2.8\times10^{25}}{1.0\times10^{23}}=280,\qquad \ln280=5.635,$$
+$$k_BT\ln\frac{N_c}{n}=0.0258\times5.635=0.1454\,\text{eV},$$
+$$\mu_n=E_c-k_BT\ln\frac{N_c}{n}=1.12-0.1454=\boxed{0.975\,\text{eV}}\ (\text{距導帶底 }0.145\,\text{eV})。$$
+
+**範例 B(本題 p 側化學勢,逐步)**:$N_v=9.84\times10^{24}\,\text{m}^{-3}$、$p=N_A=10^{23}\,\text{m}^{-3}$、$E_v=0$。
+$$\frac{N_v}{p}=\frac{9.84\times10^{24}}{1.0\times10^{23}}=98.4,\qquad \ln98.4=4.589,$$
+$$\mu_p-E_v=k_BT\ln\frac{N_v}{p}=0.0258\times4.589=\boxed{0.118\,\text{eV}}\ (\text{在價帶頂上方 }0.118\,\text{eV})。$$
+$$eV_{\rm bi}=\mu_n-\mu_p=0.975-0.118=\boxed{0.857\,\text{eV}}\Rightarrow V_{\rm bi}=0.857\,\text{V}.$$
+
+**範例 C(用 $n_i$ 閉式重算 built-in voltage)**:先算本徵載子濃度
+$$n_i=\sqrt{N_cN_v}\,e^{-E_g/2k_BT}.$$
+$\sqrt{N_cN_v}=\sqrt{2.8\times10^{25}\times9.84\times10^{24}}=\sqrt{2.755\times10^{50}}=1.660\times10^{25}\,\text{m}^{-3}$。
+指數:$\dfrac{E_g}{2k_BT}=\dfrac{1.12}{2\times0.0258}=\dfrac{1.12}{0.0516}=21.71$,$e^{-21.71}=3.71\times10^{-10}$。
+$$n_i=1.660\times10^{25}\times3.71\times10^{-10}=6.16\times10^{15}\,\text{m}^{-3}.$$
+再代:
+$$V_{\rm bi}=\frac{k_BT}{e}\ln\frac{N_AN_D}{n_i^2}=0.0258\times\ln\frac{(10^{23})(10^{23})}{(6.16\times10^{15})^2}.$$
+$n_i^2=3.79\times10^{31}$,$\dfrac{10^{46}}{3.79\times10^{31}}=2.638\times10^{14}$,$\ln=33.21$,
+$$V_{\rm bi}=0.0258\times33.21=\boxed{0.857\,\text{V}}\ ✓$$
+與 $\mu_n-\mu_p$ 法一致(微差來自捨入)。
+
+**範例 D(非對稱摻雜:$N_D=10^{18}$,$N_A=10^{16}\,\text{cm}^{-3}$)**:換 m⁻³:$N_D=10^{24}$、$N_A=10^{22}\,\text{m}^{-3}$。用閉式
+$$eV_{\rm bi}=E_g-k_BT\ln\frac{N_cN_v}{N_DN_A}.$$
+$\dfrac{N_cN_v}{N_DN_A}=\dfrac{2.755\times10^{50}}{10^{24}\times10^{22}}=\dfrac{2.755\times10^{50}}{10^{46}}=2.755\times10^{4}$,$\ln=10.224$,
+$$eV_{\rm bi}=1.12-0.0258\times10.224=1.12-0.264=\boxed{0.856\,\text{V}}.$$
+有趣:乘積 $N_DN_A=10^{46}$ 與對稱情形($10^{23}\times10^{23}=10^{46}$)相同 → $V_{\rm bi}$ **幾乎不變**(只取決於 $N_DN_A$ 乘積);但空乏區會**偏向低摻雜的 p 側**($N_Dx_n=N_Ax_p\Rightarrow x_p=100\,x_n$),電場三角形變不對稱(峰仍在接面、仍 n→p)。
+</details>
+
+## ✅ 自我檢核
+- **本徵能階位置自檢**:$\mu_i=\tfrac{E_g}2+\tfrac{k_BT}2\ln\tfrac{N_v}{N_c}=0.56-0.013=0.547\,\text{eV}$;$\mu_n=0.975>\mu_i$(n 型 ✓)、$\mu_p=0.118<\mu_i$(p 型 ✓)。
+- **兩法一致**:$\mu_n-\mu_p$ 與閉式 $E_g-k_BT\ln(N_cN_v/N_DN_A)$ 都得 $0.856\,\text{V}$ ✓。
+- **量級**:Si 二極體 $V_{\rm bi}\sim0.7\text{–}0.9\,\text{V}$,本題 $0.856\,\text{V}$ 合理 ✓;$V_{\rm bi}<E_g/e=1.12\,\text{V}$ ✓(必然)。
+- **電場**:$\int_{-x_n}^{x_p}E\,dx=$ 三角形面積 $=\tfrac12WE_{\max}=V_{\rm bi}$ ✓。
+
+## 🔀 變化的可能情況
+- **非對稱摻雜**($N_A\ne N_D$):空乏區偏向低摻雜側($N_Dx_n=N_Ax_p$),三角形不對稱,但峰仍在接面、方向仍 n→p。
+- **加偏壓**:正偏 → $V_{\rm bi}-V$ 變小、空乏區窄、場弱;逆偏相反。
+- **問 $n_i$**:$n_i=\sqrt{N_cN_v}\,e^{-E_g/2k_BT}$ → $V_{\rm bi}=\tfrac{k_BT}e\ln\tfrac{N_AN_D}{n_i^2}$(等價閉式)。
+- **歷年同型**:2016 第 5 題(半導體/donor)、本題的 built-in voltage 是 pn junction 常考核心。
+
+## 信心:**高**($\mu_n=0.975$、$\mu_p=0.118\,\text{eV}$、$V_{\rm bi}=0.856\,\text{V}$ 經兩法獨立驗算一致;(c) 形狀/方向標準。唯 $E_{\max}/W$ 用了題目未給的 $\varepsilon_r$,已標明為選配)。
+
+---
+
+# 📔 第 7 題 — 電子:量測電子態密度(DOS)的兩種實驗技術（Electrons 40%）
+
+## 📋 原題
+> 描述**兩種**可量測電子態密度(DOS)的實驗技術(各自的重要部件是什麼、量到什麼)。
+
+## 🎯 核心訊息
+> DOS 有兩個常考量法:**(1) 光電子能譜(Photoemission, PES/ARPES)**——量被打出的電子能量分布 → **占據態 DOS**(角解析還給 $E(k)$ 能帶);**(2) 穿隧能譜(STM/STS 或平面穿隧接面)**——量 $dI/dV$ → **費米能附近的局域 DOS**。另有**低溫電子比熱**(Sommerfeld $\gamma$)只給 $g(E_F)$,可當第二/第三選項。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 三個常見 DOS 量法的「部件 / 量到什麼」</b></summary>
+
+**範例 1(光電子能譜 PES/ARPES)**:光子源 + 電子能量分析儀 + 超高真空 → 占據態 DOS;ARPES 加角度解析 → $E(k)$。
+**範例 2(穿隧能譜 STS)**:尖銳金屬探針 + 壓電掃描 + 偏壓 $V$ + 電流放大 → $dI/dV\propto$ 局域 DOS(費米能附近)。
+**範例 3(低溫比熱)**:量熱計 + 溫度計 + 低溫恆溫器 → $C/T=\gamma+\beta T^2$ 的 $\gamma\propto g(E_F)$。
+</details>
+
+## 解答
+
+### 技術一 — 光電子能譜(Photoemission Spectroscopy, PES / ARPES)
+**原理**:光電效應。入射光子($h\nu$)把電子打出,測出射電子動能
+$$E_{\rm kin}=h\nu-\phi-E_B,$$
+$\phi$=功函數、$E_B$=結合能(相對費米能)。出射電子的**能量分布**直接映照樣品的**占據態 DOS**(在 $E_F$ 以下)。
+**重要部件**:
+- **光子源**:UV 燈(UPS,測價帶)、X 光源或同步輻射(XPS/硬 X 光,測深層)。
+- **電子能量分析儀**:半球形能量分析儀(定 $E_{\rm kin}$);ARPES 另測**出射角** → 由平行動量守恆 $k_\parallel=\tfrac1\hbar\sqrt{2mE_{\rm kin}}\sin\theta$ 還原 $E(k)$ 能帶。
+- **超高真空 + 乾淨表面**:電子平均自由程短,需 UHV。
+**量到什麼**:**占據態 DOS**;ARPES 給出**能帶色散 $E(\mathbf k)$**(費米面、能隙)。
+
+### 技術二 — 掃描穿隧能譜(Scanning Tunneling Spectroscopy, STS)
+**原理**:量子穿隧。探針與樣品間加偏壓 $V$,穿隧電流
+$$I(V)\propto\int_0^{eV} g_{\rm sample}(E)\,dE\ \Rightarrow\ \frac{dI}{dV}\propto g_{\rm sample}(E_F+eV).$$
+微分電導 $dI/dV$ 正比於**樣品在能量 $E_F+eV$ 的局域 DOS**(偏壓正負分別探空態/占據態)。
+**重要部件**:
+- **原子級尖銳金屬探針**(W 或 Pt-Ir)。
+- **壓電掃描器 + 回饋電路**(穩定 tip–sample 距離 $\sim$Å)。
+- **偏壓源 + 低雜訊電流放大器**;常配低溫/減振。
+**量到什麼**:**費米能附近的局域 DOS**(空間解析至原子尺度;可看能隙、雜質態、超導 coherence peak)。
+
+> **小結**:PES 數「打出來的電子能量」→ 占據態 DOS;STS 數「穿隧 $dI/dV$」→ $E_F$ 附近局域 DOS。一個給能帶全貌、一個給局域與費米面細節。
+
+## ✅ 自我檢核
+- 兩技術皆「能量分辨 → 對應 DOS」,物理機制(光電 vs 穿隧)獨立、互補 ✓。
+- ARPES 用動量守恆還原 $E(k)$、STS 用 $dI/dV$ 取微分,公式自洽 ✓。
+
+## 🔀 變化的可能情況
+- **低溫電子比熱**:$C_{\rm el}=\gamma T$,$\gamma=\tfrac{\pi^2}3k_B^2g(E_F)$;作 $C/T$–$T^2$ 圖取截距 $\gamma$ → **$g(E_F)$**(只給費米面那一點)。
+- **光學/X 光吸收**:吸收邊與譜形反映**聯合 DOS / 空態 DOS**(XAS 探導帶)。
+- **量子振盪(de Haas–van Alphen)**:雖主要測費米面截面積,亦與 $g(E_F)$ 相關。
+- 題目只要兩種 → PES + STS 即足;比熱可當第三例補強。
+
+## 信心:**高**(PES/ARPES 與 STS 為量 DOS 的教科書標準技術,部件與量測對象明確)。
+
+---
+
+## 📊 本卷信心總表（2022:計算偏多）
+| 題 | 區塊 | 主題 | 信心 | 重點 |
+|---|---|---|---|---|
+| 1 | Crystal structure 20% | CaF₂ 螢石結構、Ca–F 距離 | 高 | $d=\tfrac{\sqrt3}{4}a=2.36\,\text{Å}$、basis 3 |
+| 2 | Diffraction 30% | tetragonal 倒晶格 + BZ | 高 | $\mathbf b_i=\tfrac{2\pi}{a_i}\hat e_i$、BZ 盒 $1.26\times1.26\times0.785\,\text{Å}^{-1}$ |
+| 3 | Diffraction 30% | 蛋白質結晶定形狀 | 高 | 強度=$|F|^2$=電子密度傅立葉、相位問題 |
+| 4 | Phonons 10% | Ag vs Au 聲子色散 | 中高 | 同 fcc→同形;$\sqrt{K/M}$ 相近→同尺度 |
+| 5 | Electrons 40% | Al $E_F$/$T_F$ | 高 | $n=1.81\times10^{29}$、$E_F=11.7\,\text{eV}$、$T_F=1.36\times10^5\,\text{K}$ |
+| 6 | Electrons 40% | Si pn junction | 高 | $\mu_n=0.975$、$\mu_p=0.118\,\text{eV}$、$V_{\rm bi}=0.856\,\text{V}$、三角電場 n→p |
+| 7 | Electrons 40% | 量 DOS 技術 | 高 | PES/ARPES(占據態)、STS($E_F$ 附近 LDOS) |
+
+> **低信心/需注意處**:**Q4(中高)**——「Au 鍵硬度補償質量差」屬半定量,Au 細部頻率仍略低(Debye 溫度 $165$ vs $225\,\text{K}$)。**Q6(c)** 的 $E_{\max}/W$ 數值用了題目**未給**的 Si 介電常數 $\varepsilon_r\approx11.7$,已標為選配;主答案(三角形形狀 + 由 n 指向 p)不依賴它。其餘計算題($Q1/Q2/Q5/Q6a,b$)均經獨立重算,與標準文獻值一致。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

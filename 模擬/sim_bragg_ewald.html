@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模擬② 布拉格／Ewald</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 模擬首頁</a>
+  <a href="sim_dispersion.html">① 色散</a>
+  <a class="here" href="sim_bragg_ewald.html">② Ewald</a>
+  <a href="sim_nfe_gap.html">③ NFE</a>
+  <a href="../單元教學/unit02_倒晶格與繞射.html">unit02</a>
+</div>
+
+<h1>② 布拉格定律 ＋ Ewald 球（Bragg / Ewald）</h1>
+<p class="intro">
+  左側：Ewald 作圖——入射波向量 k_in 末端在原點，球半徑 2π/λ；
+  倒晶格點 G 落在球上 ⇒ 繞射。右側：布拉格 2 d sinθ = n λ 是否滿足。
+</p>
+
+<div class="layout">
+  <div class="panel">
+    <h2>參數</h2>
+    <div class="control">
+      <label>波長 λ <span class="val" data-for="lam">1.2</span></label>
+      <input id="lam" type="range" min="0.5" max="2.8" step="0.02" value="1.2" data-digits="2">
+      <div class="hint">λ 愈小 → Ewald 球愈大 → 更容易碰到倒晶格點</div>
+    </div>
+    <div class="control">
+      <label>晶格常數 a <span class="val" data-for="a">2</span></label>
+      <input id="a" type="range" min="1.2" max="4" step="0.05" value="2" data-digits="2">
+      <div class="hint">倒晶格間距 b = 2π/a；a 愈大 → 倒空間點愈密</div>
+    </div>
+    <div class="control">
+      <label>入射角 θ（相對晶面） <span class="val" data-for="theta">30</span>°</label>
+      <input id="theta" type="range" min="5" max="85" step="0.5" value="30" data-digits="1" data-suffix="°">
+    </div>
+    <div class="control">
+      <label>布拉格階 n <span class="val" data-for="n">1</span></label>
+      <input id="n" type="range" min="1" max="3" step="1" value="1" data-digits="0">
+    </div>
+
+    <div class="formula">
+      <span class="eq">布拉格：2 d sinθ = n λ ，此處 d = a（示意 1D 面距）</span>
+      <span class="eq">Laue / Ewald：k_out − k_in = G ，|k| = 2π/λ</span>
+      <span class="eq">倒晶格（1D 示意）：G_h = h · (2π/a)，h = 0, ±1, ±2…</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="plot-wrap">
+      <svg id="plot"></svg>
+    </div>
+    <div class="kpi" id="kpi"></div>
+    <div class="readout" id="readout"></div>
+  </div>
+</div>
+
+<footer>2D 示意：水平為倒空間 q_x。真實 3D Ewald 是球面；此處用圓截面建立 Δk=G 直覺。</footer>
+<script src="shared.js"></script>
+<script>
+(function () {
+  const svg = document.getElementById("plot");
+  const R = SSP.bindAll(["lam", "a", "theta", "n"], redraw);
+
+  function redraw() {
+    const lam = R.lam(), a = R.a(), thetaDeg = R.theta(), n = Math.round(R.n());
+    const theta = (thetaDeg * Math.PI) / 180;
+    const kmag = (2 * Math.PI) / lam;
+    const b = (2 * Math.PI) / a; // reciprocal spacing
+    const d = a;
+    const braggRHS = n * lam;
+    const braggLHS = 2 * d * Math.sin(theta);
+    const sinNeed = braggRHS / (2 * d);
+    const canBragg = sinNeed <= 1 + 1e-9 && sinNeed >= 0;
+    const thetaB = canBragg ? (Math.asin(SSP.clamp(sinNeed, 0, 1)) * 180) / Math.PI : null;
+    const match = canBragg && Math.abs(braggLHS - braggRHS) < 0.05 * Math.max(braggRHS, 0.2);
+
+    // Ewald geometry in reciprocal space
+    // Place origin O at (0,0). Incident wave ends at O; start of k_in is center C of sphere.
+    // Let incidence such that k_in points at angle (180°-2θ) style simplified:
+    // Standard textbook: center C, O on sphere, k_in = O - C, |k|=kmag.
+    // We put C at (-kmag, 0) so O at origin is on the sphere (forward direction +x).
+    // Scattering angle 2θ: k_out direction rotated by 2θ from k_in.
+    const twoTheta = 2 * theta;
+    // k_in vector: from C to O = (kmag, 0) when C=(-kmag,0)
+    // k_out: from C, at angle +2θ from x-axis
+    const kox = kmag * Math.cos(twoTheta);
+    const koy = kmag * Math.sin(twoTheta);
+    // endpoint of k_out from C: C + k_out_vec, with k_out_vec direction...
+    // Actually if C = (-kmag, 0), points on circle: C + kmag*(cos φ, sin φ), φ=0 → O.
+    // Scattered: φ = 2θ → G_candidate = that point (since O is origin, the reciprocal point is the point itself)
+    const Gx = -kmag + kmag * Math.cos(twoTheta);
+    const Gy = 0 + kmag * Math.sin(twoTheta);
+    // |G| should equal |k_out - k_in|. k_in ends at 0, starts at C; Δk = k_out_end - 0 = point on circle.
+
+    // Drawing bounds
+    const Gmax = Math.max(4 * b, 2 * kmag, 8);
+    const W = 680, H = 440;
+    const pad = { l: 40, r: 20, t: 24, b: 36 };
+    const xmin = -Gmax * 0.15, xmax = Gmax * 1.05;
+    const ymin = -Gmax * 0.55, ymax = Gmax * 0.55;
+    const x = (v) => pad.l + ((v - xmin) / (xmax - xmin)) * (W - pad.l - pad.r);
+    const y = (v) => pad.t + (1 - (v - ymin) / (ymax - ymin)) * (H - pad.t - pad.b);
+
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    SSP.el(svg, "rect", { x: 0, y: 0, width: W, height: H, fill: "#fff" });
+
+    // reciprocal lattice points on x-axis (1D chain / planes)
+    const hMax = Math.ceil(Gmax / b) + 1;
+    for (let h = -hMax; h <= hMax; h++) {
+      const gx = h * b;
+      if (gx < xmin || gx > xmax) continue;
+      // distance from Ewald center C=(-kmag,0) to lattice point (gx,0)
+      const dist = Math.hypot(gx - (-kmag), 0 - 0);
+      const onSphere = Math.abs(dist - kmag) < 0.08 * kmag || Math.abs(dist - kmag) < 0.25;
+      const hit = Math.abs(dist - kmag) < 0.12 * Math.max(kmag, 1);
+      SSP.el(svg, "circle", {
+        cx: x(gx), cy: y(0), r: hit ? 7 : 4.5,
+        fill: hit ? "#c0392b" : "#1a4d7c",
+        opacity: hit ? 1 : 0.75,
+        stroke: hit ? "#7a1c14" : "none",
+        "stroke-width": 1.5,
+      });
+      if (h !== 0) {
+        SSP.text(svg, x(gx), y(0) + 18, `G=${h}`, {
+          "text-anchor": "middle", fill: "#456", "font-size": 11,
+        });
+      } else {
+        SSP.text(svg, x(0) + 10, y(0) - 10, "O (000)", {
+          fill: "#333", "font-size": 12, "font-weight": 600,
+        });
+      }
+    }
+
+    // Ewald circle center C
+    const Cx = -kmag, Cy = 0;
+    SSP.el(svg, "circle", {
+      cx: x(Cx), cy: y(Cy),
+      r: Math.abs(x(Cx + kmag) - x(Cx)),
+      fill: "rgba(26,77,124,0.05)",
+      stroke: "#2b6ca0",
+      "stroke-width": 2,
+    });
+    SSP.el(svg, "circle", {
+      cx: x(Cx), cy: y(Cy), r: 4, fill: "#c47a12",
+    });
+    SSP.text(svg, x(Cx), y(Cy) - 12, "C", {
+      "text-anchor": "middle", fill: "#c47a12", "font-size": 13, "font-weight": 700,
+    });
+
+    // k_in arrow C → O
+    arrow(svg, x(Cx), y(Cy), x(0), y(0), "#1e7a46", "k_in");
+    // k_out arrow C → scatter point on circle
+    const Pox = Cx + kmag * Math.cos(twoTheta);
+    const Poy = Cy + kmag * Math.sin(twoTheta);
+    arrow(svg, x(Cx), y(Cy), x(Pox), y(Poy), "#6c3fa0", "k_out");
+    // Δk = G candidate from O to scatter endpoint
+    arrow(svg, x(0), y(0), x(Pox), y(Poy), "#c0392b", "Δk");
+
+    // axes
+    SSP.el(svg, "line", {
+      x1: x(xmin), x2: x(xmax), y1: y(0), y2: y(0),
+      stroke: "#999", "stroke-width": 1,
+    });
+    SSP.text(svg, x(xmax) - 8, y(0) - 8, "q_x (reciprocal)", {
+      "text-anchor": "end", fill: "#567", "font-size": 11,
+    });
+    SSP.text(svg, 12, 18, "Ewald 圓 · 倒空間示意", {
+      fill: "#1a4d7c", "font-size": 13, "font-weight": 700,
+    });
+
+    // nearest G to Δk tip for highlight message
+    const dGx = Pox, dGy = Poy;
+    let bestH = 0, bestDist = Infinity;
+    for (let h = -hMax; h <= hMax; h++) {
+      const dd = Math.hypot(h * b - dGx, 0 - dGy);
+      if (dd < bestDist) { bestDist = dd; bestH = h; }
+    }
+    const onG = bestDist < 0.15 * Math.max(b, 1);
+
+    document.getElementById("kpi").innerHTML = `
+      <div class="box"><div class="k">|k| = 2π/λ</div><div class="v">${SSP.fmt(kmag, 2)}</div></div>
+      <div class="box"><div class="k">b = 2π/a</div><div class="v">${SSP.fmt(b, 2)}</div></div>
+      <div class="box"><div class="k">2d sinθ</div><div class="v">${SSP.fmt(braggLHS, 2)}</div></div>
+      <div class="box"><div class="k">n λ</div><div class="v">${SSP.fmt(braggRHS, 2)}</div></div>
+      <div class="box"><div class="k">布拉格 θ_B</div><div class="v">${thetaB == null ? "—" : SSP.fmt(thetaB, 1) + "°"}</div></div>
+      <div class="box"><div class="k">條件</div><div class="v" style="color:${match || onG ? "#1e7a46" : "#c0392b"}">${match || onG ? "命中" : "未命中"}</div></div>`;
+
+    document.getElementById("readout").innerHTML = `
+      <strong>你應該看到</strong>
+      <ul>
+        <li>藍點 = 倒晶格點 G_h。紅圈亮起 ≈ Ewald 圓穿過該點 ⇒ 繞射。</li>
+        <li>縮小 λ（球變大）或增大 a（點變密）→ 更容易「擦到」某個 G。</li>
+        <li>布拉格：目前 2d sinθ ${match ? "≈" : "≠"} nλ${thetaB != null ? `；n=${n} 的布拉格角約 ${SSP.fmt(thetaB, 1)}°` : "（nλ 太大，此 d 無解）"}。</li>
+        <li>幾何意義：散射改變的動量 Δk 必須剛好是某個倒晶格向量 G。</li>
+      </ul>`;
+  }
+
+  function arrow(svg, x1, y1, x2, y2, color, label) {
+    const id = SSP.uid("m");
+    const defs = svg.querySelector("defs") || SSP.el(svg, "defs", {});
+    const m = SSP.el(defs, "marker", {
+      id, viewBox: "0 0 10 10", refX: 9, refY: 5,
+      markerWidth: 7, markerHeight: 7, orient: "auto-start-reverse",
+    });
+    SSP.el(m, "path", { d: "M 0 0 L 10 5 L 0 10 z", fill: color });
+    SSP.el(svg, "line", {
+      x1, y1, x2, y2, stroke: color, "stroke-width": 2.2,
+      "marker-end": `url(#${id})`,
+    });
+    if (label) {
+      SSP.text(svg, (x1 + x2) / 2 + 6, (y1 + y2) / 2 - 6, label, {
+        fill: color, "font-size": 12, "font-weight": 600,
+      });
+    }
+  }
+
+  redraw();
+})();
+</script>
+</body>
+</html>

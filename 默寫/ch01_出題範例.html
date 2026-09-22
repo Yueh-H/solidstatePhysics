@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Jiang’s questions are worded — Ch. 1 samples</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  :root{--blue:#1a4d7c;--blue2:#2b6ca0;--soft:#eef5fb;--border:#c5d5e5;--ink:#1c2733}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+       max-width:860px;margin:1.3em auto 4.5em;padding:0 1.1em;line-height:1.7;color:var(--ink);background:#fafafa}
+  h1{color:var(--blue);border-bottom:3px solid var(--blue);padding-bottom:.3em;font-size:1.32em}
+  h2{color:var(--blue);font-size:1.1em;margin:1.6em 0 .4em;border-bottom:1px solid #ddd;padding-bottom:.2em}
+  a{color:var(--blue2)}
+  .nav{font-size:.9em;margin:0 0 .8em;display:flex;gap:.5em;flex-wrap:wrap}
+  .nav a{text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.25em .65em;color:#234}
+  .lede,.warn{border-radius:6px;padding:.75em .95em;margin:0 0 1em;font-size:.95em}
+  .lede{background:var(--soft);border-left:4px solid #6aa1d6}
+  .warn{background:#fff8ee;border-left:4px solid #e0b97a;color:#5c3d00}
+  .zh{display:none;margin:.45em 0 0;padding:.55em .75em;background:#f7f4ee;border-left:3px solid #c4a574;border-radius:0 6px 6px 0;color:#5c4a2e;font-size:.92em}
+  body.show-zh .zh{display:block}
+  .toolbar{margin:0 0 1em}
+  .toolbar button{font:inherit;font-size:.9em;padding:.3em .85em;border:1px solid var(--border);background:#fff;border-radius:999px;cursor:pointer}
+  .toolbar button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .q{background:#fff;border:1px solid var(--border);border-radius:12px;padding:.95em 1.05em;margin:0 0 .8em}
+  .q .meta{font-size:.78em;font-weight:700;color:var(--blue);margin:0 0 .35em}
+  .stem{background:#f4f7fb;border-radius:8px;padding:.7em .85em;margin:.4em 0;font-size:.98em}
+  .stem em{font-style:normal;color:#1a4d7c;font-weight:700}
+  .ans{margin-top:.5em;padding:.65em .8em;background:#f7fbf8;border:1px solid #c5ddc8;border-radius:8px;font-size:.94em}
+  body.hide-ans .ans{display:none}
+  footer{color:#888;font-size:.84em;margin-top:2em;border-top:1px solid #ddd;padding-top:.8em}
+</style>
+</head>
+<body class="hide-ans">
+<div class="nav">
+  <a href="ch01_名詞定義.html">名詞定義</a>
+  <a href="ch01_全部橋框.html">橋框</a>
+  <a href="ch01_小考模擬.html">8-min drill</a>
+</div>
+
+<h1>How the questions are worded</h1>
+<div class="warn">
+The course is <b>in English</b>. Pop quizzes and the midterm will be English stems, not Chinese. There is <b>no public archive of Jiang’s in-class quizzes</b>. Two sources below: (1) <b>real English</b> from the NTU “Introduction to Solid State Physics” qualifying exams 2019–2024 (same four-block syllabus); (2) reconstructed <b>8-minute quiz</b> stems in that same register.
+<div class="zh">課是英語授課，題幹會是英文。沒有江正天隨堂小考原卷。下面兩種：① 2019–2024 資格考<b>真實英文題幹</b>（同一套四段式）；② 用同一口氣改寫的 8 分鐘小考。</div>
+</div>
+<div class="lede">
+What the English usually does: define a phrase in parentheses (“filling factor”), ask you to <em>draw</em>, <em>identify</em>, <em>calculate</em>, or <em>explain why not</em>. Full marks = English sentence + one derivation line + a sketch if it says draw.
+<div class="zh">英文題習慣：括號裡給定義、要求 draw / identify / calculate / explain why not。滿分＝一句英文＋一行推導＋題目說 draw 就要畫。</div>
+</div>
+<div class="toolbar">
+  <button type="button" id="btnZh">中文說明</button>
+  <button type="button" id="btnHide" class="on">Hide answers</button>
+  <button type="button" id="btnShow">Show answers</button>
+</div>
+
+<h2>A · Real qualifying-exam English (crystal-structure block)</h2>
+
+<div class="q">
+  <p class="meta">QE 2020 · packing · real wording</p>
+  <div class="stem">Calculate the maximum portion of the volume that spherical atoms can fill (i.e. the <em>filling factor</em>) when arranged in the following three cubic lattices.</div>
+  <div class="zh"><b>這題在考什麼。</b> filling factor = packing fraction $\eta$。三個立方＝sc / bcc / fcc（原卷有圖）。不要只寫 0.52／0.68／0.74，要有 $2r$ 或 $4r$。<br>
+  <b>老師用詞。</b> 他可能寫 filling factor、packing fraction、atomic packing factor，都是 $\eta$。</div>
+  <div class="ans">sc $\pi/6$；bcc $\pi\sqrt3/8$；fcc $\pi\sqrt2/6$. Show contact: $2r=a$, $4r=\sqrt3 a$, $4r=\sqrt2 a$. Kittel Table 2.</div>
+</div>
+
+<div class="q">
+  <p class="meta">QE 2020 · diamond hardness · real wording</p>
+  <div class="stem">Diamond exhibits the highest hardness of any material. Can this be explained by the packing density of its crystal structure?</div>
+  <div class="zh"><b>這題在考什麼。</b> 答案是 <b>No</b>。鑽石 $\eta\approx0.34$、CN＝4，比 fcc 空。硬度來自四面體共價鍵，不是 packing。<br>
+  <b>怎麼寫。</b> 先一句 No，再給 $\eta$ 與 CN，再講 covalent bonds。</div>
+  <div class="ans">No. Diamond packing $\approx0.34$ (emptier than sc). CN $=4$. Hardness from directional $sp^3$ bonds, not density. Kittel § Diamond.</div>
+</div>
+
+<div class="q">
+  <p class="meta">QE 2024 · Bravais from vectors · real wording</p>
+  <div class="stem">Someone tells you he found a crystal with the following lattice vectors: [three vectors in $\hat x,\hat y,\hat z$].<br>
+  (1) Identify the Bravais lattice (drawing a picture may help).<br>
+  (2) Calculate the volume of the primitive cell.</div>
+  <div class="zh"><b>這題在考什麼。</b> 給 $\mathbf a_1,\mathbf a_2,\mathbf a_3$，認 sc／bcc／fcc。畫圖加分。體積 $V=|\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)|$。<br>
+  <b>fcc 指紋。</b> 三支等長、夾角 $60^\circ$，連到面心。bcc 連到體心。</div>
+  <div class="ans">If they are the three face-centre vectors $\frac a2(\hat x+\hat y)$ etc. → fcc, $V=a^3/4$. If body-centre type → bcc, $V=a^3/2$. Kittel Fig. 10–11.</div>
+</div>
+
+<div class="q">
+  <p class="meta">QE 2024 · hcp · real wording</p>
+  <div class="stem">Consider the hcp structure that is produced by stacking layers of equal-size spheres.<br>
+  (1) What is the ratio between unit cell height and width?<br>
+  (2) What is the atomic packing factor?</div>
+  <div class="zh"><b>這題在考什麼。</b> height/width = $c/a=\sqrt{8/3}\approx1.633$。APF 與 fcc 相同 $0.74$。<br>
+  <b>用詞。</b> ratio between height and width = $c/a$。atomic packing factor = $\eta$。</div>
+  <div class="ans">(1) $\sqrt{8/3}\approx1.633$. (2) $\pi\sqrt2/6\approx0.740$ (same as fcc). Kittel Fig. 19–21.</div>
+</div>
+
+<div class="q">
+  <p class="meta">QE 2019 · lattice vs basis · real wording</p>
+  <div class="stem">Draw the lattice for a crystal with the three-atom basis $A=(0,1)$, $B=(1,1)$, $C=(0,0)$ and the lattice vectors $\mathbf r=(2,1)$ and $\mathbf s=(1,3)$.</div>
+  <div class="zh"><b>這題在考什麼。</b> 先畫格點（只靠 $\mathbf r,\mathbf s$ 的整數組合），再在<b>每個</b>格點掛 A,B,C 三原子。很多人只畫一組 ABC 就停。<br>
+  <b>小考短版。</b> Define lattice and basis. Give one example (NaCl or CsCl).</div>
+  <div class="ans">Dots at $n\mathbf r+m\mathbf s$. At every dot, copy the three atoms A,B,C. Crystal = lattice × basis. Kittel § basis.</div>
+</div>
+
+<div class="q">
+  <p class="meta">QE 2019 · what is a crystal · real wording</p>
+  <div class="stem">What properties make a crystal different from a liquid? (5%)</div>
+  <div class="zh"><b>這題在考什麼。</b> 長程平移週期：存在 $\mathbf T=n_i\mathbf a_i$。液體近程有序、沒有格子。<br>
+  <b>5% 短答。</b> 兩句英文就夠，不要寫作文。</div>
+  <div class="ans">A crystal has long-range translational order: a discrete lattice of points and a repeating basis. A liquid has only short-range order, no $\mathbf T$ that maps it onto itself at arbitrary distance.</div>
+</div>
+
+<h2>B · Reconstructed 8-minute in-class quiz (same English)</h2>
+<p style="font-size:.9em;color:#5a6a7a">These are not leaked quizzes. They use the same verbs: calculate / identify / draw / explain. One question, 8–12 minutes, last lecture.</p>
+
+<div class="q">
+  <p class="meta">Pop quiz · likely</p>
+  <div class="stem">Define the terms <em>lattice</em> and <em>basis</em>. Write the general lattice translation $\mathbf T$.</div>
+  <div class="zh"><b>中文在問。</b> 晶格是什麼、基元是什麼、平移向量公式。<br>
+  <b>滿分形。</b> Lattice = mathematical points. Basis = atoms on each point. Crystal = lattice × basis. Then the $\mathbf T$ formula. 不要只寫中文「格子」「原子」。</div>
+  <div class="ans">Lattice: set of mathematical points. Basis: atom(s) on each point. $\mathbf T=n_1\mathbf a_1+n_2\mathbf a_2+n_3\mathbf a_3$.</div>
+</div>
+
+<div class="q">
+  <p class="meta">Pop quiz · likely</p>
+  <div class="stem">For the face-centered cubic conventional cell, give the number of lattice points, the coordination number, the hard-sphere contact condition, and the packing fraction (derive $\eta$, do not only quote 0.74).</div>
+  <div class="zh"><b>中文在問。</b> fcc 慣用立方：每胞幾點、配位數、相切、$\\eta$ 要推。<br>
+  <b>用詞。</b> face-centered cubic 就是 fcc；conventional cell 就是你畫的那個立方。derive = 要有 $4r=\sqrt2 a$。</div>
+  <div class="ans">$N=4$, CN $=12$, $4r=\sqrt2 a$, $\eta=\pi\sqrt2/6$. Sketch: 8 corners + 6 face centres + red face diagonal.</div>
+</div>
+
+<div class="q">
+  <p class="meta">Pop quiz · trap</p>
+  <div class="stem">CsCl has one ion at the cube corners and the other at the body centre. Identify the Bravais lattice and the basis. Why is this structure <em>not</em> body-centered cubic?</div>
+  <div class="zh"><b>中文在問。</b> 認 Bravais、寫 basis、為什麼不是 bcc。<br>
+  <b>關鍵英文。</b> “not equivalent lattice points” / “different chemical species”。Identify the Bravais lattice → 答 simple cubic。</div>
+  <div class="ans">Bravais: simple cubic. Basis: Cs + Cl. Not bcc because corner and centre are different ions, hence inequivalent. Kittel Fig. 18.</div>
+</div>
+
+<div class="q">
+  <p class="meta">Pop quiz · Miller</p>
+  <div class="stem">A plane intercepts the crystal axes at $3a_1$, $2a_2$ and $2a_3$. Determine the Miller indices. For a cubic crystal with lattice constant $a$, write $d_{hkl}$.</div>
+  <div class="zh"><b>中文在問。</b> 截距 → Miller；再寫立方面間距公式。<br>
+  <b>用詞。</b> intercepts、Miller indices、lattice constant。$3,2,2\to(233)$，不是 (322)。</div>
+  <div class="ans">Reciprocals $\frac13,\frac12,\frac12$ → $(233)$. $d_{hkl}=a/\sqrt{h^2+k^2+l^2}$.</div>
+</div>
+
+<div class="q">
+  <p class="meta">Pop quiz · names</p>
+  <div class="stem">Write the full names of sc, bcc and fcc. In one sentence each, state where the extra lattice point(s) sit (if any).</div>
+  <div class="zh"><b>中文在問。</b> 三個全名＋多出來的格點在哪。<br>
+  <b>必寫英文。</b> simple cubic / body-centered cubic / face-centered cubic。body = interior；face = each square face。</div>
+  <div class="ans">sc simple cubic: corners only. bcc body-centered cubic: extra point at the body centre. fcc face-centered cubic: extra point at each face centre.</div>
+</div>
+
+<h2>C · What he probably will <i>not</i> ask in week 1–4</h2>
+<ul>
+  <li>Chinese stems. The syllabus says the course is conducted in English.</li>
+  <li>Reciprocal lattice, Bragg, structure factor — Chapter 2 / weeks 5–8.</li>
+  <li>Ashcroft Ch. 1 (that is Drude, not crystals).</li>
+  <li>A 40-minute derivation on a pop quiz. One idea, one sketch, one number.</li>
+  <li><b>Memorising every reciprocal-lattice qualifying-exam paper.</b> That block is Weeks 5–8 / midterm 1 Nov, not now. Recopying 2013–2025 numbers does not help — the exam will not reuse the same $a$. What repeats is five <i>types</i>: construct $\mathbf b_i$; Bragg $\Leftrightarrow$ Laue; structure-factor absences; bcc and fcc are reciprocal of each other; 1st BZ = WS cell of the reciprocal lattice. Drill those from Week 5; see <a href="../考古題/單元整理.html">單元整理 §3</a>.</li>
+</ul>
+
+<footer>
+After the first real quiz, photograph the <b>stem only</b> and we replace section B with his actual verbs.<br>
+Real QE wording is in <code>考古題/歷年原卷/</code> (2019, 2020, 2024).
+<div class="zh">第一張真的小考拍題幹過來，B 段才能從「同一口氣」變成「他的動詞」。資格考英文原句在考古題資料夾。</div>
+</footer>
+<script>
+(function(){
+  var zh=document.getElementById('btnZh'), hide=document.getElementById('btnHide'), show=document.getElementById('btnShow');
+  zh.onclick=function(){ document.body.classList.toggle('show-zh'); zh.classList.toggle('on', document.body.classList.contains('show-zh')); };
+  function setHide(on){ document.body.classList.toggle('hide-ans', on); hide.classList.toggle('on', on); show.classList.toggle('on', !on); }
+  hide.onclick=function(){ setHide(true); };
+  show.onclick=function(){ setHide(false); };
+})();
+</script>
+</body>
+</html>

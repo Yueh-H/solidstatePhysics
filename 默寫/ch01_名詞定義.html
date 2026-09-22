@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 第1章 — 每個名詞：中文定義＋例子＋英文</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  svg: { fontCache: 'global', scale: 1.05 }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  :root{--blue:#1a4d7c;--blue2:#2b6ca0;--soft:#eef5fb;--border:#c5d5e5;--ink:#1c2733}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+       max-width:880px;margin:1.3em auto 4.5em;padding:0 1.1em;line-height:1.75;color:var(--ink);background:#fafafa}
+  h1{color:var(--blue);border-bottom:3px solid var(--blue);padding-bottom:.3em;font-size:1.32em}
+  h2{color:var(--blue);font-size:1.1em;margin:1.8em 0 .5em;border-bottom:1px solid #ddd;padding-bottom:.2em}
+  a{color:var(--blue2)}
+  .nav{font-size:.9em;margin:0 0 .8em;display:flex;gap:.5em;flex-wrap:wrap}
+  .nav a{text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.25em .65em;color:#234}
+  .lede{background:var(--soft);border-left:4px solid #6aa1d6;border-radius:4px;padding:.75em 1em;margin:0 0 1em;font-size:.95em}
+  .toolbar{position:sticky;top:0;z-index:20;background:rgba(250,250,250,.94);padding:.4em 0;margin:0 0 1em;
+           border-bottom:1px solid #e3eaf1;backdrop-filter:blur(6px)}
+  .toolbar button{font:inherit;font-size:.9em;padding:.3em .85em;border:1px solid var(--border);background:#fff;border-radius:999px;cursor:pointer}
+  .toolbar button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .en{display:none;margin:.55em 0 0;padding:.65em .8em;background:#eef3f8;border-left:3px solid #6aa1d6;border-radius:0 8px 8px 0;color:#20364a}
+  body.show-en .en{display:block}
+  .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:.9em 1.05em;margin:0 0 .75em}
+  .card h3{margin:0 0 .4em;font-size:1.05em;color:var(--blue)}
+  .card h3 .aka{font-weight:500;color:#6b7c90;font-size:.88em}
+  .lab{font-size:.75em;font-weight:700;color:#6b7c90;letter-spacing:.04em;margin:.45em 0 .15em}
+  .ref{font-size:.82em;color:#5a6a7a;margin:.4em 0 0}
+  toc a{display:inline-block;margin:.15em .35em .15em 0;font-size:.86em}
+  footer{color:#888;font-size:.84em;margin-top:2em;border-top:1px solid #ddd;padding-top:.8em}
+  mjx-container[display="true"]{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="ch01_全部橋框.html">全部橋框</a>
+  <a href="ch01_怎麼畫.html">怎麼畫</a>
+  <a href="../教材/Kittel章節導讀/ch01_晶體結構.html">導讀 1</a>
+</div>
+
+<h1>第 1 章每個名詞：定義＋例子</h1>
+<div class="lede">
+預設是<b>中文</b>：定義、例子、Kittel 出處。按「顯示英文」後，每條下面會多出一段英文（課堂／quiz 用的句子）。不要背中文去應英文小考——toggle 打開後把英文句子抄一次。
+</div>
+<div class="toolbar">
+  <button type="button" id="btnEn">顯示英文</button>
+</div>
+<p style="font-size:.9em;color:#5a6a7a">
+  <a href="#t-lattice">lattice</a> ·
+  <a href="#t-basis">basis</a> ·
+  <a href="#t-crystal">crystal structure</a> ·
+  <a href="#t-T">T</a> ·
+  <a href="#t-prim">primitive cell</a> ·
+  <a href="#t-conv">conventional cell</a> ·
+  <a href="#t-ws">Wigner–Seitz</a> ·
+  <a href="#t-bravais">Bravais</a> ·
+  <a href="#t-sc">sc</a> ·
+  <a href="#t-bcc">bcc</a> ·
+  <a href="#t-fcc">fcc</a> ·
+  <a href="#t-cn">CN</a> ·
+  <a href="#t-eta">packing</a> ·
+  <a href="#t-miller">Miller</a> ·
+  <a href="#t-d">$d_{hkl}$</a> ·
+  <a href="#t-nacl">NaCl</a> ·
+  <a href="#t-cscl">CsCl</a> ·
+  <a href="#t-dia">diamond</a> ·
+  <a href="#t-hcp">hcp</a>
+</p>
+
+<h2>結構怎麼拆</h2>
+
+<div class="card" id="t-crystal">
+  <h3>crystal structure　晶體結構</h3>
+  <div class="lab">定義</div>
+  <p>一塊固體裡原子如何週期排列的完整描述。Kittel 把它拆成兩件獨立的事：<b>晶格</b>（點怎麼重複）乘上<b>基元</b>（每個點上掛什麼原子）。沒有這個拆法，你要列出約 $10^{23}$ 個座標。</p>
+  <div class="lab">例子</div>
+  <p>銅：晶格是 fcc，基元是「一顆 Cu」。氯化鈉：晶格仍是 fcc，基元是「一顆 Na⁺ 加一顆 Cl⁻」——所以 NaCl 和 Cu 的<b>晶格相同、晶體結構不同</b>。</p>
+  $$\text{crystal structure}=\text{lattice}\times\text{basis}$$
+  <p class="ref">Ref. Kittel 8e Ch. 1，§ Basis and the crystal structure。</p>
+  <div class="en"><b>Definition.</b> The complete specification of how atoms sit in a crystal: a lattice of points together with a basis of atoms on each point.<br>
+  <b>Example.</b> Cu and NaCl share an fcc lattice; they differ in the basis (one Cu vs Na⁺+Cl⁻).<br>
+  <i>A crystal structure is a lattice times a basis.</i></div>
+</div>
+
+<div class="card" id="t-lattice">
+  <h3>lattice　晶格 <span class="aka">／ space lattice 空間晶格</span></h3>
+  <div class="lab">定義</div>
+  <p>一組<b>數學點</b>，具有平移對稱：從任一點看出去，原子排列看起來都一樣。點本身不是原子；原子是後來掛上去的。任意兩格點之差必須仍是一個格點。</p>
+  <div class="lab">例子</div>
+  <p>圖紙上的點陣。bcc 鐵：格點在立方的角<b>以及</b>體心——角與體心是<b>同等的格點</b>（同種鐵原子、環境相同）。</p>
+  <p class="ref">Ref. Kittel § Periodic arrays of atoms; lattice translation vectors。</p>
+  <div class="en"><b>Definition.</b> A set of mathematical points with translational symmetry: the view from any point is identical. Points are not atoms.<br>
+  <b>Example.</b> In bcc Fe the cube corner and the body centre are equivalent lattice points (same species, same environment).<br>
+  <i>A lattice is a set of points, not a set of atoms.</i></div>
+</div>
+
+<div class="card" id="t-basis">
+  <h3>basis　基元</h3>
+  <div class="lab">定義</div>
+  <p>掛在<b>每一個</b>格點上的那一組原子（種類、相對位置）。基元可以是 1 顆，也可以是好幾顆。數「每個原胞幾顆原子」其實就是在數基元。</p>
+  <div class="lab">例子</div>
+  <p>Cu：基元 = 1 顆 Cu 在 $000$。<br>
+  CsCl：基元 = Cs 在 $000$、Cl 在 $\tfrac12\tfrac12\tfrac12$（或對調）。<br>
+  鑽石：基元 = 兩顆相同的 C，在 $000$ 與 $\tfrac14\tfrac14\tfrac14$。</p>
+  <p class="ref">Ref. Kittel § Basis and the crystal structure; Fig. 18, 22。</p>
+  <div class="en"><b>Definition.</b> The group of atoms, with their relative positions, attached to every lattice point.<br>
+  <b>Example.</b> Cu: one atom at $000$. CsCl: Cs at $000$ and Cl at $\tfrac12\tfrac12\tfrac12$. Diamond: two identical C atoms at $000$ and $\tfrac14\tfrac14\tfrac14$.<br>
+  <i>The basis is what you hang on each lattice point.</i></div>
+</div>
+
+<div class="card" id="t-T">
+  <h3>lattice translation $\mathbf T$　晶格平移向量</h3>
+  <div class="lab">定義</div>
+  <p>把晶體移一個 $\mathbf T$ 之後，看起來與沒移之前完全相同。$\mathbf T$ 必須是三個原始平移向量的<b>整數</b>組合。</p>
+  $$\mathbf T=n_1\mathbf a_1+n_2\mathbf a_2+n_3\mathbf a_3,\qquad n_i\in\mathbb Z$$
+  <div class="lab">例子</div>
+  <p>簡單立方邊長 $a$：$\mathbf a_1=a\hat x$ 等。移 $2a\hat x$ 合法；移 $\tfrac12 a\hat x$ 在 sc 裡<b>不</b>是晶格平移（那會對到邊的中點，不是格點）。在 bcc 裡，移到體心 $\tfrac a2(\hat x+\hat y+\hat z)$ 反而是合法的，因為體心也是格點。</p>
+  <p class="ref">Ref. Kittel § Lattice translation vectors。</p>
+  <div class="en"><b>Definition.</b> A displacement that leaves the crystal looking identical. It must be an integer combination of the primitive translations $\mathbf a_i$.<br>
+  <b>Example.</b> In sc, $\tfrac12 a\hat x$ is not a lattice translation. In bcc, $\tfrac a2(\hat x+\hat y+\hat z)$ is, because the body centre is a lattice point.<br>
+  <i>$\mathbf T=n_1\mathbf a_1+n_2\mathbf a_2+n_3\mathbf a_3$ with $n_i$ integers.</i></div>
+</div>
+
+<div class="card" id="t-ai">
+  <h3>primitive translation vectors $\mathbf a_1,\mathbf a_2,\mathbf a_3$　原始平移向量</h3>
+  <div class="lab">定義</div>
+  <p>能用整數組合生出<b>全部</b>格點、且張成體積最小的那三支向量。不是唯一的：同一晶格可換一組 $\mathbf a_i$。</p>
+  <div class="lab">例子</div>
+  <p>fcc 慣用立方邊長 $a$ 時，常用連到三個鄰近面心的向量：
+  $\mathbf a_1=\frac a2(\hat x+\hat y)$ 等。它們等長、夾角 $60^\circ$，張出的體積是 $a^3/4$。</p>
+  <p class="ref">Ref. Kittel Fig. 10 (bcc), Fig. 11 (fcc)。</p>
+  <div class="en"><b>Definition.</b> Three vectors whose integer combinations generate every lattice point, with no smaller cell.<br>
+  <b>Example.</b> fcc: $\mathbf a_1=\frac a2(\hat x+\hat y),\ldots$; $|\mathbf a_i|=\frac a2\sqrt2$, angle $60^\circ$, volume $a^3/4$.<br>
+  <i>Primitive vectors generate the whole lattice and nothing smaller.</i></div>
+</div>
+
+<h2>三種「盒子」</h2>
+
+<div class="card" id="t-prim">
+  <h3>primitive cell　原胞／原始晶胞</h3>
+  <div class="lab">定義</div>
+  <p>能靠晶格平移鋪滿全空間、體積<b>最小</b>的重複單元。<b>恰含 1 個格點</b>。形狀不唯一（許多平行四面體體積相同）。</p>
+  $$V_c=\lvert\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)\rvert$$
+  <div class="lab">例子</div>
+  <p>sc：慣用立方就是原胞，$V=a^3$，1 個格點。<br>
+  bcc：慣用立方有 2 個格點，所以原胞體積是 $\frac12 a^3$。<br>
+  fcc：慣用立方 4 個格點，原胞 $\frac14 a^3$。</p>
+  <p class="ref">Ref. Kittel § Primitive lattice cell; Table 2。</p>
+  <div class="en"><b>Definition.</b> The smallest cell that tiles space by lattice translations. It contains exactly one lattice point.<br>
+  <b>Example.</b> sc: $V=a^3$. bcc primitive volume $a^3/2$. fcc $a^3/4$.<br>
+  <i>A primitive cell contains exactly one lattice point.</i></div>
+</div>
+
+<div class="card" id="t-conv">
+  <h3>conventional cell　慣用晶胞</h3>
+  <div class="lab">定義</div>
+  <p>為了看清對稱而選的較大盒子，通常讓軸正交、等長。可以含<b>多於 1 個</b>格點。小考畫的立方體幾乎都是慣用胞。</p>
+  <div class="lab">例子</div>
+  <p>bcc、fcc 的「邊長 $a$ 的立方」都是慣用胞，不是原胞。畫圖、數 $N$、算填充率時用慣用立方最省事。</p>
+  <p class="ref">Ref. Kittel Fig. 8：「The cells shown are the conventional cells. Of these only the sc is a primitive cell.」</p>
+  <div class="en"><b>Definition.</b> A larger, prettier cell chosen to display the symmetry (often a cube). It may contain several lattice points.<br>
+  <b>Example.</b> The cubes you draw for bcc and fcc are conventional, not primitive.<br>
+  <i>Quiz drawings use the conventional cube.</i></div>
+</div>
+
+<div class="card" id="t-ws">
+  <h3>Wigner–Seitz cell　維格納–賽茲胞</h3>
+  <div class="lab">定義</div>
+  <p>一種特別的原胞：選一格點，連到鄰點，在每條連線中點作垂直平分面，圍出來的最小區域。它是最「對稱」的那一種原胞（恰含 1 格點）。</p>
+  <div class="lab">例子</div>
+  <p>作法三步：（1）連鄰點（2）中垂面（3）最小凸多面體。第 2 章的<b>第一布里淵區</b>就是倒晶格的 Wigner–Seitz 胞——本章先會畫，後面才用。</p>
+  <p class="ref">Ref. Kittel Fig. 4。</p>
+  <div class="en"><b>Definition.</b> The primitive cell obtained as the Voronoi cell of a lattice point: perpendicular bisectors of the segments to neighbouring points.<br>
+  <b>Example.</b> The first Brillouin zone (Ch. 2) is the Wigner–Seitz cell of the reciprocal lattice.<br>
+  <i>WS cell = the most symmetric primitive cell.</i></div>
+</div>
+
+<div class="card" id="t-lp">
+  <h3>lattice point　格點</h3>
+  <div class="lab">定義</div>
+  <p>晶格裡的一個數學點。數「每胞幾個格點」用分數：角 $\tfrac18$、面 $\tfrac12$、體心 $1$。</p>
+  <div class="lab">例子</div>
+  <p>fcc 慣用立方：8 個角 $\times\tfrac18$ + 6 個面心 $\times\tfrac12$ = 4 個格點。不要把 8+6 加成 14。</p>
+  <p class="ref">Ref. Kittel：原胞「恰含一個格點」；$8\times\tfrac18=1$ 的論證。</p>
+  <div class="en"><b>Definition.</b> One point of the lattice. In a cube: corner $=\frac18$, face centre $=\frac12$, body centre $=1$.<br>
+  <b>Example.</b> fcc conventional cube: $8\times\frac18+6\times\frac12=4$, not 14.<br>
+  <i>Never add 8 corners and 6 faces as 14 atoms.</i></div>
+</div>
+
+<h2>格子的種類</h2>
+
+<div class="card" id="t-bravais">
+  <h3>Bravais lattice　布拉維晶格</h3>
+  <div class="lab">定義</div>
+  <p>合格的「格子型」：<b>每個格點看出去的環境都一模一樣</b>（同等價）。二維 5 種、三維 14 種。週期點陣只允許旋轉 $1,2,3,4,6$ 重，<b>沒有五重軸</b>（正五邊形鋪不滿平面）。</p>
+  <div class="lab">例子</div>
+  <p>立方晶系三種：sc、bcc、fcc（Kittel 圖 1.8）。<br>
+  石墨烯的蜂巢<b>不是</b>單點 Bravais：A、B 兩種碳的鄰居方向不同，要拆成「三角晶格 + 兩碳基元」。</p>
+  <p class="ref">Ref. Kittel Table 1；§ Fundamental types of lattices。</p>
+  <div class="en"><b>Definition.</b> A lattice in which every point has the identical environment. 5 types in 2D, 14 in 3D. Allowed rotations: 1, 2, 3, 4, 6 — no five-fold.<br>
+  <b>Example.</b> Graphene’s honeycomb is not a one-point Bravais lattice; it is a triangular lattice with a two-carbon basis.<br>
+  <i>Every Bravais-lattice point looks the same.</i></div>
+</div>
+
+<div class="card" id="t-sc">
+  <h3>sc　simple cubic　簡單立方</h3>
+  <div class="lab">定義</div>
+  <p>慣用立方的<b>只有 8 個角</b>有格點，沒有體心、沒有面心。這個立方<b>就是</b>原胞。全名請寫 simple cubic（有時稱 primitive cubic）。</p>
+  $$N=1,\quad \mathrm{CN}=6,\quad 2r=a,\quad \eta=\pi/6\approx0.524$$
+  <div class="lab">例子</div>
+  <p>α-Po（釙）幾乎是唯一常見的 sc 金屬。相切沿<b>立方邊</b>：兩個半徑等於 $a$。</p>
+  <p class="ref">Ref. Kittel Fig. 8, Table 2 欄 Simple。</p>
+  <div class="en"><b>Definition.</b> Lattice points only at the 8 corners of the cube. The cube is primitive.<br>
+  <b>Example.</b> Contact along the cube edge: $2r=a$. Almost no metal is sc (α-Po).<br>
+  <i>sc = simple cubic = corners only.</i></div>
+</div>
+
+<div class="card" id="t-bcc">
+  <h3>bcc　body-centered cubic　體心立方</h3>
+  <div class="lab">定義</div>
+  <p><b>Body</b>＝立方體內部。8 個角 + 正中心 1 個<b>同種</b>格點。慣用立方含 2 個格點。相切沿<b>體對角線</b>：角—體心—對角，四個半徑等於 $\sqrt3 a$。</p>
+  $$N=2,\quad \mathrm{CN}=8,\quad 4r=\sqrt3\,a,\quad \eta=\pi\sqrt3/8\approx0.680$$
+  <div class="lab">例子</div>
+  <p>α-Fe、Cr、W 是 bcc。注意：CsCl 的圖長得像 bcc，但中心是另一種離子，所以<b>不是</b> bcc（見 CsCl）。</p>
+  <p class="ref">Ref. Kittel Fig. 8, 9, 10；Table 2 欄 Body-centered。</p>
+  <div class="en"><b>Definition.</b> Corners plus an identical lattice point at the body centre $\tfrac12\tfrac12\tfrac12$. Two points per conventional cube. Contact along the body diagonal: $4r=\sqrt3\,a$.<br>
+  <b>Example.</b> α-Fe, W. CsCl looks similar but is not bcc.<br>
+  <i>bcc = body-centered cubic = corners + one in the body.</i></div>
+</div>
+
+<div class="card" id="t-fcc">
+  <h3>fcc　face-centered cubic　面心立方</h3>
+  <div class="lab">定義</div>
+  <p><b>Face</b>＝六個正方形面。8 個角 + 每個面正中 1 個同種格點。慣用立方含 4 個格點。相切沿<b>面對角線</b>：角—面心—角，四個半徑等於 $\sqrt2 a$。</p>
+  $$N=4,\quad \mathrm{CN}=12,\quad 4r=\sqrt2\,a,\quad \eta=\pi\sqrt2/6\approx0.740$$
+  <div class="lab">例子</div>
+  <p>Cu、Al、Ag、Au 是 fcc。與 hcp 同為最密堆積（填充率相同），差在堆疊序 $ABCABC$ vs $ABAB$。</p>
+  <p class="ref">Ref. Kittel Fig. 8, 11；Table 2 欄 Face-centered。fcc 的 $\eta$ 課本寫 $\pi\sqrt2/6$。</p>
+  <div class="en"><b>Definition.</b> Corners plus an identical point at each of the 6 face centres. Four points per conventional cube. Contact along the face diagonal: $4r=\sqrt2\,a$.<br>
+  <b>Example.</b> Cu, Al, Au. Same packing fraction 0.74 as hcp; stacking $ABCABC$ not $ABAB$.<br>
+  <i>fcc = face-centered cubic = corners + one on every face.</i></div>
+</div>
+
+<h2>有多密、貼幾顆</h2>
+
+<div class="card" id="t-cn">
+  <h3>coordination number (CN)　配位數</h3>
+  <div class="lab">定義</div>
+  <p>一顆原子的<b>最近鄰</b>有幾顆（距離最短的那些，不是次近鄰）。</p>
+  <div class="lab">例子</div>
+  <p>sc＝6（前上後下左後右），bcc＝8（沿體對角線），fcc 與 hcp＝12，鑽石＝4（四面體）。CsCl 裡 Cs 的配位也是 8，但那 8 顆是 Cl，不是另一顆 Cs。</p>
+  <p class="ref">Ref. Kittel Table 2 “Number of nearest neighbors”。</p>
+  <div class="en"><b>Definition.</b> The number of nearest-neighbour atoms around a given atom.<br>
+  <b>Example.</b> sc 6, bcc 8, fcc/hcp 12, diamond 4.<br>
+  <i>CN counts only the shortest distance, not the next shell.</i></div>
+</div>
+
+<div class="card" id="t-nn">
+  <h3>nearest-neighbour distance　最近鄰距離</h3>
+  <div class="lab">定義</div>
+  <p>兩個最近格點（或原子）之間的距離。硬球相切時 $d_{\mathrm{nn}}=2r$。</p>
+  <div class="lab">例子</div>
+  <p>Kittel 表 2：sc 為 $a$，bcc 為 $\frac{\sqrt3}{2}a$，fcc 為 $a/\sqrt2$。<br>
+  銅 fcc、$a=3.61$ Å → $d_{\mathrm{nn}}=3.61/\sqrt2\approx2.55$ Å。</p>
+  <p class="ref">Ref. Kittel Table 2。</p>
+  <div class="en"><b>Definition.</b> Distance between nearest lattice points (or atoms). For hard spheres in contact, $d_{\mathrm{nn}}=2r$.<br>
+  <b>Example.</b> Cu fcc, $a=3.61$ Å: $d_{\mathrm{nn}}=a/\sqrt2\approx2.55$ Å.<br>
+  <i>Table 2 lists nn distance; $2r$ or $4r$ follows at once.</i></div>
+</div>
+
+<div class="card" id="t-eta">
+  <h3>packing fraction $\eta$　填充率／堆積因子 APF</h3>
+  <div class="lab">定義</div>
+  <p>把原子當<b>硬球、彼此相切</b>，球的總體積除以晶胞體積。無單位，介於 0 與 1。先用相切條件定 $r$，再代入。</p>
+  $$\eta=\frac{N\cdot\frac43\pi r^3}{a^3}$$
+  <div class="lab">例子</div>
+  <p>sc：$r=a/2$ → $\pi/6\approx0.52$。<br>
+  bcc：$r=\sqrt3 a/4$ → $\pi\sqrt3/8\approx0.68$。<br>
+  fcc：$r=\sqrt2 a/4$ → $\pi\sqrt2/6\approx0.74$（三維等大球上限）。<br>
+  鑽石只有 $\approx0.34$——硬不是因為填得密，是因為共價鍵。</p>
+  <p class="ref">Ref. Kittel Table 2 註 $a$：packing fraction is the maximum proportion filled with hard spheres。</p>
+  <div class="en"><b>Definition.</b> Volume of contacting hard spheres divided by the cell volume. Find $r$ from the contact condition first.<br>
+  <b>Example.</b> sc $\pi/6$, bcc $\pi\sqrt3/8$, fcc $\pi\sqrt2/6$. Diamond $\approx0.34$ is empty, yet hard because of bonds, not packing.<br>
+  <i>Never quote 0.74 without the contact line $4r=\sqrt2 a$.</i></div>
+</div>
+
+<div class="card" id="t-hs">
+  <h3>hard sphere　硬球模型</h3>
+  <div class="lab">定義</div>
+  <p>把原子畫成不能重疊的實心球，相切時剛好碰到。這是算填充率的約定，不是說真實電子雲是硬的。</p>
+  <div class="lab">例子</div>
+  <p>小考圖：3D 用點表示原子即可；要證明相切，旁邊畫 2D 切開，讓圓在紅線上真的碰到。</p>
+  <p class="ref">Ref. Kittel Table 2 footnote $a$。</p>
+  <div class="en"><b>Definition.</b> Atoms treated as non-overlapping spheres that touch at the nn distance.<br>
+  <b>Example.</b> On a quiz, dots in 3D plus a 2D cut where circles actually touch.<br>
+  <i>Hard spheres are a packing convention, not a model of the electron cloud.</i></div>
+</div>
+
+<h2>怎麼標記面與方向</h2>
+
+<div class="card" id="t-miller">
+  <h3>Miller indices $(hkl)$　密勒指標</h3>
+  <div class="lab">定義</div>
+  <p>給一族<b>平行晶面</b>貼的整數標籤。手順：面截三軸於 $x_1 a_1,x_2 a_2,x_3 a_3$（以軸長為單位）→ 取倒數 $1/x_i$ → 化成互質最小整數 → 寫成 $(hkl)$。面若與某軸平行，該截距為 $\infty$，指標為 $0$。負的寫 $\bar h$。</p>
+  <div class="lab">例子</div>
+  <p>截距 $3,2,2$ → 倒數 $\frac13,\frac12,\frac12$ → 乘 6 → $(233)$。<br>
+  截距 $4,1,2$ → $(142)$。<br>
+  立方體的前表面截 $x=a$，與 $y,z$ 平行 → $(100)$。</p>
+  <p class="ref">Ref. Kittel § Indices of planes, Fig. 13。</p>
+  <div class="en"><b>Definition.</b> Integer labels of a family of parallel planes: intercepts in units of $\mathbf a_i$ → reciprocals → lowest integers $(hkl)$. Infinity intercept → index 0.<br>
+  <b>Example.</b> Intercepts $3,2,2$ give $(233)$. The cube face perpendicular to $x$ is $(100)$.<br>
+  <i>Intercepts, then reciprocals, then lowest integers.</i></div>
+</div>
+
+<div class="card" id="t-uvw">
+  <h3>direction $[uvw]$　晶向；family $\{hkl\}$　面族</h3>
+  <div class="lab">定義</div>
+  <p>$[uvw]$ 是一條方向（從原點到 $u\mathbf a_1+v\mathbf a_2+w\mathbf a_3$）。$\{hkl\}$ 是由對稱把 $(hkl)$ 轉出來的所有等價面，例如立方的 $\{100\}$ 有六個面。</p>
+  <div class="lab">例子</div>
+  <p>$(110)$ 是一個面；$[110]$ 是一個方向。在<b>立方</b>晶系裡 $[hkl]\perp(hkl)$，所以 $[110]$ 垂直 $(110)$。一般晶系不成立。</p>
+  <p class="ref">Ref. Kittel Fig. 13–14。</p>
+  <div class="en"><b>Definition.</b> $[uvw]$ labels a direction. $\{hkl\}$ is the symmetry family of planes equivalent to $(hkl)$.<br>
+  <b>Example.</b> In cubic crystals $[hkl]\perp(hkl)$; not true in a general crystal system.<br>
+  <i>Parentheses = plane; square brackets = direction.</i></div>
+</div>
+
+<div class="card" id="t-d">
+  <h3>interplanar spacing $d_{hkl}$　面間距</h3>
+  <div class="lab">定義</div>
+  <p>同一族 $(hkl)$ 裡，相鄰兩平行面的垂直距離。立方晶：</p>
+  $$d_{hkl}=\frac{a}{\sqrt{h^2+k^2+l^2}}$$
+  <div class="lab">例子</div>
+  <p>$a=3.61$ Å（Cu）：$d_{200}=a/2=1.805$ Å；$d_{111}=a/\sqrt3\approx2.08$ Å。指標越大，面越密、$d$ 越小。第 2 章 Bragg 定律會用到 $d_{hkl}$。</p>
+  <p class="ref">Ref. 立方幾何；與 Kittel Fig. 14 的面標記一起用。</p>
+  <div class="en"><b>Definition.</b> Perpendicular distance between adjacent planes of the family $(hkl)$. Cubic: $d_{hkl}=a/\sqrt{h^2+k^2+l^2}$.<br>
+  <b>Example.</b> Cu $a=3.61$ Å: $d_{200}=1.805$ Å.<br>
+  <i>Larger $hkl$ means smaller $d$.</i></div>
+</div>
+
+<h2>幾個必考結構</h2>
+
+<div class="card" id="t-nacl">
+  <h3>NaCl structure　氯化鈉結構</h3>
+  <div class="lab">定義</div>
+  <p>空間晶格是 <b>fcc</b>，基元是兩個異種離子（Na⁺ 與 Cl⁻）。可以想成兩套 fcc 套在一起，錯開半條邊。</p>
+  <div class="lab">例子</div>
+  <p>慣用立方裡 4 個 Na 與 4 個 Cl。每個離子配位數 6。不是 sc：雖然看起來棋盤很多，Bravais 仍是 fcc。</p>
+  <p class="ref">Ref. Kittel § Sodium chloride, Fig. 15–17。</p>
+  <div class="en"><b>Definition.</b> An fcc lattice with a two-ion basis (Na⁺ and Cl⁻).<br>
+  <b>Example.</b> 4 NaCl per conventional cube; CN $=6$. Not simple cubic.<br>
+  <i>NaCl = fcc lattice + two-ion basis.</i></div>
+</div>
+
+<div class="card" id="t-cscl">
+  <h3>CsCl structure　氯化銫結構</h3>
+  <div class="lab">定義</div>
+  <p>空間晶格是 <b>simple cubic</b>，基元是 Cs⁺ 在 $000$、Cl⁻ 在 $\tfrac12\tfrac12\tfrac12$（或對調）。圖看起來像 bcc，但角與體心是<b>不同種</b>，環境不同，所以<b>不是</b> bcc。</p>
+  <div class="lab">例子</div>
+  <p>每胞 1 個 Cs + 1 個 Cl。配位數 8（每個 Cs 被 8 個 Cl 圍住）。小考一句話：<i>not bcc, because the two sites are different atoms.</i></p>
+  <p class="ref">Ref. Kittel Fig. 18：原文 “The space lattice is simple cubic”。</p>
+  <div class="en"><b>Definition.</b> Simple cubic lattice with a two-ion basis at $000$ and $\tfrac12\tfrac12\tfrac12$.<br>
+  <b>Example.</b> Looks like bcc, but corner and centre are different species, hence not a bcc Bravais lattice. CN $=8$.<br>
+  <i>CsCl = sc + basis {Cs, Cl}. Not bcc.</i></div>
+</div>
+
+<div class="card" id="t-dia">
+  <h3>diamond structure　鑽石結構；zincblende　閃鋅礦</h3>
+  <div class="lab">定義</div>
+  <p>空間晶格是 fcc，基元兩顆：在 $000$ 與 $\tfrac14\tfrac14\tfrac14$。兩顆<b>同種</b>＝鑽石（C、Si、Ge）；<b>異種</b>＝閃鋅礦 ZnS（GaAs 也是這類）。慣用立方 8 個原子。配位數 4（四面體）。填充率只有 $\approx0.34$。</p>
+  <div class="lab">例子</div>
+  <p>「鑽石很硬是因為 packing 最高」是錯的——它比 sc 還空。硬度來自方向性 $sp^3$ 共價鍵。</p>
+  <p class="ref">Ref. Kittel Fig. 22–24；填充率 0.34 在鑽石節。</p>
+  <div class="en"><b>Definition.</b> fcc + basis $\{000,\tfrac14\tfrac14\tfrac14\}$. Same atom: diamond. Two species: zincblende. 8 atoms per cube, CN $=4$, $\eta\approx0.34$.<br>
+  <b>Example.</b> Diamond is hard because of tetrahedral covalent bonds, not because it packs densely.<br>
+  <i>Diamond is one of the emptiest common structures.</i></div>
+</div>
+
+<div class="card" id="t-hcp">
+  <h3>hcp　hexagonal close-packed　六方最密堆積</h3>
+  <div class="lab">定義</div>
+  <p>最密球層以 $ABAB\cdots$ 堆疊。空間晶格是<b>簡單六方</b>，每格點兩個相同原子作基元。理想硬球時軸比鎖死為正四面體幾何。</p>
+  $$\left(\frac{c}{a}\right)_{\mathrm{ideal}}=\sqrt{8/3}\approx1.633$$
+  <div class="lab">例子</div>
+  <p>Mg 的 $c/a\approx1.623$，接近理想。Zn 約 1.86，偏離理想。hcp 與 fcc 的 $\eta$ 都是 0.74、CN 都是 12；差只在第三層：$A$（hcp）或 $C$（fcc）。</p>
+  <p class="ref">Ref. Kittel Fig. 19–21。第二原子在 $\tfrac23\mathbf a_1+\tfrac13\mathbf a_2+\tfrac12\mathbf a_3$。</p>
+  <div class="en"><b>Definition.</b> Close-packed layers stacked $ABAB\cdots$. Space lattice: simple hexagonal with a two-atom basis. Ideal $c/a=\sqrt{8/3}$.<br>
+  <b>Example.</b> Mg is near-ideal. Same packing 0.74 as fcc; stacking differs.<br>
+  <i>hcp = ABAB; fcc = ABCABC; both CN 12 and $\eta=0.74$.</i></div>
+</div>
+
+<div class="card" id="t-stack">
+  <h3>close packing / stacking sequence　最密堆積／堆疊序</h3>
+  <div class="lab">定義</div>
+  <p>一層等大球能排的最密方式是三角排列。第二層坐凹洞（只有一種，叫 $B$）。第三層有兩個凹洞可選：回到 $A$ 正上方 → hcp；換另一個沒被佔的凹洞 $C$ → fcc。</p>
+  <div class="lab">例子</div>
+  <p>沿 fcc 立方的體對角線看下去，看到的就是 $ABCABC$ 層。</p>
+  <p class="ref">Ref. Kittel Fig. 19。</p>
+  <div class="en"><b>Definition.</b> After two close-packed layers $A,B$, the third layer is either $A$ (hcp) or $C$ (fcc).<br>
+  <b>Example.</b> Looking along a $\langle 111\rangle$ axis of fcc shows $ABCABC$ stacking.<br>
+  <i>The third layer is the only choice that distinguishes hcp from fcc.</i></div>
+</div>
+
+<footer>
+小考先會講、會寫英文句的：lattice, basis, sc / bcc / fcc 全名, packing fraction, CsCl。<br>
+倒晶格、Bragg、聲子不是第 1 章名詞。
+</footer>
+<script>
+document.getElementById('btnEn').onclick=function(){
+  document.body.classList.toggle('show-en');
+  this.classList.toggle('on', document.body.classList.contains('show-en'));
+};
+</script>
+</body>
+</html>

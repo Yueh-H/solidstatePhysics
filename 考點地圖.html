@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理 — 考點 × 數學 × 站內連結</title>
+<link rel="stylesheet" href="模擬/shared.css">
+<style>
+  table.map { width: 100%; border-collapse: collapse; font-size: 0.88em; margin: 1em 0; }
+  table.map th, table.map td {
+    border: 1px solid #c5d5e5; padding: 0.45em 0.55em; vertical-align: top; text-align: left;
+  }
+  table.map th { background: #e8eef4; color: #1a4d7c; position: sticky; top: 0; }
+  table.map tr:nth-child(even) td { background: #fafcfe; }
+  table.map a { color: #2b6ca0; white-space: nowrap; }
+  .tier1 td:first-child { border-left: 4px solid #1a4d7c; }
+  .tier2 td:first-child { border-left: 4px solid #2b6ca0; }
+  .tier3 td:first-child { border-left: 4px solid #c47a12; }
+  .tier4 td:first-child { border-left: 4px solid #999; }
+  .math-list { columns: 2; gap: 1.5em; font-size: 0.92em; }
+  @media (max-width: 700px) { .math-list { columns: 1; } }
+  .math-list li { margin: 0.35em 0; break-inside: avoid; }
+  h2 .tag {
+    font-size: 0.7em; font-weight: 600; background: #eef5fb; color: #1a4d7c;
+    padding: 0.15em 0.5em; border-radius: 999px; vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 備考總入口</a>
+  <a class="here" href="考點地圖.html">考點地圖</a>
+  <a href="數學lab/index.html">數學 Lab</a>
+  <a href="模擬/index.html">系統模擬</a>
+  <a href="考古題/單元整理.html">單元整理</a>
+</div>
+
+<h1>🗺️ 考點 × 數學原理 × 站內連結</h1>
+<p class="intro">
+  依 <b>Kittel</b> 與 <b>2013–2025 資格考</b> 整理。
+  近年卷面多為 <code>結構 / 繞射 / 聲子 / 電子</code> 四段；梯隊顏色見左框線。
+  學習動線：<b>單元教學</b> → <b>數學 Lab</b>（推導）→ <b>模擬</b>（圖像）→ <b>考古詳解</b>。
+  倒晶格／繞射段：<b>不要把 2013–2025 原卷全部背下來</b>——資格考不會再出同一組數字。要會推的只有五種：$\mathbf b_i$、Bragg↔Laue、結構因子消光、bcc↔fcc 互為倒晶格、第一 BZ＝倒晶格 WS cell。詳見 <a href="考古題/單元整理.html">單元整理 §3</a>。現在（第 1–4 週）先把晶體結構五框寫完，Week 5 才開倒晶格。
+</p>
+
+<h2>優先序一覽 <span class="tag">先吃滿一、二梯隊</span></h2>
+<table class="map">
+  <thead>
+    <tr>
+      <th>梯隊</th>
+      <th>單元（Kittel）</th>
+      <th>考試考什麼</th>
+      <th>數學原理</th>
+      <th>站內</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="tier1">
+      <td>一</td>
+      <td>1 晶體結構<br>Ch.1</td>
+      <td>Bravais/basis、packing、hcp c/a、Miller、原胞體積</td>
+      <td>向量體積、立體幾何、填充率計數</td>
+      <td>
+        <a href="單元教學/unit01_晶體結構.html">單元</a>
+        <a href="數學lab/lab_packing.html">Lab②</a>
+        <a href="考古題/單元整理.html">頻率</a>
+      </td>
+    </tr>
+    <tr class="tier1">
+      <td>一</td>
+      <td>2 倒晶格／繞射<br>Ch.2</td>
+      <td>bᵢ、BZ、Bragg/Laue、結構因子消光、Ewald</td>
+      <td>倒基、複指數相位、傅立葉選擇規則</td>
+      <td>
+        <a href="單元教學/unit02_倒晶格與繞射.html">單元</a>
+        <a href="數學lab/lab_reciprocal.html">Lab①</a>
+        <a href="數學lab/lab_structure_factor.html">Lab③</a>
+        <a href="模擬/sim_bragg_ewald.html">模擬</a>
+      </td>
+    </tr>
+    <tr class="tier1">
+      <td>一</td>
+      <td>4 聲子<br>Ch.4–5</td>
+      <td>單/雙原子色散、ω_max、Debye T³、Dulong–Petit</td>
+      <td>特徵值、e^{ika}、dω/dk、態密度積分</td>
+      <td>
+        <a href="單元教學/unit04_聲子與晶格振動.html">單元</a>
+        <a href="數學lab/lab_dispersion.html">Lab④</a>
+        <a href="模擬/sim_dispersion.html">模擬</a>
+      </td>
+    </tr>
+    <tr class="tier1">
+      <td>一</td>
+      <td>6 能帶／Bloch<br>Ch.7</td>
+      <td>Bloch、gap、NFE 2|U|、m*、tight-binding</td>
+      <td>週期邊值、2×2 本徵、d²E/dk²</td>
+      <td>
+        <a href="單元教學/unit06_能帶與Bloch電子.html">單元</a>
+        <a href="數學lab/lab_nfe.html">Lab⑤</a>
+        <a href="模擬/sim_nfe_gap.html">NFE</a>
+        <a href="模擬/sim_tight_binding.html">TB</a>
+      </td>
+    </tr>
+    <tr class="tier2">
+      <td>二</td>
+      <td>5 費米氣體<br>Ch.6</td>
+      <td>E_F、DOS、C_el=γT、Wiedemann–Franz</td>
+      <td>k 空間球、g(E)、FD 統計</td>
+      <td>
+        <a href="單元教學/unit05_自由電子費米氣體.html">單元</a>
+        <a href="數學lab/lab_dos.html">Lab⑥</a>
+        <a href="模擬/sim_fermi_dos.html">模擬</a>
+      </td>
+    </tr>
+    <tr class="tier3">
+      <td>三</td>
+      <td>3 鍵結<br>Ch.3</td>
+      <td>LJ、Madelung、內聚能</td>
+      <td>極值 dU/dr=0、交錯級數 ln2</td>
+      <td>
+        <a href="單元教學/unit03_晶體鍵結.html">單元</a>
+        <a href="數學lab/lab_madelung.html">Lab⑦</a>
+      </td>
+    </tr>
+    <tr class="tier3">
+      <td>三</td>
+      <td>7 半導體<br>Ch.8</td>
+      <td>n_i、外質、pn、Hall、direct/indirect</td>
+      <td>指數活化、電中性方程</td>
+      <td>
+        <a href="單元教學/unit07_半導體.html">單元</a>
+        <a href="模擬/sim_semiconductor.html">模擬</a>
+      </td>
+    </tr>
+    <tr class="tier4">
+      <td>四</td>
+      <td>8 磁性<br>Ch.11–12</td>
+      <td>Langevin、Curie、T_C、Landau level</td>
+      <td>Boltzmann 平均、小 α 展開</td>
+      <td>
+        <a href="單元教學/unit08_磁性.html">單元</a>
+        <a href="數學lab/lab_langevin.html">Lab⑧</a>
+        <a href="模擬/sim_langevin_curie.html">模擬</a>
+      </td>
+    </tr>
+    <tr class="tier4">
+      <td>四</td>
+      <td>9 超導<br>Ch.10</td>
+      <td>Meissner、type I/II、vortex</td>
+      <td>多半定性／相圖</td>
+      <td>
+        <a href="單元教學/unit09_超導.html">單元</a>
+      </td>
+    </tr>
+    <tr class="tier4">
+      <td>四</td>
+      <td>10 實驗／進階</td>
+      <td>STM、量 DOS、Dirac/graphene</td>
+      <td>穿隧、線性色散 E=v|k|</td>
+      <td>
+        <a href="單元教學/unit10_實驗與進階.html">單元</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>數學工具箱（考推導時真正在考的）</h2>
+<ol class="math-list">
+  <li><b>向量三重積</b> → 原胞體積、倒基</li>
+  <li><b>Kronecker δ / 正交</b> → aᵢ·bⱼ=2πδᵢⱼ</li>
+  <li><b>複指數 / Euler</b> → 結構因子、Bloch、聲子模</li>
+  <li><b>傅立葉與選擇規則</b> → Δk=G、消光</li>
+  <li><b>特徵值問題</b> → ω(k)、能帶</li>
+  <li><b>群速 dω/dk、曲率 d²E/dk²</b> → v_g、m*</li>
+  <li><b>k 空間積分</b> → DOS、E_F</li>
+  <li><b>FD / Boltzmann</b> → 金屬、半導體、磁性</li>
+  <li><b>級數 ln2、極值</b> → Madelung、LJ</li>
+  <li><b>小量展開</b> → Curie、帶底拋物線</li>
+</ol>
+<p>先備詳文：
+  <a href="教材/先備知識/數學先備.html">數學先備</a> ·
+  <a href="教材/先備知識/物理先備.html">物理先備</a>
+</p>
+
+<h2>近年固定題型（2021–2025）→ 練什麼</h2>
+<table class="map">
+  <thead>
+    <tr><th>卷面段</th><th>高頻題型</th><th>先做</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Crystal</td>
+      <td>packing、hcp、給 aᵢ 認格子／basis</td>
+      <td><a href="數學lab/lab_packing.html">Lab②</a> + unit01 詳解</td>
+    </tr>
+    <tr>
+      <td>Diffraction</td>
+      <td>推 bᵢ、消光、λ–θ 數值、Δk=G</td>
+      <td><a href="數學lab/lab_reciprocal.html">Lab①</a> <a href="數學lab/lab_structure_factor.html">Lab③</a> <a href="模擬/sim_bragg_ewald.html">Ewald</a></td>
+    </tr>
+    <tr>
+      <td>Phonons</td>
+      <td>ω(k)、ω_max、衰減波、聲速→C</td>
+      <td><a href="數學lab/lab_dispersion.html">Lab④</a> <a href="模擬/sim_dispersion.html">模擬</a></td>
+    </tr>
+    <tr>
+      <td>Electrons</td>
+      <td>E_F、DOS、m*／hole、pn、degenerate</td>
+      <td><a href="數學lab/lab_dos.html">Lab⑥</a> <a href="數學lab/lab_nfe.html">Lab⑤</a> <a href="模擬/sim_fermi_dos.html">FD</a> <a href="模擬/sim_semiconductor.html">半導體</a></td>
+    </tr>
+    <tr>
+      <td>（偶）磁／超導</td>
+      <td>Langevin、T_C、type I/II</td>
+      <td><a href="數學lab/lab_langevin.html">Lab⑧</a> <a href="模擬/sim_langevin_curie.html">模擬</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>完整資源索引</h2>
+<div class="cards">
+  <a class="card" href="數學lab/index.html"><div class="t">📐 數學推導 Lab</div><div class="s">8 頁逐步+填空</div></a>
+  <a class="card" href="模擬/index.html"><div class="t">🔬 系統模擬</div><div class="s">7 個拖參數實驗</div></a>
+  <a class="card" href="單元教學/index.html"><div class="t">🎓 單元學科</div><div class="s">從高中到資格考</div></a>
+  <a class="card" href="考古題/詳解/index.html"><div class="t">✍️ 逐題詳解</div><div class="s">2013–2025</div></a>
+  <a class="card" href="考古題/單元整理.html"><div class="t">📊 出題頻率</div><div class="s">13 年單元表</div></a>
+  <a class="card" href="教材/先備知識/index.html"><div class="t">🧰 先備知識</div><div class="s">數學／物理補帖</div></a>
+</div>
+
+<footer>
+  對齊 solidstatePhysics/考古題/單元整理.md 與導讀.md。參數與推導為教學用；細節以 Kittel 與歷年詳解為準。
+</footer>
+</body>
+</html>

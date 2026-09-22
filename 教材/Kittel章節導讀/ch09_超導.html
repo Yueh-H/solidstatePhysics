@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 章節導讀 — Kittel 第10章 — 超導現象（Superconductivity）</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">章節導讀目錄</a> &nbsp;·&nbsp; <a href="../Kittel_翻譯.html">完整翻譯</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../../考古題/詳解/index.html">逐題詳解</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- Kittel 章節導讀：第10章 超導現象（Superconductivity） -->
+
+# Kittel 第10章 對照導讀 — 超導現象（Superconductivity）
+
+> **這頁是什麼**：讀 Kittel 這一章時的對照地圖——概念橋（高中→大學普物→固態）＋術語速查。完整課文見 [Kittel 翻譯本對應章節](../Kittel_翻譯.html)；想看完整推導與考題，見 [單元教學 unit09 超導](../../單元教學/unit09_超導.html)。
+>
+> **章次提醒**：Kittel 原書把超導列為「第 10 章」（chapter 10: superconductivity），本檔依排版命名為 `ch09`，內容即 Kittel 第 10 章，別被檔名混淆。
+>
+> **符號慣例（對齊本章）**：臨界溫度 $T_c$；外加磁場 $B_a$（CGS 下臨界值習慣寫成 $H_c$，$1\,\text{T}=10^4\,\text{G}$，SI 下 $B_{ac}=\mu_0 H_c$）；磁感應 $\mathbf B$、磁化強度 $\mathbf M$、磁化率 $\chi$；超導能隙 $E_g=2\Delta$；磁通量 $\Phi$、磁通量子 $\Phi_0=h/2e=2\pi\hbar c/q$（$q=2e$）；穿透深度 $\lambda_L$、相干長度 $\xi$。
+
+## 🗺️ 這一章在講什麼（3–6 句白話）
+
+這章從一個實驗事實出發：很多金屬冷到某個臨界溫度 $T_c$ 以下，電阻會「斷崖式」掉到零（1911 年 Onnes 在汞上發現）。但零電阻只是一半故事——超導體還會「主動把磁場擠出去」（邁斯納效應），這兩件事一起才定義了超導態。章節接著用三組工具描述它：熱力學（從臨界場曲線 $H_c(T)$ 算出穩定化自由能、能隙 $E_g$）、唯象方程（倫敦方程解釋邁斯納效應、引出穿透深度 $\lambda_L$ 與相干長度 $\xi$）、以及微觀的 BCS 理論（電子靠晶格振動間接相吸，配成庫柏對，呈現能隙）。最後把第一/第二類超導體、磁通量子化 $\Phi_0=h/2e$、約瑟夫森效應與高溫超導串起來。Kittel 的節次大致就是「實驗調查 → 熱力學 → 倫敦方程/相干長度 → BCS → 磁通量子化 → 第二類/渦旋態 → 隧穿/約瑟夫森 → 高溫超導」。
+
+## 🌉 概念三層對應表（高中 → 大學普物 → 本章固態物理）
+
+| 高中你學過的 | 大學普物的版本 | 本章固態物理變成 |
+|---|---|---|
+| 歐姆定律 $V=IR$、焦耳熱 $P=I^2R$ | 電阻來自電子被晶格/雜質散射 | **零電阻**：$T<T_c$ 時直流電阻嚴格為零，持久電流可流數年（$\rho=0$） |
+| 磁鐵的磁場線可穿過或繞過物體 | 抗磁體 $\chi<0$、磁感應 $\mathbf B=\mu_0(1+\chi)\mathbf H$ | **邁斯納效應**：超導體把內部磁場主動排出，$\mathbf B=0$，是「完美抗磁體」$\chi=-1$ |
+| 水到 $0^\circ$C 結冰是相變 | 一級/二級相變、潛熱、自由能 $F=U-TS$ | 正常↔超導是**二級相變**（$T_c$ 處無潛熱），由 $H_c(T)$ 曲線算穩定化自由能 |
+| 波耳模型角動量取 $\hbar$ 整數倍 | 量子化條件、單值波函數 | **磁通量子化**：穿過超導環的磁通只能取 $\Phi_0=h/2e$ 整數倍（那個 2 來自電子對） |
+| 波的相位 $\sin(kx-\omega t)$ | 波函數相位、機率幅 | 整塊超導體共用一個**巨觀波函數相位** $\theta(\mathbf r)$，是磁通量子化與約瑟夫森效應的根 |
+| 指數衰減 $e^{-x}$ 掉得很快 | 邊界值問題的衰減解 | 磁場只能滲入表面薄層，深度即**倫敦穿透深度** $\lambda_L\sim500\,$Å |
+| $E=p^2/2m$、能階有間隙 | 費米面、費米能 $\varepsilon_F$ | 費米能附近開一個**能隙** $E_g$，把超導電子和能隙上的常態電子隔開 |
+| 兩物體中間夾一層東西可阻擋 | 量子穿隧穿過位能壘 | **約瑟夫森隧穿**：電子對穿過薄絕緣層，產生直流/交流約瑟夫森效應 |
+
+## 🔑 專有名詞 × 範例（速查）
+
+<details>
+<summary><b>▸ 臨界溫度（critical temperature）$T_c$</b></summary>
+
+**白話**：金屬「切換成超導」的門檻溫度，跨過它整塊材料換一種狀態。
+**高中接點**：像水的熔點 $0^\circ$C——溫度跨過就整個換相。
+**定義**：零場下直流電阻歸零、邁斯納效應出現的溫度，是材料固有常數。
+**範例**：Hg $\approx4.2\,$K、Pb $\approx7.2\,$K、Nb $\approx9.3\,$K；化合物 YBa$_2$Cu$_3$O$_7$ 高達 $90\,$K，元素 Rh 低到 $0.001\,$K。
+**在 Kittel 哪裡**：開章「超導現象的出現」與表 1、表 2。
+</details>
+
+<details>
+<summary><b>▸ 邁斯納效應（Meissner effect）</b></summary>
+
+**白話**：超導體把內部磁場「主動」趕出去，不只是擋住。
+**高中接點**：抗磁體會被磁場推開——超導體是最強的抗磁體。
+**定義**：塊狀超導體內 $\mathbf B=0$，即 CGS 下 $\chi=-1/4\pi$、SI 下 $\chi=-1$。
+**範例**：先把球放進磁場再降溫過 $T_c$，磁感應線會在跨越的瞬間被擠出球外（Kittel 圖 2）。
+**在 Kittel 哪裡**：「邁斯納效應」節；關鍵句「零電阻只給 $d\mathbf B/dt=0$，給不出 $\mathbf B=0$」。
+</details>
+
+![Meissner 效應：超導體排斥磁場（完全抗磁）](../../figs/f09_meissner.svg)
+
+<details>
+<summary><b>▸ 臨界場（critical field）$H_c$、$H_{c1}$、$H_{c2}$</b></summary>
+
+**白話**：磁場太強會「摧毀」超導；第一類只有一個門檻，第二類有兩個。
+**高中接點**：施力超過某個值東西就壞掉——這裡是「磁場超過 $H_c$ 超導就消失」。
+**定義**：$H_c(T_c)=0$，隨溫度下降而升高（拋物線狀）；第二類在 $H_{c1}<H<H_{c2}$ 為渦旋態。
+**範例**：Al 在 $0\,$K 的 $B_{ac}\approx105\,$G；第二類 Nb-Al-Ge 合金 $H_{c2}$ 可達 $410\,$kG（41 T）。
+**在 Kittel 哪裡**：「磁場摧毀超導性」節、圖 3、圖 4。
+</details>
+
+<details>
+<summary><b>▸ 能隙（energy gap）$E_g$</b></summary>
+
+**白話**：費米能附近開一道「禁區」，把超導電子和被激發的常態電子隔開。
+**高中接點**：原子能階之間的間隙；要跳上去得吸足夠能量。
+**定義**：$E_g=2\Delta$，典型 $E_g\sim4k_BT_c\sim10^{-4}\varepsilon_F$；熱容指數因子是 $E_g/2k_BT$（不是 $E_g/k_BT$）。
+**範例**：鎵的超導熱容 $C_{es}\propto\exp(-1.39\,T_c/T)$，指數依賴 $1/T$ 暗示電子要跨過能隙。
+**在 Kittel 哪裡**：「能隙」「熱容」「微波與紅外性質」節、圖 8–10。
+</details>
+
+<details>
+<summary><b>▸ 同位素效應（isotope effect）</b></summary>
+
+**白話**：把同元素換成較重的同位素，$T_c$ 會稍微改變——說明晶格振動有份。
+**高中接點**：質量不同、振動頻率不同（像彈簧 $\omega\propto1/\sqrt{m}$）。
+**定義**：$M^{\alpha}T_c=$ 常數，BCS 原始模型給 $\alpha\approx1/2$，即 $T_c\propto M^{-1/2}$。
+**範例**：汞平均質量從 199.5 增到 203.4 amu，$T_c$ 從 $4.185\,$K 降到 $4.146\,$K（$\alpha\approx0.50$）。
+**在 Kittel 哪裡**：「同位素效應」節、表 4。
+</details>
+
+<details>
+<summary><b>▸ 倫敦方程（London equation）與穿透深度 $\lambda_L$</b></summary>
+
+**白話**：把電流綁在向量勢上的唯象方程，自然推出「磁場只能滲表面」。
+**高中接點**：指數衰減 $e^{-x}$；磁場進不去深處。
+**定義**：$\mathbf j=-\dfrac{c}{4\pi\lambda_L^2}\mathbf A$，旋度後得 $\nabla^2\mathbf B=\mathbf B/\lambda_L^2$，故 $B(x)=B(0)e^{-x/\lambda_L}$；$\lambda_L^2=mc^2/4\pi nq^2$。
+**範例**：純超導體 $\lambda_L\sim500\,$Å（表 5：Sn $\lambda_L=3.4\times10^{-6}\,$cm）。薄膜厚度 $\ll\lambda_L$ 時邁斯納不完全，臨界場很高。
+**在 Kittel 哪裡**：「倫敦方程」「相干長度」節、圖 13。
+</details>
+
+<details>
+<summary><b>▸ 相干長度（coherence length）$\xi$</b></summary>
+
+**白話**：超導電子濃度「不想急轉彎」的最短尺度，也是正常↔超導界面的厚度。
+**高中接點**：波函數彎得越急動能越大，所以系統不愛劇烈變化。
+**定義**：本徵相干長度 $\xi_0=\dfrac{2\hbar v_F}{\pi E_g}$（$v_F$ 為費米速度）；含雜質時 $\xi<\xi_0$。
+**範例**：表 5 中 Al 的 $\xi_0=160\times10^{-6}\,$cm，遠大於其 $\lambda_L$，故 Al 是第一類。
+**在 Kittel 哪裡**：「相干長度」節、圖 14；定義 G-L 參數 $\kappa=\lambda/\xi$。
+</details>
+
+<details>
+<summary><b>▸ 庫柏對（Cooper pair）與 BCS 理論</b></summary>
+
+**白話**：兩個電子靠晶格變形「間接」相吸，配成一對，整窩變有序。
+**高中接點**：一個電子壓凹晶格，第二個電子被凹處吸引——像兩人共睡一張軟床會滾向中間。
+**定義**：配對態 $(\mathbf k\uparrow,-\mathbf k\downarrow)$，自旋為 0、像玻色子；BCS 預測 $T_c\approx1.14\,\Theta\,e^{-1/UD(\varepsilon_F)}$。
+**範例**：因為配對電荷是 $2e$，磁通量子才是 $\Phi_0=h/2e$（那個「2」的來源）。
+**在 Kittel 哪裡**：「BCS 超導理論」「BCS 基態」節、圖 15。
+</details>
+
+<details>
+<summary><b>▸ 磁通量子化（flux quantization）$\Phi_0$</b></summary>
+
+**白話**：穿過超導環的總磁通只能是某個基本單位的整數倍。
+**高中接點**：波耳模型角動量量子化（單值波函數繞一圈相位變 $2\pi$ 整數倍）。
+**定義**：$\Phi_0=h/2e=2\pi\hbar c/q$（CGS），$q=2e$；環內超導電流會自動調整使總磁通量子化。這個量子稱 fluxoid/fluxon。
+**範例**：Kittel 估計第一類環中磁通子洩漏時間 $\sim10^{10^7}\,$s，遠超宇宙年齡 $\sim10^{18}\,$s，故電流不衰減。
+**在 Kittel 哪裡**：「超導環中的磁通量量子化」「持續電流的持續時間」節、圖 16。
+</details>
+
+<details>
+<summary><b>▸ 第二類超導體（type II）與渦旋態（vortex state）</b></summary>
+
+**白話**：磁場不全擋也不全進，而是穿成一根根「渦旋」，渦旋核是常態、周圍仍超導。
+**高中接點**：水裡的漩渦——中心一個核，外圈繞流。
+**定義**：$\xi<\lambda$（即 $\kappa=\lambda/\xi>1/\sqrt2$）；在 $H_{c1}<H<H_{c2}$ 為渦旋態，每根渦旋帶一個磁通量子 $\Phi_0$。
+**範例**：在 Pb 加 2 wt% In 就能把它從第一類變第二類，$T_c$ 幾乎不變但磁性行為劇變。$H_{c1}\sim(\xi/\lambda)H_c$、$H_{c2}\sim(\lambda/\xi)H_c$。
+**在 Kittel 哪裡**：「第二類超導體」「估算 $H_{c1}$ 與 $H_{c2}$」節、圖 17–19。
+</details>
+
+![第一類（$H_c$ 突變）vs 第二類（$H_{c1}$–$H_{c2}$ 漸變、渦旋態）的磁化曲線](../../figs/f09_typeI_II.svg)
+
+<details>
+<summary><b>▸ 約瑟夫森效應（Josephson effect）</b></summary>
+
+**白話**：電子對能穿過薄絕緣層；不加電壓有直流電流，加直流電壓反而生出高頻交流。
+**高中接點**：量子穿隧（穿過古典過不去的牆）＋波的相位差。
+**定義**：直流 $J=J_0\sin(\theta_2-\theta_1)$；交流 $\omega=2eV/\hbar$。
+**範例**：$1\,\mu$V 的直流電壓產生 $483.6\,$MHz 的振盪；用兩個並聯接面可做超靈敏磁力計（巨觀量子干涉/SQUID）。
+**在 Kittel 哪裡**：「單粒子隧道」「約瑟夫森超導隧穿」「巨觀量子干涉」節、圖 20–26。
+</details>
+
+<details>
+<summary><b>▸ 高溫超導體（high-$T_c$ / HTS）</b></summary>
+
+**白話**：以銅氧化物為主、$T_c$ 高得多的超導材料。
+**高中接點**：同樣是相變，只是門檻溫度被推到液態氮（77 K）以上。
+**定義**：主要是含 CuO 平面的氧化物，伴隨高臨界電流與強磁場。
+**範例**：La$_{1.85}$Ba$_{0.15}$CuO$_4$ $T_c\approx36\,$K、YBa$_2$Cu$_3$O$_7$ $\approx90\,$K、Hg-Tl 系 $\approx138\,$K。
+**在 Kittel 哪裡**：本章末「高溫超導體」節。
+</details>
+
+## ⚠️ 讀這章常卡的點 ＋ 翻譯雷區
+
+- **零電阻 ≠ 邁斯納效應**：很多人以為超導就是「電阻為零」。Kittel 特別強調：由歐姆定律 $\mathbf E=\rho\mathbf j$，$\rho\to0$ 只得 $d\mathbf B/dt=0$（磁通凍結），給不出 $\mathbf B=0$。**完美抗磁（$\mathbf B=0$）才是超導的本質定義**，是「完美導體」做不到的。
+- **$H_c$ 其實是 $B_{ac}$**：Kittel 開頭就警告——超導圈習慣用 $H_c$ 表外加場臨界值，但物理上那是外加磁感應 $B_{ac}$。CGS 下 $H_c=B_{ac}$，SI 下 $H_c=B_{ac}/\mu_0$。算題務必先確認單位制。
+- **能隙指數是 $E_g/2k_BT$，不是 $E_g/k_BT$**：熱容/隧穿測到的指數因子帶那個「2」，對應 $E_g=2\Delta$（拆一對要 $2\Delta$）。翻譯本此處公式被圖片吞掉（`picture omitted`），別漏看。
+- **磁通量子裡的「2」**：$\Phi_0=h/2e$ 的 2 來自配對電荷 $q=2e$，是 BCS 的直接後果。翻譯本把 $\Phi_0=2\pi\hbar c/q$ 的式子排版打散（如 6493、7007 行附近亂碼），對照原文較安全。
+- **第一/第二類差別在 $\xi$ 與 $\lambda$ 的大小關係，不在機制**：兩者超導機制相同；$\xi>\lambda$（界面表面能為正）是第一類，$\xi<\lambda$（表面能變負）是第二類。渦旋態只出現在第二類。
+- **翻譯亂碼與錯字**：本章公式幾乎都被轉成 `==> picture ... omitted <==`，正文又夾雜 `�`、英文殘句。注意幾處明顯誤譯，如把「鉻 chromium」誤標 gadolinium、「鈧」與 lanthanum 對不上（6541 行）、表 2 化合物下標錯位（NbSn$_3$ 應為 Nb$_3$Sn）。**凡公式與化學式請對照 [Kittel 原文](../Kittel_原文.html)**。
+
+## 📝 實際範例（Worked Examples）
+
+> 以下例題用 SI 單位、CODATA 常數：$h=6.626\times10^{-34}\,\mathrm{J\cdot s}$、$e=1.602\times10^{-19}\,\mathrm{C}$、$k_B=1.381\times10^{-23}\,\mathrm{J/K}$。磁通量子（flux quantum）$\Phi_0=h/2e$，那個「2」來自庫柏對（Cooper pair）電荷 $q=2e$。
+
+### 例題 1：磁通量子（flux quantum）的數值，與超導環包含的量子數
+
+**題目**：(a) 由 $\Phi_0=h/2e$ 算出磁通量子的數值。(b) 一個半徑 $r=1\,\mathrm{mm}$ 的超導環（superconducting ring），垂直穿過它的磁感應 $B=1\,\mu\mathrm{T}=1\times10^{-6}\,\mathrm{T}$，問環內包含幾個磁通量子？
+
+**Step 1**：算 $\Phi_0$。代入常數
+$$\Phi_0=\frac{h}{2e}=\frac{6.626\times10^{-34}}{2\times1.602\times10^{-19}}\,\mathrm{Wb}=\frac{6.626\times10^{-34}}{3.204\times10^{-19}}\,\mathrm{Wb}.$$
+
+**Step 2**：做除法
+$$\Phi_0=2.068\times10^{-15}\,\mathrm{Wb}\approx2.07\times10^{-15}\,\mathrm{Wb}.$$
+（$1\,\mathrm{Wb}=1\,\mathrm{T\cdot m^2}$，這就是常用的 $\Phi_0\approx2.07\times10^{-15}\,\mathrm{T\cdot m^2}$。）
+
+**Step 3**：算環的面積。$A=\pi r^2=\pi(1\times10^{-3}\,\mathrm{m})^2=\pi\times10^{-6}\,\mathrm{m^2}=3.14\times10^{-6}\,\mathrm{m^2}$。
+
+**Step 4**：算通過環的總磁通 $\Phi=BA=(1\times10^{-6}\,\mathrm{T})(3.14\times10^{-6}\,\mathrm{m^2})=3.14\times10^{-12}\,\mathrm{Wb}$。
+
+**Step 5**：量子數 $N=\Phi/\Phi_0$
+$$N=\frac{3.14\times10^{-12}}{2.07\times10^{-15}}\approx1.52\times10^{3}.$$
+
+$$\boxed{\Phi_0\approx2.07\times10^{-15}\,\mathrm{Wb},\qquad N\approx1.5\times10^{3}\ \text{個磁通量子}}$$
+
+### 例題 2：第二類超導體（type II）渦旋態的渦旋密度
+
+**題目**：第二類超導體（type II superconductor）在 $H_{c1}<H<H_{c2}$ 進入渦旋態（vortex state），每個渦旋（vortex）剛好帶一個磁通量子 $\Phi_0$。當內部磁感應 $B=0.1\,\mathrm{T}$ 時，估單位面積的渦旋數 $n=B/\Phi_0$。
+
+**Step 1**：渦旋態中磁通以一根根渦旋穿過，總磁通 $=$（渦旋數）$\times\,\Phi_0$。對單位面積 $\Phi=B$（每平方公尺的磁通），故
+$$n=\frac{B}{\Phi_0}.$$
+
+**Step 2**：代入 $B=0.1\,\mathrm{T}$、$\Phi_0=2.07\times10^{-15}\,\mathrm{Wb}$
+$$n=\frac{0.1}{2.07\times10^{-15}}\,\mathrm{m^{-2}}=4.83\times10^{13}\,\mathrm{m^{-2}}.$$
+
+**Step 3**：換成每平方公分（$1\,\mathrm{m^2}=10^{4}\,\mathrm{cm^2}$）
+$$n=4.83\times10^{13}\,\mathrm{m^{-2}}=4.83\times10^{9}\,\mathrm{cm^{-2}}.$$
+
+$$\boxed{n=\frac{B}{\Phi_0}\approx4.8\times10^{13}\,\mathrm{m^{-2}}\approx4.8\times10^{9}\,\mathrm{cm^{-2}}}$$
+
+### 例題 3：由 $T_c$ 估 BCS 能隙（energy gap）
+
+**題目**：BCS 理論在弱耦合極限給出能隙關係 $2\Delta(0)\approx3.5\,k_BT_c$（即 $E_g=2\Delta$）。鈮（Nb）的臨界溫度 $T_c=9\,\mathrm{K}$，估它在 $T=0$ 的能隙 $2\Delta(0)$（以 J 與 meV 表示）與單電子能隙 $\Delta(0)$。
+
+**Step 1**：算 $2\Delta(0)=3.5\,k_BT_c$
+$$2\Delta(0)=3.5\times(1.381\times10^{-23}\,\mathrm{J/K})\times(9\,\mathrm{K}).$$
+
+**Step 2**：逐步乘出
+$$k_BT_c=1.381\times10^{-23}\times9=1.243\times10^{-22}\,\mathrm{J},\qquad 2\Delta(0)=3.5\times1.243\times10^{-22}=4.35\times10^{-22}\,\mathrm{J}.$$
+
+**Step 3**：換成 eV（除以 $1.602\times10^{-19}\,\mathrm{J/eV}$）
+$$2\Delta(0)=\frac{4.35\times10^{-22}}{1.602\times10^{-19}}\,\mathrm{eV}=2.72\times10^{-3}\,\mathrm{eV}=2.72\,\mathrm{meV}.$$
+
+**Step 4**：單電子能隙取一半 $\Delta(0)=\tfrac12\times2.72\,\mathrm{meV}\approx1.36\,\mathrm{meV}$。
+
+$$\boxed{2\Delta(0)\approx4.4\times10^{-22}\,\mathrm{J}\approx2.7\,\mathrm{meV},\qquad \Delta(0)\approx1.4\,\mathrm{meV}}$$
+
+## 🔗 延伸
+
+- 完整課文：[Kittel 翻譯本](../Kittel_翻譯.html)（搜尋「超導現象」或「Meissner」即可定位本章）
+- 深入推導＋考題：[單元教學 unit09 超導](../../單元教學/unit09_超導.html)
+- 練歷年題：[逐題詳解](../../考古題/詳解/index.html)
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

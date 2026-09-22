@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab ④ 單原子鏈色散推導</title>
+<link rel="stylesheet" href="../模擬/shared.css">
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 數學 Lab</a>
+  <a href="lab_structure_factor.html">③ 結構因子</a>
+  <a class="here" href="lab_dispersion.html">④ 色散</a>
+  <a href="lab_nfe.html">⑤ NFE</a>
+  <a href="../模擬/sim_dispersion.html">完整模擬</a>
+</div>
+
+<h1>④ 單原子鏈：牛頓 → ω(k)</h1>
+<div class="goal">
+  推出 <strong>ω = 2√(C/M)|sin(ka/2)|</strong>。本頁內嵌<strong>即時色散圖</strong>；完整雙原子見全站模擬。
+</div>
+<div class="lab-progress" id="progress"></div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 1</span>運動方程 + 彈簧鏈圖</h3>
+  <div class="eqbox">M ü_n = C(u_{n+1} − 2u_n + u_{n−1})</div>
+  <div class="viz-panel">
+    <div class="viz-title">SVG：1D 彈簧–質量鏈（示意位移）</div>
+    <svg id="vizChain" viewBox="0 0 520 140"></svg>
+    <div class="viz-controls">
+      <div>
+        <label>波數 ka（動畫相位） <span class="v" data-val="kaAnim">1.2</span></label>
+        <input id="kaAnim" type="range" min="0" max="3.14" step="0.05" value="1.2" data-digits="2">
+      </div>
+    </div>
+    <p class="note-tip">各質量位移 u_n ∝ cos(n·ka)。拖 ka 看相鄰原子是同相還是反相。</p>
+  </div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>ka→0：大家一起移，彈簧幾乎不拉伸 → ω→0。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>ka=π：相鄰反向，彈簧拉伸最大 → ω 最大。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>力 ∝ 相對位移，不是絕對位移（平移不變性）。</div>
+  </div>
+  <div class="blank-row">
+    <span>恢復力來自相鄰位移的</span>
+    <input id="d1" type="text" data-answers="差|差值|相對位移|difference|位移差" placeholder="？">
+    <button type="button" data-check="d1" data-answers="差|差值|相對位移|difference|位移差">檢查</button>
+    <div class="fb" id="d1Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 2</span>行進波假設</h3>
+  <div class="eqbox">u_n = A exp(i(kna − ωt)) ⇒ u_{n+1}/u_n = e^{ika}</div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>與 Bloch 同一數學：平移乘相位。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>k 與 k+2π/a 在離散點上無法區分 → BZ。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>實部 cos(kna−ωt) 才是真實位移。</div>
+  </div>
+  <div class="blank-row">
+    <span>u_{n+1}/u_n =</span>
+    <input id="d2" type="text" data-answers="e^{ika}|exp(ika)|e^(ika)|exp(i*k*a)" placeholder="e^{ika}">
+    <button type="button" data-check="d2" data-answers="e^{ika}|exp(ika)|e^(ika)|exp(i*k*a)">檢查</button>
+    <div class="fb" id="d2Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 3–4</span>特徵方程 + 即時 ω(k)</h3>
+  <div class="eqbox">ω(k) = 2 √(C/M) |sin(ka/2)|</div>
+  <div class="viz-panel">
+    <div class="viz-title">互動色散：調 C、M</div>
+    <svg id="vizDisp"></svg>
+    <div class="viz-controls">
+      <div>
+        <label>C <span class="v" data-val="Cdisp">1</span></label>
+        <input id="Cdisp" type="range" min="0.3" max="3" step="0.05" value="1" data-digits="2">
+      </div>
+      <div>
+        <label>M <span class="v" data-val="Mdisp">1</span></label>
+        <input id="Mdisp" type="range" min="0.3" max="3" step="0.05" value="1" data-digits="2">
+      </div>
+    </div>
+    <div class="viz-kpi" id="dispKpi"></div>
+  </div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>C=1,M=1 → ω_max=2。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>C→4C：整條曲線 ×2（√C）。</div>
+    <div class="ex-card"><div class="ex-h">範例 C · 考古</div>給聲速 v= a√(C/M)，反推 C。</div>
+  </div>
+  <div class="blank-row">
+    <span>ω_max =</span>
+    <input id="d4" type="text" data-answers="2*sqrt(c/m)|2sqrt(c/m)|2√(c/m)|2√(C/M)|2*sqrt(C/M)" placeholder="2√(C/M)">
+    <button type="button" data-check="d4" data-answers="2*sqrt(c/m)|2sqrt(c/m)|2√(c/m)|2√(C/M)|2*sqrt(C/M)">檢查</button>
+    <div class="fb" id="d4Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 5</span>群速與 ω&gt;ω_max</h3>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>v_g=dω/dk，k=0 最大（聲速），k=π/a 為 0。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>ω&gt;ω_max ⇒ sin 要 &gt;1 ⇒ k 複數 → 衰減。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>雙原子：光學支 k=0 仍有限頻率（完整模擬）。</div>
+  </div>
+  <div class="choice-row">
+    <span style="width:100%">第一 BZ</span>
+    <button type="button" data-choice="1" data-okmsg="✓">[−π/a, π/a]</button>
+    <button type="button" data-choice="0">[0,∞)</button>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="done-banner" id="doneBanner">
+  <h3>完成</h3>
+  <p><a href="../模擬/sim_dispersion.html">完整色散模擬（含雙原子）</a> · <a href="lab_nfe.html">⑤ NFE</a></p>
+</div>
+<div class="nav-steps">
+  <button type="button" id="btnPrev">← 上一步</button>
+  <button type="button" id="btnNext" class="primary">下一步 →</button>
+  <button type="button" id="btnReveal">一次展開全部</button>
+  <span class="meta" id="stepMeta"></span>
+</div>
+<footer>Lab ④ · 色散推導 + 內嵌圖</footer>
+<script src="lab.js"></script>
+<script src="viz.js"></script>
+<script>
+new MathLab.StepLab({});
+(function () {
+  const svg = document.getElementById("vizChain");
+  const rka = LabViz.bindRange("kaAnim", draw);
+  function draw() {
+    const ka = rka();
+    LabViz.clear(svg);
+    svg.setAttribute("viewBox", "0 0 520 140");
+    LabViz.el(svg, "rect", { x: 0, y: 0, width: 520, height: 140, fill: "#fcfdff" });
+    const n = 8, x0 = 40, dx = 55, y0 = 70;
+    for (let i = 0; i < n; i++) {
+      const u = 22 * Math.cos(i * ka);
+      const x = x0 + i * dx;
+      const y = y0 - u;
+      if (i > 0) {
+        LabViz.el(svg, "line", {
+          x1: x0 + (i - 1) * dx, y1: y0 - 22 * Math.cos((i - 1) * ka),
+          x2: x, y2: y, stroke: "#888", "stroke-width": 1.5,
+        });
+      }
+      LabViz.el(svg, "circle", { cx: x, cy: y, r: 12, fill: "#1a4d7c", opacity: 0.85 });
+      LabViz.el(svg, "text", { x: x, y: y0 + 40, fill: "#567", "font-size": 10, "text-anchor": "middle" }, "n=" + i);
+    }
+    LabViz.el(svg, "text", { x: 16, y: 20, fill: "#555", "font-size": 12 },
+      `ka=${LabViz.fmt(ka, 2)}  ·  相鄰相位差 = ka`);
+  }
+  draw();
+})();
+(function () {
+  const svg = document.getElementById("vizDisp");
+  const plot = new LabViz.Plot(svg, {
+    w: 520, h: 280, xD: [-Math.PI, Math.PI], yD: [0, 4],
+    xLabel: "k·a", yLabel: "ω",
+  });
+  const rC = LabViz.bindRange("Cdisp", draw);
+  const rM = LabViz.bindRange("Mdisp", draw);
+  function draw() {
+    const C = rC(), M = rM();
+    const wmax = 2 * Math.sqrt(C / M);
+    plot.setDomain([-Math.PI, Math.PI], [0, wmax * 1.2]);
+    const pts = LabViz.linspace(-Math.PI, Math.PI, 160).map((ka) => [
+      ka,
+      2 * Math.sqrt(C / M) * Math.abs(Math.sin(ka / 2)),
+    ]);
+    plot.poly(pts, { stroke: "#1a4d7c", width: 2.6 });
+    plot.vline(Math.PI, { stroke: "#aaa" });
+    plot.vline(-Math.PI, { stroke: "#aaa" });
+    plot.hline(wmax, { stroke: "#c0392b", dash: "4 3" });
+    plot.label(1.5, wmax * 0.95, "ω_max", { fill: "#c0392b", size: 11 });
+    // long wave approx
+    const ptsL = LabViz.linspace(-0.8, 0.8, 40).map((ka) => [
+      ka,
+      Math.sqrt(C / M) * Math.abs(ka),
+    ]);
+    plot.poly(ptsL, { stroke: "#c47a12", width: 1.6, dash: "5 4" });
+    document.getElementById("dispKpi").innerHTML =
+      `<span>ω_max=<b>${LabViz.fmt(wmax, 3)}</b></span>` +
+      `<span>√(C/M)=<b>${LabViz.fmt(Math.sqrt(C / M), 3)}</b></span>` +
+      `<span>橘虛線：長波 ω≈√(C/M)·|ka|</span>`;
+  }
+  draw();
+})();
+</script>
+</body>
+</html>

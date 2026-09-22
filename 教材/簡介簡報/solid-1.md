@@ -1,0 +1,1086 @@
+<!-- source: 固態物理簡介/solid-1.pdf -->
+
+## **深入淺出固態物理理論** 
+
+**==> picture [631 x 64] intentionally omitted <==**
+
+**蕭智仁 政治大學應用物理所** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **大綱** 
+
+- **什麼是固態?** 
+
+- **一** 
+
+- **晶體結構( )晶體的週期性與其他對稱性** 
+
+- **晶體結構(二)X光繞射與倒晶格空間** 
+
+- **� : 一 微觀世界的定律 量子力學( )粒子性與波動性** 
+
+- **� : 二 微觀世界的定律 量子力學( )薛丁格方程式** 
+
+- **� 微觀世界的定律:量子力學(三)電子自旋與原子軌道 � 對稱性與分子軌道** 
+
+- **基本能帶理論** 
+
+- **能帶與晶體物理性質** 
+
+- **一** 
+
+- **能帶範例( )石墨烯與碳奈米結構** 
+
+- **二** 
+
+- **能帶範例( )半導體材料** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **認識晶體 � 什麼是固態?** 
+
+**==> picture [191 x 151] intentionally omitted <==**
+
+http://www.stonecropgallery.com/artists/caleb.php 
+
+## **� 晶體的週期性與其他對稱性** 
+
+**==> picture [163 x 23] intentionally omitted <==**
+
+**==> picture [163 x 123] intentionally omitted <==**
+
+wikipedia 
+
+- **X光繞射與倒晶格空間** 
+
+**==> picture [121 x 121] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **什麼是固態?** 
+
+|||**形狀**|**體積**||
+|---|---|---|---|---|
+||**氣態**|**不固定不固定**|||
+||**液態**|**不固定**|**固定**||
+||**固態**|**固定**|**固定**||
+||||||
+
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **固態的結構分類** 
+
+## **� 晶體** 
+
+**==> picture [163 x 145] intentionally omitted <==**
+
+**==> picture [153 x 91] intentionally omitted <==**
+
+## **� 準晶體** 
+
+**==> picture [153 x 67] intentionally omitted <==**
+
+**==> picture [168 x 175] intentionally omitted <==**
+
+- **非晶體** 
+
+   - **玻璃** 
+
+**==> picture [200 x 102] intentionally omitted <==**
+
+- **複合物質** 
+
+   - **如鋼筋混凝土等** 
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+**==> picture [691 x 42] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+固態的結構分類<br>**----- End of picture text -----**<br>
+
+
+**==> picture [721 x 451] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+固體<br>純物質 複合物質<br>晶體 非晶體<br>準晶體<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **思考問題 � 木材是不是固體?** 
+
+## **� 人體是不是固體?** 
+
+- **為何固體適合當建築材料?** 
+
+**==> picture [721 x 271] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **晶體的特性** 
+
+- **週期性** 
+
+   - **晶格有週期性** 
+
+   - **原子在各個晶格中重複出現** 
+
+   - **一個晶格中不只有一個或一種原子** 
+
+**==> picture [721 x 330] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+晶格 lattice<br>周期<br>周期<br>原子 atom<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **晶體的特性** 
+
+## **� 晶體與旋轉對稱** 
+
+## � **一重旋轉對稱** 
+
+� 轉360°後跟原本一樣 
+
+**==> picture [266 x 67] intentionally omitted <==**
+
+## � **二重旋轉對稱** 
+
+� 轉180°後跟原本一樣 
+
+## � **三重旋轉對稱** 
+
+� 轉120°後跟原本一樣 
+
+- **四重旋轉對稱** 
+
+� 轉90°後跟原本一樣 
+
+- **六重旋轉對稱** 
+
+   - 轉60°後跟原本一樣 
+
+   - � 在立體空間中, 有三重對稱不代表就有六重對稱 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **準晶體** 
+
+- **常出現在五重或是七重旋轉對稱系統** 
+
+- **同樣的圖案重複出現填滿空間** 
+
+- **不過並不具有週期性** 
+
+- **數學家 Penrose 提出這種圖形** 
+
+**==> picture [189 x 19] intentionally omitted <==**
+
+**==> picture [189 x 204] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [310 x 241] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **準晶體** 
+
+**==> picture [320 x 147] intentionally omitted <==**
+
+**==> picture [320 x 147] intentionally omitted <==**
+
+wikipedia 
+
+## Ag-Al 準晶體模型 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **準晶體** 
+
+**==> picture [290 x 127] intentionally omitted <==**
+
+**==> picture [295 x 121] intentionally omitted <==**
+
+**==> picture [290 x 170] intentionally omitted <==**
+
+**==> picture [295 x 175] intentionally omitted <==**
+
+wikipedia 
+
+## Ho-Mg-Zn 電子繞射圖案 
+
+Ho-Mg-Zn 晶體 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **玻璃** 
+
+## **� 不具有週期性與旋轉對稱性** 
+
+## **� 與準晶體完全不同** 
+
+SiO 2 玻璃 
+
+**==> picture [281 x 151] intentionally omitted <==**
+
+SiO2 晶體 (石英) wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **晶體的週期性與其他對稱性** 
+
+- **為什麼晶體只容許一重、二重、三重、四重與六重 旋轉對稱？** 
+
+   - **答案是：為了要同時滿足旋轉與周期平移對稱** 
+
+**==> picture [478 x 235] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+v v<br>r − r = r<br>2 1<br>v v<br>r −r [v] = r r −r [v] = r<br>1 ['] 1 2 ['] 2<br>[r][v] 1 [r][v] 2<br>θ θ<br>' '<br>θ<br>[r][v] 1 [r][v] 2<br>θ θ<br>r cosθ r cosθ<br>**----- End of picture text -----**<br>
+
+
+= = − r + 2r cosθ Nr ⇒ 2 cosθ N 1 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **思考問題** 
+
+## **� 2cosθ θ=2π N n n 若 =N-1, /n, 其中 與 必須為整數, 則 有 多少種解?** 
+
+||**n**|**2cos(2π/n)**||
+|---|---|---|---|
+||**1**|**2**||
+||**2**|**-2**||
+||**3**|**1**<br>**-**||
+||**4**|**0**||
+||**5**|**~0.618**||
+||**6**|**1**||
+||**7**|**~1.247**||
+||**8**|**~1.414**||
+||**9**|**~1.532**||
+||**10**|**~1.618**||
+|||||
+
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+**晶體內不包含平移的對稱操作 � 不包含平移的對稱, 也可以在獨立分子上找到** 
+
+**轉動 非正當轉動 反演 鏡射** 
+
+Rotation      Improper rotation   Inversion          Reflection 
+
+**==> picture [721 x 321] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **晶體內包含平移的對稱操作** 
+
+**螺旋** 
+
+**滑移** 
+
+Screw                                        Glide 
+
+**==> picture [721 x 365] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+1<br>4<br>3<br>2<br>1<br>1<br>2 x 4<br>3<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **對稱操作** 
+
+## **� : 對稱操作的符號定義** 
+
+- **°** 
+
+- � cn: **轉動** 360 /n 
+
+- **σ** : h **水平面鏡射** ( **鏡射面與轉軸正交** ) 
+
+- **σ** : v **垂直面鏡射** ( **轉軸躺在鏡射面上** ) 
+
+- � **σ** : d **對角鏡射** (cn **主轉軸躺在該鏡射面上** , **而且還可找到兩** c c 
+
+- **個以上垂直於 n主轉軸的 2轉軸** , **只與鏡射面相交於一點** ) **°** 
+
+- � s : 360 /n **σ** n **非正當轉動** , **也就是先轉 再一個** h **鏡射操作** 
+
+- � i : **反演操作** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **對稱操作** 
+
+**==> picture [414 x 28] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+c s i<br>4                                   4<br>**----- End of picture text -----**<br>
+
+
+**==> picture [721 x 379] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **對稱操作** 
+
+**==> picture [443 x 21] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+σ σ σ<br>v                                   h                                     d<br>**----- End of picture text -----**<br>
+
+
+**==> picture [721 x 384] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+- **Schönflies 符號 � 晶體結構可容許一種以上的對稱操作, 所以需要一個 記號系統來標記與區分不同的對稱結構** 
+
+   - Cn: **有** cn **軸的轉動對稱** 
+
+      - C σ nv: adding v 
+
+      - C σ nh: adding h 
+
+   - D : c c n **二面體** (dihedral) **對稱** , **含有** n **軸及與之垂直的** 2 **軸** 
+
+      - D **nv** : addin **g** σ **v** 
+
+      - D σ nh: adding h 
+
+      - D σ nd: adding d 
+
+   - Sn: **有** sn **軸的轉動鏡射對稱** 
+
+   - O: **八面體對稱** , **含有** c3, c4 
+
+   - � T: c **四面體對稱** , **含有** 2, c3 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **Classification flow chart** 
+
+**==> picture [694 x 188] intentionally omitted <==**
+
+**==> picture [694 x 213] intentionally omitted <==**
+
+http://csma31.csm.jmu.edu/chemistry/courses/inorganic/chem470/point%20group.png 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **晶胞 cell** 
+
+- **基本的晶體單元 (不一定是最小單元)** 
+
+- **晶格常數 a b c** 
+
+- **夾角 α β γ** 
+
+- **體積** 
+
+**==> picture [475 x 35] intentionally omitted <==**
+
+**==> picture [721 x 271] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+c b<br>α<br>γ<br>β<br>a<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **晶體分類** 
+
+- **7大晶系 crystal systems** 
+
+   - **三斜晶系** 
+
+Triclinic 
+
+- **單斜晶系** 
+
+Monoclinic 
+
+- **斜方** ( **正交** ) **晶系** 
+
+- � **四方晶系** 
+
+- � **三方** ( **稜方** ) **晶系** 
+
+- � **六方晶系** 
+
+ **斜方** ( **正交** ) **晶系** Orthorhombic � **四方晶系** Tetragonal � **三方** ( **稜方** ) **晶系** Trigonal (rhombohedral) � **H l 六方晶系** exagona � **等軸** ( **立方** ) **晶系** Cubic 
+
+- **4類中心 Centering** � **簡單** Primitive (Simple) 
+
+   - **特定面** Base centered 
+
+   - � **體心** Body centered 
+
+   - � **面心** Face centered 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **14種Bravais 晶格** 
+
+||**Primitive**<br>**(P)**|**Centered**<br>**(A or C)**|**Body-centered**<br>**(I)**|**Face-centered**<br>**(F)**|
+|---|---|---|---|---|
+|**Triclinic**||**N/A**|**N/A**|**N/A**|
+|**Monoclinic**|||**N/A**|**N/A**|
+|**Orthorhombic**|||||
+
+
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **14種Bravais 晶格** 
+
+|||**Primitive**<br>**(P)**|**Centered**<br>**(A or C)**|**Body-centered**<br>**(I)**|**Face-centered**<br>**(F)**|
+|---|---|---|---|---|---|
+||**Tetragonal**||**N/A**||**N/A**|
+||**Trigonal**<br>**(Rhombohedral)**|**(or R)**|**N/A**|**N/A**|**N/A**|
+||**Hexagonal**||**N/A**|**N/A**|**N/A**|
+||**Cubic**||**N/A**|||
+
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **230種晶格形式(空間群)** 
+
+**==> picture [692 x 149] intentionally omitted <==**
+
+**==> picture [692 x 148] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **230種晶格形式(空間群)** 
+
+**==> picture [692 x 148] intentionally omitted <==**
+
+**==> picture [692 x 161] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **230種晶格形式(空間群)** 
+
+**==> picture [692 x 148] intentionally omitted <==**
+
+**==> picture [692 x 89] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **230種晶格形式(空間群)** 
+
+**==> picture [692 x 150] intentionally omitted <==**
+
+**==> picture [692 x 143] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **230種晶格形式(空間群)** 
+
+**==> picture [692 x 148] intentionally omitted <==**
+
+**==> picture [692 x 89] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **三斜晶系晶體** 
+
+**==> picture [414 x 175] intentionally omitted <==**
+
+**==> picture [414 x 137] intentionally omitted <==**
+
+## 矽灰石wollastonite 
+
+## 成分結構:矽酸鈣 CaSiO3 
+
+http://www.uua.cn/rock/show-6484-1.html 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **單斜晶系晶體** 
+
+**==> picture [361 x 163] intentionally omitted <==**
+
+**==> picture [361 x 109] intentionally omitted <==**
+
+和闐玉 (閃透石Tremolite - 陽起石Actinolite ) 成分結構: Ca2Mg5(Si4O11)2(OH)2 - Ca2(Mg,Fe[2+] )5(Si4O11)2(OH)2 
+
+http://hi.baidu.com/lyc_200000/blog/item/955c2aaee536ed054a36d6f5.html 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **正交晶系晶體** 
+
+**==> picture [312 x 181] intentionally omitted <==**
+
+**==> picture [312 x 136] intentionally omitted <==**
+
+wikipedia 
+
+黃玉 Topaz 成分結構:矽酸鋁 Al2SiO4(F,OH)2 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **四方晶系晶體** 
+
+**==> picture [226 x 127] intentionally omitted <==**
+
+**==> picture [226 x 100] intentionally omitted <==**
+
+## 鋯石 Zircon 
+
+## 成分結構:矽酸鋯 ZrSiO 4 
+
+http://media.photobucket.com/image/Zircon/Henry_Taso/gem_zircon.jpg 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **三方晶系晶體** 
+
+**==> picture [487 x 181] intentionally omitted <==**
+
+**==> picture [487 x 145] intentionally omitted <==**
+
+wikipedia 紫水晶 Amethyst 成分結構:二氧化矽 SiO 2 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **六方晶系晶體** 
+
+**==> picture [271 x 151] intentionally omitted <==**
+
+**==> picture [271 x 116] intentionally omitted <==**
+
+wikipedia 石墨 Graphite 成分結構: 碳 C 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **立方(等軸)晶系晶體** 
+
+**==> picture [438 x 167] intentionally omitted <==**
+
+wikipedia 鑽石 Diamond 成分結構: 碳 C 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **七大晶系的階層** 
+
+**==> picture [721 x 436] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+Cubic<br>Tetragonal Hexagonal<br>Orthorhombic Trigonal<br>Monoclinic<br>Triclinic<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **思考問題** 
+
+## **� 四方晶系不會有面心的基本結構, 因為你可以從面心 : 四方晶格上找到更小的基本單元 體心四方晶格 為什麼可以找得到?** 
+
+**==> picture [721 x 320] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **如何 “看” 東西? 用光! � 光具有波動性, 是電磁場的振動** 
+
+**==> picture [493 x 151] intentionally omitted <==**
+
+**==> picture [493 x 169] intentionally omitted <==**
+
+http://h2physics.org/?cat=45 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **波動的特質** 
+
+## **� 兩道波動彼此可以互相疊加** 
+
+## � + + : **波峰 波峰** , **或是波谷 波谷 相長干涉** � + : **波峰 波谷 相消干涉** 
+
+**==> picture [435 x 97] intentionally omitted <==**
+
+**==> picture [435 x 233] intentionally omitted <==**
+
+http://h2physics.org/?cat=45 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **波動的數學表達 � 波動的特徵量: 波長 λ, 振幅 A, 周期 T** 
+
+**==> picture [508 x 102] intentionally omitted <==**
+
+A 
+
+λ 
+
+## **– � π λ 基本的寫法: Asin(2 (x/ t/T))** 
+
+- **:** 
+
+- **近一步的寫法** 
+
+   - **π** / **λ** 
+
+   - **波向量** |k|=2 
+
+   - **ω** =2 **π** /T 
+
+   - **角頻率** 
+
+   - e[i] **[α]** sin **α** = cos **α** + i sin **α** 
+
+   - **用 取代 的表達** (e[i] **[α]** ) 
+
+- **進階的表達方式: Ae[i(k·x-][ω][t][)]** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **: 繞射 作為微觀世界的探測工具** 
+
+- **:** 
+
+- **繞射成因 光的波動性** 
+
+**==> picture [239 x 187] intentionally omitted <==**
+
+   - + + : 
+
+   - **波峰 波峰** , **或是波谷 波谷 亮紋** 
+
+   - + : 
+
+   - **波峰 波谷 暗紋** 
+
+- **繞射(diffraction)與干涉 (interference)意思不同** 
+
+   - **:** 
+
+   - **干涉 兩同調光源的相長相消** 
+
+**==> picture [239 x 225] intentionally omitted <==**
+
+   - : 
+
+   - **繞射 多個同調光源產生斑紋** 
+
+- **當狹縫間距接近波長時, 屏幕上 容易觀察到干涉條紋** 
+
+http://www.phy.ntnu.edu.tw/demolab/phpBB/viewtopic.php?topic=18267 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **繞射斑紋成立條件** 
+
+## **� 穿透式光柵** 
+
+## = d sinθ nλ 
+
+**==> picture [305 x 138] intentionally omitted <==**
+
+**==> picture [305 x 150] intentionally omitted <==**
+
+faculty.otterbein.edu/DRobertson/nano/Diffraction.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **繞射斑紋成立條件** 
+
+## **� 反射式光柵** 
+
+**==> picture [721 x 391] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+'<br>−<br>=<br>d sinθ d sinθ nλ<br>θ’<br>θ<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **思考問題** 
+
+## **� 利用雷射(650nm)照射CD片可看見繞射斑點, 請利 用這張圖所呈現的資訊推測CD溝槽的寬度週期** 
+
+**==> picture [241 x 359] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+ −1 4.2<br>θ = tan = .0575<br><br>7.3<br><br>' −1 6.8<br>θ = tan = .1165<br> 7.3<br>.065 m<br>µ<br>d = = 1 . 74 m<br>µ<br>'<br>−<br>sinθ sinθ<br>CD標準: 1.6µm wikimedia<br>**----- End of picture text -----**<br>
+
+
+**==> picture [287 x 359] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+8.6cm<br>2.4cm<br>3.7cm<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **X : 繞射 微觀世界的探測工具 � X光是一種電磁波, 具有波動性** 
+
+**==> picture [691 x 151] intentionally omitted <==**
+
+**==> picture [691 x 192] intentionally omitted <==**
+
+http://www.lbl.gov/MicroWorlds/ALSTool/EMSpec/EMSpec2.html 
+
+波長約Å等級 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **X光與晶體的交互作用** 
+
+**==> picture [615 x 51] intentionally omitted <==**
+
+**==> picture [721 x 271] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+wikipedia<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **產生X光的方法** 
+
+**� 高能電子撞擊銅靶, 動能轉換成電磁輻射 � E=hν X 由於 , 若能量正確(~10[4] eV)則可發出對應的 光** 
+
+**==> picture [214 x 25] intentionally omitted <==**
+
+**==> picture [214 x 141] intentionally omitted <==**
+
+**==> picture [82 x 13] intentionally omitted <==**
+
+**==> picture [82 x 124] intentionally omitted <==**
+
+**==> picture [248 x 61] intentionally omitted <==**
+
+**==> picture [248 x 165] intentionally omitted <==**
+
+http://www.xtal.iqfr.csic.es/Cristalografia/index-en.html 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **產生X光的方法 � 銅內層電子結構** 
+
+**==> picture [328 x 169] intentionally omitted <==**
+
+**==> picture [721 x 271] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **產生X光的方法** 
+
+- **若激發到原子內層的電子躍遷, 則可發出近乎單頻而 高能量密度的X光** 
+
+**==> picture [164 x 115] intentionally omitted <==**
+
+**==> picture [164 x 18] intentionally omitted <==**
+
+**==> picture [248 x 7] intentionally omitted <==**
+
+**==> picture [248 x 219] intentionally omitted <==**
+
+**==> picture [164 x 109] intentionally omitted <==**
+
+**==> picture [164 x 24] intentionally omitted <==**
+
+http://nobelprize.org/educational_games/physics/x-rays/ 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **晶體繞射** 
+
+- **Bragg 繞射是來自X光對層層晶面的繞射作用** 
+
+## **� 繞射光點成立條件與晶面排列方式有關** 
+
+**==> picture [283 x 69] intentionally omitted <==**
+
+**==> picture [283 x 77] intentionally omitted <==**
+
+= 2d sinθ nλ 
+
+**==> picture [351 x 65] intentionally omitted <==**
+
+**==> picture [351 x 92] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **晶面** 
+
+- **晶體在不同角度就會有不同晶面, 都可參與繞射作用** 
+
+**==> picture [349 x 121] intentionally omitted <==**
+
+**==> picture [349 x 188] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **Miller指數** 
+
+## **� 以整數 (h  k  l) 表示** 
+
+**==> picture [338 x 133] intentionally omitted <==**
+
+**==> picture [721 x 271] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+wikipedia<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **Miller指數** 
+
+- **三方與六方晶格的 Miller 指數以 (h  k  -h-k  l) 表示** 
+
+**==> picture [345 x 67] intentionally omitted <==**
+
+**==> picture [721 x 271] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+wikipedia<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **晶面, Miller指數與倒晶格** 
+
+**==> picture [140 x 33] intentionally omitted <==**
+
+**==> picture [721 x 415] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+b + b<br>1 2<br>(1 1 0)<br>(0 1 0)<br>b<br>2<br>b<br>1<br>(1 0 0)<br>a<br>2<br>倒晶格<br>a<br>1 晶格<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+**晶面與干涉 � 不同晶面排列方式, 會改變繞射條件的成立與否** 
+
+**==> picture [412 x 169] intentionally omitted <==**
+
+(0 0 1) 
+
+(0 0 2) 
+
+**==> picture [412 x 237] intentionally omitted <==**
+
+**相長干涉** 
+
+**相消干涉** 
+
+http://www.gly.uga.edu/Schroeder/geol3010/diffraction.jpeg 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **Miller指數與晶體結構** 
+
+## **� 晶面間距由晶體結構與Miller指數所決定** 
+
+**==> picture [541 x 163] intentionally omitted <==**
+
+**==> picture [541 x 241] intentionally omitted <==**
+
+http://www.xtal.iqfr.csic.es/Cristalografia/index-en.html 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **Laue方程式 � 入射光波向量ki與繞射光波向量ko 的差∆k與晶格的關係** 
+
+**==> picture [145 x 159] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+k<br>i<br>k<br>b + b o<br>1 2<br>∆ k<br>**----- End of picture text -----**<br>
+
+
+⋅ = a ∆k 2πh 1 ⋅ = a ∆k 2πk 2 ⋅ = a ∆k 2πl **3** 
+
+**==> picture [208 x 49] intentionally omitted <==**
+
+## **� 或者是∆k=G, G=hb1+kb2+lb3                                               也** b **就是說繞射光點出現的條件** 2 **構** b **成倒晶格空間的格點** 1 
+
+**==> picture [208 x 150] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+b<br>2 構<br>b<br>1<br>G<br>倒晶格<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **XRD 實驗** 
+
+- **繞射斑點的集合可以與倒空間格點對應, 可用來解析 晶體結構** 
+
+**==> picture [303 x 121] intentionally omitted <==**
+
+**==> picture [303 x 249] intentionally omitted <==**
+
+**==> picture [291 x 97] intentionally omitted <==**
+
+**==> picture [291 x 199] intentionally omitted <==**
+
+http://www.xtal.iqfr.csic.es/Cristalografia/parte_06-en.html 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **X光解析結構的實驗流程** 
+
+**==> picture [270 x 193] intentionally omitted <==**
+
+**==> picture [721 x 271] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+wikipedia<br>**----- End of picture text -----**<br>
+
+

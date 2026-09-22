@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 0–1 — math and words for Kittel Ch.1 only</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  :root{--blue:#1a4d7c;--blue2:#2b6ca0;--soft:#eef5fb;--border:#c5d5e5;--ink:#1c2733;--muted:#6b7c90}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+       max-width:860px;margin:1.4em auto 5em;padding:0 1.15em;line-height:1.7;color:var(--ink);background:#fafafa}
+  h1{color:var(--blue);border-bottom:3px solid var(--blue);padding-bottom:.3em;font-size:1.35em}
+  h2{color:var(--blue);font-size:1.08em;margin:1.5em 0 .4em;border-bottom:1px solid #ddd;padding-bottom:.2em}
+  a{color:var(--blue2)}
+  .nav{font-size:.92em;margin:0 0 1em;display:flex;flex-wrap:wrap;gap:.5em}
+  .nav a{text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.3em .7em;color:#234}
+  .lede,.warn{border-radius:6px;padding:.8em 1em;margin:0 0 1em;font-size:.95em}
+  .lede{background:var(--soft);border-left:4px solid #6aa1d6}
+  .warn{background:#fff8ee;border-left:4px solid #e0b97a;color:#5c3d00}
+  .zh{display:none;margin:.4em 0 0;padding:.5em .75em;background:#f7f4ee;border-left:3px solid #c4a574;border-radius:0 6px 6px 0;color:#5c4a2e;font-size:.92em}
+  body.show-zh .zh{display:block}
+  .toolbar{display:flex;flex-wrap:wrap;gap:.5em;margin:0 0 1em;position:sticky;top:0;z-index:20;
+           background:rgba(250,250,250,.94);padding:.4em 0;backdrop-filter:blur(6px)}
+  .toolbar button{font:inherit;font-size:.9em;padding:.35em .9em;border:1px solid var(--border);background:#fff;border-radius:999px;cursor:pointer}
+  .toolbar button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .q{background:#fff;border:1px solid var(--border);border-radius:12px;padding:.95em 1.1em;margin:0 0 .8em}
+  .q h3{margin:.1em 0 .4em;font-size:1.02em;color:var(--blue)}
+  .write{border:1px dashed #b7c9db;background:#f4f7fb;border-radius:8px;min-height:4.5em;margin:.45em 0;padding:.5em .7em;color:var(--muted);font-size:.88em}
+  .ans{margin-top:.45em;padding:.7em .85em;background:#f7fbf8;border:1px solid #c5ddc8;border-radius:8px}
+  body.hide-ans .ans{display:none}
+  .boxed{display:block;margin:.4em 0;padding:.4em .65em;border:2px solid var(--blue);border-radius:8px;font-weight:700;color:var(--blue)}
+  table{border-collapse:collapse;width:100%;font-size:.9em;margin:.4em 0}
+  th,td{border:1px solid #dde3e9;padding:.4em .5em;text-align:left}
+  th{background:var(--soft);color:var(--blue)}
+  footer{color:#888;font-size:.85em;margin-top:2em;border-top:1px solid #ddd;padding-top:1em}
+</style>
+</head>
+<body class="hide-ans">
+<div class="nav">
+  <a href="ch01_練習題.html">Set A (after this)</a>
+  <a href="ch01_原子結構_默寫卡.html">Formula card</a>
+  <a href="../學習卡片.html">Flashcards M1</a>
+</div>
+
+<h1>Day 0–1 — only the math and words Ch. 1 actually uses</h1>
+<div class="lede">
+Do <b>not</b> restart calculus, linear algebra, or Fourier. For Atomic structure you need cube geometry, a few fractions, one sphere-volume formula, and about twelve English words. Write answers in English.
+<div class="zh">不要重讀微積分／線性代數／傅立葉。第一章只要立方體幾何、分數、球體積，加上十來個英文詞。用英文寫。</div>
+</div>
+<div class="warn">35 minutes. No book. Star if stuck &gt; 2 min.
+<div class="zh">35 分鐘。不准開書。卡超過 2 分鐘打星。</div>
+</div>
+<div class="toolbar">
+  <button type="button" id="btnZh">中文旁註</button>
+  <button type="button" id="btnHide" class="on">Hide answers</button>
+  <button type="button" id="btnShow">Show answers</button>
+</div>
+
+<h2>Part 0 · words (say them out loud)</h2>
+<div class="q">
+  <h3>W1 — Copy this table once, then cover it and reproduce</h3>
+  <table>
+    <tr><th>English</th><th>meaning in one phrase</th></tr>
+    <tr><td>lattice</td><td>the set of mathematical points (how it repeats)</td></tr>
+    <tr><td>basis</td><td>the atom(s) hung on each lattice point</td></tr>
+    <tr><td>crystal structure</td><td>lattice × basis</td></tr>
+    <tr><td>primitive cell</td><td>smallest repeating cell; exactly 1 lattice point</td></tr>
+    <tr><td>conventional cell</td><td>pretty larger cell; may contain several points</td></tr>
+    <tr><td>packing fraction $\eta$</td><td>volume of hard spheres / volume of cell</td></tr>
+    <tr><td>coordination number</td><td>number of nearest neighbours</td></tr>
+    <tr><td>Miller indices $(hkl)$</td><td>label of a family of planes</td></tr>
+  </table>
+  <p>Then write one English sentence: <i>A crystal structure is …</i></p>
+  <div class="zh">先抄一次再蓋住默寫。最後用英文寫一句：晶體結構是…</div>
+  <div class="write">Paper</div>
+  <div class="ans">
+    <span class="boxed">A crystal structure is a lattice times a basis.</span>
+    Lattice = how it repeats. Basis = what sits on each point.
+  </div>
+</div>
+
+<h2>Part 1 · cube geometry (the whole packing chapter lives here)</h2>
+<div class="q">
+  <h3>M1 — Face diagonal</h3>
+  <p>A cube has edge $a$. Draw a square face. Using Pythagoras, find the length of the face diagonal.</p>
+  <div class="zh">邊長 $a$ 的立方體，面對角線多長？畢氏定理。</div>
+  <div class="write">Paper — draw the square</div>
+  <div class="ans">$a^2+a^2=d^2$ → $d=\sqrt2\,a$. This is the contact line in <b>fcc</b>.</div>
+</div>
+<div class="q">
+  <h3>M2 — Body diagonal</h3>
+  <p>Same cube. Find the body diagonal (corner to opposite corner through the interior).</p>
+  <div class="zh">體對角線（穿過內部、角到對角）多長？</div>
+  <div class="write">Paper</div>
+  <div class="ans">Face diagonal $\sqrt2\,a$, then $d^2=(\sqrt2\,a)^2+a^2=3a^2$ → $d=\sqrt3\,a$. Contact line in <b>bcc</b>.</div>
+</div>
+<div class="q">
+  <h3>M3 — Counting shared atoms</h3>
+  <p>A cube has 8 corners. Each corner atom is shared by 8 cubes. How many corner atoms belong to <i>this</i> cube? A cube has 6 faces; each face-centre atom is shared by 2 cubes. How many face-centre atoms belong to this cube?</p>
+  <div class="zh">8 個角、各被 8 個立方共用 → 這個立方分到幾顆？6 個面心、各被 2 個共用 → 幾顆？</div>
+  <div class="write">Paper</div>
+  <div class="ans">Corners: $8\times\tfrac18=1$. Faces: $6\times\tfrac12=3$. Together with no body-centre → fcc has $N=4$. sc is corners only, $N=1$. bcc is corners + 1 body centre, $N=2$.</div>
+</div>
+<div class="q">
+  <h3>M4 — Sphere volume</h3>
+  <p>Write the volume of a sphere of radius $r$. Then substitute $r=a/2$ and simplify $N\cdot\frac43\pi r^3/a^3$ for $N=1$.</p>
+  <div class="zh">球體積公式。代入 $r=a/2$、$N=1$，化簡填充率。</div>
+  <div class="write">Paper</div>
+  <div class="ans">$V=\frac43\pi r^3$. $r=a/2$ → $\eta=\frac43\pi(a/2)^3/a^3=\pi/6$. That is sc packing.</div>
+</div>
+<div class="q">
+  <h3>M5 — Reciprocals (Miller engine)</h3>
+  <p>A plane cuts the axes at $4$, $1$, and $2$ (in units of $a_1,a_2,a_3$). Take reciprocals, then clear fractions to the smallest integers. Write $(hkl)$.</p>
+  <div class="zh">截距 4, 1, 2 → 取倒數 → 化最小整數 → Miller 指標。</div>
+  <div class="write">Paper</div>
+  <div class="ans">Reciprocals $\frac14,1,\frac12$. Multiply by 4 → $(1,4,2)$ i.e. $(142)$.</div>
+</div>
+<div class="q">
+  <h3>M6 — Vector length</h3>
+  <p>$\mathbf v=\frac a2(\hat x+\hat y)$. Find $|\mathbf v|$.</p>
+  <div class="zh">這就是 fcc 一條原胞向量的長度。</div>
+  <div class="write">Paper</div>
+  <div class="ans">$|\mathbf v|=\frac a2\sqrt{1+1}=\frac a2\sqrt2$. (fcc primitive vector length.)</div>
+</div>
+
+<footer>
+Done when you can do M1–M5 without looking. Then go to Set A, still in English:<br>
+<a href="ch01_練習題.html">ch01_練習題.html</a>
+<div class="zh">M1–M5 不看書會了，再去做 A 卷。不要先開單元 01 全文。</div>
+</footer>
+<script>
+(function(){
+  var hide=document.getElementById('btnHide'), show=document.getElementById('btnShow'), zh=document.getElementById('btnZh');
+  function setHide(on){
+    document.body.classList.toggle('hide-ans', on);
+    hide.classList.toggle('on', on);
+    show.classList.toggle('on', !on);
+  }
+  hide.onclick=function(){ setHide(true); };
+  show.onclick=function(){ setHide(false); };
+  zh.onclick=function(){
+    document.body.classList.toggle('show-zh');
+    zh.classList.toggle('on', document.body.classList.contains('show-zh'));
+  };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab ① 倒基正交證明</title>
+<link rel="stylesheet" href="../模擬/shared.css">
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 數學 Lab</a>
+  <a class="here" href="lab_reciprocal.html">① 倒基</a>
+  <a href="lab_packing.html">② packing</a>
+  <a href="../模擬/sim_bragg_ewald.html">Ewald 模擬</a>
+</div>
+
+<h1>① 倒基正交：aᵢ · bⱼ = 2π δᵢⱼ</h1>
+<div class="goal">
+  <strong>目標</strong>：由 V 與 b₁ 定義證明對角 = 2π、非對角 = 0。下方有<strong>可調 a 的 2D 即時圖</strong>與三個計算範例。
+</div>
+<div class="links">
+  <a href="../教材/先備知識/數學先備.html">數學先備</a>
+  <a href="../模擬/sim_bragg_ewald.html">Ewald</a>
+  <a href="../單元教學/unit02_倒晶格與繞射.html">unit02</a>
+</div>
+<div class="lab-progress" id="progress"></div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 1</span>體積 = 純量三重積</h3>
+  <div class="eqbox">V = a₁ · (a₂ × a₃)</div>
+  <div class="viz-panel">
+    <div class="viz-title">SVG 觀念：底面積向量 × 高</div>
+    <svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="480" height="200" fill="#fcfdff"/>
+      <!-- parallelogram base -->
+      <polygon points="80,150 220,150 260,90 120,90" fill="rgba(26,77,124,0.12)" stroke="#1a4d7c" stroke-width="2"/>
+      <text x="150" y="128" fill="#1a4d7c" font-size="12">底：a₂–a₃ 平面</text>
+      <!-- height vector a1 -->
+      <line x1="170" y1="120" x2="170" y2="40" stroke="#c0392b" stroke-width="2.5"/>
+      <polygon points="170,40 164,52 176,52" fill="#c0392b"/>
+      <text x="180" y="70" fill="#c0392b" font-size="13" font-weight="700">a₁（高的分量）</text>
+      <!-- area vector -->
+      <line x1="300" y1="150" x2="300" y2="70" stroke="#1e7a46" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="310" y="110" fill="#1e7a46" font-size="12">a₂×a₃ 方向</text>
+      <text x="80" y="30" fill="#555" font-size="13">V = 底面積 × 高 = a₁ · (a₂ × a₃)</text>
+    </svg>
+  </div>
+  <div class="examples">
+    <div class="ex-card">
+      <div class="ex-h">範例 A · 熱身<span class="ex-tag">立方</span></div>
+      a₁=a x̂, a₂=a ŷ, a₃=a ẑ → V = a³。邊長 2 Å 時 V = 8 Å³。
+    </div>
+    <div class="ex-card">
+      <div class="ex-h">範例 B · 中階<span class="ex-tag">長方</span></div>
+      a₁=2 x̂, a₂=3 ŷ, a₃=4 ẑ → V = 24。三重積 = 行列式 det[a₁ a₂ a₃]。
+    </div>
+    <div class="ex-card">
+      <div class="ex-h">範例 C · 考試味<span class="ex-tag">斜交 2D</span></div>
+      2D「面積」S = |a₁ × a₂|（取 z 分量）。a₁=(2,0), a₂=(1,1) → S=2。
+    </div>
+  </div>
+  <div class="blank-row">
+    <span>交換三重積中兩個向量，結果差一個</span>
+    <input id="b1" type="text" data-answers="符號|正負|正負號|sign|-" placeholder="？">
+    <button type="button" data-check="b1" data-answers="符號|正負|正負號|sign|-">檢查</button>
+    <button type="button" class="ghost" data-hint-for="b1" data-hint="u×v = −(v×u)">提示</button>
+    <div class="fb" id="b1Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 2</span>倒基定義 + 互動圖（2D）</h3>
+  <div class="eqbox">b₁ = 2π (a₂ × a₃)/V ，&nbsp; 2D：b₁ = 2π (a₂ × ẑ)/S</div>
+  <div class="viz-panel">
+    <div class="viz-title">互動：拖 a（正方晶格邊長）→ 看 a 與 b=2π/a</div>
+    <svg id="vizRecip" viewBox="0 0 520 300"></svg>
+    <div class="viz-controls">
+      <div>
+        <label>晶格常數 a <span class="v" data-val="aSlider">2</span></label>
+        <input id="aSlider" type="range" min="1" max="4" step="0.05" value="2" data-digits="2">
+      </div>
+    </div>
+    <div class="viz-kpi" id="recipKpi"></div>
+    <p class="note-tip">左：實空間格子；右：倒空間。a 變大 → 實空間點變疏、倒空間 b 變密（|b|=2π/a 變小？不——a↑ 則 |b|↓，倒格子點變密是因為間距 2π/a 變小）。</p>
+  </div>
+  <div class="examples">
+    <div class="ex-card">
+      <div class="ex-h">範例 A</div>
+      a=1 → |b|=2π ≈ 6.28；第一 BZ 邊界在 π。
+    </div>
+    <div class="ex-card">
+      <div class="ex-h">範例 B</div>
+      a=2 → |b|=π；倒格子點間距減半。
+    </div>
+    <div class="ex-card">
+      <div class="ex-h">範例 C · 繞射</div>
+      |G_min|=2π/a 必須 ≤ 2|k|=4π/λ 才能繞射 → λ ≤ 2a（一階示意）。
+    </div>
+  </div>
+  <div class="blank-row">
+    <span>b₁ 方向平行於</span>
+    <input id="b2" type="text" data-answers="a2×a3|a2xa3|a2*a3|a2 cross a3" placeholder="a₂×a₃">
+    <button type="button" data-check="b2" data-answers="a2×a3|a2xa3|a2*a3|a2 cross a3">檢查</button>
+    <div class="fb" id="b2Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 3</span>對角：a₁ · b₁ = 2π</h3>
+  <div class="eqbox">a₁ · b₁ = (2π/V) · a₁·(a₂×a₃) = (2π/V)·V = 2π</div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A · sc</div>a₁=a x̂, b₁=(2π/a)x̂ → 內積 = 2π ✓</div>
+    <div class="ex-card"><div class="ex-h">範例 B · 驗算數字</div>a=3, |a₁|=3, |b₁|=2π/3, 同向 → 3·(2π/3)=2π</div>
+    <div class="ex-card"><div class="ex-h">範例 C · 為何 2π</div>使 e^{i G·R}=1：G·R = 2π × 整數（晶格平移相位）。</div>
+  </div>
+  <div class="blank-row">
+    <span>a₁ · b₁ =</span>
+    <input id="b3" type="text" data-answers="2pi|2π|2*pi" placeholder="2π">
+    <button type="button" data-check="b3" data-answers="2pi|2π|2*pi">檢查</button>
+    <div class="fb" id="b3Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 4</span>非對角 = 0（外積 ⊥ 輸入）</h3>
+  <div class="viz-panel">
+    <div class="viz-title">SVG：a₂ 與 (a₂×a₃) 垂直 → 內積 0</div>
+    <svg viewBox="0 0 480 180" xmlns="http://www.w3.org/2000/svg">
+      <rect width="480" height="180" fill="#fcfdff"/>
+      <line x1="80" y1="120" x2="240" y2="120" stroke="#1a4d7c" stroke-width="3"/>
+      <polygon points="240,120 228,114 228,126" fill="#1a4d7c"/>
+      <text x="140" y="145" fill="#1a4d7c" font-size="13">a₂</text>
+      <line x1="80" y1="120" x2="80" y2="40" stroke="#c0392b" stroke-width="3"/>
+      <polygon points="80,40 74,52 86,52" fill="#c0392b"/>
+      <text x="90" y="70" fill="#c0392b" font-size="13">a₂×a₃</text>
+      <path d="M100 120 A20 20 0 0 0 80 100" fill="none" stroke="#888" stroke-width="1.5"/>
+      <text x="105" y="105" fill="#555" font-size="12">90°</text>
+      <text x="280" y="80" fill="#234" font-size="13">a₂ · (a₂×a₃) = 0</text>
+      <text x="280" y="105" fill="#567" font-size="12">⇒ a₂ · b₁ = 0</text>
+    </svg>
+  </div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>任何 u·(u×v)=0（純量三重積兩列相同）。</div>
+    <div class="ex-card"><div class="ex-h">範例 B · sc</div>a₂=a ŷ, b₁=(2π/a)x̂ → ŷ·x̂=0。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>同理 a₃·b₁=0；輪換得完整 δᵢⱼ。</div>
+  </div>
+  <div class="choice-row">
+    <button type="button" data-choice="1" data-okmsg="✓ 外積垂直於兩個輸入">a₂·(a₂×a₃)=0 因為外積 ⊥ a₂</button>
+    <button type="button" data-choice="0">因為 V=0</button>
+    <button type="button" data-choice="0">因為 |a₂|=0</button>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 5</span>總結與 bcc 倒晶格範例</h3>
+  <div class="eqbox">aᵢ · bⱼ = 2π δᵢⱼ</div>
+  <div class="examples">
+    <div class="ex-card">
+      <div class="ex-h">範例 A · sc</div>
+      倒格子仍是 sc，邊長 2π/a。
+    </div>
+    <div class="ex-card">
+      <div class="ex-h">範例 B · bcc ↔ fcc</div>
+      實空間 bcc 的倒格子是 fcc（考試常考「互為倒晶格」）。
+    </div>
+    <div class="ex-card">
+      <div class="ex-h">範例 C · 第一 BZ</div>
+      sc：立方 |k_i|≤π/a；邊界上常發生 Bragg / 開能隙。
+    </div>
+  </div>
+  <div class="blank-row">
+    <span>sc 的 |b₁| =</span>
+    <input id="b5" type="text" data-answers="2pi/a|2π/a|2*pi/a" placeholder="2π/a">
+    <button type="button" data-check="b5" data-answers="2pi/a|2π/a|2*pi/a">檢查</button>
+    <div class="fb" id="b5Fb"></div>
+  </div>
+</div>
+
+<div class="done-banner" id="doneBanner">
+  <h3>完成本 lab</h3>
+  <p>下一步：<a href="lab_packing.html">② packing</a> · 全站模擬 <a href="../模擬/sim_bragg_ewald.html">Ewald</a></p>
+</div>
+<div class="nav-steps">
+  <button type="button" id="btnPrev">← 上一步</button>
+  <button type="button" id="btnNext" class="primary">下一步 →</button>
+  <button type="button" id="btnReveal">一次展開全部</button>
+  <span class="meta" id="stepMeta"></span>
+</div>
+<footer>Lab ① · 倒基 + 2D 互動圖</footer>
+<script src="lab.js"></script>
+<script src="viz.js"></script>
+<script>
+new MathLab.StepLab({});
+(function () {
+  const svg = document.getElementById("vizRecip");
+  const readA = LabViz.bindRange("aSlider", draw);
+  function draw() {
+    const a = readA();
+    const b = 2 * Math.PI / a;
+    LabViz.clear(svg);
+    svg.setAttribute("viewBox", "0 0 520 300");
+    LabViz.el(svg, "rect", { x: 0, y: 0, width: 520, height: 300, fill: "#fcfdff" });
+    // left real
+    LabViz.el(svg, "text", { x: 20, y: 24, fill: "#1a4d7c", "font-size": 13, "font-weight": 700 }, "實空間 lattice");
+    LabViz.el(svg, "text", { x: 280, y: 24, fill: "#6c3fa0", "font-size": 13, "font-weight": 700 }, "倒空間 reciprocal");
+    const scaleR = 40;
+    const ox = 90, oy = 180;
+    for (let i = -1; i <= 3; i++) {
+      for (let j = -1; j <= 2; j++) {
+        LabViz.el(svg, "circle", {
+          cx: ox + i * a * scaleR * 0.55,
+          cy: oy - j * a * scaleR * 0.55,
+          r: 5, fill: "#1a4d7c", opacity: 0.85,
+        });
+      }
+    }
+    LabViz.arrow(svg, ox, oy, ox + a * scaleR * 0.55, oy, "#c0392b", "a₁");
+    LabViz.arrow(svg, ox, oy, ox, oy - a * scaleR * 0.55, "#1e7a46", "a₂");
+    // right recip
+    const ox2 = 340, oy2 = 180;
+    const scaleB = 18;
+    for (let i = -2; i <= 3; i++) {
+      for (let j = -2; j <= 2; j++) {
+        LabViz.el(svg, "circle", {
+          cx: ox2 + i * b * scaleB * 0.35,
+          cy: oy2 - j * b * scaleB * 0.35,
+          r: 4, fill: "#6c3fa0", opacity: 0.85,
+        });
+      }
+    }
+    LabViz.arrow(svg, ox2, oy2, ox2 + b * scaleB * 0.35, oy2, "#c47a12", "b₁");
+    LabViz.el(svg, "text", { x: 20, y: 280, fill: "#555", "font-size": 12 },
+      `a=${LabViz.fmt(a,2)}  →  |b|=2π/a=${LabViz.fmt(b,2)}  ·  a·b=${LabViz.fmt(a*b,2)} (=2π)`);
+    document.getElementById("recipKpi").innerHTML =
+      `<span>a = <b>${LabViz.fmt(a,2)}</b></span>` +
+      `<span>|b| = 2π/a = <b>${LabViz.fmt(b,3)}</b></span>` +
+      `<span>a·b = <b>${LabViz.fmt(a * b, 3)}</b> （應 = 2π≈6.283）</span>`;
+  }
+  draw();
+})();
+</script>
+</body>
+</html>

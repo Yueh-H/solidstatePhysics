@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 章節導讀 — Kittel 第2章 — 波繞射與倒晶格（Wave Diffraction & Reciprocal Lattice）</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">章節導讀目錄</a> &nbsp;·&nbsp; <a href="../Kittel_翻譯.html">完整翻譯</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../../考古題/詳解/index.html">逐題詳解</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- Kittel 章節導讀：第2章 波衍射與倒易格子（Wave Diffraction and the Reciprocal Lattice） -->
+
+# Kittel 第2章 對照導讀 — 倒晶格與繞射（Wave Diffraction & the Reciprocal Lattice）
+
+> **這頁是什麼**：讀 Kittel 這一章時的對照地圖——概念橋（高中→大學→固態）＋術語速查。這裡**不重教推導**，只幫你把翻譯本那一章「翻成人話、搭好概念橋」。完整課文見 [Kittel 翻譯本對應章節](../Kittel_翻譯.html)；想看完整推導與考題，見 [單元教學 unit02](../../單元教學/unit02_倒晶格與繞射.html)；想練歷年題見 [逐題詳解](../../考古題/詳解/index.html)。
+
+## 🗺️ 這一章在講什麼（3–6 句白話）
+
+這一章在問：**我們怎麼「看見」晶體裡的原子排列？** 答案是用 X 光（或中子、電子）打晶體，看繞射圖樣。Kittel 的主線是先用 **布拉格定律（Bragg law）$2d\sin\theta=n\lambda$** 給最直觀的解釋（一疊平行晶面的鏡面反射建設性干涉）；但布拉格只管「峰在哪」，管不了三維與多原子基元的細節，所以引入**倒晶格（reciprocal lattice）**——把週期性電子密度做傅立葉分析後，自然冒出的一組向量 $\mathbf G$。於是繞射條件被乾淨地寫成 **$\Delta\mathbf k=\mathbf G$（von Laue 條件）**，並用 **Ewald 球**、**布里淵區（Brillouin zone）邊界** 給出幾何圖像。最後用**結構因子（structure factor）$S_{\mathbf G}$** 與**原子形態因子（atomic form factor）$f_j$** 解釋「峰的強度與消光（bcc 看不到 (100) 峰）」。一句話分工：**位置 ← 倒晶格；強度 ← 結構因子**。
+
+一句話記住整章的分工：
+
+$$\boxed{\underbrace{\text{峰的位置}}_{\text{倒晶格 }\mathbf G}\quad\text{與}\quad\underbrace{\text{峰的強度}}_{\text{結構因子 }S_{\mathbf G}}\ \text{被乾淨地分開}}$$
+
+「在哪出現」由倒晶格決定，「亮不亮 / 會不會消失」由結構因子決定。本章一切題目都掛在這條脊椎上。
+
+## 🌉 概念三層對應表（高中 → 大學普物 → 本章固態物理）
+
+| 高中你學過的 | 大學普物的版本 | 本章固態物理變成 |
+|---|---|---|
+| 雙狹縫干涉 $d\sin\theta=n\lambda$ | 波的疊加、路徑差 = 整數倍波長 → 建設性干涉 | 布拉格定律 $2d\sin\theta=n\lambda$（一疊晶面的反射干涉） |
+| 週期函數（$\sin,\cos$ 重複） | 傅立葉級數：把週期函數拆成正弦/餘弦和 | 電子密度 $n(\mathbf r)=\sum_{\mathbf G}n_{\mathbf G}\,e^{i\mathbf G\cdot\mathbf r}$，只允許特定波向量 $\mathbf G$ |
+| 座標軸、垂直 | 向量點積、叉積、正交基底 | 倒晶格基矢 $\mathbf b_i$，滿足 $\mathbf b_i\cdot\mathbf a_j=2\pi\delta_{ij}$ |
+| 單位換算（長度↔1/長度） | 量綱分析 | 實晶格量綱 $[\text{長度}]$、倒晶格量綱 $[1/\text{長度}]$（即波向量空間） |
+| 向量加法、終點 | 動量守恆、波向量 $\mathbf k$ | 繞射條件 $\Delta\mathbf k=\mathbf k'-\mathbf k=\mathbf G$（動量轉移 = 倒晶格向量） |
+| 複數 $e^{i\phi}=\cos\phi+i\sin\phi$ | 相位相加、相量 | 結構因子 $S_{\mathbf G}=\sum_j f_j\,e^{-i\mathbf G\cdot\mathbf r_j}$（基元內各原子相位和） |
+| 中垂線（到兩點等距） | Voronoi / 最近鄰區域 | 第一布里淵區 = 倒晶格的 Wigner–Seitz 胞（中垂面圍出） |
+
+## 🔑 專有名詞 × 範例（速查）
+
+<details>
+<summary><b>▸ 布拉格定律（Bragg law）</b></summary>
+
+**白話**：一疊平行晶面各反射一點 X 光，要全部同相疊加才看得到亮峰。
+**高中接點**：雙狹縫干涉 $d\sin\theta=n\lambda$ 的直系子孫。
+**定義**：$2d\sin\theta=n\lambda$，$d$ 是晶面間距，$\theta$ **量自晶面**（不是法線）。
+**範例**：$\lambda$ 必須 $\le 2d$ 才有解；入射束與繞射束夾角是 $2\theta$。
+**在 Kittel 哪裡**：「布拉格定律」一節，圖 2，式 (1)。
+</details>
+
+![Bragg 反射：相鄰面程差 $2d\sin\theta=n\lambda$ 才相長](../../figs/f02_bragg.svg)
+
+<details>
+<summary><b>▸ 傅立葉分析（Fourier analysis）of $n(\mathbf r)$</b></summary>
+
+**白話**：晶體的電子密度是週期函數，可拆成一堆「與晶格同週期的平面波」之和。
+**高中接點**：週期函數展成 $\sin/\cos$ 級數。
+**定義**：$n(\mathbf r)=\sum_{\mathbf G}n_{\mathbf G}\,e^{i\mathbf G\cdot\mathbf r}$；只有特定 $\mathbf G$ 被允許（與週期相容）。
+**範例**：一維 $n(x)=\sum_p n_p\,e^{i2\pi px/a}$，允許的波向量是 $2\pi p/a$。
+**在 Kittel 哪裡**：「傅立葉分析」一節，式 (4)–(11)。
+</details>
+
+<details>
+<summary><b>▸ 倒晶格／倒晶格向量（reciprocal lattice / vector $\mathbf G$）</b></summary>
+
+**白話**：做完傅立葉分析後自然冒出的另一個格子；它住在「波向量空間」。
+**高中接點**：把「每隔多遠重複」翻譯成「空間頻率」。
+**定義**：基矢 $\mathbf b_1=2\pi\dfrac{\mathbf a_2\times\mathbf a_3}{\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)}$（餘類推），滿足 $\mathbf b_i\cdot\mathbf a_j=2\pi\delta_{ij}$；$\mathbf G=v_1\mathbf b_1+v_2\mathbf b_2+v_3\mathbf b_3$（$v_i$ 整數）。
+**範例**：sc 的倒晶格仍是 sc（邊 $2\pi/a$）；**bcc 的倒晶格是 fcc，fcc 的倒晶格是 bcc**（互為倒晶格）。
+**在 Kittel 哪裡**：「倒格點向量」一節，式 (13)–(15)。
+</details>
+
+<details>
+<summary><b>▸ 繞射條件 $\Delta\mathbf k=\mathbf G$（von Laue condition）</b></summary>
+
+**白話**：繞射發生 ⟺ 入射與出射波向量之差（動量轉移）剛好等於某個倒晶格向量。
+**高中接點**：向量加法 $\mathbf k'=\mathbf k+\mathbf G$。
+**定義**：$\Delta\mathbf k=\mathbf k'-\mathbf k=\mathbf G$；彈性散射 $\lvert\mathbf k'\rvert=\lvert\mathbf k\rvert$，等價式 $2\mathbf k\cdot\mathbf G=G^2$。
+**範例**：把 $2\mathbf k\cdot\mathbf G=G^2$ 配上 $\lvert\mathbf G\rvert=2\pi/d$ 即還原布拉格 $2d\sin\theta=n\lambda$。
+**在 Kittel 哪裡**：「繞射條件」一節，式 (18)–(23)。
+</details>
+
+<details>
+<summary><b>▸ 散射振幅（scattering amplitude）$F$</b></summary>
+
+**白話**：所有體積元素散射波加總後的總振幅，正比於電子密度的傅立葉變換。
+**高中接點**：把每個小格子的反射波（帶相位）全部相加。
+**定義**：$F=\displaystyle\int n(\mathbf r)\,e^{-i\Delta\mathbf k\cdot\mathbf r}\,dV$；只有 $\Delta\mathbf k=\mathbf G$ 時不為零，$F=V\,n_{\mathbf G}$。
+**範例**：$\Delta\mathbf k$ 與任何 $\mathbf G$ 明顯不同時，相位互相抵消 → $F\approx0$（無峰）。
+**在 Kittel 哪裡**：「散射波振幅」「繞射條件」各節，式 (18)–(21)。
+</details>
+
+<details>
+<summary><b>▸ 勞厄方程（Laue equations）／ Ewald 球（Ewald sphere）</b></summary>
+
+**白話**：$\Delta\mathbf k=\mathbf G$ 的三個分量式（三個圓錐同時滿足）＋它的圖像化作圖法。
+**高中接點**：三個條件同時成立 → 三條曲線的共同交點。
+**定義**：$\mathbf a_i\cdot\Delta\mathbf k=2\pi v_i$（$i=1,2,3$）。Ewald 球：以 $\mathbf k$ 起點為球心、半徑 $k=2\pi/\lambda$ 畫球，球面通過的倒格點即滿足繞射。
+**範例**：要 $0<\lvert\mathbf G\rvert\le 2k$ 才可能繞射；$\lambda$ 太長 → 球太小 → 碰不到倒格點 → 不繞射。
+**在 Kittel 哪裡**：「勞厄方程」一節，式 (26)，圖 8。
+</details>
+
+<details>
+<summary><b>▸ 第一布里淵區（first Brillouin zone, BZ）</b></summary>
+
+**白話**：倒晶格裡最「公平、最對稱」的原胞；它的邊界正是繞射條件的幾何面。
+**高中接點**：到最近倒格點等距的中垂面圍出的中央區域。
+**定義**：倒晶格的 Wigner–Seitz 胞；其邊界面滿足 $2\mathbf k\cdot\mathbf G=G^2$（即 $\mathbf k$ 落在 $\mathbf G$ 的中垂面）。
+**範例**：sc 的 BZ 是立方體；**bcc 的 BZ 是菱形十二面體**；**fcc 的 BZ 是截角八面體**。
+**在 Kittel 哪裡**：「布里淵區」一節，圖 9–15。
+</details>
+
+![倒晶格與第一布里淵區（reciprocal lattice 的 WS cell）](../../figs/f02_bz_square.svg)
+
+<details>
+<summary><b>▸ 結構因子（structure factor）$S_{\mathbf G}$</b></summary>
+
+**白話**：把一個原胞裡所有原子的散射相位加總，決定峰的「強度」與「消光」。
+**高中接點**：複數相量相加 $e^{i\phi_1}+e^{i\phi_2}+\cdots$。
+**定義**：$S_{\mathbf G}=\sum_{j=1}^{s} f_j\,e^{-i\mathbf G\cdot\mathbf r_j}=\sum_j f_j\,e^{-i2\pi(v_1x_j+v_2y_j+v_3z_j)}$。
+**範例**：**bcc** 基元 $000,\frac12\frac12\frac12$ → $S=f\,[1+e^{-i\pi(v_1+v_2+v_3)}]$，當 $v_1+v_2+v_3$ 為奇數時 $S=0$ → (100)、(111) 消失，只見 (110)、(200)、(222)。**fcc** 則「指數全奇或全偶」才出現。
+**在 Kittel 哪裡**：「基底的傅立葉分析」「bcc/fcc 結構因子」各節，式 (39)–(48)。
+</details>
+
+<details>
+<summary><b>▸ 原子形態因子（atomic form factor）$f_j$</b></summary>
+
+**白話**：單一原子的散射本領；把它電子雲畫的「散射效率」。
+**高中接點**：一顆原子有幾個電子、散射就大致多強。
+**定義**：$f_j=\displaystyle\int n_j(\boldsymbol\rho)\,e^{-i\mathbf G\cdot\boldsymbol\rho}\,dV$；球對稱時 $f_j=\int n_j(r)\dfrac{\sin Gr}{Gr}\,4\pi r^2\,dr$。
+**範例**：$G\to 0$（前向）時 $f\to Z$（原子序，即電子數）。$\text{K}^+$ 與 $\text{Cl}^-$ 電子數相同 → 在 KCl 中 $f$ 幾乎相等，使晶體「看起來像」邊長 $a/2$ 的 sc。
+**在 Kittel 哪裡**：「原子形態因子」一節，式 (49)，圖 17。
+</details>
+
+<details>
+<summary><b>▸ 消光／系統性缺峰（systematic absence）</b></summary>
+
+**白話**：布拉格算得出角度、實驗卻看不到的那些峰——被結構因子相消掉了。
+**高中接點**：兩道反相波相加 $1+e^{-i\pi}=0$。
+**定義**：$S_{\mathbf G}=0$ 的反射不出現；規則由晶格型態決定。
+**範例**：bcc 缺 (100)、(111)（中間那層原子讓相位差 $\pi$ 而抵銷）；fcc 缺「奇偶混合」反射；鑽石進一步缺更多（$v_1+v_2+v_3=4n$ 或全奇才現）。
+**在 Kittel 哪裡**：「bcc 結構因子」一節，圖 16，及習題 5（鑽石）。
+</details>
+
+![消光規則：sc 全有、bcc 要 $h+k+l$ 偶、fcc 要全奇或全偶](../../figs/f02_diffraction_peaks.svg)
+
+## 🧭 建議的讀法（一個 5 步小流程）
+
+1. **先用布拉格直觀建立圖像**：$2d\sin\theta=n\lambda$，知道「波長要 $\le 2d$ 才有峰」。
+2. **由 $\mathbf a_i$ 算 $\mathbf b_i$**：套公式 $\mathbf b_1=2\pi\dfrac{\mathbf a_2\times\mathbf a_3}{V_c}$（餘類推），記住 bcc↔fcc 互為倒晶格。
+3. **把繞射寫成 $\Delta\mathbf k=\mathbf G$**：等價式 $2\mathbf k\cdot\mathbf G=G^2$，用 Ewald 球判「哪些 $\mathbf G$ 會亮」。
+4. **畫第一布里淵區**：對最近的幾個 $\mathbf G$ 作中垂面，圍出中央最小區（sc→立方、bcc→菱形十二面體、fcc→截角八面體）。
+5. **用結構因子處理強度/消光**：寫 $S_{\mathbf G}=\sum_j f_j e^{-i\mathbf G\cdot\mathbf r_j}$，代基元座標，找 $S=0$ 的反射就是消光。
+
+走熟這 5 步，「位置 + 強度」兩條主線就都能算。
+
+## ⚠️ 讀這章常卡的點 ＋ 翻譯雷區
+
+- **位置 vs. 強度的分工別混**：倒晶格 $\mathbf G$ 決定「峰在哪」，結構因子 $S_{\mathbf G}$ 決定「峰多亮 / 會不會消失」。bcc 的 (100) 峰**位置存在但強度為零**——這正是布拉格說不清、要靠結構因子的地方。
+
+- **$\theta$ 量自晶面、不是法線**：布拉格 $2d\sin\theta=n\lambda$ 的 $\theta$ 是束與**晶面**夾角；入射–繞射總夾角是 $2\theta$（圖 2、圖 8 的 $2\theta$）。
+
+- **$2\pi$ 的慣例**：Kittel 的倒晶格定義帶 $2\pi$（$\mathbf b_i\cdot\mathbf a_j=2\pi\delta_{ij}$，$\lvert\mathbf G\rvert=2\pi/d$），結晶學家常用不帶 $2\pi$ 的版本。翻譯本式 (13) 就有 $2\pi$，算題時務必前後一致。
+
+- **「指數 $hkl$」與「反射指數 $v_1v_2v_3$」可能差一個公因子**：第 1 章的密勒指標已約去公因子，但繞射的 $\mathbf G=v_1\mathbf b_1+v_2\mathbf b_2+v_3\mathbf b_3$ 不一定約去（對應布拉格的 $n$ 階）。翻譯本式 (24)、(25) 附近講的就是這件事。
+
+- **互為倒晶格別記反**：bcc ↔ fcc 互為倒晶格；BZ 形狀對應為 bcc→菱形十二面體、fcc→截角八面體。翻譯本「正菱形十二面體」「截頂/截角八面體」指的就是這兩個。
+
+- **翻譯本亂碼與公式拆散**：滿頁 `�`、`==> picture ... omitted <==`，許多關鍵式（傅立葉反演、$S_{\mathbf G}$、Laue 方程）被 OCR 打散或塞進圖說裡。氫原子形態因子的正解是 $f_G=16/(4+G^2a_0^2)^2$（翻譯本習題 6 寫成 `16/(4 � G²a²₀)²`）。遇到斷裂公式請對照 [原文](../Kittel_原文.html) 與 [unit02](../../單元教學/unit02_倒晶格與繞射.html)。
+
+## 📝 實際範例（Worked Examples）
+
+> 三個有具體數字、逐步解、答案 boxed 的例題，把「布拉格定律（Bragg law）／結構因子消光（structure-factor extinction）／倒晶格向量（reciprocal lattice vector）與布里淵區（Brillouin zone）邊界」一次練熟。
+
+### 例題 1：布拉格定律——Cu Kα 打 $d=2.00$ Å 晶面的一級繞射角
+
+**題目**：用銅 Kα（Cu Kα）X 光，波長 $\lambda=1.54$ Å，照射晶面間距 $d=2.00$ Å 的一族晶面。求一級（$n=1$）繞射的布拉格角（Bragg angle）$\theta$。
+
+**Step 1（寫布拉格定律）**：
+
+$$2d\sin\theta=n\lambda$$
+
+**Step 2（解 $\sin\theta$）**：代 $n=1$，
+
+$$\sin\theta=\frac{n\lambda}{2d}=\frac{1\times1.54}{2\times2.00}=\frac{1.54}{4.00}=0.385$$
+
+**Step 3（檢查有解）**：$0.385\le1$，有解（若 $>1$ 則該級不出現）。
+
+**Step 4（取反正弦）**：
+
+$$\theta=\arcsin(0.385)\approx22.65^\circ$$
+
+**Step 5（提醒入射–繞射總夾角）**：$\theta$ 量自晶面（not 法線），實驗上偵測器擺在偏轉角 $2\theta\approx45.3^\circ$。
+
+$$\boxed{\theta\approx22.7^\circ\quad(2\theta\approx45.3^\circ)}$$
+
+### 例題 2：bcc 結構因子判消光——證 (100) 消失、(110) 出現
+
+**題目**：體心立方（bcc）的慣用立方晶胞，基元（basis）兩原子位於 $\mathbf r_1=(0,0,0)$ 與 $\mathbf r_2=(\tfrac12,\tfrac12,\tfrac12)$，散射本領皆為 $f$。用結構因子（structure factor）判斷反射 (100) 與 (110) 是否出現。
+
+**Step 1（寫結構因子）**：
+
+$$S_{\mathbf G}=\sum_{j} f_j\,e^{-i2\pi(v_1x_j+v_2y_j+v_3z_j)}$$
+
+**Step 2（代入兩個原子座標）**：第一個原子相位為 0；第二個原子座標 $(\tfrac12,\tfrac12,\tfrac12)$：
+
+$$S=f\left[1+e^{-i\pi(v_1+v_2+v_3)}\right]$$
+
+**Step 3（找通則）**：當 $v_1+v_2+v_3$ 為偶數，$e^{-i\pi\cdot\text{偶}}=+1$，$S=2f$（出現）；為奇數時 $e^{-i\pi\cdot\text{奇}}=-1$，$S=0$（消光）。
+
+**Step 4（代 (100)）**：$v_1+v_2+v_3=1+0+0=1$（奇），
+
+$$S_{100}=f\left[1+e^{-i\pi}\right]=f[1+(-1)]=0\ \Rightarrow\ \text{(100) 消失}$$
+
+**Step 5（代 (110)）**：$v_1+v_2+v_3=1+1+0=2$（偶），
+
+$$S_{110}=f\left[1+e^{-i2\pi}\right]=f[1+1]=2f\ \neq0\ \Rightarrow\ \text{(110) 出現}$$
+
+$$\boxed{S_{100}=0\ \text{（消光）},\qquad S_{110}=2f\ \text{（出現）}}$$
+
+### 例題 3：二維正方晶格的倒晶格向量大小與第一布里淵區邊界
+
+**題目**：邊長為 $a$ 的二維正方晶格（2D square lattice），實晶格基矢 $\mathbf a_1=a\hat x,\ \mathbf a_2=a\hat y$。求 (a) 倒晶格基矢（reciprocal lattice vectors）$\mathbf b_1,\mathbf b_2$ 的大小；(b) 沿 $\hat x$ 方向第一布里淵區（first Brillouin zone）邊界的波向量 $k$。
+
+**Step 1（用倒晶格定義）**：採 Kittel 慣例 $\mathbf b_i\cdot\mathbf a_j=2\pi\delta_{ij}$。正方晶格正交，故 $\mathbf b_1\parallel\hat x$、$\mathbf b_2\parallel\hat y$。
+
+**Step 2（解 $\mathbf b_1$）**：由 $\mathbf b_1\cdot\mathbf a_1=2\pi$ 且 $\mathbf a_1=a\hat x$：
+
+$$\mathbf b_1=\frac{2\pi}{a}\hat x,\qquad \mathbf b_2=\frac{2\pi}{a}\hat y$$
+
+**Step 3（倒晶格向量大小）**：
+
+$$|\mathbf b_1|=|\mathbf b_2|=\frac{2\pi}{a}$$
+
+**Step 4（最短倒晶格向量沿 $\hat x$）**：最近的倒格點在 $\mathbf G=\mathbf b_1=\frac{2\pi}{a}\hat x$。
+
+**Step 5（BZ 邊界 = 中垂面）**：第一布里淵區邊界落在 $\mathbf G$ 的中垂線，即 $\mathbf k=\tfrac12\mathbf G$：
+
+$$k=\frac12\cdot\frac{2\pi}{a}=\frac{\pi}{a}$$
+
+$$\boxed{|\mathbf b_1|=|\mathbf b_2|=\frac{2\pi}{a},\qquad k_{\text{BZ}}=\frac{\pi}{a}}$$
+
+## 🔗 延伸
+- 完整課文：[Kittel 翻譯本](../Kittel_翻譯.html)（搜尋「波衍射」「倒易格子」「布里淵區」即可定位）
+- 深入推導＋考題：[單元教學 unit02](../../單元教學/unit02_倒晶格與繞射.html)
+- 練歷年題：[逐題詳解](../../考古題/詳解/index.html)
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

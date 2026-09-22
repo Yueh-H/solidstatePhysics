@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab ⑤ NFE 能隙 2|U|</title>
+<link rel="stylesheet" href="../模擬/shared.css">
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 數學 Lab</a>
+  <a href="lab_dispersion.html">④ 色散</a>
+  <a class="here" href="lab_nfe.html">⑤ NFE</a>
+  <a href="lab_dos.html">⑥ DOS</a>
+  <a href="../模擬/sim_nfe_gap.html">完整模擬</a>
+</div>
+
+<h1>⑤ 近自由電子：gap = 2|U|</h1>
+<div class="goal">
+  邊界 2×2 耦合 → <strong>E± = ε ± |U|</strong>。內嵌<strong>調 U 的能帶圖</strong>。
+</div>
+<div class="lab-progress" id="progress"></div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 1</span>自由電子與 BZ 邊界</h3>
+  <div class="eqbox">ε_k = α k² （α=ħ²/2m 教學單位）· 邊界 k=±π/a</div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>空格子：只把拋物線摺進第一 BZ，不開隙。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>邊界滿足 Bragg：前向與背向波簡併。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>U=0 時 gap 關閉（金屬可穿過）。</div>
+  </div>
+  <div class="blank-row">
+    <span>第一 BZ 邊界 k=</span>
+    <input id="n1" type="text" data-answers="pi/a|π/a|±pi/a|±π/a" placeholder="±π/a">
+    <button type="button" data-check="n1" data-answers="pi/a|π/a|±pi/a|±π/a">檢查</button>
+    <div class="fb" id="n1Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 2–4</span>2×2 與即時能帶</h3>
+  <div class="eqbox">E± = ½(ε_k+ε_{k−G}) ± √{¼(ε_k−ε_{k−G})² + |U|²}</div>
+  <div class="eqbox">k=G/2 時：E± = ε ± |U| ， gap = 2|U|</div>
+  <div class="viz-panel">
+    <div class="viz-title">互動：拖 |U| 看邊界裂開</div>
+    <svg id="vizNFE"></svg>
+    <div class="viz-controls">
+      <div>
+        <label>|U| <span class="v" data-val="Ulab">0.4</span></label>
+        <input id="Ulab" type="range" min="0" max="1.2" step="0.02" value="0.4" data-digits="2">
+      </div>
+    </div>
+    <div class="viz-kpi" id="nfeKpi"></div>
+  </div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>U=0.5 → gap=1.0（剛好 2U）。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>下支頂 = ε−|U|，上支底 = ε+|U|。</div>
+    <div class="ex-card"><div class="ex-h">範例 C · 駐波</div>ρ 在離子核上／之間 → 位能期望 ±|U|。</div>
+  </div>
+  <div class="blank-row">
+    <span>能隙 =</span>
+    <input id="n4" type="text" data-answers="2|u||2|U||2u|2*abs(u)|2abs(u)" placeholder="2|U|">
+    <button type="button" data-check="n4" data-answers="2|u||2|U||2u|2*abs(u)|2abs(u)">檢查</button>
+    <div class="fb" id="n4Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 5</span>與緊束縛對照</h3>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>NFE：從自由電子 + 弱週期位能。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>TB：從原子軌域 + hopping（見 TB 模擬）。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>中等耦合兩者圖像可接合。</div>
+  </div>
+  <div class="choice-row">
+    <button type="button" data-choice="1" data-okmsg="✓">能隙來自週期位能在簡併點打開</button>
+    <button type="button" data-choice="0">來自自旋</button>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="done-banner" id="doneBanner">
+  <h3>完成</h3>
+  <p><a href="../模擬/sim_nfe_gap.html">完整 NFE 模擬</a> · <a href="lab_dos.html">⑥ DOS</a></p>
+</div>
+<div class="nav-steps">
+  <button type="button" id="btnPrev">← 上一步</button>
+  <button type="button" id="btnNext" class="primary">下一步 →</button>
+  <button type="button" id="btnReveal">一次展開全部</button>
+  <span class="meta" id="stepMeta"></span>
+</div>
+<footer>Lab ⑤ NFE + 內嵌能帶</footer>
+<script src="lab.js"></script>
+<script src="viz.js"></script>
+<script>
+new MathLab.StepLab({});
+(function () {
+  const svg = document.getElementById("vizNFE");
+  const plot = new LabViz.Plot(svg, {
+    w: 520, h: 300, xD: [-Math.PI, Math.PI], yD: [0, 5],
+    xLabel: "k·a", yLabel: "E",
+  });
+  const rU = LabViz.bindRange("Ulab", draw);
+  const alpha = 1, a = 1, G = 2 * Math.PI / a;
+  function eps(k) { return alpha * k * k; }
+  function Epm(k, U) {
+    const Gp = k >= 0 ? G : -G;
+    const e1 = eps(k), e2 = eps(k - Gp);
+    const mid = 0.5 * (e1 + e2);
+    const half = Math.sqrt(0.25 * (e1 - e2) * (e1 - e2) + U * U);
+    return { m: mid - half, p: mid + half };
+  }
+  function draw() {
+    const U = rU();
+    const kBZ = Math.PI / a;
+    let yM = 1;
+    const ptsM = [], ptsP = [], ptsF = [];
+    LabViz.linspace(-kBZ, kBZ, 180).forEach((k) => {
+      const e = Epm(k, U);
+      ptsM.push([k * a, e.m]);
+      ptsP.push([k * a, e.p]);
+      ptsF.push([k * a, eps(k)]);
+      yM = Math.max(yM, e.p, eps(k));
+    });
+    const edge = Epm(kBZ, U);
+    plot.setDomain([-Math.PI, Math.PI], [0, yM * 1.1]);
+    plot.poly(ptsF, { stroke: "#aaa", width: 1.4, dash: "4 3" });
+    plot.poly(ptsM, { stroke: "#1a4d7c", width: 2.5 });
+    plot.poly(ptsP, { stroke: "#c0392b", width: 2.5 });
+    plot.vline(Math.PI, { stroke: "#888" });
+    plot.vline(-Math.PI, { stroke: "#888" });
+    if (U > 0.02) {
+      plot.label(2, (edge.m + edge.p) / 2, `gap=${LabViz.fmt(2 * U, 2)}`, {
+        fill: "#c0392b", weight: 700, size: 12,
+      });
+    }
+    document.getElementById("nfeKpi").innerHTML =
+      `<span>|U|=<b>${LabViz.fmt(U, 2)}</b></span>` +
+      `<span>gap=2|U|=<b>${LabViz.fmt(2 * U, 2)}</b></span>` +
+      `<span>E−(π/a)=<b>${LabViz.fmt(edge.m, 3)}</b></span>` +
+      `<span>E+(π/a)=<b>${LabViz.fmt(edge.p, 3)}</b></span>`;
+  }
+  draw();
+})();
+</script>
+</body>
+</html>

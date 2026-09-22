@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to draw sc / bcc / fcc in 30 seconds</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global', scale: 1.08 }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  :root{--blue:#1a4d7c;--blue2:#2b6ca0;--soft:#eef5fb;--border:#c5d5e5;--ink:#1c2733;--red:#c0392b}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+       max-width:920px;margin:1.3em auto 4.5em;padding:0 1.1em;line-height:1.65;color:var(--ink);background:#fafafa}
+  h1{color:var(--blue);border-bottom:3px solid var(--blue);padding-bottom:.3em;font-size:1.35em}
+  h2{color:var(--blue);font-size:1.12em;margin:1.6em 0 .4em;border-bottom:1px solid #ddd;padding-bottom:.2em}
+  h3{color:var(--blue2);font-size:1.02em;margin:1em 0 .3em}
+  a{color:var(--blue2)}
+  .nav{font-size:.9em;margin:0 0 .8em;display:flex;gap:.5em;flex-wrap:wrap}
+  .nav a{text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.25em .65em;color:#234}
+  .lede,.warn{border-radius:6px;padding:.75em .95em;margin:0 0 1em;font-size:.95em}
+  .lede{background:var(--soft);border-left:4px solid #6aa1d6}
+  .warn{background:#fff8ee;border-left:4px solid #e0b97a;color:#5c3d00}
+  .zh{display:none;margin:.4em 0 0;padding:.5em .75em;background:#f7f4ee;border-left:3px solid #c4a574;border-radius:0 6px 6px 0;color:#5c4a2e;font-size:.92em}
+  body.show-zh .zh{display:block}
+  .toolbar{margin:0 0 1em}
+  .toolbar button{font:inherit;font-size:.9em;padding:.3em .85em;border:1px solid var(--border);background:#fff;border-radius:999px;cursor:pointer}
+  .toolbar button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1em;margin:0 0 1em}
+  ol.how{margin:.3em 0 .6em;padding-left:1.3em}
+  ol.how li{margin:.35em 0}
+  .fig{margin:.6em 0;text-align:center}
+  svg{max-width:100%;height:auto;background:#fff;border:1px solid #e3eaf1;border-radius:10px}
+  figcaption{font-size:.88em;color:#555;margin:.35em 0 0;text-align:left}
+  .boxed{display:block;margin:.5em 0;padding:.45em .7em;border:2px solid var(--blue);border-radius:8px;font-weight:700;color:var(--blue)}
+  footer{color:#888;font-size:.84em;margin-top:2em;border-top:1px solid #ddd;padding-top:.8em}
+  code{background:#eaf1f8;padding:1px 5px;border-radius:4px}
+  .ref{font-size:.82em;color:#5a6a7a;margin:.35em 0 0}
+  .ref b{color:#1a4d7c}
+  table.refs{border-collapse:collapse;width:100%;font-size:.86em;margin:.6em 0;background:#fff}
+  table.refs th,table.refs td{border:1px solid #dde3e9;padding:.4em .5em;text-align:left;vertical-align:top}
+  table.refs th{background:var(--soft);color:var(--blue)}
+  mjx-container{font-size:1.08em}
+  .boxed mjx-container,.how mjx-container{font-size:1.12em}
+  mjx-container[jax="CHTML"][display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="ch01_全部橋框.html">All Ch.1 boxes</a>
+  <a href="ch01_小考滿分卡.html">Full-mark card</a>
+  <a href="ch01_小考模擬.html">8-min quiz</a>
+</div>
+<h1>How to draw the three cubes (quiz, 30 s each)</h1>
+<div class="lede">
+On a quiz, draw a <b>oblique cube</b> (front square + offset square + connect). Not perspective art. Label atoms, then mark the <b>contact line</b> (that is the packing question).
+<div class="zh">小考畫「斜立方」：正面正方形 + 往右上再一個正方形 + 連對應角。不是美術透視。原子標完，<b>相切那一條線</b>一定要畫——那才是填充率。</div>
+</div>
+<div class="warn">
+<b>Audit (corrected):</b> 3D cubes are <i>schematic</i> (dots, not to-scale spheres). The 2D cuts below are the packing geometry to scale. Two earlier mistakes are fixed: fcc top/bottom face-centres were 25 px too far right; the bcc “square diagonal = $\sqrt3 a$” figure was wrong (a square diagonal is $\sqrt2 a$) — bcc contact is drawn on an $a\times a\sqrt2$ rectangle.
+<div class="zh">3D 立方是示意（點不是按比例的球）。下面 2D 切開才是按比例的相切。已修正：fcc 上／下底面心偏右；bcc 不能在正方形上標 $4r=\sqrt3 a$（正方形對角線是 $\sqrt2 a$）。</div>
+</div>
+<div class="toolbar"><button type="button" id="btnZh">中文旁註</button></div>
+
+<h2>Names — write these in English on the quiz</h2>
+<div class="card">
+  <p>Kittel Table 2 calls them <b>simple</b>, <b>body-centered</b>, and <b>face-centered</b> cubic lattices. The abbreviations <code>sc</code> / <code>bcc</code> / <code>fcc</code> are what you write on the paper. “Centered” means <i>an extra lattice point sits at the centre of something</i> — the cube’s interior, or each face.</p>
+  <div class="zh">Kittel 表 1.2 用 Simple / Body-centered / Face-centered。小考請寫英文全名或縮寫。<b>centered</b>＝多了一個格點，放在「體心」或「每個面的中心」。</div>
+  <table class="refs">
+    <tr><th>Abbrev.</th><th>Full name (English)</th><th>中文</th><th>What “centered” means</th></tr>
+    <tr>
+      <td><code>sc</code></td>
+      <td><b>simple cubic</b><br><span style="color:#6b7c90;font-weight:400">(also primitive cubic)</span></td>
+      <td>簡單立方</td>
+      <td>Nothing extra: atoms only at the <b>8 corners</b>. The conventional cube <i>is</i> the primitive cell.</td>
+    </tr>
+    <tr>
+      <td><code>bcc</code></td>
+      <td><b>body-centered cubic</b></td>
+      <td>體心立方</td>
+      <td><b>Body</b> = the interior of the cube. One extra identical atom at $\tfrac12\tfrac12\tfrac12$. Corners $+$ centre $=2$ lattice points.</td>
+    </tr>
+    <tr>
+      <td><code>fcc</code></td>
+      <td><b>face-centered cubic</b></td>
+      <td>面心立方</td>
+      <td><b>Face</b> = each of the 6 square faces. Extra identical atoms at the 6 face centres. Corners $+$ faces $=4$ lattice points.</td>
+    </tr>
+  </table>
+  <p class="ref"><b>Ref.</b> Kittel 8e Ch. 1, Fig. 8 (“The cubic space lattices”) and Table 2 (“Simple / Body-centered / Face-centered”). Fig. 8’s cells are <i>conventional</i>; only sc is primitive (Kittel: “of these only the sc is a primitive cell”).</p>
+  <p>One-line memory:</p>
+  $$
+  \begin{aligned}
+  \mathrm{sc}&=\text{simple cubic}=\text{corners only},\\
+  \mathrm{bcc}&=\text{body-centered cubic}=\text{corners}+\text{one in the body},\\
+  \mathrm{fcc}&=\text{face-centered cubic}=\text{corners}+\text{one on every face}.
+  \end{aligned}
+  $$
+  <div class="zh">
+    <b>sc</b>＝簡單立方：只有角，沒有「心」。<br>
+    <b>bcc</b>＝體心立方：body＝立方體內部，正中心多 1 顆（和角上同種）。<br>
+    <b>fcc</b>＝面心立方：face＝6 個正方形面，每個面正中多 1 顆。<br>
+    CsCl 看起來像 bcc，但角與中心是<b>不同元素</b>，所以全名仍是 simple cubic + basis，不是 body-centered cubic（Kittel Fig. 18）。
+  </div>
+</div>
+
+<h2>0 · Build the cube (do this first, every time)</h2>
+<div class="card">
+  <ol class="how">
+    <li>Draw a <b>square</b> — this is the front face. Side $= a$.</li>
+    <li>From each corner, draw a short line <b>up and right</b> (same length, about $\frac13 a$, same angle).</li>
+    <li>Connect those four new points — back square.</li>
+    <li>Dashed the three edges you cannot see (left-back, bottom-back, vertical-back if hidden).</li>
+  </ol>
+  <div class="zh">①正面正方形 ②每角往右上畫一小段 ③連成後面的正方形 ④看不見的邊改虛線。</div>
+  <div class="fig">
+<svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg" aria-label="Four steps to draw an oblique cube">
+  <g font-family="-apple-system,sans-serif" font-size="13" fill="#1a4d7c">
+    <text x="90" y="22" text-anchor="middle" font-weight="700">1. Front square</text>
+    <text x="270" y="22" text-anchor="middle" font-weight="700">2. Offset corners</text>
+    <text x="450" y="22" text-anchor="middle" font-weight="700">3. Connect</text>
+    <text x="630" y="22" text-anchor="middle" font-weight="700">4. Dash hidden</text>
+  </g>
+  <!-- step1 -->
+  <g transform="translate(20,40)">
+    <rect x="30" y="50" width="90" height="90" fill="none" stroke="#333" stroke-width="2"/>
+    <text x="75" y="175" text-anchor="middle" font-size="12" fill="#555">front = a × a</text>
+  </g>
+  <!-- step2 -->
+  <g transform="translate(200,40)">
+    <rect x="30" y="50" width="90" height="90" fill="none" stroke="#333" stroke-width="2"/>
+    <line x1="30" y1="50" x2="58" y2="28" stroke="#2b6ca0" stroke-width="1.8"/>
+    <line x1="120" y1="50" x2="148" y2="28" stroke="#2b6ca0" stroke-width="1.8"/>
+    <line x1="120" y1="140" x2="148" y2="118" stroke="#2b6ca0" stroke-width="1.8"/>
+    <line x1="30" y1="140" x2="58" y2="118" stroke="#2b6ca0" stroke-width="1.8"/>
+    <circle cx="58" cy="28" r="3" fill="#2b6ca0"/>
+    <circle cx="148" cy="28" r="3" fill="#2b6ca0"/>
+    <circle cx="148" cy="118" r="3" fill="#2b6ca0"/>
+    <circle cx="58" cy="118" r="3" fill="#2b6ca0"/>
+  </g>
+  <!-- step3 -->
+  <g transform="translate(380,40)">
+    <rect x="30" y="50" width="90" height="90" fill="none" stroke="#333" stroke-width="2"/>
+    <path d="M58,28 H148 V118 H58 Z" fill="none" stroke="#333" stroke-width="2"/>
+    <line x1="30" y1="50" x2="58" y2="28" stroke="#333" stroke-width="2"/>
+    <line x1="120" y1="50" x2="148" y2="28" stroke="#333" stroke-width="2"/>
+    <line x1="120" y1="140" x2="148" y2="118" stroke="#333" stroke-width="2"/>
+    <line x1="30" y1="140" x2="58" y2="118" stroke="#333" stroke-width="2"/>
+  </g>
+  <!-- step4 -->
+  <g transform="translate(560,40)">
+    <rect x="30" y="50" width="90" height="90" fill="none" stroke="#333" stroke-width="2"/>
+    <path d="M120,50 L148,28 L148,118" fill="none" stroke="#333" stroke-width="2"/>
+    <line x1="30" y1="50" x2="58" y2="28" stroke="#333" stroke-width="2"/>
+    <line x1="58" y1="28" x2="148" y2="28" stroke="#333" stroke-width="2"/>
+    <line x1="30" y1="140" x2="58" y2="118" stroke="#888" stroke-width="1.6" stroke-dasharray="5 4"/>
+    <line x1="58" y1="118" x2="148" y2="118" stroke="#888" stroke-width="1.6" stroke-dasharray="5 4"/>
+    <line x1="58" y1="28" x2="58" y2="118" stroke="#888" stroke-width="1.6" stroke-dasharray="5 4"/>
+  </g>
+</svg>
+<figcaption>Always the same cube. Then add atoms. Do not restart with a new drawing style in the exam.</figcaption>
+  </div>
+</div>
+
+<h2>1 · sc — simple cubic — 8 blue corners only</h2>
+<div class="card">
+  <ol class="how">
+    <li>Draw the cube.</li>
+    <li>Put a <b>dot on all 8 corners</b>. Stop. No extra dots.</li>
+    <li>Mark one <b>front edge in red</b> — that is the contact:
+      $$2r=a$$</li>
+    <li>Write next to it:
+      $$N=8\times\frac{1}{8}=1,\qquad \mathrm{CN}=6$$</li>
+  </ol>
+  <div class="zh">只畫 8 個角。紅線畫一條正面的邊＝相切。$N=1$。</div>
+  <div class="fig">
+<svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" aria-label="sc conventional cube">
+  <defs>
+    <radialGradient id="bl" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#9cc3e6"/><stop offset="1" stop-color="#1a4d7c"/></radialGradient>
+  </defs>
+  <!-- cube -->
+  <g transform="translate(40,30)" fill="none" stroke="#333" stroke-width="2">
+    <rect x="40" y="80" width="140" height="140"/>
+    <path d="M40,80 L90,40 H230 V180 L180,220"/>
+    <line x1="180" y1="80" x2="230" y2="40"/>
+    <line x1="90" y1="40" x2="90" y2="180" stroke="#999" stroke-dasharray="6 5" stroke-width="1.6"/>
+    <line x1="90" y1="180" x2="230" y2="180" stroke="#999" stroke-dasharray="6 5" stroke-width="1.6"/>
+    <line x1="90" y1="180" x2="40" y2="220" stroke="#999" stroke-dasharray="6 5" stroke-width="1.6"/>
+  </g>
+  <!-- one contact edge: front top, length a -->
+  <line x1="80" y1="110" x2="220" y2="110" stroke="#c0392b" stroke-width="4"/>
+  <text x="150" y="100" text-anchor="middle" font-size="14" font-weight="700" fill="#c0392b">2r = a  (edge)</text>
+  <!-- 8 corners: front 4 + back 4 -->
+  <g fill="url(#bl)" stroke="#13395d" stroke-width="1">
+    <circle cx="80" cy="110" r="11"/><circle cx="220" cy="110" r="11"/>
+    <circle cx="80" cy="250" r="11"/><circle cx="220" cy="250" r="11"/>
+    <circle cx="130" cy="70" r="11"/><circle cx="270" cy="70" r="11"/>
+    <circle cx="130" cy="210" r="11"/><circle cx="270" cy="210" r="11"/>
+  </g>
+  <text x="400" y="120" font-size="15" fill="#1a4d7c" font-weight="700">sc</text>
+  <text x="400" y="145" font-size="14" fill="#333">N = 1</text>
+  <text x="400" y="168" font-size="14" fill="#333">CN = 6</text>
+  <text x="400" y="191" font-size="14" fill="#333">2r = a</text>
+  <text x="400" y="214" font-size="14" fill="#333">η = π/6</text>
+</svg>
+<figcaption>Quiz drawing: 8 dots + one red edge. Do not draw spheres filling the cube.</figcaption>
+  </div>
+  <span class="boxed">sc: 8 corners only. Red line = an edge.
+    $$2r=a,\qquad N=1,\qquad \mathrm{CN}=6,\qquad \eta=\frac{\pi}{6}$$</span>
+  <p class="ref"><b>Ref.</b> Kittel 8e Ch. 1 Fig. 8 (conventional sc cell); Table 2: lattice points per cell $=1$, nearest neighbours $=6$, nn distance $=a$, packing fraction $\pi/6=0.524$. Because nn $=a=2r$ for hard spheres in contact.</p>
+</div>
+
+<h2>2 · bcc — body-centered cubic — 8 corners + 1 red centre</h2>
+<div class="card">
+  <ol class="how">
+    <li>Draw sc first (8 corners).</li>
+    <li>Put <b>one red dot in the middle of the cube</b> (crossing of the body diagonals). Approximate: centre of the front square, then nudge up-right half the offset.</li>
+    <li>Draw a <b>red dashed body diagonal</b>: front-bottom-left corner → back-top-right corner. Write on that line:
+      $$4r=\sqrt{3}\,a$$</li>
+    <li>Write:
+      $$N=2,\qquad \mathrm{CN}=8$$</li>
+  </ol>
+  <div class="zh">先畫 sc，再在立方正中心加一顆紅點。紅虛線＝體對角線（前下左 → 後上右），上面排 4 個半徑。</div>
+  <div class="fig">
+<svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" aria-label="bcc conventional cube">
+  <defs>
+    <radialGradient id="bl2" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#9cc3e6"/><stop offset="1" stop-color="#1a4d7c"/></radialGradient>
+    <radialGradient id="re2" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#f5b7ae"/><stop offset="1" stop-color="#c0392b"/></radialGradient>
+  </defs>
+  <g transform="translate(40,30)" fill="none" stroke="#333" stroke-width="2">
+    <rect x="40" y="80" width="140" height="140"/>
+    <path d="M40,80 L90,40 H230 V180 L180,220"/>
+    <line x1="180" y1="80" x2="230" y2="40"/>
+    <line x1="90" y1="40" x2="90" y2="180" stroke="#999" stroke-dasharray="6 5" stroke-width="1.6"/>
+    <line x1="90" y1="180" x2="230" y2="180" stroke="#999" stroke-dasharray="6 5" stroke-width="1.6"/>
+    <line x1="90" y1="180" x2="40" y2="220" stroke="#999" stroke-dasharray="6 5" stroke-width="1.6"/>
+  </g>
+  <!-- body diagonal: front bottom left (80,250) to back top right (270,70) -->
+  <line x1="80" y1="250" x2="270" y2="70" stroke="#c0392b" stroke-width="2.4" stroke-dasharray="7 5"/>
+  <text x="200" y="130" font-size="14" font-weight="700" fill="#c0392b" transform="rotate(-38 200 130)">4r = √3 a</text>
+  <g fill="url(#bl2)" stroke="#13395d" stroke-width="1">
+    <circle cx="80" cy="110" r="11"/><circle cx="220" cy="110" r="11"/>
+    <circle cx="80" cy="250" r="11"/><circle cx="220" cy="250" r="11"/>
+    <circle cx="130" cy="70" r="11"/><circle cx="270" cy="70" r="11"/>
+    <circle cx="130" cy="210" r="11"/><circle cx="270" cy="210" r="11"/>
+  </g>
+  <circle cx="175" cy="160" r="12" fill="url(#re2)" stroke="#7d2418" stroke-width="1.2"/>
+  <text x="188" y="155" font-size="12" font-weight="700" fill="#c0392b">body</text>
+  <text x="400" y="120" font-size="15" fill="#1a4d7c" font-weight="700">bcc</text>
+  <text x="400" y="145" font-size="14" fill="#333">N = 2</text>
+  <text x="400" y="168" font-size="14" fill="#333">CN = 8</text>
+  <text x="400" y="191" font-size="14" fill="#333">4r = √3 a</text>
+  <text x="400" y="214" font-size="14" fill="#333">η = π√3 / 8</text>
+</svg>
+<figcaption>Why 4r: corner sphere — centre sphere — opposite corner sphere. Two radii + two radii along the body diagonal $\sqrt3\,a$.</figcaption>
+  </div>
+  <span class="boxed">bcc: sc + 1 red centre. Red line = body diagonal.
+    $$4r=\sqrt{3}\,a,\qquad N=2,\qquad \mathrm{CN}=8,\qquad \eta=\frac{\pi\sqrt{3}}{8}$$</span>
+  <p class="ref"><b>Ref.</b> Kittel 8e Ch. 1 Fig. 8 (conventional bcc); Table 2: 2 lattice points per conventional cell, CN $=8$, nn distance $=\frac{\sqrt3}{2}a$. Hard-sphere contact: $2r=\frac{\sqrt3}{2}a$ ⇒ $4r=\sqrt3\,a$. Packing $\pi\sqrt3/8=0.680$. Primitive vectors: Fig. 10.</p>
+</div>
+
+<h2>3 · fcc — face-centered cubic — 8 corners + 6 red face centres</h2>
+<div class="card">
+  <ol class="how">
+    <li>Draw sc (8 corners).</li>
+    <li>On <b>each of the 6 faces</b>, put a red dot at the face centre (midpoint of the face). Visible faces: front, top, right. Hidden: back, bottom, left — still draw them (smaller / dashed if you want).</li>
+    <li>On the <b>front face</b>, draw a red face diagonal (corner–face centre–corner). Write:
+      $$4r=\sqrt{2}\,a$$</li>
+    <li>Write:
+      $$N=4,\qquad \mathrm{CN}=12$$</li>
+  </ol>
+  <div class="zh">8 個角 + 每個面正中一顆紅點（6 面）。相切在<b>面對角線</b>：角—面心—角，4 個半徑。</div>
+  <div class="fig">
+<svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" aria-label="fcc conventional cube">
+  <defs>
+    <radialGradient id="bl3" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#9cc3e6"/><stop offset="1" stop-color="#1a4d7c"/></radialGradient>
+    <radialGradient id="re3" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#f5b7ae"/><stop offset="1" stop-color="#c0392b"/></radialGradient>
+  </defs>
+  <g transform="translate(40,30)" fill="none" stroke="#333" stroke-width="2">
+    <rect x="40" y="80" width="140" height="140"/>
+    <path d="M40,80 L90,40 H230 V180 L180,220"/>
+    <line x1="180" y1="80" x2="230" y2="40"/>
+    <line x1="90" y1="40" x2="90" y2="180" stroke="#999" stroke-dasharray="6 5" stroke-width="1.6"/>
+    <line x1="90" y1="180" x2="230" y2="180" stroke="#999" stroke-dasharray="6 5" stroke-width="1.6"/>
+    <line x1="90" y1="180" x2="40" y2="220" stroke="#999" stroke-dasharray="6 5" stroke-width="1.6"/>
+  </g>
+  <!-- front face diagonal -->
+  <line x1="80" y1="110" x2="220" y2="250" stroke="#c0392b" stroke-width="3"/>
+  <text x="168" y="168" font-size="13" font-weight="700" fill="#c0392b">4r = √2 a</text>
+  <!-- corners -->
+  <g fill="url(#bl3)" stroke="#13395d" stroke-width="1">
+    <circle cx="80" cy="110" r="10"/><circle cx="220" cy="110" r="10"/>
+    <circle cx="80" cy="250" r="10"/><circle cx="220" cy="250" r="10"/>
+    <circle cx="130" cy="70" r="10"/><circle cx="270" cy="70" r="10"/>
+    <circle cx="130" cy="210" r="10"/><circle cx="270" cy="210" r="10"/>
+  </g>
+  <!-- 6 face centres = midpoints of the 6 faces (computed from the 8 vertices) -->
+  <g fill="url(#re3)" stroke="#7d2418" stroke-width="1">
+    <circle cx="150" cy="180" r="10"/><!-- front  -->
+    <circle cx="175" cy="90" r="10"/><!-- top    -->
+    <circle cx="245" cy="160" r="10"/><!-- right  -->
+    <circle cx="175" cy="230" r="9" opacity="0.5"/><!-- bottom -->
+    <circle cx="105" cy="160" r="9" opacity="0.5"/><!-- left   -->
+    <circle cx="200" cy="140" r="9" opacity="0.45"/><!-- back  -->
+  </g>
+  <g font-size="11" font-weight="700" fill="#c0392b" font-family="-apple-system,sans-serif">
+    <text x="158" y="184">F</text>
+    <text x="183" y="86">T</text>
+    <text x="256" y="164">R</text>
+  </g>
+  <text x="400" y="120" font-size="15" fill="#1a4d7c" font-weight="700">fcc</text>
+  <text x="400" y="145" font-size="14" fill="#333">N = 4</text>
+  <text x="400" y="168" font-size="14" fill="#333">CN = 12</text>
+  <text x="400" y="191" font-size="14" fill="#333">4r = √2 a</text>
+  <text x="400" y="214" font-size="14" fill="#333">η = π/(3√2)</text>
+</svg>
+<figcaption>Front-face diagonal is enough to show contact. You do not need all six red dots perfectly placed — get front, top, right, then mention “+3 hidden faces”.</figcaption>
+  </div>
+  <span class="boxed">fcc: 8 corners + 6 face centres. Red line = face diagonal.
+    $$4r=\sqrt{2}\,a,\qquad N=4,\qquad \mathrm{CN}=12,\qquad \eta=\frac{\pi\sqrt{2}}{6}$$</span>
+  <p class="ref"><b>Ref.</b> Kittel 8e Ch. 1 Fig. 8 (conventional fcc); Table 2: 4 lattice points per cell, CN $=12$, nn distance $=a/\sqrt2$. Hard-sphere contact: $2r=a/\sqrt2$ ⇒ $4r=\sqrt2\,a$. Packing $\pi\sqrt2/6=0.740$ (same as $\pi/(3\sqrt2)$). Primitive vectors to face centres: Fig. 11, angle $60^\circ$.</p>
+</div>
+
+<h2>4 · Why the 4r (flat cut — this is the packing picture)</h2>
+<div class="card">
+  <p>If the 3D cube is messy, draw this <b>2D cut</b> next to it. Circles are to scale and <b>actually touch</b> on the red line.</p>
+  <div class="zh">立體畫亂了，旁邊畫 2D 切開。圓的半徑按公式，紅線上真的相切。bcc 不是正方形（正方形對角線是 $\sqrt2 a$），是 $a\times a\sqrt2$ 的矩形，對角線才是 $\sqrt3 a$。</div>
+  <div class="fig">
+<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" aria-label="To-scale 2D contact cuts">
+  <g font-family="-apple-system,sans-serif">
+    <text x="115" y="22" text-anchor="middle" font-size="14" font-weight="700" fill="#1a4d7c">sc · cube face</text>
+    <text x="380" y="22" text-anchor="middle" font-size="14" font-weight="700" fill="#1a4d7c">bcc · diagonal slice (not a face)</text>
+    <text x="640" y="22" text-anchor="middle" font-size="14" font-weight="700" fill="#1a4d7c">fcc · cube face</text>
+  </g>
+
+  <!-- sc: a=160, r=a/2=80, circles clipped to the square, touch at edge midpoints -->
+  <g transform="translate(20,36)">
+    <defs>
+      <clipPath id="clipSC"><rect x="20" y="20" width="160" height="160"/></clipPath>
+    </defs>
+    <rect x="20" y="20" width="160" height="160" fill="#f7fbff" stroke="#333" stroke-width="2"/>
+    <g clip-path="url(#clipSC)">
+      <circle cx="20" cy="20" r="80" fill="#8eb4d8" fill-opacity="0.45" stroke="#1a4d7c" stroke-width="2"/>
+      <circle cx="180" cy="20" r="80" fill="#8eb4d8" fill-opacity="0.45" stroke="#1a4d7c" stroke-width="2"/>
+      <circle cx="20" cy="180" r="80" fill="#8eb4d8" fill-opacity="0.45" stroke="#1a4d7c" stroke-width="2"/>
+      <circle cx="180" cy="180" r="80" fill="#8eb4d8" fill-opacity="0.45" stroke="#1a4d7c" stroke-width="2"/>
+    </g>
+    <line x1="20" y1="180" x2="180" y2="180" stroke="#c0392b" stroke-width="4"/>
+    <text x="100" y="198" text-anchor="middle" font-size="13" font-weight="700" fill="#c0392b">2r = a</text>
+    <text x="100" y="218" text-anchor="middle" font-size="11" fill="#555">touch at edge midpoints</text>
+  </g>
+
+  <!-- bcc: rectangle a × a√2. a=110 (height), a√2=155.56 (width). r=√3 a/4=47.63
+       BL (0,0,0), BR (a,a,0) dist a√2, TL (0,0,a) dist a, TR (a,a,a)
+       Place: x+width=155.56, y+height=110. Origin at (20, 70) so BL=(20,180), BR=(176,180), TL=(20,70), TR=(176,70)
+       Center = (98, 125). Diagonal BL-TR: (20,180)-(176,70) -->
+  <g transform="translate(250,36)">
+    <text x="98" y="58" text-anchor="middle" font-size="11" fill="#555">side a√2 (face diagonal)</text>
+    <rect x="20" y="70" width="155.56" height="110" fill="#fff8f6" stroke="#333" stroke-width="2"/>
+    <line x1="20" y1="180" x2="175.56" y2="70" stroke="#c0392b" stroke-width="3"/>
+    <!-- r = 47.63 ; they touch on the diagonal -->
+    <circle cx="20" cy="180" r="47.63" fill="#8eb4d8" fill-opacity="0.4" stroke="#1a4d7c" stroke-width="2"/>
+    <circle cx="175.56" cy="70" r="47.63" fill="#8eb4d8" fill-opacity="0.4" stroke="#1a4d7c" stroke-width="2"/>
+    <circle cx="97.78" cy="125" r="47.63" fill="#f5b7ae" fill-opacity="0.55" stroke="#c0392b" stroke-width="2"/>
+    <text x="98" y="204" text-anchor="middle" font-size="13" font-weight="700" fill="#c0392b">4r = √3 a</text>
+    <text x="8" y="128" font-size="11" fill="#555" transform="rotate(-90 8 128)">a</text>
+    <text x="98" y="228" text-anchor="middle" font-size="11" fill="#555">plane y=x through the cube</text>
+  </g>
+
+  <!-- fcc: a=160, r=√2 a/4 = 56.57, square face, 4 corners + face centre, touch on face diagonal -->
+  <g transform="translate(530,36)">
+    <defs>
+      <clipPath id="clipFCC"><rect x="20" y="20" width="160" height="160"/></clipPath>
+    </defs>
+    <rect x="20" y="20" width="160" height="160" fill="#fff8f6" stroke="#333" stroke-width="2"/>
+    <g clip-path="url(#clipFCC)">
+      <circle cx="20" cy="20" r="56.57" fill="#8eb4d8" fill-opacity="0.4" stroke="#1a4d7c" stroke-width="2"/>
+      <circle cx="180" cy="20" r="56.57" fill="#8eb4d8" fill-opacity="0.4" stroke="#1a4d7c" stroke-width="2"/>
+      <circle cx="20" cy="180" r="56.57" fill="#8eb4d8" fill-opacity="0.4" stroke="#1a4d7c" stroke-width="2"/>
+      <circle cx="180" cy="180" r="56.57" fill="#8eb4d8" fill-opacity="0.4" stroke="#1a4d7c" stroke-width="2"/>
+      <circle cx="100" cy="100" r="56.57" fill="#f5b7ae" fill-opacity="0.5" stroke="#c0392b" stroke-width="2"/>
+    </g>
+    <line x1="20" y1="20" x2="180" y2="180" stroke="#c0392b" stroke-width="3"/>
+    <text x="100" y="198" text-anchor="middle" font-size="13" font-weight="700" fill="#c0392b">4r = √2 a</text>
+    <text x="100" y="218" text-anchor="middle" font-size="11" fill="#555">face diagonal of the cube</text>
+  </g>
+</svg>
+<figcaption>
+sc: $r=a/2$, circles meet at edge midpoints. &nbsp;
+bcc: cut is the rectangle $a\times a\sqrt2$ (plane $y=x$); its diagonal is $\sqrt3 a=4r$. A cube <i>face</i> of bcc has no centre atom. &nbsp;
+fcc: $r=a/(2\sqrt2)$, corner and face-centre circles meet on the face diagonal.
+</figcaption>
+  <p class="ref"><b>Ref.</b> Numbers: Kittel Table 2 nn distances. sc and fcc 2D panels <i>are</i> cube faces (Fig. 8). The bcc panel is <b>not a Kittel figure</b> — it is the Euclidean section of the cube by the plane $y=x$, chosen so the rectangle diagonal equals Table 2’s $\frac{\sqrt3}{2}a\times 2$. Do not draw bcc contact on a square (square diagonal $=\sqrt2 a$, that is fcc).</p>
+  </div>
+</div>
+
+<h2>5 · CsCl — looks like bcc, draw it as sc + two colours</h2>
+<div class="card">
+  <ol class="how">
+    <li>Draw the same cube as bcc.</li>
+    <li>Colour <b>corners one species</b> (Cs), <b>centre the other</b> (Cl). Write the two names.</li>
+    <li>Caption: <i>sc + 2-atom basis, NOT bcc</i> — because the two sites are different atoms.</li>
+  </ol>
+  <div class="zh">圖跟 bcc 一樣，但角與中心用兩種顏色／兩個元素名。圖下寫 NOT bcc。</div>
+  <div class="fig">
+<svg viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" aria-label="CsCl is sc plus basis">
+  <defs>
+    <radialGradient id="cs" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#9cc3e6"/><stop offset="1" stop-color="#1a4d7c"/></radialGradient>
+    <radialGradient id="cl" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#f5b7ae"/><stop offset="1" stop-color="#c0392b"/></radialGradient>
+  </defs>
+  <g transform="translate(30,20)" fill="none" stroke="#333" stroke-width="2">
+    <rect x="40" y="70" width="130" height="130"/>
+    <path d="M40,70 L85,35 H215 V165 L170,200"/>
+    <line x1="170" y1="70" x2="215" y2="35"/>
+  </g>
+  <g fill="url(#cs)" stroke="#13395d" stroke-width="1">
+    <circle cx="70" cy="90" r="10"/><circle cx="200" cy="90" r="10"/>
+    <circle cx="70" cy="220" r="10"/><circle cx="200" cy="220" r="10"/>
+    <circle cx="115" cy="55" r="10"/><circle cx="245" cy="55" r="10"/>
+    <circle cx="115" cy="185" r="10"/><circle cx="245" cy="185" r="10"/>
+  </g>
+  <circle cx="157" cy="138" r="13" fill="url(#cl)" stroke="#7d2418" stroke-width="1.2"/>
+  <text x="70" y="78" font-size="12" fill="#1a4d7c" font-weight="700">Cs</text>
+  <text x="172" y="142" font-size="12" fill="#c0392b" font-weight="700">Cl</text>
+  <text x="280" y="120" font-size="15" font-weight="700" fill="#1a4d7c">CsCl</text>
+  <text x="280" y="145" font-size="14" fill="#333">lattice: sc</text>
+  <text x="280" y="168" font-size="14" fill="#333">basis: Cs+Cl</text>
+  <text x="280" y="198" font-size="14" font-weight="700" fill="#c0392b">NOT bcc</text>
+</svg>
+  </div>
+  <span class="boxed">Same drawing as bcc, two colours. Caption: not bcc.</span>
+  <p class="ref"><b>Ref.</b> Kittel 8e Ch. 1, § Cesium chloride structure, Fig. 18: “The space lattice is simple cubic, and the basis has one Cs⁺ ion at 000 and one Cl⁻ ion at $\tfrac12\tfrac12\tfrac12$.” CN $=8$ (unlike bcc’s 8 <i>identical</i> neighbours). Ashcroft &amp; Mermin Ch. 4 / Ch. 7: a Bravais lattice has every point equivalent — two species ⇒ not a 1-atom bcc lattice.</p>
+</div>
+
+<h2>Claim → number → source (checked against local Kittel 8e text)</h2>
+<table class="refs">
+  <tr><th>Claim</th><th>Kittel 8e Ch. 1</th><th>Also</th></tr>
+  <tr><td>Crystal = lattice × basis; $\mathbf T=\sum n_i\mathbf a_i$</td><td>§ Periodic arrays of atoms; lattice translation vectors</td><td>Ashcroft &amp; Mermin Ch. 4; Simon Ch. 12.1</td></tr>
+  <tr><td>3 cubic conventional cells: sc, bcc, fcc</td><td><b>Fig. 8</b></td><td>Simon 12.2.1–2</td></tr>
+  <tr><td>Points per conventional cell 1 / 2 / 4</td><td><b>Table 2</b></td><td></td></tr>
+  <tr><td>CN 6 / 8 / 12</td><td><b>Table 2</b> “Number of nearest neighbors”</td><td></td></tr>
+  <tr><td>nn distance $a$, $\frac{\sqrt3}{2}a$, $a/\sqrt2$</td><td><b>Table 2</b></td><td>⇒ $2r$ or $4r$ for hard spheres (Table 2 footnote $a$: packing = hard spheres)</td></tr>
+  <tr><td>Packing $\pi/6$, $\pi\sqrt3/8$, $\pi\sqrt2/6$ (=0.524, 0.680, 0.740)</td><td><b>Table 2</b> (fcc written $\pi\sqrt2/6$; equal to $\pi/(3\sqrt2)$)</td><td>Simon 12.2.3 Sphere packing</td></tr>
+  <tr><td>CsCl is simple cubic + 2-ion basis, not bcc</td><td><b>Fig. 18</b> and § Cesium chloride</td><td>Ashcroft &amp; Mermin: inequivalent sites ⇒ not a 1-point bcc lattice</td></tr>
+  <tr><td>NaCl is fcc + 2-ion basis; 4 NaCl per cube</td><td>§ Sodium chloride; Fig. 15–17</td><td></td></tr>
+  <tr><td>hcp $c/a=\sqrt{8/3}=1.633$; packing 0.74 like fcc</td><td>§ Hexagonal close-packed; Fig. 19–21</td><td></td></tr>
+  <tr><td>Diamond: fcc + basis $000$ and $\tfrac14\tfrac14\tfrac14$; packing 0.34; CN 4</td><td>§ Diamond; Fig. 22–23</td><td></td></tr>
+  <tr><td>Miller: intercepts → reciprocals → lowest integers; example $3,2,2\to(233)$</td><td>§ Indices of planes; Fig. 13</td><td></td></tr>
+  <tr><td>14 Bravais lattices; no 5-fold</td><td>Table 1; § Fundamental types of lattices</td><td>Ashcroft &amp; Mermin Ch. 7</td></tr>
+  <tr><td>bcc 2D rectangle $a\times a\sqrt2$</td><td><b>Not a Kittel figure.</b> Derived so that the cut diagonal $=2\times$ Table 2 nn $=\sqrt3 a$.</td><td>Cube geometry, plane $y=x$</td></tr>
+</table>
+<p class="ref">Primary text in this repo: <code>教材/Kittel_原文.md</code> / <code>Kittel_翻譯.md</code> (8th ed. Ch. 1). Ashcroft &amp; Mermin and Simon: chapter numbers from their TOCs; no local page-checked PDF for those two.</p>
+
+<h2>Tonight’s drill (10 minutes)</h2>
+<div class="card">
+  <p>Blank paper. Draw sc, bcc, fcc, CsCl once each, no looking. Each must have: cube, atoms, <b>one red contact line with the formula</b>, and $N$.</p>
+  <div class="zh">白紙各畫一次。每張都要有：立方、原子、一條紅相切線＋公式、$N$。</div>
+</div>
+<footer>
+Quiz drawing is a schematic, not a hard-sphere packing rendering. If the cube is ugly but $N$ and $4r=\ldots$ are right, you still get the marks.
+</footer>
+<script>
+document.getElementById('btnZh').onclick=function(){
+  document.body.classList.toggle('show-zh');
+  this.classList.toggle('on', document.body.classList.contains('show-zh'));
+};
+</script>
+</body>
+</html>

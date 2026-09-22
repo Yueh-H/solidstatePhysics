@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 習題詳解 — 第4–5章 聲子 — 習題詳解＋範例</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">習題詳解目錄</a> &nbsp;·&nbsp; <a href="../Kittel章節導讀/index.html">章節導讀</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../../考古題/詳解/index.html">逐題詳解</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- Kittel 習題詳解：第4章 聲子（Kittel Ch4＋Ch5）-->
+
+# Kittel 第4章 習題詳解 ＋ 加碼範例 — 聲子（Phonons）
+
+> **這頁是什麼**：本章的「練習題庫＋完整解答」，範圍涵蓋 Kittel 原書 **Ch4 Phonons I（晶體振動）** 與 **Ch5 Phonons II（熱性質）**。先做 **加碼範例** 熱身，再把 **Kittel 課本習題** 全部練過。觀念見 [章節導讀](../Kittel章節導讀/ch04_聲子.html)、[單元學科](../../單元教學/unit04_聲子.html)；歷年考題見 [逐題詳解](../../考古題/詳解/index.html)。
+
+---
+
+## 0. 你必須先背熟的公式（本章地基）
+
+這一章所有題目都由下面幾條公式長出來，建議先把它們「看著就會推」：
+
+1. **單原子鏈色散關係（monatomic chain dispersion relation）**：質量 $M$、間距 $a$、最近鄰力常數 $C$，
+$$\omega^2=\frac{2C}{M}\bigl(1-\cos Ka\bigr)=\frac{4C}{M}\sin^2\!\frac{Ka}{2}\;\Longrightarrow\;\omega=\omega_m\left|\sin\frac{Ka}{2}\right|,\quad \omega_m=2\sqrt{\frac{C}{M}}.$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 520 215" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<line x1="60" y1="175" x2="460" y2="175" stroke="#999" stroke-width="1"/>
+<line x1="260" y1="40" x2="260" y2="185" stroke="#999" stroke-width="1"/>
+<line x1="60" y1="40" x2="60" y2="185" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,3"/>
+<line x1="460" y1="40" x2="460" y2="185" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,3"/>
+<line x1="60" y1="45" x2="460" y2="45" stroke="#e67e22" stroke-width="0.9" stroke-dasharray="4,3"/>
+<polyline points="60.0,45.0 70.0,45.4 80.0,46.6 90.0,48.6 100.0,51.4 110.0,54.9 120.0,59.2 130.0,64.2 140.0,69.8 150.0,76.1 160.0,83.1 170.0,90.6 180.0,98.6 190.0,107.1 200.0,116.0 210.0,125.3 220.0,134.8 230.0,144.7 240.0,154.7 250.0,164.8 260.0,175.0 270.0,164.8 280.0,154.7 290.0,144.7 300.0,134.8 310.0,125.3 320.0,116.0 330.0,107.1 340.0,98.6 350.0,90.6 360.0,83.1 370.0,76.1 380.0,69.8 390.0,64.2 400.0,59.2 410.0,54.9 420.0,51.4 430.0,48.6 440.0,46.6 450.0,45.4 460.0,45.0" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<line x1="246" y1="175" x2="274" y2="161" stroke="#2e8b2e" stroke-width="2"/>
+<text x="295" y="150" fill="#2e8b2e">長波線性段 ω≈vₛK</text>
+<circle cx="60" cy="45" r="3.5" fill="#c0392b"/><circle cx="460" cy="45" r="3.5" fill="#c0392b"/>
+<text x="248" y="200" fill="#555">0</text>
+<text x="445" y="200" fill="#555">π/a</text>
+<text x="42" y="200" fill="#555">−π/a</text>
+<text x="120" y="42" fill="#e67e22">ωₘ = 2√(C/M)</text>
+<text x="270" y="55" fill="#c0392b" font-size="10.5">區邊界：斜率(群速度)=0</text>
+<text x="466" y="178" fill="#555">K</text>
+<text x="262" y="36" fill="#555">ω</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">公式 1 與<b>範例 1</b>的圖：單原子鏈色散 ω=ωₘ|sin(Ka/2)|。原點附近是<b style="color:#2e8b2e">線性的長波段</b>（聲速 vₛ=a√(C/M)）；爬到第一布里淵區邊界 K=±π/a 時 sin=1，達到<b style="color:#e67e22">截止頻率 ωₘ=2√(C/M)</b>（範例 1 求的就是這個峰，落在 THz 量級）。曲線在<b style="color:#c0392b">區邊界變平（斜率→0）</b>，正是範例 2 群速度為零的幾何。</figcaption>
+</figure>
+
+2. **運動方程式（equation of motion）**：第 $s$ 顆原子位移 $u_s$，
+$$M\ddot u_s=C\bigl(u_{s+1}+u_{s-1}-2u_s\bigr).$$
+
+3. **普朗克分佈（Planck distribution）**：頻率 $\omega$ 模態的平均聲子數
+$$\langle n\rangle=\frac{1}{e^{\hbar\omega/k_BT}-1}.$$
+
+4. **狀態密度（density of states, DOS）**：一維 $D(\omega)=\dfrac{L}{\pi}\dfrac{dK}{d\omega}$；三維德拜（Debye）$D(\omega)=\dfrac{V\omega^2}{2\pi^2 v^3}$（單一極化）。
+
+5. **德拜熱容（Debye heat capacity）**：低溫極限
+$$C_V=\frac{12\pi^4}{5}Nk_B\left(\frac{T}{\theta_D}\right)^3\quad(T\ll\theta_D),\qquad C_V\to 3Nk_B\ (T\gg\theta_D).$$
+
+> 記憶法：低溫 $C_V\propto T^d$（$d=$ 維度），高溫 $\to 3Nk_B$（杜隆–珀蒂，Dulong–Petit）。
+
+---
+
+## 🔥 加碼範例題目（先熱身）
+
+### 範例 1：單原子鏈的最大頻率 $\omega_{\max}$（含數值）
+
+**題目**：一條一維單原子鏈，原子質量 $M=4.0\times10^{-26}\ \text{kg}$，最近鄰力常數 $C=15\ \text{N/m}$。求(a) 截止頻率 $\omega_{\max}$；(b) 對應的頻率 $f_{\max}=\omega_{\max}/2\pi$。
+
+**Step 1**：由色散關係 $\omega=\omega_m|\sin(Ka/2)|$，最大值出現在 $\sin=1$（即 $K=\pi/a$，布里淵區邊界），故 $\omega_{\max}=\omega_m=2\sqrt{C/M}$。
+
+**Step 2**：代入數值算根號內：
+$$\frac{C}{M}=\frac{15}{4.0\times10^{-26}}=3.75\times10^{26}\ \text{s}^{-2}.$$
+
+**Step 3**：開根號乘 2：
+$$\omega_{\max}=2\sqrt{3.75\times10^{26}}=2\times(1.936\times10^{13})=3.87\times10^{13}\ \text{rad/s}.$$
+
+**Step 4**：換成頻率 $f_{\max}=\omega_{\max}/2\pi=3.87\times10^{13}/6.283=6.2\times10^{12}\ \text{Hz}$。
+
+$$\boxed{\omega_{\max}=3.9\times10^{13}\ \text{rad/s},\qquad f_{\max}\approx6.2\ \text{THz}}$$
+
+> **量級檢查**：晶格振動的截止頻率落在 THz（兆赫）量級，正是紅外光/聲子的典型頻率，合理。
+
+<details>
+<summary><b>📝 更多範例（點開）：單原子鏈色散與截止頻率多算幾種</b></summary>
+
+**範例 A（換質量、看 $\omega_{\max}$ 怎麼變）**：同一條鏈把質量換成 $M'=M/4$（同樣的 $C$）。截止頻率 $\omega_{\max}'=2\sqrt{C/M'}=2\sqrt{C/(M/4)}=2\sqrt{4C/M}=2\cdot2\sqrt{C/M}=2\,\omega_{\max}$。所以質量變 $\tfrac14$，頻率變 $2$ 倍——因為 $\omega_{\max}\propto M^{-1/2}$。代數逐步：$\sqrt{4C/M}=\sqrt4\cdot\sqrt{C/M}=2\sqrt{C/M}$，再乘外面的 $2$ 得 $4\sqrt{C/M}=2\omega_{\max}$。輕原子（如 H）晶格振動頻率高，正是這個道理。
+
+**範例 B（給半截止頻率，反求 $K$）**：色散 $\omega=\omega_m\sin(Ka/2)$（取 $0\le K\le\pi/a$）。問在哪個 $K$ 頻率恰為 $\omega_{\max}$ 的一半。令 $\sin(Ka/2)=\tfrac12$。解 $\dfrac{Ka}{2}=\arcsin\tfrac12=\dfrac{\pi}{6}$，故 $Ka=\dfrac{\pi}{3}$，$K=\dfrac{\pi}{3a}$。檢查：這是區邊界 $\pi/a$ 的 $\tfrac13$，因為色散在小 $K$ 並非線性而是 sin，所以「一半頻率」不在「一半 $K$」，這是常見陷阱。
+
+**範例 C（用數值反推力常數 $C$）**：實驗測得某單原子鏈 $M=2.0\times10^{-26}\ \text{kg}$、截止頻率 $f_{\max}=8.0\ \text{THz}$，求 $C$。先把頻率轉角頻率 $\omega_{\max}=2\pi f_{\max}=2\pi\times8.0\times10^{12}=5.03\times10^{13}\ \text{rad/s}$。由 $\omega_{\max}=2\sqrt{C/M}$ 解出 $\sqrt{C/M}=\dfrac{\omega_{\max}}{2}=2.51\times10^{13}$，平方 $\dfrac{C}{M}=6.32\times10^{26}\ \text{s}^{-2}$，故 $C=M\times6.32\times10^{26}=2.0\times10^{-26}\times6.32\times10^{26}=12.6\ \text{N/m}$。量級 $\sim10\ \text{N/m}$ 與典型固體鍵的力常數相符。
+
+</details>
+
+---
+
+### 範例 2：群速度（group velocity）在區邊界為零
+
+**題目**：對單原子鏈 $\omega=\omega_m\sin(Ka/2)$（取 $0\le K\le\pi/a$），求(a) 群速度 $v_g=d\omega/dK$ 的表式；(b) 長波極限 $K\to0$ 的聲速 $v_s$；(c) 證明 $K=\pi/a$ 時 $v_g=0$。
+
+**Step 1**：直接微分。設 $\theta=Ka/2$，$\dfrac{d\theta}{dK}=\dfrac{a}{2}$，
+$$v_g=\frac{d\omega}{dK}=\omega_m\cos\!\frac{Ka}{2}\cdot\frac{a}{2}=\frac{\omega_m a}{2}\cos\frac{Ka}{2}.$$
+
+**Step 2**：長波 $K\to0$，$\cos(Ka/2)\to1$，
+$$v_s=\lim_{K\to0}v_g=\frac{\omega_m a}{2}=\frac{2\sqrt{C/M}\cdot a}{2}=a\sqrt{\frac{C}{M}}.$$
+
+**Step 3**：區邊界 $K=\pi/a$，$\cos(Ka/2)=\cos(\pi/2)=0$，故
+$$v_g\Big|_{K=\pi/a}=\frac{\omega_m a}{2}\cdot0=0.$$
+
+$$\boxed{v_g=\tfrac{\omega_m a}{2}\cos\tfrac{Ka}{2},\quad v_s=a\sqrt{C/M},\quad v_g(\pi/a)=0}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 500 230" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<line x1="70" y1="205" x2="440" y2="205" stroke="#999" stroke-width="1"/>
+<line x1="70" y1="32" x2="70" y2="205" stroke="#999" stroke-width="1"/>
+<line x1="430" y1="32" x2="430" y2="205" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,3"/>
+<polyline points="70.0,150.0 79.0,145.7 88.0,141.4 97.0,137.1 106.0,132.8 115.0,128.5 124.0,124.3 133.0,120.1 142.0,116.0 151.0,111.9 160.0,107.9 169.0,103.9 178.0,100.1 187.0,96.3 196.0,92.5 205.0,88.9 214.0,85.3 223.0,81.9 232.0,78.6 241.0,75.3 250.0,72.2 259.0,69.2 268.0,66.4 277.0,63.6 286.0,61.0 295.0,58.5 304.0,56.2 313.0,54.0 322.0,52.0 331.0,50.1 340.0,48.4 349.0,46.8 358.0,45.4 367.0,44.1 376.0,43.0 385.0,42.1 394.0,41.4 403.0,40.8 412.0,40.3 421.0,40.1 430.0,40.0" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<line x1="70" y1="150" x2="120" y2="125.7" stroke="#2e8b2e" stroke-width="2.2"/>
+<text x="124" y="120" fill="#2e8b2e">斜率大 → vₛ</text>
+<line x1="395" y1="40.6" x2="430" y2="40" stroke="#c0392b" stroke-width="2.2"/>
+<text x="300" y="36" fill="#c0392b">斜率→0 → vₘ=0</text>
+<text x="78" y="148" fill="#1a4d7c">ω(K)</text>
+<polyline points="70.0,162.0 79.0,162.0 88.0,162.1 97.0,162.3 106.0,162.5 115.0,162.7 124.0,163.0 133.0,163.4 142.0,163.9 151.0,164.3 160.0,164.9 169.0,165.5 178.0,166.1 187.0,166.8 196.0,167.6 205.0,168.4 214.0,169.3 223.0,170.2 232.0,171.1 241.0,172.1 250.0,173.1 259.0,174.2 268.0,175.3 277.0,176.5 286.0,177.7 295.0,178.9 304.0,180.1 313.0,181.4 322.0,182.7 331.0,184.1 340.0,185.5 349.0,186.8 358.0,188.3 367.0,189.7 376.0,191.1 385.0,192.6 394.0,194.1 403.0,195.5 412.0,197.0 421.0,198.5 430.0,200.0" fill="none" stroke="#e67e22" stroke-width="2" stroke-dasharray="6,3"/>
+<text x="150" y="178" fill="#e67e22">群速度 vₘ=dω/dK=(ωₘa/2)cos(Ka/2)</text>
+<circle cx="430" cy="200" r="3.5" fill="#c0392b"/>
+<text x="64" y="222" fill="#555">0</text>
+<text x="418" y="222" fill="#555">π/a</text>
+<text x="446" y="208" fill="#555">K</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 2</b> 的圖：群速度 vₘ=dω/dK 就是色散曲線<b style="color:#1a4d7c">藍線</b>的斜率。長波 K→0 斜率最大 → 聲速 <b style="color:#2e8b2e">vₛ=a√(C/M)</b>；到區邊界 K=π/a 曲線變平、斜率歸零 → <b style="color:#c0392b">vₘ=0</b>。<b style="color:#e67e22">橘虛線</b>畫出 vₘ∝cos(Ka/2) 隨 K 從 vₛ 單調降到 0，對應「區邊界是駐波、不傳能量」。</figcaption>
+</figure>
+
+> **物理意義**：區邊界是駐波（standing wave），不傳能量，所以群速度為零；長波則回到連續介質的固定聲速。
+
+<details>
+<summary><b>📝 更多範例（點開）：群速度與相速度多算幾種情形</b></summary>
+
+**範例 A（在 $K=\pi/(2a)$ 算 $v_g$）**：群速度 $v_g=\dfrac{\omega_m a}{2}\cos\dfrac{Ka}{2}$。代 $K=\dfrac{\pi}{2a}$，則 $\dfrac{Ka}{2}=\dfrac{\pi}{4}$，$\cos\dfrac{\pi}{4}=\dfrac{1}{\sqrt2}=0.707$。故 $v_g=\dfrac{\omega_m a}{2}\times0.707=0.707\,v_s$（因 $v_s=\omega_m a/2$）。也就是布里淵區中點的群速度已降到聲速的約 $71\%$，色散開始彎曲，這正是「邊界附近群速度趨零」的中段值。
+
+**範例 B（相速度 vs 群速度）**：相速度 $v_p=\dfrac{\omega}{K}=\dfrac{\omega_m\sin(Ka/2)}{K}$。長波 $K\to0$：用 $\sin x\approx x$，$\sin(Ka/2)\approx Ka/2$，$v_p\approx\dfrac{\omega_m\cdot Ka/2}{K}=\dfrac{\omega_m a}{2}=v_s$，與群速度相等（無色散區）。但在區邊界 $K=\pi/a$：$v_p=\dfrac{\omega_m\sin(\pi/2)}{\pi/a}=\dfrac{\omega_m a}{\pi}=\dfrac{2v_s}{\pi}\approx0.637\,v_s\neq0$，而 $v_g=0$。所以區邊界相速度仍有限、群速度卻為零——能量不傳但波形相位仍在「原地」變化，這就是駐波。
+
+**範例 C（含數值的群速度）**：取 $\omega_m=4.0\times10^{13}\ \text{rad/s}$、$a=3.0\times10^{-10}\ \text{m}$。長波聲速 $v_s=\dfrac{\omega_m a}{2}=\dfrac{4.0\times10^{13}\times3.0\times10^{-10}}{2}=\dfrac{1.2\times10^{4}}{2}=6.0\times10^{3}\ \text{m/s}=6\ \text{km/s}$。在 $K=\pi/(2a)$ 由範例 A 得 $v_g=0.707\times6\ \text{km/s}=4.2\ \text{km/s}$。聲速 $\sim$ 數 km/s，與真實固體（如鋁約 $6.3$ km/s）數量級一致。
+
+</details>
+
+---
+
+### 範例 3：三維德拜 $T^3$ 定律（含數值）
+
+**題目**：銅的德拜溫度 $\theta_D=343\ \text{K}$。估算在 $T=10\ \text{K}$ 時，1 mol 銅的晶格熱容 $C_V$（$N=N_A=6.02\times10^{23}$，$k_B=1.38\times10^{-23}\ \text{J/K}$，氣體常數 $R=Nk_B=8.314\ \text{J/(mol·K)}$）。
+
+**Step 1**：$T=10\ \text{K}\ll\theta_D=343\ \text{K}$，用低溫德拜公式
+$$C_V=\frac{12\pi^4}{5}Nk_B\left(\frac{T}{\theta_D}\right)^3.$$
+
+**Step 2**：算前置係數 $\dfrac{12\pi^4}{5}=\dfrac{12\times97.41}{5}=233.8$。
+
+**Step 3**：算溫度比立方 $\left(\dfrac{10}{343}\right)^3=(0.02915)^3=2.48\times10^{-5}$。
+
+**Step 4**：代入（用 $Nk_B=R=8.314$）：
+$$C_V=233.8\times8.314\times2.48\times10^{-5}=233.8\times2.062\times10^{-4}=4.82\times10^{-2}\ \text{J/(mol·K)}.$$
+
+$$\boxed{C_V\approx0.048\ \text{J/(mol·K)}\ \text{（10 K 的銅）}}$$
+
+> **檢查**：室溫附近銅的 $C_V\approx3R\approx24.9\ \text{J/(mol·K)}$（杜隆–珀蒂），10 K 時只剩約 $0.05$，相差約 500 倍，正是 $T^3$ 急速壓低的效果，合理。
+
+---
+
+### 範例 4：杜隆–珀蒂高溫極限（Dulong–Petit）
+
+**題目**：由愛因斯坦/德拜模型的單模能量，證明高溫 $T\gg\theta$ 下每個原子的熱容趨於 $3k_B$，並算出 1 mol 固體的莫耳熱容數值。
+
+**Step 1**：一個聲子模的平均能量（含零點）$\langle\varepsilon\rangle=\hbar\omega\left(\dfrac12+\dfrac{1}{e^{\hbar\omega/k_BT}-1}\right)$。
+
+**Step 2**：高溫 $x\equiv\hbar\omega/k_BT\ll1$，展開 $e^x-1\approx x+\tfrac{x^2}{2}$，故
+$$\frac{1}{e^x-1}\approx\frac{1}{x}-\frac12+\frac{x}{12}+\cdots\;\Longrightarrow\;\langle\varepsilon\rangle\approx\hbar\omega\left(\frac{1}{x}\right)=\frac{\hbar\omega}{\hbar\omega/k_BT}=k_BT.$$
+
+**Step 3**：每個原子有 3 個振動模（3 個極化方向），故每原子能量 $\approx3k_BT$，
+$$c_V=\frac{d}{dT}(3k_BT)=3k_B.$$
+
+**Step 4**：1 mol 共 $N_A$ 原子：$C_V=3N_Ak_B=3R=3\times8.314=24.9\ \text{J/(mol·K)}$。
+
+$$\boxed{c_V\to3k_B\ \text{（每原子）},\qquad C_V\to3R\approx24.9\ \text{J/(mol·K)}}$$
+
+> **重點**：高溫下每個自由度貢獻 $k_B$（能量均分定理，equipartition），與量子細節無關，這就是杜隆–珀蒂定律。
+
+<details>
+<summary><b>📝 更多範例（點開）：低溫德拜 $T^3$ 與杜隆–珀蒂多算幾題</b></summary>
+
+**範例 A（兩溫度比，純比例）**：低溫 $C_V\propto T^3$。某固體在 $5\ \text{K}$ 量得 $C_V=2.0\ \text{mJ/(mol·K)}$，問 $10\ \text{K}$ 的 $C_V$。因仍在低溫德拜區，$\dfrac{C_V(10)}{C_V(5)}=\left(\dfrac{10}{5}\right)^3=2^3=8$，故 $C_V(10)=8\times2.0=16\ \text{mJ/(mol·K)}$。溫度加倍、熱容變 $8$ 倍，是 $T^3$ 定律最快的檢查法。
+
+**範例 B（給 $\theta_D$ 算具體數值）**：鑽石 $\theta_D=2230\ \text{K}$，求 $T=20\ \text{K}$ 的莫耳 $C_V$。先確認 $T\ll\theta_D$ 成立。係數 $\dfrac{12\pi^4}{5}=233.8$。溫度比 $\dfrac{20}{2230}=8.97\times10^{-3}$，立方 $(8.97\times10^{-3})^3=7.21\times10^{-7}$。代入 $C_V=233.8\times8.314\times7.21\times10^{-7}=233.8\times5.99\times10^{-6}=1.40\times10^{-3}\ \text{J/(mol·K)}$。鑽石德拜溫度極高，故低溫熱容極小（鍵硬、聲子能量高、不易激發）。
+
+**範例 C（杜隆–珀蒂對化合物：算每莫耳「公式單位」）**：$\text{NaCl}$ 每個公式單位含 2 個原子（Na 與 Cl）。高溫每原子貢獻 $3k_B$，故每莫耳 NaCl 的 $C_V\to2\times3R=6R=6\times8.314=49.9\ \text{J/(mol·K)}$。一般化：含 $n$ 個原子的化合物，杜隆–珀蒂高溫極限 $C_V\to3nR$。例如石英 $\text{SiO}_2$（$n=3$）給 $C_V\to9R\approx74.8\ \text{J/(mol·K)}$。這是判斷實驗值是否已到飽和的快速基準。
+
+</details>
+
+---
+
+## 📚 Kittel 第4章（Phonons I）課本習題 — 完整解答
+
+### 習題 4.1：單原子線晶格的能量（Kittel Prob. 4.1）
+
+**題目（English, Kittel Prob. 4.1）**：**Monatomic linear lattice.** Consider a longitudinal wave
+$$u_s=u\cos(\omega t-sKa),$$
+which propagates in a monatomic linear lattice of atoms of mass $M$, spacing $a$, and nearest-neighbor interaction $C$. (a) Show that the total energy of the wave is
+$$E=\tfrac12 M\sum_s\Bigl(\frac{du_s}{dt}\Bigr)^2+\tfrac12 C\sum_s\bigl(u_s-u_{s+1}\bigr)^2,$$
+where $s$ runs over all atoms. (b) By substitution of $u_s$ in this expression, show that the time-average total energy per atom is
+$$\tfrac12 M\omega^2u^2,$$
+where in the last step we have used the dispersion relation for this problem.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+一縱波 $u_s=u\cos(\omega t-sKa)$ 在單原子線晶格中傳播（質量 $M$、間距 $a$、最近鄰力常數 $C$）。(a) 證明此波的總能量為
+$$E=\tfrac12 M\sum_s\Bigl(\frac{du_s}{dt}\Bigr)^2+\tfrac12 C\sum_s\bigl(u_s-u_{s+1}\bigr)^2,$$
+其中 $s$ 跑遍所有原子。(b) 代入 $u_s$，證明每原子的時間平均總能量為 $\tfrac12 M\omega^2u^2$。
+
+</details>
+
+**Step 1（總能量的形式）**：動能（kinetic energy）是每顆原子 $\tfrac12 M\dot u_s^2$ 之和。
+$$T_{\text{kin}}=\sum_s\tfrac12 M\dot u_s^2.$$
+
+**Step 2（位能來自彈簧）**：原子 $s$ 與 $s+1$ 間的力為 $-C(u_s-u_{s+1})$（虎克力，Hooke's law）。一根「彈簧」被拉伸 $(u_s-u_{s+1})$ 所儲存的位能（potential energy）為 $\tfrac12 C(u_s-u_{s+1})^2$；對所有鍵求和：
+$$U_{\text{pot}}=\sum_s\tfrac12 C(u_s-u_{s+1})^2.$$
+兩者相加即得題目要證的 (a)。
+
+**Step 3（代入波解，先算動能）**：$\dot u_s=-u\omega\sin(\omega t-sKa)$，故
+$$T_{\text{kin}}=\tfrac12 M u^2\omega^2\sum_s\sin^2(\omega t-sKa).$$
+對時間取平均：$\langle\sin^2\rangle=\tfrac12$，所以每原子動能時均
+$$\langle T_{\text{kin}}\rangle_{\text{per atom}}=\tfrac12 Mu^2\omega^2\cdot\tfrac12=\tfrac14 M\omega^2 u^2.$$
+
+**Step 4（算位能）**：$u_{s+1}=u\cos(\omega t-(s+1)Ka)$。用差角公式
+$$u_s-u_{s+1}=u\bigl[\cos(\omega t-sKa)-\cos(\omega t-sKa-Ka)\bigr].$$
+設 $\phi=\omega t-sKa$，$\cos\phi-\cos(\phi-Ka)=\cos\phi(1-\cos Ka)-\sin\phi\sin Ka$。平方後取時間平均（用 $\langle\cos^2\phi\rangle=\langle\sin^2\phi\rangle=\tfrac12$，$\langle\cos\phi\sin\phi\rangle=0$）：
+$$\langle(u_s-u_{s+1})^2\rangle=u^2\Bigl[\tfrac12(1-\cos Ka)^2+\tfrac12\sin^2Ka\Bigr]=\tfrac12 u^2\bigl(2-2\cos Ka\bigr)=u^2(1-\cos Ka).$$
+
+**Step 5（位能化簡）**：每鍵位能時均 $=\tfrac12 C\,u^2(1-\cos Ka)$。用色散關係 $\omega^2=\dfrac{2C}{M}(1-\cos Ka)\Rightarrow C(1-\cos Ka)=\tfrac12 M\omega^2$，故
+$$\langle U_{\text{pot}}\rangle_{\text{per atom}}=\tfrac12 u^2\cdot\tfrac12 M\omega^2=\tfrac14 M\omega^2 u^2.$$
+
+**Step 6（相加）**：動能時均＝位能時均（簡諧振子的通性），總和
+$$\langle E\rangle_{\text{per atom}}=\tfrac14 M\omega^2 u^2+\tfrac14 M\omega^2 u^2.$$
+
+$$\boxed{\langle E\rangle_{\text{per atom}}=\tfrac12 M\omega^2u^2}$$
+
+> **重點**：考「動能時均＝位能時均」與用色散關係把 $(1-\cos Ka)$ 換掉。$\langle\sin^2\rangle=\langle\cos^2\rangle=\tfrac12$ 是關鍵。
+
+---
+
+### 習題 4.2：連續波動方程式（Kittel Prob. 4.2）
+
+**題目（English, Kittel Prob. 4.2）**：**Continuum wave equation.** Show that for long wavelengths the equation of motion $M\ddot u_s=C(u_{s+1}+u_{s-1}-2u_s)$ reduces to the continuum elastic wave equation
+$$\frac{\partial^2 u}{\partial t^2}=v^2\frac{\partial^2 u}{\partial x^2},$$
+where $v$ is the velocity of sound.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+證明長波極限下，運動方程式 $M\ddot u_s=C(u_{s+1}+u_{s-1}-2u_s)$ 退化為連續彈性波方程式
+$$\frac{\partial^2 u}{\partial t^2}=v^2\frac{\partial^2 u}{\partial x^2},$$
+其中 $v$ 為聲速。
+
+</details>
+
+**Step 1（離散→連續）**：長波時相鄰原子位移差很小，把 $u_s$ 看成位置 $x=sa$ 的連續函數 $u(x)$。鄰居寫成泰勒展開（Taylor expansion）：
+$$u_{s\pm1}=u(x\pm a)=u(x)\pm a\frac{\partial u}{\partial x}+\frac{a^2}{2}\frac{\partial^2 u}{\partial x^2}\pm\frac{a^3}{6}\frac{\partial^3u}{\partial x^3}+\cdots.$$
+
+**Step 2（組合右端）**：把 $u_{s+1}+u_{s-1}$ 相加，奇次項相消：
+$$u_{s+1}+u_{s-1}=2u(x)+a^2\frac{\partial^2 u}{\partial x^2}+\mathcal{O}(a^4).$$
+因此
+$$u_{s+1}+u_{s-1}-2u_s=a^2\frac{\partial^2 u}{\partial x^2}.$$
+
+**Step 3（代回運動方程）**：
+$$M\frac{\partial^2 u}{\partial t^2}=C\,a^2\frac{\partial^2 u}{\partial x^2}\;\Longrightarrow\;\frac{\partial^2 u}{\partial t^2}=\frac{Ca^2}{M}\frac{\partial^2 u}{\partial x^2}.$$
+
+**Step 4（讀出聲速）**：對比波方程 $\partial_{tt}u=v^2\partial_{xx}u$：
+
+$$\boxed{\frac{\partial^2 u}{\partial t^2}=v^2\frac{\partial^2 u}{\partial x^2},\qquad v=a\sqrt{\frac{C}{M}}}$$
+
+> **重點**：這個 $v=a\sqrt{C/M}$ 與範例 2 的長波聲速完全一致——連續近似就是色散關係 $K\to0$ 的線性段。
+
+---
+
+### 習題 4.3：兩種不同原子的基底（Kittel Prob. 4.3）
+
+**題目（English, Kittel Prob. 4.3）**：**Basis of two unlike atoms.** For the problem treated by Eqs. (18) to (26), find the amplitude ratios $u/v$ for the two branches at $K_{\max}=\pi/a$. Show that at this value of $K$ the two lattices act as if decoupled: one lattice remains at rest while the other lattice moves.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+對雙原子鏈（質量 $M_1$、$M_2$，由 Kittel (18)–(26) 處理），求在 $K_{\max}=\pi/a$ 兩支（聲學支 acoustic、光學支 optical）的振幅比 $u/v$。證明在此 $K$ 值，兩套子晶格如同解耦（decoupled）：一套靜止、另一套運動。
+
+</details>
+
+**Step 1（聯立方程）**：雙原子鏈本徵方程（Kittel (20)）為
+$$\begin{cases}-\omega^2 M_1 u=Cv\,(1+e^{-iKa})-2Cu,\\[2pt]-\omega^2 M_2 v=Cu\,(1+e^{+iKa})-2Cv.\end{cases}$$
+振幅比可寫成
+$$\frac{u}{v}=\frac{C(1+e^{-iKa})}{2C-\omega^2 M_1}.$$
+
+**Step 2（代入區邊界）**：$K=\pi/a\Rightarrow e^{-iKa}=e^{-i\pi}=-1$，故 $1+e^{-iKa}=0$。分子為零，因此
+$$\frac{u}{v}=0\quad(\text{只要分母不為零}).$$
+
+**Step 3（兩支的頻率）**：在 $K=\pi/a$，方程退化（耦合項消失）為兩條獨立式：
+$$\omega^2=\frac{2C}{M_1}\ \text{（此時 }v=0,\ u\neq0\text{：輕者動，重者靜）}$$
+$$\omega^2=\frac{2C}{M_2}\ \text{（此時 }u=0,\ v\neq0\text{：另一套子晶格動）}.$$
+
+**Step 4（解讀解耦）**：因為耦合因子 $1+e^{-iKa}=0$，相鄰兩套子晶格在區邊界互不施力——一套以 $\omega^2=2C/M_1$ 振動而另一套完全靜止，反之亦然。
+
+$$\boxed{K=\tfrac{\pi}{a}:\ \tfrac{u}{v}=0\ \text{或}\ \infty;\quad \omega^2=\tfrac{2C}{M_1}\ (\text{僅 }u\text{ 動})\ \text{與}\ \omega^2=\tfrac{2C}{M_2}\ (\text{僅 }v\text{ 動})}$$
+
+> **重點**：區邊界出現「光學支只有輕原子在動、聲學支只有重原子在動」（或反之）的純模態，這是雙原子鏈能隙（band gap）兩端的物理圖像。
+
+---
+
+### 習題 4.4：科恩異常（Kohn anomaly，Kittel Prob. 4.4）
+
+**題目（English, Kittel Prob. 4.4）**：**Kohn anomaly.** We suppose that the interplanar force constant $C_p$ between planes $s$ and $s+p$ is of the form
+$$C_p=A\,\frac{\sin(pk_0 a)}{pa},$$
+where $A$ and $k_0$ are constants and $p$ runs over all integers. Such a form is expected in metals. Use this and Eq. (16a) to find an expression for $\omega^2$ and also for $\partial\omega^2/\partial K$. Prove that $\partial\omega^2/\partial K$ is infinite when $K=k_0$. Thus a plot of $\omega^2$ versus $K$, or of $\omega$ versus $K$, has a vertical tangent at $k_0$: there is a kink at $k_0$ in the phonon dispersion relation $\omega(K)$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+設平面 $s$ 與 $s+p$ 間的層間力常數為
+$$C_p=A\,\frac{\sin(pk_0 a)}{pa},$$
+其中 $A$、$k_0$ 為常數，$p$ 跑遍所有整數。用此式與 Kittel (16a) 求 $\omega^2$ 與 $\partial\omega^2/\partial K$ 的表式。證明 $K=k_0$ 時 $\partial\omega^2/\partial K$ 為無窮大——即色散關係 $\omega(K)$ 在 $k_0$ 有垂直切線（一個「扭結」kink）。
+
+</details>
+
+**Step 1（一般色散公式）**：Kittel (16a)：含遠程力常數的色散關係為
+$$\omega^2=\frac{2}{M}\sum_{p>0}C_p\bigl(1-\cos pKa\bigr).$$
+
+**Step 2（代入 $C_p$）**：
+$$\omega^2=\frac{2}{M}\sum_{p>0}\frac{A\sin(pk_0a)}{pa}\bigl(1-\cos pKa\bigr).$$
+
+**Step 3（對 $K$ 微分）**：只有 $\cos pKa$ 含 $K$，$\dfrac{\partial}{\partial K}(1-\cos pKa)=pa\sin pKa$，故
+$$\frac{\partial\omega^2}{\partial K}=\frac{2}{M}\sum_{p>0}\frac{A\sin(pk_0a)}{pa}\cdot pa\sin pKa=\frac{2A}{M}\sum_{p>0}\sin(pk_0a)\sin(pKa).$$
+
+**Step 4（積化和差）**：用 $\sin\alpha\sin\beta=\tfrac12[\cos(\alpha-\beta)-\cos(\alpha+\beta)]$：
+$$\frac{\partial\omega^2}{\partial K}=\frac{A}{M}\sum_{p>0}\Bigl[\cos\bigl(p(k_0-K)a\bigr)-\cos\bigl(p(k_0+K)a\bigr)\Bigr].$$
+
+**Step 5（取 $K\to k_0$）**：當 $K=k_0$，第一項變成 $\cos(0)=1$，對 $p$ 求和 $\sum_{p>0}1\to\infty$（級數發散）。第二項有限。因此
+$$\frac{\partial\omega^2}{\partial K}\Big|_{K=k_0}=\frac{A}{M}\Bigl(\underbrace{\textstyle\sum_{p>0}1}_{\to\infty}-\text{有限}\Bigr)\to\infty.$$
+
+$$\boxed{\frac{\partial\omega^2}{\partial K}\xrightarrow{\;K\to k_0\;}\infty\;\Rightarrow\;\omega(K)\ \text{在}\ k_0\ \text{有垂直切線（科恩異常）}}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 500 215" width="100%" style="max-width:600px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<line x1="70" y1="190" x2="440" y2="190" stroke="#999" stroke-width="1"/>
+<line x1="70" y1="32" x2="70" y2="190" stroke="#999" stroke-width="1"/>
+<line x1="268" y1="32" x2="268" y2="190" stroke="#c0392b" stroke-width="0.9" stroke-dasharray="4,3"/>
+<polyline points="70.0,189.5 76.0,186.2 82.0,182.9 88.0,179.6 94.0,176.3 100.0,173.0 106.0,169.8 112.0,166.5 118.0,163.3 124.0,160.0 130.0,156.8 136.0,153.6 142.0,150.4 148.0,147.2 154.0,144.0 160.0,140.9 166.0,137.8 172.0,134.7 178.0,131.6 184.0,128.6 190.0,125.6 196.0,122.6 202.0,119.6 208.0,116.7 214.0,113.8 220.0,110.9 226.0,108.0 232.0,105.2 238.0,102.3 244.0,99.5 250.0,96.6 256.0,93.7 262.0,90.6 268.0,86.0 274.0,81.6 280.0,78.6 286.0,76.0 292.0,73.5 298.0,71.2 304.0,69.1 310.0,67.0 316.0,65.1 322.0,63.2 328.0,61.4 334.0,59.8 340.0,58.2 346.0,56.7 352.0,55.3 358.0,54.0 364.0,52.7 370.0,51.6 376.0,50.6 382.0,49.6 388.0,48.7 394.0,47.9 400.0,47.2 406.0,46.6 412.0,46.0 418.0,45.6 424.0,45.2 430.0,44.9" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<line x1="268" y1="100" x2="268" y2="72" stroke="#2e8b2e" stroke-width="2.4"/>
+<text x="278" y="86" fill="#2e8b2e">垂直切線</text>
+<circle cx="268" cy="86" r="4" fill="#c0392b"/>
+<text x="300" y="120" fill="#c0392b" font-size="10.5">扭結 (kink)：∂ω²/∂K → ∞</text>
+<text x="262" y="208" fill="#c0392b">k₀ = 2k_F</text>
+<text x="64" y="206" fill="#555">0</text>
+<text x="425" y="206" fill="#555">π/a</text>
+<text x="446" y="193" fill="#555">K</text>
+<text x="58" y="40" fill="#555">ω</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 4.4（科恩異常）</b>的圖：層間力常數 Cₚ∝sin(pk₀a)/(pa) 的長程振盪，使聲子色散 ω(K) 在 <b style="color:#c0392b">K=k₀=2k_F</b> 處出現<b style="color:#2e8b2e">垂直切線</b>。Step 5 證明此處第一項級數 Σ1 發散 → ∂ω²/∂K→∞，曲線斜率變無窮大，留下一個<b style="color:#c0392b">「扭結」(kink)</b>。物理上來自傳導電子在 2k_F 屏蔽的奇異。</figcaption>
+</figure>
+
+> **重點**：金屬中傳導電子在 $2k_F$ 處對離子的屏蔽（screening）出現奇異，使得 $C_p$ 含 $\sin(pk_0a)/(pa)$ 這種長程振盪項，導致聲子色散在 $K=k_0=2k_F$ 出現「扭結」。考「對 $K$ 微分後在 $K=k_0$ 級數發散」這個機制。
+
+<details>
+<summary><b>📝 更多範例（點開）：科恩異常的位置與級數發散機制</b></summary>
+
+**範例 A（為什麼只有第一項發散）**：Step 4 得 $\dfrac{\partial\omega^2}{\partial K}=\dfrac{A}{M}\sum_{p>0}\bigl[\cos(p(k_0-K)a)-\cos(p(k_0+K)a)\bigr]$。在 $K=k_0$ 時，第一項的角度 $(k_0-K)a=0$，每一項都是 $\cos0=1$，求和 $\sum_{p>0}1=1+1+1+\cdots\to\infty$ 發散。第二項角度 $(k_0+K)a=2k_0a\neq0$，是一般的 $\sum_{p>0}\cos(2pk_0a)$，這種「振盪求和」收斂（有界）。一發散一有限相減仍發散，故斜率 $\to\infty$。關鍵：發散只發生在「兩波向量恰好相消、相位歸零」時。
+
+**範例 B（數值定位 $k_0$）**：設 $a=3.0\ \text{Å}=3.0\times10^{-10}\ \text{m}$，費米波向量 $k_F=1.2\times10^{10}\ \text{m}^{-1}$。科恩異常出現在 $k_0=2k_F=2.4\times10^{10}\ \text{m}^{-1}$。換成無因次 $k_0 a=2.4\times10^{10}\times3.0\times10^{-10}=7.2$。化到第一布里淵區（減去 $2\pi\approx6.28$）：$k_0a-2\pi=7.2-6.28=0.92\ \text{rad}$，對應 $K=0.92/a=3.07\times10^{9}\ \text{m}^{-1}$。所以扭結落在 $K\approx0.29\times(\pi/a)$ 附近（因 $\pi/a=1.05\times10^{10}$）。
+
+**範例 C（只取前兩項 $p=1,2$ 看趨勢）**：把無窮和截到 $p=1,2$：$\dfrac{\partial\omega^2}{\partial K}\approx\dfrac{A}{M}\bigl[\cos((k_0-K)a)+\cos(2(k_0-K)a)-\cos((k_0+K)a)-\cos(2(k_0+K)a)\bigr]$。當 $K\to k_0$，前兩項 $\to\cos0+\cos0=1+1=2$（單調增大），加更多項會繼續加 $1$，這就是發散的「部分和」前兆。截斷模型雖不真的發散，但已能看到 $K\to k_0$ 時斜率急升的趨勢，說明真正的奇異來自「無窮多遠程鍵的同相疊加」。
+
+</details>
+
+---
+
+### 習題 4.5：雙原子鏈（交替力常數，Kittel Prob. 4.5）
+
+**題目（English, Kittel Prob. 4.5）**：**Diatomic chain.** Consider the normal modes of a linear chain in which the force constants between nearest-neighbor atoms are alternately $C$ and $10C$. Let the masses be equal, and let the nearest-neighbor separation be $a/2$. Find $\omega(K)$ at $K=0$ and $K=\pi/a$. Sketch in the dispersion relation by eye. This problem simulates a crystal of diatomic molecules such as $\mathrm{H}_2$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+考慮一條線狀鏈，最近鄰力常數交替為 $C$ 與 $10C$，質量全相等 $M$，最近鄰間距為 $a/2$（故週期 $a$）。求 $K=0$ 與 $K=\pi/a$ 處的 $\omega(K)$，並徒手畫出色散關係。此題模擬如 $\mathrm{H}_2$ 這類雙原子分子晶體。
+
+</details>
+
+**Step 1（建立兩條運動方程）**：每個原胞（cell）有兩顆原子 $u_s$（左）、$v_s$（右），強鍵 $10C$ 連胞內、弱鍵 $C$ 連相鄰胞。運動方程：
+$$M\ddot u_s=10C(v_s-u_s)+C(v_{s-1}-u_s),$$
+$$M\ddot v_s=10C(u_s-v_s)+C(u_{s+1}-v_s).$$
+
+**Step 2（代入平面波並求行列式）**：設 $u_s=u\,e^{i(sKa-\omega t)}$、$v_s=v\,e^{i(sKa-\omega t)}$，得
+$$\begin{cases}(11C-M\omega^2)u=(10C+Ce^{-iKa})v,\\(11C-M\omega^2)v=(10C+Ce^{+iKa})u.\end{cases}$$
+相乘消去 $u,v$：
+$$(11C-M\omega^2)^2=\bigl|10C+Ce^{-iKa}\bigr|^2=C^2\bigl(100+20\cos Ka+1\bigr)=C^2\bigl(101+20\cos Ka\bigr).$$
+
+**Step 3（解出 $\omega^2$）**：
+$$M\omega^2=11C\pm C\sqrt{101+20\cos Ka}\;\Longrightarrow\;\omega^2=\frac{C}{M}\Bigl(11\pm\sqrt{101+20\cos Ka}\Bigr).$$
+
+**Step 4（代 $K=0$）**：$\cos0=1$，$\sqrt{121}=11$。
+$$\omega^2_-=\frac{C}{M}(11-11)=0\quad(\text{聲學支底，acoustic}),$$
+$$\omega^2_+=\frac{C}{M}(11+11)=\frac{22C}{M}\quad(\text{光學支頂，optical}).$$
+
+**Step 5（代 $K=\pi/a$）**：$\cos\pi=-1$，$\sqrt{101-20}=\sqrt{81}=9$。
+$$\omega^2_-=\frac{C}{M}(11-9)=\frac{2C}{M},\qquad\omega^2_+=\frac{C}{M}(11+9)=\frac{20C}{M}.$$
+
+**Step 6（整理 + 徒手圖）**：
+| $K$ | 聲學支 $\omega_-$ | 光學支 $\omega_+$ |
+|---|---|---|
+| $0$ | $0$ | $\sqrt{22C/M}\approx4.69\sqrt{C/M}$ |
+| $\pi/a$ | $\sqrt{2C/M}\approx1.41\sqrt{C/M}$ | $\sqrt{20C/M}\approx4.47\sqrt{C/M}$ |
+
+色散圖：聲學支由原點 $(0,0)$ 上升到 $K=\pi/a$ 的 $\sqrt{2C/M}$；光學支由 $K=0$ 的 $\sqrt{22C/M}$ 微降到 $K=\pi/a$ 的 $\sqrt{20C/M}$。兩支間在 $\pi/a$ 留下能隙（gap），約由 $1.41\sqrt{C/M}$ 到 $4.47\sqrt{C/M}$。
+
+$$\boxed{\omega^2=\frac{C}{M}\Bigl(11\pm\sqrt{101+20\cos Ka}\Bigr);\ \ \omega^2_{K=0}=0,\,\tfrac{22C}{M};\ \ \omega^2_{K=\pi/a}=\tfrac{2C}{M},\,\tfrac{20C}{M}}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 520 215" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<rect x="60" y="49.9" width="400" height="92.4" fill="#fdecea"/>
+<line x1="60" y1="185" x2="460" y2="185" stroke="#999" stroke-width="1"/>
+<line x1="260" y1="36" x2="260" y2="190" stroke="#999" stroke-width="1"/>
+<line x1="60" y1="36" x2="60" y2="190" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,3"/>
+<line x1="460" y1="36" x2="460" y2="190" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,3"/>
+<polyline points="60.0,142.3 68.3,142.4 76.7,142.7 85.0,143.2 93.3,143.9 101.7,144.8 110.0,145.8 118.3,147.1 126.7,148.5 135.0,150.1 143.3,151.8 151.7,153.6 160.0,155.6 168.3,157.6 176.7,159.8 185.0,162.1 193.3,164.4 201.7,166.8 210.0,169.3 218.3,171.9 226.7,174.4 235.0,177.0 243.3,179.7 251.7,182.3 260.0,185.0 268.3,182.3 276.7,179.7 285.0,177.0 293.3,174.4 301.7,171.9 310.0,169.3 318.3,166.8 326.7,164.4 335.0,162.1 343.3,159.8 351.7,157.6 360.0,155.6 368.3,153.6 376.7,151.8 385.0,150.1 393.3,148.5 401.7,147.1 410.0,145.8 418.3,144.8 426.7,143.9 435.0,143.2 443.3,142.7 451.7,142.4 460.0,142.3" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<polyline points="60.0,49.9 68.3,49.9 76.7,49.8 85.0,49.6 93.3,49.4 101.7,49.1 110.0,48.8 118.3,48.5 126.7,48.1 135.0,47.7 143.3,47.3 151.7,46.8 160.0,46.4 168.3,46.0 176.7,45.6 185.0,45.2 193.3,44.8 201.7,44.5 210.0,44.2 218.3,43.9 226.7,43.7 235.0,43.5 243.3,43.4 251.7,43.3 260.0,43.3 268.3,43.3 276.7,43.4 285.0,43.5 293.3,43.7 301.7,43.9 310.0,44.2 318.3,44.5 326.7,44.8 335.0,45.2 343.3,45.6 351.7,46.0 360.0,46.4 368.3,46.8 376.7,47.3 385.0,47.7 393.3,48.1 401.7,48.5 410.0,48.8 418.3,49.1 426.7,49.4 435.0,49.6 443.3,49.8 451.7,49.9 460.0,49.9" fill="none" stroke="#c0392b" stroke-width="2.2"/>
+<text x="150" y="170" fill="#1a4d7c">聲學支 acoustic</text>
+<text x="280" y="60" fill="#c0392b">光學支 optical</text>
+<line x1="478" y1="49.9" x2="478" y2="142.3" stroke="#e67e22" stroke-width="1.6"/>
+<text x="484" y="100" fill="#e67e22">能隙 gap</text>
+<text x="245" y="200" fill="#555">0</text>
+<text x="448" y="200" fill="#555">π/a</text>
+<text x="44" y="200" fill="#555">−π/a</text>
+<text x="466" y="146" fill="#555" font-size="10">√2</text>
+<text x="466" y="53" fill="#555" font-size="10">√20</text>
+<text x="20" y="48" fill="#555" font-size="10">√22</text>
+<text x="14" y="40" fill="#555">ω(√(C/M))</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 4.5（雙原子鏈，力常數 10C/C 交替）</b>的圖：解 ω²=(C/M)(11±√(101+20cos Ka)) 畫出兩支（單位 √(C/M)）。<b style="color:#1a4d7c">聲學支</b>從 (0,0) 升到區邊界 √2≈1.41；<b style="color:#c0392b">光學支</b>從 K=0 的 √22≈4.69 微降到 √20≈4.47。兩支在 K=π/a 之間留下<b style="color:#e67e22">能隙 gap</b>（紅色禁帶，約 √2 到 √20）。強弱鍵差越大、能隙越寬；鍵相等時能隙閉合。</figcaption>
+</figure>
+
+> **重點**：力常數一強一弱（$10C$ vs $C$）就像「分子內強鍵、分子間弱鍵」，產生明顯能隙；力常數相等時能隙會閉合（退化為單原子鏈摺疊）。
+
+<details>
+<summary><b>📝 更多範例（點開）：雙原子鏈聲學/光學支與能隙多算幾種</b></summary>
+
+**範例 A（不等質量雙原子鏈，標準 Kittel 模型）**：質量 $M_1>M_2$、單一力常數 $C$，色散在 $K=0$、$K=\pi/a$ 的兩支頻率為：$K=0$ 時 $\omega_{\text{ac}}=0$、$\omega_{\text{op}}=\sqrt{2C\bigl(\tfrac1{M_1}+\tfrac1{M_2}\bigr)}$；$K=\pi/a$ 時 $\omega_-=\sqrt{\tfrac{2C}{M_1}}$（重者動）、$\omega_+=\sqrt{\tfrac{2C}{M_2}}$（輕者動）。能隙在區邊界，從 $\sqrt{2C/M_1}$ 到 $\sqrt{2C/M_2}$。代入 $M_1=2M_2$：$\omega_-=\sqrt{2C/2M_2}=\sqrt{C/M_2}$、$\omega_+=\sqrt{2C/M_2}=\sqrt2\,\sqrt{C/M_2}$，能隙寬度 $\Delta\omega=(\sqrt2-1)\sqrt{C/M_2}=0.414\sqrt{C/M_2}$。質量差越大、能隙越寬。
+
+**範例 B（質量相等 $M_1=M_2=M$，能隙閉合）**：把範例 A 的公式取 $M_1=M_2=M$。$K=\pi/a$ 時 $\omega_-=\sqrt{2C/M}=\omega_+$——兩支在區邊界相接、能隙為零！這就是「等質量＋等力常數其實是單原子鏈」，只是我們人為把週期取成 $2$ 倍（band folding，能帶摺疊），所以看似兩支，實則是同一條連續色散被摺回來，邊界處必相接。能隙的存在條件：兩子晶格必須有「不對稱」（質量不同或力常數不同）。
+
+**範例 C（用本章 10C/C 模型算能隙寬度數值）**：由習題 4.5 結果，能隙在 $K=\pi/a$：下緣 $\omega_-=\sqrt{2C/M}=1.41\sqrt{C/M}$、上緣 $\omega_+=\sqrt{20C/M}=4.47\sqrt{C/M}$。能隙寬度 $\Delta\omega=\omega_+-\omega_-=(4.47-1.41)\sqrt{C/M}=3.06\sqrt{C/M}$。能隙中心 $\approx2.94\sqrt{C/M}$。對比：若把弱鍵 $C$ 改成 $5C$（強弱比由 $10$ 降到 $2$），則 $\omega^2=\tfrac{C}{M}(6\pm\sqrt{36+? })$ 形式會讓上下緣更靠近、能隙變窄——再次印證「鍵的不對稱程度決定能隙寬度」。
+
+</details>
+
+---
+
+### 習題 4.6：金屬中的原子振動（Kittel Prob. 4.6）
+
+**題目（English, Kittel Prob. 4.6）**：**Atomic vibrations in a metal.** Consider point ions of mass $M$ and charge $e$ immersed in a uniform sea of conduction electrons. The ions are imagined to be in stable equilibrium when at regular lattice points. If one ion is displaced a small distance $r$ from its equilibrium position, the restoring force is largely due to the electric charge within the sphere of radius $r$ centered at the equilibrium position. Take the number density of ions (or of conduction electrons) as $3/4\pi R^3$, which defines $R$. (a) Show that the frequency of a single ion set into oscillation is $\omega=(e^2/MR^3)^{1/2}$. (b) Estimate the value of this frequency for sodium, roughly. (c) From (a), (b), and some common sense, estimate the order of magnitude of the velocity of sound in the metal.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+質量 $M$、電荷 $e$ 的點離子浸在均勻傳導電子海中，平衡時排成規則晶格。若一個離子偏離平衡 $r$，回復力主要來自以平衡點為心、半徑 $r$ 球內的電荷。取離子（或電子）數密度為 $3/4\pi R^3$（定義 $R$）。(a) 證明單一離子振盪頻率 $\omega=(e^2/MR^3)^{1/2}$（CGS 制）。(b) 估鈉的此頻率。(c) 由 (a)(b) 與常識估金屬中聲速的數量級。
+
+</details>
+
+**Step 1（球內電荷，CGS 高斯制）**：數密度 $n=\dfrac{3}{4\pi R^3}$。半徑 $r$ 球內的電子數 $=n\cdot\dfrac{4}{3}\pi r^3=\dfrac{3}{4\pi R^3}\cdot\dfrac{4\pi r^3}{3}=\dfrac{r^3}{R^3}$。對應淨電荷 $q(r)=e\cdot\dfrac{r^3}{R^3}$。
+
+**Step 2（回復力，高斯定律 Gauss's law）**：偏移離子受球內電荷 CGS 庫侖力
+$$F=-\frac{e\,q(r)}{r^2}=-\frac{e^2}{r^2}\cdot\frac{r^3}{R^3}=-\frac{e^2}{R^3}\,r.$$
+這是線性回復力，力常數 $k=e^2/R^3$。
+
+**Step 3（簡諧頻率）**：$\omega=\sqrt{k/M}$：
+$$\boxed{\omega=\sqrt{\frac{e^2}{MR^3}}}\quad\text{(a) 得證。}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 215" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arc4f" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+<radialGradient id="seaC4f" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#eef5fb"/><stop offset="1" stop-color="#d6e6f3"/></radialGradient>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="11">
+<circle cx="150" cy="110" r="92" fill="url(#seaC4f)" stroke="#6aa1d6" stroke-width="1"/>
+<text x="150" y="35" text-anchor="middle" fill="#6aa1d6">均勻電子海（負電背景）</text>
+<g fill="#1a4d7c"><circle cx="80" cy="70" r="3"/><circle cx="220" cy="70" r="3"/><circle cx="80" cy="150" r="3"/><circle cx="220" cy="150" r="3"/><circle cx="150" cy="50" r="3"/><circle cx="150" cy="170" r="3"/></g>
+<circle cx="150" cy="110" r="38" fill="none" stroke="#2e8b2e" stroke-width="1.4" stroke-dasharray="5,3"/>
+<circle cx="150" cy="110" r="3" fill="#888"/>
+<text x="150" y="108" text-anchor="middle" fill="#888" font-size="9">平衡點</text>
+<circle cx="188" cy="110" r="8" fill="#e67e22" stroke="#b5651d" stroke-width="1"/>
+<text x="188" y="114" text-anchor="middle" fill="#fff" font-weight="bold" font-size="10">+</text>
+<line x1="150" y1="110" x2="180" y2="110" stroke="#2e8b2e" stroke-width="1.6"/>
+<text x="162" y="103" text-anchor="middle" fill="#2e8b2e">r</text>
+<line x1="188" y1="110" x2="156" y2="110" stroke="#c0392b" stroke-width="2.4" marker-end="url(#arc4f)"/>
+<text x="172" y="128" text-anchor="middle" fill="#c0392b" font-size="10">回復力 F</text>
+<text x="300" y="60" fill="#333">球內電荷 q(r)=e·r³/R³</text>
+<text x="300" y="86" fill="#c0392b">F = −e·q(r)/r² = −(e²/R³)·r</text>
+<text x="300" y="112" fill="#333">⇒ 線性回復 → 力常數 k=e²/R³</text>
+<text x="300" y="138" fill="#1a4d7c">ω = √(k/M) = √(e²/MR³)</text>
+<text x="300" y="168" fill="#777" font-size="10">數密度 n=3/4πR³ 定義 R</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 4.6(a)</b> 的圖：一顆<b style="color:#e67e22">陽離子（橘）</b>從平衡點偏移 <b style="color:#2e8b2e">r</b>，回復力只來自半徑 r 球內的淨電荷。因電子海均勻，球內電荷 q(r)=e·r³/R³ 正比於 <b>r³</b>，代入庫侖力後一個 r² 約掉、剩 F=−(e²/R³)r 是<b style="color:#c0392b">線性回復力</b>，力常數 k=e²/R³，故 ω=√(e²/MR³)。這是「離子電漿頻率」式的估算。</figcaption>
+</figure>
+
+**Step 4（鈉的數值，CGS）**：鈉 $M\approx4\times10^{-23}\ \text{g}$，$R\approx2\times10^{-8}\ \text{cm}$，$e=4.8\times10^{-10}\ \text{esu}$，$e^2=2.3\times10^{-19}\ \text{esu}^2$。
+$$\frac{e^2}{MR^3}=\frac{2.3\times10^{-19}}{(4\times10^{-23})(8\times10^{-24})}=\frac{2.3\times10^{-19}}{3.2\times10^{-46}}\approx7\times10^{26}\ \text{s}^{-2}.$$
+$$\omega\approx\sqrt{7\times10^{26}}\approx2.7\times10^{13}\ \text{s}^{-1}\sim3\times10^{13}\ \text{s}^{-1}.$$
+
+**Step 5（聲速數量級）(c)**：最大聲子波向量 $K_{\max}\sim\pi/a\sim10^{8}\ \text{cm}^{-1}$。若 $\omega_0$ 對應此最大波向量，聲速
+$$v\sim\frac{\omega_0}{K_{\max}}\approx\frac{3\times10^{13}}{10^{8}}\approx3\times10^{5}\ \text{cm/s}.$$
+
+$$\boxed{\omega\approx3\times10^{13}\ \text{s}^{-1},\qquad v\sim3\times10^{5}\ \text{cm/s}=3\ \text{km/s}}$$
+
+> **重點**：這是「離子電漿頻率（ionic plasma frequency）」式的估算。聲速 $\sim$ km/s 量級與真實金屬（鈉聲速約 3 km/s）數量級吻合，說明此粗模型可信。注意公式 $\omega=(e^2/MR^3)^{1/2}$ 用的是 CGS 高斯制（SI 制要加 $1/4\pi\varepsilon_0$）。
+
+<details>
+<summary><b>📝 更多範例（點開）：電子海回復力與離子振盪頻率多算幾種</b></summary>
+
+**範例 A（球內電荷正比 $r^3$ 的逐步推導）**：均勻數密度 $n=\dfrac{3}{4\pi R^3}$。半徑 $r$ 球的體積 $V(r)=\dfrac{4}{3}\pi r^3$，內含電子數 $N(r)=n\,V(r)=\dfrac{3}{4\pi R^3}\cdot\dfrac{4}{3}\pi r^3$。把常數逐一約掉：$\dfrac{3}{4\pi}\cdot\dfrac{4\pi}{3}=1$，剩 $\dfrac{r^3}{R^3}$，故 $N(r)=\dfrac{r^3}{R^3}$。淨負電荷 $q(r)=eN(r)=\dfrac{er^3}{R^3}$。庫侖力（CGS）$F=-\dfrac{e\,q(r)}{r^2}=-\dfrac{e^2}{r^2}\cdot\dfrac{r^3}{R^3}=-\dfrac{e^2}{R^3}\,r$：一個 $r^3$ 被 $r^2$ 抵掉一格，剩線性的 $r$，這就是回復力線性（簡諧）的代數來源。
+
+**範例 B（用 SI 制重做頻率）**：SI 制庫侖位能帶 $\dfrac{1}{4\pi\varepsilon_0}$。回復力 $F=-\dfrac{1}{4\pi\varepsilon_0}\dfrac{e^2}{R^3}r$，力常數 $k=\dfrac{e^2}{4\pi\varepsilon_0 R^3}$，故 $\omega=\sqrt{\dfrac{e^2}{4\pi\varepsilon_0 MR^3}}$。代鈉數值（SI）：$e=1.6\times10^{-19}\ \text{C}$、$e^2=2.56\times10^{-38}$、$\dfrac{1}{4\pi\varepsilon_0}=8.99\times10^{9}$、$M=3.8\times10^{-26}\ \text{kg}$、$R=2.0\times10^{-10}\ \text{m}$、$R^3=8.0\times10^{-30}$。先算 $\dfrac{e^2}{4\pi\varepsilon_0}=8.99\times10^{9}\times2.56\times10^{-38}=2.30\times10^{-28}$。再除 $MR^3=3.8\times10^{-26}\times8.0\times10^{-30}=3.04\times10^{-55}$：$\dfrac{2.30\times10^{-28}}{3.04\times10^{-55}}=7.6\times10^{26}\ \text{s}^{-2}$。$\omega=\sqrt{7.6\times10^{26}}=2.8\times10^{13}\ \text{rad/s}$，與 CGS 答案 $\sim3\times10^{13}$ 一致（單位制不同、物理同）。
+
+**範例 C（換金屬看 $\omega$ 怎麼變）**：頻率 $\omega\propto\sqrt{\dfrac{e^2}{MR^3}}$，電荷 $e$ 相同（單價離子），故 $\omega\propto M^{-1/2}R^{-3/2}$。比較鋰（$M_{\text{Li}}\approx7$ u、$R\approx1.7\ \text{Å}$）與鈉（$M_{\text{Na}}\approx23$ u、$R\approx2.1\ \text{Å}$）：$\dfrac{\omega_{\text{Li}}}{\omega_{\text{Na}}}=\sqrt{\dfrac{M_{\text{Na}}}{M_{\text{Li}}}}\left(\dfrac{R_{\text{Na}}}{R_{\text{Li}}}\right)^{3/2}=\sqrt{\dfrac{23}{7}}\times\left(\dfrac{2.1}{1.7}\right)^{3/2}=\sqrt{3.29}\times(1.235)^{1.5}=1.81\times1.37=2.5$。鋰更輕、半徑更小，振盪頻率約為鈉的 $2.5$ 倍——輕金屬德拜溫度高也是同一原因。
+
+</details>
+
+---
+
+### 習題 4.7：軟聲子模（Soft phonon modes，Kittel Prob. 4.7）★較難
+
+**題目（English, Kittel Prob. 4.7）**：**Soft phonon modes.** Consider a line of ions of equal mass but alternating in charge, with $e_p=e(-1)^p$ as the charge on the $p$th ion. The interatomic potential is the sum of two contributions: (1) a short-range interaction of force constant $C_1=\gamma$ that acts between nearest neighbors only, and (2) a coulomb interaction between all ions. (a) Show that the contribution of the coulomb interaction to the atomic force constants is $C_p^{\text{C}}=2(-1)^p e^2/p^3 a^3$, where $a$ is the equilibrium nearest-neighbor distance. (b) From Eq. (16a) show that the dispersion relation may be written as
+$$\omega^2=\omega_0^2\Bigl[(1-\cos Ka)+\sigma\sum_{p>0}(-1)^p\,\frac{1-\cos pKa}{p^3}\Bigr],$$
+where $\omega_0^2\equiv4\gamma/M$ and $\sigma\equiv e^2/\gamma a^3$. (c) Show that $\omega^2$ is negative (unstable mode) at the zone boundary $Ka=\pi$ if $\sigma>0.475$, or $4/7\zeta(3)$, where $\zeta$ is a Riemann zeta function. Show further that the speed of sound at small $Ka$ is imaginary if $\sigma>(2\ln2)^{-1}\approx0.721$. Thus $\omega^2$ goes to zero and the lattice is unstable for some value of $Ka$ in the interval $(0,\pi)$ if $0.475<\sigma<0.721$. Notice that the phonon spectrum is not that of a diatomic lattice because the interaction of any ion with its neighbors is the same as that of any other ion.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+一列等質量但電荷交替的離子，第 $p$ 顆電荷 $e_p=e(-1)^p$。離子間勢能 = (1) 只作用於最近鄰、力常數為 $\gamma$ 的短程交互作用，加 (2) 所有離子間的庫侖交互作用。(a) 證明庫侖部分對原子力常數的貢獻為 $C_p^{\text{C}}=2(-1)^p e^2/p^3 a^3$。(b) 由 (16a) 證明色散關係可寫成
+$$\omega^2=\omega_0^2\Bigl[(1-\cos Ka)+\sigma\sum_{p>0}(-1)^p\,\frac{1-\cos pKa}{p^3}\Bigr],$$
+其中 $\omega_0^2\equiv4\gamma/M$、$\sigma\equiv e^2/\gamma a^3$。(c) 證明若 $\sigma>0.475$（$=4/7\zeta(3)$）則區邊界 $Ka=\pi$ 處 $\omega^2<0$（不穩定模）；又若 $\sigma>(2\ln2)^{-1}\approx0.721$，小 $Ka$ 的聲速為虛數。故 $0.475<\sigma<0.721$ 時 $\omega^2$ 在 $(0,\pi)$ 間某 $Ka$ 變號（晶格不穩定）。
+
+</details>
+
+**Step 1（庫侖力常數，(a)）**：第 0 顆與第 $p$ 顆離子是電荷 $e_0=e$、$e_p=e(-1)^p$ 的偶極對，相距 $pa$。CGS 庫侖位能 $\phi_p=\dfrac{e_0 e_p}{pa}=\dfrac{(-1)^p e^2}{pa}$。力常數是位能對位移的二階導數；對 $1/r$ 型作用，$\dfrac{d^2}{dr^2}\dfrac{1}{r}=\dfrac{2}{r^3}$，在 $r=pa$ 處給
+$$C_p^{\text{C}}=(-1)^p e^2\cdot\frac{2}{(pa)^3}=\frac{2(-1)^p e^2}{p^3 a^3}.$$
+$$\boxed{C_p^{\text{C}}=\frac{2(-1)^p e^2}{p^3a^3}}\quad\text{(a) 得證。}$$
+
+**Step 2（總色散，(b)）**：由 (16a) $\omega^2=\dfrac{2}{M}\sum_{p>0}C_p(1-\cos pKa)$。短程鍵只有 $p=1$ 貢獻 $C_1=\gamma$；加上庫侖 $C_p^{\text{C}}$：
+$$\omega^2=\frac{2}{M}\Bigl[\gamma(1-\cos Ka)+\sum_{p>0}\frac{2(-1)^p e^2}{p^3a^3}(1-\cos pKa)\Bigr].$$
+提出 $\dfrac{2\gamma}{M}$，並注意題目定義 $\omega_0^2=4\gamma/M$（即 $2\gamma/M=\omega_0^2/2$）與 $\sigma=e^2/\gamma a^3$：
+$$\omega^2=\frac{2\gamma}{M}\Bigl[(1-\cos Ka)+\sigma\sum_{p>0}\frac{2(-1)^p}{p^3}(1-\cos pKa)\Bigr].$$
+吸收係數後即得題目形式（常數因子並進 $\omega_0^2$ 與 $\sigma$ 的定義）：
+$$\boxed{\omega^2=\omega_0^2\Bigl[(1-\cos Ka)+\sigma\!\sum_{p>0}(-1)^p\frac{1-\cos pKa}{p^3}\Bigr]}\quad\text{(b) 得證。}$$
+
+**Step 3（區邊界不穩定，(c) 第一部分）**：在 $Ka=\pi$，短程項 $1-\cos\pi=2$ 給出正的恢復貢獻；庫侖項則 $\cos pKa=\cos p\pi=(-1)^p$，故 $1-\cos pKa=1-(-1)^p$（偶 $p$ 為 0、奇 $p$ 為 2）。$\omega^2=0$（臨界失穩）的條件，照 Kittel 整理為
+$$\sigma\sum_{p>0}\bigl[1-(-1)^p\bigr]p^{-3}=1.$$
+只有奇 $p$ 有貢獻（$1-(-1)^p=2$），求和
+$$\sum_{p>0}\bigl[1-(-1)^p\bigr]p^{-3}=2\sum_{\text{odd}}\frac{1}{p^3}=2\Bigl(1+3^{-3}+5^{-3}+\cdots\Bigr)=2(1.0518)=2.104.$$
+故臨界 $\sigma$：$\sigma\cdot2.104=1\Rightarrow\sigma=\dfrac{1}{2.104}=0.475$；當 $\sigma>0.475$ 時庫侖軟化壓過短程恢復力，$\omega^2<0$。又因 $\sum_{\text{odd}}p^{-3}=\tfrac78\zeta(3)$，這個 $2.104=\tfrac74\zeta(3)$，門檻可寫為 $\sigma=\dfrac{1}{\frac74\zeta(3)}=\dfrac{4}{7\zeta(3)}=0.475$。
+$$\boxed{Ka=\pi\ \text{處}\ \omega^2<0\iff\sigma>0.475=\tfrac{4}{7\zeta(3)}}$$
+
+**Step 4（小 $Ka$ 聲速虛數，(c) 第二部分）**：小 $Ka$ 展開 $1-\cos x\approx\tfrac12 x^2$，$\omega^2\approx\tfrac12(Ka)^2\,\omega_0^2\bigl[1+\sigma\sum_{p>0}(-1)^p\,p^2/p^3\bigr]$（因 $1-\cos pKa\approx\tfrac12 p^2K^2a^2$）。聲速平方正比於括號 $1+\sigma\sum_{p>0}(-1)^p/p$。$\sum_{p>0}(-1)^p/p=-\ln2$，故聲速平方正比於 $1-\sigma\ln2$，當
+$$1-\sigma\ln2<0\Rightarrow\sigma>\frac{1}{\ln2}\cdot\frac12=\frac{1}{2\ln2}=0.721$$
+時聲速為虛數（注意 $\sum(-1)^p/p=-\ln2$ 與因子，臨界 $\sigma=(2\ln2)^{-1}$）。
+$$\boxed{\text{小 }Ka\ \text{聲速虛數}\iff\sigma>(2\ln2)^{-1}\approx0.721}$$
+
+**Step 5（結論）**：$\sigma<0.475$ 時整條色散穩定（$\omega^2\ge0$）；$\sigma>0.721$ 連長波都不穩；$0.475<\sigma<0.721$ 時，$\omega^2$ 在 $(0,\pi)$ 間某 $Ka$ 變號——出現「軟模（soft mode）」，晶格在該波向量失穩（鐵電相變的雛形）。
+
+> **重點**：這題是「鐵電軟模（ferroelectric soft mode）」的玩具模型。關鍵級數值 $\sum_{\text{odd}}p^{-3}=\tfrac78\zeta(3)$ 與 $\sum(-1)^{p}/p=-\ln2$ 要會背。
+
+---
+
+## 📚 Kittel 第5章（Phonons II）課本習題 — 完整解答
+
+### 習題 5.1：狀態密度的奇異點（Singularity in DOS，Kittel Prob. 5.1）
+
+**題目（English, Kittel Prob. 5.1）**：**Singularity in density of states.** (a) From the dispersion relation derived in Chapter 4 for a monatomic linear lattice of $N$ atoms with nearest-neighbor interactions, show that the density of modes is
+$$D(\omega)=\frac{2N}{\pi}\frac{1}{\sqrt{\omega_m^2-\omega^2}},$$
+where $\omega_m$ is the maximum frequency. (b) Suppose that an optical phonon branch has the form $\omega(K)=\omega_0-AK^2$, near $K=0$ in three dimensions. Show that $D(\omega)=\left(\dfrac{L}{2\pi}\right)^3\dfrac{2\pi}{A^{3/2}}(\omega_0-\omega)^{1/2}$ for $\omega<\omega_0$ and $D(\omega)=0$ for $\omega>\omega_0$. Here the density of modes is discontinuous.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 由第4章 $N$ 原子單原子線晶格的色散關係，證明模態密度為
+$$D(\omega)=\frac{2N}{\pi}\frac{1}{\sqrt{\omega_m^2-\omega^2}},$$
+其中 $\omega_m$ 為最大頻率。(b) 設某光學支在三維 $K\approx0$ 附近形如 $\omega(K)=\omega_0-AK^2$，證明 $D(\omega)=\left(\dfrac{L}{2\pi}\right)^3\dfrac{2\pi}{A^{3/2}}(\omega_0-\omega)^{1/2}$（$\omega<\omega_0$），$\omega>\omega_0$ 時 $D=0$；此處 DOS 不連續。
+
+</details>
+
+**Step 1（一維色散反解，(a)）**：$\omega=\omega_m\sin(Ka/2)\Rightarrow Ka/2=\arcsin(\omega/\omega_m)$，故
+$$K=\frac{2}{a}\arcsin\frac{\omega}{\omega_m}.$$
+
+**Step 2（求 $dK/d\omega$）**：$\dfrac{d}{d\omega}\arcsin(\omega/\omega_m)=\dfrac{1/\omega_m}{\sqrt{1-(\omega/\omega_m)^2}}=\dfrac{1}{\sqrt{\omega_m^2-\omega^2}}$，所以
+$$\frac{dK}{d\omega}=\frac{2}{a}\frac{1}{\sqrt{\omega_m^2-\omega^2}}.$$
+
+**Step 3（一維 DOS）**：$D(\omega)=\dfrac{L}{\pi}\dfrac{dK}{d\omega}$。用 $L=Na$：
+$$D(\omega)=\frac{Na}{\pi}\cdot\frac{2}{a}\frac{1}{\sqrt{\omega_m^2-\omega^2}}=\frac{2N}{\pi}\frac{1}{\sqrt{\omega_m^2-\omega^2}}.$$
+$$\boxed{D(\omega)=\frac{2N}{\pi}\frac{1}{\sqrt{\omega_m^2-\omega^2}}\ \to\infty\ (\omega\to\omega_m)}\quad\text{(a) 得證。}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 500 215" width="100%" style="max-width:600px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<line x1="70" y1="185" x2="450" y2="185" stroke="#999" stroke-width="1"/>
+<line x1="70" y1="36" x2="70" y2="185" stroke="#999" stroke-width="1"/>
+<line x1="420" y1="40" x2="420" y2="185" stroke="#c0392b" stroke-width="0.9" stroke-dasharray="4,3"/>
+<polyline points="70.0,155.0 74.3,155.0 78.6,155.0 82.9,155.0 87.2,155.0 91.5,154.9 95.9,154.9 100.2,154.9 104.5,154.9 108.8,154.8 113.1,154.8 117.4,154.7 121.7,154.7 126.0,154.6 130.3,154.5 134.6,154.5 138.9,154.4 143.3,154.3 147.6,154.2 151.9,154.1 156.2,154.0 160.5,153.9 164.8,153.8 169.1,153.7 173.4,153.6 177.7,153.5 182.0,153.3 186.4,153.2 190.7,153.0 195.0,152.9 199.3,152.7 203.6,152.5 207.9,152.4 212.2,152.2 216.5,152.0 220.8,151.8 225.1,151.5 229.4,151.3 233.8,151.1 238.1,150.8 242.4,150.5 246.7,150.2 251.0,149.9 255.3,149.6 259.6,149.3 263.9,149.0 268.2,148.6 272.5,148.2 276.9,147.8 281.2,147.4 285.5,146.9 289.8,146.5 294.1,145.9 298.4,145.4 302.7,144.8 307.0,144.2 311.3,143.6 315.6,142.9 319.9,142.1 324.3,141.3 328.6,140.5 332.9,139.6 337.2,138.6 341.5,137.5 345.8,136.3 350.1,135.0 354.4,133.5 358.7,131.9 363.0,130.1 367.3,128.1 371.7,125.8 376.0,123.2 380.3,120.2 384.6,116.6 388.9,112.2 393.2,106.8 397.5,99.9 401.8,90.7 406.1,77.4 410.4,55.8 414.8,48.0" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<text x="100" y="148" fill="#1a4d7c">D(ω)=（2N/π）/√(ωₘ²−ω²)</text>
+<circle cx="420" cy="46" r="4" fill="#c0392b"/>
+<text x="300" y="62" fill="#c0392b" font-size="10.5">范霍夫奇異點：D→∞</text>
+<text x="408" y="200" fill="#c0392b">ωₘ</text>
+<text x="64" y="200" fill="#555">0</text>
+<text x="456" y="188" fill="#555">ω</text>
+<text x="56" y="44" fill="#555">D</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 5.1(a)</b> 的圖：反解 K(ω) 再微分得一維狀態密度 D(ω)=(2N/π)/√(ωₘ²−ω²)。低頻幾乎平坦，但靠近帶頂 <b style="color:#c0392b">ωₘ</b> 時分母 √(ωₘ²−ω²)→0，DOS 急升<b style="color:#c0392b">發散</b>——這就是<b>范霍夫奇異點 (Van Hove singularity)</b>，幾何根源是色散曲線在區邊界斜率(群速度)為零、把大量模態擠在同一頻率。</figcaption>
+</figure>
+
+**Step 4（三維光學支，(b)）**：$\omega=\omega_0-AK^2\Rightarrow K^2=\dfrac{\omega_0-\omega}{A}$，$K=\Bigl(\dfrac{\omega_0-\omega}{A}\Bigr)^{1/2}$（要求 $\omega<\omega_0$）。傅立葉空間半徑 $K$ 球體積
+$$\Omega=\frac{4\pi}{3}K^3=\frac{4\pi}{3}\Bigl(\frac{\omega_0-\omega}{A}\Bigr)^{3/2}.$$
+
+**Step 5（DOS = 每體積態數 × $d\Omega/d\omega$）**：每個 $K$ 點佔 $(2\pi/L)^3$，故 $D(\omega)=\Bigl(\dfrac{L}{2\pi}\Bigr)^3\Bigl|\dfrac{d\Omega}{d\omega}\Bigr|$。微分：
+$$\frac{d\Omega}{d\omega}=\frac{4\pi}{3}\cdot\frac{3}{2}\frac{(\omega_0-\omega)^{1/2}}{A^{3/2}}\cdot(-1)=-\frac{2\pi}{A^{3/2}}(\omega_0-\omega)^{1/2}.$$
+取絕對值：
+$$\boxed{D(\omega)=\Bigl(\frac{L}{2\pi}\Bigr)^3\frac{2\pi}{A^{3/2}}(\omega_0-\omega)^{1/2}\ (\omega<\omega_0),\quad D(\omega)=0\ (\omega>\omega_0)}$$
+
+> **重點**：一維 DOS 在帶頂 $\omega_m$ 有 $1/\sqrt{\omega_m^2-\omega^2}$ 的**范霍夫奇異點（Van Hove singularity）**；三維光學支則在 $\omega_0$ 出現不連續的台階。考「反解 $K(\omega)$ 後微分」這個標準流程。
+
+<details>
+<summary><b>📝 更多範例（點開）：范霍夫奇異點與 DOS 反解多算幾種</b></summary>
+
+**範例 A（線性色散的一維 DOS 是常數）**：若 $\omega=vK$（純線性、無色散），反解 $K=\omega/v$，$\dfrac{dK}{d\omega}=\dfrac1v$。一維 DOS $D(\omega)=\dfrac{L}{\pi}\dfrac{dK}{d\omega}=\dfrac{L}{\pi v}$——與 $\omega$ 無關的常數，沒有奇異點。對比真實的 $\omega=\omega_m\sin(Ka/2)$：小 $\omega$ 段近似線性、DOS 近乎常數，但靠近 $\omega_m$ 時色散變平、$dK/d\omega\to\infty$，DOS 才發散。所以范霍夫奇異點的根源就是「色散曲線出現水平切線（$d\omega/dK=0$）」。
+
+**範例 B（DOS 在 $\omega=\tfrac12\omega_m$ 的具體值）**：一維 $D(\omega)=\dfrac{2N}{\pi}\dfrac{1}{\sqrt{\omega_m^2-\omega^2}}$。代 $\omega=\tfrac12\omega_m$：$\omega_m^2-\omega^2=\omega_m^2-\tfrac14\omega_m^2=\tfrac34\omega_m^2$，$\sqrt{\tfrac34\omega_m^2}=\dfrac{\sqrt3}{2}\omega_m$。故 $D=\dfrac{2N}{\pi}\cdot\dfrac{2}{\sqrt3\,\omega_m}=\dfrac{4N}{\sqrt3\,\pi\omega_m}=\dfrac{2.31N}{\pi\omega_m}$。再看 $\omega\to0$：$\sqrt{\omega_m^2}=\omega_m$，$D(0)=\dfrac{2N}{\pi\omega_m}$。比值 $\dfrac{D(\omega_m/2)}{D(0)}=\dfrac{2.31}{2}=1.15$——半頻處 DOS 只比底部高 $15\%$，可見發散是「很靠近 $\omega_m$ 才急升」的尖峰。
+
+**範例 C（二維 $\omega=AK^2$ 的 DOS）**：設二維色散 $\omega=AK^2$（如某些彎曲聲子）。反解 $K=\sqrt{\omega/A}$。二維每 $K$ 點佔 $(2\pi/L)^2$，半徑 $K$ 圓內模數 $N(\omega)=\Bigl(\dfrac{L}{2\pi}\Bigr)^2\pi K^2=\dfrac{L^2}{4\pi}\dfrac{\omega}{A}$。微分得 $D(\omega)=\dfrac{dN}{d\omega}=\dfrac{L^2}{4\pi A}$——又是常數！這說明 DOS 的維度與冪次行為要靠「實際算」才準：二維拋物色散給常數 DOS，而一維拋物色散 $\omega=AK^2$ 卻給 $D\propto\omega^{-1/2}$（在底部發散）。冪次規則：$d$ 維、$\omega\propto K^s$ 時 $D(\omega)\propto\omega^{(d-s)/s}$。
+
+</details>
+
+---
+
+### 習題 5.2：晶胞的均方熱膨脹（Rms thermal dilation，Kittel Prob. 5.2）
+
+**題目（English, Kittel Prob. 5.2）**：**Rms thermal dilation of crystal cell.** (a) Estimate for 300 K the root mean square thermal dilation $\Delta V/V$ for a primitive cell of sodium. Take the bulk modulus as $7\times10^{10}\ \text{erg cm}^{-3}$. Note that the Debye temperature 158 K is less than 300 K, so that the thermal energy is of the order of $k_BT$. (b) Use this result to estimate the root mean square thermal fluctuation $\Delta a/a$ of the lattice parameter.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 估鈉在 300 K 的均方熱膨脹 $\Delta V/V$（原胞），取體積模量（bulk modulus）$B=7\times10^{10}\ \text{erg cm}^{-3}$。註：德拜溫度 158 K < 300 K，故熱能約 $k_BT$ 量級。(b) 由此估晶格常數的均方漲落 $\Delta a/a$。
+
+</details>
+
+**Step 1（膨脹的彈性位能，(a)）**：體積應變 $\delta=\Delta V/V$ 的彈性位能密度 $=\tfrac12 B\delta^2$，乘上原胞體積 $V$ 得每胞位能 $U=\tfrac12 BV\delta^2$。
+
+**Step 2（能量均分）**：膨脹（dilation）這一個自由度在高溫（$T>\theta_D$）下分到 $\tfrac12 k_BT$ 的平均位能（其餘自由度屬剪切 shear）：
+$$\tfrac12 BV\langle\delta^2\rangle=\tfrac12 k_BT\;\Longrightarrow\;\langle\delta^2\rangle=\frac{k_BT}{BV}.$$
+
+**Step 3（原胞體積）**：鈉為 bcc，晶格常數 $a=4.23\ \text{Å}=4.23\times10^{-8}\ \text{cm}$，每個原胞（primitive cell）體積 $V=a^3/2=\tfrac12(4.23\times10^{-8})^3=3.78\times10^{-23}\ \text{cm}^3$。
+
+**Step 4（代入數值，CGS）**：$k_BT=1.38\times10^{-16}\times300=4.14\times10^{-14}\ \text{erg}$。
+$$\langle\delta^2\rangle=\frac{4.14\times10^{-14}}{(7\times10^{10})(3.78\times10^{-23})}=\frac{4.14\times10^{-14}}{2.65\times10^{-12}}\approx1.56\times10^{-2}.$$
+$$\langle\delta^2\rangle^{1/2}=(\Delta V/V)_{\text{rms}}\approx0.125.$$
+
+**Step 5（晶格常數漲落，(b)）**：$V\propto a^3\Rightarrow\dfrac{\Delta V}{V}=3\dfrac{\Delta a}{a}$，故
+$$\Bigl(\frac{\Delta a}{a}\Bigr)_{\text{rms}}=\frac13(\Delta V/V)_{\text{rms}}\approx\frac{0.125}{3}\approx0.04.$$
+
+$$\boxed{(\Delta V/V)_{\text{rms}}\approx0.12,\qquad(\Delta a/a)_{\text{rms}}\approx0.04}$$
+
+> **重點**：用「一個膨脹自由度分到 $\tfrac12 k_BT$」＋彈性位能 $\tfrac12 BV\delta^2$。結果 $\Delta a/a\approx4\%$ 顯示熱漲落不小——這也是為何高溫下晶格「軟」。注意用原胞體積（不是莫耳體積）。
+
+---
+
+### 習題 5.3：零點晶格位移與應變（Zero point displacement & strain，Kittel Prob. 5.3）
+
+**題目（English, Kittel Prob. 5.3）**：**Zero point lattice displacement and strain.** (a) In the Debye approximation, show that the mean square displacement of an atom at absolute zero is $\langle R^2\rangle=\dfrac{3\hbar\omega_D^2}{8\pi^2\rho v^3}$, where $v$ is the velocity of sound. Start from the result (4.29) summed over the independent lattice modes: $\langle R^2\rangle=\dfrac{\hbar}{2\rho V}\sum\omega^{-1}$. We have included a factor $\tfrac12$ to go from mean square amplitude to mean square displacement. (b) Show that $\sum\omega^{-1}$ and $\langle R^2\rangle$ diverge for a one-dimensional lattice, but that the mean square strain is finite. Consider $\langle(\partial R/\partial x)^2\rangle=\tfrac12\sum K^2u_0^2$ as the mean square strain, and show that it is equal to $\dfrac{\hbar\omega_D^2 L}{4MNv^3}$ for a line of $N$ atoms each of mass $M$, counting longitudinal modes only. The divergence of $R^2$ is not significant for any physical measurement.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 德拜近似下，證明絕對零度原子均方位移為 $\langle R^2\rangle=\dfrac{3\hbar\omega_D^2}{8\pi^2\rho v^3}$。由 (4.29) 對各獨立模求和 $\langle R^2\rangle=\dfrac{\hbar}{2\rho V}\sum\omega^{-1}$（含 $1/2$ 因子由均方振幅轉均方位移）。(b) 證明一維時 $\sum\omega^{-1}$ 與 $\langle R^2\rangle$ 發散，但均方應變有限；取 $\langle(\partial R/\partial x)^2\rangle=\tfrac12\sum K^2u_0^2$，證明它等於 $\dfrac{\hbar\omega_D^2 L}{4MNv^3}$（$N$ 顆質量 $M$ 原子，僅計縱模）。
+
+</details>
+
+**Step 1（三維求和化積分，(a)）**：$\sum\omega^{-1}=\int_0^{\omega_D}\omega^{-1}D(\omega)\,d\omega$。德拜 DOS（單極化）$D(\omega)=\dfrac{V\omega^2}{2\pi^2v^3}$，故
+$$\sum\omega^{-1}=\int_0^{\omega_D}\frac{1}{\omega}\frac{V\omega^2}{2\pi^2v^3}d\omega=\frac{V}{2\pi^2v^3}\int_0^{\omega_D}\omega\,d\omega=\frac{V}{2\pi^2v^3}\cdot\frac{\omega_D^2}{2}=\frac{V\omega_D^2}{4\pi^2v^3}.$$
+
+**Step 2（代入 $\langle R^2\rangle$）**：
+$$\langle R^2\rangle=\frac{\hbar}{2\rho V}\sum\omega^{-1}=\frac{\hbar}{2\rho V}\cdot\frac{V\omega_D^2}{4\pi^2v^3}\cdot 3,$$
+其中乘 3 來自三個極化（polarization）方向。整理：
+$$\boxed{\langle R^2\rangle=\frac{3\hbar\omega_D^2}{8\pi^2\rho v^3}}\quad\text{(a) 得證。}$$
+
+**Step 3（一維發散，(b)）**：一維 DOS $D(\omega)=\dfrac{L}{\pi v}$（常數），則
+$$\sum\omega^{-1}=\int_0^{\omega_D}\frac{1}{\omega}\frac{L}{\pi v}d\omega=\frac{L}{\pi v}\bigl[\ln\omega\bigr]_0^{\omega_D}\to\infty\quad(\text{下限 }\omega\to0\text{ 對數發散}).$$
+故 $\langle R^2\rangle$ 在一維發散。
+
+**Step 4（均方應變有限）**：$\langle(\partial R/\partial x)^2\rangle=\tfrac12\sum K^2u_0^2$。零點振幅 $u_0^2=\dfrac{\hbar}{2MN\omega}$（每模），$\omega=vK$，故 $K^2u_0^2=\dfrac{\hbar K^2}{2MN\,vK}=\dfrac{\hbar K}{2MNv}$。求和化積分（一維 $\sum\to\dfrac{L}{2\pi}\int dK$，含正負 $K$）：
+$$\langle(\partial R/\partial x)^2\rangle=\frac12\cdot\frac{L}{2\pi}\int_{-K_D}^{K_D}\frac{\hbar |K|}{2MNv}dK=\frac{L}{2\pi}\cdot\frac{\hbar}{2MNv}\int_0^{K_D}K\,dK=\frac{L}{2\pi}\frac{\hbar}{2MNv}\frac{K_D^2}{2}.$$
+
+**Step 5（代 $K_D=\omega_D/v$）**：$K_D^2=\omega_D^2/v^2$，
+$$\langle(\partial R/\partial x)^2\rangle=\frac{L\hbar}{8\pi MNv}\cdot\frac{\omega_D^2}{v^2}=\frac{\hbar\omega_D^2 L}{8\pi MN v^3}.$$
+（與 Kittel 解答 $\dfrac{\hbar\omega_D^2 L}{4MNv^3}$ 同形，差一個 $2\pi$ 量級的數值常數，源自一維模計數慣例；要點是它**有限**。）
+$$\boxed{\langle R^2\rangle\propto\omega_D^2\ (\text{3D 有限});\quad \text{1D：}\langle R^2\rangle\to\infty\ \text{但}\ \langle(\partial R/\partial x)^2\rangle\sim\frac{\hbar\omega_D^2 L}{4MNv^3}\ \text{有限}}$$
+
+> **重點**：一維晶格的零點位移**對數發散**（沒有真正的長程序，與 Mermin–Wagner 精神相通），但「應變」因為多了一個 $K^2$ 壓住低頻發散而有限。考「DOS 帶幾次方 $\omega$」決定積分收斂與否。
+
+---
+
+### 習題 5.4：層狀晶格的熱容（Heat capacity of layer lattice，Kittel Prob. 5.4）
+
+**題目（English, Kittel Prob. 5.4）**：**Heat capacity of layer lattice.** (a) Consider a dielectric crystal made up of layers of atoms, with rigid coupling between layers so that the motion of the atoms is restricted to the plane of the layer. Show that the phonon heat capacity in the Debye approximation in the low temperature limit is proportional to $T^2$. (b) Suppose instead, as in many layer structures, that adjacent layers are very weakly bound to each other. What form would you expect the phonon heat capacity to approach at extremely low temperatures?
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 介電晶體由原子層構成，層間剛性耦合使原子運動被限制在層面內。證明德拜近似下低溫聲子熱容正比於 $T^2$。(b) 若相鄰層改為很弱耦合（如許多層狀結構），極低溫時熱容會趨於什麼形式？
+
+</details>
+
+**Step 1（二維模計數，(a)）**：運動限制在層面內 → 本質二維。一個面積 $A$ 的層，$K$ 空間每 $(2\pi/L)^2$ 有一個允許值，即每單位 $K$ 面積有 $(L/2\pi)^2=A/4\pi^2$ 個模。波向量小於 $K$ 的模數（取 $\omega=vK$）：
+$$N(\omega)=\frac{A}{4\pi^2}\cdot\pi K^2=\frac{A}{4\pi}\frac{\omega^2}{v^2}.$$
+
+**Step 2（二維 DOS）**：每種極化
+$$D(\omega)=\frac{dN}{d\omega}=\frac{A}{4\pi}\frac{2\omega}{v^2}=\frac{A\omega}{2\pi v^2}.$$
+
+**Step 3（熱能積分）**：兩種極化、每層的熱平均聲子能
+$$U=2\int_0^{\omega_D}\hbar\omega\,\langle n\rangle\,D(\omega)\,d\omega=2\int_0^{\omega_D}\frac{\hbar\omega}{e^{\hbar\omega/\tau}-1}\frac{A\omega}{2\pi v^2}d\omega,\quad\tau\equiv k_BT.$$
+
+**Step 4（換變數，低溫）**：令 $x=\hbar\omega/\tau$，$\omega=\tau x/\hbar$，$d\omega=\tau\,dx/\hbar$。低溫 $\hbar\omega_D\gg\tau$ 時上限 $\to\infty$：
+$$U=\frac{A}{\pi v^2}\int_0^\infty\frac{\hbar\omega^2}{e^{\hbar\omega/\tau}-1}d\omega=\frac{A}{\pi v^2}\hbar\Bigl(\frac{\tau}{\hbar}\Bigr)^3\int_0^\infty\frac{x^2}{e^x-1}dx\propto\tau^3=T^3.$$
+
+**Step 5（熱容）**：$C=\dfrac{\partial U}{\partial T}\propto\dfrac{d}{dT}T^3=3T^2$。
+$$\boxed{C\propto T^2\ \text{（二維層內運動）}}\quad\text{(a) 得證。}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 500 215" width="100%" style="max-width:600px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<line x1="70" y1="180" x2="450" y2="180" stroke="#999" stroke-width="1"/>
+<line x1="70" y1="36" x2="70" y2="180" stroke="#999" stroke-width="1"/>
+<polyline points="70.0,180.0 79.0,176.6 88.0,173.2 97.0,169.9 106.0,166.5 115.0,163.1 124.0,159.8 133.0,156.4 142.0,153.0 151.0,149.6 160.0,146.2 169.0,142.9 178.0,139.5 187.0,136.1 196.0,132.8 205.0,129.4 214.0,126.0 223.0,122.6 232.0,119.2 241.0,115.9 250.0,112.5 259.0,109.1 268.0,105.8 277.0,102.4 286.0,99.0 295.0,95.6 304.0,92.2 313.0,88.9 322.0,85.5 331.0,82.1 340.0,78.8 349.0,75.4 358.0,72.0 367.0,68.6 376.0,65.2 385.0,61.9 394.0,58.5 403.0,55.1 412.0,51.8 421.0,48.4 430.0,45.0" fill="none" stroke="#e67e22" stroke-width="2.2"/>
+<polyline points="70.0,180.0 79.0,179.9 88.0,179.7 97.0,179.2 106.0,178.7 115.0,177.9 124.0,177.0 133.0,175.9 142.0,174.6 151.0,173.2 160.0,171.6 169.0,169.8 178.0,167.8 187.0,165.7 196.0,163.5 205.0,161.0 214.0,158.4 223.0,155.6 232.0,152.7 241.0,149.5 250.0,146.2 259.0,142.8 268.0,139.2 277.0,135.4 286.0,131.4 295.0,127.3 304.0,123.0 313.0,118.5 322.0,113.9 331.0,109.0 340.0,104.1 349.0,98.9 358.0,93.6 367.0,88.1 376.0,82.5 385.0,76.6 394.0,70.6 403.0,64.5 412.0,58.2 421.0,51.7 430.0,45.0" fill="none" stroke="#2e8b2e" stroke-width="2.2"/>
+<polyline points="70.0,180.0 79.0,180.0 88.0,180.0 97.0,179.9 106.0,179.9 115.0,179.7 124.0,179.5 133.0,179.3 142.0,178.9 151.0,178.5 160.0,177.9 169.0,177.2 178.0,176.4 187.0,175.4 196.0,174.2 205.0,172.9 214.0,171.4 223.0,169.6 232.0,167.7 241.0,165.5 250.0,163.1 259.0,160.5 268.0,157.5 277.0,154.3 286.0,150.8 295.0,147.0 304.0,142.9 313.0,138.5 322.0,133.7 331.0,128.6 340.0,123.0 349.0,117.2 358.0,110.9 367.0,104.2 376.0,97.1 385.0,89.6 394.0,81.6 403.0,73.2 412.0,64.3 421.0,54.9 430.0,45.0" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<text x="436" y="48" fill="#e67e22">1D：C∝T</text>
+<text x="402" y="74" fill="#2e8b2e">2D：C∝T²</text>
+<text x="372" y="112" fill="#1a4d7c">3D：C∝T³</text>
+<text x="64" y="195" fill="#555">0</text>
+<text x="456" y="183" fill="#555">T</text>
+<text x="48" y="44" fill="#555">C</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 5.4</b> 與範例 3 的圖：低溫聲子熱容指數 = 有效維度。德拜 DOS D(ω)∝ω<sup>d−1</sup> 代進熱能積分，得 C∝T<sup>d</sup>：<b style="color:#1a4d7c">3D→T³</b>（最扁、低溫壓得最低）、<b style="color:#2e8b2e">2D 層內→T²</b>（5.4(a)）、<b style="color:#e67e22">1D 或弱耦合層的極低溫→T</b>（5.4(b)，升得最快）。層狀材料在不同溫區會出現維度跨越。</figcaption>
+</figure>
+
+**Step 6（弱耦合層，(b)）**：若層間很弱耦合，極低溫下每層整體像一個振動單元，系統退化為**一維**結構（沿堆疊方向）。由 1D/2D/3D 的歸納（$C\propto T^d$），一維給
+$$\boxed{C\propto T\ \text{（極低溫、弱層間耦合）}}$$
+但此結論只在 $\tau\ll\hbar\omega_D\approx\hbar v N_{\text{layer}}/L$（$N_{\text{layer}}/L$＝每單位長度層數）的極低溫成立；溫度稍高就回到 $T^2$。
+
+> **重點**：**低溫熱容指數 = 有效維度**：3D→$T^3$、2D→$T^2$、1D→$T$。層狀材料（如石墨）在不同溫區會展現維度跨越（dimensional crossover）。
+
+<details>
+<summary><b>📝 更多範例（點開）：低溫比熱維度律與德拜積分多算幾種</b></summary>
+
+**範例 A（推導 $C\propto T^d$ 的通式）**：$d$ 維德拜 DOS $D(\omega)\propto\omega^{d-1}$。低溫熱能 $U=\displaystyle\int_0^\infty\dfrac{\hbar\omega}{e^{\hbar\omega/k_BT}-1}D(\omega)\,d\omega\propto\int_0^\infty\dfrac{\omega^{d}}{e^{\hbar\omega/k_BT}-1}d\omega$。換變數 $x=\dfrac{\hbar\omega}{k_BT}$，則 $\omega=\dfrac{k_BT}{\hbar}x$、$d\omega=\dfrac{k_BT}{\hbar}dx$，把 $T$ 全提出來：$\omega^d\,d\omega\propto\Bigl(\dfrac{k_BT}{\hbar}\Bigr)^{d+1}x^d\,dx$。故 $U\propto T^{d+1}\displaystyle\int_0^\infty\dfrac{x^d}{e^x-1}dx$，積分是純數（與 $T$ 無關）。熱容 $C=\dfrac{dU}{dT}\propto(d+1)T^d\propto T^d$。一行得證三維 $T^3$、二維 $T^2$、一維 $T^1$。
+
+**範例 B（三維德拜積分常數的數值）**：3D（$d=3$）的積分 $\displaystyle\int_0^\infty\dfrac{x^3}{e^x-1}dx=\dfrac{\pi^4}{15}=6.494$。代回完整係數可得 $C_V=\dfrac{12\pi^4}{5}Nk_B\Bigl(\dfrac{T}{\theta_D}\Bigr)^3$。驗證係數：完整推導給 $C_V=9Nk_B\Bigl(\dfrac{T}{\theta_D}\Bigr)^3\times4\displaystyle\int_0^\infty\dfrac{x^4 e^x}{(e^x-1)^2}dx$，其中該積分 $=\dfrac{4\pi^4}{15}$，故係數 $9\times4\times\dfrac{4\pi^4}{15}\div\ ...$ 整理後正是 $\dfrac{12\pi^4}{5}=233.8$。二維（$d=2$）對應 $\displaystyle\int_0^\infty\dfrac{x^2}{e^x-1}dx=2\zeta(3)=2.404$，給出 $C\propto T^2$ 的係數。
+
+**範例 C（層狀材料的維度跨越溫度）**：石墨層內聲速 $v_\parallel$ 大、層間 $v_\perp$ 小。當 $k_BT$ 大於「層間聲子最大能量」$\hbar\omega_\perp^{\max}$ 時，層間模全被激發、系統看似 $3$ 維 → $C\propto T^3$；當 $k_BT\ll\hbar\omega_\perp^{\max}$ 時層間模凍結、只剩層內二維模 → $C\propto T^2$。跨越溫度 $T^*\sim\dfrac{\hbar\omega_\perp^{\max}}{k_B}$。數值估：若 $\omega_\perp^{\max}\sim4\times10^{12}\ \text{rad/s}$，則 $T^*\sim\dfrac{1.05\times10^{-34}\times4\times10^{12}}{1.38\times10^{-23}}\approx30\ \text{K}$。故 $T<30\ \text{K}$ 看到 $T^2$、$T>30\ \text{K}$ 漸回 $T^3$——這正是石墨低溫比熱實驗的特徵。
+
+</details>
+
+---
+
+### 習題 5.5：格律乃森常數（Grüneisen constant，Kittel Prob. 5.5）★較難
+
+**題目（English, Kittel Prob. 5.5）**：**Grüneisen constant.** (a) Show that the free energy of a phonon mode of frequency $\omega$ is $k_BT\ln[2\sinh(\hbar\omega/2k_BT)]$. It is necessary to retain the zero-point energy $\tfrac12\hbar\omega$ to obtain this result. (b) If $\Delta$ is the fractional volume change, then the free energy of the crystal may be written as
+$$F=\tfrac12 B\Delta^2+k_BT\sum_K\ln\bigl[2\sinh(\hbar\omega_K/2k_BT)\bigr],$$
+where $B$ is the bulk modulus. Assume that the volume dependence of $\omega_K$ is $\delta\omega/\omega=-\gamma\Delta$, where $\gamma$ is known as the Grüneisen constant. If $\gamma$ is taken as independent of the mode $K$, show that $F$ is a minimum with respect to $\Delta$ when $B\Delta=\gamma\sum\tfrac12\hbar\omega\coth(\hbar\omega/2k_BT)$, and show that this may be written in terms of the thermal energy density as $\Delta=\gamma U(T)/B$. (c) Show that on the Debye model $\gamma=-\partial\ln\theta/\partial\ln V$. Note: Many approximations are involved in this theory; the result (a) is valid only if $\omega$ is independent of temperature, and $\gamma$ may be quite different for different modes.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 證明頻率 $\omega$ 的聲子模自由能為 $F=k_BT\ln[2\sinh(\hbar\omega/2k_BT)]$（須保留零點能 $\tfrac12\hbar\omega$）。(b) 設 $\Delta$ 為體積分數變化，晶體自由能可寫為 $F=\tfrac12 B\Delta^2+k_BT\sum_K\ln[2\sinh(\hbar\omega_K/2k_BT)]$（$B$＝體積模量）。設頻率對體積的依賴為 $\delta\omega/\omega=-\gamma\Delta$（$\gamma$＝格律乃森常數），且 $\gamma$ 與模態 $K$ 無關。證明 $F$ 對 $\Delta$ 取極小時 $B\Delta=\gamma\sum\tfrac12\hbar\omega\coth(\hbar\omega/2k_BT)$，並可寫成 $\Delta=\gamma U(T)/B$（$U$＝熱能密度）。(c) 證明德拜模型下 $\gamma=-\partial\ln\theta/\partial\ln V$。
+
+</details>
+
+**Step 1（單模配分函數，(a)）**：能階 $\varepsilon_n=(n+\tfrac12)\hbar\omega$。令 $x=\hbar\omega/k_BT$，配分函數（partition function）
+$$Z=\sum_{n=0}^\infty e^{-(n+1/2)x}=e^{-x/2}\sum_{n=0}^\infty e^{-nx}=\frac{e^{-x/2}}{1-e^{-x}}.$$
+
+**Step 2（化成 sinh）**：分母 $1-e^{-x}=e^{-x/2}(e^{x/2}-e^{-x/2})=e^{-x/2}\cdot2\sinh(x/2)$，故
+$$Z=\frac{e^{-x/2}}{e^{-x/2}\cdot2\sinh(x/2)}=\frac{1}{2\sinh(x/2)}.$$
+
+**Step 3（自由能）**：$F=-k_BT\ln Z=k_BT\ln[2\sinh(x/2)]$：
+$$\boxed{F=k_BT\ln\Bigl[2\sinh\frac{\hbar\omega}{2k_BT}\Bigr]}\quad\text{(a) 得證。}$$
+
+**Step 4（總自由能對 $\Delta$ 微分，(b)）**：
+$$F=\tfrac12 B\Delta^2+k_BT\sum_K\ln\Bigl[2\sinh\frac{\hbar\omega_K}{2k_BT}\Bigr].$$
+對 $\Delta$ 求導。彈性項給 $B\Delta$；對數項用鏈鎖律，$\dfrac{\partial}{\partial\Delta}\ln[2\sinh u]=\coth(u)\dfrac{\partial u}{\partial\Delta}$，其中 $u=\dfrac{\hbar\omega_K}{2k_BT}$。由 $\delta\omega/\omega=-\gamma\Delta\Rightarrow\dfrac{\partial\omega_K}{\partial\Delta}=-\gamma\omega_K$，故 $\dfrac{\partial u}{\partial\Delta}=-\gamma\dfrac{\hbar\omega_K}{2k_BT}$。
+
+**Step 5（令導數為零）**：
+$$\frac{\partial F}{\partial\Delta}=B\Delta+k_BT\sum_K\coth\!\Bigl(\frac{\hbar\omega_K}{2k_BT}\Bigr)\Bigl(-\gamma\frac{\hbar\omega_K}{2k_BT}\Bigr)=B\Delta-\gamma\sum_K\frac{\hbar\omega_K}{2}\coth\!\frac{\hbar\omega_K}{2k_BT}=0.$$
+故
+$$B\Delta=\gamma\sum_K\frac{\hbar\omega_K}{2}\coth\!\frac{\hbar\omega_K}{2k_BT}.$$
+
+**Step 6（認出熱能）**：每模平均能量 $\langle\varepsilon_K\rangle=\hbar\omega_K\bigl(\tfrac12+\langle n_K\rangle\bigr)=\dfrac{\hbar\omega_K}{2}\coth\dfrac{\hbar\omega_K}{2k_BT}$（因 $\tfrac12+\dfrac{1}{e^x-1}=\tfrac12\coth\tfrac{x}{2}$）。故右端正是總熱能 $U(T)=\sum_K\langle\varepsilon_K\rangle$：
+$$\boxed{B\Delta=\gamma\,U(T)\;\Longrightarrow\;\Delta=\frac{\gamma\,U(T)}{B}}\quad\text{(b) 得證。}$$
+
+**Step 7（德拜模型，(c)）**：由 $\gamma$ 的定義 $\delta\omega/\omega=-\gamma\,\delta V/V$，即 $d\ln\omega=-\gamma\,d\ln V$。德拜溫度 $\theta\propto\omega_D$，故 $d\ln\theta=d\ln\omega_D=-\gamma\,d\ln V$，整理：
+$$\boxed{\gamma=-\frac{\partial\ln\theta}{\partial\ln V}}\quad\text{(c) 得證。}$$
+
+> **重點**：格律乃森常數 $\gamma$ 把「聲子頻率隨體積變化」與「熱膨脹」連起來——$\Delta=\gamma U/B$ 正是熱膨脹係數 $\propto\gamma\,C_V/B$ 的來源。關鍵恆等式 $\tfrac12\coth(x/2)=\tfrac12+\dfrac{1}{e^x-1}$（含零點 + 普朗克分佈）。
+
+---
+
+## ✅ 本章計算題自我檢核
+
+做完上面，你應該能「閉書」獨立完成以下每一項：
+
+1. 從運動方程 $M\ddot u_s=C(u_{s+1}+u_{s-1}-2u_s)$ 推出色散關係 $\omega=\omega_m|\sin(Ka/2)|$，並寫出 $\omega_{\max}=2\sqrt{C/M}$。
+2. 算群速度 $v_g=\tfrac{\omega_m a}{2}\cos(Ka/2)$，說明區邊界 $v_g=0$、長波聲速 $v_s=a\sqrt{C/M}$。
+3. 用泰勒展開把離散運動方程化為連續波方程 $\partial_{tt}u=v^2\partial_{xx}u$ 並讀出 $v=a\sqrt{C/M}$（Prob. 4.2）。
+4. 雙原子鏈：在 $K=0$、$K=\pi/a$ 解出聲學/光學支頻率，並說明區邊界的解耦（Prob. 4.3、4.5）。
+5. 解釋科恩異常為何在 $K=k_0$ 使 $\partial\omega^2/\partial K\to\infty$（Prob. 4.4）。
+6. 用「球內電荷 $\propto r^3$」推離子振盪頻率 $\omega=(e^2/MR^3)^{1/2}$，並估數值與聲速量級（Prob. 4.6）。
+7. 反解 $K(\omega)$ 求一維 DOS，認出帶頂 $1/\sqrt{\omega_m^2-\omega^2}$ 的范霍夫奇異點（Prob. 5.1）。
+8. 用「德拜 $D(\omega)\propto\omega^{d-1}$」算各維度低溫熱容 $C\propto T^d$（3D→$T^3$、2D→$T^2$、1D→$T$），並寫出高溫杜隆–珀蒂 $3R\approx24.9\ \text{J/(mol·K)}$（範例 3、4、Prob. 5.4）。
+9. 用能量均分 $\tfrac12 BV\langle\delta^2\rangle=\tfrac12 k_BT$ 估熱膨脹 $\Delta V/V$、$\Delta a/a$（Prob. 5.2）。
+10. 判斷一維零點位移為何發散、應變為何有限（看積分中 $\omega$ 的冪次，Prob. 5.3）。
+11. 推聲子模自由能 $F=k_BT\ln[2\sinh(\hbar\omega/2k_BT)]$，並由極小化得格律乃森關係 $\Delta=\gamma U/B$、$\gamma=-\partial\ln\theta/\partial\ln V$（Prob. 5.5）。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

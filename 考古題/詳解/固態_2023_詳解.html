@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理導論 2023 資格考 — 詳解</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">← 詳解目錄</a> &nbsp;·&nbsp; <a href="_共用觀念與公式.html">🧰 共用觀念與公式</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- source: 歷年原卷/固態物理導論_2023.md -->
+
+# 固態物理導論 2023 資格考 — 教學版逐題詳解（從普物起建 · 代數不跳步）
+
+> **這份是什麼**:2023 卷共 4 大區塊 / 100 分(晶體結構 30、繞射 25、聲子 20、電子 25),底下 8 個小題。本卷偏「觀念＋短推導」,但每一題都能完整展開——graphene 倒晶格、sc 填充率 0.52、1D Madelung、Bragg 由 $\Delta\mathbf k=\mathbf G$ 推、1D DOS(兩種色散)、由聲速反推彈簧常數、ZnO 退化判定——全部從普物起建、代數不跳步。寫法同 2016/2025:`📋原題 → 🎯核心訊息 →(必要時)📚前情提要 → 🔍符號說明 → 解答 Step(每步小結＋$\boxed{}$) → ✅自我檢核 → 🔀變化 → 信心`。共用觀念見 [`_共用觀念與公式.html`](_共用觀念與公式.html)。
+> **想看更硬的長推導**(Bloch 證明、Kronig–Penney、$U_0=\tfrac35NE_F$),見 [`固態_2016_詳解`](固態_2016_詳解.md);想看輕量短答版,見 [`固態_2025_詳解`](固態_2025_詳解.md)。
+
+## 🧭 全卷約定
+- **題卷給的常數**:$\varepsilon_0=8.85\times10^{-12}\,$F/m、$1\,\text{Å}=10^{-10}\,$m、$e=1.602\times10^{-19}\,$C、$1\,\text{eV}=1.602\times10^{-19}\,$J、$m_e=9.1\times10^{-31}\,$kg、$\hbar=h/2\pi\approx1\times10^{-34}\,$J·s(本檔數值計算用較準的 $\hbar=1.05\times10^{-34}$,並標出用題卷 $1\times10^{-34}$ 的結果)。
+- 倒晶格慣例 $\mathbf a_i\cdot\mathbf b_j=2\pi\delta_{ij}$;自由電子 $E=\hbar^2k^2/2m$;2D 用 $\hat e_x$(右)、$\hat e_y$(上)。
+- **題卷沒給** $k_B$ 與 $T$——第 8 題判退化時需用室溫熱能 $k_BT(300\text{K})\approx0.026\,$eV(視為常識),本檔會明確標出這個外加假設。
+
+---
+
+# 📘 第 1 題 — 晶體結構（30%）
+
+## 📋 原題
+> **1. Graphene**(正六邊形連續排列,六邊形邊長 $0.14\,$nm):
+> &nbsp;&nbsp;a. 一個 primitive unit cell 內有幾顆原子?
+> &nbsp;&nbsp;b. 寫下 basis 與 conventional lattice vectors。
+> &nbsp;&nbsp;c. 畫出倒晶格並標示第一布里淵區。
+> **2.** 證明 hard spheres 排在 simple cubic 上的最大體積填充率 $=0.52$。
+> **3.** 說明 1D 離子鏈的 Madelung 常數如何導出。
+
+## 🎯 核心訊息
+> 三小題,三條主線:**(1) graphene = 三角 Bravais 格 + 2 顆碳的 basis**(蜂巢本身不是 Bravais 格,所以 primitive cell 一定 2 顆)→ 倒晶格也是三角格、第一 BZ 是六邊形;**(2) sc 填充率** = 「球沿立方邊相切($2r=a$)」這一條算出 $\pi/6\approx0.524$;**(3) Madelung** = 把「一個離子對全鏈的庫侖能」寫成交錯級數 $1-\tfrac12+\tfrac13-\cdots=\ln2$,得 $\alpha_{1D}=2\ln2$。
+
+## 📚 前情提要：為什麼蜂巢的 basis 一定是 2
+### 階段 1（普物/化學）：蜂巢長什麼樣
+碳排成正六邊形連續鋪滿,每個碳接 3 個鄰碳(夾角 $120^\circ$),鍵長 $d=0.14\,$nm。
+> **留存**:蜂巢有「兩種環境不同的碳」——指向上的三鍵 vs 指向下的三鍵,交替出現。
+
+### 階段 2（晶體學）：蜂巢不是 Bravais lattice
+Bravais lattice 要求「每個格點看出去環境完全相同」。蜂巢裡相鄰兩碳(A、B)的鍵指向相反 → **環境不同** → 蜂巢本身**不是** Bravais lattice。
+> **留存**:不能把每顆碳當格點。要把「A 碳」當格點 → 這些 A 排成**三角(hexagonal)Bravais 格**;每個格點再掛上「A+B 兩顆」當 basis。
+
+### 階段 3（數原子）：兩個獨立算法都給 2
+1. **A 子晶格法**:格點 = 三角格,每格點 basis = {A, B} → **2 顆**。
+2. **數六邊形法**:一個六邊形 6 個角,每角被 3 個六邊形共用 → $6\times\tfrac13=2$ 顆/六邊形;而一個六邊形面積 = 一個 primitive cell 面積 → **2 顆/primitive cell**。
+> **一句話**:蜂巢 = 三角格 × (basis 2)。這正是共用檔裡「graphene basis = 2」的嚴格版,也是 2025 第 1 題「縮格定理」的同一招(A→B 的位移不是晶格向量)。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 三角(hexagonal)Bravais 格、primitive vectors、倒晶格、填充率、Madelung 級數</b></summary>
+
+### 你普物學過的
+晶體 = 格子(怎麼重複)× 花樣(每格放什麼);庫侖位能 $U=\dfrac{q_1q_2}{4\pi\varepsilon_0 r}$;球體積 $\tfrac43\pi r^3$。
+
+### 為什麼要這個
+這三小題分別要:把蜂巢拆成「三角格＋basis」、把球塞進立方算佔比、把離子鏈的庫侖和收斂成一個數(Madelung)。
+
+### 定義
+- 三角格 primitive vectors(夾 $60^\circ$):$\mathbf a_1=a(\tfrac{\sqrt3}2,\tfrac12),\ \mathbf a_2=a(\tfrac{\sqrt3}2,-\tfrac12)$,$a=$ 最近 A–A 距離。
+- 倒晶格 $\mathbf a_i\cdot\mathbf b_j=2\pi\delta_{ij}$;矩陣法 $\begin{pmatrix}\mathbf b_1\\\mathbf b_2\end{pmatrix}=2\pi(A^{-1})^{\mathsf T}$,$A=\begin{pmatrix}\mathbf a_1\\\mathbf a_2\end{pmatrix}$。
+- 填充率 $=\dfrac{(\text{胞內原子數})\times\frac43\pi r^3}{\text{胞體積}}$,$r$ 由「最近鄰相切」定。
+- Madelung:$U_{\text{ref}}=-\dfrac{\alpha\,q^2}{4\pi\varepsilon_0 R}$,$\alpha=$ 把符號交錯的庫侖和加起來的無因次數。
+
+**範例 1（熱身）**:正方格 $a$ → $\mathbf b_i=\tfrac{2\pi}a\hat e_i$,BZ = 邊長 $2\pi/a$ 的正方。
+**範例 2（中階）**:bcc 的倒晶格 = fcc(2016 第 1 題)——「倒晶格的形狀」常考。
+**範例 3（本題）**:三角格的倒晶格仍是三角格(轉 $90^\circ$),BZ = 六邊形(graphene 的著名 BZ)。
+</details>
+
+## 解答
+
+### 1(a) primitive cell 內的原子數
+
+如上「前情提要 階段 3」,蜂巢 = 三角 Bravais 格 + basis{A,B}。兩個獨立算法:
+
+- **A 子晶格法**:每三角格點掛 A、B 兩顆 → 2。
+- **數六邊形法**:$6$ 角 $\times\tfrac13=2$。
+
+$$\boxed{\text{每 primitive cell }=2\text{ 顆碳原子}。}$$
+> **小結**:答案是 2,理由是「蜂巢非 Bravais,須以三角格＋2-碳 basis 描述」——不是因為六邊形有 6 個角。
+
+### 1(b) basis 與 lattice vectors（含尺寸換算）
+
+**Step 1 — 由鍵長定三角格常數 $a$。**
+最近的兩個同子晶格點(A–A)之間,中間隔一顆 B;幾何上 A–A 距離 $a=\sqrt3\,d$(兩鍵夾 $120^\circ$ 的第三邊)。
+$$a=\sqrt3\,d=\sqrt3\times0.14\,\text{nm}=0.243\,\text{nm}\approx2.42\,\text{Å}.$$
+> **小結**:題目給的 $0.14\,$nm 是**鍵長**(C–C),不是晶格常數;晶格常數要 $\times\sqrt3$。這是 graphene 最常被搞混的一步。
+
+**Step 2 — 寫 primitive(conventional)lattice vectors。**
+$$\boxed{\mathbf a_1=a\Big(\tfrac{\sqrt3}2\hat e_x+\tfrac12\hat e_y\Big),\qquad \mathbf a_2=a\Big(\tfrac{\sqrt3}2\hat e_x-\tfrac12\hat e_y\Big),\quad a=\sqrt3\,d.}$$
+夾角 $\cos\theta=\dfrac{\mathbf a_1\cdot\mathbf a_2}{a^2}=\dfrac{3/4-1/4}{1}=\tfrac12\Rightarrow\theta=60^\circ$ ✓(三角格)。原胞面積 $|\mathbf a_1\times\mathbf a_2|=a^2\sin60^\circ=\tfrac{\sqrt3}2a^2$。
+
+**Step 3 — 寫 basis。**
+取 A 碳在格點 $(0,0)$;B 碳沿一條鍵位移 $\boldsymbol\delta$。由 $\mathbf a_1+\mathbf a_2=(\sqrt3\,a)\hat e_x$,取
+$$\boldsymbol\delta=\tfrac13(\mathbf a_1+\mathbf a_2)=\tfrac{a}{\sqrt3}\hat e_x=d\,\hat e_x.$$
+$$\boxed{\text{basis}=\{\,\text{C}_A:(0,0),\ \ \text{C}_B:\ \boldsymbol\delta=d\,\hat e_x=\tfrac{a}{\sqrt3}\hat e_x\,\}.}$$
+> **小結**:B 就在 A 的右方一個鍵長 $d$;$\boldsymbol\delta$ 不是晶格向量($\tfrac13(\mathbf a_1+\mathbf a_2)$ 的 $\tfrac13$ 過不了整數),所以 basis 縮不掉,鎖死 2 顆——與 (a) 自洽。
+
+### 1(c) 倒晶格與第一布里淵區
+
+**Step 1 — 矩陣法算 $\mathbf b_1,\mathbf b_2$。** $A=\begin{pmatrix}\tfrac{\sqrt3}2a&\tfrac12a\\[2pt]\tfrac{\sqrt3}2a&-\tfrac12a\end{pmatrix}$,$\det A=-\tfrac{\sqrt3}2a^2$。
+$$A^{-1}=\frac{1}{\det A}\begin{pmatrix}-\tfrac12a&-\tfrac12a\\[2pt]-\tfrac{\sqrt3}2a&\tfrac{\sqrt3}2a\end{pmatrix}=\begin{pmatrix}\tfrac1{\sqrt3 a}&\tfrac1a\\[2pt]\tfrac1{\sqrt3 a}&-\tfrac1a\end{pmatrix}^{\!\mathsf T}\!\!,\quad \begin{pmatrix}\mathbf b_1\\\mathbf b_2\end{pmatrix}=2\pi(A^{-1})^{\mathsf T}.$$
+$$\boxed{\mathbf b_1=\frac{2\pi}{a}\Big(\tfrac1{\sqrt3}\hat e_x+\hat e_y\Big),\qquad \mathbf b_2=\frac{2\pi}{a}\Big(\tfrac1{\sqrt3}\hat e_x-\hat e_y\Big).}$$
+**驗證**:$\mathbf a_1\cdot\mathbf b_1=2\pi(\tfrac{\sqrt3}2\cdot\tfrac1{\sqrt3}+\tfrac12\cdot1)=2\pi$ ✓;$\mathbf a_1\cdot\mathbf b_2=2\pi(\tfrac12-\tfrac12)=0$ ✓。
+
+**Step 2 — 認出倒晶格形狀。**
+$|\mathbf b_1|=|\mathbf b_2|=\dfrac{2\pi}a\sqrt{\tfrac13+1}=\dfrac{4\pi}{\sqrt3\,a}$;夾角 $\cos=\dfrac{\mathbf b_1\cdot\mathbf b_2}{|\mathbf b|^2}=\dfrac{1/3-1}{4/3}=-\tfrac12\Rightarrow120^\circ$。
+> **小結**:倒晶格仍是**三角格**,只是相對實空間轉了 $90^\circ$(實空間 $\mathbf a_i$ 夾 $60^\circ$、倒空間 $\mathbf b_i$ 夾 $120^\circ$)。
+
+**Step 3 — 第一 BZ = 倒晶格的 Wigner–Seitz cell = 正六邊形。**
+取 $\Gamma$(原點)到 6 個最近倒晶格點($\pm\mathbf b_1,\pm\mathbf b_2,\pm(\mathbf b_1+\mathbf b_2)$,皆長 $\tfrac{4\pi}{\sqrt3 a}$)連線的中垂線,圍出正六邊形:
+$$|\Gamma M|=\tfrac12|\mathbf b_1|=\frac{2\pi}{\sqrt3\,a}\approx1.50\,\text{Å}^{-1},\qquad \boxed{|\Gamma K|=\frac{|\Gamma M|}{\cos30^\circ}=\frac{4\pi}{3a}\approx1.73\,\text{Å}^{-1}.}$$
+($M$=邊心,$K$=角點;這就是 graphene 著名的 Dirac 點 $K/K'$。)
+
+![graphene 實空間 honeycomb 與倒空間三角格＋第一 BZ 六邊形](figs/固態_2023_graphene_倒晶格與BZ.png)
+
+> **判讀**:左=實空間,A(實心)、B(空心)兩子晶格,$\mathbf a_1,\mathbf a_2$ 夾 $60^\circ$、$\boldsymbol\delta$ 是一條鍵;右=倒空間,黑點為三角倒晶格,黃色六邊形為第一 BZ,$\Gamma$(中心)、$K$(角)、$M$(邊心),$\mathbf b_1,\mathbf b_2$ 夾 $120^\circ$。注意:實空間 $\mathbf a_i$ 夾 $60^\circ$ 而 BZ 六邊形「轉了 $30^\circ$」(角點 $K$ 朝上、邊心 $M$ 朝右)。
+
+### 2. simple cubic 填充率 $=0.52$（完整）
+
+**Step 1 — 每胞原子數。** sc 立方 8 個角,每角 $\tfrac18$ → $8\times\tfrac18=1$ 顆/立方。
+**Step 2 — 球半徑(相切條件)。** sc 最近鄰沿**立方邊**相切:$2r=a\Rightarrow r=\tfrac a2$。
+**Step 3 — 填充率。**
+$$f=\frac{1\cdot\frac43\pi r^3}{a^3}=\frac{\frac43\pi(\tfrac a2)^3}{a^3}=\frac{\frac43\pi\frac{a^3}8}{a^3}=\frac{\pi}{6}\approx\boxed{0.5236\approx0.52.}$$
+> **小結**:答案 $\pi/6$ 與立方邊 $a$ 無關——填充率是純幾何。對照:bcc $=\tfrac{\sqrt3}8\pi\approx0.68$、fcc/hcp $=\tfrac{\pi}{3\sqrt2}\approx0.74$;sc 最鬆。
+
+### 3. 1D 離子鏈的 Madelung 常數（完整）
+
+**Step 1 — 設定。** 等間距 $R$ 的交錯離子鏈 $\cdots+\,-\,+\,-\cdots$,電荷 $\pm q$。取一個 $+$ 離子當參考,算它與**其餘所有**離子的庫侖位能總和 $U_{\text{ref}}$。
+**Step 2 — 逐殼層列出。** 左右對稱,每個距離各有 2 顆:
+- 距 $R$:2 顆 $-$(吸引,負);距 $2R$:2 顆 $+$(排斥,正);距 $3R$:2 顆 $-$;…
+$$U_{\text{ref}}=\frac{q^2}{4\pi\varepsilon_0}\Big[-\frac{2}{R}+\frac{2}{2R}-\frac{2}{3R}+\frac{2}{4R}-\cdots\Big]=-\frac{q^2}{4\pi\varepsilon_0 R}\cdot2\Big(1-\tfrac12+\tfrac13-\tfrac14+\cdots\Big).$$
+**Step 3 — 收斂這個交錯級數。** 由 $\ln(1+x)=x-\tfrac{x^2}2+\tfrac{x^3}3-\cdots$ 取 $x=1$:
+$$1-\tfrac12+\tfrac13-\tfrac14+\cdots=\ln 2.$$
+**Step 4 — 定義 Madelung 常數。** 寫成 $U_{\text{ref}}=-\dfrac{\alpha\,q^2}{4\pi\varepsilon_0 R}$,比對得
+$$\boxed{\alpha_{1D}=2\ln 2\approx1.386.}$$
+> **小結**:1D Madelung 的精髓是「交錯調和級數 $\to\ln2$」——這是少數能**閉式**算出的 Madelung(3D NaCl 的 $\alpha\approx1.748$ 只能數值/Ewald)。負號表示鏈整體**束縛**(穩定)。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 620 175" width="100%" style="max-width:680px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="30" y1="80" x2="590" y2="80" stroke="#bbb" stroke-width="1"/>
+<circle cx="310" cy="80" r="12" fill="#c0392b"/>
+<text x="310" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">+</text>
+<text x="310" y="48" text-anchor="middle" font-size="11" fill="#c0392b">參考離子</text>
+<circle cx="260" cy="80" r="11" fill="#1a4d7c"/>
+<text x="260" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">−</text>
+<circle cx="360" cy="80" r="11" fill="#1a4d7c"/>
+<text x="360" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">−</text>
+<circle cx="210" cy="80" r="11" fill="#c0392b"/>
+<text x="210" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">+</text>
+<circle cx="410" cy="80" r="11" fill="#c0392b"/>
+<text x="410" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">+</text>
+<circle cx="160" cy="80" r="11" fill="#1a4d7c"/>
+<text x="160" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">−</text>
+<circle cx="460" cy="80" r="11" fill="#1a4d7c"/>
+<text x="460" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">−</text>
+<circle cx="110" cy="80" r="11" fill="#c0392b"/>
+<circle cx="510" cy="80" r="11" fill="#c0392b"/>
+<line x1="310" y1="100" x2="360" y2="100" stroke="#2e8b2e" stroke-width="1.5"/>
+<text x="335" y="118" text-anchor="middle" font-size="11" fill="#2e8b2e">R</text>
+<line x1="310" y1="135" x2="410" y2="135" stroke="#e67e22" stroke-width="1.5"/>
+<text x="360" y="153" text-anchor="middle" font-size="11" fill="#e67e22">2R</text>
+<text x="310" y="170" text-anchor="middle" font-size="11.5" fill="#333">每個距離 nR 左右各一顆，符號隨 n 交替：−1/R +1/2R −1/3R +…</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">1D 交錯離子鏈的 Madelung 求和。從中央 + 離子看出去，距 R 處 2 顆異號(吸引)、距 2R 處 2 顆同號(排斥)、距 3R 處又異號…，係數正負交替 → 交錯調和級數 $1-\tfrac12+\tfrac13-\cdots=\ln2$，故 $\alpha_{1D}=2\ln2$。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例(點開):填充率與 1D Madelung 多算幾種</b></summary>
+
+**範例 A(bcc 填充率 0.68，沿體對角線相切)**:bcc 每胞 $8\times\tfrac18+1=2$ 顆。最近鄰沿**體對角線**相切,體對角線長 $\sqrt{a^2+a^2+a^2}=\sqrt3\,a$,上面排「角→體心→角」共 $4$ 個半徑:$4r=\sqrt3\,a\Rightarrow r=\dfrac{\sqrt3}4a$。填充率
+$$f=\frac{2\cdot\frac43\pi r^3}{a^3}=\frac{\frac83\pi\left(\frac{\sqrt3}4a\right)^3}{a^3}=\frac83\pi\cdot\frac{3\sqrt3}{64}=\frac{\sqrt3\,\pi}{8}\approx\frac{1.732\times3.1416}{8}\approx0.680.$$
+
+**範例 B(fcc 填充率 0.74，沿面對角線相切)**:fcc 每胞 $8\times\tfrac18+6\times\tfrac12=1+3=4$ 顆。最近鄰沿**正方面的對角線**相切,面對角線長 $\sqrt{a^2+a^2}=\sqrt2\,a$,上面「角→面心→角」共 $4$ 個半徑:$4r=\sqrt2\,a\Rightarrow r=\dfrac{\sqrt2}4a=\dfrac a{2\sqrt2}$。填充率
+$$f=\frac{4\cdot\frac43\pi r^3}{a^3}=\frac{16}3\pi\left(\frac a{2\sqrt2}\right)^3\frac1{a^3}=\frac{16}3\pi\cdot\frac1{16\sqrt2}=\frac{\pi}{3\sqrt2}\approx\frac{3.1416}{4.243}\approx0.740.$$
+與 sc 的 $0.52$ 對照:鬆緊順序 sc $<$ bcc $<$ fcc,完全由「相切方向上塞幾個半徑」決定。
+
+**範例 C(2D 正方格的「填充率」當練手)**:2D 把圓塞進正方格,每胞 $1$ 個圓,沿邊相切 $2r=a\Rightarrow r=\tfrac a2$。面積佔比
+$$f_{2D}=\frac{\pi r^2}{a^2}=\frac{\pi(a/2)^2}{a^2}=\frac{\pi}4\approx0.785.$$
+(2D 最密的「六方堆積」更高,$f=\dfrac{\pi}{2\sqrt3}\approx0.907$——同樣是純幾何。)
+
+**範例 D(1D Madelung 換成「最近鄰能」表式)**:把 $U_{\text{ref}}=-\dfrac{\alpha q^2}{4\pi\varepsilon_0 R}$ 的 $\alpha=2\ln2$ 代回,並用「最近鄰庫侖能」$U_0=\dfrac{q^2}{4\pi\varepsilon_0 R}$ 當單位,則 $U_{\text{ref}}=-2\ln2\;U_0\approx-1.386\,U_0$——意思是「把整條鏈都算進去」只比「只算最近的 2 顆($-2U_0$)」少約 $30\%$,因為遠處正負幾乎抵消。逐項驗算前四項:$-2+1-\tfrac23+\tfrac12=-1.167$(以 $U_0$ 為單位),已接近 $-1.386$,且交替逼近 ✓。
+</details>
+
+## ✅ 自我檢核
+- graphene:$|\Gamma K|=4\pi/3a\approx1.7\,\text{Å}^{-1}$ 與文獻 $1.70\,\text{Å}^{-1}$ 一致 ✓;倒晶格仍三角格、BZ 六邊形 ✓。
+- sc:$\pi/6\approx0.524$ ✓(且 $<$ bcc 0.68 $<$ fcc 0.74,鬆緊順序對)。
+- Madelung:級數**交錯**(離子正負交替)→ 才會收斂到 $\ln2$;若全同號會發散(無物理),自洽 ✓。
+
+## 🔀 變化的可能情況
+- **graphene** 常改問:畫 Wigner–Seitz(實空間,也是六邊形)、或算「primitive cell 面積 $\tfrac{\sqrt3}2a^2$」、或標 $K,K'$ 為何不等價(basis 相位)。
+- **填充率** 常換 bcc(0.68)、fcc(0.74)、diamond(0.34)、或「配位數」。
+- **Madelung** 常換 3D NaCl(說明 $\alpha\approx1.748$ 要用 Evjen/Ewald 求和,因條件收斂)、或問「為何不能逐項相加」。
+
+## 信心:**高**（graphene 倒晶格/BZ、sc 填充率、1D Madelung 全為標準完整推導,Kittel Ch1–3）。
+
+---
+
+# 📗 第 2 題 — 繞射（25%）
+
+## 📋 原題
+> **4.** 電子、X 光、中子、氦原子被晶體繞射時,**峰位置相同但強度不同**,為什麼相同、又為什麼強度不同?
+> **5.** 繞射條件可寫成 $\Delta\mathbf k=\mathbf G$。解釋倒晶格向量 $\mathbf G$ 是什麼;由繞射條件**導出** Bragg 定律。
+
+## 🎯 核心訊息
+> 一句話拆兩半:**峰位置只認晶格(倒晶格 $\mathbf G$),強度只認 basis＋散射機制(form factor)。** 四種束都看到同一個倒晶格 → 同樣的 $\Delta\mathbf k=\mathbf G$ 解 → 同樣峰位置;但 X 光打電子雲、中子打原子核、電子打總電位、氦原子打表面電子密度 → 每原子散射振幅 $f$ 不同 → 強度不同。Bragg 則是把 $\Delta\mathbf k=\mathbf G$ 配上「彈性散射 $|\Delta\mathbf k|=2k\sin\theta$」得到。
+
+## 📚 前情提要：從雙狹縫到 $\Delta\mathbf k=\mathbf G$
+### 階段 1（普物）：雙狹縫,路徑差 = 整數波長才亮。
+### 階段 2（傅立葉）：晶體是三維週期,週期 $a$ 在倒空間對應 $2\pi/a$;建設性干涉的條件由「所有格點同相」給出 → 動量轉移須等於倒晶格向量。
+### 階段 3（彈性）：$|\mathbf k'|=|\mathbf k|=2\pi/\lambda$,峰在 $\Delta\mathbf k=\mathbf G$;振幅還要乘上「每原子怎麼散」的 form factor 與「basis 怎麼排」的結構因子。
+> **留存**:**位置 ← 晶格(倒晶格);強度 ← form factor × 結構因子。** 第 4 題問的就是這條分工。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 倒晶格向量 $\mathbf G$、form factor、結構因子、彈性散射幾何</b></summary>
+
+### 你普物學過的
+干涉:振幅相加、強度 = |振幅|²。
+
+### 為什麼要這個
+要把「為何同位不同強」說清楚,必須分開「相位(決定位置)」與「每原子振幅 $f$(決定強度)」兩件事。
+
+### 定義
+- $\mathbf G=h\mathbf b_1+k\mathbf b_2+l\mathbf b_3$,對一切晶格向量 $\mathbf R$ 有 $e^{i\mathbf G\cdot\mathbf R}=1$;$\mathbf G\perp(hkl)$ 面,$|\mathbf G|=2\pi n/d_{hkl}$。
+- 散射振幅 $\propto f(\text{原子 form factor})\times S_{\mathbf G}(\text{結構因子})$;強度 $\propto|f\,S_{\mathbf G}|^2$。
+- 彈性:$|\mathbf k'|=|\mathbf k|=k$,$\mathbf k,\mathbf k'$ 夾角 $2\theta$ → $|\mathbf k'-\mathbf k|=2k\sin\theta$。
+
+**範例 1（熱身）**:X 光 $f\propto Z$(打電子雲)。
+**範例 2（中階）**:中子 $f$=核散射長度,隨同位素跳動、可定輕原子(H)、可測磁結構。
+**範例 3（本題）**:同一晶格 → 同 $\mathbf G$ → 同峰位;不同束 → 不同 $f$ → 不同強度。
+</details>
+
+## 解答
+
+### 4. 為何峰位置相同、強度不同
+
+**Step 1 — 位置由倒晶格決定(故相同)。**
+建設性干涉的條件是 $\Delta\mathbf k=\mathbf G$,$\mathbf G$ 只由**晶格的週期性(倒晶格)** 決定,與「用什麼束、束和誰作用」無關。四種束打的是**同一塊晶體、同一個倒晶格** → 同一組允許的 $\mathbf G$ → 對給定 $\lambda$ 得同樣的 Bragg 角 → **峰位置相同**。
+> **小結**:位置 = 幾何(晶格),與散射機制無關。
+
+**Step 2 — 強度由 form factor 決定(故不同)。**
+峰強度 $\propto|f\,S_{\mathbf G}|^2$,$f$ = 單一原子的散射振幅,**取決於束和什麼作用**:
+- **X 光(photon)**:散射自**電子雲** → $f\propto Z$(原子序),對輕原子(H)幾乎看不到。
+- **中子(neutron)**:散射自**原子核**(短程核力)＋**磁矩** → 散射長度隨同位素/元素不規則跳動,能定輕原子位置、能測磁結構。
+- **電子(electron)**:散射自**總靜電位**(核＋電子) → 截面大、適合薄膜/表面,但多重散射強。
+- **氦原子(He)**:能量低、不穿入,散射自**最外層表面電子密度的起伏** → 純表面探針(看表面結構/吸附)。
+
+$$\boxed{\text{峰位置}\leftarrow\text{倒晶格}\,\mathbf G\,(\text{四束相同});\quad \text{峰強度}\leftarrow|f|^2\,(\text{四束的 }f\text{ 不同})。}$$
+> **小結**:同一首曲子(晶格)用不同樂器(束)演奏——音高(峰位)相同,音色強弱(強度)不同。
+
+### 5. $\mathbf G$ 是什麼 + 由 $\Delta\mathbf k=\mathbf G$ 推 Bragg
+
+**Step 1 — 解釋 $\mathbf G$。**
+$\mathbf G=h\mathbf b_1+k\mathbf b_2+l\mathbf b_3$($h,k,l\in\mathbb Z$,$\mathbf b_i$ 為倒晶格 primitive vectors,$\mathbf a_i\cdot\mathbf b_j=2\pi\delta_{ij}$)。性質:對任意晶格向量 $\mathbf R$ 有 $e^{i\mathbf G\cdot\mathbf R}=1$(故 $\mathbf G$ 是「與晶格同週期的平面波」之波向量);$\mathbf G\parallel(hkl)$ 面法線,且 $|\mathbf G|=\dfrac{2\pi}{d_{hkl}}$(取最短的那個)。
+> **小結**:$\mathbf G$ = 倒空間的格點向量,一個 $\mathbf G$ ↔ 一族 $(hkl)$ 晶面。
+
+**Step 2 — 彈性散射幾何。** 入射 $\mathbf k$、散射 $\mathbf k'$,彈性 $|\mathbf k'|=|\mathbf k|=k=\dfrac{2\pi}\lambda$。設 $\mathbf k,\mathbf k'$ 夾角 $2\theta$:
+$$|\Delta\mathbf k|^2=|\mathbf k'-\mathbf k|^2=k^2+k^2-2k^2\cos2\theta=2k^2(1-\cos2\theta)=4k^2\sin^2\theta\Rightarrow|\Delta\mathbf k|=2k\sin\theta.$$
+**Step 3 — 套繞射條件 $|\Delta\mathbf k|=|\mathbf G|$。** 取對應 $d$ 的最短 $|\mathbf G|=2\pi/d$:
+$$2k\sin\theta=\frac{2\pi}{d}\ \Rightarrow\ 2\cdot\frac{2\pi}\lambda\sin\theta=\frac{2\pi}d\ \Rightarrow\ \boxed{2d\sin\theta=\lambda.}$$
+更高階用 $|\mathbf G|=2\pi n/d$ → $2d\sin\theta=n\lambda$。
+> **小結**:Bragg($2d\sin\theta=n\lambda$)與 von Laue($\Delta\mathbf k=\mathbf G$)完全等價——前者是後者在「鏡面反射幾何」下的投影。$\theta$ 量自**晶面**,入射束與繞射束的夾角是 $2\theta$。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 640 250" width="100%" style="max-width:700px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="30" y1="90" x2="290" y2="90" stroke="#6aa1d6" stroke-width="1"/>
+<line x1="30" y1="150" x2="290" y2="150" stroke="#6aa1d6" stroke-width="1"/>
+<g fill="#1a4d7c"><circle cx="60" cy="90" r="4"/><circle cx="120" cy="90" r="4"/><circle cx="180" cy="90" r="4"/><circle cx="240" cy="90" r="4"/><circle cx="60" cy="150" r="4"/><circle cx="120" cy="150" r="4"/><circle cx="180" cy="150" r="4"/><circle cx="240" cy="150" r="4"/></g>
+<line x1="300" y1="100" x2="300" y2="140" stroke="#888" stroke-width="0.8"/>
+<text x="312" y="123" text-anchor="middle" font-size="12" fill="#333">d</text>
+<polyline points="40,40 150,90 260,40" fill="none" stroke="#c0392b" stroke-width="2"/>
+<polygon points="150,90 142,76 134,84" fill="#c0392b"/>
+<text x="78" y="55" text-anchor="middle" font-size="11" fill="#c0392b">入射 k</text>
+<text x="225" y="55" text-anchor="middle" font-size="11" fill="#c0392b">繞射 k′</text>
+<line x1="150" y1="90" x2="150" y2="62" stroke="#999" stroke-dasharray="3,3" stroke-width="0.8"/>
+<path d="M150,78 A12,12 0 0,0 138,84" fill="none" stroke="#2e8b2e" stroke-width="1.2"/>
+<path d="M150,78 A12,12 0 0,1 162,84" fill="none" stroke="#2e8b2e" stroke-width="1.2"/>
+<text x="132" y="78" text-anchor="middle" font-size="11" fill="#2e8b2e">θ</text>
+<text x="170" y="78" text-anchor="middle" font-size="11" fill="#2e8b2e">θ</text>
+<line x1="120" y1="150" x2="180" y2="150" stroke="#e67e22" stroke-width="2.5"/>
+<text x="150" y="170" text-anchor="middle" font-size="11" fill="#e67e22">下層多走 2·d·sinθ</text>
+<text x="150" y="205" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">建設性干涉:2d sinθ = nλ</text>
+<text x="150" y="228" text-anchor="middle" font-size="11.5" fill="#555">等價於 |Δk| = 2k sinθ = |G|</text>
+<g transform="translate(420,30)">
+<text x="90" y="0" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">倒空間:Δk = G</text>
+<line x1="20" y1="120" x2="160" y2="60" stroke="#c0392b" stroke-width="2"/>
+<polygon points="160,60 148,60 154,70" fill="#c0392b"/>
+<text x="70" y="80" text-anchor="middle" font-size="11" fill="#c0392b">k</text>
+<line x1="20" y1="120" x2="120" y2="170" stroke="#1a4d7c" stroke-width="2"/>
+<polygon points="120,170 108,164 110,176" fill="#1a4d7c"/>
+<text x="60" y="160" text-anchor="middle" font-size="11" fill="#1a4d7c">k′</text>
+<line x1="160" y1="60" x2="120" y2="170" stroke="#2e8b2e" stroke-width="2"/>
+<text x="160" y="120" text-anchor="middle" font-size="11" fill="#2e8b2e">Δk=k′−k=G</text>
+<circle cx="20" cy="120" r="3.5" fill="#333"/>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">左:Bragg 反射幾何——相鄰晶面(間距 $d$)反射的兩束,下層多走光程 $2d\sin\theta$,建設性干涉要它 $=n\lambda$。右:同一件事在倒空間=動量轉移 $\Delta\mathbf k=\mathbf k'-\mathbf k$ 等於倒晶格向量 $\mathbf G$;彈性($|\mathbf k|=|\mathbf k'|$)使 $|\Delta\mathbf k|=2k\sin\theta$,配 $|\mathbf G|=2\pi/d$ 即得 Bragg。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例(點開):Bragg/Laue 反算與數值代入</b></summary>
+
+**範例 A(給 $\lambda,\theta$ 反算面間距 $d$)**:Cu Kα X 光 $\lambda=1.54\,$Å,某晶面一階($n=1$)繞射峰在 $\theta=22^\circ$。由 $2d\sin\theta=\lambda$:
+$$d=\frac{\lambda}{2\sin\theta}=\frac{1.54}{2\sin22^\circ}=\frac{1.54}{2\times0.3746}=\frac{1.54}{0.749}\approx2.06\,\text{Å}.$$
+若此為立方 $(100)$ 面,則晶格常數 $a=d_{100}=2.06\,$Å。
+
+**範例 B(由 $d_{hkl}$ 公式反算晶格常數)**:立方晶 $d_{hkl}=\dfrac a{\sqrt{h^2+k^2+l^2}}$。$(111)$ 面測得 $d_{111}=2.34\,$Å,則
+$$a=d_{111}\sqrt{1^2+1^2+1^2}=2.34\times\sqrt3=2.34\times1.732\approx4.05\,\text{Å}.$$
+(這正是 Al 的晶格常數 $4.05\,$Å,自洽。)
+
+**範例 C(最大可繞射階數 $n$)**:$\lambda=1.54\,$Å、$d=3.0\,$Å。由 $\sin\theta=\dfrac{n\lambda}{2d}\le1$:
+$$n\le\frac{2d}{\lambda}=\frac{2\times3.0}{1.54}=\frac{6.0}{1.54}\approx3.90\Rightarrow n_{\max}=3.$$
+$n=1,2,3$ 各對應 $\theta=\arcsin\frac{n\times1.54}{6.0}=14.9^\circ,\ 30.9^\circ,\ 50.4^\circ$;$n=4$ 需 $\sin\theta=1.03>1$ → 不存在。
+
+**範例 D(波長上限)**:由 $\sin\theta=\dfrac{\lambda}{2d}\le1\Rightarrow\lambda\le2d$。若 $d=2.5\,$Å,則只有 $\lambda\le5.0\,$Å 的束能繞射;可見光($\lambda\sim5000\,$Å)$\gg2d$ → **完全無法**對原子晶格繞射,這就是為何要用 X 光/電子/中子($\lambda\sim1\,$Å)。等價的倒空間說法:$|\mathbf G|=2\pi/d\le2k=4\pi/\lambda$。
+</details>
+
+## ✅ 自我檢核
+- 第 4 題:若改變晶格(換材料)峰位才會變;只換束 → 位不變強變,自洽 ✓。
+- 第 5 題:$\sin\theta=\lambda/2d\le1\Rightarrow\lambda\le2d$——波長太長無法繞射,與「$|\mathbf G|\le2k$」同義 ✓。
+- 取 $n=1$、$d=2\pi/|\mathbf G|$ 代回 $|\Delta\mathbf k|=2k\sin\theta=|\mathbf G|$ 一致 ✓。
+
+## 🔀 變化的可能情況
+- 第 4 題常追問「結構因子消光」(bcc $h{+}k{+}l$ 奇消、fcc 混奇偶消)——那是 $S_{\mathbf G}$ 而非 $f$ 造成的「強度=0」,與本題的 $f$ 差異互補。
+- 第 5 題常改問:給 $\lambda,\theta$ 反算 $d$ 或晶格常數(2021 同型)、或要求證「$\mathbf G\perp(hkl)$ 面且 $|\mathbf G|=2\pi/d$」、或畫 Ewald 球。
+
+## 信心:**高**（$\mathbf G$ 定義、form factor 分工、Bragg 由 $\Delta\mathbf k=\mathbf G$ 推導全標準,Kittel Ch2）。
+
+---
+
+# 📙 第 3 題 — 聲子（20%）
+
+## 📋 原題
+> **6.** 某一維單原子鏈聲速 $v_s=1.08\times10^4\,$m/s,每原子質量 $M=6.1\times10^{-26}\,$kg,平衡原子間距 $a=0.485\,$nm,求:
+> &nbsp;&nbsp;a. 有效彈簧常數 $C$;
+> &nbsp;&nbsp;b. 最大簡正模角頻率 $\omega_{\max}$。
+
+## 🎯 核心訊息
+> 一維單原子鏈的色散 $\omega(k)=\sqrt{\tfrac{4C}{M}}\,\big|\sin\tfrac{ka}2\big|$,只有兩個極限要記:**長波(小 $k$)斜率 = 聲速** $v_s=a\sqrt{C/M}$(反推 $C$);**BZ 邊界($k=\pi/a$)= 最高頻** $\omega_{\max}=\sqrt{4C/M}=2v_s/a$。兩問各取一個極限即可。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 一維單原子鏈色散、聲速、截止頻率</b></summary>
+
+### 你普物學過的
+彈簧—質量鏈、波速 $v=\sqrt{T/\mu}$(弦)、$\omega=vk$(無色散時)。
+
+### 為什麼要這個
+晶格振動 = 一串彈簧連起來的質點;由 Newton 方程得色散,聲速是它在 $k\to0$ 的斜率。
+
+### 定義（最近鄰彈簧 $C$、質量 $M$、間距 $a$）
+$$\omega(k)=\sqrt{\frac{4C}{M}}\left|\sin\frac{ka}{2}\right|,\quad v_s=\left.\frac{d\omega}{dk}\right|_{k\to0}=a\sqrt{\frac{C}{M}},\quad \omega_{\max}=\omega(\tfrac\pi a)=\sqrt{\frac{4C}{M}}.$$
+
+**範例 1（熱身）**:$k\to0$,$\sin\tfrac{ka}2\approx\tfrac{ka}2$ → $\omega\approx a\sqrt{C/M}\,k$,線性無色散(聲學模)。
+**範例 2（中階）**:$\omega_{\max}=2v_s/a$(把 $\sqrt{4C/M}=2\sqrt{C/M}=2v_s/a$)——不必先求 $C$ 也能得 b。
+**範例 3（本題）**:給 $v_s,M,a$ → (a) $C=M v_s^2/a^2$;(b) $\omega_{\max}=2v_s/a$。
+</details>
+
+## 解答
+
+### 6. 由聲速反推彈簧常數與最高頻
+
+**Step 1 — 由色散取長波極限定聲速。**
+$\omega(k)=\sqrt{\tfrac{4C}M}\,\sin\tfrac{ka}2$,小 $k$ 展開 $\sin\tfrac{ka}2\approx\tfrac{ka}2$:
+$$\omega\approx\sqrt{\tfrac{4C}M}\cdot\tfrac{ka}2=a\sqrt{\tfrac CM}\;k\ \Rightarrow\ v_s=\frac{d\omega}{dk}\Big|_{0}=a\sqrt{\frac CM}.$$
+
+**Step 2 (a) — 解出 $C$。**
+$$C=M\Big(\frac{v_s}{a}\Big)^2.$$
+代數字:$\dfrac{v_s}{a}=\dfrac{1.08\times10^4}{0.485\times10^{-9}}=\dfrac{1.08\times10^4}{4.85\times10^{-10}}=2.227\times10^{13}\,\text{s}^{-1}$,
+$$C=6.1\times10^{-26}\times(2.227\times10^{13})^2=6.1\times10^{-26}\times4.96\times10^{26}\approx\boxed{30.2\ \text{N/m}.}$$
+> **小結**:$C\approx30\,$N/m,典型共價/離子鍵彈簧常數的量級(數 10 N/m),合理。
+
+**Step 3 (b) — 最高頻在 BZ 邊界 $k=\pi/a$($\sin=1$)。**
+$$\omega_{\max}=\sqrt{\frac{4C}{M}}=2\sqrt{\frac CM}=\frac{2v_s}{a}.$$
+代數字(用 $2v_s/a$ 最快):
+$$\omega_{\max}=2\times2.227\times10^{13}\approx\boxed{4.45\times10^{13}\ \text{rad/s}.}$$
+(等價檢查:$\sqrt{4C/M}=\sqrt{4\times30.2/6.1\times10^{-26}}=\sqrt{1.98\times10^{27}}=4.45\times10^{13}$ ✓。)
+> **小結**:$\omega_{\max}=2v_s/a$ 是漂亮捷徑——根本不必先算 $C$ 就能回答 (b);兩條路給同一數 ✓。對應頻率 $f_{\max}=\omega_{\max}/2\pi\approx7.1\,$THz,落在真實聲子頻段。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 280" width="100%" style="max-width:600px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="70" y1="240" x2="520" y2="240" stroke="#333" stroke-width="1.2"/>
+<line x1="70" y1="240" x2="70" y2="30" stroke="#333" stroke-width="1.2"/>
+<text x="525" y="244" font-size="12" fill="#333">k</text>
+<text x="70" y="22" text-anchor="middle" font-size="12" fill="#333">ω</text>
+<line x1="295" y1="240" x2="295" y2="50" stroke="#bbb" stroke-dasharray="4,3" stroke-width="0.8"/>
+<text x="295" y="258" text-anchor="middle" font-size="11" fill="#555">π/a (BZ 邊界)</text>
+<text x="70" y="258" text-anchor="middle" font-size="11" fill="#555">0</text>
+<line x1="70" y1="60" x2="295" y2="60" stroke="#c0392b" stroke-dasharray="4,3" stroke-width="0.8"/>
+<text x="120" y="52" font-size="11" fill="#c0392b">ω_max = √(4C/M) = 2v_s/a</text>
+<polyline points="70,240 92,212 114,186 137,161 160,139 183,119 207,101 230,87 253,76 270,68 285,62 295,60" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<line x1="70" y1="240" x2="150" y2="166" stroke="#2e8b2e" stroke-width="1.4" stroke-dasharray="5,3"/>
+<text x="158" y="150" font-size="10.5" fill="#2e8b2e">斜率 = v_s</text>
+<circle cx="295" cy="60" r="3.5" fill="#c0392b"/>
+<text x="300" y="200" font-size="11" fill="#1a4d7c">ω(k)=√(4C/M)·|sin(ka/2)|</text>
+<text x="290" y="120" text-anchor="start" font-size="10.5" fill="#555">群速→0(駐波)</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">一維單原子鏈色散 $\omega(k)=\sqrt{4C/M}\,|\sin(ka/2)|$。$k\to0$ 切線斜率 = 聲速 $v_s=a\sqrt{C/M}$(綠虛線),由它反推 $C=M(v_s/a)^2$;BZ 邊界 $k=\pi/a$ 處 $\sin=1$ → 最高頻 $\omega_{\max}=\sqrt{4C/M}=2v_s/a$(紅虛線),且該處曲線轉平、群速 $d\omega/dk\to0$(駐波)。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例(點開):單原子鏈各量互算與雙原子鏈</b></summary>
+
+**範例 A(給 $C,M,a$ 求 $v_s$)**:設 $C=15\,$N/m、$M=4.0\times10^{-26}\,$kg、$a=0.3\,$nm$=3.0\times10^{-10}\,$m。由 $v_s=a\sqrt{C/M}$:
+$$\sqrt{\frac CM}=\sqrt{\frac{15}{4.0\times10^{-26}}}=\sqrt{3.75\times10^{26}}=1.94\times10^{13}\,\text{s}^{-1},$$
+$$v_s=3.0\times10^{-10}\times1.94\times10^{13}=5.81\times10^{3}\,\text{m/s}\approx5.8\,\text{km/s}.$$
+
+**範例 B(由 $\omega_{\max}$ 估 Debye 溫度)**:沿用本題 $\omega_{\max}=4.45\times10^{13}\,$rad/s。Debye 溫度 $\Theta_D=\hbar\omega_{\max}/k_B$,$\hbar=1.05\times10^{-34}$、$k_B=1.38\times10^{-23}$:
+$$\Theta_D=\frac{1.05\times10^{-34}\times4.45\times10^{13}}{1.38\times10^{-23}}=\frac{4.67\times10^{-21}}{1.38\times10^{-23}}\approx339\,\text{K}.$$
+(量級對:多數固體 $\Theta_D$ 落在 $100\sim500\,$K。)
+
+**範例 C(群速在不同 $k$)**:$v_g=\dfrac{d\omega}{dk}=\sqrt{\dfrac{4C}M}\cdot\dfrac a2\cos\dfrac{ka}2=v_s\cos\dfrac{ka}2$。
+- $k\to0$:$\cos0=1\Rightarrow v_g=v_s$(等於相速,無色散)。
+- $k=\dfrac{\pi}{2a}$:$\cos\dfrac\pi4=\dfrac{\sqrt2}2\Rightarrow v_g=0.707\,v_s$。
+- $k=\dfrac\pi a$:$\cos\dfrac\pi2=0\Rightarrow v_g=0$(BZ 邊界=駐波,能量不傳播)。
+
+**範例 D(雙原子鏈的 gap)**:質量 $M_1,M_2$、彈簧 $C$。$k=0$ 處光學支 $\omega_O(0)=\sqrt{2C\left(\dfrac1{M_1}+\dfrac1{M_2}\right)}$,聲學支 $\omega_A(0)=0$。取 $M_1=M,\ M_2=3M$:
+$$\omega_O(0)=\sqrt{2C\left(\frac1M+\frac1{3M}\right)}=\sqrt{2C\cdot\frac{4}{3M}}=\sqrt{\frac{8C}{3M}}.$$
+與單原子鏈 $\omega_{\max}=\sqrt{4C/M}$ 對照:雙原子多出一條光學支與一個禁帶(gap),這是「每胞 2 原子」的直接後果。
+</details>
+
+## ✅ 自我檢核
+- 量綱:$[C]=\text{kg}\cdot\text{s}^{-2}=\text{N/m}$ ✓;$[\omega]=\text{s}^{-1}$ ✓。
+- 一致性:$\omega_{\max}=2v_s/a$ 與 $\sqrt{4C/M}$ 兩法同值 ✓。
+- 數量級:$C\sim30\,$N/m、$\omega_{\max}\sim4\times10^{13}\,$rad/s($\sim7\,$THz)皆為真實固體聲子的合理範圍 ✓。
+
+## 🔀 變化的可能情況
+- 常改問:**雙原子鏈**(出現 optical/acoustic 兩支、$k=0$ 的 gap、$\omega_{\max}$ 與 $\omega_{\text{gap}}$)。
+- 或反過來:給 $C,M,a$ 求 $v_s$;或問「群速在 BZ 邊界 $=0$(駐波)」;或由 $\omega_{\max}$ 估 Debye 溫度 $\Theta_D=\hbar\omega_{\max}/k_B$。
+
+## 信心:**高**（單原子鏈色散、聲速、截止頻率為標準結果,數值兩法互核一致,Kittel Ch4）。
+
+---
+
+# 📕 第 4 題 — 電子（25%）
+
+## 📋 原題
+> **7.** 求長度 $L$ 的一維原子鏈的態密度(DOS),分別對兩種色散:
+> &nbsp;&nbsp;a. $E\sim k$;&nbsp;&nbsp;b. $E\sim k^2$。
+> **8.** n 型半導體若費米能落在導帶內則稱「退化(degenerate)」。ZnO 有效質量 $m_e^*=0.27\,m_e$、電子濃度 $n=10^{20}\,\text{cm}^{-3}$,問 ZnO 是否退化?
+
+## 🎯 核心訊息
+> **7:** 一維 DOS 的母公式 $g(E)=\dfrac{L}{\pi}\dfrac{1}{|dE/dk|}$(每自旋,已含 $\pm k$ 兩支)。色散斜率倒數決定一切——**$E\sim k$ 給常數 DOS、$E\sim k^2$ 給 $g\propto E^{-1/2}$**(一維特有的「能帶底發散」)。
+> **8:** 把導帶電子當「有效質量 $m^*$ 的自由電子氣」,用 $T=0$ 費米氣體算 $E_F-E_c=\dfrac{\hbar^2}{2m^*}(3\pi^2 n)^{2/3}$;若它 $\gg k_BT(300\text{K})\approx26\,$meV,費米面就深陷導帶 → **退化**。算出 $\approx0.29\,$eV $\gg26\,$meV → **是,退化**。
+
+## 📚 前情提要：一維 DOS 的母公式怎麼來
+### 階段 1（普物）：有限長 → $k$ 離散
+長度 $L$ 加 Born–von Kármán 週期邊界 $\Rightarrow e^{ikL}=1\Rightarrow k=\tfrac{2\pi}L n$,每個 $k$ 態占 $\Delta k=\tfrac{2\pi}L$。
+### 階段 2（數態）：$k$ 軸上態的線密度
+單位 $k$ 長度有 $\dfrac{L}{2\pi}$ 個態(每自旋)。一維中,給定能量 $E$ 通常對應 $\pm k$ **兩個** $k$ 點。
+### 階段 3（換變數 $k\to E$）：
+$$g(E)\,dE=\underbrace{\frac{L}{2\pi}}_{\text{線密度}}\times\underbrace{2}_{\pm k}\times dk\ \Rightarrow\ \boxed{g(E)=\frac{L}{\pi}\frac{dk}{dE}=\frac{L}{\pi}\frac{1}{|dE/dk|}}\ (\text{每自旋}).$$
+> **留存**:一維 DOS 完全由「色散斜率倒數」決定。電子要再 $\times2$(自旋);本題以「每自旋」呈現並標出自旋因子,重點在 $E$ 依賴的形狀。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 一維 DOS 母公式、退化判據(費米氣體 vs 室溫)</b></summary>
+
+### 你普物學過的
+DOS = 「每單位能量有幾個座位」;費米氣體 $T=0$ 時電子填到 $E_F$。
+
+### 為什麼要這個
+第 7 題要看 DOS 隨 $E$ 的形狀(常數 or 發散);第 8 題要把摻雜電子當費米氣體、估 $E_F$ 與導帶底的相對位置。
+
+### 定義
+- 一維:$g(E)=\dfrac{L}{\pi}\dfrac{1}{|dE/dk|}$(每自旋;$\times2$ 為含自旋)。
+- 三維費米氣體($T=0$):$n=\dfrac{k_F^3}{3\pi^2}\Rightarrow k_F=(3\pi^2 n)^{1/3}$,$E_F=\dfrac{\hbar^2k_F^2}{2m^*}$。
+- **退化判據**:$E_F-E_c\gtrsim k_BT$(費米面深入導帶數個 $k_BT$);等價於 $n\gtrsim N_c$($N_c$=導帶有效態密度)。
+
+**範例 1（熱身）**:三維自由電子 $g\propto E^{1/2}$、二維 $g=$ 常數(2025 第 3c)、一維 $g\propto E^{-1/2}$——維度三件套。
+**範例 2（中階）**:$E\sim k$(線性,聲子/Dirac)→ $dE/dk=$ 常數 → $g=$ 常數。
+**範例 3（本題）**:$E\sim k^2$ → $dE/dk\propto k\propto\sqrt E$ → $g\propto E^{-1/2}$。
+</details>
+
+## 解答
+
+### 7. 一維 DOS（兩種色散）
+
+母公式(前情提要 階段 3):$g(E)=\dfrac{L}{\pi}\dfrac{1}{|dE/dk|}$(每自旋)。
+
+**(a) $E=A k$(線性)。**
+$\dfrac{dE}{dk}=A=$ 常數 $\Rightarrow$
+$$\boxed{g(E)=\frac{L}{\pi A}=\text{常數}\quad(\text{與 }E\text{ 無關})。}$$
+(若 $E=\hbar v_F|k|$ 則 $A=\hbar v_F$,$g=\dfrac{L}{\pi\hbar v_F}$;含自旋 $\times2$。)
+> **小結**:線性色散 → **平坦(常數)DOS**。直覺:$k$ 軸上態均勻,$E$ 與 $k$ 線性 → $E$ 軸上也均勻。
+
+**(b) $E=B k^2$(拋物線,如自由電子 $B=\hbar^2/2m^*$)。**
+$k=\sqrt{E/B}$,$\dfrac{dE}{dk}=2Bk=2B\sqrt{E/B}=2\sqrt{BE}\Rightarrow$
+$$\boxed{g(E)=\frac{L}{\pi}\frac{1}{2\sqrt{BE}}=\frac{L}{2\pi\sqrt B}\,E^{-1/2}\ \propto\ E^{-1/2}.}$$
+代自由電子 $B=\hbar^2/2m^*$:$\dfrac1{\sqrt B}=\dfrac{\sqrt{2m^*}}{\hbar}$,$g(E)=\dfrac{L}{2\pi\hbar}\sqrt{2m^*}\;E^{-1/2}$(每自旋;含自旋 $\times2$)。
+> **小結**:拋物色散 → $g\propto E^{-1/2}$,在能帶底 $E\to0$ **發散**(van Hove 奇點)——這是一維特有,對照二維常數、三維 $\propto E^{1/2}$。
+
+### 8. ZnO 是否退化
+
+**Step 1 — 退化的判據。** 「$E_F$ 在導帶內」嚴格說要 $E_F-E_c$ 大過熱模糊 $\sim k_BT$(否則 Boltzmann 近似仍成立,稱非退化)。策略:把導帶電子當有效質量 $m^*$ 的 $T=0$ 費米氣體,算 $E_F-E_c$,再和室溫 $k_BT$ 比。
+
+**Step 2 — 費米波數與費米能(自導帶底起算)。**
+$$n=\frac{k_F^3}{3\pi^2}\Rightarrow k_F=(3\pi^2 n)^{1/3},\qquad E_F-E_c=\frac{\hbar^2 k_F^2}{2m^*}=\frac{\hbar^2}{2m^*}(3\pi^2 n)^{2/3}.$$
+
+**Step 3 — 代數字。** 先換 SI:$n=10^{20}\,\text{cm}^{-3}=10^{20}\times10^{6}\,\text{m}^{-3}=10^{26}\,\text{m}^{-3}$。
+$$3\pi^2 n=3\times9.87\times10^{26}=2.96\times10^{27}\,\text{m}^{-3},\quad (3\pi^2 n)^{1/3}=1.44\times10^{9}\,\text{m}^{-1},\quad (3\pi^2 n)^{2/3}=2.06\times10^{18}\,\text{m}^{-2}.$$
+$m^*=0.27\times9.1\times10^{-31}=2.46\times10^{-31}\,$kg;用 $\hbar=1.05\times10^{-34}$:
+$$\frac{\hbar^2}{2m^*}=\frac{(1.05\times10^{-34})^2}{2\times2.46\times10^{-31}}=\frac{1.10\times10^{-68}}{4.91\times10^{-31}}=2.25\times10^{-38}\,\text{J·m}^2.$$
+$$E_F-E_c=2.25\times10^{-38}\times2.06\times10^{18}=4.6\times10^{-20}\,\text{J}=\frac{4.6\times10^{-20}}{1.602\times10^{-19}}\approx\boxed{0.29\ \text{eV}.}$$
+(若用題卷的 $\hbar=1\times10^{-34}$,則 $\approx0.26\,$eV——結論不變。)
+
+**Step 4 — 與室溫熱能比。** 室溫 $k_BT(300\text{K})\approx0.026\,$eV(題卷未給 $k_B,T$,此為常識外加假設)。
+$$E_F-E_c\approx0.29\ \text{eV}\ \gg\ k_BT\approx0.026\ \text{eV}\quad(\text{約 }11\times)\ \Rightarrow\ \boxed{\text{ZnO 在此摻雜下是退化半導體(YES)。}}$$
+> **小結**:費米面落在導帶底**上方約 0.29 eV($\sim11\,k_BT$)**,深陷導帶 → 退化。物理上合理:ZnO 正是常見的透明導電氧化物(如 AZO/GZO),高摻雜即退化。
+
+**(旁證:有效態密度判據)** $N_c=2\big(\tfrac{m^*k_BT}{2\pi\hbar^2}\big)^{3/2}=2.5\times10^{19}(m^*/m_e)^{3/2}\,\text{cm}^{-3}=2.5\times10^{19}\times0.27^{3/2}\approx3.5\times10^{18}\,\text{cm}^{-3}$。$n=10^{20}\gg N_c=3.5\times10^{18}$(約 $28\times$)→ 同樣判退化 ✓。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 600 230" width="100%" style="max-width:680px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<g transform="translate(0,0)">
+<text x="100" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">1D: g ∝ E^(−1/2)</text>
+<line x1="40" y1="180" x2="180" y2="180" stroke="#333" stroke-width="1.1"/>
+<line x1="40" y1="180" x2="40" y2="40" stroke="#333" stroke-width="1.1"/>
+<polyline points="46,52 50,72 56,92 64,108 76,124 92,138 112,150 138,160 168,168 178,170" fill="none" stroke="#c0392b" stroke-width="2.2"/>
+<text x="110" y="200" text-anchor="middle" fill="#555">E →</text>
+<text x="32" y="48" text-anchor="end" fill="#555">g</text>
+<text x="100" y="100" text-anchor="middle" font-size="10.5" fill="#c0392b">能帶底發散</text>
+</g>
+<g transform="translate(200,0)">
+<text x="100" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#2e8b2e">2D: g = 常數</text>
+<line x1="40" y1="180" x2="180" y2="180" stroke="#333" stroke-width="1.1"/>
+<line x1="40" y1="180" x2="40" y2="40" stroke="#333" stroke-width="1.1"/>
+<polyline points="40,110 178,110" fill="none" stroke="#2e8b2e" stroke-width="2.2"/>
+<line x1="40" y1="180" x2="40" y2="110" stroke="#2e8b2e" stroke-width="2.2"/>
+<text x="110" y="200" text-anchor="middle" fill="#555">E →</text>
+<text x="110" y="100" text-anchor="middle" font-size="10.5" fill="#2e8b2e">階梯式平台</text>
+</g>
+<g transform="translate(400,0)">
+<text x="100" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#e67e22">3D: g ∝ E^(1/2)</text>
+<line x1="40" y1="180" x2="180" y2="180" stroke="#333" stroke-width="1.1"/>
+<line x1="40" y1="180" x2="40" y2="40" stroke="#333" stroke-width="1.1"/>
+<polyline points="40,180 52,156 68,138 88,122 112,108 140,96 170,84 178,82" fill="none" stroke="#e67e22" stroke-width="2.2"/>
+<text x="110" y="200" text-anchor="middle" fill="#555">E →</text>
+<text x="110" y="60" text-anchor="middle" font-size="10.5" fill="#e67e22">隨 √E 上升</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">維度三件套:自由電子(拋物色散 $E\propto k^2$)的態密度形狀。<b>1D</b> $g\propto E^{-1/2}$ 在能帶底發散(van Hove 奇點);<b>2D</b> $g=$ 常數(階梯);<b>3D</b> $g\propto E^{1/2}$ 隨 $\sqrt E$ 上升。本題 7(a) 的線性色散則給「常數 DOS」(平坦),是另一種極端。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例(點開):DOS 形狀與退化判定多算幾題</b></summary>
+
+**範例 A(三維自由電子 DOS 完整推導)**:三維 $E=\dfrac{\hbar^2k^2}{2m}$。$k$ 空間態密度(含自旋 $\times2$)$=2\cdot\dfrac{V}{(2\pi)^3}$。能量 $<E$ 的態數
+$$N(E)=2\cdot\frac{V}{(2\pi)^3}\cdot\frac43\pi k^3,\quad k=\frac{\sqrt{2mE}}{\hbar}.$$
+$$g(E)=\frac{dN}{dE}=\frac{V}{2\pi^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\frac{d}{dE}\!\left(\frac23 E^{3/2}\right)=\frac{V}{2\pi^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}E^{1/2}\ \propto\ \sqrt E.$$
+
+**範例 B(二維自由電子 DOS = 常數)**:二維 $N(E)=2\cdot\dfrac{A}{(2\pi)^2}\cdot\pi k^2=\dfrac{A}{2\pi}\cdot\dfrac{2mE}{\hbar^2}$。
+$$g(E)=\frac{dN}{dE}=\frac{A m}{\pi\hbar^2}=\text{常數}\quad(\text{與 }E\text{ 無關})。$$
+這就是 figcaption 裡 2D 的平台,與第 7(a) 線性色散的常數 DOS 殊途同歸。
+
+**範例 C(臨界濃度 $n_c$,使 $E_F=E_c$ 即剛好退化邊界)**:取「退化邊界」為 $E_F-E_c=k_BT$。由 $E_F-E_c=\dfrac{\hbar^2}{2m^*}(3\pi^2 n)^{2/3}=k_BT$ 解 $n$:
+$$(3\pi^2 n)^{2/3}=\frac{2m^*k_BT}{\hbar^2}\Rightarrow 3\pi^2 n=\left(\frac{2m^*k_BT}{\hbar^2}\right)^{3/2}\Rightarrow n_c=\frac1{3\pi^2}\left(\frac{2m^*k_BT}{\hbar^2}\right)^{3/2}.$$
+代 $m^*=0.27m_e=2.46\times10^{-31}$、$k_BT=0.026\,$eV$=4.16\times10^{-21}\,$J、$\hbar=1.05\times10^{-34}$:
+$$\frac{2m^*k_BT}{\hbar^2}=\frac{2\times2.46\times10^{-31}\times4.16\times10^{-21}}{1.10\times10^{-68}}=\frac{2.05\times10^{-51}}{1.10\times10^{-68}}=1.86\times10^{17}\,\text{m}^{-2},$$
+$$n_c=\frac{(1.86\times10^{17})^{3/2}}{3\pi^2}=\frac{8.0\times10^{25}}{29.6}\approx2.7\times10^{24}\,\text{m}^{-3}=2.7\times10^{18}\,\text{cm}^{-3}.$$
+本題 $n=10^{20}\,\text{cm}^{-3}\gg n_c\approx2.7\times10^{18}$ → 遠在退化區,與「$E_F-E_c\approx0.29\,$eV $\gg k_BT$」一致 ✓。
+
+**範例 D(換 Si 看不退化的對照)**:Si 導帶 $m^*\approx1.1m_e$、輕摻雜 $n=10^{16}\,\text{cm}^{-3}=10^{22}\,\text{m}^{-3}$。
+$$E_F-E_c=\frac{\hbar^2}{2m^*}(3\pi^2 n)^{2/3},\quad 3\pi^2 n=2.96\times10^{23},\ (3\pi^2n)^{2/3}=(2.96\times10^{23})^{2/3}\approx4.45\times10^{15}\,\text{m}^{-2}.$$
+$$\frac{\hbar^2}{2m^*}=\frac{1.10\times10^{-68}}{2\times1.0\times10^{-30}}=5.5\times10^{-39}\Rightarrow E_F-E_c\approx5.5\times10^{-39}\times4.45\times10^{15}=2.4\times10^{-23}\,\text{J}\approx1.5\times10^{-4}\,\text{eV}.$$
+$1.5\times10^{-4}\,$eV $\ll k_BT\approx0.026\,$eV → **非退化**(Boltzmann 統計成立)。對照 ZnO:高 $n$ + 小 $m^*$ 才容易退化。
+</details>
+
+## ✅ 自我檢核
+- 第 7 題:三維度對照 $g_{1D}\propto E^{-1/2}$、$g_{2D}=$ 常數、$g_{3D}\propto E^{+1/2}$,本題 (a)(b) 落在 1D 的兩個極端,自洽 ✓。
+- 第 8 題:兩個獨立判據($E_F-E_c\gg k_BT$ 與 $n\gg N_c$)都指向退化 ✓;量綱 $[\hbar^2(3\pi^2n)^{2/3}/2m^*]=$ J ✓。
+- 數值穩健性:$\hbar$ 取 $1.05$ 或 $1.0\times10^{-34}$,$E_F-E_c\approx0.26\!-\!0.29\,$eV 都 $\gg0.026\,$eV,結論不敏感 ✓。
+
+## 🔀 變化的可能情況
+- 第 7 題常追問:三維 DOS $g\propto\sqrt E$ 完整推導、或畫 1D/2D/3D 三條 $g(E)$ 對照、或加自旋因子。
+- 第 8 題常改問:給溫度求 $N_c$ 再判、或反算「臨界濃度 $n_c$(使 $E_F=E_c$)」、或問退化半導體為何電導近金屬(載子已不隨 $T$ 指數變)。
+
+## 信心:**高**（1D DOS 兩色散、ZnO 退化判定皆完整推導且數值自核;唯第 8 題需外加 $k_BT(300\text{K})\approx26\,$meV 這一常識值,因題卷未給 $k_B,T$——已標明）。
+
+---
+
+## 📊 本卷信心總表（2023）
+| 區塊 | 小題 | 主題 | 信心 | 重頭推導 |
+|---|---|---|---|---|
+| 📘 晶體結構(30%) | 1 | graphene 原子數/basis/倒晶格＋BZ | 高 | **三角格＋basis 2、$\mathbf b_i$、六邊形 BZ($\Gamma K=4\pi/3a$)** |
+| | 2 | sc 填充率 | 高 | $\pi/6\approx0.52$(相切 $2r=a$) |
+| | 3 | 1D Madelung | 高 | **交錯級數 $\to\ln2$,$\alpha_{1D}=2\ln2$** |
+| 📗 繞射(25%) | 4 | 同位不同強 | 高 | 位置←倒晶格、強度←form factor |
+| | 5 | $\mathbf G$ + Bragg 推導 | 高 | **$2k\sin\theta=|\mathbf G|\Rightarrow2d\sin\theta=n\lambda$** |
+| 📙 聲子(20%) | 6 | 聲速反推 $C,\omega_{\max}$ | 高 | $C=Mv_s^2/a^2\approx30$ N/m、$\omega_{\max}=2v_s/a\approx4.45\times10^{13}$ rad/s |
+| 📕 電子(25%) | 7 | 1D DOS(兩色散) | 高 | **$E\!\sim\!k$→常數、$E\!\sim\!k^2$→$E^{-1/2}$** |
+| | 8 | ZnO 退化判定 | 高 | $E_F-E_c\approx0.29$ eV $\gg k_BT$ → 退化(需外加 $k_BT\approx26$ meV) |
+
+> **對照用**:2023 是「觀念題為主、推導偏短」的中等年份;想看硬長推導見 [`固態_2016_詳解`](固態_2016_詳解.md)(Bloch 證明、Kronig–Penney),想看輕量短答見 [`固態_2025_詳解`](固態_2025_詳解.md)。三份合起來涵蓋難度光譜兩端＋中段。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

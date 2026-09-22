@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理導論 — 導讀（近10年 × 教材三層）</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="詳解/index.html">詳解目錄 →</a> &nbsp;·&nbsp; <a href="單元整理.html">單元整理</a> &nbsp;·&nbsp; <a href="../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../教材/index.html">📖 教材直讀</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- 固態物理導論 — 近10年導向 × 教材三層導讀 -->
+
+# 固態物理導論 — 導讀（近10年考向 × 教材三層安排）
+
+> 這份把**近10年(2016–2025)資格考真正考的東西**,對到**手上教材的精確章節**,再連到**逐題詳解**當練習。
+> 用「**三層讀法**」:卡在哪層讀哪層,不必每本從頭啃。配套:出題頻率全表見 [`單元整理.md`](單元整理.md);逐題詳解見 [`詳解/index.html`](詳解/index.html)。
+
+## 🧭 三層讀法（每單元都這樣配）
+1. **快入門**(建立直覺、看得懂在幹嘛)→ 蕭智仁**簡報** `../教材/簡介簡報/` 或 **林盛煇**中文先掃一遍。
+2. **打底**(考試主力、符號依此)→ **Kittel** `../教材/Kittel_原文.md`(英·指定符號)＋**林盛煇** `../教材/固態物理導論_林盛煇.md`(中·對照)。兩本同讀:看不懂英文先看林盛煇同節。
+3. **進階**(想更深、或碰到難年份)→ **講義** `../教材/講義.md`(研究所級理論;只在能帶/半導體/聲子/Landau/輸運/磁性有對應)。
+
+> Kittel 是**考試指定符號**來源("Terms follow C. Kittel"),所以「打底」一定要回到 Kittel;林盛煇/簡報是中文上手橋樑;講義是 bonus 深度。
+
+---
+
+## 📊 近10年(2016–2025)考點權重 → 讀書順序
+
+| 優先序 | 單元 | 近10年出現 | 典型配分 | 為何這順序 |
+|---|---|:--:|---|---|
+| **第一梯隊** | 晶體結構 | 8/10 | 高(常 20–40%) | 年年考、且常是大題 |
+| **第一梯隊** | 倒晶格/繞射 | 8/10 | 高 | 與結構綁一起,必拿 |
+| **第一梯隊** | 聲子/晶格振動 | 8/10 | 中高 | 年年一題,推導固定 |
+| **第一梯隊** | 能帶/Bloch | 8/10 | 高 | 觀念+推導,變化多 |
+| **第二梯隊** | 自由電子費米氣體 | 7/10 | 中高 | DOS/費米能必考型 |
+| **第三梯隊** | 晶體鍵結 | 5/10 | 中 | 隔年出,Madelung/LJ |
+| **第三梯隊** | 半導體 | 5/10 | 中 | 隔年出,effective mass/pn |
+| **第四梯隊** | 磁性 | 2/10 | 低(5–20%) | 零星,2018/2025 回溫 |
+| **第四梯隊** | 超導 | 1/10 | 低 | 罕見,2025 出 type I/II |
+| **第四梯隊** | 實驗/進階 | 2/10 | 低 | STM/DOS量測/Dirac |
+
+**策略**:先把**第一梯隊 4 個**讀到能默寫推導(這就 ≥60% 分數)→ 補**第二梯隊**(自由電子)→ **第三梯隊**(鍵結/半導體)→ **第四梯隊**只求看到題不慌(背關鍵結論即可)。
+
+---
+
+# 第一梯隊（先吃滿,≥60% 分數)
+
+## 📘 單元 1 — 晶體結構　[近10年 8/10 · 常 20–40%]
+**🎯 定位**:認 Bravais lattice + basis、算 packing factor、primitive/WS cell。最常當開場大題。
+
+**📖 三層讀法**
+- **快入門**:簡報 `solid-1`(什麼是固態、晶體週期性與對稱)。
+- **打底**:**Kittel Ch1**(Crystal Structure:Lattice Translation Vectors → Basis → Primitive Cell → 2D/3D Lattice Types → Index System → Simple Crystal Structures: NaCl/CsCl/**hcp**/diamond)＋**林盛煇 1-1**(晶體的週期性)、**1-7**(異常/非晶)。
+- **進階**:講義 1.1.1(Space groups,只在想懂對稱群時)。
+
+**🔑 必背**:sc/bcc/fcc/diamond/hcp 的 packing fraction(0.52/0.68/0.74/0.34/0.74)推導;hcp 理想 $c/a=\sqrt{8/3}\approx1.633$;`[hkl]⊥(hkl)`(cubic)與 $d_{hkl}=a/\sqrt{h^2+k^2+l^2}$;**basis 判準**:位移 $\boldsymbol\delta$ 是不是晶格(半)向量。
+
+**📝 指定練習**(近10年):[2025 Q1](詳解/固態_2025_詳解.html)(2D basis)、[2024 Q1+Q2](詳解/固態_2024_詳解.html)(認 Bravais/hcp packing)、[2023 Q1+Q2](詳解/固態_2023_詳解.html)(graphene/sc packing)、[2022 Q1](詳解/固態_2022_詳解.html)(CaF₂)、[2021](詳解/固態_2021_詳解.html)(hcp)、[2020 Q1](詳解/固態_2020_詳解.html)(filling factor)、[2016 Q1](詳解/固態_2016_詳解.html)。
+
+**⚠️ 陷阱**:`(⅓,½)` 之類非 `(½,½)` 的位移**不能**縮成 basis 1;hcp 不是 Bravais(basis 2);conventional vs primitive cell 別混。
+
+## 📗 單元 2 — 倒晶格 / 繞射　[近10年 8/10 · 高]
+**🎯 定位**:倒晶格 $\mathbf a_i\cdot\mathbf b_j=2\pi\delta_{ij}$、Bragg=von Laue、structure factor 消光、繞射角。
+
+**📖 三層讀法**
+- **快入門**:簡報 `solid-1`(X 光繞射與倒晶格空間)。
+- **打底**:**Kittel Ch2**(Bragg law → Reciprocal Lattice Vectors → Diffraction/Laue → Brillouin Zones → 倒晶格 sc/bcc/fcc → Structure Factor bcc/fcc → Atomic Form Factor)＋**林盛煇 1-2~1-5**(倒晶格/繞射/布里淵區/結構因子)。
+- **進階**:講義 1.1.2(Reciprocal lattice)。
+
+**🔑 必背**:bcc↔fcc 互為倒晶格(完整算一次);結構因子消光(bcc:h+k+l 奇消;fcc:混奇偶消;diamond:加 h+k+l≡2 mod4 消);$\sin\theta=|\mathbf G|/2k$、夾角 $2\theta$;能繞射 ⟺ $|\mathbf G|\le2k$。
+
+**📝 指定練習**:[2025 Q2](詳解/固態_2025_詳解.html)、[2023 Q4+Q5](詳解/固態_2023_詳解.html)(Δk=G→Bragg)、[2022 Q2](詳解/固態_2022_詳解.html)(tetragonal+BZ)、[2021](詳解/固態_2021_詳解.html)(NaCl 數值)、[2018 Q3](詳解/固態_2018_詳解.html)(繞射=BZ 邊界+bcc 消光)、[2016 Q1](詳解/固態_2016_詳解.html)。
+
+**⚠️ 陷阱**:倒晶格只看 lattice(峰位置)、結構因子才看 basis(峰強度);NaCl 因 $f_{Na}\ne f_{Cl}$,(111)弱、(200)強。
+
+## 📙 單元 3 — 聲子 / 晶格振動　[近10年 8/10 · 中高]
+**🎯 定位**:單/雙原子鏈色散、Debye/Einstein、比熱(Dulong-Petit/Debye T³)、ω>ω_max 衰減波。
+
+**📖 三層讀法**
+- **快入門**:林盛煇 **第二章**(晶格振盪→聲子→狀態密度→比熱)中文一次到位,比 Kittel 好上手。
+- **打底**:**Kittel Ch4**(Phonons I:Crystal Vibrations,單/雙原子鏈)＋**Ch5**(Phonons II:Thermal,Debye/Einstein/Dulong-Petit)。
+- **進階**:講義 3.3(Lattice vibrations,連續介質/Peierls)。
+
+**🔑 必背**:單原子鏈 $\omega=2\sqrt{C/M}|\sin(ka/2)|$、$\omega_{\max}=2\sqrt{C/M}$;Debye $\omega_D=v(6\pi^2N/V)^{1/3}$;高溫→$3Nk_B$、低溫→$T^3$;群速 $v_g=d\omega/dk$;ω>ω_max ⇒ k 變複數→指數衰減。
+
+**📝 指定練習**:[2024 Q5](詳解/固態_2024_詳解.html)、[2023 Q6](詳解/固態_2023_詳解.html)(聲速→彈簧常數)、[2022 Q4](詳解/固態_2022_詳解.html)、[2021](詳解/固態_2021_詳解.html)(ω>ω_max)、[2019 Q6](詳解/固態_2019_詳解.html)(全展開)、[2016 Q6](詳解/固態_2016_詳解.html)(Debye)。
+
+**⚠️ 陷阱**:Einstein 低溫衰太快(缺 acoustic),低溫要 Debye T³;Dulong-Petit 是高溫極限。
+
+## 📕 單元 4 — 能帶 / Bloch 電子　[近10年 8/10 · 高]
+**🎯 定位**:Bloch 定理(+證明)、gap 來源、Kronig-Penney、crystal momentum、effective mass、tight-binding。
+
+**📖 三層讀法**
+- **快入門**:簡報 `solid-4`(基本能帶理論);林盛煇 **3-1**(布洛赫函數)。
+- **打底**:**Kittel Ch7**(Energy Bands:NFE、Bloch、Kronig-Penney、central equation)＋**林盛煇 3-3,3-4**(Kronig-Penney/近乎自由電子)、**第四章**(能帶計算法)。
+- **進階**:**講義 Ch1 全**(Bloch、NFE、tight-binding/LCAO、Wannier、semiclassical dynamics)——最嚴格的一份。
+
+**🔑 必背**:**Bloch 定理證明**(平移算符 5 步,務必會默寫);gap=$2|U_G|$;Kronig-Penney($P\ll1$ 最低能、$k=\pi/a$ gap);crystal momentum ℏk 非真動量;**effective mass** $\frac1{m^*}=\frac1{\hbar^2}\frac{d^2E}{dk^2}$;tight-binding $E=\varepsilon_0-\alpha-2\gamma\cos ka$。
+
+**📝 指定練習**:[2025 Q3](詳解/固態_2025_詳解.html)(Bloch/TB)、[2024 Q4](詳解/固態_2024_詳解.html)(各向異性 band)、[2018 Q1+Q5](詳解/固態_2018_詳解.html)(gap/Dirac)、[2017 Q1+Q2](詳解/固態_2017_詳解.html)(band/effective mass)、[2016 Q4](詳解/固態_2016_詳解.html)(Bloch 證明+KP)、[2015](詳解/固態_2015_詳解.html)、[2014](詳解/固態_2014_詳解.html)(Bloch 證明)。
+
+**⚠️ 陷阱**:Bloch 證明是高頻送分題,一定要練熟;effective mass 在價帶頂為負→用電洞;s 軌道 TB 最高能在 $k=\pi/a$,p 軌道在 $k=0$。
+
+---
+
+# 第二梯隊
+
+## 📘 單元 5 — 自由電子費米氣體　[近10年 7/10 · 中高]
+**🎯 定位**:Drude→Sommerfeld、Fermi energy/temperature、DOS(1D/2D/3D)、電子比熱、Wiedemann-Franz、thermoelectric。
+
+**📖 三層讀法**
+- **快入門**:林盛煇 **3-2**(自由電子模型)。
+- **打底**:**Kittel Ch6**(Free Electron Fermi Gas:DOS、$U_0=\tfrac35NE_F$、heat capacity、conductivity、Wiedemann-Franz、thermoelectric)。
+- **進階**:講義 Ch5(Fermi liquid)、Ch6(transport/thermoelectric)——硬年份(2014 的 30 分輸運題)看這。
+
+**🔑 必背**:3D DOS $g\propto E^{1/2}$、**2D DOS 常數** $g=\frac{m}{\pi\hbar^2}$(每面積)、1D $g\propto E^{-1/2}$;$E_F=\frac{\hbar^2}{2m}(3\pi^2n)^{2/3}$、$U_0=\tfrac35NE_F$;BvK $\Delta k=2\pi/L$;Wiedemann-Franz $L=\frac{\pi^2}{3}(k_B/e)^2$;電子比熱 $C_{el}=\gamma T$。
+
+**📝 指定練習**:[2025 Q3](詳解/固態_2025_詳解.html)(2D DOS)、[2023 Q7](詳解/固態_2023_詳解.html)(1D DOS)、[2022 Q5](詳解/固態_2022_詳解.html)(Al 費米能)、[2020](詳解/固態_2020_詳解.html)、[2017 Q3](詳解/固態_2017_詳解.html)(費米球)、[2016 Q2](詳解/固態_2016_詳解.html)(U₀+2D DOS+μ(T))、[2014 Q8](詳解/固態_2014_詳解.html)(Wiedemann-Franz 30分)。
+
+**⚠️ 陷阱**:DOS 維度別記錯(2D 是常數!);只算 spin-up 別乘 2;$C/T=\gamma+AT^2$ 作圖分離電子/聲子項。
+
+---
+
+# 第三梯隊
+
+## 📗 單元 6 — 晶體鍵結　[近10年 5/10 · 中]
+**🎯 定位**:五種鍵結、Lennard-Jones(cohesive energy)、Madelung、惰性氣體沸點。
+
+**📖 三層讀法**
+- **打底**:**Kittel Ch3**(Crystal Binding:inert gases/Lennard-Jones、ionic/Madelung)＋**林盛煇 1-6**(晶體結合的類型)。(簡報/講義 無對應,跳過。)
+
+**🔑 必背**:Lennard-Jones $U=4\varepsilon[(\sigma/r)^{12}-(\sigma/r)^6]$、平衡 $R_0=2^{1/6}\sigma$(單體)/晶體用晶格和;Madelung(1D 鏈 $\alpha=2\ln2$;NaCl $\alpha\approx1.748$);van der Waals 由兩諧振子推。
+
+**📝 指定練習**:[2024 Q3](詳解/固態_2024_詳解.html)(LiCl Madelung)、[2023 Q3](詳解/固態_2023_詳解.html)(1D Madelung)、[2020 Q2](詳解/固態_2020_詳解.html)(LiCl)、[2019 Q3](詳解/固態_2019_詳解.html)、[2016 Q3](詳解/固態_2016_詳解.html)(LJ 完整)。
+
+**⚠️ 陷阱**:惰性氣體在 LJ 模型下 cohesive energy 同形,差在 $\varepsilon$→沸點;LiCl「5.14Å」是晶格常數還是最近鄰距,結論差一倍。
+
+## 📙 單元 7 — 半導體　[近10年 5/10 · 中]
+**🎯 定位**:holes、direct/indirect gap、effective mass、mobility、pn junction、degenerate、donor/acceptor。
+
+**📖 三層讀法**
+- **快入門**:林盛煇(電子在晶體中的運動,霍耳效應)。
+- **打底**:**Kittel Ch8**(Semiconductor Crystals)。
+- **進階**:**講義 Ch2 全**(group IV band、excitons、optical、doping、pn/diode/LED/solar/MOSFET)——最完整。
+
+**🔑 必背**:$n_i\propto T^{3/2}e^{-E_g/2k_BT}$(故半導體電導隨 T 升);effective mass equation;Hall 測載子;direct/indirect 吸收(需不需聲子);pn built-in voltage;degenerate ⟺ $E_F$ 進導帶。
+
+**📝 指定練習**:[2023 Q8](詳解/固態_2023_詳解.html)(ZnO degenerate)、[2022 Q6](詳解/固態_2022_詳解.html)(Si pn junction)、[2021](詳解/固態_2021_詳解.html)(hole)、[2017 Q2](詳解/固態_2017_詳解.html)(effective mass)、[2016 Q5](詳解/固態_2016_詳解.html)。
+
+**⚠️ 陷阱**:金屬電導隨 T 降、半導體隨 T 升(載子數指數增壓過 μ);effective mass 由能帶曲率。
+
+---
+
+# 第四梯隊（看到題不慌即可,背關鍵結論)
+
+## 📕 單元 8 — 磁性　[近10年 2/10 · 低]
+**📖 打底**:**Kittel Ch11**(Diamagnetism/Paramagnetism)、**Ch12**(Ferromagnetism)＋**林盛煇 第八章**。**進階**:講義 Ch7(Stoner)、**Ch4(Landau level/dHvA)**——2018 Q4 直接對應。
+**🔑 必背**:Langevin $L(\alpha)=\coth\alpha-1/\alpha$;Curie-Weiss $\chi=C/(T-T_C)$;$T>T_C$ 自發磁化=0;**Landau level** $E_n=(n+\tfrac12)\hbar\omega_c$、磁通量子化。
+**📝 練習**:[2025 Q4a](詳解/固態_2025_詳解.html)、[2018 Q4](詳解/固態_2018_詳解.html)(Landau level)。
+
+## 📘 單元 9 — 超導　[近10年 1/10 · 低]
+**📖 打底**:**Kittel Ch10**(Superconductivity)＋**林盛煇 第九章**(Meissner/London/種類/熱力學/Ginzburg-Landau/穿透深度)。
+**🔑 必背**:Meissner effect;**type I vs II**(II 有混合態+磁通渦旋);磁通量子 $\Phi_0=h/2e$;BCS 配對概念。
+**📝 練習**:[2025 Q4b](詳解/固態_2025_詳解.html)(type II)。
+
+## 📗 單元 10 — 實驗技術 / 進階　[近10年 2/10 · 低]
+**🔑 內容**:STM/AFM/MFM;測 DOS(PES/ARPES/STS、低溫比熱 γ);Dirac point/graphene massless($E=\hbar v_F|k|$);de Haas-van Alphen。**進階**:講義 Ch4(dHvA/QHE)。
+**📝 練習**:[2022 Q3+Q7](詳解/固態_2022_詳解.html)(蛋白質結晶/測 DOS)、[2018 Q5](詳解/固態_2018_詳解.html)(Dirac)。
+
+---
+
+## 🎯 一頁總結(考前回看)
+- **先讀第一梯隊 4 單元到能默寫推導**:Bloch 證明、Kronig-Penney、結構因子消光、packing factor、Debye、2D DOS——這些是高頻送分。
+- **三層**:看不懂先 簡報/林盛煇 → 回 Kittel 打底(符號依此)→ 行有餘力翻講義。
+- **練習**:每單元的「指定練習」直接點開 → 對照 [`詳解`](詳解/index.html) 的 Step,先自己做再看解。
+- **頻率全表**與**近年四段式固定題型**見 [`單元整理.md`](單元整理.md)。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

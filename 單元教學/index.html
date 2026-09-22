@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理導論 — 單元學科完整版 ＆ 全公式速查大全（含出處 Ref）</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  :root {
+    --primary: #1a4d7c;
+    --primary-light: #2b6ca0;
+    --primary-subtle: #eef5fb;
+    --border-color: #c5d5e5;
+    --text-main: #222;
+    --text-muted: #555;
+    --bg-page: #f8fafc;
+    --bg-card: #ffffff;
+    --sidebar-w: 260px;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    margin: 0; padding: 0; color: var(--text-main); background: var(--bg-page); line-height: 1.7;
+    display: flex; min-height: 100vh;
+  }
+  html { scroll-behavior: smooth; }
+
+  /* Sidebar */
+  #sidebar {
+    position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w);
+    background: #ffffff; border-right: 1px solid var(--border-color);
+    padding: 1.5em 1em 2em; overflow-y: auto; z-index: 100;
+    transition: transform 0.25s ease;
+  }
+  .brand { font-size: 1.15em; font-weight: 700; color: var(--primary); margin-bottom: 0.3em; display: flex; align-items: center; gap: 0.4em; }
+  .brand-sub { font-size: 0.8em; color: var(--text-muted); margin-bottom: 1.2em; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.8em; }
+  .search-box { margin-bottom: 1.2em; }
+  .search-box input {
+    width: 100%; padding: 7px 10px; font-size: 0.88em; border: 1px solid var(--border-color);
+    border-radius: 6px; outline: none; background: #fafcfe;
+  }
+  .search-box input:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 2px rgba(26,77,124,0.15); }
+  .nav-group-title { font-size: 0.76em; font-weight: 700; color: #8898aa; text-transform: uppercase; letter-spacing: 0.05em; margin: 1.2em 0 0.4em 0.3em; }
+  .nav-link {
+    display: block; padding: 5px 8px; font-size: 0.88em; color: #334e68; text-decoration: none;
+    border-radius: 6px; transition: background 0.12s, color 0.12s; margin-bottom: 2px;
+  }
+  .nav-link:hover, .nav-link.active { background: var(--primary-subtle); color: var(--primary); font-weight: 600; }
+  .nav-link.sub { padding-left: 1.6em; font-size: 0.84em; color: #627d98; }
+
+  /* Main Container */
+  #main {
+    margin-left: var(--sidebar-w); flex: 1; padding: 2.2em 2.5em 5em; max-width: 1100px;
+  }
+  #toc-toggle {
+    display: none; position: fixed; top: 12px; left: 12px; z-index: 101;
+    background: var(--primary); color: #fff; border: none; border-radius: 6px;
+    padding: 7px 12px; font-size: 0.9em; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  }
+
+  /* Header & Breadcrumb */
+  .top-nav { font-size: 0.9em; margin-bottom: 1.2em; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 0.6em; }
+  .top-nav a { color: var(--primary); text-decoration: none; }
+  .top-nav a:hover { text-decoration: underline; }
+  h1 { color: var(--primary); font-size: 1.85em; margin: 0 0 0.4em; border-bottom: 3px solid var(--primary); padding-bottom: 0.3em; }
+  .intro { color: #486581; font-size: 1.02em; margin-bottom: 1.4em; line-height: 1.65; }
+
+  /* Alerts / Notes */
+  .note {
+    background: var(--primary-subtle); border-left: 4px solid var(--primary-light);
+    border-radius: 6px; padding: 0.9em 1.2em; color: #102a43; font-size: 0.93em; margin: 1.4em 0;
+  }
+
+  /* Unit Cards Grid */
+  .grid-units {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1em; margin: 1.5em 0 2.5em;
+  }
+  .card {
+    display: flex; flex-direction: column; text-decoration: none; color: inherit;
+    background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius);
+    padding: 1.1em 1.3em; box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+  }
+  .card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(26,77,124,0.12); }
+  .card-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.3em; }
+  .card-title { color: var(--primary); font-weight: 700; font-size: 1.08em; }
+  .card-sub { color: #486581; font-size: 0.9em; flex-grow: 1; }
+  .tier {
+    font-size: 0.72em; font-weight: 700; color: #fff; background: #486581;
+    border-radius: 12px; padding: 2px 9px; white-space: nowrap; margin-left: 0.5em;
+  }
+  .tier.tier-1 { background: #d9383a; }
+  .tier.tier-2 { background: #e06c00; }
+  .tier.tier-3 { background: #2f855a; }
+  .tier.tier-4 { background: #627d98; }
+
+  /* Formula Master Section */
+  h2.section-title {
+    color: var(--primary); font-size: 1.4em; border-bottom: 2px solid #cbd5e1;
+    padding-bottom: 0.3em; margin: 2.2em 0 1em; display: flex; align-items: center; justify-content: space-between;
+  }
+  .unit-formula-block {
+    background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius);
+    padding: 1.3em 1.6em; margin: 1.2em 0 1.8em; box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+  }
+  .unit-formula-header {
+    display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.6em; margin-bottom: 1em;
+  }
+  .unit-formula-title { font-size: 1.15em; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.5em; }
+  .formula-item {
+    background: #fbfcfe; border: 1px solid #e1eaf2; border-radius: 8px;
+    padding: 0.9em 1.2em; margin: 0.8em 0; position: relative;
+  }
+  .formula-name { font-weight: 700; color: #102a43; font-size: 0.95em; margin-bottom: 0.3em; display: flex; justify-content: space-between; align-items: center; }
+  .formula-desc { font-size: 0.88em; color: #486581; margin-top: 0.3em; }
+  .formula-ref {
+    font-size: 0.82em; color: #1a4d7c; background: #f0f7fd; border-left: 3px solid #6aa1d6;
+    padding: 4px 9px; border-radius: 4px; margin-top: 0.6em; display: flex; align-items: center; flex-wrap: wrap; gap: 0.4em;
+  }
+  .formula-ref a { color: #1a4d7c; text-decoration: underline; }
+  .btn-copy {
+    background: #f0f4f8; border: 1px solid #cbd5e1; border-radius: 4px;
+    font-size: 0.75em; padding: 2px 7px; color: #486581; cursor: pointer; transition: all 0.12s;
+  }
+  .btn-copy:hover { background: var(--primary-subtle); color: var(--primary); border-color: var(--primary); }
+
+  /* Toast Notification */
+  #toast {
+    position: fixed; bottom: 25px; right: 25px; background: #102a43; color: #fff;
+    padding: 8px 16px; border-radius: 6px; font-size: 0.85em; display: none; z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  @media (max-width: 900px) {
+    #sidebar { transform: translateX(-100%); }
+    #sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.18); }
+    #toc-toggle { display: block; }
+    #main { margin-left: 0; padding: 4em 1.2em 4em; }
+  }
+  @media print {
+    #sidebar, #toc-toggle { display: none !important; }
+    #main { margin: 0 !important; padding: 0 !important; max-width: 100% !important; }
+  }
+</style>
+</head>
+<body>
+
+<button id="toc-toggle" type="button" aria-label="開關側邊導覽">☰ 目錄</button>
+
+<nav id="sidebar">
+  <div class="brand">🎓 固態物理導論</div>
+  <div class="brand-sub">單元學科 ＆ 全公式速查大全</div>
+
+  <div class="search-box">
+    <input type="text" id="formula-search" placeholder="🔍 搜尋公式、概念、出處或年份..." autocomplete="off">
+  </div>
+
+  <div class="nav-group-title">快捷跳轉</div>
+  <a class="nav-link" href="#overview">🧭 總覽與路線</a>
+  <a class="nav-link" href="#units-grid">📚 十大單元全覽</a>
+  <a class="nav-link" href="#formula-master">🧮 全單元公式速查（含 Ref）</a>
+
+  <div class="nav-group-title">公式速查分單元</div>
+  <a class="nav-link sub" href="#f-unit01">01 晶體結構</a>
+  <a class="nav-link sub" href="#f-unit02">02 倒晶格與繞射</a>
+  <a class="nav-link sub" href="#f-unit03">03 晶體鍵結</a>
+  <a class="nav-link sub" href="#f-unit04">04 聲子振動</a>
+  <a class="nav-link sub" href="#f-unit05">05 自由電子氣</a>
+  <a class="nav-link sub" href="#f-unit06">06 能帶理論</a>
+  <a class="nav-link sub" href="#f-unit07">07 半導體物理</a>
+  <a class="nav-link sub" href="#f-unit08">08 磁性</a>
+  <a class="nav-link sub" href="#f-unit09">09 超導現象</a>
+  <a class="nav-link sub" href="#f-unit10">10 實驗與進階</a>
+
+  <div class="nav-group-title">全站導航</div>
+  <a class="nav-link" href="../考古題/導讀.html">🧭 備考導讀</a>
+  <a class="nav-link" href="../考古題/單元整理.html">📊 單元考頻整理</a>
+  <a class="nav-link" href="../考古題/詳解/index.html">✍️ 歷年逐題詳解</a>
+  <a class="nav-link" href="../教材/index.html">📖 教材直讀</a>
+  <a class="nav-link" href="../_質檢報告_主表.html">✅ 質檢真值報告</a>
+  <a class="nav-link" href="https://github.com/Yueh-H/AItotur/tree/main/solidstatePhysics/單元教學" target="_blank" rel="noopener">🐙 GitHub 專案目錄</a>
+</nav>
+
+<div id="main">
+  <div class="top-nav">
+    <a href="../index.html">總入口</a> &nbsp;/&nbsp;
+    <a href="../考古題/導讀.html">導讀</a> &nbsp;/&nbsp;
+    <a href="../考古題/單元整理.html">單元整理</a> &nbsp;/&nbsp;
+    <a href="../考古題/詳解/index.html">逐題詳解</a> &nbsp;/&nbsp;
+    <a href="../教材/index.html">教材直讀</a> &nbsp;/&nbsp;
+    <span style="color:#627d98;">單元學科 ＆ 公式大全（含 Ref）</span>
+  </div>
+
+  <h1 id="overview">🎓 固態物理導論 — 單元學科完整版 ＆ 全公式速查大全（含出處 Ref）</h1>
+  <p class="intro">
+    以 <b>C. Kittel《Introduction to Solid State Physics》8th ed.</b> 經典範疇為核心，將全科目重構為 10 大單元，教學堅持「<b>高中起步 $\to$ 符號就地展開 $\to$ 資格考真題推導</b>」。<br>
+    本頁整合 <b>10 大單元完整講義</b> 與 <b>資格考全公式速查手冊（Master Formula Sheet）</b>，所有物理量與公式皆附帶 <b>Kittel 教材章節頁碼、公式編號與歷年台大資格考真題出處（Ref）</b>。支援公式即時搜尋、MathJax 完美排版與一鍵複製 LaTeX 原始碼。
+  </p>
+
+  <div class="note">
+    📐 <b>高效備考四梯隊路線</b>：<br>
+    • <b>第一梯隊（先吃滿 ≥60% 分數）</b>：01 晶體結構、02 倒晶格與繞射、04 聲子振動、06 能帶理論。<br>
+    • <b>第二梯隊（高頻重點）</b>：03 晶體鍵結、05 自由電子費米氣體。<br>
+    • <b>第三梯隊（週期必考）</b>：07 半導體物理。<br>
+    • <b>第四梯隊（近年回溫）</b>：08 磁性、09 超導現象、10 實驗技術與進階主題。
+  </div>
+
+  <h2 class="section-title" id="units-grid">
+    <span>📚 十大單元全覽（點選進入個別單元深入講義）</span>
+  </h2>
+  <div class="grid-units">
+  <a class="card" href="unit01_晶體結構.html">
+    <div class="card-title">單元 01 — 晶體結構（Crystal Structure） <span class="tier">第一梯隊</span></div>
+    <div class="card-sub">Bravais / 原胞 / 填充率 / Miller 指標</div>
+  </a>
+  <a class="card" href="unit02_倒晶格與繞射.html">
+    <div class="card-title">單元 02 — 倒晶格與繞射（Reciprocal Lattice & Diffraction） <span class="tier">第一梯隊</span></div>
+    <div class="card-sub">倒晶格 / Bragg / 結構因子 / 消光</div>
+  </a>
+  <a class="card" href="unit03_晶體鍵結.html">
+    <div class="card-title">單元 03 — 晶體鍵結（Crystal Binding） <span class="tier">第三梯隊</span></div>
+    <div class="card-sub">凡得瓦 / Lennard–Jones / Madelung</div>
+  </a>
+  <a class="card" href="unit04_聲子與晶格振動.html">
+    <div class="card-title">單元 04 — 聲子／晶格振動（Phonons） <span class="tier">第一梯隊</span></div>
+    <div class="card-sub">色散關係 / 聲學光學支 / Debye T³</div>
+  </a>
+  <a class="card" href="unit05_自由電子費米氣體.html">
+    <div class="card-title">單元 05 — 自由電子費米氣體（Free Electron Fermi Gas） <span class="tier">第二梯隊</span></div>
+    <div class="card-sub">費米能 / DOS / Wiedemann–Franz</div>
+  </a>
+  <a class="card" href="unit06_能帶與Bloch電子.html">
+    <div class="card-title">單元 06 — 能帶／Bloch 電子（Energy Bands） <span class="tier">第一梯隊</span></div>
+    <div class="card-sub">Bloch 定理 / 能隙 / 有效質量 / tight-binding</div>
+  </a>
+  <a class="card" href="unit07_半導體.html">
+    <div class="card-title">單元 07 — 半導體（Semiconductors） <span class="tier">第三梯隊</span></div>
+    <div class="card-sub">電洞 / 施主受主 / pn 接面 / Hall</div>
+  </a>
+  <a class="card" href="unit08_磁性.html">
+    <div class="card-title">單元 08 — 磁性（Magnetism） <span class="tier">第四梯隊</span></div>
+    <div class="card-sub">Langevin / Curie / Landau 能階</div>
+  </a>
+  <a class="card" href="unit09_超導.html">
+    <div class="card-title">單元 09 — 超導（Superconductivity） <span class="tier">第四梯隊</span></div>
+    <div class="card-sub">Meissner / type I·II / 渦旋</div>
+  </a>
+  <a class="card" href="unit10_實驗與進階.html">
+    <div class="card-title">單元 10 — 實驗技術／進階（Experimental / Advanced） <span class="tier">第四梯隊</span></div>
+    <div class="card-sub">STM·AFM / 反射率 / Dirac·graphene</div>
+  </a>
+  </div>
+
+  <h2 class="section-title" id="formula-master">
+    <span>🧮 固態物理全單元核心公式速查大全（Master Formula Sheet ＆ Ref）</span>
+    <span style="font-size:0.65em;font-weight:400;color:#627d98;">支援搜尋快篩 ＆ 點擊複製 LaTeX</span>
+  </h2>
+
+  <!-- Unit 01 Formula Block -->
+  <div class="unit-formula-block" id="f-unit01" data-tags="unit01 晶體結構 crystal structure packing fraction bcc fcc sc diamond hcp miller 密勒指標 填充率 晶格 kittel ch1 2013 2014 2015 2020 2021 2023 2024 2025">
+    <div class="unit-formula-header">
+      <div class="unit-formula-title">單元 01：晶體結構（Crystal Structure）</div>
+      <a href="unit01_晶體結構.html" style="font-size:0.85em;color:var(--primary);text-decoration:none;">查看詳細講義 →</a>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>晶格向量與平移週期性</span>
+        <button class="btn-copy" onclick="copyLatex('\\mathbf R = n_1 \\mathbf a_1 + n_2 \\mathbf a_2 + n_3 \\mathbf a_3, \\quad n_i \\in \\mathbb Z')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$\mathbf R = n_1 \mathbf a_1 + n_2 \mathbf a_2 + n_3 \mathbf a_3, \quad n_i \in \mathbb Z$$</div>
+      <div class="formula-desc">實空間布拉菲晶格（Bravais lattice）之點陣定義，三整數線性組合生成全晶格。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 1 p. 4 ｜ 林盛煇 §1.2 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013</a>, <a href="../考古題/詳解/固態_2014_詳解.html">2014</a>, <a href="../考古題/詳解/固態_2024_詳解.html">2024 Q1</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>原胞體積（Primitive Cell Volume）</span>
+        <button class="btn-copy" onclick="copyLatex('V_p = |\\mathbf a_1 \\cdot (\\mathbf a_2 \\times \\mathbf a_3)|')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$V_p = |\mathbf a_1 \cdot (\mathbf a_2 \times \mathbf a_3)|$$</div>
+      <div class="formula-desc">基底向量構成之純量三重積。每個原胞（primitive cell）只包含恰好 1 個格點。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 1 p. 7 ｜ 歷年考題：<a href="../考古題/詳解/固態_2024_詳解.html">2024 Q1</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>密勒指標晶面間距（正交立方晶系）</span>
+        <button class="btn-copy" onclick="copyLatex('d_{hkl} = \\frac{a}{\\sqrt{h^2 + k^2 + l^2}}')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$d_{hkl} = \frac{a}{\sqrt{h^2 + k^2 + l^2}}, \quad [hkl] \perp (hkl)$$</div>
+      <div class="formula-desc">立方晶系中相鄰兩 $(hkl)$ 面間距，且晶向 $[hkl]$ 嚴格垂直於 $(hkl)$ 晶面。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 1 Eq. (16) p. 13 ｜ 林盛煇 §1.4 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013</a>, <a href="../考古題/詳解/固態_2014_詳解.html">2014</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>各結構填充率（Packing Fraction, PF）</span>
+        <button class="btn-copy" onclick="copyLatex('\\text{SC}=\\frac{\\pi}{6}\\approx0.524,\\; \\text{BCC}=\\frac{\\sqrt{3}\\pi}{8}\\approx0.680,\\; \\text{FCC}=\\frac{\\sqrt{2}\\pi}{6}\\approx0.740,\\; \\text{Dia}=\\frac{\\sqrt{3}\\pi}{16}\\approx0.340')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$\text{SC}: \frac{\pi}{6} \approx 0.524, \quad \text{BCC}: \frac{\sqrt{3}\pi}{8} \approx 0.680, \quad \text{FCC}: \frac{\sqrt{2}\pi}{6} \approx 0.740, \quad \text{Diamond}: \frac{\sqrt{3}\pi}{16} \approx 0.340$$</div>
+      <div class="formula-desc">以球心剛球相切幾何推導。HCP 理想填充率與 FCC 相同（0.740）。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 1 Table 2 p. 11 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013</a>, <a href="../考古題/詳解/固態_2015_詳解.html">2015</a>, <a href="../考古題/詳解/固態_2020_詳解.html">2020</a>, <a href="../考古題/詳解/固態_2021_詳解.html">2021</a>, <a href="../考古題/詳解/固態_2023_詳解.html">2023</a>, <a href="../考古題/詳解/固態_2024_詳解.html">2024</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>HCP 理想軸比</span>
+        <button class="btn-copy" onclick="copyLatex('\\frac{c}{a} = \\sqrt{\\frac{8}{3}} \\approx 1.633')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$\frac{c}{a} = \sqrt{\frac{8}{3}} \approx 1.633$$</div>
+      <div class="formula-desc">六方最密堆積相鄰三原子與上一層原子構成正四面體之幾何解。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 1 p. 15 ｜ 歷年考題：<a href="../考古題/詳解/固態_2015_詳解.html">2015</a>, <a href="../考古題/詳解/固態_2021_詳解.html">2021</a>, <a href="../考古題/詳解/固態_2024_詳解.html">2024</a></div>
+    </div>
+  </div>
+
+  <!-- Unit 02 Formula Block -->
+  <div class="unit-formula-block" id="f-unit02" data-tags="unit02 倒晶格與繞射 reciprocal lattice diffraction bragg laue structure factor extinction 消光 結構因子 kittel ch2 2013 2014 2015 2016 2018 2021 2022 2023 2025">
+    <div class="unit-formula-header">
+      <div class="unit-formula-title">單元 02：倒晶格與繞射（Reciprocal Lattice & Diffraction）</div>
+      <a href="unit02_倒晶格與繞射.html" style="font-size:0.85em;color:var(--primary);text-decoration:none;">查看詳細講義 →</a>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>倒晶格基底向量（Reciprocal Lattice Vectors）</span>
+        <button class="btn-copy" onclick="copyLatex('\\mathbf b_1 = 2\\pi \\frac{\\mathbf a_2 \\times \\mathbf a_3}{\\mathbf a_1 \\cdot (\\mathbf a_2 \\times \\mathbf a_3)}, \\quad \\mathbf a_i \\cdot \\mathbf b_j = 2\\pi \\delta_{ij}')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$\mathbf b_1 = 2\pi \frac{\mathbf a_2 \times \mathbf a_3}{\mathbf a_1 \cdot (\mathbf a_2 \times \mathbf a_3)}, \quad \mathbf b_2 = 2\pi \frac{\mathbf a_3 \times \mathbf a_1}{\mathbf a_1 \cdot (\mathbf a_2 \times \mathbf a_3)}, \quad \mathbf b_3 = 2\pi \frac{\mathbf a_1 \times \mathbf a_2}{\mathbf a_1 \cdot (\mathbf a_2 \times \mathbf a_3)}$$</div>
+      <div class="formula-desc">倒空間基底定義，$\mathbf G = h\mathbf b_1 + k\mathbf b_2 + l\mathbf b_3$ 且長度 $|\mathbf G| = 2\pi / d_{hkl}$。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 2 Eq. (13) p. 34 ｜ 林盛煇 §2.2 ｜ 歷年考題：<a href="../考古題/詳解/固態_2015_詳解.html">2015</a>, <a href="../考古題/詳解/固態_2016_詳解.html">2016</a>, <a href="../考古題/詳解/固態_2022_詳解.html">2022</a>, <a href="../考古題/詳解/固態_2024_詳解.html">2024</a>, <a href="../考古題/詳解/固態_2025_詳解.html">2025</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>布拉格定律與勞厄繞射條件（等價性）</span>
+        <button class="btn-copy" onclick="copyLatex('2d\\sin\\theta = n\\lambda \\iff \\Delta\\mathbf k = \\mathbf G \\iff 2\\mathbf k \\cdot \\mathbf G = |\\mathbf G|^2')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$2d\sin\theta = n\lambda \iff \Delta\mathbf k = \mathbf k' - \mathbf k = \mathbf G \iff 2\mathbf k \cdot \mathbf G = |\mathbf G|^2$$</div>
+      <div class="formula-desc">實空間幾何光徑差與倒空間動量轉移守恆之等價描述；Ewald 球與 BZ 邊界平分面之幾何起源。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 2 Eq. (1), (18)–(25) p. 30, 36–37 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013</a>, <a href="../考古題/詳解/固態_2014_詳解.html">2014</a>, <a href="../考古題/詳解/固態_2016_詳解.html">2016</a>, <a href="../考古題/詳解/固態_2018_詳解.html">2018</a>, <a href="../考古題/詳解/固態_2023_詳解.html">2023</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>幾何結構因子與四大晶格消光規則</span>
+        <button class="btn-copy" onclick="copyLatex('S_{\\mathbf G} = \\sum_{j=1}^p f_j e^{-i \\mathbf G \\cdot \\mathbf r_j}')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$S_{\mathbf G} = \sum_{j=1}^p f_j e^{-i \mathbf G \cdot \mathbf r_j}, \quad I \propto |S_{\mathbf G}|^2$$</div>
+      <div class="formula-desc">
+        • <b>BCC</b>：$h+k+l$ 偶數允許反射，奇數消光 ($S=0$)<br>
+        • <b>FCC</b>：$h,k,l$ 全奇或全偶允許反射，奇偶混雜消光 ($S=0$)<br>
+        • <b>Diamond</b>：全奇數允許；全偶數且 $h+k+l=4n$ 允許；$h+k+l=4n+2$ 消光（例如 (200), (222) 消光）
+      </div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 2 Eq. (39), (42)–(44) p. 42–45 ｜ 林盛煇 §2.4 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013</a>, <a href="../考古題/詳解/固態_2014_詳解.html">2014</a>, <a href="../考古題/詳解/固態_2016_詳解.html">2016</a>, <a href="../考古題/詳解/固態_2018_詳解.html">2018</a>, <a href="../考古題/詳解/固態_2021_詳解.html">2021</a></div>
+    </div>
+  </div>
+
+  <!-- Unit 03 Formula Block -->
+  <div class="unit-formula-block" id="f-unit03" data-tags="unit03 晶體鍵結 crystal binding lennard-jones madelung cohesive energy 凡得瓦 馬德隆 內聚能 kittel ch3 2013 2014 2015 2016 2020 2023 2024">
+    <div class="unit-formula-header">
+      <div class="unit-formula-title">單元 03：晶體鍵結（Crystal Binding）</div>
+      <a href="unit03_晶體鍵結.html" style="font-size:0.85em;color:var(--primary);text-decoration:none;">查看詳細講義 →</a>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>藍納–瓊斯（Lennard-Jones）12-6 位能與 FCC 平衡內聚能</span>
+        <button class="btn-copy" onclick="copyLatex('U(r) = 4\\varepsilon \\left[ \\left(\\frac{\\sigma}{r}\\right)^{12} - \\left(\\frac{\\sigma}{r}\\right)^6 \\right], \\quad R_0 \\approx 1.09\\sigma, \\quad U_{\\text{tot}}(R_0) \\approx -8.61 N\\varepsilon')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$U(r) = 4\varepsilon \left[ \left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6 \right] \implies R_0 \approx 1.09\sigma, \quad U_{\text{tot}}(R_0) \approx -8.61 N\varepsilon$$</div>
+      <div class="formula-desc">$r^{-12}$ 為泡利排斥，$r^{-6}$ 為誘導偶極凡得瓦吸引。由晶格和 $A_{12}\approx12.13, A_6\approx14.45$ 導出。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 3 Eq. (2), (8)–(12) Table 4 p. 55–60 ｜ 林盛煇 §3.2 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013</a>, <a href="../考古題/詳解/固態_2014_詳解.html">2014</a>, <a href="../考古題/詳解/固態_2015_詳解.html">2015</a>, <a href="../考古題/詳解/固態_2016_詳解.html">2016</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>離子晶體位能與馬德隆常數（Madelung Constant）</span>
+        <button class="btn-copy" onclick="copyLatex('U_{\\text{tot}} = N \\left( -\\frac{\\alpha e^2}{4\\pi\\varepsilon_0 R} + \\frac{z B}{R^n} \\right), \\quad \\alpha_{\\text{1D}} = 2\\ln 2')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$U_{\text{tot}} = N \left( -\frac{\alpha e^2}{4\pi\varepsilon_0 R} + \frac{z B}{R^n} \right), \quad \alpha_{\text{1D}} = 2\ln 2 \approx 1.386, \quad \alpha_{\text{NaCl}} \approx 1.7476$$</div>
+      <div class="formula-desc">長程庫侖交錯級數求和。1D 離子鏈：$\alpha = 2(1 - 1/2 + 1/3 - 1/4 + \dots) = 2\ln 2$。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 3 Eq. (20)–(23), Table 7 p. 64–65 ｜ 歷年考題：<a href="../考古題/詳解/固態_2020_詳解.html">2020</a>, <a href="../考古題/詳解/固態_2023_詳解.html">2023 Q1</a>, <a href="../考古題/詳解/固態_2024_詳解.html">2024 Q2</a></div>
+    </div>
+  </div>
+
+  <!-- Unit 04 Formula Block -->
+  <div class="unit-formula-block" id="f-unit04" data-tags="unit04 聲子 晶格振動 phonons vibrations dispersion debye dulong-petit 色散 德拜 比熱 kittel ch4 ch5 2013 2014 2015 2016 2018 2019 2020 2021 2023 2024">
+    <div class="unit-formula-header">
+      <div class="unit-formula-title">單元 04：聲子與晶格振動（Phonons / Vibrations）</div>
+      <a href="unit04_聲子與晶格振動.html" style="font-size:0.85em;color:var(--primary);text-decoration:none;">查看詳細講義 →</a>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>單原子鏈色散關係與群速度</span>
+        <button class="btn-copy" onclick="copyLatex('\\omega(K) = 2\\sqrt{\\frac{C}{M}}\\left|\\sin\\left(\\frac{Ka}{2}\\right)\\right|, \\quad v_g = \\frac{d\\omega}{dK} = a\\sqrt{\\frac{C}{M}}\\cos\\left(\\frac{Ka}{2}\\right)')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$\omega(K) = 2\sqrt{\frac{C}{M}}\left|\sin\left(\frac{Ka}{2}\right)\right|, \quad \omega_{\max} = 2\sqrt{\frac{C}{M}}, \quad v_s = a\sqrt{\frac{C}{M}}$$</div>
+      <div class="formula-desc">最高頻發生在 BZ 邊界 $K=\pi/a$，群速度 $v_g = 0$（駐波）；長波極限 $K\to 0$ 呈現線性聲波。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 4 Eq. (9)–(16) p. 89–92 ｜ 林盛煇 §4.2 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013</a>, <a href="../考古題/詳解/固態_2019_詳解.html">2019</a>, <a href="../考古題/詳解/固態_2021_詳解.html">2021</a>, <a href="../考古題/詳解/固態_2023_詳解.html">2023</a>, <a href="../考古題/詳解/固態_2024_詳解.html">2024</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>雙原子鏈聲學支、光學支與邊界能隙</span>
+        <button class="btn-copy" onclick="copyLatex('\\omega^2 = C\\left(\\frac{1}{M_1}+\\frac{1}{M_2}\\right) \\pm C\\sqrt{\\left(\\frac{1}{M_1}+\\frac{1}{M_2}\\right)^2 - \\frac{4\\sin^2(Ka/2)}{M_1 M_2}}')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$\omega^2 = C\left(\frac{1}{M_1}+\frac{1}{M_2}\right) \pm C\sqrt{\left(\frac{1}{M_1}+\frac{1}{M_2}\right)^2 - \frac{4\sin^2(Ka/2)}{M_1 M_2}}$$</div>
+      <div class="formula-desc">光學支（$+$號，$K\to 0$ 振幅反相）；聲學支（$-$號，$K\to 0$ 振幅同相）。邊界能隙 $\Delta\omega = \sqrt{2C/M_2} - \sqrt{2C/M_1}$。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 4 Eq. (20)–(27) p. 94–97 ｜ 歷年考題：<a href="../考古題/詳解/固態_2018_詳解.html">2018</a>, <a href="../考古題/詳解/固態_2020_詳解.html">2020</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>德拜模型（Debye Model）與低溫 $T^3$ 定律</span>
+        <button class="btn-copy" onclick="copyLatex('\\omega_D = v_s (6\\pi^2 n)^{1/3}, \\quad D(\\omega) = \\frac{9N}{\\omega_D^3}\\omega^2, \\quad C_v \\approx \\frac{12\\pi^4}{5} N k_B \\left(\\frac{T}{\\Theta_D}\\right)^3')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$\omega_D = v_s (6\pi^2 n)^{1/3}, \quad D(\omega) = \frac{3V\omega^2}{2\pi^2 v_s^3} = \frac{9N}{\omega_D^3}\omega^2, \quad C_v \approx \frac{12\pi^4}{5} N k_B \left(\frac{T}{\Theta_D}\right)^3 \propto T^3$$</div>
+      <div class="formula-desc">低溫下激發之聲子模態體積正比於 $T^3$；高溫則還原 Dulong-Petit 極限 $C_v \to 3Nk_B$。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 5 Eq. (15)–(28) p. 110–116 ｜ 林盛煇 §5.3 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013</a>, <a href="../考古題/詳解/固態_2014_詳解.html">2014</a>, <a href="../考古題/詳解/固態_2015_詳解.html">2015</a>, <a href="../考古題/詳解/固態_2016_詳解.html">2016</a></div>
+    </div>
+  </div>
+
+  <!-- Unit 05 Formula Block -->
+  <div class="unit-formula-block" id="f-unit05" data-tags="unit05 自由電子 費米氣體 fermi gas dos sommerfeld wiedemann-franz 比熱 態密度 kittel ch6 2014 2015 2016 2017 2020 2021 2022 2023 2024 2025">
+    <div class="unit-formula-header">
+      <div class="unit-formula-title">單元 05：自由電子費米氣體（Free Electron Fermi Gas）</div>
+      <a href="unit05_自由電子費米氣體.html" style="font-size:0.85em;color:var(--primary);text-decoration:none;">查看詳細講義 →</a>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>3D 費米面物理量（Fermi Surface）</span>
+        <button class="btn-copy" onclick="copyLatex('k_F = (3\\pi^2 n)^{1/3}, \\quad E_F = \\frac{\\hbar^2 k_F^2}{2m} = \\frac{\\hbar^2}{2m}(3\\pi^2 n)^{2/3}, \\quad U_0 = \\frac{3}{5} N E_F')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$k_F = (3\pi^2 n)^{1/3}, \quad E_F = \frac{\hbar^2 k_F^2}{2m} = \frac{\hbar^2}{2m}(3\pi^2 n)^{2/3}, \quad U_0 = \frac{3}{5} N E_F$$</div>
+      <div class="formula-desc">基態電子填滿半徑 $k_F$ 之費米球。0K 總能量為 $3/5 N E_F$。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 6 Eq. (17)–(23) p. 138–139 ｜ 林盛煇 §6.3 ｜ 歷年考題：<a href="../考古題/詳解/固態_2016_詳解.html">2016</a>, <a href="../考古題/詳解/固態_2017_詳解.html">2017</a>, <a href="../考古題/詳解/固態_2022_詳解.html">2022</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>1D / 2D / 3D 能態密度（DOS）</span>
+        <button class="btn-copy" onclick="copyLatex('g_{\\text{3D}}(E) \\propto E^{1/2}, \\quad g_{\\text{2D}}(E) = \\frac{A m}{\\pi \\hbar^2} = \\text{const}, \\quad g_{\\text{1D}}(E) \\propto E^{-1/2}')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$g_{\text{3D}}(E) = \frac{V}{2\pi^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\sqrt{E} \propto E^{1/2}, \quad g_{\text{2D}}(E) = \frac{Am}{\pi\hbar^2} = \text{常數}, \quad g_{\text{1D}}(E) \propto E^{-1/2}$$</div>
+      <div class="formula-desc">不同空間維度下，自旋簡併度為 2 的自由電子能態密度能量相依關係。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 6 Eq. (20)–(21) p. 139 ｜ 歷年考題：<a href="../考古題/詳解/固態_2016_詳解.html">2016（2D）</a>, <a href="../考古題/詳解/固態_2023_詳解.html">2023（1D）</a>, <a href="../考古題/詳解/固態_2024_詳解.html">2024</a>, <a href="../考古題/詳解/固態_2025_詳解.html">2025（2D）</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>電子熱容與維德曼–夫蘭茲定律（Wiedemann-Franz Law）</span>
+        <button class="btn-copy" onclick="copyLatex('C_{el} = \\frac{\\pi^2}{3} k_B^2 g(E_F) T = \\gamma T, \\quad \\frac{K}{\\sigma T} = \\frac{\\pi^2 k_B^2}{3e^2} = L \\approx 2.44\\times10^{-8}\\,\\text{W}\\Omega/\\text{K}^2')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$C_{el} = \gamma T, \quad C/T = \gamma + A T^2, \quad \frac{K}{\\sigma T} = \frac{\pi^2 k_B^2}{3e^2} = L \approx 2.443\times 10^{-8} \, \text{W}\cdot\Omega/\text{K}^2$$</div>
+      <div class="formula-desc">索末菲展開說明只有費米面附近 $k_BT$ 範圍之電子參與熱激發。勞侖茲數 $L$ 與金屬種類無關。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 6 Eq. (37)–(43), (54) p. 143–154 ｜ 歷年考題：<a href="../考古題/詳解/固態_2014_詳解.html">2014（30分）</a>, <a href="../考古題/詳解/固態_2015_詳解.html">2015</a>, <a href="../考古題/詳解/固態_2020_詳解.html">2020</a></div>
+    </div>
+  </div>
+
+  <!-- Unit 06 Formula Block -->
+  <div class="unit-formula-block" id="f-unit06" data-tags="unit06 能帶 bloch energy bands kronig-penney effective mass tight-binding 布洛赫 有效質量 緊束縛 kittel ch7 ch9 2013 2014 2015 2016 2017 2018 2020 2021 2025">
+    <div class="unit-formula-header">
+      <div class="unit-formula-title">單元 06：能帶理論與 Bloch 電子（Energy Bands & Bloch Electrons）</div>
+      <a href="unit06_能帶與Bloch電子.html" style="font-size:0.85em;color:var(--primary);text-decoration:none;">查看詳細講義 →</a>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>布洛赫定理（Bloch's Theorem）與 NFE 能隙</span>
+        <button class="btn-copy" onclick="copyLatex('\\psi_{\\mathbf k}(\\mathbf r) = u_{\\mathbf k}(\\mathbf r) e^{i\\mathbf k \\cdot \\mathbf r}, \\quad \\Delta E_g = 2|U_{\\mathbf G}|')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$\psi_{\mathbf k}(\mathbf r) = u_{\mathbf k}(\mathbf r) e^{i\mathbf k \cdot \mathbf r}, \quad u_{\mathbf k}(\mathbf r+\mathbf R) = u_{\mathbf k}(\mathbf r), \quad \Delta E_g = 2|U_{\mathbf G}|$$</div>
+      <div class="formula-desc">週期位能下電子波函數形式。在第一 BZ 邊界，正反向行波疊加成駐波，位能積分差值開出能隙 $2|U_G|$。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 7 Eq. (5)–(7), (24)–(27) p. 165–167 ｜ 林盛煇 §7.2–7.3 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013</a>, <a href="../考古題/詳解/固態_2014_詳解.html">2014</a>, <a href="../考古題/詳解/固態_2018_詳解.html">2018</a>, <a href="../考古題/詳解/固態_2020_詳解.html">2020</a>, <a href="../考古題/詳解/固態_2025_詳解.html">2025</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>克勒尼希–潘尼模型超越方程（Kronig-Penney Model）</span>
+        <button class="btn-copy" onclick="copyLatex('P \\frac{\\sin(Ka)}{Ka} + \\cos(Ka) = \\cos(ka)')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$P \frac{\sin(Ka)}{Ka} + \cos(Ka) = \cos(ka), \quad P = \frac{m V_0 b a}{\hbar^2}$$</div>
+      <div class="formula-desc">左式絕對值大於 1 時對應能量禁帶（Forbidden Gap），嚴格證明能帶結構之存在。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 7 Eq. (21b) p. 169–171 ｜ 林盛煇 §7.4 ｜ 歷年考題：<a href="../考古題/詳解/固態_2014_詳解.html">2014</a>, <a href="../考古題/詳解/固態_2015_詳解.html">2015</a>, <a href="../考古題/詳解/固態_2016_詳解.html">2016</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>有效質量張量與緊束縛模型（Tight-Binding）</span>
+        <button class="btn-copy" onclick="copyLatex('\\left(\\frac{1}{m^*}\\right)_{ij} = \\frac{1}{\\hbar^2}\\frac{\\partial^2 E}{\\partial k_i \\partial k_j}, \\quad E(k) = -\\alpha - 2\\gamma \\cos(ka)')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$\left(\frac{1}{m^*}\right)_{ij} = \frac{1}{\hbar^2}\frac{\partial^2 E}{\partial k_i \partial k_j}, \quad E(k) = -\alpha - 2\gamma \cos(ka) \implies m^* = \frac{\hbar^2}{2\gamma a^2}$$</div>
+      <div class="formula-desc">帶頂曲率為負對應負質量（電洞）；緊束縛帶寬 $W=4\gamma$，帶底有效質量反比於跳躍積分 $\gamma$。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 7 Eq. (37)–(40) p. 176 ＆ Ch. 9 p. 232 ｜ 歷年考題：<a href="../考古題/詳解/固態_2016_詳解.html">2016</a>, <a href="../考古題/詳解/固態_2017_詳解.html">2017</a>, <a href="../考古題/詳解/固態_2021_詳解.html">2021</a>, <a href="../考古題/詳解/固態_2025_詳解.html">2025 Q2</a></div>
+    </div>
+  </div>
+
+  <!-- Unit 07 Formula Block -->
+  <div class="unit-formula-block" id="f-unit07" data-tags="unit07 半導體 semiconductors mass action pn junction hall 載子濃度 霍爾 質量作用 kittel ch8 ch17 2013 2016 2021 2022 2023">
+    <div class="unit-formula-header">
+      <div class="unit-formula-title">單元 07：半導體物理（Semiconductors）</div>
+      <a href="unit07_半導體.html" style="font-size:0.85em;color:var(--primary);text-decoration:none;">查看詳細講義 →</a>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>質量作用定律與本質載子濃度</span>
+        <button class="btn-copy" onclick="copyLatex('n p = n_i^2 = N_c N_v e^{-E_g / k_BT}, \\quad n_i \\propto T^{3/2} e^{-E_g / 2k_BT}')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$np = n_i^2 = N_c N_v e^{-E_g / k_BT}, \quad n_i = \sqrt{N_c N_v} e^{-E_g / 2k_BT} \propto T^{3/2} e^{-E_g / 2k_BT}$$</div>
+      <div class="formula-desc">不論純半導體或摻雜外質半導體，熱平衡下載子濃度乘積均為定值 $n_i^2$。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 8 Eq. (29)–(43) p. 206–209 ｜ 林盛煇 §8.2 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013</a>, <a href="../考古題/詳解/固態_2016_詳解.html">2016</a>, <a href="../考古題/詳解/固態_2022_詳解.html">2022</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>pn 接面內建電位與霍爾係數（Hall Coefficient）</span>
+        <button class="btn-copy" onclick="copyLatex('V_{bi} = \\frac{k_B T}{e}\\ln\\left(\\frac{N_A N_D}{n_i^2}\\right), \\quad R_H = -\\frac{1}{ne} \\;(\\text{電子}), \\quad R_H = +\\frac{1}{pe} \\;(\\text{電洞})')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$V_{bi} = \frac{k_B T}{e}\ln\left(\frac{N_A N_D}{n_i^2}\right), \quad R_H = \frac{E_y}{j_x B_z} = -\frac{1}{ne} \text{ 或 } +\frac{1}{pe}$$</div>
+      <div class="formula-desc">內建電位維持擴散與漂移平衡；霍爾係數符號直接判定主導載子為電子或電洞。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 6 Eq. (56), Ch. 8 Eq. (52), Ch. 17 p. 488 ｜ 歷年考題：<a href="../考古題/詳解/固態_2016_詳解.html">2016</a>, <a href="../考古題/詳解/固態_2022_詳解.html">2022 Q2（40分）</a></div>
+    </div>
+  </div>
+
+  <!-- Unit 08 Formula Block -->
+  <div class="unit-formula-block" id="f-unit08" data-tags="unit08 磁性 magnetism curie langevin landau 居里 朗之萬 朗道能階 kittel ch11 ch12 ch9 2013 2018 2025">
+    <div class="unit-formula-header">
+      <div class="unit-formula-title">單元 08：磁性（Magnetism）</div>
+      <a href="unit08_磁性.html" style="font-size:0.85em;color:var(--primary);text-decoration:none;">查看詳細講義 →</a>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>朗之萬順磁函數與居里定律（Curie's Law）</span>
+        <button class="btn-copy" onclick="copyLatex('M = N m L(\\alpha), \\quad L(\\alpha) = \\coth\\alpha - \\frac{1}{\\alpha}, \\quad \\chi = \\frac{C}{T}')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$M = N m L(\alpha), \quad L(\alpha) = \coth\alpha - \frac{1}{\alpha}, \quad \alpha = \frac{m B}{k_B T} \xrightarrow{\alpha \ll 1} \chi = \frac{N\mu_0 m^2}{3k_BT} = \frac{C}{T}$$</div>
+      <div class="formula-desc">弱場極限還原居里定律；強場低溫下 $L(\alpha) \to 1$，磁化強度達到飽和 $Nm$。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 11 Eq. (13)–(23) p. 303–305 ｜ 林盛煇 §11.3 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013 Q4（20分）</a>, <a href="../考古題/詳解/固態_2025_詳解.html">2025</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>朗道能階（Landau Levels）量子化</span>
+        <button class="btn-copy" onclick="copyLatex('E_n = \\left(n + \\frac{1}{2}\\right)\\hbar\\omega_c, \\quad \\omega_c = \\frac{e B}{m^*}, \\quad D = \\frac{eB}{h} = \\frac{B}{\\Phi_0}')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$E_n = \left(n + \frac{1}{2}\right)\hbar\omega_c, \quad \omega_c = \frac{e B}{m^*}, \quad D = \frac{eB}{h} = \frac{B}{\Phi_0}$$</div>
+      <div class="formula-desc">外加磁場使 2D 連續態崩縮為分離朗道階梯，每個階梯面簡併度正比於磁場 $B$。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 9 p. 254–256 ｜ 歷年考題：<a href="../考古題/詳解/固態_2018_詳解.html">2018 Q3（20分）</a></div>
+    </div>
+  </div>
+
+  <!-- Unit 09 Formula Block -->
+  <div class="unit-formula-block" id="f-unit09" data-tags="unit09 超導 superconductivity meissner london bcs vortex 邁斯納 倫敦方程 渦旋 kittel ch10 2013 2025">
+    <div class="unit-formula-header">
+      <div class="unit-formula-title">單元 09：超導現象（Superconductivity）</div>
+      <a href="unit09_超導.html" style="font-size:0.85em;color:var(--primary);text-decoration:none;">查看詳細講義 →</a>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>倫敦方程與倫敦穿透深度（London Penetration Depth）</span>
+        <button class="btn-copy" onclick="copyLatex('\\nabla^2 \\mathbf B = \\frac{1}{\\lambda_L^2} \\mathbf B, \\quad \\lambda_L = \\sqrt{\\frac{m}{\\mu_0 n_s e^2}}, \\quad B(x) = B_0 e^{-x/\\lambda_L}')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$\nabla^2 \mathbf B = \frac{1}{\lambda_L^2} \mathbf B, \quad \lambda_L = \sqrt{\frac{m}{\mu_0 n_s e^2}}, \quad B(x) = B_0 e^{-x/\lambda_L}$$</div>
+      <div class="formula-desc">邁斯納完全抗磁性（$\chi=-1$）的定量描述，磁場進入超導體表面呈指數衰減。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 10 Eq. (14)–(19) p. 269–271 ｜ 林盛煇 §10.3 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013 Q5</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>磁通量子與 BCS 零溫能隙</span>
+        <button class="btn-copy" onclick="copyLatex('\\Phi_0 = \\frac{h}{2e} \\approx 2.07\\times 10^{-15} \\,\\text{Wb}, \\quad \\Delta(0) \\approx 1.764 k_B T_c')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$\Phi_0 = \frac{h}{2e} \approx 2.0678 \times 10^{-15} \, \text{Wb} \, (\text{T}\cdot\text{m}^2), \quad \Delta(0) \approx 1.764 \, k_B T_c$$</div>
+      <div class="formula-desc">Cooper 電子配對（電荷 $q=2e$）引發磁通量子化；BCS 理論給出能隙與臨界溫度的普適比值。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 10 Eq. (36), (40), Table 3 p. 273, 283 ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013</a>, <a href="../考古題/詳解/固態_2025_詳解.html">2025 Q4</a></div>
+    </div>
+  </div>
+
+  <!-- Unit 10 Formula Block -->
+  <div class="unit-formula-block" id="f-unit10" data-tags="unit10 實驗 進階 stm graphene dirac arpes 石墨烯 穿隧 反射率 kittel ch1 ch18 2013 2018 2022 2023">
+    <div class="unit-formula-header">
+      <div class="unit-formula-title">單元 10：實驗技術與進階主題（Experimental & Advanced）</div>
+      <a href="unit10_實驗與進階.html" style="font-size:0.85em;color:var(--primary);text-decoration:none;">查看詳細講義 →</a>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>STM 穿隧電流對間距的指數敏感性</span>
+        <button class="btn-copy" onclick="copyLatex('I \\propto e^{-2\\kappa d}, \\quad \\kappa = \\frac{\\sqrt{2m\\phi}}{\\hbar} \\approx 0.512 \\sqrt{\\phi(\\text{eV})} \\,\\text{Å}^{-1}')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$I \propto e^{-2\kappa d}, \quad \kappa = \frac{\sqrt{2m\phi}}{\hbar} \approx 0.512 \sqrt{\phi(\text{eV})} \,\, \text{Å}^{-1}$$</div>
+      <div class="formula-desc">探針每後退 $1\,\text{Å}$，電流約縮減一個數量級，構成原子級垂直解析度的物理基礎。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 1 p. 20 ｜ 講義.md ｜ 歷年考題：<a href="../考古題/詳解/固態_2013_詳解.html">2013 Q3</a>, <a href="../考古題/詳解/固態_2018_詳解.html">2018</a></div>
+    </div>
+
+    <div class="formula-item">
+      <div class="formula-name">
+        <span>石墨烯（Graphene）無質量 Dirac 錐線性色散</span>
+        <button class="btn-copy" onclick="copyLatex('E(\\mathbf q) = \\pm \\hbar v_F |\\mathbf q|, \\quad g(E) = \\frac{2}{\\pi \\hbar^2 v_F^2}|E|')">📋 複製 LaTeX</button>
+      </div>
+      <div>$$E(\mathbf q) = \pm \hbar v_F |\mathbf q|, \quad v_F \approx 10^6 \, \text{m/s}, \quad g(E) = \frac{2}{\pi \hbar^2 v_F^2} |E|$$</div>
+      <div class="formula-desc">在 $K, K'$ 點附近靜止質量為零（無質量狄拉克費米子），能態密度隨能量線性增加。</div>
+      <div class="formula-ref">📖 <b>出處 (Ref)</b>: Kittel 8e Ch. 18 ｜ Rev. Mod. Phys. 81, 109 (2009) ｜ 歷年考題：<a href="../考古題/詳解/固態_2018_詳解.html">2018 Q4</a>, <a href="../考古題/詳解/固態_2023_詳解.html">2023 Q1</a></div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:1px solid #cbd5e1;margin:3em 0 1.5em;">
+  <div style="font-size:0.85em;color:#627d98;text-align:center;">
+    NTU 應用物理所博士班資格考備考系統 · 由 <code>考古題/詳解/_build_html.py</code> 統一建置交付
+  </div>
+</div>
+
+<div id="toast">已複製 LaTeX 到剪貼簿！</div>
+
+<script>
+// Sidebar Toggle (Mobile)
+const toggle = document.getElementById('toc-toggle');
+const sidebar = document.getElementById('sidebar');
+if (toggle && sidebar) {
+  toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+}
+
+// Live Search Filter
+const searchInput = document.getElementById('formula-search');
+if (searchInput) {
+  searchInput.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    const blocks = document.querySelectorAll('.unit-formula-block');
+    blocks.forEach(b => {
+      const tags = (b.dataset.tags || '').toLowerCase();
+      const text = b.innerText.toLowerCase();
+      if (!q || tags.includes(q) || text.includes(q)) {
+        b.style.display = '';
+      } else {
+        b.style.display = 'none';
+      }
+    });
+  });
+}
+
+// Copy LaTeX
+function copyLatex(tex) {
+  navigator.clipboard.writeText(tex).then(() => {
+    const toast = document.getElementById('toast');
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 2000);
+  });
+}
+
+// Sidebar Active Spy
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('.unit-formula-block, #overview, #units-grid, #formula-master');
+  const scrollY = window.scrollY + 100;
+  let currentId = '';
+  sections.forEach(sec => {
+    if (sec.offsetTop <= scrollY) {
+      currentId = sec.id;
+    }
+  });
+  if (currentId) {
+    document.querySelectorAll('#sidebar .nav-link').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      if (href === '#' + currentId) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理 — 數學推導 Lab</title>
+<link rel="stylesheet" href="../模擬/shared.css">
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="../index.html">← 備考總入口</a>
+  <a class="here" href="index.html">數學 Lab</a>
+  <a href="../模擬/index.html">系統模擬</a>
+  <a href="../考點地圖.html">考點地圖</a>
+  <a href="../教材/先備知識/index.html">先備知識</a>
+</div>
+
+<h1>📐 數學推導 Lab（逐步揭露 + 填空）</h1>
+<p class="intro">
+  每個 lab 把一條<strong>考試必背推導</strong>拆成數步，並附：
+  <b>① 每步 ≥3 個計算／觀念範例</b>、
+  <b>② SVG 示意圖</b>、
+  <b>③ 頁內 HTML 小模擬</b>（滑桿即時重畫）。
+  建議：填對再「下一步」；與 <a href="../模擬/index.html">全站系統模擬</a> 互補——Lab 練推導＋迷你圖，全站模擬練完整參數實驗。
+</p>
+
+<div class="cards">
+  <a class="card" href="lab_reciprocal.html">
+    <div class="t">① 倒基正交 aᵢ·bⱼ=2πδᵢⱼ</div>
+    <div class="s">V 定義 → b₁ 定義 → 對角 2π → 外積垂直 ⇒ 非對角 0。</div>
+    <span class="tag">unit02 · 向量</span>
+  </a>
+  <a class="card" href="lab_packing.html">
+    <div class="t">② Packing fraction</div>
+    <div class="s">sc / bcc / fcc：n → 最近鄰 → r(a) → f。必背 0.52 / 0.68 / 0.74。</div>
+    <span class="tag">unit01 · 幾何</span>
+  </a>
+  <a class="card" href="lab_structure_factor.html">
+    <div class="t">③ 結構因子與消光</div>
+    <div class="s">S_G 定義、bcc/fcc 規則、相位相消圖像。</div>
+    <span class="tag">unit02 · 複指數</span>
+  </a>
+  <a class="card" href="lab_dispersion.html">
+    <div class="t">④ 單原子鏈色散 ω(k)</div>
+    <div class="s">牛頓 → e^{ika} → 特徵值 → 2√(C/M)|sin(ka/2)|。</div>
+    <span class="tag">unit04 · 特徵方程</span>
+  </a>
+  <a class="card" href="lab_nfe.html">
+    <div class="t">⑤ NFE 能隙 2|U|</div>
+    <div class="s">簡併點 2×2 → 邊界 E±=ε±|U| → gap=2|U|。</div>
+    <span class="tag">unit06 · 行列式</span>
+  </a>
+  <a class="card" href="lab_dos.html">
+    <div class="t">⑥ DOS 與 E_F</div>
+    <div class="s">費米球 → k_F → E_F；g∝√E；C_el=γT 計數論證。</div>
+    <span class="tag">unit05 · k 空間積分</span>
+  </a>
+  <a class="card" href="lab_madelung.html">
+    <div class="t">⑦ Madelung = 2 ln 2</div>
+    <div class="s">1D 離子鏈交錯調和級數 → α=2 ln 2。</div>
+    <span class="tag">unit03 · 級數</span>
+  </a>
+  <a class="card" href="lab_langevin.html">
+    <div class="t">⑧ Langevin → Curie</div>
+    <div class="s">L=cothα−1/α；α≪1 → α/3 → χ=C/T。</div>
+    <span class="tag">unit08 · 統計平均</span>
+  </a>
+</div>
+
+<h2>建議路線</h2>
+<ol>
+  <li><b>幾何地基</b>：① 倒基 → ② packing → ③ 結構因子</li>
+  <li><b>波與能帶</b>：④ 色散（+模擬）→ ⑤ NFE（+模擬）</li>
+  <li><b>統計</b>：⑥ DOS/E_F（+FD 模擬）→ ⑦ Madelung → ⑧ Langevin</li>
+  <li>每做完一條，到 <a href="../考點地圖.html">考點地圖</a> 勾對應必背公式，再做一題考古。</li>
+</ol>
+
+<div class="note intro" style="margin-top:1.2em">
+  <b>與符號就地展開的關係</b>：單元教學／詳解是「長文完整版」；本 Lab 是「可動手驗收的精簡推導」。兩者公式一致，Lab 不取代詳解。
+</div>
+
+<footer>solidstatePhysics/數學lab · standalone · lab.js 填空比對（允許多種寫法）</footer>
+</body>
+</html>

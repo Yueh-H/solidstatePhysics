@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理導論 2013 資格考 — 詳解</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">← 詳解目錄</a> &nbsp;·&nbsp; <a href="_共用觀念與公式.html">🧰 共用觀念與公式</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- source: 歷年原卷/固態物理導論_2013.md -->
+
+# 固態物理導論 2013 資格考 — 教學版逐題詳解（硬年份 · 代數不跳步）
+
+> **這是歷年最硬的一卷:17 小題 / 156 分。** 題型橫跨「晶格 → 倒晶格/結構因子 → 鍵結 → 聲子鏈能量 → Drude/Sommerfeld → Bloch 定理與能隙 → 半導體 → 磁性 Langevin → 掃描探針 → 超導 → 多層膜 X 光反射率」。寫法對齊 `固態_2016_詳解`(硬年份長推導模板):每題走 `📋 原題 → 🎯 核心訊息 →(必要時)前情提要 → 🔍 符號說明 → 解答 Step → ✅ 自我檢核 → 🔀 變化 → 信心`。短答觀念題精簡;**Q6 聲子鏈能量、Q10/Q11 Bloch+能隙、Q14 Langevin、Q17 反射率每三峰消失**走完整長推導,代數不跳。共用觀念見 [`_共用觀念與公式.html`](_共用觀念與公式.html)。
+>
+> **OCR 校正聲明**:本卷 md 來自掃描卷 OCR 文字層,公式多有亂碼。關鍵式已對原 PDF 逐一核對——Q5 $U(R)\approx-10^{-58}\,\mathrm{erg\,cm^6}/R^6$、Q6 總能量與色散 $\omega^2=(4C/M)\sin^2\tfrac12 Ka$、Q11 central equation $(\lambda_k-E)C(k)+\sum_G U_G C(k-G)=0$、Q14 積分提示 $\int x^n e^{\alpha x}dx=\tfrac{x^n e^{\alpha x}}{\alpha}-\tfrac{n}{\alpha}\int x^{n-1}e^{\alpha x}dx$、Q17 圖(Mo $D_1/D=1/3$ / Si $D_2/D=2/3$,每第三峰消失)——皆已確認。
+
+## 🧭 全卷約定
+- cubic 慣用立方邊 $a$;倒晶格 $\mathbf a_i\cdot\mathbf b_j=2\pi\delta_{ij}$;自由電子 $E=\hbar^2k^2/2m$,含自旋簡併 2。
+- 結構因子 $S_{\mathbf G}=\sum_j f_j e^{-i2\pi(hx_j+ky_j+lz_j)}$(分數座標)。
+- 物理常數沿用題目給的 CGS:$k_B=1.38\times10^{-16}\,\mathrm{erg/K}$。符號依 Kittel。
+
+---
+
+# 📘 第 1 題 — Bravais 晶格、bcc 原胞、fcc 參數、晶向⊥晶面（2+2+3+2+3+4+3 = 19 pts）
+
+## 📋 原題
+> Bravais lattice 是描述晶體週期排列的基本概念。
+> (a) 什麼是 Bravais lattice?定義之。
+> (b) 二維有幾種相異晶格?是哪些(畫出來)?
+> (c) 三維有幾種相異晶格?是哪些(畫出來)?
+> (d) 什麼是 primitive cell?
+> (e) bcc 的 primitive cell 是哪一種 Bravais lattice?算出夾角與晶格常數。
+> (f) 求 fcc 的:慣用胞體積、慣用胞含幾格點、原胞體積、原胞含幾格點、最近鄰數、最近鄰距離、堆積率。
+> (g) 證明 cubic 中晶向 $[hkl]\perp$ 同指標晶面 $(hkl)$。相鄰面間距?
+
+## 🎯 核心訊息
+> 一條「實空間幾何」主線:**14 種 Bravais**(2D 是 5 種)→ **bcc 原胞 = 菱面體**(算出 $109.47°$)→ **fcc 數格點/鄰居/堆積**(0.74)→ **cubic 才有 $[hkl]\parallel\mathbf G\perp(hkl)$**。
+
+## 解答
+
+### (a) Bravais lattice 定義
+**Bravais lattice** = 所有 $\mathbf R=n_1\mathbf a_1+n_2\mathbf a_2+n_3\mathbf a_3$($n_i\in\mathbb Z$)構成的無限點集,其中 $\mathbf a_i$ 為 primitive vectors。等價判準:**從任一格點看出去的方位與環境都完全相同**(平移不變)。例:simple cubic $\mathbf a_i=a\hat e_i$。
+
+### (b) 二維 5 種
+$$\boxed{\text{oblique(斜方)、square(正方)、rectangular(矩形 P)、centered rectangular(矩形 C/置心)、hexagonal(六方)}}$$
+- oblique:$|\mathbf a_1|\ne|\mathbf a_2|$,夾角任意。
+- square:$|\mathbf a_1|=|\mathbf a_2|$,$90°$。
+- rectangular(P):$|\mathbf a_1|\ne|\mathbf a_2|$,$90°$。
+- centered rectangular(C):矩形多一個面心點(它**不能**化簡成更小矩形,故獨立成一型)。
+- hexagonal:$|\mathbf a_1|=|\mathbf a_2|$,$120°$。
+
+### (c) 三維 14 種
+**7 晶系 × 允許置心 = 14**:cubic(P, I, F)、tetragonal(P, I)、orthorhombic(P, C, I, F)、monoclinic(P, C)、triclinic(P)、trigonal/rhombohedral(R)、hexagonal(P)。(P 簡單、I 體心、F 面心、C 底心。)
+
+### (d) primitive cell
+含**恰 1 個格點**的最小重複體積胞,$V_{\text{prim}}=|\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)|$,平移它可不重不漏鋪滿全空間。形狀可任選(平行六面體或 Wigner–Seitz 胞)。
+
+### (e) bcc 的原胞 = 菱面體(rhombohedral),完整計算
+**Step 1 — bcc primitive vectors(立方邊 $a$)。**
+$$\mathbf a_1=\tfrac a2(-\hat x+\hat y+\hat z),\quad \mathbf a_2=\tfrac a2(\hat x-\hat y+\hat z),\quad \mathbf a_3=\tfrac a2(\hat x+\hat y-\hat z).$$
+這三個向量由「立方角 → 體心」連線得到,各含 1 格點(原胞體積 $=a^3/2$,正是 bcc 每立方含 2 點)。
+
+**Step 2 — 原胞晶格常數(邊長)。**
+$$|\mathbf a_i|=\frac a2\sqrt{(-1)^2+1^2+1^2}=\frac a2\sqrt3=\boxed{\frac{\sqrt3}{2}\,a\approx0.866\,a.}$$
+
+**Step 3 — 夾角。**
+$$\mathbf a_1\cdot\mathbf a_2=\frac{a^2}{4}\big[(-1)(1)+(1)(-1)+(1)(1)\big]=\frac{a^2}{4}(-1)=-\frac{a^2}{4}.$$
+$$\cos\theta=\frac{\mathbf a_1\cdot\mathbf a_2}{|\mathbf a_1||\mathbf a_2|}=\frac{-a^2/4}{3a^2/4}=-\frac13\ \Rightarrow\ \boxed{\theta=\arccos\!\big(-\tfrac13\big)\approx109.47°.}$$
+> **小結**:bcc 原胞是「三邊等長 $\tfrac{\sqrt3}2a$、三夾角皆 $109.47°$」的**菱面體**,屬 **trigonal/rhombohedral** Bravais lattice。(這個 $109.47°$ 正是四面體鍵角,非巧合——四個體對角線方向。)
+
+### (f) fcc 七項參數
+| 量 | 值 | 說明 |
+|---|---|---|
+| 慣用胞體積 | $a^3$ | 立方 |
+| 慣用胞格點數 | $4$ | $8\times\tfrac18+6\times\tfrac12=1+3$ |
+| 原胞體積 | $a^3/4$ | $V_{\text{conv}}/4$ |
+| 原胞格點數 | $1$ | primitive 定義 |
+| 最近鄰數 | $12$ | 面心配位 |
+| 最近鄰距離 | $a/\sqrt2$ | 面對角線一半 $\tfrac{\sqrt2}2a$ |
+| 堆積率 | $\dfrac{\pi}{3\sqrt2}\approx0.74$ | 見下 |
+
+**堆積率推導**:硬球相切 → 球半徑 $r=\tfrac12\cdot\tfrac{a}{\sqrt2}=\tfrac{a}{2\sqrt2}$。每慣用胞 4 球:
+$$f=\frac{4\cdot\frac43\pi r^3}{a^3}=\frac{\frac{16}3\pi\left(\frac{a}{2\sqrt2}\right)^3}{a^3}=\frac{\frac{16}3\pi\cdot\frac{a^3}{16\sqrt2}}{a^3}=\frac{\pi}{3\sqrt2}=\boxed{0.7405.}$$
+
+### (g) cubic 中 $[hkl]\perp(hkl)$ + 面間距
+**Step 1.** 平面 $(hkl)$ 的法向 = 倒晶格向量 $\mathbf G=h\mathbf b_1+k\mathbf b_2+l\mathbf b_3$。cubic 時 $\mathbf b_i=\tfrac{2\pi}a\hat e_i$,故
+$$\mathbf G=\frac{2\pi}a(h\hat x+k\hat y+l\hat z).$$
+**Step 2.** 晶向 $[hkl]=h\hat x+k\hat y+l\hat z\parallel\mathbf G$,而 $\mathbf G\perp(hkl)$(倒晶格向量恆垂直其對應晶面)→ $[hkl]\perp(hkl)$ ✓。**注意這只在 cubic 成立**,因唯 cubic 才有 $\mathbf b_i\parallel\mathbf a_i$。
+**Step 3.** 面間距
+$$d_{hkl}=\frac{2\pi}{|\mathbf G|}=\boxed{\frac{a}{\sqrt{h^2+k^2+l^2}}.}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 620 220" width="100%" style="max-width:700px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<g transform="translate(0,0)">
+<text x="100" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">bcc 原胞 = 菱面體</text>
+<line x1="40" y1="150" x2="160" y2="150" stroke="#888" stroke-width="1"/>
+<line x1="40" y1="150" x2="78" y2="70" stroke="#888" stroke-width="1"/>
+<line x1="40" y1="150" x2="120" y2="120" stroke="#888" stroke-width="1"/>
+<line x1="100" y1="105" x2="40" y2="150" stroke="#c0392b" stroke-width="2"/>
+<line x1="100" y1="105" x2="160" y2="150" stroke="#c0392b" stroke-width="2"/>
+<line x1="100" y1="105" x2="78" y2="70" stroke="#c0392b" stroke-width="2"/>
+<circle cx="40" cy="150" r="4.5" fill="#1a4d7c"/>
+<circle cx="160" cy="150" r="4.5" fill="#1a4d7c"/>
+<circle cx="78" cy="70" r="4.5" fill="#1a4d7c"/>
+<circle cx="100" cy="105" r="5" fill="#c0392b"/>
+<text x="100" y="180" text-anchor="middle" fill="#c0392b">邊 = (√3/2)a</text>
+<text x="100" y="198" text-anchor="middle" fill="#333">夾角 109.47°</text>
+</g>
+<g transform="translate(210,0)">
+<text x="100" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">fcc：面對角線相切</text>
+<rect x="45" y="55" width="110" height="110" fill="none" stroke="#555" stroke-width="1.3"/>
+<line x1="45" y1="165" x2="155" y2="55" stroke="#c0392b" stroke-width="2"/>
+<circle cx="45" cy="165" r="5" fill="#1a4d7c"/>
+<circle cx="155" cy="55" r="5" fill="#1a4d7c"/>
+<circle cx="155" cy="165" r="5" fill="#1a4d7c"/>
+<circle cx="45" cy="55" r="5" fill="#1a4d7c"/>
+<circle cx="100" cy="110" r="5" fill="#2e8b2e"/>
+<text x="118" y="120" fill="#2e8b2e">面心</text>
+<text x="100" y="190" text-anchor="middle" fill="#c0392b">4r = √2 a</text>
+<text x="100" y="206" text-anchor="middle" fill="#333">堆積率 0.74</text>
+</g>
+<g transform="translate(420,0)">
+<text x="100" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">[hkl] ⊥ (hkl)</text>
+<line x1="30" y1="160" x2="170" y2="80" stroke="#1a4d7c" stroke-width="1.6"/>
+<line x1="40" y1="178" x2="180" y2="98" stroke="#1a4d7c" stroke-width="1.6"/>
+<line x1="100" y1="135" x2="142" y2="160" stroke="#c0392b" stroke-width="2.4"/>
+<polygon points="142,160 132,154 136,148" fill="#c0392b"/>
+<text x="150" y="172" fill="#c0392b">G ∥ [hkl]</text>
+<text x="50" y="80" fill="#1a4d7c">(hkl) 面族</text>
+<text x="100" y="206" text-anchor="middle" fill="#333">d = a/√(h²+k²+l²)</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">左：bcc 的 primitive cell 是三邊 (√3/2)a、夾角 109.47° 的<b style="color:#c0392b">菱面體</b>（紅 = 體心點與三角連線）。中：fcc 沿正方面對角線相切，4r=√2 a，<b style="color:#2e8b2e">面心點</b>使堆積率達 0.74。右：cubic 中倒晶格向量 G 平行 [hkl] 且垂直 (hkl) 面族，故 [hkl]⊥(hkl)、面間距 d=a/√(h²+k²+l²)。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：原胞角、堆積率、晶面間距與密度反推</b></summary>
+
+**範例 A（fcc 原胞的邊與夾角）**：fcc 的 primitive vectors $\mathbf a_1=\tfrac a2(\hat y+\hat z),\ \mathbf a_2=\tfrac a2(\hat z+\hat x),\ \mathbf a_3=\tfrac a2(\hat x+\hat y)$。邊長 $|\mathbf a_1|=\tfrac a2\sqrt{0^2+1^2+1^2}=\tfrac a2\sqrt2=\dfrac{a}{\sqrt2}$。夾角：$\mathbf a_1\cdot\mathbf a_2=\tfrac{a^2}4(\hat y+\hat z)\cdot(\hat z+\hat x)=\tfrac{a^2}4(0+0+1+0)=\tfrac{a^2}4$，故 $\cos\theta=\dfrac{a^2/4}{(a/\sqrt2)^2}=\dfrac{a^2/4}{a^2/2}=\tfrac12\Rightarrow\theta=60^\circ$。所以 fcc 原胞是「邊 $a/\sqrt2$、角 $60^\circ$」的菱面體（對照 bcc 的 $109.47^\circ$）。
+
+**範例 B（bcc 堆積率 0.68 完整算）**：bcc 沿體對角線相切，$4r=\sqrt3\,a\Rightarrow r=\tfrac{\sqrt3}4a$。每慣用胞 2 顆：
+$$\eta=\frac{2\cdot\tfrac43\pi r^3}{a^3}=\frac{\tfrac83\pi\big(\tfrac{\sqrt3}4a\big)^3}{a^3}=\frac83\pi\cdot\frac{3\sqrt3}{64}=\frac{24\sqrt3\,\pi}{192}=\frac{\sqrt3\,\pi}{8}\approx0.6802.$$
+比 fcc 的 0.74 鬆（bcc 配位數 8、fcc 12）。
+
+**範例 C（三個低指標面的間距比較）**：cubic $d_{hkl}=\dfrac{a}{\sqrt{h^2+k^2+l^2}}$。
+$$d_{100}=\frac a{\sqrt1}=a,\quad d_{110}=\frac a{\sqrt2}=0.707a,\quad d_{111}=\frac a{\sqrt3}=0.577a.$$
+面指標越高、面越密集越靠近，間距遞減 → 對應繞射角越大（$2d\sin\theta=\lambda$）。
+
+**範例 D（由密度反推晶格常數）**：鎢 W 為 bcc，每胞 2 顆，原子量 $M=183.8$、密度 $\rho=19.25\,\mathrm{g/cm^3}$。由 $\rho=\dfrac{2M/N_A}{a^3}$：
+$$a^3=\frac{2\times183.8}{6.02\times10^{23}\times19.25}=3.17\times10^{-23}\,\mathrm{cm^3}\Rightarrow a=3.16\times10^{-8}\,\mathrm{cm}=3.16\,\text{Å}.$$
+再由 $r=\tfrac{\sqrt3}4a=0.433\times3.16=1.37\,\text{Å}$，最近鄰距 $2r=2.74\,\text{Å}$。
+</details>
+
+## ✅ 自我檢核
+- bcc 原胞角 $109.47°$、邊 $0.866a$,屬 trigonal ✓(Kittel 標準)。
+- fcc 堆積率 $0.74$ = 最密堆積(與 hcp 同)✓;最近鄰 12 ✓。
+- (g) $d_{100}=a,\ d_{110}=a/\sqrt2,\ d_{111}=a/\sqrt3$,遞減合理 ✓。
+
+## 🔀 變化的可能情況
+- 常把 (e) 改問「fcc 的原胞」(答:菱面體,邊 $a/\sqrt2$、角 $60°$)。
+- (f) 換成 bcc(配位 8、最近鄰 $\tfrac{\sqrt3}2a$、堆積率 $0.68$)。
+- (g) 是 2016 第 1(f)、2025 第 2 題的同型核心。
+
+## 信心：高（全為 Kittel Ch1 標準推導,數值獨立重算）
+
+---
+
+# 📗 第 2 題 — Bragg ↔ von Laue 等價（10 pts）
+
+## 📋 原題
+> X 光繞射的 Bragg 與 von Laue 表述各是什麼?證明兩者等價。
+
+## 🎯 核心訊息
+> 兩者是同一物理的兩種語言:Bragg 把晶面當鏡子($2d\sin\theta=n\lambda$),von Laue 看動量轉移($\Delta\mathbf k=\mathbf G$)。代入 $|\mathbf G|=2\pi n/d$ 與 $|\Delta\mathbf k|=2k\sin\theta$ 即互換。
+
+## 解答
+### Bragg 表述
+視平行晶面(間距 $d$)為部分反射鏡,相鄰面反射光程差 $2d\sin\theta$,建設性干涉:
+$$\boxed{2d\sin\theta=n\lambda.}$$
+
+### von Laue 表述
+彈性散射 $|\mathbf k'|=|\mathbf k|=2\pi/\lambda$;建設性干涉要求動量轉移等於倒晶格向量:
+$$\boxed{\Delta\mathbf k=\mathbf k'-\mathbf k=\mathbf G.}$$
+
+### 等價證明
+**Step 1.** 由 $\Delta\mathbf k=\mathbf G$,取模:$|\mathbf G|=|\mathbf k'-\mathbf k|$。彈性 $|\mathbf k'|=|\mathbf k|=k$,且入射與散射對 $\mathbf G$(即晶面法向)對稱,夾半角 $\theta$:
+$$|\Delta\mathbf k|=2k\sin\theta=\frac{4\pi}{\lambda}\sin\theta.$$
+**Step 2.** 倒晶格向量大小與面間距關係:$\mathbf G$ 對應 $(hkl)$ 面族,最短的 $|\mathbf G_{hkl}|=2\pi/d_{hkl}$;其 $n$ 倍 $|\mathbf G|=2\pi n/d$。
+**Step 3.** 令兩者相等 $\Delta k=G$:
+$$\frac{4\pi}{\lambda}\sin\theta=\frac{2\pi n}{d}\ \Rightarrow\ 2d\sin\theta=n\lambda.\ \blacksquare$$
+> **小結**:von Laue 的 $n$ 階繞射 = Bragg 把 $\mathbf G$ 取 $n$ 倍(即 $(nh,nk,nl)$ 面)。兩者完全等價。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 620 240" width="100%" style="max-width:700px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="bgArr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1a4d7c"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<g transform="translate(0,0)">
+<text x="160" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">Bragg：晶面當鏡子</text>
+<line x1="20" y1="90" x2="300" y2="90" stroke="#888" stroke-width="1"/>
+<line x1="20" y1="150" x2="300" y2="150" stroke="#888" stroke-width="1"/>
+<circle cx="80" cy="90" r="3" fill="#555"/><circle cx="160" cy="90" r="3" fill="#555"/><circle cx="240" cy="90" r="3" fill="#555"/>
+<circle cx="80" cy="150" r="3" fill="#555"/><circle cx="160" cy="150" r="3" fill="#555"/><circle cx="240" cy="150" r="3" fill="#555"/>
+<line x1="40" y1="50" x2="160" y2="90" stroke="#c0392b" stroke-width="1.8" marker-end="url(#bgArr)"/>
+<line x1="160" y1="90" x2="280" y2="50" stroke="#c0392b" stroke-width="1.8" marker-end="url(#bgArr)"/>
+<line x1="80" y1="64" x2="160" y2="150" stroke="#e67e22" stroke-width="1.6" stroke-dasharray="4 3"/>
+<line x1="160" y1="150" x2="232" y2="74" stroke="#e67e22" stroke-width="1.6" stroke-dasharray="4 3"/>
+<text x="100" y="120" fill="#333">θ</text>
+<line x1="120" y1="120" x2="320" y2="120" stroke="#6aa1d6" stroke-width="0.8" stroke-dasharray="2 2"/>
+<text x="300" y="116" text-anchor="end" fill="#1a4d7c">d</text>
+<line x1="305" y1="90" x2="305" y2="150" stroke="#1a4d7c" stroke-width="1"/>
+<text x="150" y="200" text-anchor="middle" fill="#c0392b">光程差 2d sinθ = nλ</text>
+</g>
+<g transform="translate(340,0)">
+<text x="130" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">von Laue：動量轉移</text>
+<line x1="20" y1="160" x2="120" y2="100" stroke="#1a4d7c" stroke-width="2" marker-end="url(#bgArr)"/>
+<text x="40" y="120" fill="#1a4d7c">k</text>
+<line x1="120" y1="100" x2="220" y2="160" stroke="#1a4d7c" stroke-width="2" marker-end="url(#bgArr)"/>
+<text x="195" y="125" fill="#1a4d7c">k′</text>
+<line x1="120" y1="100" x2="120" y2="200" stroke="#c0392b" stroke-width="2.2" marker-end="url(#bgArr)"/>
+<text x="128" y="190" fill="#c0392b">G = Δk</text>
+<text x="130" y="225" text-anchor="middle" fill="#c0392b">|Δk| = 2k sinθ = |G| = 2πn/d</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">兩種等價語言。左 <b style="color:#c0392b">Bragg</b>：相鄰晶面（間距 d）反射的光程差 2d sinθ 為 λ 整數倍才建設性干涉。右 <b style="color:#1a4d7c">von Laue</b>：入射 k、散射 k′ 等長（彈性），動量轉移 Δk=k′−k 須等於倒晶格向量 G。代入 |Δk|=2k sinθ 與 |G|=2πn/d 即得 2d sinθ=nλ。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：用 2d sinθ=nλ 算繞射角與晶格常數</b></summary>
+
+**範例 A（求一階繞射角）**：Cu Kα $\lambda=1.54\,\text{Å}$ 打 fcc 鋁 $(111)$ 面，$d_{111}=\dfrac{a}{\sqrt3}=\dfrac{4.05}{\sqrt3}=2.34\,\text{Å}$。一階 $n=1$：
+$$\sin\theta=\frac{n\lambda}{2d}=\frac{1\times1.54}{2\times2.34}=\frac{1.54}{4.68}=0.329\Rightarrow\theta=19.2^\circ,\quad 2\theta=38.4^\circ.$$
+
+**範例 B（最高可見階數）**：同上 $(111)$ 面，$\sin\theta\le1\Rightarrow n\le\dfrac{2d}{\lambda}=\dfrac{2\times2.34}{1.54}=3.04$，故只能看到 $n=1,2,3$ 三階繞射，$n=4$ 已無解。
+
+**範例 C（由繞射角反推晶格常數）**：某 cubic 晶體 $(110)$ 面一階繞射量到 $2\theta=44.0^\circ\Rightarrow\theta=22.0^\circ$，$\lambda=1.54\,\text{Å}$：
+$$d_{110}=\frac{\lambda}{2\sin\theta}=\frac{1.54}{2\sin22^\circ}=\frac{1.54}{2\times0.3746}=2.056\,\text{Å}.$$
+再由 $d_{110}=\dfrac{a}{\sqrt2}\Rightarrow a=\sqrt2\,d_{110}=1.414\times2.056=2.91\,\text{Å}$（約為 α-Fe 的 bcc 邊長）。
+
+**範例 D（von Laue 語言重算 B）**：$|\mathbf G_{110}|=\dfrac{2\pi}{d_{110}}=\dfrac{2\pi}{2.056}=3.056\,\text{Å}^{-1}$；入射 $k=\dfrac{2\pi}{\lambda}=\dfrac{2\pi}{1.54}=4.08\,\text{Å}^{-1}$。$\sin\theta=\dfrac{|\mathbf G|}{2k}=\dfrac{3.056}{2\times4.08}=0.3746\Rightarrow\theta=22.0^\circ$ ✓ — 與 Bragg 完全一致。
+</details>
+
+## ✅ 自我檢核：$\sin\theta\le1\Rightarrow\lambda\le2d$ ✓(波長太長不繞射,兩表述一致)。
+## 🔀 變化：2016 第 1 題、2025 第 2(c) 題都靠此關係算繞射角 $2\theta$。
+## 信心：高
+
+---
+
+# 📙 第 3 題 — 結構因子（sc / bcc / fcc / diamond）（2+3+3+3+3 = 14 pts）
+
+## 📋 原題
+> (a) X 光繞射中的 structure factor 是什麼?算 (b) simple cubic、(c) bcc、(d) fcc、(e) diamond 的結構因子,並列出各晶格可能出現的反射。
+
+## 🎯 核心訊息
+> **倒晶格定峰位置,結構因子定峰強度(消光)。** basis 內各原子的相位和 $S_{\mathbf G}=\sum_j f_j e^{-i2\pi(hx_j+ky_j+lz_j)}$;當相位相消 $S=0$ → 該峰消失。
+
+## 解答
+
+### (a) structure factor 定義
+一個原胞內 basis 各原子($f_j$ 為原子形狀因子,$\mathbf r_j$ 為分數座標)對繞射振幅的相干貢獻:
+$$\boxed{S_{\mathbf G}=\sum_j f_j\,e^{-i2\pi(hx_j+ky_j+lz_j)}.}$$
+繞射強度 $I\propto|S_{\mathbf G}|^2$;$S=0$ 即系統消光。
+
+### (b) simple cubic — basis 1 原子 $(0,0,0)$
+$$S=f\quad\forall(hkl)\ \Rightarrow\ \boxed{\text{所有 }(hkl)\text{ 皆出現}.}$$
+
+### (c) bcc — basis $(0,0,0),(\tfrac12,\tfrac12,\tfrac12)$
+$$S=f\big[1+e^{-i\pi(h+k+l)}\big]=f\big[1+(-1)^{h+k+l}\big]=\boxed{\begin{cases}2f & h+k+l\ \text{偶}\\ 0 & h+k+l\ \text{奇}\end{cases}}$$
+**出現**:110, 200, 211, 220, 310, 222,…(指標和為偶)。
+
+### (d) fcc — basis $(000),(\tfrac12\tfrac120),(\tfrac120\tfrac12),(0\tfrac12\tfrac12)$
+$$S=f\big[1+e^{-i\pi(h+k)}+e^{-i\pi(h+l)}+e^{-i\pi(k+l)}\big]=\boxed{\begin{cases}4f & h,k,l\ \text{全奇或全偶}\\ 0 & \text{混合奇偶}\end{cases}}$$
+**出現**:111, 200, 220, 311, 222, 400,…。
+
+### (e) diamond — fcc 再加 basis $(\tfrac14\tfrac14\tfrac14)$
+$$S=S_{\text{fcc}}\cdot\big[1+e^{-i\frac\pi2(h+k+l)}\big].$$
+在 fcc 允許峰中再篩選:
+- $h{+}k{+}l\equiv0\pmod4$(全偶且和為 4 倍):$[1+1]=2$ → **出現**(如 400, 220, 440)。
+- $h{+}k{+}l\equiv2\pmod4$:$[1-1]=0$ → **消光**(如 **200, 222, 420**)。
+- $h{+}k{+}l$ 奇(全奇):$[1\mp i]$,$|S|^2$ 有限 → **出現**(如 111, 311, 331)。
+
+**出現**:111, 220, 311, 400, 331, 422,…;**消光**:200, 222, 420,…。
+
+### 反射總表
+| 晶格 | 出現規則 | 前幾個出現 |
+|---|---|---|
+| sc | 全部 | 100,110,111,200,210,211,… |
+| bcc | $h{+}k{+}l$ 偶 | 110,200,211,220,310,222,… |
+| fcc | 全奇 / 全偶 | 111,200,220,311,222,400,… |
+| diamond | fcc 規則 ∧ $h{+}k{+}l\ne4n{+}2$ | 111,220,311,400,331,422,… |
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 620 250" width="100%" style="max-width:700px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="10.5">
+<text x="310" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">結構因子消光：哪些 (hkl) 峰會出現</text>
+<line x1="60" y1="210" x2="600" y2="210" stroke="#333" stroke-width="1"/>
+<g fill="#333"><text x="40" y="55">sc</text><text x="40" y="105">bcc</text><text x="40" y="155">fcc</text><text x="40" y="205">dia</text></g>
+<g font-size="9.5">
+<text x="100" y="225" text-anchor="middle">100</text><text x="160" y="225" text-anchor="middle">110</text><text x="220" y="225" text-anchor="middle">111</text><text x="280" y="225" text-anchor="middle">200</text><text x="340" y="225" text-anchor="middle">210</text><text x="400" y="225" text-anchor="middle">211</text><text x="460" y="225" text-anchor="middle">220</text><text x="520" y="225" text-anchor="middle">311</text><text x="580" y="225" text-anchor="middle">222</text>
+</g>
+<g fill="#2e8b2e"><circle cx="100" cy="50" r="6"/><circle cx="160" cy="50" r="6"/><circle cx="220" cy="50" r="6"/><circle cx="280" cy="50" r="6"/><circle cx="340" cy="50" r="6"/><circle cx="400" cy="50" r="6"/><circle cx="460" cy="50" r="6"/><circle cx="520" cy="50" r="6"/><circle cx="580" cy="50" r="6"/></g>
+<g fill="#1a4d7c"><circle cx="160" cy="100" r="6"/><circle cx="280" cy="100" r="6"/><circle cx="400" cy="100" r="6"/><circle cx="460" cy="100" r="6"/><circle cx="580" cy="100" r="6"/></g>
+<g stroke="#ccc" stroke-width="1.4" fill="none"><circle cx="100" cy="100" r="6"/><circle cx="220" cy="100" r="6"/><circle cx="340" cy="100" r="6"/><circle cx="520" cy="100" r="6"/></g>
+<g fill="#e67e22"><circle cx="220" cy="150" r="6"/><circle cx="280" cy="150" r="6"/><circle cx="460" cy="150" r="6"/><circle cx="520" cy="150" r="6"/></g>
+<g stroke="#ccc" stroke-width="1.4" fill="none"><circle cx="100" cy="150" r="6"/><circle cx="160" cy="150" r="6"/><circle cx="340" cy="150" r="6"/><circle cx="400" cy="150" r="6"/><circle cx="580" cy="150" r="6"/></g>
+<g fill="#c0392b"><circle cx="220" cy="200" r="6"/><circle cx="460" cy="200" r="6"/><circle cx="520" cy="200" r="6"/></g>
+<g stroke="#ccc" stroke-width="1.4" fill="none"><circle cx="100" cy="200" r="6"/><circle cx="160" cy="200" r="6"/><circle cx="280" cy="200" r="6"/><circle cx="340" cy="200" r="6"/><circle cx="400" cy="200" r="6"/><circle cx="580" cy="200" r="6"/></g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">實心圓 = 該反射出現、空心圈 = 消光。<b style="color:#2e8b2e">sc</b> 全出現；<b style="color:#1a4d7c">bcc</b> 只留 h+k+l 偶；<b style="color:#e67e22">fcc</b> 只留全奇或全偶；<b style="color:#c0392b">diamond</b> 在 fcc 基礎再消掉 200、222（h+k+l≡2 mod 4）。同一橫排越往右指標越高。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：逐峰判消光、CsCl 不全消、計算 |S|²</b></summary>
+
+**範例 A（bcc 為何無 (100)、有 (110)）**：bcc basis $(000),(\tfrac12\tfrac12\tfrac12)$，$S=f[1+(-1)^{h+k+l}]$。
+$(100)$：$h+k+l=1$ 奇 $\Rightarrow S=f[1+(-1)]=0$ → **消光**。
+$(110)$：$h+k+l=2$ 偶 $\Rightarrow S=f[1+1]=2f$ → **出現**，$I\propto|2f|^2=4f^2$。
+
+**範例 B（fcc 為何無 (210)）**：fcc 允許 $\Leftrightarrow h,k,l$ 全奇或全偶。$(210)$ 是「偶奇偶」混合 $\Rightarrow$ 代入 $S=f[1+e^{-i\pi(h+k)}+e^{-i\pi(h+l)}+e^{-i\pi(k+l)}]$：$h+k=3$ 奇、$h+l=2$ 偶、$k+l=1$ 奇 $\Rightarrow S=f[1-1+1-1]=0$ → **消光**。
+
+**範例 C（diamond 的 (222) 消、(400) 在）**：diamond $S=S_{\text{fcc}}\cdot[1+e^{-i\frac\pi2(h+k+l)}]$。
+$(222)$：全偶 → fcc 允許；$h+k+l=6\equiv2\pmod4\Rightarrow e^{-i\frac\pi2\cdot6}=e^{-i3\pi}=-1\Rightarrow[1-1]=0$ → **消光**。
+$(400)$：全偶 → fcc 允許；$h+k+l=4\equiv0\pmod4\Rightarrow e^{-i\frac\pi2\cdot4}=e^{-i2\pi}=1\Rightarrow[1+1]=2$ → **出現**。
+
+**範例 D（CsCl：兩種原子不全消）**：CsCl 是 sc，basis $\mathrm{Cs}(000)+\mathrm{Cl}(\tfrac12\tfrac12\tfrac12)$，兩原子形狀因子 $f_{\mathrm{Cs}}\ne f_{\mathrm{Cl}}$：
+$$S=f_{\mathrm{Cs}}+f_{\mathrm{Cl}}e^{-i\pi(h+k+l)}=\begin{cases}f_{\mathrm{Cs}}+f_{\mathrm{Cl}} & h+k+l\ \text{偶}\\ f_{\mathrm{Cs}}-f_{\mathrm{Cl}} & h+k+l\ \text{奇}\end{cases}$$
+奇指標峰**不再完全消失**（只變弱 $\propto|f_{\mathrm{Cs}}-f_{\mathrm{Cl}}|^2$）——這是區分 CsCl 與真 bcc 的判據。
+</details>
+
+## ✅ 自我檢核
+- bcc (100) 奇 → 消光、(110) 偶 → 出現 ✓(實驗一致)。
+- diamond (200) 消、(222) 消、(111) 在 ✓(矽/鍺繞射特徵)。
+
+## 🔀 變化：常單獨問「哪些峰消失/為何 fcc 無 (210)」,或加 CsCl(兩種原子 → $S=f_1\pm f_2$ 不全消)。
+## 信心：高（Kittel Ch2 標準）
+
+---
+
+# 📕 第 4 題 — 晶體鍵結類型（5 pts）
+
+## 📋 原題
+> 主要晶體鍵結類型有哪些?各舉至少一種材料系統為例。
+
+## 🎯 核心訊息
+> 五類,由弱到強的代表:van der Waals → hydrogen → metallic → ionic → covalent。
+
+## 解答
+| 鍵結 | 機制 | 例 |
+|---|---|---|
+| **van der Waals**(分子) | 瞬時偶極–感應偶極($\propto r^{-6}$) | Ar、Kr、固態 CH₄ |
+| **hydrogen bond**(氫鍵) | H 居間的偶極吸引 | 冰 H₂O、HF |
+| **metallic**(金屬) | 離子實 + 共享電子海 | Na、Cu、Al |
+| **ionic**(離子) | 陰陽離子 Coulomb 吸引 | NaCl、KCl、CsCl |
+| **covalent**(共價) | 共享電子對、方向性鍵 | diamond、Si、Ge |
+
+## ✅ 自我檢核：結合能量級 vdW(~0.01 eV)< 金屬/離子/共價(~1–10 eV)✓。
+## 🔀 變化：2016 第 3 題加 Lennard–Jones 計算;2013 第 5 題即接著推 vdW。
+## 信心：高
+
+---
+
+# 📒 第 5 題 — van der Waals 推導 + 氪熔點估計（10 pts）
+
+## 📋 原題
+> 由「兩個全同諧振子」或「兩偶極的靜電作用能」推導 van der Waals 交互作用。用 $U(R)\approx-10^{-58}\,\mathrm{erg\,cm^6}/R^6$、原子間距 $4\,\text{Å}$、$k_B=1.38\times10^{-16}\,\mathrm{erg/K}$,估計惰性氣體氪的熔點。
+
+## 🎯 核心訊息
+> 兩個耦合諧振子的**零點能**因偶極耦合而下降,降幅 $\propto -1/R^6$ → 這就是 van der Waals 吸引。熔點估計:令熱能 $k_BT_m\sim|U(R)|$。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 兩耦合諧振子 → 零點能下降 → $-1/R^6$</b></summary>
+
+每個原子模型成一維諧振子(電子相對離子位移 $x_i$,彈簧常數 $C$,$\omega_0=\sqrt{C/m}$)。兩振子相距 $R$,偶極矩 $p_i=ex_i$,偶極–偶極耦合能 $\sim\dfrac{2e^2x_1x_2}{R^3}$。對角化耦合 → 兩正則模頻率分裂 → 零點能 $\tfrac12\hbar(\omega_++\omega_-)$ 低於未耦合的 $\hbar\omega_0$,降幅 $\propto R^{-6}$。
+</details>
+
+## 解答
+
+### (i) 推導(兩諧振子法,完整)
+**Step 1 — 未耦合 Hamiltonian。**
+$$H_0=\frac{p_1^2}{2m}+\frac12 C x_1^2+\frac{p_2^2}{2m}+\frac12 C x_2^2,\qquad \omega_0=\sqrt{C/m}.$$
+**Step 2 — 偶極耦合。** 兩共線偶極($ex_1,ex_2$)相距 $R$ 的靜電作用,展開到領先項:
+$$H_1\approx-\frac{2e^2}{R^3}x_1x_2.$$
+**Step 3 — 正則模。** 令 $x_\pm=\tfrac1{\sqrt2}(x_1\pm x_2)$,則
+$$\tfrac12C(x_1^2+x_2^2)-\tfrac{2e^2}{R^3}x_1x_2=\tfrac12\Big(C-\tfrac{2e^2}{R^3}\Big)x_+^2+\tfrac12\Big(C+\tfrac{2e^2}{R^3}\Big)x_-^2,$$
+$$\omega_\pm=\sqrt{\frac{C\mp 2e^2/R^3}{m}}=\omega_0\sqrt{1\mp\frac{2e^2}{CR^3}}.$$
+**Step 4 — 零點能差。** 展開到二階 $\sqrt{1+x}\approx1+\tfrac x2-\tfrac{x^2}8$:
+$$\Delta U=\tfrac12\hbar(\omega_++\omega_-)-\hbar\omega_0\approx\tfrac12\hbar\omega_0\Big[-\tfrac18\Big(\tfrac{2e^2}{CR^3}\Big)^2\cdot2\Big]=-\frac{\hbar\omega_0}{8}\Big(\frac{2e^2}{CR^3}\Big)^2.$$
+$$\boxed{\Delta U=-\frac{\hbar\omega_0\,e^4}{2C^2}\frac1{R^6}\equiv-\frac{A}{R^6}<0.}$$
+一階項 $\mp\tfrac12$ 相消,二階項同號相加 → 淨吸引 $\propto-1/R^6$,即 van der Waals。
+
+### (ii) 氪熔點估計(完整數值)
+熔點時熱能與鍵能同量級,取 $k_BT_m\approx|U(R)|$。代 $R=4\,\text{Å}=4\times10^{-8}\,\mathrm{cm}$:
+$$R^6=(4\times10^{-8})^6=4^6\times10^{-48}=4096\times10^{-48}=4.096\times10^{-45}\,\mathrm{cm^6}.$$
+$$|U|=\frac{10^{-58}}{4.096\times10^{-45}}=2.44\times10^{-14}\,\mathrm{erg}.$$
+$$\boxed{T_m\approx\frac{|U|}{k_B}=\frac{2.44\times10^{-14}}{1.38\times10^{-16}}\approx177\,\mathrm{K}.}$$
+> **小結**:估得 $\sim177\,\mathrm K$,與氪實際熔點 $116\,\mathrm K$ 同量級(差約 1.5 倍)——這是「$k_BT_m\sim$ 鍵能」的粗估,沒考慮配位數與多體和,量級正確即達題意。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 300" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<text x="280" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">Lennard–Jones 位能：−1/R⁶ 吸引 + 1/R¹² 排斥</text>
+<line x1="60" y1="160" x2="540" y2="160" stroke="#999" stroke-width="1"/>
+<line x1="80" y1="40" x2="80" y2="270" stroke="#999" stroke-width="1"/>
+<text x="528" y="153" fill="#555">R</text>
+<text x="92" y="48" fill="#555">U(R)</text>
+<polyline points="120,55 128,110 136,142 145,158 155,168 168,174 185,172 205,166 230,160 260,156 300,154 350,153 420,153 530,153" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<polyline points="120,55 145,158 168,174 230,160 530,153" fill="none" stroke="#e67e22" stroke-width="1.4" stroke-dasharray="4 3" opacity="0.5"/>
+<line x1="168" y1="160" x2="168" y2="174" stroke="#1a4d7c" stroke-width="1" stroke-dasharray="3 2"/>
+<circle cx="168" cy="174" r="3.5" fill="#1a4d7c"/>
+<text x="168" y="192" text-anchor="middle" fill="#1a4d7c">R₀ ≈ 4 Å</text>
+<line x1="80" y1="174" x2="168" y2="174" stroke="#2e8b2e" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="100" y="172" fill="#2e8b2e">−|U|</text>
+<line x1="60" y1="230" x2="540" y2="230" stroke="#6aa1d6" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="280" y="248" text-anchor="middle" fill="#1a4d7c">熔點判準：k_B T_m ≈ |U(R₀)| ⇒ T_m ≈ 177 K</text>
+<text x="280" y="266" text-anchor="middle" fill="#555">（吸引尾 ∝ −1/R⁶ = van der Waals）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">惰性氣體原子對位能：長程 <b style="color:#e67e22">−A/R⁶</b>（van der Waals 吸引，來自耦合諧振子零點能下降）+ 短程排斥，合成有最小值 −|U| 的井（<b style="color:#1a4d7c">R₀≈4 Å</b>）。熔點粗估令熱能 k_B T_m 等於井深 |U(R₀)|，得 T_m≈177 K（與 Kr 實測 116 K 同量級）。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：不同 R 的 U、不同氣體熔點、單位換算</b></summary>
+
+**範例 A（R 改成 3.5 Å 的 |U|）**：$U=-10^{-58}/R^6$。$R=3.5\,\text{Å}=3.5\times10^{-8}\,\mathrm{cm}$：
+$$R^6=(3.5)^6\times10^{-48}=1838\times10^{-48}=1.838\times10^{-45}\,\mathrm{cm^6},\quad |U|=\frac{10^{-58}}{1.838\times10^{-45}}=5.44\times10^{-14}\,\mathrm{erg}.$$
+比 $4\,\text{Å}$ 時的 $2.44\times10^{-14}$ 大 2.2 倍——因 $|U|\propto R^{-6}$，距離縮 $0.875$ 倍，能量放大 $0.875^{-6}=2.23$ 倍。
+
+**範例 B（對應熔點）**：$T_m=\dfrac{|U|}{k_B}=\dfrac{5.44\times10^{-14}}{1.38\times10^{-16}}=394\,\mathrm K$。可見熔點對鍵長極敏感（$T_m\propto R^{-6}$）。
+
+**範例 C（為何 Ne→Xe 熔點遞增）**：吸引係數 $A=\dfrac{\hbar\omega_0 e^4}{2C^2}\propto$ 極化率$^2$。原子越大、外層電子越鬆 → 極化率越大 → $A$ 越大 → $|U|$ 越深 → 熔點越高。實測：Ne 24 K < Ar 84 K < Kr 116 K < Xe 161 K，單調遞增 ✓。
+
+**範例 D（erg→eV 檢查量級）**：$|U|=2.44\times10^{-14}\,\mathrm{erg}$，$1\,\mathrm{eV}=1.602\times10^{-12}\,\mathrm{erg}$：
+$$|U|=\frac{2.44\times10^{-14}}{1.602\times10^{-12}}=0.0152\,\mathrm{eV}\approx15\,\mathrm{meV}.$$
+正是「vdW 鍵 $\sim$ 十幾 meV」的典型量級（遠小於共價/離子鍵的數 eV）✓。
+</details>
+
+## ✅ 自我檢核
+- $\Delta U\propto-1/R^6$ ✓(vdW 標準);一階相消、二階相加 ✓。
+- 數值:$T_m\sim10^2$ K 量級、惰性氣體低熔點 ✓。
+
+## 🔀 變化：可改走「兩固定偶極靜電能」法;或問「為何 Ne→Xe 熔點遞增」(極化率 → $A$ 遞增)。
+## 信心：中高（推導嚴格;熔點估計模型粗,故標中高,數值 177 K 已獨立重算）
+
+---
+
+# 📓 第 6 題 — 單原子鏈聲子的總能量（4+7 = 11 pts）★長推導
+
+## 📋 原題
+> 單原子線晶格(原子質量 $M$、間距 $a$、最近鄰力常數 $C$),縱波 $u_s=u\cos(\omega t-sKa)$。
+> (a) 證明波的總能量為
+> $$E=\frac12 M\sum_s\Big(\frac{du_s}{dt}\Big)^2+\frac12 C\sum_s(u_s-u_{s+1})^2.$$
+> (b) 代入 $u_s$,證明每原子的時間平均總能量為
+> $$\frac14 M\omega^2u^2+\frac12 C(1-\cos Ka)u^2=\frac12 M\omega^2u^2,$$
+> 最後一步用了色散關係 $\omega^2=(4C/M)\sin^2\tfrac12 Ka$。
+
+## 🎯 核心訊息
+> 動能時間平均 $\tfrac14M\omega^2u^2$、位能時間平均 $\tfrac12C(1-\cos Ka)u^2$;**用色散關係 $C(1-\cos Ka)=\tfrac12M\omega^2$**,兩者相等 → 各 $\tfrac14M\omega^2u^2$,合計 $\tfrac12M\omega^2u^2$(動能=位能,簡諧振子均分定理)。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 為何位能寫成 $\tfrac12C(u_s-u_{s+1})^2$、色散關係怎麼來</b></summary>
+
+最近鄰彈簧:第 $s$、$s{+}1$ 原子間的彈簧伸長 $=u_s-u_{s+1}$,儲能 $\tfrac12C(u_s-u_{s+1})^2$。運動方程 $M\ddot u_s=C(u_{s+1}+u_{s-1}-2u_s)$,代行波解即得色散 $\omega^2=\dfrac{4C}{M}\sin^2\dfrac{Ka}{2}=\dfrac{2C}{M}(1-\cos Ka)$。故 $C(1-\cos Ka)=\tfrac12M\omega^2$——這正是 (b) 最後一步的鑰匙。
+</details>
+
+## 解答
+
+### (a) 總能量 = 動能 + 彈性位能
+**動能**:第 $s$ 原子質量 $M$、速度 $\dot u_s$,動能 $\tfrac12M\dot u_s^2$。對所有原子求和:
+$$T=\frac12 M\sum_s\dot u_s^2=\frac12 M\sum_s\Big(\frac{du_s}{dt}\Big)^2.$$
+**位能**:最近鄰諧近似下,每對相鄰原子(力常數 $C$)的彈性能 $\tfrac12C(u_s-u_{s+1})^2$。對所有鍵求和:
+$$V=\frac12 C\sum_s(u_s-u_{s+1})^2.$$
+$$\boxed{E=T+V=\frac12 M\sum_s\Big(\frac{du_s}{dt}\Big)^2+\frac12 C\sum_s(u_s-u_{s+1})^2.}\ \blacksquare$$
+
+### (b) 代入行波,取時間平均
+**Step 1 — 動能項。** $\dot u_s=-u\omega\sin(\omega t-sKa)$,
+$$\frac12 M\dot u_s^2=\frac12 M u^2\omega^2\sin^2(\omega t-sKa).$$
+時間平均 $\langle\sin^2\rangle=\tfrac12$,故**每原子動能平均**
+$$\langle T\rangle_s=\frac12 Mu^2\omega^2\cdot\frac12=\frac14 M\omega^2u^2.$$
+
+**Step 2 — 位能項。** 用和差化積 $\cos A-\cos B=-2\sin\tfrac{A+B}{2}\sin\tfrac{A-B}{2}$,取 $A=\omega t-sKa$、$B=\omega t-(s+1)Ka$($A-B=Ka$):
+$$u_s-u_{s+1}=u\big[\cos A-\cos B\big]=-2u\sin\!\Big(\omega t-(s+\tfrac12)Ka\Big)\sin\frac{Ka}{2}.$$
+平方:
+$$(u_s-u_{s+1})^2=4u^2\sin^2\!\Big(\omega t-(s+\tfrac12)Ka\Big)\sin^2\frac{Ka}{2}.$$
+時間平均 $\langle\sin^2\rangle=\tfrac12$:
+$$\big\langle(u_s-u_{s+1})^2\big\rangle=4u^2\cdot\frac12\cdot\sin^2\frac{Ka}{2}=2u^2\sin^2\frac{Ka}{2}.$$
+用 $\sin^2\tfrac{Ka}{2}=\tfrac12(1-\cos Ka)$,**每原子位能平均**
+$$\langle V\rangle_s=\frac12 C\cdot2u^2\sin^2\frac{Ka}{2}=Cu^2\sin^2\frac{Ka}{2}=\frac12 C(1-\cos Ka)u^2.$$
+
+**Step 3 — 合計並用色散關係。** 每原子時間平均總能
+$$\langle E\rangle_s=\frac14 M\omega^2u^2+\frac12 C(1-\cos Ka)u^2.$$
+代色散 $\omega^2=\dfrac{2C}{M}(1-\cos Ka)\Rightarrow C(1-\cos Ka)=\tfrac12 M\omega^2$:
+$$\frac12 C(1-\cos Ka)u^2=\frac12\cdot\frac12 M\omega^2u^2=\frac14 M\omega^2u^2.$$
+$$\boxed{\langle E\rangle_s=\frac14 M\omega^2u^2+\frac14 M\omega^2u^2=\frac12 M\omega^2u^2.}\ \blacksquare$$
+> **小結**:動能平均 = 位能平均 = $\tfrac14M\omega^2u^2$(諧振子位能/動能均分),合計 $\tfrac12M\omega^2u^2$,與題目一致。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 580 280" width="100%" style="max-width:640px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<text x="290" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">單原子鏈色散 ω = ω_max |sin(Ka/2)|</text>
+<line x1="60" y1="220" x2="540" y2="220" stroke="#999" stroke-width="1"/>
+<line x1="300" y1="40" x2="300" y2="235" stroke="#999" stroke-width="1"/>
+<text x="300" y="252" text-anchor="middle" fill="#555">0</text>
+<text x="540" y="240" text-anchor="end" fill="#555">π/a</text>
+<text x="60" y="240" text-anchor="start" fill="#555">−π/a</text>
+<text x="312" y="55" fill="#555">ω</text>
+<line x1="60" y1="60" x2="540" y2="60" stroke="#6aa1d6" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="66" y="54" fill="#1a4d7c">ω_max = √(4C/M)</text>
+<polyline points="60,60 78,63 96,72 114,86 132,104 150,124 168,145 186,164 204,182 222,196 240,207 258,214 282,219 300,220 318,219 342,214 360,207 378,196 396,182 414,164 432,145 450,124 468,104 486,86 504,72 522,63 540,60" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<line x1="300" y1="220" x2="340" y2="180" stroke="#2e8b2e" stroke-width="1.6" stroke-dasharray="3 2"/>
+<text x="360" y="180" fill="#2e8b2e">小 K：ω ≈ v K（線性）</text>
+<line x1="540" y1="60" x2="540" y2="220" stroke="#e67e22" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="490" y="78" fill="#e67e22">v_g = 0（駐波）</text>
+<text x="290" y="272" text-anchor="middle" fill="#555">每原子時間平均能 ⟨E⟩ = ½Mω²u²（動能 = 位能 = ¼Mω²u²）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">第一布里淵區內的聲學色散 ω=√(4C/M)|sin(Ka/2)|。小 K 處 <b style="color:#2e8b2e">線性</b>（聲速 v=a√(C/M)）；BZ 邊界 K=π/a 處 ω 最大、群速 v_g=dω/dK=0，是<b style="color:#e67e22">駐波</b>。本題用的關係 C(1−cos Ka)=½Mω² 正是把這條曲線平方後的形式。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：色散數值、群速、長波聲速、雙原子鏈分支</b></summary>
+
+**範例 A（K=π/a 的最大頻率）**：$\omega^2=\dfrac{4C}{M}\sin^2\tfrac{Ka}{2}$，在 $K=\pi/a$：$\sin\tfrac{Ka}{2}=\sin\tfrac\pi2=1$，
+$$\omega_{\max}=\sqrt{\frac{4C}{M}}=2\sqrt{\frac CM}.$$
+代 $C=15\,\mathrm{N/m},\ M=10^{-26}\,\mathrm{kg}$：$\omega_{\max}=2\sqrt{15/10^{-26}}=2\times3.87\times10^{13}=7.7\times10^{13}\,\mathrm{rad/s}$。
+
+**範例 B（群速與相速）**：$\omega=\omega_{\max}\sin\tfrac{Ka}{2}$，群速
+$$v_g=\frac{d\omega}{dK}=\omega_{\max}\cdot\frac a2\cos\frac{Ka}{2}.$$
+在 $K\to0$：$v_g\to\omega_{\max}\tfrac a2=2\sqrt{C/M}\cdot\tfrac a2=a\sqrt{C/M}=v$（聲速）。在 $K=\pi/a$：$\cos\tfrac\pi2=0\Rightarrow v_g=0$（駐波，不傳能）。
+
+**範例 C（長波聲速）**：$Ka\ll1$ 時 $\sin\tfrac{Ka}{2}\approx\tfrac{Ka}{2}$，
+$$\omega\approx\sqrt{\frac{4C}{M}}\cdot\frac{Ka}{2}=a\sqrt{\frac CM}\,K\equiv vK,\qquad v=a\sqrt{\frac CM}.$$
+代上面數值 $v=a\sqrt{C/M}$，$a=3\times10^{-10}\,\mathrm m$：$v=3\times10^{-10}\times3.87\times10^{13}=1.16\times10^{4}\,\mathrm{m/s}$（典型固體聲速量級）✓。
+
+**範例 D（雙原子鏈多一支光學模）**：質量交替 $M_1,M_2$ 時色散裂成兩支：
+$$\omega^2=C\Big(\frac1{M_1}+\frac1{M_2}\Big)\pm C\sqrt{\Big(\frac1{M_1}+\frac1{M_2}\Big)^2-\frac{4\sin^2(Ka/2)}{M_1M_2}}.$$
+「−」根 $K\to0$ 時 $\omega\to0$ 是**聲學支**；「+」根 $K\to0$ 時 $\omega\to\sqrt{2C(1/M_1+1/M_2)}\ne0$ 是**光學支**，中間出現聲子能隙。單原子鏈是 $M_1=M_2$ 的退化情形（光學支消失）。
+</details>
+
+## ✅ 自我檢核
+- 量綱:$M\omega^2u^2$ = 質量×頻率²×長度² = 能量 ✓。
+- 長波極限 $Ka\to0$:$1-\cos Ka\to\tfrac12(Ka)^2$、$\omega^2\to\tfrac{C}{M}(Ka)^2=v^2K^2$($v=a\sqrt{C/M}$)→ 線性聲學支 ✓。
+- 動能=位能 ✓(任何諧振子時間平均下成立)。
+
+## 🔀 變化：常接問「群速 $v_g=d\omega/dK$、$K=\pi/a$ 處 $v_g=0$(駐波)」、或雙原子鏈 optical/acoustic 分支。
+## 信心：高（色散與和差化積逐步重算,結果完全對上題目)
+
+---
+
+# 📘 第 7 題 — Debye vs Einstein 聲子 DOS（3 pts）
+
+## 📋 原題
+> 聲子態密度的 Debye 模型是什麼?Einstein 模型是什麼?
+
+## 解答
+- **Debye**:把晶格振動當**連續彈性介質**,色散 $\omega=vk$ 線性,DOS
+  $$g(\omega)=\frac{3V\omega^2}{2\pi^2v^3}\quad(0\le\omega\le\omega_D),$$
+  並以「模式總數 $=3N$」截止於 Debye 頻率 $\omega_D=v(6\pi^2N/V)^{1/3}$。對應比熱低溫 $\propto T^3$、高溫 $\to3Nk_B$。
+- **Einstein**:假設 $3N$ 個模**全同頻率 $\omega_E$**(獨立振子),DOS 為單一 $\delta$ 峰
+  $$g(\omega)=3N\,\delta(\omega-\omega_E).$$
+  低溫比熱**指數**衰減(因缺低頻聲學模,衰太快),適合描述 optical 模。
+
+## ✅ 自我檢核：Debye $\int_0^{\omega_D}g\,d\omega=3N$ ✓;Einstein 低溫過衰 → 故低溫須用 Debye $T^3$ ✓。
+## 🔀 變化：2016 第 6 題完整推 $\omega_D$ 與 Dulong–Petit。
+## 信心：高
+
+---
+
+# 📗 第 8 題 — Dulong–Petit 定律（2 pts）
+
+## 📋 原題
+> 古典晶體的比熱:Dulong–Petit 定律是什麼?
+
+## 解答
+古典等分定理:每個原子 3 維、每維有動能+位能各 $\tfrac12k_BT$,故每原子平均能 $3k_BT$。$N$ 原子固體:
+$$U=3Nk_BT\ \Rightarrow\ \boxed{C_V=\frac{dU}{dT}=3Nk_B\ (=3R\ \text{每莫耳}\approx25\,\mathrm{J\,mol^{-1}K^{-1}}).}$$
+**與材料、溫度無關**——僅高溫($T\gg\Theta_D$)成立;低溫量子凍結 → $C_V\to0$($\propto T^3$),這正是 Debye/Einstein 要修正的地方。
+
+## ✅ 自我檢核：與第 6/7 題高溫極限一致 ✓。
+## 信心：高
+
+---
+
+# 📙 第 9 題 — Drude 與 Sommerfeld 理論（3+3+3+3 = 12 pts）
+
+## 📋 原題
+> 金屬模型 Drude theory:(a) 盡量描述它。(b) 主要成就與失敗?(c) Sommerfeld 如何修正?(d) Sommerfeld 修正的主要成就與失敗?
+
+## 🎯 核心訊息
+> Drude = 古典自由電子氣(Maxwell–Boltzmann);Sommerfeld 換成 **Fermi–Dirac + Pauli**。換統計就解決了比熱過大、Lorenz 數等問題;但兩者都「自由電子」,擋不住能隙/絕緣體/正 Hall 係數——那要 Bloch(第 10–11 題)。
+
+## 解答
+
+### (a) Drude theory 描述
+- 金屬中價電子視為**古典理想氣體**,在固定離子背景中自由運動;遵守 **Maxwell–Boltzmann** 統計。
+- 電子與離子(實則雜質/聲子)碰撞,平均**弛豫時間 $\tau$**,碰撞間隨機化速度。
+- 結果:直流電導 $\sigma=\dfrac{ne^2\tau}{m}$、運動方程 $m\dfrac{d\mathbf v}{dt}=-e\mathbf E-\dfrac{m\mathbf v}\tau$。
+
+### (b) Drude 成就與失敗
+**成就**:Ohm 定律與 $\sigma=ne^2\tau/m$、Hall 效應、AC 電導與電漿頻率、Wiedemann–Franz 定律($\kappa/\sigma T=$ 常數,數值幸運地約對)。
+**失敗**:預測電子比熱 $\tfrac32k_B$/電子(實測小百倍)、Lorenz 數靠**兩個錯(過大 $v^2$ × 過大 $C$)相消**才對、無法解釋為何有絕緣體、部分金屬 Hall 係數為**正**、磁阻與熱電勢量級錯。
+
+### (c) Sommerfeld 修正
+保留自由電子,但把 **Maxwell–Boltzmann 換成 Fermi–Dirac 分布 + Pauli 不相容**:電子填到費米能 $E_F$,只有費米面附近 $\sim k_BT$ 寬的電子能被熱激發。
+
+### (d) Sommerfeld 成就與失敗
+**成就**:正確的電子比熱 $C_{el}=\tfrac{\pi^2}2 nk_B(T/T_F)\propto T$(故小)、正確的 Lorenz 數 $L=\tfrac{\pi^2}3(k_B/e)^2$、Pauli 順磁、合理的熱電勢量級。
+**失敗**:**仍是自由電子** → 不解釋能隙/絕緣體/半導體、正 Hall 係數、為何平均自由程可極長、能帶結構。需引入週期位能 → **Bloch 理論**。
+
+## ✅ 自我檢核：核心一句——「Sommerfeld 修對了統計(比熱、Lorenz),但沒修『自由』這件事(能隙)」✓。
+## 🔀 變化：2016 第 2 題深推 $U_0=\tfrac35NE_F$、2D DOS。
+## 信心：高
+
+---
+
+# 📕 第 10 題 — Bloch 定理 + 證明（2+10 = 12 pts）★長推導
+
+## 📋 原題
+> (a) Bloch 定理是什麼?(b) 證明之(可用一般量子力學論述或其他)。
+
+## 🎯 核心訊息
+> 「平移算符與 $H$ 對易 → 共同本徵態 → 本徵值是模 1 相位 $e^{i\mathbf k\cdot\mathbf R}$」。Bloch 不是假設,是「平移對稱 + 歸一不變」的必然。
+
+## 📚 前情提要
+週期位能 $V(\mathbf r+\mathbf R)=V(\mathbf r)$ ⇒ 平移 $\mathbf R$ 不改 $H$ ⇒ 平移算符 $T_{\mathbf R}$ 與 $H$ 對易 ⇒ 可同時對角化。$T_{\mathbf R}$ 本徵值因平移不改機率而模 1 → $e^{i\mathbf k\cdot\mathbf R}$。
+
+## 解答
+
+### (a) Bloch 定理敘述
+週期位能下,單電子本徵態可寫成「平面波 × 週期函數」:
+$$\boxed{\psi_{\mathbf k}(\mathbf r)=e^{i\mathbf k\cdot\mathbf r}u_{\mathbf k}(\mathbf r),\qquad u_{\mathbf k}(\mathbf r+\mathbf R)=u_{\mathbf k}(\mathbf r),}$$
+等價於 $\psi_{\mathbf k}(\mathbf r+\mathbf R)=e^{i\mathbf k\cdot\mathbf R}\psi_{\mathbf k}(\mathbf r)$。
+
+### (b) 證明（平移算符法,完整）
+**Step 1 — 定義平移算符。** $T_{\mathbf R}f(\mathbf r)=f(\mathbf r+\mathbf R)$。因 $V$ 週期,$T_{\mathbf R}\big(H\psi\big)=H\big(T_{\mathbf R}\psi\big)$,即 $[T_{\mathbf R},H]=0$。
+**Step 2 — 平移群可交換。** $T_{\mathbf R}T_{\mathbf R'}=T_{\mathbf R+\mathbf R'}=T_{\mathbf R'}T_{\mathbf R}$。一族互相對易又與 $H$ 對易 → 有**共同本徵態** $\psi$。
+**Step 3 — 本徵值模 1。** 設 $T_{\mathbf R}\psi=c(\mathbf R)\psi$。歸一不變($\int|\psi|^2$ 不因平移改變)⇒ $|c(\mathbf R)|=1$。又群性質 ⇒ $c(\mathbf R)c(\mathbf R')=c(\mathbf R+\mathbf R')$。
+**Step 4 — 解函數方程。** $|c|=1$ 且對加法為乘法同態 ⇒ 必為 $c(\mathbf R)=e^{i\mathbf k\cdot\mathbf R}$(某實向量 $\mathbf k$)。故
+$$\psi(\mathbf r+\mathbf R)=e^{i\mathbf k\cdot\mathbf R}\psi(\mathbf r).$$
+**Step 5 — 化成 Bloch 形。** 定義 $u_{\mathbf k}(\mathbf r)\equiv e^{-i\mathbf k\cdot\mathbf r}\psi(\mathbf r)$,則
+$$u_{\mathbf k}(\mathbf r+\mathbf R)=e^{-i\mathbf k\cdot(\mathbf r+\mathbf R)}\psi(\mathbf r+\mathbf R)=e^{-i\mathbf k\cdot\mathbf r}e^{-i\mathbf k\cdot\mathbf R}\,e^{i\mathbf k\cdot\mathbf R}\psi(\mathbf r)=u_{\mathbf k}(\mathbf r).\ \blacksquare$$
+> **小結**:唯一輸入是「平移對稱 + 歸一不變」;$\hbar\mathbf k$ 是平移群的量子數(晶體動量),只在模一個 $\hbar\mathbf G$ 下守恆。
+
+## ✅ 自我檢核：$\mathbf k\to\mathbf k+\mathbf G$ 給同一 $c(\mathbf R)$(因 $e^{i\mathbf G\cdot\mathbf R}=1$)→ $\mathbf k$ 可限第一 BZ ✓。
+## 🔀 變化：也可走 central equation(見第 11 題);2016 第 4(a) 同題。
+## 信心：高（Kittel Ch7 標準）
+
+---
+
+# 📒 第 11 題 — 能隙起源 + BZ 邊界能隙 $2U$（2+5+7 = 14 pts）★長推導
+
+## 📋 原題
+> (a) 能隙的起源?(b) 一維晶體(常數 $a$),位能 $U(x)=2U\cos Gx$,$G=2\pi/a$ 為倒晶格向量,證明 Brillouin zone 邊界的能隙大小為 $2U$(一階)。(加分:用 central equation $(\lambda_k-E)C(k)+\sum_G U_G C(k-G)=0$ 導出,$\lambda_k=\hbar^2k^2/2m$,$H\psi=(p^2/2m+U(x))\psi=E\psi$;假設位能 Fourier 分量遠小於 zone 邊界自由電子動能。)
+
+## 🎯 核心訊息
+> 在 BZ 邊界 $k=\pm\pi/a$,兩個簡併平面波 $e^{\pm i\pi x/a}$ 被週期位能耦合,$2\times2$ 久期方程給 $E_\pm=\lambda\pm U$,**能隙 $=2U=2|U_G|$**。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ $U(x)=2U\cos Gx$ 的 Fourier 分量是 $U$,不是 $2U$</b></summary>
+
+$2U\cos Gx=U e^{iGx}+U e^{-iGx}$,故 $U_{+G}=U_{-G}=U$。能隙 $=2|U_G|=2U$。這個「2」的來源是 $\pm G$ 兩個分量,別與 cos 前的係數 $2U$ 混淆。
+</details>
+
+## 解答
+
+### (a) 能隙起源
+自由電子 $E=\hbar^2k^2/2m$ 連續無隙。在 BZ 邊界 $k=\pm\pi/a$,$e^{i\pi x/a}$ 與 $e^{-i\pi x/a}$ 簡併,被週期位能的 Fourier 分量 $U_G$ 強耦合(Bragg 反射),混成兩個**駐波**:
+$$\psi_+\propto\cos\frac{\pi x}{a}\ (\text{電子密度堆在離子上,能量低}),\quad \psi_-\propto\sin\frac{\pi x}{a}\ (\text{堆在離子間,能量高}).$$
+兩者能量差 = 能隙。
+
+### (b) 退化微擾法(一階,給 $2U$)
+**Step 1 — 簡併基底。** 在 $k=\pi/a$,取 $|1\rangle=e^{i\pi x/a}$、$|2\rangle=e^{-i\pi x/a}$,自由電子能皆 $\lambda=\dfrac{\hbar^2}{2m}\Big(\dfrac\pi a\Big)^2$。
+**Step 2 — 位能矩陣元。** $U(x)=Ue^{iGx}+Ue^{-iGx}$,$G=2\pi/a$。
+$$\langle1|U|2\rangle=\frac1L\int e^{-i\pi x/a}U(x)e^{-i\pi x/a}dx=\frac1L\int U(x)e^{-i2\pi x/a}dx=U_G=U,$$
+(只有 $e^{+iGx}$ 項殘存,挑出 $U_G=U$);同理 $\langle2|U|1\rangle=U_{-G}=U$,對角元 $\langle1|U|1\rangle=\langle2|U|2\rangle=0$。
+**Step 3 — 久期方程。**
+$$\begin{vmatrix}\lambda-E & U\\ U & \lambda-E\end{vmatrix}=0\ \Rightarrow\ (\lambda-E)^2=U^2\ \Rightarrow\ E_\pm=\lambda\pm U.$$
+$$\boxed{E_{\text{gap}}=E_+-E_-=2U.}$$
+
+### (b′) central equation 法(加分,完整)
+**Step 1 — 寫 central equation。** 在 $k$ 附近只保留與 $C(k)$ 經由 $U_{\pm G}$ 耦合的 $C(k-G)$ 兩係數:
+$$(\lambda_k-E)C(k)+U_G\,C(k-G)+U_{-G}\,C(k+G)+\dots=0.$$
+在 zone 邊界 $k=G/2=\pi/a$,最近共振的是 $k$ 與 $k-G=-\pi/a$。截斷成兩式:
+$$(\lambda_k-E)C(k)+U\,C(k-G)=0,$$
+$$(\lambda_{k-G}-E)C(k-G)+U\,C(k)=0.$$
+**Step 2 — 邊界簡併。** $\lambda_k=\dfrac{\hbar^2}{2m}\Big(\dfrac\pi a\Big)^2=\lambda$,$\lambda_{k-G}=\dfrac{\hbar^2}{2m}\Big(-\dfrac\pi a\Big)^2=\lambda$(相等)。
+**Step 3 — 久期行列式。**
+$$\begin{vmatrix}\lambda-E & U\\ U & \lambda-E\end{vmatrix}=0\ \Rightarrow\ E_\pm=\lambda\pm U\ \Rightarrow\ \boxed{E_{\text{gap}}=2U.}$$
+(假設 $U\ll\lambda$,故只需保留這兩個近簡併分量,高階 $C(k\pm2G)$ 可略 → 一階結果。)
+> **小結**:兩法同源——「兩個近簡併平面波 + 把它們耦起來的單一 Fourier 分量 $U_G$」。能隙 $=2|U_G|$,此題 $|U_G|=U$ → $2U$。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 290" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<text x="280" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">弱週期位能在 BZ 邊界開能隙 2U</text>
+<line x1="60" y1="250" x2="520" y2="250" stroke="#999" stroke-width="1"/>
+<line x1="290" y1="40" x2="290" y2="260" stroke="#999" stroke-width="1"/>
+<text x="120" y="266" text-anchor="middle" fill="#555">−π/a</text>
+<text x="460" y="266" text-anchor="middle" fill="#555">π/a</text>
+<text x="302" y="52" fill="#555">E</text>
+<line x1="120" y1="40" x2="120" y2="250" stroke="#ddd" stroke-width="1"/>
+<line x1="460" y1="40" x2="460" y2="250" stroke="#ddd" stroke-width="1"/>
+<polyline points="60,70 90,98 120,124 150,148 180,170 210,190 240,208 270,224 290,230" fill="none" stroke="#aaa" stroke-width="1.2" stroke-dasharray="4 3"/>
+<polyline points="290,230 310,224 340,208 370,190 400,170 430,148 460,124 490,98 520,70" fill="none" stroke="#aaa" stroke-width="1.2" stroke-dasharray="4 3"/>
+<polyline points="60,70 90,98 118,126 138,150 150,166 156,176 160,180" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<polyline points="420,180 424,176 430,166 442,150 462,126 490,98 520,70" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<polyline points="160,180 290,150 420,180" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<polyline points="160,140 290,110 420,140" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<polyline points="60,40 138,110 160,140" fill="none" stroke="#c0392b" stroke-width="2.4" opacity="0"/>
+<line x1="120" y1="140" x2="120" y2="180" stroke="#c0392b" stroke-width="2.6"/>
+<line x1="112" y1="140" x2="128" y2="140" stroke="#c0392b" stroke-width="1.4"/>
+<line x1="112" y1="180" x2="128" y2="180" stroke="#c0392b" stroke-width="1.4"/>
+<text x="100" y="165" text-anchor="end" fill="#c0392b">2U</text>
+<text x="200" y="205" fill="#1a4d7c">下帶 E₋=λ−U</text>
+<text x="200" y="105" fill="#c0392b">上帶 E₊=λ+U</text>
+<text x="280" y="285" text-anchor="middle" fill="#555">虛線 = 自由電子拋物線（無隙）；邊界 k=±π/a 處 Bragg 反射開隙</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">自由電子能帶（灰虛線拋物線）在 BZ 邊界 k=±π/a 簡併。週期位能 U(x)=2U cos Gx 的 Fourier 分量 U_G=U 把兩個簡併平面波耦合，劈成 <b style="color:#1a4d7c">E₋=λ−U（下帶，cos 駐波堆在離子上）</b> 與 <b style="color:#c0392b">E₊=λ+U（上帶，sin 駐波堆在離子間）</b>，能隙 = E₊−E₋ = 2U。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：不同位能的能隙、不同階能隙、Kronig–Penney 對照</b></summary>
+
+**範例 A（位能寫成 $U_0\cos Gx$）**：若 $U(x)=U_0\cos Gx=\tfrac{U_0}2 e^{iGx}+\tfrac{U_0}2 e^{-iGx}$，則 Fourier 分量 $U_G=\tfrac{U_0}2$。久期方程 $E_\pm=\lambda\pm|U_G|$，
+$$E_{\text{gap}}=2|U_G|=2\cdot\frac{U_0}2=U_0.$$
+注意此處振幅 $U_0$ 直接等於能隙——與題目 $2U\cos Gx$（能隙 $2U$）的「2」差別只在 cos 前係數。
+
+**範例 B（第二個能隙在哪、多大）**：第 $n$ 個能隙開在 $k=n\pi/a$，由 Fourier 分量 $U_{nG}$ 決定，$E_{\text{gap},n}=2|U_{nG}|$。若 $U(x)=2U_1\cos Gx+2U_2\cos2Gx$，則第一隙 $=2U_1$（在 $\pi/a$）、第二隙 $=2U_2$（在 $2\pi/a$）。純 $\cos Gx$ 位能 $U_{2G}=0$ → 一階近似下第二隙為零。
+
+**範例 C（久期方程含對角項時）**：若位能還有 $k=0$ 分量（常數 $V_0$）只整體平移能量、不影響能隙。一般 $2\times2$：
+$$\begin{vmatrix}\lambda+V_0-E & U_G\\ U_G^* & \lambda+V_0-E\end{vmatrix}=0\Rightarrow E_\pm=\lambda+V_0\pm|U_G|,$$
+能隙仍 $=2|U_G|$，與常數項無關。
+
+**範例 D（Kronig–Penney δ 位能對照）**：$U(x)=A\sum_n\delta(x-na)$ 的 Fourier 分量 $U_G=\dfrac{A}{a}$（與 $G$ 無關，各階等大）。故 KP 模型**每個** BZ 邊界都開能隙 $\approx2A/a$（弱位能極限），不像單 $\cos$ 只開第一隙。這對應 2014 第 11 題、2016 第 4(e) 的 $\delta$-KP 題型。
+</details>
+
+## ✅ 自我檢核
+- $U\to0$ 時 gap $\to0$ → 回自由電子 ✓。
+- 駐波能量 $E_\pm=\lambda\pm U$ 對稱分裂於自由電子值 $\lambda$ ✓。
+- Fourier 分量取對:$U(x)=2U\cos Gx\Rightarrow U_G=U$(非 $2U$)✓。
+
+## 🔀 變化：2014 第 11 題 Kronig–Penney、2016 第 4(e) $\delta$-KP gap $\propto P$;本題是「弱週期位能」對照版。
+## 信心：高（兩法獨立給 $2U$,Fourier 係數已核對)
+
+---
+
+# 📓 第 12 題 — 電洞、本徵/外質半導體（3 pts）
+
+## 📋 原題
+> 半導體中的「holes」是什麼?什麼是 (a) 本徵(intrinsic)、(b) 外質(extrinsic)半導體?
+
+## 解答
+- **Holes(電洞)**:價帶頂部缺一個電子留下的空位;在電場/能帶動力學中表現如**帶 $+e$、正 effective mass** 的載子,與電子反向漂移但**同向貢獻電流**。
+- **(a) Intrinsic**:純(未摻雜)半導體,載子完全來自**熱激發跨能隙**,$n=p=n_i\propto T^{3/2}e^{-E_g/2k_BT}$。
+- **(b) Extrinsic**:**摻雜**的半導體——donor(n 型,如 Si:P)或 acceptor(p 型,如 Si:B)主導載子濃度;室溫下雜質近全游離,$n\approx N_D$(或 $p\approx N_A$),導電性由摻雜控制。
+
+## ✅ 自我檢核：intrinsic $np=n_i^2$;extrinsic 仍守 $np=n_i^2$ 但多數載子由摻雜定 ✓。
+## 信心：高
+
+---
+
+# 📘 第 13 題 — 磁性儲存的物理極限（3 pts）
+
+## 📋 原題
+> 解釋磁性媒體做資訊儲存的物理極限。
+
+## 解答
+**超順磁極限(superparamagnetic limit)**。一個位元 = 一顆(或一群)磁性晶粒的磁化方向。其熱穩定性由**磁各向異性能障** $K_uV$ 對抗熱擾動 $k_BT$ 決定,翻轉率 $\sim f_0e^{-K_uV/k_BT}$。要 10 年保存資料需
+$$\frac{K_uV}{k_BT}\gtrsim40\text{–}60.$$
+提高面密度 → 晶粒體積 $V$ 縮小 → $K_uV$ 下降 → 熱擾動隨機翻轉磁矩、**資料自發抹除**。這就是磁儲存的物理極限。**對策**:用高各向異性材料($K_u$ 大,如 FePt)、垂直記錄、熱輔助寫入(HAMR)以兼顧可寫性與穩定性。
+
+## ✅ 自我檢核：極限本質 = $K_uV$ vs $k_BT$ 競爭 ✓。
+## 信心：高
+
+---
+
+# 📗 第 14 題 — Langevin 函數推導（10 pts）★長推導
+
+## 📋 原題
+> $N$ 顆均勻分布、隨機取向的奈米磁體(各磁矩 $m$)置於外場 $H$ 中,每顆取向機率 $\propto e^{-U/k_BT}$(Boltzmann),證明總磁化
+> $$M(H)=Nm\,L(\alpha),\quad \alpha=\frac{mH}{k_BT},\quad L(\alpha)=\coth\alpha-\frac1\alpha\ (\text{Langevin 函數}).$$
+> 提示積分:$\displaystyle\int x^n e^{\alpha x}dx=\frac{x^n e^{\alpha x}}{\alpha}-\frac n\alpha\int x^{n-1}e^{\alpha x}dx.$
+
+## 🎯 核心訊息
+> 把磁矩在場中的能量 $U=-mH\cos\theta$ 丟進 Boltzmann,對所有取向做**統計平均** $\langle\cos\theta\rangle$;球面積分用 $x=\cos\theta$ 換元,提示積分(分部)算出分子 → 得 $\coth\alpha-1/\alpha$。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 為何 $U=-mH\cos\theta$、平均怎麼取</b></summary>
+
+磁矩 $\mathbf m$ 在場 $\mathbf H$ 中位能 $U=-\mathbf m\cdot\mathbf H=-mH\cos\theta$($\theta$ 為夾角)。每顆磁體沿 $\mathbf H$ 的投影 $m\cos\theta$,以 Boltzmann 權重 $e^{-U/k_BT}=e^{\alpha\cos\theta}$ 對立體角 $d\Omega=2\pi\sin\theta\,d\theta$ 平均。換元 $x=\cos\theta$ 後就是一維積分。
+</details>
+
+## 解答
+
+**Step 1 — 單顆平均磁矩。** 沿場方向投影 $m\cos\theta$,以 Boltzmann 權重對立體角平均($\alpha\equiv mH/k_BT$):
+$$\langle m_z\rangle=m\,\frac{\displaystyle\int_0^\pi \cos\theta\,e^{\alpha\cos\theta}\,2\pi\sin\theta\,d\theta}{\displaystyle\int_0^\pi e^{\alpha\cos\theta}\,2\pi\sin\theta\,d\theta}.$$
+**Step 2 — 換元 $x=\cos\theta$($dx=-\sin\theta\,d\theta$,$\theta:0\to\pi$ ⇒ $x:1\to-1$)。**
+$$\langle m_z\rangle=m\,\frac{\displaystyle\int_{-1}^{1}x\,e^{\alpha x}\,dx}{\displaystyle\int_{-1}^{1}e^{\alpha x}\,dx}.$$
+**Step 3 — 分母。**
+$$\int_{-1}^1 e^{\alpha x}dx=\frac{e^\alpha-e^{-\alpha}}{\alpha}=\frac{2\sinh\alpha}{\alpha}.$$
+**Step 4 — 分子(用提示積分,$n=1$)。**
+$$\int x e^{\alpha x}dx=\frac{x e^{\alpha x}}{\alpha}-\frac1\alpha\int e^{\alpha x}dx=\frac{x e^{\alpha x}}{\alpha}-\frac{e^{\alpha x}}{\alpha^2}.$$
+代上下限 $-1\to1$:
+$$\int_{-1}^1 x e^{\alpha x}dx=\Big[\frac{x e^{\alpha x}}{\alpha}-\frac{e^{\alpha x}}{\alpha^2}\Big]_{-1}^{1}=\frac{e^\alpha+e^{-\alpha}}{\alpha}-\frac{e^\alpha-e^{-\alpha}}{\alpha^2}=\frac{2\cosh\alpha}{\alpha}-\frac{2\sinh\alpha}{\alpha^2}.$$
+**Step 5 — 相除。**
+$$\langle m_z\rangle=m\,\frac{\dfrac{2\cosh\alpha}{\alpha}-\dfrac{2\sinh\alpha}{\alpha^2}}{\dfrac{2\sinh\alpha}{\alpha}}=m\Big(\frac{\cosh\alpha}{\sinh\alpha}-\frac1\alpha\Big)=m\Big(\coth\alpha-\frac1\alpha\Big)=m\,L(\alpha).$$
+**Step 6 — 總磁化(N 顆)。**
+$$\boxed{M(H)=N\langle m_z\rangle=Nm\,L(\alpha),\qquad L(\alpha)=\coth\alpha-\frac1\alpha,\quad \alpha=\frac{mH}{k_BT}.}\ \blacksquare$$
+
+**極限檢查**:
+- 弱場 $\alpha\ll1$:$\coth\alpha\approx\tfrac1\alpha+\tfrac\alpha3$,$L\approx\tfrac\alpha3$ → $M\approx\dfrac{Nm^2H}{3k_BT}$(**Curie 定律** $\chi=Nm^2/3k_BT$)。
+- 強場 $\alpha\gg1$:$\coth\alpha\to1$,$L\to1$ → $M\to Nm$(**飽和**)。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 280" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<text x="280" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">Langevin 函數 L(α) = coth α − 1/α</text>
+<line x1="70" y1="230" x2="530" y2="230" stroke="#999" stroke-width="1"/>
+<line x1="70" y1="40" x2="70" y2="240" stroke="#999" stroke-width="1"/>
+<text x="520" y="248" fill="#555">α = mH/k_BT</text>
+<text x="58" y="50" text-anchor="end" fill="#555">L</text>
+<line x1="70" y1="60" x2="530" y2="60" stroke="#e67e22" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="80" y="54" fill="#e67e22">L → 1（飽和 M = Nm）</text>
+<text x="58" y="64" text-anchor="end" fill="#555">1</text>
+<text x="58" y="234" text-anchor="end" fill="#555">0</text>
+<polyline points="70,230 88,219 106,208 124,198 142,188 160,179 180,169 200,160 224,150 250,141 280,131 314,122 350,114 390,106 434,98 482,90 530,84" fill="none" stroke="#c0392b" stroke-width="2.6"/>
+<line x1="70" y1="230" x2="190" y2="170" stroke="#2e8b2e" stroke-width="1.6" stroke-dasharray="4 3"/>
+<text x="150" y="205" fill="#2e8b2e">弱場斜率 1/3</text>
+<text x="240" y="200" fill="#1a4d7c">L ≈ α/3 → Curie 定律</text>
+<text x="280" y="270" text-anchor="middle" fill="#555">M(H) = Nm L(α)：低場線性 (χ=Nm²/3k_BT)、高場飽和</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">Langevin 曲線 L(α)=coth α−1/α。<b style="color:#2e8b2e">弱場</b> α≪1 時 L≈α/3（斜率 1/3，給 Curie 定律 χ=Nm²/3k_BT）；<b style="color:#e67e22">強場</b> α≫1 時 L→1（所有磁矩排齊，M 飽和到 Nm）。橫軸 α=mH/k_BT 是「磁能 / 熱能」之比。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：L(α) 數值、弱場展開、Curie 常數、量子 Brillouin 極限</b></summary>
+
+**範例 A（算 L(2) 的數值）**：$\coth2=\dfrac{e^2+e^{-2}}{e^2-e^{-2}}=\dfrac{7.389+0.135}{7.389-0.135}=\dfrac{7.524}{7.254}=1.0372$，
+$$L(2)=\coth2-\frac12=1.0372-0.5=0.5372.$$
+即 α=2 時磁化已達飽和值的 54%。
+
+**範例 B（弱場展開到三階驗 1/3）**：$\coth\alpha=\dfrac1\alpha+\dfrac\alpha3-\dfrac{\alpha^3}{45}+\cdots$，故
+$$L(\alpha)=\coth\alpha-\frac1\alpha=\frac\alpha3-\frac{\alpha^3}{45}+\cdots\xrightarrow{\alpha\to0}\frac\alpha3.$$
+初始斜率 $L'(0)=\tfrac13$，與圖中綠線一致。
+
+**範例 C（Curie 常數的數值）**：$\chi=\dfrac{Nm^2}{3k_BT}=\dfrac{C}{T}$，Curie 常數 $C=\dfrac{Nm^2}{3k_B}$。取 $N=6\times10^{28}\,\mathrm{m^{-3}}$、$m=\mu_B=9.27\times10^{-24}\,\mathrm{J/T}$：
+$$C=\frac{6\times10^{28}\times(9.27\times10^{-24})^2}{3\times1.38\times10^{-23}}=\frac{6\times10^{28}\times8.59\times10^{-47}}{4.14\times10^{-23}}=0.124\,\mathrm{K}.$$
+室溫 $T=300$ K 時 $\chi\approx0.124/300=4.1\times10^{-4}$（順磁的典型小值）。
+
+**範例 D（量子 Brillouin → 古典 Langevin 極限）**：量子版 $M=Ng\mu_B J\,B_J(x)$，$x=g\mu_B JH/k_BT$，
+$$B_J(x)=\frac{2J+1}{2J}\coth\frac{(2J+1)x}{2J}-\frac1{2J}\coth\frac{x}{2J}.$$
+令 $J\to\infty$（古典極限）：$\dfrac{2J+1}{2J}\to1$、$\dfrac1{2J}\coth\dfrac{x}{2J}\to\dfrac1{2J}\cdot\dfrac{2J}{x}=\dfrac1x$，故 $B_J\to\coth x-\dfrac1x=L(x)$。Langevin 正是 Brillouin 的 $J\to\infty$ 古典極限。
+</details>
+
+## ✅ 自我檢核
+- $L(\alpha)$ 為奇函數、$0\le L<1$ ✓。
+- 提示積分用對($n=1$,$\int e^{\alpha x}=e^{\alpha x}/\alpha$)✓。
+- 弱場給 Curie、強場飽和 ✓(物理正確)。
+
+## 🔀 變化：量子版 → Brillouin 函數 $B_J(\alpha)$;2025 第 4 題、2018 Landau level 同屬磁性區。
+## 信心：高（分部積分與極限獨立重算,完全對上 $\coth\alpha-1/\alpha$)
+
+---
+
+# 📙 第 15 題 — STM / AFM / MFM 與量測位障高度（1+4 = 5 pts）
+
+## 📋 原題
+> (a) 解釋顯微技術縮寫:1) STM;2) AFM;3) MFM。(b) 要量測有效穿隧位障高度,該用下列哪種?從每個括號挑正確答案:(I, V, Z) vs. (I, V, Z) spectroscopy,Z feedback(ON, OFF),為什麼?
+
+## 解答
+### (a) 縮寫
+1. **STM** = Scanning Tunneling Microscopy(掃描穿隧顯微術)。
+2. **AFM** = Atomic Force Microscopy(原子力顯微術)。
+3. **MFM** = Magnetic Force Microscopy(磁力顯微術)。
+
+### (b) 量測位障高度
+$$\boxed{(I)\ \text{vs.}\ (Z)\ \text{spectroscopy,Z feedback}\ \mathbf{OFF}.}$$
+**為什麼**:穿隧電流隨針尖–樣品距離 $z$ 指數衰減
+$$I\propto e^{-2\kappa z},\qquad \kappa=\frac{\sqrt{2m\phi}}{\hbar},$$
+$\phi$ 為有效位障高度。取對數斜率即得
+$$\phi=\frac{\hbar^2}{8m}\Big(\frac{d\ln I}{dz}\Big)^2.$$
+故要**掃 $z$、記錄 $I(z)$**(即 $I$–$Z$ 譜),且必須**關閉 Z 回饋**(否則回饋會自動調 $z$ 維持定電流,$z$ 無法當自變量掃描)。由 $I$–$z$ 曲線的對數斜率算出 $\phi$。
+
+## ✅ 自我檢核：$\phi\propto(d\ln I/dz)^2$,需 feedback OFF 才能自由變 $z$ ✓。
+## 信心：高
+
+---
+
+# 📕 第 16 題 — 超導體的電性與磁性（3 pts）
+
+## 📋 原題
+> 超導體的電性與磁性性質為何?
+
+## 解答
+- **電性**:$T<T_c$ 時**直流電阻為零**;可載**持久電流**(persistent current)不衰減;有臨界電流密度 $J_c$,超過即破超導。
+- **磁性**:**Meissner 效應**——完全排磁,內部 $B=0$(完美抗磁 $\chi=-1$),且**主動排出**已存在的磁場(非僅「完美導體」鎖磁)。有臨界場 $H_c$(Type I)或 $H_{c1}<H<H_{c2}$ 混合態(Type II,量子化磁通渦旋穿入,$\Phi_0=h/2e$)。超過臨界場 → 回正常態。
+
+## ✅ 自我檢核：零電阻 + Meissner 是超導兩大標誌 ✓;Type II 才有 vortex(對照 2025 第 4 題)。
+## 信心：高
+
+---
+
+# 📒 第 17 題 — 多層膜 X 光反射率「每第三峰消失」（20 pts）★長推導
+
+## 📋 原題
+> 由 $N$ 個週期、每週期厚 $D$ 的雙層(bilayer)疊成的多層膜:材料 1(密度 $\rho_1$、厚 $D_1$)+ 材料 2(密度 $\rho_2$、厚 $D_2$),如圖(a)。圖(b)為 Mo($D_1/D=1/3$)/Si($D_2/D=2/3$)多層膜的模擬 X 光反射率,其中**每第三個反射峰(箭頭標)消失**。用數學證明每第三峰消失。
+
+## 🎯 核心訊息
+> 多層膜 = 「超晶格週期 $D$(定布拉格峰位置 $q_m=2\pi m/D$)」× 「一個週期內的密度輪廓(定每個峰的振幅)」。**單週期 form factor $\propto\sin(\pi m D_1/D)$**;當 $D_1/D=1/3$,$m=3,6,9,\dots$ 時 form factor $=0$ → 每第三峰消失。
+
+## ⚠️ 原圖判讀
+![2013 Q17 多層膜反射率](figs/固態_2013_Q17_多層膜反射率.png)
+
+- **圖(a)**:由下而上 substrate($\rho_s$)上疊 $N$ 個雙層;每雙層內 $\rho_1$(厚 $\Delta_1=D_1$)+ $\rho_2$(厚 $\Delta_2=D_2$),週期 $\Delta=D=D_1+D_2$。
+- **圖(b)**:反射率(對數縱軸)對入射角。低角有總反射平台,之後一系列超晶格 Bragg 峰;肉眼可見峰呈「兩個亮、一個缺」的節奏——即第 3、6、9… 階峰被壓掉。本證明就是要算出這個 form-factor 零點。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 超晶格 Bragg 峰 = 「晶格和」× 「單胞 form factor」</b></summary>
+
+把密度 $\rho(z)$ 看成以 $D$ 為週期的一維函數,展成 Fourier 級數:$\rho(z)=\sum_m F_m e^{i q_m z}$,$q_m=2\pi m/D$。反射率峰出現在動量轉移 $q=q_m$(超晶格 Bragg),**峰振幅 $\propto|F_m|$**;$F_m$ 由單一週期內的密度輪廓決定。$F_m=0$ 的階就看不到峰——這與晶體「結構因子消光」完全同構,只是這裡 basis 是「一層 $\rho_1$ + 一層 $\rho_2$」。
+</details>
+
+## 解答
+
+**Step 1 — 單週期內的密度輪廓。** 設一個週期 $0\le z<D$:
+$$\rho(z)=\begin{cases}\rho_1 & 0\le z<D_1\\ \rho_2 & D_1\le z<D\end{cases}\qquad(D=D_1+D_2).$$
+
+**Step 2 — 第 $m$ 階 Fourier 係數(= form factor)。** $q_m=2\pi m/D$,
+$$F_m=\frac1D\int_0^D\rho(z)\,e^{i q_m z}\,dz=\frac1D\Big[\rho_1\!\int_0^{D_1}\!e^{iq_m z}dz+\rho_2\!\int_{D_1}^{D}\!e^{iq_m z}dz\Big].$$
+
+**Step 3 — 算兩段積分($m\ne0$)。** 用 $e^{iq_m D}=e^{i2\pi m}=1$:
+$$\int_0^{D_1}e^{iq_m z}dz=\frac{e^{iq_m D_1}-1}{iq_m},\qquad \int_{D_1}^{D}e^{iq_m z}dz=\frac{1-e^{iq_m D_1}}{iq_m}.$$
+
+**Step 4 — 合併(對比 $\rho_1-\rho_2$ 浮現)。**
+$$F_m=\frac1{D\,iq_m}\Big[\rho_1(e^{iq_m D_1}-1)+\rho_2(1-e^{iq_m D_1})\Big]=\frac{(\rho_1-\rho_2)}{D\,iq_m}\big(e^{iq_m D_1}-1\big).$$
+> **小結**:只有**密度對比** $\Delta\rho=\rho_1-\rho_2$ 才散射(均勻層不貢獻峰)——合理。
+
+**Step 5 — 取模,得 form factor 大小。** $|e^{i\phi}-1|=2|\sin(\phi/2)|$,且 $q_m D_1=\dfrac{2\pi m}{D}D_1=2\pi m\dfrac{D_1}{D}$:
+$$|F_m|=\frac{|\rho_1-\rho_2|}{D\,q_m}\cdot2\Big|\sin\frac{q_m D_1}{2}\Big|=\frac{|\rho_1-\rho_2|}{D\,q_m}\cdot2\Big|\sin\!\Big(\pi m\frac{D_1}{D}\Big)\Big|.$$
+$$\boxed{|F_m|\ \propto\ \Big|\sin\!\Big(\pi m\,\frac{D_1}{D}\Big)\Big|.}$$
+
+**Step 6 — 代 $D_1/D=1/3$,找零點。**
+$$|F_m|\propto\Big|\sin\frac{\pi m}{3}\Big|=0\quad\Longleftrightarrow\quad \frac{m}{3}\in\mathbb Z\quad\Longleftrightarrow\quad m=3,6,9,\dots$$
+$$\boxed{\text{故每第三個反射峰}(m=3,6,9,\dots)\text{ 的 form factor 為零,峰消失。}\ \blacksquare}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 600 290" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="300" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">峰強度 ∝ |sin(πm·D₁/D)|，D₁/D = 1/3 時每第三峰消失</text>
+<line x1="60" y1="220" x2="560" y2="220" stroke="#333" stroke-width="1"/>
+<line x1="60" y1="40" x2="60" y2="225" stroke="#999" stroke-width="1"/>
+<text x="550" y="240" fill="#555">超晶格階 m（峰位 q_m = 2πm/D）</text>
+<text x="50" y="50" text-anchor="end" fill="#555">|F_m|</text>
+<polyline points="60,220 78,180 96,150 114,135 132,135 150,150 168,180 186,219 204,180 222,150 240,135 258,135 276,150 294,180 312,219 330,180 348,150 366,135 384,135 402,150 420,180 438,219 456,180 474,150 492,135 510,135 528,150 546,180" fill="none" stroke="#6aa1d6" stroke-width="1.4" stroke-dasharray="4 3"/>
+<g stroke="#2e8b2e" stroke-width="3">
+<line x1="96" y1="220" x2="96" y2="150"/>
+<line x1="132" y1="220" x2="132" y2="135"/>
+<line x1="240" y1="220" x2="240" y2="135"/>
+<line x1="276" y1="220" x2="276" y2="150"/>
+<line x1="384" y1="220" x2="384" y2="135"/>
+<line x1="420" y1="220" x2="420" y2="150"/>
+<line x1="528" y1="220" x2="528" y2="150"/>
+</g>
+<g fill="#c0392b">
+<circle cx="186" cy="219" r="4"/><circle cx="312" cy="219" r="4"/><circle cx="438" cy="219" r="4"/>
+</g>
+<g font-size="10" fill="#555">
+<text x="96" y="236" text-anchor="middle">1</text><text x="132" y="236" text-anchor="middle">2</text><text x="186" y="236" text-anchor="middle" fill="#c0392b">3</text><text x="240" y="236" text-anchor="middle">4</text><text x="276" y="236" text-anchor="middle">5</text><text x="312" y="236" text-anchor="middle" fill="#c0392b">6</text><text x="366" y="236" text-anchor="middle">7</text><text x="420" y="236" text-anchor="middle">8</text><text x="438" y="236" text-anchor="middle" fill="#c0392b">9</text>
+</g>
+<text x="300" y="270" text-anchor="middle" fill="#c0392b">紅點 m=3,6,9：sin(πm/3)=0 → 峰消失（兩亮一缺的節奏）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">超晶格 Bragg 峰的包絡 |F_m|∝|sin(πm·D₁/D)|（淺藍虛線）。綠色豎線 = 出現的峰；<b style="color:#c0392b">紅點 m=3,6,9</b> 落在 sin 的零點（D₁/D=1/3 ⇒ sin(πm/3)=0）→ 峰消失，呈「亮、亮、缺」的三拍節奏，與圖(b) 箭頭標的缺峰一致。</figcaption>
+</figure>
+
+> **小結**:消失條件只看比例 $D_1/D$。用 Si 那層 $D_2/D=2/3$ 算也一樣:$\sin(\pi m\cdot\tfrac23)$ 同樣在 $m=3,6,9$ 為零(因 $\sin(2\pi m/3)$ 與 $\sin(\pi m/3)$ 的零點一致)→ 兩層觀點自洽。若改成 $D_1/D=1/2$,則 $m=2,4,6\dots$ 消失(每第二峰),這正是「對稱方波無偶次諧波」的同一數學。
+
+## ✅ 自我檢核
+- $\rho_1=\rho_2$ 時 $F_m=0$ 全部 → 無對比無繞射 ✓。
+- $D_1/D=1/3$ → 零點 $m=3,6,9$ → **每三峰消一** ✓(與圖(b)箭頭一致)。
+- form factor 是「單矩形脈衝寬 $D_1$」的 $\mathrm{sinc}$ 型零點,物理上等同單狹縫繞射的暗紋條件 $D_1\cdot q=2\pi\times$整數 ✓。
+
+## 🔀 變化的可能情況
+- **$D_1/D=1/n$** → 每第 $n$ 峰消失(本題 $n=3$ 的推廣)。
+- **三成分超晶格**或**漸變界面**:form factor 改由多段積分/含粗糙度 Debye–Waller 因子。
+- 與晶體「結構因子消光」(第 3 題 bcc/fcc)是同一招:週期內子結構造成特定階消光。
+
+<details>
+<summary><b>📝 更多範例（點開）：不同 D₁/D 的消失階、峰位、對稱方波</b></summary>
+
+**範例 A（D₁/D=1/2，每第二峰消失）**：$|F_m|\propto|\sin(\pi m/2)|$。$m=2,4,6,\dots$ 時 $\sin(\pi m/2)=0$ → 消失；$m=1,3,5$ 時 $|\sin|=1$ → 最強。這正是「對稱方波（占空比 50%）無偶次諧波」的同一數學。
+
+**範例 B（D₁/D=1/4，每第四峰消失）**：$|F_m|\propto|\sin(\pi m/4)|$。零點在 $\pi m/4=\ell\pi\Rightarrow m=4,8,12,\dots$。故消失階為 4 的倍數——一般規律 $D_1/D=1/n\Rightarrow$ 每第 $n$ 峰消失。
+
+**範例 C（用另一層 D₂/D=2/3 驗證一致）**：以 Si 層算，$|F_m|\propto|\sin(\pi m\cdot\tfrac23)|=|\sin(2\pi m/3)|$。零點 $2\pi m/3=\ell\pi\Rightarrow m=\tfrac{3\ell}2$ 為整數 $\Rightarrow m=3,6,9,\dots$ — 與 D₁ 觀點完全相同（因 $\sin(2\pi m/3)$ 與 $\sin(\pi m/3)$ 的零點集合一致）。兩層觀點自洽。
+
+**範例 D（算第一峰的角位置）**：峰位 $q_m=\dfrac{2\pi m}{D}$。設週期 $D=7\,\mathrm{nm}=70\,\text{Å}$，X 光 $\lambda=1.54\,\text{Å}$，由 $q=\dfrac{4\pi}\lambda\sin\theta=q_m$：
+$$\sin\theta_m=\frac{q_m\lambda}{4\pi}=\frac{2\pi m\lambda}{4\pi D}=\frac{m\lambda}{2D}=\frac{m\times1.54}{2\times70}=0.011\,m.$$
+第一峰 $m=1$：$\theta_1=0.63^\circ$；第二峰 $m=2$：$\theta_2=1.26^\circ$；第三峰 $m=3$ 本應在 $1.89^\circ$ 但 **消失**（form factor 零）。峰等間距出現、每第三個缺。
+</details>
+
+## 信心：高（form factor 零點 $\sin(\pi mD_1/D)$ 為標準超晶格結果,逐步積分重算;圖(b)峰節奏判讀與 $D_1/D=1/3$ 一致)
+
+---
+
+## 📊 本卷信心總表（2013：歷年最硬,17 小題 / 156 分）
+
+| 題 | 主題 | 配分 | 信心 | 重頭推導 |
+|---|---|---|---|---|
+| 1 | Bravais/bcc 原胞/fcc/晶向⊥晶面 | 19 | 高 | bcc 原胞 $109.47°$、fcc 七參數、$d_{hkl}$ |
+| 2 | Bragg ↔ von Laue 等價 | 10 | 高 | 等價證明 |
+| 3 | 結構因子 sc/bcc/fcc/diamond | 14 | 高 | 四晶格消光規則 |
+| 4 | 晶體鍵結類型 | 5 | 高 | — |
+| 5 | van der Waals + Kr 熔點 | 10 | 中高 | 兩振子零點能 $-1/R^6$;熔點 $\approx177$ K(粗估) |
+| 6 | **單原子鏈聲子總能量** | 11 | 高 | **動能/位能時間平均 + 色散代入** |
+| 7 | Debye vs Einstein DOS | 3 | 高 | — |
+| 8 | Dulong–Petit | 2 | 高 | — |
+| 9 | Drude / Sommerfeld | 12 | 高 | 成就/失敗對照 |
+| 10 | **Bloch 定理 + 證明** | 12 | 高 | **平移算符法** |
+| 11 | **能隙起源 + 邊界 gap $2U$** | 14 | 高 | **退化微擾 + central equation** |
+| 12 | 電洞、本徵/外質半導體 | 3 | 高 | — |
+| 13 | 磁儲存物理極限 | 3 | 高 | 超順磁極限 |
+| 14 | **Langevin 函數** | 10 | 高 | **Boltzmann 平均 + 分部積分** |
+| 15 | STM/AFM/MFM + 量位障 | 5 | 高 | $I$–$Z$,feedback OFF |
+| 16 | 超導電性/磁性 | 3 | 高 | — |
+| 17 | **多層膜反射率每三峰消失** | 20 | 高 | **form factor $\sin(\pi mD_1/D)$ 零點** |
+
+> **唯一標「中高」是 Q5 熔點估計**:推導嚴格,但「$k_BT_m\sim|U|$」是量級模型,算得 $177$ K(實際 Kr 為 $116$ K,同量級)。其餘 16 題皆完整重算、信心高。
+>
+> **對照**:2013(本檔,17 題,歷年最硬)與 2016(`固態_2016_詳解`,6 大題硬年份)同屬長推導端;2025(`固態_2025_詳解`,輕)為短答端。三卷已覆蓋難度全譜。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

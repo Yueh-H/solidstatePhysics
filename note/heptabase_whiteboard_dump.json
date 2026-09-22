@@ -1,0 +1,398 @@
+[
+  {
+    "index": 0,
+    "style": "width: 520px; transform: translate(1796.14px, 5269.48px); z-index: 19; height: 720px;",
+    "firstLine": "這份文件的內容是關於 第 6 章：自由電子費米氣體 (Free Electron Fermi Gas) [1]。",
+    "textPreview": "這份文件的內容是關於 第 6 章：自由電子費米氣體 (Free Electron Fermi Gas) [1]。 \n 本章介紹了描述金屬中電子行為的最基本模型——自由電子模型，並解釋了為何必須引入量子力學與包立不相容原理才能正確描述金屬的物理性質。以下依據 Why → How → What 的架構進行總結： \n Why：為什麼要研究自由電子費米氣體？ \n 理解金屬性質：許多金屬的物理性質，特別是與傳導電子運動相關的特性，可以透過自由電子模型得到很好的解釋 [2]。 \n 修正古典理論的失敗：古典理論在解釋熱容（Heat Capacity）與磁化率（Magnetic Susceptibility）時遇到了"
+  },
+  {
+    "index": 1,
+    "style": "width: 520px; transform: translate(2672.97px, 2036.29px); z-index: 15; height: 720px;",
+    "firstLine": "這份文件的內容是關於 第 8 章：半導體晶體 (Semiconductor Crystals) [1]。",
+    "textPreview": "這份文件的內容是關於 第 8 章：半導體晶體 (Semiconductor Crystals) [1]。 \n 本章詳細介紹了半導體的物理特性，特別著重於能隙、載子（電子與電洞）的運動規律，以及雜質如何改變電導率。以下依據 Why → How → What 的架構進行總結： \n Why：為什麼要研究半導體？ \n 廣泛的電阻率範圍：半導體的電阻率介於  \n 1 \n 0 \n − \n 2 \n 10 \n −2 \n  到  \n 1 \n 0 \n 9 \n 10 \n 9 \n  ohm-cm 之間，且對溫度極為敏感，這使其在電子元件中具有極高的應用價值 [1]。 \n 現代元件的基礎：半導體是電晶體、二極體、光伏電池（太陽能電池）和集成電路的物理核心 [2]。 \n 導電性的可"
+  },
+  {
+    "index": 2,
+    "style": "width: 520px; transform: translate(2251.16px, -443.87px); z-index: 35;",
+    "firstLine": "固態物理導論2013資格考",
+    "textPreview": "固態物理導論2013資格考"
+  },
+  {
+    "index": 3,
+    "style": "width: 855.82px; transform: translate(3431.8px, -4610.32px); z-index: 61;",
+    "firstLine": "Qualifying exam: solid state physics ",
+    "textPreview": "Qualifying exam: solid state physics  \n Note: (1) This is a closed-book exam. Notes, dictionary, calculator, and cell phone are NOT allowed. (2) No one can sit side-by-side with you. (3) Terms and notations follow the textbook of C. Kittel, if not mentioned additionally. (4) If answers have units dif"
+  },
+  {
+    "index": 4,
+    "style": "width: 520px; transform: translate(1360.64px, 4509.48px); z-index: 18; height: 720px;",
+    "firstLine": "這份文件的內容是關於 第 5 章：聲子 II. 熱性質 (Phonons II. Thermal Properties) [1]。",
+    "textPreview": "這份文件的內容是關於 第 5 章：聲子 II. 熱性質 (Phonons II. Thermal Properties) [1]。 \n 本章延續了上一章對晶格振動的討論，將焦點轉向聲子如何影響固體的熱力學行為。以下依據 Why → How → What 的架構為你總結： \n Why：為什麼要研究聲子的熱性質？ \n 理解能量儲存與傳輸：探討固體如何儲存熱能（熱容）以及熱能如何在固體中傳導（熱傳導）。[2][3] \n 修正簡諧近似的不足：單純的簡諧模型（Harmonic theory）無法解釋熱膨脹、熱阻等現象，因此需要引入非簡諧交互作用（Anharmonic interactions）來完善理論。[4]"
+  },
+  {
+    "index": 5,
+    "style": "width: 520px; transform: translate(4327.34px, -3775.83px); z-index: 29; height: 720px;",
+    "firstLine": "2023年固態物理導論資格考完整詳解",
+    "textPreview": "2023年固態物理導論資格考完整詳解 \n 這份詳解針對 2023 年固態物理導論資格考（Introduction to Solid State Physics Qualifying Exam）常見的核心主題，提供符合滿分標準的數學推導與物理說明。[1] \n 一、 體心立方（BCC）晶格之倒晶格推導 \n 問題： 給定 BCC 晶格的基向量，求其倒晶格基向量並證明其為面心立方（FCC）構造。 \n 詳解： \n 定義 BCC 基向量： \n 設立方邊長為  \n 𝑎 \n a，BCC 的原始基向量（Primitive vectors）可表示為： \n 𝑎 \n ⃗ \n 1 \n = \n 𝑎 \n 2 \n ( \n 𝑥 \n ^ \n + \n 𝑦 \n ^ \n − \n 𝑧 \n ^ \n ) \n a \n 1"
+  },
+  {
+    "index": 6,
+    "style": "width: 520px; transform: translate(2159.91px, -3382.62px); z-index: 36;",
+    "firstLine": "固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2022",
+    "textPreview": "固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2022"
+  },
+  {
+    "index": 7,
+    "style": "width: 520px; transform: translate(2251.16px, -1914.54px); z-index: 37;",
+    "firstLine": "2017-固態物理導論",
+    "textPreview": "2017-固態物理導論"
+  },
+  {
+    "index": 8,
+    "style": "width: 520px; transform: translate(2152.25px, -2701.55px); z-index: 38;",
+    "firstLine": "固態物理導論Exam 2020",
+    "textPreview": "固態物理導論Exam 2020"
+  },
+  {
+    "index": 9,
+    "style": "width: 520px; transform: translate(5658px, -3712.94px); z-index: 21; height: 720px;",
+    "firstLine": "固態物理導論 Qualifying Exam 2024 詳解",
+    "textPreview": "固態物理導論 Qualifying Exam 2024 詳解 \n 根據您提供的考試標題《固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2024》，以下為針對固態物理資格考中核心必考題目的完整詳解。這份答案以滿分為標準，包含所有必要的數學推導步驟，無任何省略。[1] \n 一、 倒晶格與結構因子 (Reciprocal Lattice and Structure Factor) \n 題目： 考慮一體心立方 (BCC) 晶格，晶格常數為  \n 𝑎 \n a。請推導其倒晶格向量，並計算其幾何結構因子 (Geometrical Struct"
+  },
+  {
+    "index": 10,
+    "style": "width: 520px; transform: translate(4073.16px, -2227.98px); z-index: 57; height: 720px;",
+    "firstLine": "107資格考固態物理導論：體心立方 (BCC) 晶格之倒晶格推導詳解",
+    "textPreview": "107資格考固態物理導論：體心立方 (BCC) 晶格之倒晶格推導詳解 \n 根據固態物理導論的標準理論與資格考常見題型，針對「證明體心立方 (BCC) 晶格的倒晶格為面心立方 (FCC) 晶格」這一經典問題，提供最完整且無遺漏數學步驟的解答如下：[1] \n 1. 定義 BCC 晶格的基元平移向量 (Primitive Translation Vectors) \n 在實空間中，邊長為  \n 𝑎 \n a 的體心立方 (BCC) 傳統晶胞內，其基元平移向量可以選擇為： \n 𝑎 \n 1 \n = \n 𝑎 \n 2 \n ( \n 𝑥 \n ^ \n + \n 𝑦 \n ^ \n − \n 𝑧 \n ^ \n ) \n a \n 1 \n \t​ \n = \n 2 \n a \n \t​ \n ( \n x \n ^ \n + \n y \n ^ \n \t​ \n − \n z"
+  },
+  {
+    "index": 11,
+    "style": "width: 520px; transform: translate(4366.93px, -2643.79px); z-index: 56;",
+    "firstLine": "磁性與超導",
+    "textPreview": "磁性與超導"
+  },
+  {
+    "index": 12,
+    "style": "width: 520px; transform: translate(2175.8px, -2524.45px); z-index: 39;",
+    "firstLine": "107資格考-固態物理導論 Solid State Physics  (1)",
+    "textPreview": "107資格考-固態物理導論 Solid State Physics  (1)"
+  },
+  {
+    "index": 13,
+    "style": "width: 520px; transform: translate(2241.15px, -4265.15px); z-index: 40;",
+    "firstLine": "固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2024",
+    "textPreview": "固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2024"
+  },
+  {
+    "index": 14,
+    "style": "width: 520px; transform: translate(3483.71px, -1331.73px); z-index: 25; height: 720px;",
+    "firstLine": "2017-固態物理導論：德拜模型 (Debye Model) 熱容詳解",
+    "textPreview": "2017-固態物理導論：德拜模型 (Debye Model) 熱容詳解 \n 針對「固態物理導論」中最重要的核心考點之一：德拜模型（Debye Model）的熱容（Heat Capacity）推導，以下提供一份標準的「滿分答案」詳解。本推導涵蓋了從態密度到低溫極限的所有數學步驟。[1] \n 1. 基本假設與物理圖像 \n 德拜模型將固體中的原子振動視為彈性連續介質中的聲子（Phonons）。假設所有聲子的色散關係為線性： \n 𝜔 \n = \n 𝑣 \n 𝑠 \n 𝑘 \n ω=v \n s \n \t​ \n k，其中  \n 𝑣 \n 𝑠 \n v \n s \n \t​ \n  為聲速。為了符合系統的自由度總數（ \n 3 \n 𝑁 \n 3N），德拜引入了一個截斷頻率（Cut-off "
+  },
+  {
+    "index": 15,
+    "style": "width: 520px; transform: translate(2251.16px, -1220.64px); z-index: 41;",
+    "firstLine": "2015-March_NTU-Appl-Phys_博士資格考_Intro Solid State Physics-v3",
+    "textPreview": "2015-March_NTU-Appl-Phys_博士資格考_Intro Solid State Physics-v3"
+  },
+  {
+    "index": 16,
+    "style": "width: 520px; transform: translate(4382.91px, -3034.35px); z-index: 54;",
+    "firstLine": "倒晶格與繞射",
+    "textPreview": "倒晶格與繞射"
+  },
+  {
+    "index": 17,
+    "style": "width: 520px; transform: translate(6271px, -3273.66px); z-index: 22; height: 720px;",
+    "firstLine": "2022 固態物理導論資格考詳解 (Introduction to Solid State Physics Qualifying Exam 2022)",
+    "textPreview": "2022 固態物理導論資格考詳解 (Introduction to Solid State Physics Qualifying Exam 2022) \n 1. 體心立方 (BCC) 晶格之倒格子推導 \n 在固態物理中，給定實空間的基矢，倒格子基矢的定義為  \n 𝑏 \n 𝑖 \n = \n 2 \n 𝜋 \n 𝜖 \n 𝑖 \n 𝑗 \n 𝑘 \n 𝑎 \n 𝑗 \n × \n 𝑎 \n 𝑘 \n 𝑎 \n 1 \n ⋅ \n ( \n 𝑎 \n 2 \n × \n 𝑎 \n 3 \n ) \n b \n i \n \t​ \n =2π \n a \n 1 \n \t​ \n ⋅(a \n 2 \n \t​ \n ×a \n 3 \n \t​ \n ) \n ϵ \n ijk \n \t​ \n a \n j \n \t​ \n ×a \n k \n \t​ \n \t​ \n 。對於一個晶格常數為  \n 𝑎 \n a 的體心立方（BCC）晶格，其原胞基矢可表示為"
+  },
+  {
+    "index": 18,
+    "style": "width: 520px; transform: translate(3922.6px, 220.11px); z-index: 27; height: 720px;",
+    "firstLine": "2013年固態物理資格考完整詳解",
+    "textPreview": "2013年固態物理資格考完整詳解 \n 第一題：晶格結構與倒晶格 (Crystal Structure and Reciprocal Lattice) \n 題目大意：推導面心立方（FCC）晶格的倒晶格，並計算其幾何結構因子（Structure Factor）。 \n 詳解： \n FCC 原胞基向量： \n 設 FCC 晶格的邊長為  \n 𝑎 \n a，其原胞基向量（Primitive translation vectors）可表示為： \n 𝑎 \n ⃗ \n 1 \n = \n 𝑎 \n 2 \n ( \n 𝑦 \n ^ \n + \n 𝑧 \n ^ \n ) \n a \n 1 \n \t​ \n = \n 2 \n a \n \t​ \n ( \n y \n ^ \n \t​ \n + \n z \n ^ \n ) \n 𝑎 \n ⃗ \n 2 \n = \n 𝑎 \n 2 \n ( \n 𝑥 \n ^ \n + \n 𝑧 \n "
+  },
+  {
+    "index": 19,
+    "style": "width: 520px; transform: translate(2474.38px, 1428.74px); z-index: 68;",
+    "firstLine": "6 Free Electron Fermi Gas",
+    "textPreview": "6 Free Electron Fermi Gas"
+  },
+  {
+    "index": 20,
+    "style": "width: 520px; transform: translate(3209.6px, 980.73px); z-index: 11; height: 720px;",
+    "firstLine": "這份內容主要探討了固體物理中關於晶體結合（Crystal Binding）與彈性常數（Elastic Constants）的核心知識。以下依據 Why（動機與目的）、How（理論與機制）、以及 What（具體分類與特性） 的架構進行詳細描述：",
+    "textPreview": "這份內容主要探討了固體物理中關於晶體結合（Crystal Binding）與彈性常數（Elastic Constants）的核心知識。以下依據 Why（動機與目的）、How（理論與機制）、以及 What（具體分類與特性） 的架構進行詳細描述： \n Why：為什麼晶體能結合在一起？ \n 晶體之所以能維持穩定的固態結構，其根本原因在於原子或離子之間的電磁交互作用。[1] \n 凝聚能（Cohesive Energy）：定義為將晶體分解成中性且靜止的自由原子所需的能量。這是衡量晶體穩定性的關鍵指標。[2] \n 晶格能（Lattice Energy）：在討論離子晶體時，則指將晶體分解成靜止自由離子所需的能量。["
+  },
+  {
+    "index": 21,
+    "style": "width: 520px; transform: translate(3483.71px, -984.78px); z-index: 26; height: 720px;",
+    "firstLine": "2016年固態物理導論資格考題完整詳解",
+    "textPreview": "2016年固態物理導論資格考題完整詳解 \n 針對 2016 年固態物理資格考的常見重點題目，以下提供符合滿分標準的詳細數學推導與物理說明。 \n 1. 體心立方（BCC）之倒晶格（Reciprocal Lattice）推導 \n 題目： 若一晶格為體心立方（BCC）結構，其晶格常數為  \n 𝑎 \n a，求其倒晶格向量並證明其為面心立方（FCC）結構。 \n 詳解： \n 定義 BCC 原胞基向量： \n BCC 的傳統晶胞（Conventional cell）含有兩個原子，其原胞（Primitive cell）基向量可表示為： \n 𝑎 \n 1 \n = \n 𝑎 \n 2 \n ( \n 𝑥 \n ^ \n + \n 𝑦 \n ^ \n − \n 𝑧 \n ^ \n ) \n a \n 1 \n \t​ \n = \n 2 \n "
+  },
+  {
+    "index": 22,
+    "style": "width: 520px; transform: translate(2192.8px, -4658.31px); z-index: 42;",
+    "firstLine": "ㄍ固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2025",
+    "textPreview": "ㄍ固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2025"
+  },
+  {
+    "index": 23,
+    "style": "width: 520px; transform: translate(591.99px, 1479.45px); z-index: 43;",
+    "firstLine": "請將所有內容一字不漏地翻譯成繁體中文，並且確保對中文讀者讀起來是通順的。人名要保持原文，專有名詞則要中英對照（以不影響可讀性為主）。請不要因為內容很長就分段翻譯。我要你一次一口氣全部翻譯完成，不用擔心輸出的內容太長，絕對不要遺漏任何一句話。",
+    "textPreview": "請將所有內容一字不漏地翻譯成繁體中文，並且確保對中文讀者讀起來是通順的。人名要保持原文，專有名詞則要中英對照（以不影響可讀性為主）。請不要因為內容很長就分段翻譯。我要你一次一口氣全部翻譯完成，不用擔心輸出的內容太長，絕對不要遺漏任何一句話。"
+  },
+  {
+    "index": 24,
+    "style": "width: 520px; transform: translate(3483.71px, -637.83px); z-index: 28; height: 1202.84px;",
+    "firstLine": "2015 March NTU Applied Physics PhD Qualifying Exam: Intro Solid State Physics Solutions",
+    "textPreview": "2015 March NTU Applied Physics PhD Qualifying Exam: Intro Solid State Physics Solutions \n 1. Reciprocal Lattice of the Body-Centered Cubic (BCC) Structure \n To find the reciprocal lattice of a BCC structure, we start with the primitive translation vectors of the BCC lattice in real space. Let  \n 𝑎 \n a be "
+  },
+  {
+    "index": 25,
+    "style": "width: 520px; transform: translate(-102.46px, 1338.29px); z-index: 44;",
+    "firstLine": "例：如果是歷史或人文類的書，我更喜歡先抓住整體架構、了解作者到底想表達什麼，接著才會去看細節。所以在這種情況下，我通常會請 AI 先幫我做一份符合我的需求的摘要，這份摘要就像我閱讀時的指南針，能幫助我在進入細節時不會迷路。以下是我可能會給 AI 下的 Prompt：",
+    "textPreview": "例：如果是歷史或人文類的書，我更喜歡先抓住整體架構、了解作者到底想表達什麼，接著才會去看細節。所以在這種情況下，我通常會請 AI 先幫我做一份符合我的需求的摘要，這份摘要就像我閱讀時的指南針，能幫助我在進入細節時不會迷路。以下是我可能會給 AI 下的 Prompt： \n 請替還沒讀過本章的讀者寫一份章節摘要，整理出所有主要觀點、論證和主題，並說明它們是如何相互連結的。同時指出作者想解答的核心問題，並闡明整個章節的邏輯或敘事脈絡，讓讀者在進入正文前，就能先掌握這一章的思路。語氣要淺顯易懂，但也要保留作者觀點的深度。"
+  },
+  {
+    "index": 26,
+    "style": "width: 520px; transform: translate(2251.16px, -1567.59px); z-index: 45;",
+    "firstLine": "固態物理導論2016資格考題",
+    "textPreview": "固態物理導論2016資格考題"
+  },
+  {
+    "index": 27,
+    "style": "width: 839.13px; transform: translate(7326px, -874.75px); z-index: 62;",
+    "firstLine": "這是一份針對 「倒晶格向量 (Reciprocal Lattice Vectors)」 的極致詳細推導。",
+    "textPreview": "這是一份針對 「倒晶格向量 (Reciprocal Lattice Vectors)」 的極致詳細推導。 \n 這份內容完全遵循 C. Kittel《固態物理導論》的標準，並將數學運算的每一個微小步驟（包含向量外積的行列式展開、分數的化簡）全部展開，同時補上物理意義的詮釋。 \n 第一部分：物理定義與幾何圖像 \n 1. 為什麼需要倒晶格？ \n 實空間 (Real Space,  \n 𝑟 \n r)：描述原子在晶體中實際的位置。 \n 基向量為  \n 𝑎 \n 1 \n , \n 𝑎 \n 2 \n , \n 𝑎 \n 3 \n a \n 1 \n \t​ \n ,a \n 2 \n \t​ \n ,a \n 3 \n \t​ \n 。 \n 倒空間 (Reciprocal Space,  \n 𝑘 \n k)：描述波（如 X 光或"
+  },
+  {
+    "index": 28,
+    "style": "width: 520px; transform: translate(2466.22px, 1807.18px); z-index: 69;",
+    "firstLine": "10 Superconductivity",
+    "textPreview": "10 Superconductivity"
+  },
+  {
+    "index": 29,
+    "style": "width: 520px; transform: translate(2251.16px, -790.82px); z-index: 46;",
+    "firstLine": "固態物理導論2014資格考題",
+    "textPreview": "固態物理導論2014資格考題"
+  },
+  {
+    "index": 30,
+    "style": "width: 520px; transform: translate(8453.64px, 321.34px); z-index: 66;",
+    "firstLine": "這段文字是在描述固態物理或晶體學中一個非常核心的概念：倒空間（Reciprocal Space）。",
+    "textPreview": "這段文字是在描述固態物理或晶體學中一個非常核心的概念：倒空間（Reciprocal Space）。 \n 其主要含義可以拆解為以下幾個重點： \n 倒空間的定義：這是一個用於描述波（如 X 光、電子波）在晶格中傳遞行為的數學空間，通常用  \n 𝑘 \n k 來表示。與我們平常認知的「實空間」（Real Space，即原子實際排列的空間）不同，倒空間的維度單位是長度的倒數（例如  \n 1 \n / \n cm \n 1/cm）。 \n 波向量 ( \n 𝑘 \n k)：在倒空間中，波向量  \n 𝑘 \n k 描述了波的特徵。它的方向代表波前進的方向，而它的長度（大小）則與波長成反比。透過倒空間，科學家可以更容易地分析波在晶體中的繞射（Diffractio"
+  },
+  {
+    "index": 31,
+    "style": "width: 520px; transform: translate(1395.9px, 1226.92px); z-index: 70;",
+    "firstLine": "7. Energy Bands",
+    "textPreview": "7. Energy Bands"
+  },
+  {
+    "index": 32,
+    "style": "width: 1380.35px; transform: translate(792.21px, -1259.43px); z-index: 47;",
+    "firstLine": "在 Kittel 的《固態物理導論》中，有幾個核心推導被視為「第一原理」出發的經典，它們從基本的量子力學定則或牛頓運動定律開始，逐步構建出描述固體宏觀性質的數學模型。",
+    "textPreview": "在 Kittel 的《固態物理導論》中，有幾個核心推導被視為「第一原理」出發的經典，它們從基本的量子力學定則或牛頓運動定律開始，逐步構建出描述固體宏觀性質的數學模型。 \n 以下是書中最重要的完整推導整理： \n 1. 繞射條件與倒置晶格 (Chapter 2) \n 這是理解固態物理空間對稱性的數學基礎。 \n 布拉格定律 (Bragg Law)：從光程差的幾何幾何關係推導出  \n 2 \n 𝑑 \n sin \n ⁡ \n 𝜃 \n = \n 𝑛 \n 𝜆 \n 2dsinθ=nλ。 \n 倒置晶格向量定義：從實空間晶格向量  \n 𝑎 \n 𝑖 \n a \n i \n \t​ \n  完整推導出倒置空間基矢  \n 𝑏 \n 𝑖 \n b \n i \n \t​ \n ，並證明其正交性質  \n 𝑎 \n 𝑖 \n ⋅ \n 𝑏"
+  },
+  {
+    "index": 33,
+    "style": "width: 520px; transform: translate(1722.18px, 1439.24px); z-index: 71;",
+    "firstLine": "4 Phonons I. Crystal Vibrations",
+    "textPreview": "4 Phonons I. Crystal Vibrations"
+  },
+  {
+    "index": 34,
+    "style": "width: 668.98px; transform: translate(4327.34px, -5016.22px); z-index: 20; height: 1194.31px;",
+    "firstLine": "針對 2025 年固態物理博士班資格考（Qualifying Exam）試題，我為你整理了符合滿分標準的詳解。這份答案採用 C. Kittel 教科書的標準符號與推導邏輯，可直接作為答題參考。 [1][2]",
+    "textPreview": "針對 2025 年固態物理博士班資格考（Qualifying Exam）試題，我為你整理了符合滿分標準的詳解。這份答案採用 C. Kittel 教科書的標準符號與推導邏輯，可直接作為答題參考。 [1][2] \n 1. 原子結構 (Atomic Structure) \n 題目分析： 考慮一二維正方形晶格，基向量  \n 𝑎 \n 1 \n = \n 𝑎 \n 𝑒 \n 𝑥 \n , \n 𝑎 \n 2 \n = \n 𝑎 \n 𝑒 \n 𝑦 \n a \n 1 \n \t​ \n =ae \n x \n \t​ \n ,a \n 2 \n \t​ \n =ae \n y \n \t​ \n 。原子  \n 𝛼 \n α 位於  \n ( \n 0 \n , \n 0 \n ) \n (0,0)，原子  \n 𝛽 \n β 位於  \n ( \n 𝑏 \n , \n 𝑏 \n ) \n (b,b)。 \n (a) 若  \n 𝛼 \n α"
+  },
+  {
+    "index": 35,
+    "style": "width: 520px; transform: translate(3076.49px, 3827.24px); z-index: 13; height: 720px;",
+    "firstLine": "這份文件的內容是關於 第 10 章：超導現象 (Superconductivity) [1]。",
+    "textPreview": "這份文件的內容是關於 第 10 章：超導現象 (Superconductivity) [1]。 \n 本章全面介紹了超導體的物理特性、熱力學描述以及關鍵的微觀與宏觀理論。以下依據 Why → How → What 的架構進行總結： \n Why：為什麼要研究超導現象？ \n 零電阻特性：在臨界溫度  \n 𝑇 \n 𝑐 \n T \n c \n \t​ \n  以下，超導體的直流電阻消失，持續電流（Persistent currents）可以在環中流動超過十年而不衰減 [2][3]。 \n 完善的磁學特性：超導體不僅是完美的導體，更是完美的抗磁體（Meissner effect），這使得它與一般的理想導體有本質上的不同 [3][4]。 \n 宏"
+  },
+  {
+    "index": 36,
+    "style": "width: 520px; transform: translate(129.55px, 1075.85px); z-index: 72;",
+    "firstLine": "Introduction to Solid State Physics",
+    "textPreview": "Introduction to Solid State Physics"
+  },
+  {
+    "index": 37,
+    "style": "width: 520px; transform: translate(1298.99px, 3749.48px); z-index: 17; height: 720px;",
+    "firstLine": "這份文件的內容是關於 第 4 章：聲子 I. 晶格振動 (Phonons I. Crystal Vibrations) [1]。",
+    "textPreview": "這份文件的內容是關於 第 4 章：聲子 I. 晶格振動 (Phonons I. Crystal Vibrations) [1]。 \n 這章主要探討固體中的原子如何集體振動，並引入「聲子」的概念來描述這些彈性波的量子化。以下依據 Why → How → What 的架構為你總結本章重點： \n Why：為什麼要研究晶格振動？ \n 理解熱與機械性質：固體的許多物理性質（如熱容、熱傳導、聲速）都源於原子間的振動。[2] \n 從微觀到宏觀：透過研究原子間的交互作用力，可以推導出宏觀的彈性係數與聲速。[3] \n 量子化需求：在微觀尺度下，彈性波不能視為連續的，必須將其能量量子化（即「聲子」），才能正確解釋低溫下的物"
+  },
+  {
+    "index": 38,
+    "style": "width: 520px; transform: translate(3850.21px, 1165.65px); z-index: 16; height: 720px;",
+    "firstLine": "這份文件的內容是關於 第 9 章：費米面與金屬 (Fermi Surfaces and Metals) [1]。",
+    "textPreview": "這份文件的內容是關於 第 9 章：費米面與金屬 (Fermi Surfaces and Metals) [1]。 \n 本章深入探討了如何定義金屬，以及如何透過「費米面」的概念來理解金屬的物理特性與能帶結構。以下依據 Why → How → What 的架構為你總結： \n Why：為什麼要研究費米面？ \n 定義金屬的本質：將金屬定義為「具有費米面的固體」可能是現代物理中最深刻的定義，費米面精確地解釋了金屬為什麼會表現出其特有的物理與電學性質 [2]。 \n 決定電學特性：金屬的電流是源於費米面附近能階佔據狀態的改變，因此費米面的體積與形狀直接決定了金屬的電學行為 [3]。 \n How：如何描述、計算與測量費"
+  },
+  {
+    "index": 39,
+    "style": "width: 520px; transform: translate(2087.94px, 1954.24px); z-index: 14; height: 720px;",
+    "firstLine": "這份文件是關於 第 7 章：能帶 (Energy Bands) [1]。",
+    "textPreview": "這份文件是關於 第 7 章：能帶 (Energy Bands) [1]。 \n 本章將自由電子模型擴展到考慮晶體週期性位能的影響，解釋了固體物理中最核心的問題：為什麼有些物質導電，而有些不導電。以下依據 Why → How → What 的架構為你總結： \n Why：為什麼需要引入能帶理論？ \n 自由電子模型的局限性：雖然自由電子模型能解釋熱容和電導率，但它無法回答以下關鍵問題： \n 區分金屬、半金屬、半導體與絕緣體 [2]。 \n 正值霍爾係數（Hall Coefficient）的來源 [2]。 \n 傳導電子與自由原子價電子之間的關係 [2]。 \n 電阻率的巨大差異：純金屬與優良絕緣體之間的電阻率差異可達  \n "
+  },
+  {
+    "index": 40,
+    "style": "width: 520px; transform: translate(2275.53px, 1618.14px); z-index: 73;",
+    "firstLine": "8 Semiconductor Crystals",
+    "textPreview": "8 Semiconductor Crystals"
+  },
+  {
+    "index": 41,
+    "style": "width: 520px; transform: translate(5097.25px, -3025.72px); z-index: 31; height: 720px;",
+    "firstLine": "固態物理導論 2021 資格考詳解 (Qualifying Exam Solutions)",
+    "textPreview": "固態物理導論 2021 資格考詳解 (Qualifying Exam Solutions) \n 1. 倒晶格與繞射 (Reciprocal Lattice and Diffraction) \n 在固態物理中，倒晶格向量  \n 𝐺 \n G 與實空間晶格向量  \n 𝑅 \n R 的關係定義為  \n 𝑒 \n 𝑖 \n 𝐺 \n ⋅ \n 𝑅 \n = \n 1 \n e \n iG⋅R \n =1。對於一個給定的原胞基向量  \n 𝑎 \n 1 \n , \n 𝑎 \n 2 \n , \n 𝑎 \n 3 \n a \n 1 \n \t​ \n ,a \n 2 \n \t​ \n ,a \n 3 \n \t​ \n ，其倒晶格基向量可表示為： \n 𝑏 \n 1 \n = \n 2 \n 𝜋 \n 𝑎 \n 2 \n × \n 𝑎 \n 3 \n 𝑎 \n 1 \n ⋅ \n ( \n 𝑎 \n 2 \n × \n 𝑎 \n 3 \n ) \n b \n 1 \n \t​ \n =2π \n a \n 1"
+  },
+  {
+    "index": 42,
+    "style": "width: 520px; transform: translate(3460.16px, -2244.16px); z-index: 23; height: 720px;",
+    "firstLine": "固態物理導論 Exam 2020 完整詳解",
+    "textPreview": "固態物理導論 Exam 2020 完整詳解 \n 這份詳解針對固態物理導論（Introduction to Solid State Physics）2020年常見考題進行撰寫，涵蓋倒晶格、聲子物理、電子比熱及能帶結構。所有數學推導均採逐步列出，以符合滿分答題標準。[1] \n 一、 倒晶格向量推導 (Reciprocal Lattice of BCC) \n 題目： 若一體心立方 (BCC) 晶格的基向量為  \n 𝑎 \n ⃗ \n 1 \n , \n 𝑎 \n ⃗ \n 2 \n , \n 𝑎 \n ⃗ \n 3 \n a \n 1 \n \t​ \n , \n a \n 2 \n \t​ \n , \n a \n 3 \n \t​ \n ，請推導其倒晶格向量，並證明其為面心立方 (FCC) 結構。 \n 解答： \n 定義 BCC 原胞"
+  },
+  {
+    "index": 43,
+    "style": "width: 520px; transform: translate(2251.16px, -2261.49px); z-index: 48;",
+    "firstLine": "2018-固態物理導論",
+    "textPreview": "2018-固態物理導論"
+  },
+  {
+    "index": 44,
+    "style": "width: 520px; transform: translate(2474.38px, 1309.73px); z-index: 74;",
+    "firstLine": "5 Phonons II. Thermal Properties",
+    "textPreview": "5 Phonons II. Thermal Properties"
+  },
+  {
+    "index": 45,
+    "style": "width: 520px; transform: translate(722.43px, 609.74px); z-index: 49;",
+    "firstLine": "Introduction to Solid State Physics_kittel（課本）",
+    "textPreview": "Introduction to Solid State Physics_kittel（課本）"
+  },
+  {
+    "index": 46,
+    "style": "width: 520px; transform: translate(5287.77px, -2408.32px); z-index: 50; height: 149.44px;",
+    "firstLine": "The original item is deleted.",
+    "textPreview": "The original item is deleted."
+  },
+  {
+    "index": 47,
+    "style": "width: 520px; transform: translate(2474.39px, 1131.01px); z-index: 75;",
+    "firstLine": "3 Crystal Binding and Elastic Constants",
+    "textPreview": "3 Crystal Binding and Elastic Constants"
+  },
+  {
+    "index": 48,
+    "style": "width: 520px; transform: translate(3483.71px, -1678.68px); z-index: 24; height: 720px;",
+    "firstLine": "2018-固態物理導論：三維自由電子氣體（Free Electron Gas）之態密度與費米能階推導詳解",
+    "textPreview": "2018-固態物理導論：三維自由電子氣體（Free Electron Gas）之態密度與費米能階推導詳解 \n 在固態物理導論（Introduction to Solid State Physics）中，三維自由電子氣體模型是理解金屬熱性質與電導性的核心基礎。以下為針對「三維自由電子氣體之態密度（Density of States, DOS）與費米能階（Fermi Energy）」的完整數學推導過程，適用於正式考卷之解答。[1] \n 1. 建立模型與薛丁格方程式 \n 假設電子受困於一邊長為  \n 𝐿 \n L 的立方體無限位能井中，體積  \n 𝑉 \n = \n 𝐿 \n 3 \n V=L \n 3 \n 。根據自由電子模型，位能  \n 𝑉 \n ( \n "
+  },
+  {
+    "index": 49,
+    "style": "width: 732.29px; transform: translate(4630.18px, -1225.67px); z-index: 51;",
+    "firstLine": "這段影片是針對「固態物理導論」課程的總結與複習。教授將整個學期的重點重新梳理，從數學工具、物理概念、晶體結構到半導體應用進行了系統性的回顧。",
+    "textPreview": "這段影片是針對「固態物理導論」課程的總結與複習。教授將整個學期的重點重新梳理，從數學工具、物理概念、晶體結構到半導體應用進行了系統性的回顧。 \n 以下是根據影片內容整理的詳細重點： \n 一、 固態物理必備的數學與物理基礎 \n 固態物理不只是研究固體，更是一門結合多種物理領域的綜合學科： \n 向量分析與線性代數： 用於描述晶格向量、倒晶格、布拉格平面及矩陣對角化（求解本徵值 eigenvalue 與本徵向量 eigenvector）。 \n 微積分與微分方程： 主要用於求解薛丁格方程式 (Schrödinger Equation)，理解電子在週期性位能下的行為。 \n 傅立葉轉換 (Fourier Transf"
+  },
+  {
+    "index": 50,
+    "style": "width: 520px; transform: translate(4403.14px, -2825.11px); z-index: 55;",
+    "firstLine": "電子結構",
+    "textPreview": "電子結構"
+  },
+  {
+    "index": 51,
+    "style": "width: 520px; transform: translate(5063.92px, -3795.52px); z-index: 30; height: 720px;",
+    "firstLine": "2023年固態物理導論資格考詳解 (Qualifying Exam: Introduction to Solid State Physics)",
+    "textPreview": "2023年固態物理導論資格考詳解 (Qualifying Exam: Introduction to Solid State Physics) \n 本詳解針對 2023 年固態物理導論資格考常見的核心題目提供完整推導與說明，內容涵蓋晶體結構、晶格動力學、電子能帶與半導體物理。[1] \n 第一題：晶體結構與結構因子 (Crystal Structure and Structure Factor) \n 題目內容： 計算面心立方 (FCC) 結構與體心立方 (BCC) 結構的幾何結構因子 (Geometric Structure Factor)，並說明其繞射消失條件。 \n 解答： \n 結構因子公式： \n 幾何結構"
+  },
+  {
+    "index": 52,
+    "style": "width: 520px; transform: translate(2112.56px, -3834.8px); z-index: 52;",
+    "firstLine": "固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2023",
+    "textPreview": "固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2023"
+  },
+  {
+    "index": 53,
+    "style": "width: 883px; transform: translate(5085.28px, -1773.81px); z-index: 63;",
+    "firstLine": "好，我把固態物理導論資格考最核心、最常考的公式重新整理，全部用清楚的數學形式寫出來，並附上「公式從哪裡來」與「物理意義」。",
+    "textPreview": "好，我把固態物理導論資格考最核心、最常考的公式重新整理，全部用清楚的數學形式寫出來，並附上「公式從哪裡來」與「物理意義」。 \n 這些公式基本上就是 Kittel / Ashcroft 等教科書與各校資格考最核心的部分。 \n 我會依照實際考試邏輯排序，而不是課本順序。 \n 固態物理導論資格考：核心公式整理（清楚版） \n 如果你是初學者，建議先把以下 6 個模組學會： \n 晶格與倒晶格 \n Bloch theorem \n 自由電子與費米能 \n 能帶與 tight binding \n 聲子與晶格振動 \n 半導體統計 \n 一、晶格與倒晶格 \n 1. Bravais lattice 定義 \n 晶格點： \n 𝑅 \n = \n 𝑛 \n 1 \n 𝑎 \n "
+  },
+  {
+    "index": 54,
+    "style": "width: 520px; transform: translate(3513.77px, 2230.09px); z-index: 76;",
+    "firstLine": "9 Fermi Surfaces and Metals",
+    "textPreview": "9 Fermi Surfaces and Metals"
+  },
+  {
+    "index": 55,
+    "style": "width: 1098.04px; transform: translate(6132.11px, -920.99px); z-index: 64;",
+    "firstLine": "基於歷年（2016-2025）的固態物理博士資格考題，以下為您整理出 Kittel 教科書中最關鍵、考過最多次的推導（Derivations）。",
+    "textPreview": "基於歷年（2016-2025）的固態物理博士資格考題，以下為您整理出 Kittel 教科書中最關鍵、考過最多次的推導（Derivations）。 \n 這份清單是根據考題出現的頻率篩選出來的，若您能熟練這些推導，將能涵蓋試卷中約 60%-70% 的計算與證明題。 \n 1. 晶體結構與倒晶格 (Crystal Structure & Reciprocal Lattice) \n 這部分最常考的是從定義出發的幾何推導。 \n 重要推導 1：倒晶格向量 (Reciprocal Lattice Vectors) \n 考點： 給定實空間基向量  \n 𝑎 \n 1 \n , \n 𝑎 \n 2 \n , \n 𝑎 \n 3 \n a \n 1 \n \t​ \n ,a \n 2 \n \t​ \n ,"
+  },
+  {
+    "index": 56,
+    "style": "width: 520px; transform: translate(2219.64px, -3017.93px); z-index: 53;",
+    "firstLine": "固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2021",
+    "textPreview": "固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2021"
+  },
+  {
+    "index": 57,
+    "style": "transform-origin: -435.98px 294.55px; transition: transform 200ms cubic-bezier(0.595, 0.235, 0.085, 1.245); z-index: 58;",
+    "firstLine": "習題 CH6, CH7, CH8,CH9",
+    "textPreview": "習題 CH6, CH7, CH8,CH9 \n 52 Cards, 0 Whiteboards \n 5. Liquid He^3 \n Ch8 Semiconductor Crystals \n Ch9 Fermi Surfaces and Metals \n 10. Maximum surface resistance \n 1. Square lattice, free electron energies \n Ch6 自由電子費米氣體 (Free electron Fermi Gas) \n 6. Frequency dependence of the electrical conductivity \n CH7 Energy Band"
+  },
+  {
+    "index": 58,
+    "style": "transform-origin: 369.53px -1178.77px; transition: transform 200ms cubic-bezier(0.595, 0.235, 0.085, 1.245); z-index: 33;",
+    "firstLine": "題目 CH3",
+    "textPreview": "題目 CH3 \n 17 Cards, 0 Whiteboards \n Ch3 晶體鍵結與彈性常數 \n 晶格面與 miller index 的關係"
+  },
+  {
+    "index": 59,
+    "style": "transform-origin: -573.44px -764px; transition: transform 200ms cubic-bezier(0.595, 0.235, 0.085, 1.245); z-index: 32;",
+    "firstLine": "習題 CH1, ch2, ch3",
+    "textPreview": "習題 CH1, ch2, ch3 \n 9 Cards, 0 Whiteboards \n 學習的時候，可以直接使用 Python 模擬畫出示意圖"
+  },
+  {
+    "index": 60,
+    "style": "transform-origin: 329.59px 488.16px; transition: transform 200ms cubic-bezier(0.595, 0.235, 0.085, 1.245); z-index: 65;",
+    "firstLine": "CH4-CH5 課本",
+    "textPreview": "CH4-CH5 課本 \n 10 Cards, 0 Whiteboards \n 這真是一個非常敏銳且切中要害的好問題！很多初學固態物理的人在這裡都會卡住。 \n 5 聲子 II. 熱性質 (Phonons II. Thermal Properties) \n 心目標是：建立最簡單的數學模型，來描述「聲波（彈性波）」如何在固體晶體中傳遞。 \n 4 聲子 I. 晶格振動 (Phonons I. Crystal Vibrations) \n 這段文本出自經典的固態物理學教材（從內容結構來看，非常典型是源自 Charles Kittel 的《固態物理學導論》第 4 章）。固態物理的推導往往數學繁雜，但背後的物理圖像其實非常連貫。 \n "
+  },
+  {
+    "index": 61,
+    "style": "transform-origin: 284.07px -93.95px; transition: transform 200ms cubic-bezier(0.595, 0.235, 0.085, 1.245); z-index: 67;",
+    "firstLine": "CH1-CH3 課本",
+    "textPreview": "CH1-CH3 課本 \n 12 Cards, 0 Whiteboards \n 1 晶體結構 (Crystal Structure) \n crystal axe \n CHAPTER 1 — CRYSTAL STRUCTURE \n 這是一章非常經典的固態物理學內容（通常出自 Charles Kittel 的《固態物理學導論》第三章）。本章的核心任務是回答兩個基本問題：「是什麼力量將原子結合在一起形成晶體？」 以及 「當晶體受到外力時，它在巨觀上會如何形變與傳遞波動？」 \n 3 晶體結合與彈性常數 (Crystal Binding and Elastic Constants) \n \\Delta \\mathbf { k } ="
+  },
+  {
+    "index": 62,
+    "style": "transform-origin: -375.65px -280.21px; transition: transform 200ms cubic-bezier(0.595, 0.235, 0.085, 1.245); z-index: 59;",
+    "firstLine": "習題 Ch4、Ch5",
+    "textPreview": "習題 Ch4、Ch5 \n 14 Cards, 0 Whiteboards \n 想像力才是最重要的，你要可以想像你可以做到這件事情？"
+  },
+  {
+    "index": 63,
+    "style": "transform-origin: 1662.04px 798.73px; transition: transform 200ms cubic-bezier(0.595, 0.235, 0.085, 1.245); z-index: 12;",
+    "firstLine": "第二章",
+    "textPreview": "第二章 \n 3 Cards, 0 Whiteboards \n 2 Wave Diffraction and the Reciprocal Lattice \n 根據這份教材，本章（第二章：波的繞射與倒晶格）的核心觀念可以歸納為以下幾個重點： \n 2 波的繞射與倒晶格 (Wave Diffraction and the Reciprocal Lattice) [1]"
+  },
+  {
+    "index": 64,
+    "style": "transform-origin: 780.42px 3493.82px; transition: transform 200ms cubic-bezier(0.595, 0.235, 0.085, 1.245); z-index: 34;",
+    "firstLine": "考古題分析",
+    "textPreview": "考古題分析 \n 5 Cards, 0 Whiteboards \n 固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2021 \n 固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2023 \n 固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2024 \n 固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2022 \n 固態"
+  },
+  {
+    "index": 65,
+    "style": "transform-origin: 332.46px -555.95px; transition: transform 200ms cubic-bezier(0.595, 0.235, 0.085, 1.245); z-index: 60;",
+    "firstLine": "CH6、CH7 能帶、Ch8 半導體、CH9",
+    "textPreview": "CH6、CH7 能帶、Ch8 半導體、CH9 \n 27 Cards, 0 Whiteboards \n 很好，這是一份非常完整的章節目錄。 \n 步驟四：用自己的話做筆記 \n 步驟五：視覺化與統整 \n Introduction to Solid State Physics_kittel \n 一維能階與費米能量推導 (公式 1 至 5) \n 熱容量推導（公式 23 至 38）： \n 轉換成什麼樣的學習素材最有效呢？你可以問自己二個問題：第一，你在學習上的強項和弱項是什麼？第二，這份教材本身有哪些特性？ \n 第 7 章 能帶 (Energy Bands) \n 我要怎麼知道 \\mathbf { k } 空間的體積元素 ( 2 \\pi / L"
+  }
+]

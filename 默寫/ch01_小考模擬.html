@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pop-quiz drill — PHYS7018 Atomic structure</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  :root{--blue:#1a4d7c;--blue2:#2b6ca0;--soft:#eef5fb;--border:#c5d5e5;--ink:#1c2733;--muted:#6b7c90}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+       max-width:820px;margin:1.4em auto 5em;padding:0 1.15em;line-height:1.7;color:var(--ink);background:#fafafa}
+  h1{color:var(--blue);border-bottom:3px solid var(--blue);padding-bottom:.3em;font-size:1.35em}
+  h2{color:var(--blue);font-size:1.08em;margin:1.5em 0 .4em;border-bottom:1px solid #ddd;padding-bottom:.2em}
+  a{color:var(--blue2)}
+  .nav{font-size:.92em;margin:0 0 1em;display:flex;flex-wrap:wrap;gap:.5em}
+  .nav a{text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.3em .7em;color:#234}
+  .lede,.warn,.ok{border-radius:6px;padding:.8em 1em;margin:0 0 1em;font-size:.95em}
+  .lede{background:var(--soft);border-left:4px solid #6aa1d6}
+  .warn{background:#fff8ee;border-left:4px solid #e0b97a;color:#5c3d00}
+  .ok{background:#eef9ee;border-left:4px solid #9ccc9c;color:#1c4d1f}
+  .zh{display:none;margin:.4em 0 0;padding:.5em .75em;background:#f7f4ee;border-left:3px solid #c4a574;border-radius:0 6px 6px 0;color:#5c4a2e;font-size:.92em}
+  body.show-zh .zh{display:block}
+  .toolbar{display:flex;flex-wrap:wrap;gap:.5em;margin:0 0 1em;position:sticky;top:0;z-index:20;
+           background:rgba(250,250,250,.94);padding:.4em 0;backdrop-filter:blur(6px)}
+  .toolbar button{font:inherit;font-size:.9em;padding:.35em .9em;border:1px solid var(--border);background:#fff;border-radius:999px;cursor:pointer}
+  .toolbar button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .q{background:#fff;border:1px solid var(--border);border-radius:12px;padding:.95em 1.1em;margin:0 0 .85em}
+  .q .time{float:right;font-size:.78em;color:var(--muted);font-weight:700}
+  .q h3{margin:.1em 0 .4em;font-size:1.02em;color:var(--blue)}
+  .write{border:1px dashed #b7c9db;background:#f4f7fb;border-radius:8px;min-height:5.5em;margin:.45em 0;padding:.5em .7em;color:var(--muted);font-size:.88em}
+  .ans{margin-top:.45em;padding:.7em .85em;background:#f7fbf8;border:1px solid #c5ddc8;border-radius:8px}
+  body.hide-ans .ans{display:none}
+  .boxed{display:block;margin:.4em 0;padding:.4em .65em;border:2px solid var(--blue);border-radius:8px;font-weight:700;color:var(--blue)}
+  footer{color:#888;font-size:.85em;margin-top:2em;border-top:1px solid #ddd;padding-top:1em}
+</style>
+</head>
+<body class="hide-ans">
+<div class="nav">
+  <a href="ch01_從零第一天.html">Day 0–1</a>
+  <a href="ch01_練習題.html">Set A (longer)</a>
+  <a href="../修課折抵115-1/index.html">War room</a>
+</div>
+
+<h1>Pop quiz · 8 minutes · English</h1>
+
+<div class="warn">
+<b>Fact:</b> there is no public archive of Jiang’s quizzes. Syllabus only says “Irregular exam during the lecture,” 20%, in class, in English.<br>
+A real quiz is <b>one question, 8–12 minutes, from the last lecture’s boxed line</b> — not a 40-minute problem set.
+<div class="zh">沒有江正天小考原卷。真實小考＝上一堂剛框起來的那一行，8–12 分鐘，英文，一題。不是 A 卷那種長卷。</div>
+</div>
+<div class="ok">
+<b>Full marks protocol</b> (this is the actual 滿分, not “study more”):
+<ol style="margin:.3em 0 0;padding-left:1.2em">
+<li><b>Be in the room.</b> Missed quiz = 0. Email the TAs today about honeymoon dates and whether absence is 0 or dropped.</li>
+<li>Night before: recopy <b>three English boxed formulae</b> from the last lecture, from memory.</li>
+<li>On the paper: definition in one English sentence + one derivation line + boxed number. Blank “I know it” gets partial credit at best.</li>
+</ol>
+<div class="zh">滿分＝人在教室 + 用英文寫出上一堂的框 + 推一行。缺席就是 0。今天就問 TA 蜜月缺課怎麼計。</div>
+</div>
+<div class="lede">
+Drill: one slip at a time, 8 minutes, timer on, no book. Write in English. Then uncover. Do Q1–Q6 before the next lecture.
+<div class="zh">一次只做一張。8 分鐘。英文寫。下一堂課前把 Q1–Q6 寫過。</div>
+</div>
+
+<div class="toolbar">
+  <button type="button" id="btnZh">中文旁註</button>
+  <button type="button" id="btnHide" class="on">Hide answers</button>
+  <button type="button" id="btnShow">Show answers</button>
+</div>
+
+<div class="q" id="q1">
+  <h3>Q1 <span class="time">8 min</span></h3>
+  <p><b>Define</b> lattice, basis, and crystal structure. Write the general lattice translation $\mathbf T$.</p>
+  <div class="zh">定義 lattice、basis、crystal structure。寫出平移向量 $\mathbf T$。</div>
+  <div class="write">English on paper</div>
+  <div class="ans">
+    Lattice: the mathematical set of points generated by integer combinations of three primitive vectors.<br>
+    Basis: the atom(s) attached to each lattice point.<br>
+    Crystal structure = lattice $\times$ basis.
+    <span class="boxed">$\mathbf T=n_1\mathbf a_1+n_2\mathbf a_2+n_3\mathbf a_3,\ n_i\in\mathbb Z$</span>
+  </div>
+</div>
+
+<div class="q" id="q2">
+  <h3>Q2 <span class="time">8 min</span></h3>
+  <p>For the <b>fcc</b> conventional cube: $N$, coordination number, contact condition ($4r=\ldots$), and packing fraction $\eta$ (derive, do not only quote 0.74).</p>
+  <div class="zh">fcc 慣用立方：$N$、CN、相切條件、推出 $\eta$。</div>
+  <div class="write">English on paper</div>
+  <div class="ans">
+    $N=8\times\tfrac18+6\times\tfrac12=4$. CN $=12$. Contact along the face diagonal: $4r=\sqrt2\,a$, so $r=\sqrt2\,a/4$.
+    $$\eta=\frac{4\cdot\frac43\pi r^3}{a^3}=\frac{\pi}{3\sqrt2}\approx0.740$$
+  </div>
+</div>
+
+<div class="q" id="q3">
+  <h3>Q3 <span class="time">8 min</span></h3>
+  <p>Same as Q2, but for <b>bcc</b>.</p>
+  <div class="zh">bcc：$N$、CN、相切、$\\eta$。</div>
+  <div class="write">English on paper</div>
+  <div class="ans">
+    $N=2$. CN $=8$. Body diagonal: $4r=\sqrt3\,a$.
+    $$\eta=\frac{2\cdot\frac43\pi r^3}{a^3}=\frac{\pi\sqrt3}{8}\approx0.680$$
+  </div>
+</div>
+
+<div class="q" id="q4">
+  <h3>Q4 <span class="time">8 min</span></h3>
+  <p>A plane intercepts the crystal axes at $3a_1$, $2a_2$, $2a_3$. Find the Miller indices. State the cubic formula for $d_{hkl}$ and compute $d_{110}$ if $a=4.00$ Å.</p>
+  <div class="zh">截距 3,2,2 → Miller。立方 $d_{hkl}$。$a=4.00$ Å 的 $d_{110}$。</div>
+  <div class="write">English on paper</div>
+  <div class="ans">
+    Reciprocals $\frac13,\frac12,\frac12$. Multiply by 6 → <b>$(233)$</b>.<br>
+    $d_{hkl}=a/\sqrt{h^2+k^2+l^2}$. $d_{110}=4/\sqrt2=2\sqrt2\approx2.83$ Å.
+    <div class="zh">截距 3,2,2 倒數是 1/3, 1/2, 1/2，乘 6 得 (233)。不是 (322)。</div>
+  </div>
+</div>
+
+<div class="q" id="q5">
+  <h3>Q5 <span class="time">8 min</span></h3>
+  <p>CsCl has Cs at the cube corners and Cl at the body centre. What is the Bravais lattice? What is the basis? Why is this <b>not</b> bcc?</p>
+  <div class="zh">CsCl 的 Bravais、basis、為什麼不是 bcc。</div>
+  <div class="write">English on paper</div>
+  <div class="ans">
+    Bravais lattice: <b>simple cubic</b>. Basis: one Cs + one Cl.<br>
+    bcc requires equivalent lattice points (same species, same environment) at corner and centre. Here they are different atoms, so the lattice is sc with a two-point basis.
+  </div>
+</div>
+
+<div class="q" id="q6">
+  <h3>Q6 <span class="time">8 min</span></h3>
+  <p>Copper is fcc, $a=3.61$ Å. Find the nearest-neighbour distance and $d_{200}$. One line of working each.</p>
+  <div class="zh">Cu fcc $a=3.61$ Å：$d_{\mathrm{nn}}$ 與 $d_{200}$。</div>
+  <div class="write">English on paper</div>
+  <div class="ans">
+    $d_{\mathrm{nn}}=a/\sqrt2\approx2.55$ Å. $d_{200}=a/2=1.805$ Å.
+  </div>
+</div>
+
+<div class="q" id="q7">
+  <h3>Q7 <span class="time">8 min</span></h3>
+  <p>Why are only 1-, 2-, 3-, 4-, and 6-fold rotation axes allowed in a Bravais lattice? How many Bravais lattices in 3D?</p>
+  <div class="zh">為什麼沒有五重軸？3D 幾種 Bravais？</div>
+  <div class="write">English on paper</div>
+  <div class="ans">
+    A rotation must map the lattice onto itself; only $n=1,2,3,4,6$ tile the plane by translations. A 5-fold (pentagon) cannot. There are <b>14</b> Bravais lattices in 3D.
+  </div>
+</div>
+
+<div class="q" id="q8">
+  <h3>Q8 <span class="time">8 min</span></h3>
+  <p>NaCl: name the Bravais lattice and the basis. How many Na$^+$ and Cl$^-$ in the conventional cube?</p>
+  <div class="zh">NaCl：Bravais、basis、慣用立方幾顆 Na／Cl。</div>
+  <div class="write">English on paper</div>
+  <div class="ans">
+    Bravais: fcc. Basis: Na at $000$, Cl at $\tfrac12 00$ (two-ion basis).<br>
+    Conventional cube: 4 Na + 4 Cl.
+  </div>
+</div>
+
+<footer>
+Ask TAs (r10222098@g.ntu.edu.tw, r14245011@ntu.edu.tw): How many quizzes? Is a missed quiz zero? Drop lowest? Calculator allowed?<br>
+After you sit a real quiz, send a photo of the prompt (not your answer if you prefer) — then we retune this list.
+<div class="zh">真實小考題幹拍過來，這份清單才能從「合理猜測」變成「他的題型」。</div>
+</footer>
+<script>
+(function(){
+  var hide=document.getElementById('btnHide'), show=document.getElementById('btnShow'), zh=document.getElementById('btnZh');
+  function setHide(on){
+    document.body.classList.toggle('hide-ans', on);
+    hide.classList.toggle('on', on);
+    show.classList.toggle('on', !on);
+  }
+  hide.onclick=function(){ setHide(true); };
+  show.onclick=function(){ setHide(false); };
+  zh.onclick=function(){
+    document.body.classList.toggle('show-zh');
+    zh.classList.toggle('on', document.body.classList.contains('show-zh'));
+  };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理導論 — 現況盤點 × 起手式導覽</title>
+<style>
+/* ═══════════════ tokens ═══════════════ */
+:root{
+  --ink:#1b2734; --ink2:#33455a; --sub:#6b7c90; --faint:#93a2b3;
+  --bg:#f3f6f9; --card:#ffffff; --line:#e3eaf1; --line2:#eef2f7;
+  --brand:#16456e; --brand2:#2b6ca0; --brandsoft:#eaf2f9;
+  --t1:#16456e; --t2:#2b6ca0; --t3:#c07a12; --t4:#8896a5;
+  --ok:#1f7a3d; --oksoft:#eaf6ee;
+  --warn:#c07a12; --warnsoft:#fdf5e7;
+  --bad:#c0392b; --badsoft:#fdeeeb;
+  --purple:#6b46c1; --purplesoft:#f2eefc;
+  --teal:#0f766e; --tealsoft:#e8f6f4;
+  --sh:0 1px 2px rgba(18,44,70,.05), 0 3px 12px rgba(18,44,70,.045);
+  --sh2:0 2px 6px rgba(18,44,70,.08), 0 12px 30px rgba(18,44,70,.10);
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  max-width:1180px;margin:0 auto;padding:0 1.15rem 6rem;
+  font-size:15.5px;line-height:1.7;color:var(--ink);background:var(--bg);
+}
+a{color:var(--brand2);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:#eaeff5;color:#2c4257;padding:.08em .38em;border-radius:5px;
+     font-size:.88em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+sub,sup{font-size:.72em}
+
+/* ═══════════════ hero ═══════════════ */
+.hero{
+  margin:1.6rem 0 1.1rem;padding:1.7rem 1.9rem 1.6rem;border-radius:18px;color:#fff;
+  background:radial-gradient(120% 150% at 8% 0%,#2b6ca0 0%,#16456e 55%,#0f3354 100%);
+  box-shadow:0 8px 28px rgba(16,52,84,.26);
+}
+.hero h1{margin:0 0 .3rem;font-size:1.68rem;letter-spacing:.4px;line-height:1.35}
+.hero .sub{color:#c8dcee;font-size:.94rem;margin:.15rem 0}
+.hero .sub b{color:#fff}
+.verdict{
+  margin-top:1.15rem;padding:.9rem 1.1rem;border-radius:11px;font-size:.97rem;
+  background:rgba(255,255,255,.12);border-left:4px solid #ffc978;
+}
+.verdict .big{display:block;font-weight:700;font-size:1.04rem;margin-bottom:.25rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(122px,1fr));gap:.6rem;margin-top:1.2rem}
+.stat{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.14);
+      border-radius:11px;padding:.6rem .8rem}
+.stat b{display:block;font-size:1.32rem;line-height:1.2;color:#fff;letter-spacing:.3px}
+.stat span{display:block;font-size:.755rem;color:#bed4e8;margin-top:.15rem}
+
+/* ═══════════════ nav ═══════════════ */
+nav.toc{position:sticky;top:0;z-index:40;margin:0 -1.15rem 1.3rem;padding:.5rem 1.15rem;
+        background:rgba(243,246,249,.93);backdrop-filter:saturate(1.6) blur(8px);
+        border-bottom:1px solid var(--line);white-space:nowrap;overflow-x:auto;
+        -webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.toc::-webkit-scrollbar{display:none}
+nav.toc a{display:inline-block;font-size:.83rem;padding:.3rem .68rem;margin-right:.22rem;
+          border-radius:8px;color:var(--ink2);background:#fff;border:1px solid var(--line)}
+nav.toc a:hover{background:var(--brand);color:#fff;border-color:var(--brand);text-decoration:none}
+
+/* ═══════════════ section ═══════════════ */
+section{margin:2rem 0}
+.shead{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;margin:0 0 .2rem}
+.shead .n{flex:none;display:inline-grid;place-items:center;width:1.75rem;height:1.75rem;
+          border-radius:9px;background:var(--brand);color:#fff;font-size:.82rem;font-weight:700}
+.shead h2{margin:0;font-size:1.2rem;color:var(--brand);letter-spacing:.2px}
+.slede{color:var(--sub);font-size:.92rem;margin:.3rem 0 1rem;max-width:78ch}
+h3.grp{font-size:.83rem;letter-spacing:1.4px;text-transform:uppercase;color:var(--faint);
+       margin:1.5rem 0 .6rem;font-weight:700;display:flex;align-items:center;gap:.6rem}
+h3.grp::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* ═══════════════ card system ═══════════════ */
+.grid{display:grid;gap:.8rem}
+.g-auto{grid-template-columns:repeat(auto-fit,minmax(285px,1fr))}
+.g-wide{grid-template-columns:repeat(auto-fit,minmax(400px,1fr))}
+.g-2{grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+.g-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+/* 固定欄數：避免 4 張卡排成 3+1 的孤卡、6 張卡排成 4+2 */
+.g-fix2{grid-template-columns:1fr}
+.g-fix3{grid-template-columns:1fr}
+@media (min-width:640px){.g-fix2,.g-fix3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:960px){.g-fix3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+      padding:.95rem 1.1rem 1rem;box-shadow:var(--sh);display:flex;flex-direction:column;
+      transition:box-shadow .16s ease,transform .12s ease,border-color .16s ease}
+a.card,.card--link{color:inherit;text-decoration:none}
+a.card:hover,.card--link:hover{transform:translateY(-2px);box-shadow:var(--sh2);
+                               border-color:#b9cee0;text-decoration:none}
+.card::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;
+              border-radius:0 3px 3px 0;background:var(--line);transition:background .16s}
+a.card:hover::before{background:var(--brand2)}
+.card.a-blue::before{background:var(--brand2)}
+.card.a-amber::before{background:var(--warn)}
+.card.a-purple::before{background:var(--purple)}
+.card.a-green::before{background:var(--ok)}
+.card.a-red::before{background:var(--bad)}
+.card.a-teal::before{background:var(--teal)}
+.card.a-grey::before{background:var(--t4)}
+
+.c-top{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.15rem}
+.c-ico{flex:none;font-size:1.18rem;line-height:1.35}
+.c-title{font-weight:700;font-size:1.005rem;color:#17334f;line-height:1.45;flex:1}
+.c-title small{display:block;font-weight:400;font-size:.78rem;color:var(--faint);letter-spacing:.3px}
+.c-meta{display:flex;flex-wrap:wrap;gap:.3rem;margin:.4rem 0 .1rem}
+.c-body{font-size:.885rem;color:var(--ink2);margin:.45rem 0 0;line-height:1.68}
+.c-body b{color:#17334f}
+.c-foot{margin-top:.75rem;padding-top:.6rem;border-top:1px dashed var(--line);
+        display:flex;flex-wrap:wrap;gap:.3rem;font-size:.8rem}
+.c-note{margin-top:.5rem;font-size:.8rem;color:var(--ok);background:var(--oksoft);
+        border-radius:7px;padding:.35rem .55rem}
+.spacer{flex:1}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:.22rem;font-size:.735rem;font-weight:600;
+      padding:.13rem .5rem;border-radius:999px;border:1px solid transparent;white-space:nowrap;line-height:1.6}
+.chip.n{background:#eef2f7;color:#4d6479;border-color:#e0e8f0}
+.chip.ok{background:var(--oksoft);color:var(--ok);border-color:#cbe7d5}
+.chip.warn{background:var(--warnsoft);color:var(--warn);border-color:#f0dfbe}
+.chip.bad{background:var(--badsoft);color:var(--bad);border-color:#f3cfc9}
+.chip.blue{background:var(--brandsoft);color:var(--brand);border-color:#cfe0ee}
+.chip.purple{background:var(--purplesoft);color:var(--purple);border-color:#ddd3f4}
+.chip.teal{background:var(--tealsoft);color:var(--teal);border-color:#c9e8e3}
+.chip.t1{background:#16456e;color:#fff}
+.chip.t2{background:#2b6ca0;color:#fff}
+.chip.t3{background:#c07a12;color:#fff}
+.chip.t4{background:#8896a5;color:#fff}
+
+/* link chips in footers */
+.lk{display:inline-flex;align-items:center;background:#f2f6fa;border:1px solid var(--line);
+    border-radius:7px;padding:.16rem .5rem;color:var(--brand2);font-weight:600;font-size:.79rem}
+.lk:hover{background:var(--brand);color:#fff;border-color:var(--brand);text-decoration:none}
+.lk.pri{background:var(--brand);color:#fff;border-color:var(--brand)}
+.lk.pri:hover{background:#0f3354}
+
+/* big ghost step numeral */
+.step .num{position:absolute;right:.7rem;top:.35rem;font-size:2.5rem;font-weight:800;
+           color:#eef3f8;line-height:1;letter-spacing:-2px;pointer-events:none}
+.step .c-title{position:relative;z-index:1}
+
+/* stat-style cards */
+.kpi{text-align:left}
+.kpi .v{font-size:1.5rem;font-weight:800;color:var(--brand);line-height:1.15;letter-spacing:-.5px}
+.kpi .k{font-size:.8rem;color:var(--sub);margin-top:.1rem}
+.kpi .d{font-size:.82rem;color:var(--ink2);margin-top:.45rem}
+
+/* 13-year dot strip */
+.years{display:flex;align-items:flex-end;gap:2.5px;margin:.15rem 0 .1rem}
+.years i{display:block;width:7px;height:14px;border-radius:2px;background:#e7edf3}
+.years i.on{background:var(--brand2);height:19px}
+.years i.on.t1{background:var(--t1)}
+.years i.on.t2{background:var(--t2)}
+.years i.on.t3{background:var(--t3)}
+.years i.on.t4{background:var(--t4)}
+.ycap{font-size:.71rem;color:var(--faint);letter-spacing:.4px}
+
+/* must-memorize list */
+.must{margin:.5rem 0 0;padding:.55rem .7rem;background:#f8fafc;border:1px solid var(--line2);
+      border-radius:9px;font-size:.83rem;color:var(--ink2);line-height:1.72}
+.must .h{display:block;font-size:.73rem;font-weight:700;letter-spacing:.8px;color:var(--faint);
+         text-transform:uppercase;margin-bottom:.2rem}
+
+/* symptom -> target */
+.sx .q{font-weight:700;color:#17334f;font-size:.93rem;line-height:1.55}
+.sx .arrow{color:var(--faint);font-size:.8rem;margin:.5rem 0 .35rem}
+
+/* week band */
+.wk{display:inline-flex;align-items:center;gap:.3rem;font-size:.76rem;font-weight:700;
+    letter-spacing:.5px;color:var(--brand);background:var(--brandsoft);border:1px solid #cfe0ee;
+    border-radius:7px;padding:.1rem .5rem}
+.wk.hot{color:#8f2c20;background:var(--badsoft);border-color:#f3cfc9}
+.wk.mid{color:#8a5a0d;background:var(--warnsoft);border-color:#f0dfbe}
+
+/* callouts (still card-shaped) */
+.note{border-radius:var(--r);padding:.9rem 1.1rem;font-size:.9rem;line-height:1.72;
+      border:1px solid var(--line);background:#fff;box-shadow:var(--sh);margin:.85rem 0}
+.note .h{display:block;font-weight:700;margin-bottom:.25rem;color:#17334f}
+.note.w{background:var(--warnsoft);border-color:#f0dfbe}
+.note.b{background:var(--badsoft);border-color:#f3cfc9}
+.note.g{background:var(--oksoft);border-color:#cbe7d5}
+.note.i{background:var(--brandsoft);border-color:#cfe0ee}
+.note ul{padding-left:1.2rem;margin:.4rem 0 0}
+.note li{margin:.25rem 0}
+
+pre{background:#152230;color:#dde7f0;padding:.95rem 1.1rem;border-radius:12px;overflow-x:auto;
+    font-size:.815rem;line-height:1.68;box-shadow:var(--sh)}
+pre code{background:none;color:inherit;padding:0}
+pre .c{color:#7d97ad}
+
+.copybtn{font:inherit;font-size:.78rem;font-weight:600;background:#fff;color:var(--brand);
+         border:1px solid #c5d5e5;border-radius:8px;padding:.22rem .6rem;cursor:pointer}
+.copybtn:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+.copybtn.done{background:var(--ok);color:#fff;border-color:var(--ok)}
+
+ul.tight{padding-left:1.15rem;margin:.4rem 0}
+ul.tight li{margin:.26rem 0}
+
+footer{color:var(--faint);font-size:.82rem;margin-top:3rem;padding-top:1.2rem;
+       border-top:1px solid var(--line);text-align:center;line-height:1.8}
+
+@media print{
+  nav.toc,.copybtn{display:none}
+  body{background:#fff;max-width:none;font-size:10.5pt}
+  .card,.note,pre{box-shadow:none;break-inside:avoid}
+  .hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section{break-inside:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════ HERO ══════════════════════════ -->
+<div class="hero">
+  <h1>🧭 固態物理導論 — 現況盤點 × 起手式導覽</h1>
+  <p class="sub">NTU 應用物理所博士班資格考 ·「固態物理導論」（範圍依 C. Kittel, <i>Introduction to Solid State Physics</i>）</p>
+  <p class="sub">盤點日 <b>2026-07-25</b>　｜　目標 <b>2027 年 2–3 月資格考</b>，剩約 <b>28 週</b></p>
+
+  <div class="stats">
+    <div class="stat"><b>83</b><span>HTML 頁面</span></div>
+    <div class="stat"><b>191 萬</b><span>自製內容字數</span></div>
+    <div class="stat"><b>97</b><span>考古題大題全解</span></div>
+    <div class="stat"><b>13 / 13</b><span>年份覆蓋 2013–2025</span></div>
+    <div class="stat"><b>230</b><span>張手繪 SVG 圖</span></div>
+    <div class="stat"><b>0</b><span>質檢確認錯誤（33 檔）</span></div>
+  </div>
+
+  <div class="verdict">
+    <span class="big">一句話結論：素材已經做完了，而且做過頭了。</span>
+    你缺的不是內容，是 ①<b>取用順序</b>（191 萬字不可能線性讀完）與 ②<b>輸出容器</b>（<code style="background:rgba(255,255,255,.18);color:#fff">note/</code> 至今完全空白，讀進去的東西沒地方沉澱）。這頁就是解決這兩件事。
+  </div>
+</div>
+
+<nav class="toc">
+  <a href="#s0">⏱ 30 秒版</a>
+  <a href="#s1">① 現況盤點</a>
+  <a href="#s2">② 體量現實</a>
+  <a href="#s3">③ 第一週起手式</a>
+  <a href="#s4">④ 單元循環 SOP</a>
+  <a href="#s5">⑤ 28 週路線圖</a>
+  <a href="#s6">⑥ 十單元速查</a>
+  <a href="#s7">⑦ 卡住怎麼辦</a>
+  <a href="#s8">⑧ 誠實缺口</a>
+  <a href="#s9">⑨ 操作備忘</a>
+</nav>
+
+<!-- ══════════════════════════ §0 ══════════════════════════ -->
+<section id="s0">
+  <div class="shead"><span class="n">⏱</span><h2>如果你只想知道「今天該做什麼」</h2></div>
+  <p class="slede">不用先讀完這頁。以下三張卡照順序做，第一週就會上軌道。</p>
+
+  <div class="grid g-3">
+    <a class="card step a-blue" href="ref/2025/固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2025.pdf">
+      <span class="num">1</span>
+      <div class="c-top"><span class="c-ico">📝</span>
+        <span class="c-title">裸考 2025 年真卷<small>今天</small></span></div>
+      <div class="c-meta"><span class="chip n">⏱ 3 小時</span><span class="chip bad">不查任何資料</span></div>
+      <div class="c-body">計時 3 小時寫完。<b>這是你的基準線</b> — 沒有基準線，後面所有排程都是憑感覺。2025 是最新一卷也最短（5 大題），最能代表 2027 的四段式命題風格。</div>
+      <div class="c-foot"><span class="lk pri">開原卷 PDF →</span></div>
+    </a>
+
+    <a class="card step a-blue" href="考古題/單元整理.html">
+      <span class="num">2</span>
+      <div class="c-top"><span class="c-ico">🎯</span>
+        <span class="c-title">只讀「單元整理」兩節<small>今晚</small></span></div>
+      <div class="c-meta"><span class="chip n">⏱ 40 分鐘</span><span class="chip blue">§0 ＋ §12</span></div>
+      <div class="c-body"><b>§0</b>：命題風格換過三代，只有 <b>2019–2025 有預測力</b>。<br><b>§12</b>：2021–2025 高頻具體題型清單。<br>這兩節決定你之後 6 個月的優先序，其餘先別讀。</div>
+      <div class="c-foot"><span class="lk pri">開單元整理 →</span></div>
+    </a>
+
+    <div class="card step a-blue">
+      <span class="num">3</span>
+      <div class="c-top"><span class="c-ico">🔄</span>
+        <span class="c-title">照「單元循環」跑第一個單元<small>明天起</small></span></div>
+      <div class="c-meta"><span class="chip n">每次約 2 小時</span><span class="chip blue">六步固定</span></div>
+      <div class="c-body">六個步驟固定不變，十個單元都這樣跑。第一個跑 <b>unit01 晶體結構</b>（第一梯隊、13 年考 11 次）。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><a class="lk pri" href="#s4">看 §4 SOP →</a><a class="lk" href="單元教學/unit01_晶體結構.html">直接開 unit01</a></div>
+    </div>
+  </div>
+
+  <div class="note b">
+    <span class="h">⛔ 明確不要做的事</span>
+    不要打開 <code>教材/Kittel_原文.html</code> 從第一頁開始讀 —— 那是 <b>264 萬字</b>的教材全文，定位是「查得到」不是「讀得完」。
+    同理 <code>單元教學/</code> 十篇合計 56 萬字，也不是拿來從頭順讀的，要按梯隊取用（見 <a href="#s2">§2</a>）。
+  </div>
+</section>
+
+<!-- ══════════════════════════ §1 ══════════════════════════ -->
+<section id="s1">
+  <div class="shead"><span class="n">①</span><h2>現況盤點：這個庫裡到底有什麼</h2></div>
+  <p class="slede">五個群組、十四張卡。所有數字都是實際掃描檔案得到的，不是估計值。點卡片直接開那一頁。</p>
+
+  <h3 class="grp">🧭 策略層 · 決定順序（最該先讀，也最短）</h3>
+  <div class="grid g-auto">
+    <a class="card a-blue" href="考古題/單元整理.html">
+      <div class="c-top"><span class="c-ico">📊</span><span class="c-title">單元整理<small>考古題／單元整理.html</small></span></div>
+      <div class="c-meta"><span class="chip ok">✅ 完成</span><span class="chip n">1.2 萬字</span></div>
+      <div class="c-body">2013–2025 全部考題依 Kittel 章節重分十單元，含 <b>13 年 × 10 單元出題頻率表</b>、三個命題世代、近年四段式固定題型清單（§12）。</div>
+      <div class="c-foot"><span class="lk pri">整站最該先讀的一頁 →</span></div>
+    </a>
+
+    <a class="card a-blue" href="考古題/導讀.html">
+      <div class="c-top"><span class="c-ico">📖</span><span class="c-title">導讀（三層讀法）<small>考古題／導讀.html</small></span></div>
+      <div class="c-meta"><span class="chip ok">✅ 完成</span><span class="chip n">0.9 萬字</span></div>
+      <div class="c-body">每個單元配一組「快入門 → 打底 → 進階」的精確章節，附 <b>🔑 必背清單</b>、<b>📝 指定練習</b>（連到對應年份詳解）、<b>⚠️ 陷阱</b>。</div>
+      <div class="c-foot"><span class="lk pri">每單元 Step 6 都回這裡 →</span></div>
+    </a>
+
+    <a class="card a-blue" href="考點地圖.html">
+      <div class="c-top"><span class="c-ico">🗺️</span><span class="c-title">考點地圖<small>考點地圖.html</small></span></div>
+      <div class="c-meta"><span class="chip ok">✅ 完成</span><span class="chip n">單頁總表</span></div>
+      <div class="c-body">一張表看完「考點 × 用到哪個數學原理 × 站內對應頁面」。梯隊用左框線顏色標示，適合考前掃視。</div>
+      <div class="c-foot"><span class="lk pri">開考點地圖 →</span></div>
+    </a>
+  </div>
+
+  <h3 class="grp">📚 學習層 · 主讀與查證</h3>
+  <div class="grid g-fix2">
+    <a class="card a-teal" href="單元教學/index.html">
+      <div class="c-top"><span class="c-ico">🎓</span><span class="c-title">單元教學 unit01–10<small>主讀主力</small></span></div>
+      <div class="c-meta"><span class="chip ok">✅ 已質檢</span><span class="chip teal">56.4 萬字</span><span class="chip n">136 收合塊</span><span class="chip n">86 張 SVG</span></div>
+      <div class="c-body">從高中概念一路推到資格考等級，<b>推導不跳步</b>（禁用「易證」「顯然」），每個符號用 <code>▸</code> 收合塊就地展開（高中錨點→為什麼要→定義→3 個範例）。看不懂 Kittel 時的主力。</div>
+      <div class="c-foot"><span class="lk pri">開單元教學目錄 →</span><span class="chip n">平均一篇 5.6 萬字</span></div>
+    </a>
+
+    <a class="card a-teal" href="教材/Kittel章節導讀/index.html">
+      <div class="c-top"><span class="c-ico">📑</span><span class="c-title">Kittel 章節導讀 ch01–10<small>讀原文前的暖身</small></span></div>
+      <div class="c-meta"><span class="chip warn">⚠️ 缺圖</span><span class="chip n">10.6 萬字</span><span class="chip n">118 收合塊</span><span class="chip bad">0 張 SVG</span></div>
+      <div class="c-body">三層概念對應（高中→大學→固態）＋術語中英對照＋每章 3 個實際例題。把 Kittel 英文／機翻翻成人話。<b>每章約 20 分鐘</b>，是單元循環的 Step 1。</div>
+      <div class="c-foot"><span class="lk pri">開章節導讀 →</span></div>
+    </a>
+
+    <div class="card a-teal">
+      <div class="c-top"><span class="c-ico">🧰</span><span class="c-title">先備知識補帖<small>卡住時的急救包</small></span></div>
+      <div class="c-meta"><span class="chip warn">⚠️ 缺內嵌圖</span><span class="chip n">7.4 萬字</span><span class="chip n">數學 8 項＋物理 8 項</span></div>
+      <div class="c-body"><b>數學</b>：內外積、複數與 Euler、傅立葉、等比級數、泰勒、偏微分、久期方程、k 空間計數。<br><b>物理</b>：波與波向量、簡諧、波茲曼因子、庫侖、波耳模型…每項從高中起點建起。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><a class="lk pri" href="教材/先備知識/index.html">目錄</a><a class="lk" href="教材/先備知識/數學先備.html">數學先備</a><a class="lk" href="教材/先備知識/物理先備.html">物理先備</a></div>
+    </div>
+
+    <div class="card a-grey">
+      <div class="c-top"><span class="c-ico">📚</span><span class="c-title">教材直讀（9 本全文）<small>當字典，不當讀本</small></span></div>
+      <div class="c-meta"><span class="chip n">264 萬字</span><span class="chip warn">公式為純文字</span><span class="chip warn">原圖已略去</span></div>
+      <div class="c-body">Kittel 原文／中譯／解答手冊、研究所級講義、林盛煇《固態物理導論》、蕭智仁簡報 ×4。可 ⌘F 全文搜尋。<br><b>Kittel 原文是考試指定符號來源</b>，敘述有出入時以它為準。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><a class="lk pri" href="教材/index.html">目錄</a><a class="lk" href="教材/Kittel_原文.html">Kittel 原文</a><a class="lk" href="教材/Kittel_翻譯.html">中譯</a><a class="lk" href="教材/固態物理導論_林盛煇.html">林盛煇</a><a class="lk" href="教材/講義.html">講義</a></div>
+    </div>
+  </div>
+
+  <h3 class="grp">✍️ 練習層 · 動筆</h3>
+  <div class="grid g-auto">
+    <a class="card a-green" href="教材/Kittel習題詳解/index.html">
+      <div class="c-top"><span class="c-ico">🧮</span><span class="c-title">Kittel 習題詳解 ch01–10<small>練手感</small></span></div>
+      <div class="c-meta"><span class="chip ok">✅ 已質檢</span><span class="chip teal">61.2 萬字</span><span class="chip n">約 90 題全解</span><span class="chip n">170 收合塊</span><span class="chip n">81 張 SVG</span></div>
+      <div class="c-body">每章加碼範例題 ＋ Kittel 課本習題完整逐步解答、答案 <code>boxed</code>。專治「推導看得懂但數字／單位老是算錯」。</div>
+      <div class="c-foot"><span class="lk pri">開習題詳解 →</span></div>
+    </a>
+
+    <div class="card a-green">
+      <div class="c-top"><span class="c-ico">✍️</span><span class="c-title">考古題逐題詳解 2013–2025<small>對真題</small></span></div>
+      <div class="c-meta"><span class="chip ok">✅ 已質檢</span><span class="chip teal">52.9 萬字</span><span class="chip blue">97 大題全解</span><span class="chip n">121 收合塊</span><span class="chip n">63 張 SVG</span></div>
+      <div class="c-body">符號就地展開格式：📋原題 → 🎯核心訊息 → 📚前情提要 → 🔍符號說明 → <b>Step 解答（不跳代數）</b> → ✅自我檢核 → 🔀變化題。</div>
+      <div class="spacer"></div>
+      <div class="c-foot">
+        <a class="lk pri" href="考古題/詳解/index.html">13 年目錄</a><a class="lk" href="考古題/詳解/固態_2025_詳解.html">2025</a><a class="lk" href="考古題/詳解/固態_2024_詳解.html">2024</a><a class="lk" href="考古題/詳解/固態_2023_詳解.html">2023</a><a class="lk" href="考古題/詳解/固態_2022_詳解.html">2022</a></div>
+    </div>
+
+    <div class="card a-green">
+      <div class="c-top"><span class="c-ico">📄</span><span class="c-title">歷年原卷（未附解）<small>裸考／計時演練用</small></span></div>
+      <div class="c-meta"><span class="chip ok">✅ 13 份完整</span><span class="chip warn">md 公式不渲染</span></div>
+      <div class="c-body">純文字 md 在 <code>考古題/歷年原卷/</code>；<b>原始 PDF 13 份全在 <code>ref/&lt;年份&gt;/</code></b>。<br>模考請開 PDF —— 那才是考卷原貌，圖形題看得到。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><a class="lk pri" href="ref/2025/固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2025.pdf">2025 原卷 PDF</a><a class="lk" href="ref/2024/固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2024.pdf">2024 PDF</a><a class="lk" href="考古題/歷年原卷/固態物理導論_2025.md">2025 md</a></div>
+    </div>
+  </div>
+
+  <h3 class="grp">🔬 互動層 ＋ 稽核層</h3>
+  <div class="grid g-fix2">
+    <div class="card a-amber">
+      <div class="c-top"><span class="c-ico">📐</span><span class="c-title">數學推導 Lab（8 條）<small>填對才給下一步</small></span></div>
+      <div class="c-meta"><span class="chip ok">✅ 完成</span><span class="chip warn">逐步揭露＋填空驗收</span></div>
+      <div class="c-body">把 8 條必背推導拆步：倒基正交、packing、結構因子消光、單原子鏈色散、NFE 能隙、DOS/E<sub>F</sub>、Madelung、Langevin。<b>專治「看得懂但自己推不出來」。</b></div>
+      <div class="spacer"></div>
+      <div class="c-foot"><a class="lk pri" href="數學lab/index.html">目錄</a><a class="lk" href="數學lab/lab_reciprocal.html">①倒基</a><a class="lk" href="數學lab/lab_packing.html">②packing</a><a class="lk" href="數學lab/lab_structure_factor.html">③消光</a><a class="lk" href="數學lab/lab_dispersion.html">④色散</a><a class="lk" href="數學lab/lab_nfe.html">⑤NFE</a><a class="lk" href="數學lab/lab_dos.html">⑥DOS</a><a class="lk" href="數學lab/lab_madelung.html">⑦Madelung</a><a class="lk" href="數學lab/lab_langevin.html">⑧Langevin</a></div>
+    </div>
+
+    <div class="card a-purple">
+      <div class="c-top"><span class="c-ico">🔬</span><span class="c-title">互動系統模擬（7 個）<small>拉參數看極限</small></span></div>
+      <div class="c-meta"><span class="chip ok">✅ 完成</span><span class="chip purple">滑桿即時重畫</span></div>
+      <div class="c-body">刻意拉到極端（T→0／T→∞、U→0、m*→∞、k→BZ 邊界）看圖怎麼變。<b>專治「公式會背但沒有物理圖像」。</b></div>
+      <div class="spacer"></div>
+      <div class="c-foot"><a class="lk pri" href="模擬/index.html">目錄</a><a class="lk" href="模擬/sim_dispersion.html">①色散</a><a class="lk" href="模擬/sim_bragg_ewald.html">②Bragg/Ewald</a><a class="lk" href="模擬/sim_nfe_gap.html">③NFE 能隙</a><a class="lk" href="模擬/sim_fermi_dos.html">④FD/DOS</a><a class="lk" href="模擬/sim_tight_binding.html">⑤緊束縛</a><a class="lk" href="模擬/sim_semiconductor.html">⑥半導體</a><a class="lk" href="模擬/sim_langevin_curie.html">⑦Langevin</a></div>
+    </div>
+
+    <a class="card a-green" href="質檢報告.html">
+      <div class="c-top"><span class="c-ico">🛡️</span><span class="c-title">質檢報告<small>可信度實據</small></span></div>
+      <div class="c-meta"><span class="chip ok">✅ 33 檔 0 錯</span><span class="chip n">兩輪稽查</span></div>
+      <div class="c-body">用<b>另外寫一支 Python 重算一次</b>當裁判（不是 AI 自評）。數值／標準公式 0 個確認錯誤；SVG 幾何體檢額外揪出並修正 <b>2 張上下顛倒的曲線圖</b>（unit04 聲子色散、unit05 E–k 拋物線）。<br>報告也誠實列出未涵蓋範圍。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><span class="lk pri">看完整報告 →</span></div>
+    </a>
+
+    <div class="card a-red">
+      <div class="c-top"><span class="c-ico">📓</span><span class="c-title"><code>note/</code> — 你的輸出<small>整個系統唯一的空白</small></span></div>
+      <div class="c-meta"><span class="chip bad">⛔ 0 檔</span><span class="chip bad">最大的洞</span></div>
+      <div class="c-body">所有內容都是單向「讀進去」，<b>沒有任何寫出來的容器</b> —— 沒有錯題本、沒有默寫紀錄、沒有進度追蹤。28 週演練的成果若不落地，考前一週會無處可回看。</div>
+      <div class="c-note">✔ 第一週就要建 <code>note/錯題本.md</code> ＋ <code>note/進度.md</code>，格式見 <a href="#s3">§3 Day 4</a>。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ §2 ══════════════════════════ -->
+<section id="s2">
+  <div class="shead"><span class="n">②</span><h2>體量現實：為什麼「從頭讀」一定會失敗</h2></div>
+  <p class="slede">先算一次數字，再決定策略。以每小時 8,000 字（技術文字、含停下來想）估算。</p>
+
+  <div class="grid g-3">
+    <div class="card kpi a-blue">
+      <div class="v">191 萬字</div><div class="k">自製核心內容</div>
+      <div class="d">單元教學＋Kittel 習題＋考古詳解＋章節導讀＋先備<br><b>≈ 240 小時純閱讀</b>，還不含動筆</div>
+    </div>
+    <div class="card kpi a-grey">
+      <div class="v">264 萬字</div><div class="k">教材全文（9 本）</div>
+      <div class="d">≈ 330 小時<br><b>不該讀，只該查</b></div>
+    </div>
+    <div class="card kpi a-green">
+      <div class="v">168 小時</div><div class="k">你實際有的時間</div>
+      <div class="d">28 週 × 每週 6 小時<br><b style="color:#c0392b">缺口 70 小時以上</b></div>
+    </div>
+  </div>
+
+  <div class="note w">
+    <span class="h">⚠️ 結論：不可能讀完，必須「按梯隊取用」</span>
+    這不是設計失誤 —— 這個站的定位本來就是「隨時查得到、卡住有得靠」，體量大是特性。前提是你用<b>取用式</b>，不用通讀式。下面四張卡就是每個梯隊該讀多深。
+  </div>
+
+  <div class="grid g-fix2">
+    <div class="card a-blue">
+      <div class="c-top"><span class="c-ico">🥇</span><span class="c-title">第一梯隊 — 讀滿、推導要能默寫<small>晶體結構 · 倒晶格繞射 · 聲子 · 能帶 Bloch</small></span></div>
+      <div class="c-meta"><span class="chip t1">梯隊一</span><span class="chip blue">13 年各考 11 次</span><span class="chip ok">≥60% 分數</span></div>
+      <div class="c-body">六步 SOP <b>全跑</b>。這四個單元吃滿，就覆蓋近年卷面的四大段中的絕大部分。Bloch 定理證明務必練到能默寫。</div>
+    </div>
+    <div class="card a-blue">
+      <div class="c-top"><span class="c-ico">🥈</span><span class="c-title">第二梯隊 — 讀滿主線，習題挑做<small>自由電子費米氣體</small></span></div>
+      <div class="c-meta"><span class="chip t2">梯隊二</span><span class="chip blue">13 年考 10 次</span></div>
+      <div class="c-body">六步全跑，但 Step 5 的習題量可以砍半。DOS 維度（<b>2D 是常數</b>）是最常失分的點。</div>
+    </div>
+    <div class="card a-amber">
+      <div class="c-top"><span class="c-ico">🥉</span><span class="c-title">第三梯隊 — 讀主線＋必背<small>晶體鍵結 · 半導體</small></span></div>
+      <div class="c-meta"><span class="chip t3">梯隊三</span><span class="chip warn">13 年考 8／6 次</span></div>
+      <div class="c-body">Step 5 只做「考古題出現過的題型」，不要整章掃。隔年出現，別完全放掉。</div>
+    </div>
+    <div class="card a-grey">
+      <div class="c-top"><span class="c-ico">4️⃣</span><span class="c-title">第四梯隊 — 只讀「必背」清單<small>磁性 · 超導 · 實驗進階</small></span></div>
+      <div class="c-meta"><span class="chip t4">梯隊四</span><span class="chip n">13 年考 3／2／3 次</span><span class="chip warn">2025 回溫</span></div>
+      <div class="c-body"><b>只跑 Step 1 和 Step 6</b>。目標是「看到題不慌」，不求推導。2025 又考了磁性與超導，所以不能完全裸考。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ §3 ══════════════════════════ -->
+<section id="s3">
+  <div class="shead"><span class="n">③</span><h2>第一週起手式：先量基準線，再決定怎麼讀</h2></div>
+  <p class="slede">總計約 6 小時。這一週<b>不讀任何單元教學</b>，只做定位。</p>
+
+  <div class="grid g-fix2">
+    <a class="card step a-blue" href="ref/2025/固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2025.pdf">
+      <span class="num">D1</span>
+      <div class="c-top"><span class="c-ico">📝</span><span class="c-title">裸考 2025 年真卷</span></div>
+      <div class="c-meta"><span class="chip n">⏱ 3 小時</span><span class="chip bad">計時、不查資料</span></div>
+      <div class="c-body">開 <b>ref/2025 原卷 PDF</b>（考卷原貌）。選 2025 的原因：最新一卷、最短（5 大題）、最能代表 2027 的四段式風格。</div>
+      <div class="c-foot"><span class="lk pri">開 2025 原卷 PDF →</span></div>
+    </a>
+
+    <a class="card step a-blue" href="考古題/單元整理.html">
+      <span class="num">D2</span>
+      <div class="c-top"><span class="c-ico">🎯</span><span class="c-title">只讀「單元整理」§0 與 §12</span></div>
+      <div class="c-meta"><span class="chip n">⏱ 40 分鐘</span></div>
+      <div class="c-body"><b>§0</b> 命題風格三代（2019–2025 才有預測力，固定四大段：Crystal structure／Diffraction／Phonons／Electrons，各約 25%）。<b>§12</b> 近年高頻具體題型清單。<br><span style="color:var(--faint)">§1–11 是各單元歷年題彙整，跑單元循環時再回來看對應那節。</span></div>
+      <div class="c-foot"><span class="lk pri">開單元整理 →</span></div>
+    </a>
+
+    <a class="card step a-blue" href="考古題/詳解/固態_2025_詳解.html">
+      <span class="num">D3</span>
+      <div class="c-top"><span class="c-ico">🔍</span><span class="c-title">對答案，把「不會」歸成三類</span></div>
+      <div class="c-meta"><span class="chip n">⏱ 1.5 小時</span><span class="chip blue">A / B / C 分類</span></div>
+      <div class="c-body">逐題比對 2025 詳解，錯的分成：<br><b>(A)</b> 不知道有這條公式　<b>(B)</b> 知道公式但推不出來　<b>(C)</b> 推得出來但算錯／單位錯<br>這個分類直接決定你主要用這個站的哪一層（見下）。</div>
+      <div class="c-foot"><span class="lk pri">開 2025 逐題詳解 →</span></div>
+    </a>
+
+    <div class="card step a-red">
+      <span class="num">D4</span>
+      <div class="c-top"><span class="c-ico">📓</span><span class="c-title">建立錯題本（<code>note/</code> 目前是空的）</span></div>
+      <div class="c-meta"><span class="chip n">⏱ 30 分鐘</span><span class="chip bad">整套系統唯一缺的東西</span></div>
+      <div class="c-body">建 <code>note/錯題本.md</code>，每題一行：<br><code>年份 · 題號 · 單元 · 錯在 A/B/C · 一句話症狀 · 回看連結</code><br>再建 <code>note/進度.md</code> 記每單元跑到 Step 幾。</div>
+      <div class="c-note">✔ 後面 27 週，考前一週你只會看這一個檔。沒有它，13 卷演練的結果會全部蒸發。</div>
+    </div>
+  </div>
+
+  <h3 class="grp">你的三類錯 → 對應主力工具</h3>
+  <div class="grid g-3">
+    <div class="card a-blue">
+      <div class="c-top"><span class="c-ico">Ⓐ</span><span class="c-title">不知道有這條公式<small>問題＝覆蓋率不足</small></span></div>
+      <div class="c-body">主力：<b>單元教學</b> ＋ <b>導讀的「🔑 必背」</b>。把該單元主線讀滿，必背清單抄進錯題本，<b>每週默寫一次</b>。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><a class="lk pri" href="單元教學/index.html">單元教學 →</a><a class="lk" href="考古題/導讀.html">導讀必背</a></div>
+    </div>
+    <a class="card a-amber" href="數學lab/index.html">
+      <div class="c-top"><span class="c-ico">Ⓑ</span><span class="c-title">知道公式但推不出來<small>問題＝推導沒內化</small></span></div>
+      <div class="c-body">主力：<b>數學 Lab</b> ＋ 單元教學的 Step 段。Lab 有填空驗收，逼你自己走完每一步，不能只是看過。</div>
+      <div class="c-foot"><span class="lk pri">開數學 Lab →</span></div>
+    </a>
+    <a class="card a-green" href="教材/Kittel習題詳解/index.html">
+      <div class="c-top"><span class="c-ico">Ⓒ</span><span class="c-title">推得出來但算錯／單位錯<small>問題＝手感不足</small></span></div>
+      <div class="c-body">主力：<b>Kittel 習題詳解</b>。純粹靠題量。每章先自己算再看解，答案有 <code>boxed</code> 可快速對。</div>
+      <div class="c-foot"><span class="lk pri">開習題詳解 →</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════ §4 ══════════════════════════ -->
+<section id="s4">
+  <div class="shead"><span class="n">④</span><h2>單元循環 SOP：十個單元都照這六步跑</h2></div>
+  <p class="slede">第一／二梯隊單元約 8–10 小時（分兩週）；第三梯隊約 5 小時；<b>第四梯隊只跑 Step 1 ＋ Step 6</b>。</p>
+
+  <div class="grid g-fix3">
+    <div class="card step a-blue">
+      <span class="num">1</span>
+      <div class="c-top"><span class="c-ico">🧭</span><span class="c-title">定位<small>Kittel 章節導讀 chXX</small></span></div>
+      <div class="c-meta"><span class="chip n">⏱ 20 分</span></div>
+      <div class="c-body">先知道這章在幹嘛、術語中英對照。</div>
+      <div class="c-note">✅ 驗收：能用三句話說出這章要解決什麼問題。</div>
+      <div class="c-foot"><a class="lk" href="教材/Kittel章節導讀/index.html">開章節導讀 →</a></div>
+    </div>
+
+    <div class="card step a-teal">
+      <span class="num">2</span>
+      <div class="c-top"><span class="c-ico">🎓</span><span class="c-title">主讀<small>單元教學 unitXX</small></span></div>
+      <div class="c-meta"><span class="chip n">⏱ 3–4 小時</span><span class="chip teal">最重的一步</span></div>
+      <div class="c-body">主線從高中概念推到考試級。不認得的符號點 <code>▸</code> 就地展開；數學／物理基礎卡住就跳 <a href="教材/先備知識/index.html">先備知識</a> 補完回原位。</div>
+      <div class="c-note">✅ 驗收：每個 Step 都能說出「這步在做什麼動作」，不是「看起來合理」。</div>
+      <div class="c-foot"><a class="lk" href="單元教學/index.html">開單元教學 →</a></div>
+    </div>
+
+    <div class="card step a-amber">
+      <span class="num">3</span>
+      <div class="c-top"><span class="c-ico">📐</span><span class="c-title">手推<small>數學 Lab（填空驗收）</small></span></div>
+      <div class="c-meta"><span class="chip n">⏱ 40 分</span><span class="chip warn">最容易被跳過</span></div>
+      <div class="c-body">Lab 會擋著你 —— 填對才給下一步。這是被動閱讀轉主動輸出的關鍵。</div>
+      <div class="c-note">✅ 驗收：不看提示走完全部步驟。</div>
+      <div class="c-foot"><a class="lk" href="數學lab/index.html">開數學 Lab →</a></div>
+    </div>
+
+    <div class="card step a-purple">
+      <span class="num">4</span>
+      <div class="c-top"><span class="c-ico">🔬</span><span class="c-title">圖像<small>模擬（拉參數）</small></span></div>
+      <div class="c-meta"><span class="chip n">⏱ 20 分</span></div>
+      <div class="c-body">刻意拉到極端：T→0／T→∞、U→0、m*→∞、k→BZ 邊界，看圖怎麼變。</div>
+      <div class="c-note">✅ 驗收：能在拉之前先預測圖會怎麼動。</div>
+      <div class="c-foot"><a class="lk" href="模擬/index.html">開系統模擬 →</a></div>
+    </div>
+
+    <div class="card step a-green">
+      <span class="num">5</span>
+      <div class="c-top"><span class="c-ico">🧮</span><span class="c-title">練算<small>Kittel 習題詳解 chXX</small></span></div>
+      <div class="c-meta"><span class="chip n">⏱ 2–3 小時</span><span class="chip warn">時間不夠時砍這步</span></div>
+      <div class="c-body"><b>先自己算再看解</b>。算不出來先回 Step 3，不要直接看答案。</div>
+      <div class="c-note">✅ 驗收：該章題目八成能獨立算對，含單位。</div>
+      <div class="c-foot"><a class="lk" href="教材/Kittel習題詳解/index.html">開習題詳解 →</a></div>
+    </div>
+
+    <div class="card step a-red">
+      <span class="num">6</span>
+      <div class="c-top"><span class="c-ico">✍️</span><span class="c-title">對考題 → 默寫<small>導讀「指定練習」＋錯題本</small></span></div>
+      <div class="c-meta"><span class="chip n">⏱ 1–2 小時</span><span class="chip bad">絕不可砍</span></div>
+      <div class="c-body">做該單元的歷年真題（<a href="考古題/導讀.html">導讀</a> 每單元都列好了指定練習與年份）。做完把「🔑 必背」<b>闔頁默寫在白紙上</b>。</div>
+      <div class="c-note">✅ 驗收：默寫全對。錯的寫進 <code>note/錯題本.md</code>；默寫沒過 → 回 Step 2 <b>重讀該小節</b>（不是重讀整篇）。</div>
+      <div class="c-foot"><a class="lk" href="考古題/導讀.html">開導讀 →</a><a class="lk" href="考古題/詳解/index.html">開逐題詳解 →</a></div>
+    </div>
+  </div>
+
+  <div class="note i">
+    <span class="h">💡 為什麼順序是這樣</span>
+    Step 1→2 是「先有地圖再進森林」；Step 3→4 把被動閱讀變主動輸出（<b>這兩步最容易被跳過，也最不該跳</b>）；Step 5→6 把「懂了」變成「考場上手會動」。<br>
+    時間壓縮時的砍法順序：先砍 <b>Step 5 的題量</b> → 再砍 <b>Step 4</b> → <b>Step 2 主線與 Step 6 默寫永不砍</b>。
+  </div>
+</section>
+
+<!-- ══════════════════════════ §5 ══════════════════════════ -->
+<section id="s5">
+  <div class="shead"><span class="n">⑤</span><h2>28 週路線圖（2026-07 → 2027-02）</h2></div>
+  <p class="slede">單元期約 5 h/週、演練期約 8 h/週，合計約 165 小時。這份排程會用完你所有可用時間 —— 若每週只有 3 小時，直接砍第三、四梯隊的 Step 5。</p>
+
+  <h3 class="grp">階段一 · 定位（W1）</h3>
+  <div class="grid g-auto">
+    <div class="card a-blue">
+      <div class="c-top"><span class="c-ico">🎯</span><span class="c-title">定位週<small>2025 裸考 ＋ 策略檔 ＋ 建錯題本</small></span></div>
+      <div class="c-meta"><span class="wk">W1</span><span class="chip n">7/27–8/2</span><span class="chip n">6 h</span></div>
+      <div class="c-note">📦 交付物：2025 卷分數、A/B/C 三類錯誤分佈、<code>note/錯題本.md</code> 開檔</div>
+    </div>
+  </div>
+
+  <h3 class="grp">階段二 · 第一梯隊四單元（W2–W9，≥60% 分數在這裡）</h3>
+  <div class="grid g-fix2">
+    <a class="card a-blue" href="單元教學/unit01_晶體結構.html">
+      <div class="c-top"><span class="c-ico">🔷</span><span class="c-title">單元 01 晶體結構</span></div>
+      <div class="c-meta"><span class="wk">W2–3</span><span class="chip t1">梯隊一</span><span class="chip n">10 h</span></div>
+      <div class="c-note">📦 默寫 sc/bcc/fcc/diamond/hcp packing 推導、hcp c/a=√(8/3)、d<sub>hkl</sub></div>
+    </a>
+    <a class="card a-blue" href="單元教學/unit02_倒晶格與繞射.html">
+      <div class="c-top"><span class="c-ico">🔶</span><span class="c-title">單元 02 倒晶格與繞射</span></div>
+      <div class="c-meta"><span class="wk">W4–5</span><span class="chip t1">梯隊一</span><span class="chip n">10 h</span></div>
+      <div class="c-note">📦 默寫 bcc↔fcc 互為倒晶格全算、結構因子消光三規則、Bragg⇔von Laue</div>
+    </a>
+    <a class="card a-blue" href="單元教學/unit04_聲子與晶格振動.html">
+      <div class="c-top"><span class="c-ico">〰️</span><span class="c-title">單元 04 聲子／晶格振動</span></div>
+      <div class="c-meta"><span class="wk">W6–7</span><span class="chip t1">梯隊一</span><span class="chip n">10 h</span></div>
+      <div class="c-note">📦 默寫 ω=2√(C/M)|sin(ka/2)|、Debye T³、Dulong–Petit、ω&gt;ω<sub>max</sub> 衰減波</div>
+    </a>
+    <a class="card a-blue" href="單元教學/unit06_能帶與Bloch電子.html">
+      <div class="c-top"><span class="c-ico">📶</span><span class="c-title">單元 06 能帶／Bloch 電子<small>最重的一個</small></span></div>
+      <div class="c-meta"><span class="wk">W8–9</span><span class="chip t1">梯隊一</span><span class="chip bad">12 h</span></div>
+      <div class="c-note">📦 <b>Bloch 定理證明能默寫</b>（高頻送分題）、NFE gap=2|U<sub>G</sub>|、Kronig–Penney、1/m*=(1/ℏ²)d²E/dk²</div>
+    </a>
+  </div>
+
+  <h3 class="grp">階段三 · 第二梯隊 ＋ 期中驗收（W10–W12）</h3>
+  <div class="grid g-auto">
+    <a class="card a-blue" href="單元教學/unit05_自由電子費米氣體.html">
+      <div class="c-top"><span class="c-ico">⚡</span><span class="c-title">單元 05 自由電子費米氣體</span></div>
+      <div class="c-meta"><span class="wk">W10–11</span><span class="chip t2">梯隊二</span><span class="chip n">10 h</span></div>
+      <div class="c-note">📦 默寫 1D/2D/3D DOS（<b>2D 是常數</b>）、E<sub>F</sub> 公式、U₀=⅗NE<sub>F</sub>、Wiedemann–Franz</div>
+    </a>
+    <div class="card a-amber">
+      <div class="c-top"><span class="c-ico">🚦</span><span class="c-title">期中驗收<small>計時做 2024 ＋ 2023 兩卷</small></span></div>
+      <div class="c-meta"><span class="wk mid">W12</span><span class="chip warn">檢查點</span><span class="chip n">8 h</span></div>
+      <div class="c-body">與 W1 基準線比對。<b>第一梯隊題目若仍失分 → W13 先回補，不要往下走。</b></div>
+      <div class="c-foot"><a class="lk" href="考古題/詳解/固態_2024_詳解.html">2024 詳解</a><a class="lk" href="考古題/詳解/固態_2023_詳解.html">2023 詳解</a></div>
+    </div>
+  </div>
+
+  <h3 class="grp">階段四 · 第三、四梯隊 ＋ 補洞（W13–W18）</h3>
+  <div class="grid g-fix2">
+    <a class="card a-amber" href="單元教學/unit03_晶體鍵結.html">
+      <div class="c-top"><span class="c-ico">🔗</span><span class="c-title">單元 03 晶體鍵結</span></div>
+      <div class="c-meta"><span class="wk mid">W13–14</span><span class="chip t3">梯隊三</span><span class="chip n">8 h</span></div>
+      <div class="c-note">📦 Lennard-Jones cohesive energy、Madelung（1D 鏈 α=2ln2、NaCl 1.7476）</div>
+    </a>
+    <a class="card a-amber" href="單元教學/unit07_半導體.html">
+      <div class="c-top"><span class="c-ico">💠</span><span class="c-title">單元 07 半導體</span></div>
+      <div class="c-meta"><span class="wk mid">W15–16</span><span class="chip t3">梯隊三</span><span class="chip n">8 h</span></div>
+      <div class="c-note">📦 n<sub>i</sub>∝T³ᐟ²e^(−E_g/2k_BT)、effective mass、Hall、pn built-in voltage、degenerate 判準</div>
+    </a>
+    <div class="card a-grey">
+      <div class="c-top"><span class="c-ico">🧲</span><span class="c-title">第四梯隊速攻<small>磁性 ＋ 超導 ＋ 實驗進階，三個打包一週</small></span></div>
+      <div class="c-meta"><span class="wk">W17</span><span class="chip t4">梯隊四</span><span class="chip n">6 h</span><span class="chip warn">只跑 Step 1＋6</span></div>
+      <div class="c-note">📦 只背關鍵結論：Langevin L(α)、χ=C/T、Landau level E<sub>n</sub>=(n+½)ℏω<sub>c</sub>、Meissner、type I/II vortex、STM/ARPES、Dirac 線性色散</div>
+      <div class="c-foot"><a class="lk" href="單元教學/unit08_磁性.html">unit08 磁性</a><a class="lk" href="單元教學/unit09_超導.html">unit09 超導</a><a class="lk" href="單元教學/unit10_實驗與進階.html">unit10 實驗進階</a></div>
+    </div>
+    <div class="card a-green">
+      <div class="c-top"><span class="c-ico">🩹</span><span class="c-title">補洞週<small>清 W1–W17 累積的錯題本</small></span></div>
+      <div class="c-meta"><span class="wk">W18</span><span class="chip n">6 h</span></div>
+      <div class="c-note">📦 錯題本每一條都有「已重做且對」的勾</div>
+    </div>
+  </div>
+
+  <h3 class="grp">階段五 · 全卷演練與收尾（W19–W28）</h3>
+  <div class="grid g-auto">
+    <a class="card a-blue" href="考古題/詳解/index.html">
+      <div class="c-top"><span class="c-ico">⏱️</span><span class="c-title">全卷計時演練<small>每週 2 卷，倒序 2022 → 2013</small></span></div>
+      <div class="c-meta"><span class="wk">W19–24</span><span class="chip blue">13 卷</span><span class="chip n">8 h/週</span></div>
+      <div class="c-body">多出的格次拿來重做最弱那年。每卷完成後：記分數 → 錯題歸類 → 當週回補一個最弱單元。</div>
+      <div class="c-note">📦 交付物：13 卷分數曲線＋每卷錯題歸類</div>
+    </a>
+    <div class="card a-amber">
+      <div class="c-top"><span class="c-ico">🖊️</span><span class="c-title">默寫輪<small>所有「必背」在白紙上默寫兩遍</small></span></div>
+      <div class="c-meta"><span class="wk mid">W25–26</span><span class="chip n">6 h/週</span></div>
+      <div class="c-note">📦 Bloch 證明、結構因子消光、packing、Debye、DOS、Kronig–Penney、Madelung 全部能默寫</div>
+    </div>
+    <div class="card a-red">
+      <div class="c-top"><span class="c-ico">🏁</span><span class="c-title">考前週：只回看，不開新內容</span></div>
+      <div class="c-meta"><span class="wk hot">W27–28</span><span class="chip bad">禁止開新素材</span><span class="chip n">4 h/週</span></div>
+      <div class="c-body">只看三樣東西，其餘全部關掉。</div>
+      <div class="c-foot"><a class="lk" href="考古題/單元整理.html">單元整理 §12</a><a class="lk" href="考點地圖.html">考點地圖</a><span class="lk"><code>note/錯題本.md</code></span></div>
+    </div>
+  </div>
+
+  <div class="note w">
+    <span class="h">⚠️ 這份排程的兩個已知風險（誠實講）</span>
+    <b>①</b> 每單元 10 小時對 56 萬字的單元教學是<b>偏緊</b>的（平均一篇 5.6 萬字）。讀不完時優先保 Step 2 主線與 Step 6 默寫，砍 Step 5 題量 —— <b>不要砍默寫</b>。<br>
+    <b>②</b> 你有三個身分在搶時間。這排程假設每週穩定 5–8 小時；<b>連兩週低於 3 小時就該重排</b>，而不是硬推 —— 直接砍第三梯隊深度，保第一梯隊完整。
+  </div>
+</section>
+
+<!-- ══════════════════════════ §6 ══════════════════════════ -->
+<section id="s6">
+  <div class="shead"><span class="n">⑥</span><h2>十單元速查：頻率、必背、直達連結</h2></div>
+  <p class="slede">
+    每張卡的色條 ＝ 13 年（2013→2025）出題分佈，<b>深色 ＝ 該年考過</b>。梯隊依近 10 年權重（見 <a href="考古題/導讀.html">導讀</a>）。卡片依優先序排列，不是章節序。
+  </p>
+
+  <div class="grid g-wide">
+
+    <!-- unit 1 -->
+    <div class="card a-blue">
+      <div class="c-top"><span class="c-ico">🔷</span><span class="c-title">單元 01 · 晶體結構<small>Kittel Ch.1 — Crystal Structure</small></span></div>
+      <div class="c-meta"><span class="chip t1">梯隊一</span><span class="chip blue">13 年考 11 次</span><span class="chip n">常 20–40%</span></div>
+      <div class="years" title="2013→2025，深色=該年考過">
+        <i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i></i><i></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i>
+      </div>
+      <div class="ycap">2013 ────────────────── 2025</div>
+      <div class="must"><span class="h">🔑 必背</span>
+        sc/bcc/fcc/diamond/hcp packing（0.52 / 0.68 / 0.74 / 0.34 / 0.74）<b>推導</b>；hcp 理想 c/a=√(8/3)≈1.633；[hkl]⊥(hkl) 與 d<sub>hkl</sub>=a/√(h²+k²+l²)；basis 判準（位移是不是晶格半向量）</div>
+      <div class="c-foot">
+        <a class="lk" href="教材/Kittel章節導讀/ch01_晶體結構.html">①導讀</a>
+        <a class="lk pri" href="單元教學/unit01_晶體結構.html">②單元教學</a>
+        <a class="lk" href="數學lab/lab_packing.html">③Lab packing</a>
+        <a class="lk" href="教材/Kittel習題詳解/ch01_晶體結構.html">⑤習題</a>
+      </div>
+    </div>
+
+    <!-- unit 2 -->
+    <div class="card a-blue">
+      <div class="c-top"><span class="c-ico">🔶</span><span class="c-title">單元 02 · 倒晶格／繞射<small>Kittel Ch.2 — Reciprocal Lattice &amp; Diffraction</small></span></div>
+      <div class="c-meta"><span class="chip t1">梯隊一</span><span class="chip blue">13 年考 11 次</span><span class="chip n">高配分</span></div>
+      <div class="years" title="2013→2025，深色=該年考過">
+        <i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i></i><i class="on t1"></i>
+      </div>
+      <div class="ycap">2013 ────────────────── 2025</div>
+      <div class="must"><span class="h">🔑 必背</span>
+        a<sub>i</sub>·b<sub>j</sub>=2πδ<sub>ij</sub>；bcc↔fcc 互為倒晶格（完整算一次）；消光規則（bcc: h+k+l 奇消／fcc: 混奇偶消／diamond 額外條件）；Bragg 2d sinθ=nλ 與 von Laue Δk=G 等價；能繞射 ⟺ |G|≤2k</div>
+      <div class="c-foot">
+        <a class="lk" href="教材/Kittel章節導讀/ch02_倒晶格與繞射.html">①導讀</a>
+        <a class="lk pri" href="單元教學/unit02_倒晶格與繞射.html">②單元教學</a>
+        <a class="lk" href="數學lab/lab_reciprocal.html">③Lab 倒基</a>
+        <a class="lk" href="數學lab/lab_structure_factor.html">③Lab 消光</a>
+        <a class="lk" href="模擬/sim_bragg_ewald.html">④模擬</a>
+        <a class="lk" href="教材/Kittel習題詳解/ch02_倒晶格與繞射.html">⑤習題</a>
+      </div>
+    </div>
+
+    <!-- unit 4 -->
+    <div class="card a-blue">
+      <div class="c-top"><span class="c-ico">〰️</span><span class="c-title">單元 04 · 聲子／晶格振動<small>Kittel Ch.4–5 — Phonons</small></span></div>
+      <div class="c-meta"><span class="chip t1">梯隊一</span><span class="chip blue">13 年考 11 次</span><span class="chip n">推導固定</span></div>
+      <div class="years" title="2013→2025，深色=該年考過">
+        <i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i></i>
+      </div>
+      <div class="ycap">2013 ────────────────── 2025</div>
+      <div class="must"><span class="h">🔑 必背</span>
+        單原子鏈 ω=2√(C/M)|sin(ka/2)|、ω<sub>max</sub>=2√(C/M)；雙原子鏈 acoustic／optical gap；Debye ω<sub>D</sub>=v(6π²N/V)^⅓、低溫 T³ 與高溫 3Nk<sub>B</sub> 兩極限；v<sub>g</sub>=dω/dk；<b>ω&gt;ω<sub>max</sub> ⇒ k 變複數（指數衰減波）</b></div>
+      <div class="c-foot">
+        <a class="lk" href="教材/Kittel章節導讀/ch04_聲子.html">①導讀</a>
+        <a class="lk pri" href="單元教學/unit04_聲子與晶格振動.html">②單元教學</a>
+        <a class="lk" href="數學lab/lab_dispersion.html">③Lab 色散</a>
+        <a class="lk" href="模擬/sim_dispersion.html">④模擬</a>
+        <a class="lk" href="教材/Kittel習題詳解/ch04_聲子.html">⑤習題</a>
+      </div>
+    </div>
+
+    <!-- unit 6 -->
+    <div class="card a-blue">
+      <div class="c-top"><span class="c-ico">📶</span><span class="c-title">單元 06 · 能帶／Bloch 電子<small>Kittel Ch.7 — Energy Bands</small></span></div>
+      <div class="c-meta"><span class="chip t1">梯隊一</span><span class="chip blue">13 年考 11 次</span><span class="chip bad">最重的一個</span></div>
+      <div class="years" title="2013→2025，深色=該年考過">
+        <i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i class="on t1"></i><i></i><i></i><i class="on t1"></i><i class="on t1"></i>
+      </div>
+      <div class="ycap">2013 ────────────────── 2025</div>
+      <div class="must"><span class="h">🔑 必背</span>
+        <b>Bloch 定理陳述＋證明（平移算符 5 步，務必默寫 — 高頻送分題）</b>；NFE 在 BZ 邊界開 gap=2|U<sub>G</sub>|；Kronig–Penney 超越方程；crystal momentum ℏk 非真動量、為何可限於第一 BZ；1/m*=(1/ℏ²)d²E/dk²（band 頂為負 ⇒ 用電洞）；tight-binding E=ε₀−α−2γcos(ka)</div>
+      <div class="c-foot">
+        <a class="lk" href="教材/Kittel章節導讀/ch06_能帶.html">①導讀</a>
+        <a class="lk pri" href="單元教學/unit06_能帶與Bloch電子.html">②單元教學</a>
+        <a class="lk" href="數學lab/lab_nfe.html">③Lab NFE</a>
+        <a class="lk" href="模擬/sim_nfe_gap.html">④模擬 NFE</a>
+        <a class="lk" href="模擬/sim_tight_binding.html">④模擬 TB</a>
+        <a class="lk" href="教材/Kittel習題詳解/ch06_能帶.html">⑤習題</a>
+      </div>
+    </div>
+
+    <!-- unit 5 -->
+    <div class="card a-blue">
+      <div class="c-top"><span class="c-ico">⚡</span><span class="c-title">單元 05 · 自由電子費米氣體<small>Kittel Ch.6 — Free Electron Fermi Gas</small></span></div>
+      <div class="c-meta"><span class="chip t2">梯隊二</span><span class="chip blue">13 年考 10 次</span><span class="chip n">中高配分</span></div>
+      <div class="years" title="2013→2025，深色=該年考過">
+        <i class="on t2"></i><i class="on t2"></i><i class="on t2"></i><i class="on t2"></i><i class="on t2"></i><i></i><i></i><i class="on t2"></i><i class="on t2"></i><i class="on t2"></i><i class="on t2"></i><i></i><i class="on t2"></i>
+      </div>
+      <div class="ycap">2013 ────────────────── 2025</div>
+      <div class="must"><span class="h">🔑 必背</span>
+        3D g∝E^½、<b>2D g=m/πℏ²（常數！最常錯）</b>、1D g∝E^(−½)；E<sub>F</sub>=(ℏ²/2m)(3π²n)^(2/3)；U₀=⅗NE<sub>F</sub>；BvK Δk=2π/L；C<sub>el</sub>=γT 與 C/T=γ+AT²；Wiedemann–Franz L=(π²/3)(k<sub>B</sub>/e)²</div>
+      <div class="c-foot">
+        <a class="lk" href="教材/Kittel章節導讀/ch05_自由電子費米氣體.html">①導讀</a>
+        <a class="lk pri" href="單元教學/unit05_自由電子費米氣體.html">②單元教學</a>
+        <a class="lk" href="數學lab/lab_dos.html">③Lab DOS</a>
+        <a class="lk" href="模擬/sim_fermi_dos.html">④模擬</a>
+        <a class="lk" href="教材/Kittel習題詳解/ch05_自由電子費米氣體.html">⑤習題</a>
+      </div>
+    </div>
+
+    <!-- unit 3 -->
+    <div class="card a-amber">
+      <div class="c-top"><span class="c-ico">🔗</span><span class="c-title">單元 03 · 晶體鍵結<small>Kittel Ch.3 — Crystal Binding</small></span></div>
+      <div class="c-meta"><span class="chip t3">梯隊三</span><span class="chip warn">13 年考 8 次</span><span class="chip n">隔年出</span></div>
+      <div class="years" title="2013→2025，深色=該年考過">
+        <i class="on t3"></i><i class="on t3"></i><i class="on t3"></i><i class="on t3"></i><i></i><i></i><i class="on t3"></i><i class="on t3"></i><i></i><i></i><i class="on t3"></i><i class="on t3"></i><i></i>
+      </div>
+      <div class="ycap">2013 ────────────────── 2025</div>
+      <div class="must"><span class="h">🔑 必背</span>
+        五種鍵結＋各舉例；LJ U=4ε[(σ/r)¹²−(σ/r)⁶]、平衡距離與 cohesive energy；Madelung 常數（1D 鏈 α=2ln2、NaCl 1.7476、CsCl 1.7627、ZnS 1.6381）；van der Waals 由兩諧振子推</div>
+      <div class="c-foot">
+        <a class="lk" href="教材/Kittel章節導讀/ch03_晶體鍵結.html">①導讀</a>
+        <a class="lk pri" href="單元教學/unit03_晶體鍵結.html">②單元教學</a>
+        <a class="lk" href="數學lab/lab_madelung.html">③Lab Madelung</a>
+        <a class="lk" href="教材/Kittel習題詳解/ch03_晶體鍵結.html">⑤習題</a>
+      </div>
+    </div>
+
+    <!-- unit 7 -->
+    <div class="card a-amber">
+      <div class="c-top"><span class="c-ico">💠</span><span class="c-title">單元 07 · 半導體<small>Kittel Ch.8 — Semiconductor Crystals</small></span></div>
+      <div class="c-meta"><span class="chip t3">梯隊三</span><span class="chip warn">13 年考 6 次</span><span class="chip n">隔年出</span></div>
+      <div class="years" title="2013→2025，深色=該年考過">
+        <i class="on t3"></i><i></i><i></i><i class="on t3"></i><i class="on t3"></i><i></i><i></i><i></i><i class="on t3"></i><i class="on t3"></i><i class="on t3"></i><i></i><i></i>
+      </div>
+      <div class="ycap">2013 ────────────────── 2025</div>
+      <div class="must"><span class="h">🔑 必背</span>
+        n<sub>i</sub>∝T³ᐟ²e^(−E_g/2k<sub>B</sub>T) ⇒ <b>半導體電導隨 T 升、金屬隨 T 降</b>；effective mass equation；Hall 測載子型別／濃度；direct vs indirect（吸收需不需聲子）；pn built-in voltage；degenerate ⟺ E<sub>F</sub> 進導帶</div>
+      <div class="c-foot">
+        <a class="lk" href="教材/Kittel章節導讀/ch07_半導體.html">①導讀</a>
+        <a class="lk pri" href="單元教學/unit07_半導體.html">②單元教學</a>
+        <a class="lk" href="模擬/sim_semiconductor.html">④模擬</a>
+        <a class="lk" href="教材/Kittel習題詳解/ch07_半導體.html">⑤習題</a>
+      </div>
+    </div>
+
+    <!-- unit 8 -->
+    <div class="card a-grey">
+      <div class="c-top"><span class="c-ico">🧲</span><span class="c-title">單元 08 · 磁性<small>Kittel Ch.11–12 — Magnetism</small></span></div>
+      <div class="c-meta"><span class="chip t4">梯隊四</span><span class="chip n">13 年考 3 次</span><span class="chip warn">2025 回溫</span></div>
+      <div class="years" title="2013→2025，深色=該年考過">
+        <i class="on t4"></i><i></i><i></i><i></i><i></i><i class="on t4"></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on t4"></i>
+      </div>
+      <div class="ycap">2013 ────────────────── 2025</div>
+      <div class="must"><span class="h">🔑 必背（只求看到題不慌）</span>
+        Langevin L(α)=cothα−1/α（α≪1 → α/3）；Curie χ=C/T、Curie–Weiss χ=C/(T−T<sub>C</sub>)；T&gt;T<sub>C</sub> 自發磁化＝0；Landau level E<sub>n</sub>=(n+½)ℏω<sub>c</sub> 與磁通量子化</div>
+      <div class="c-foot">
+        <a class="lk" href="教材/Kittel章節導讀/ch08_磁性.html">①導讀</a>
+        <a class="lk" href="單元教學/unit08_磁性.html">②單元教學</a>
+        <a class="lk" href="數學lab/lab_langevin.html">③Lab</a>
+        <a class="lk" href="模擬/sim_langevin_curie.html">④模擬</a>
+        <a class="lk" href="教材/Kittel習題詳解/ch08_磁性.html">⑤習題</a>
+      </div>
+    </div>
+
+    <!-- unit 9 -->
+    <div class="card a-grey">
+      <div class="c-top"><span class="c-ico">🧊</span><span class="c-title">單元 09 · 超導<small>Kittel Ch.10 — Superconductivity</small></span></div>
+      <div class="c-meta"><span class="chip t4">梯隊四</span><span class="chip n">13 年考 2 次</span><span class="chip warn">2025 回溫</span></div>
+      <div class="years" title="2013→2025，深色=該年考過">
+        <i class="on t4"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on t4"></i>
+      </div>
+      <div class="ycap">2013 ────────────────── 2025</div>
+      <div class="must"><span class="h">🔑 必背（只求看到題不慌）</span>
+        Meissner effect；type I vs type II（II 有混合態＋磁通渦旋 vortex、H<sub>c1</sub>/H<sub>c2</sub>）；磁通量子 Φ₀=h/2e；BCS 配對概念與 2Δ≈3.5k<sub>B</sub>T<sub>c</sub></div>
+      <div class="c-foot">
+        <a class="lk" href="教材/Kittel章節導讀/ch09_超導.html">①導讀</a>
+        <a class="lk" href="單元教學/unit09_超導.html">②單元教學</a>
+        <a class="lk" href="教材/Kittel習題詳解/ch09_超導.html">⑤習題</a>
+      </div>
+    </div>
+
+    <!-- unit 10 -->
+    <div class="card a-grey">
+      <div class="c-top"><span class="c-ico">🔭</span><span class="c-title">單元 10 · 實驗技術／進階<small>Kittel Ch.9 ＋ 進階主題</small></span></div>
+      <div class="c-meta"><span class="chip t4">梯隊四</span><span class="chip n">13 年考 3 次</span></div>
+      <div class="years" title="2013→2025，深色=該年考過">
+        <i class="on t4"></i><i></i><i></i><i></i><i></i><i class="on t4"></i><i></i><i></i><i></i><i class="on t4"></i><i></i><i></i><i></i>
+      </div>
+      <div class="ycap">2013 ────────────────── 2025</div>
+      <div class="must"><span class="h">🔑 必背（只求看到題不慌）</span>
+        STM／AFM／MFM 原理與適用；測 electron DOS 的手段（PES／ARPES／STS、低溫比熱 γ）；Dirac point／graphene 線性色散 E=ℏv<sub>F</sub>|k| ⇒ massless；de Haas–van Alphen</div>
+      <div class="c-foot">
+        <a class="lk" href="教材/Kittel章節導讀/ch10_費米面與進階.html">①導讀</a>
+        <a class="lk" href="單元教學/unit10_實驗與進階.html">②單元教學</a>
+        <a class="lk" href="教材/Kittel習題詳解/ch10_費米面與進階.html">⑤習題</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="note i">
+    <span class="h">📌 近年（2019–2025）卷面固定長這樣</span>
+    四大段 —— <b>Crystal structure ／ Diffraction ／ Phonons ／ Electrons</b>，各約 25%，偶爾加 Magnetism／Superconductivity（2025 就加了）。
+    這正好對應上面的<b>第一梯隊 4 張＋第二梯隊 1 張</b>卡：這五個單元吃滿，就覆蓋近年卷面的絕大部分。完整題型清單見 <a href="考古題/單元整理.html">單元整理 §12</a>。
+  </div>
+</section>
+
+<!-- ══════════════════════════ §7 ══════════════════════════ -->
+<section id="s7">
+  <div class="shead"><span class="n">⑦</span><h2>卡住怎麼辦：症狀 → 開哪一頁</h2></div>
+  <p class="slede">這一區就是這個站的使用說明書。不確定該開什麼的時候看這裡，不要憑感覺亂逛。</p>
+
+  <div class="grid g-3">
+    <div class="card sx a-teal">
+      <div class="q">公式裡有符號不認得</div>
+      <div class="arrow">↓</div>
+      <div class="c-body">在該單元教學頁裡點 <code>▸</code> 收合塊 —— 每個符號都就地展開：高中錨點 → 為什麼要 → 定義 → 3 個範例。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><a class="lk pri" href="單元教學/index.html">單元教學 →</a></div>
+    </div>
+
+    <a class="card sx a-teal" href="教材/先備知識/數學先備.html">
+      <div class="q">數學卡住<br><span style="font-weight:400;font-size:.85rem;color:var(--sub)">外積、複指數、傅立葉、等比級數、泰勒、偏微、久期方程、k 空間計數</span></div>
+      <div class="arrow">↓</div>
+      <div class="c-body">先備知識／數學先備 —— 8 項，每項從高中起點建起。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><span class="lk pri">數學先備 →</span></div>
+    </a>
+
+    <a class="card sx a-teal" href="教材/先備知識/物理先備.html">
+      <div class="q">物理卡住<br><span style="font-weight:400;font-size:.85rem;color:var(--sub)">波與波向量、簡諧、波茲曼因子、庫侖、波耳模型</span></div>
+      <div class="arrow">↓</div>
+      <div class="c-body">先備知識／物理先備 —— 8 項，同樣從高中起點。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><span class="lk pri">物理先備 →</span></div>
+    </a>
+
+    <div class="card sx a-grey">
+      <div class="q">Kittel 英文／機翻讀不動</div>
+      <div class="arrow">↓</div>
+      <div class="c-body">先開<b>章節導讀</b>（術語翻成人話）；還不行再開 <b>Kittel 中譯</b> 或 <b>林盛煇</b>（中文上手橋樑）。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><a class="lk pri" href="教材/Kittel章節導讀/index.html">章節導讀</a><a class="lk" href="教材/Kittel_翻譯.html">中譯</a><a class="lk" href="教材/固態物理導論_林盛煇.html">林盛煇</a></div>
+    </div>
+
+    <a class="card sx a-amber" href="數學lab/index.html">
+      <div class="q">推導看得懂，但自己推不出來</div>
+      <div class="arrow">↓</div>
+      <div class="c-body">數學 Lab 對應那條 —— 填空驗收，填對才給下一步，逼你真的走過一遍。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><span class="lk pri">數學 Lab →</span></div>
+    </a>
+
+    <a class="card sx a-purple" href="模擬/index.html">
+      <div class="q">公式會背，但沒有物理圖像</div>
+      <div class="arrow">↓</div>
+      <div class="c-body">系統模擬對應那個 —— 拉參數看極限行為，把公式和圖綁在一起。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><span class="lk pri">系統模擬 →</span></div>
+    </a>
+
+    <a class="card sx a-green" href="教材/Kittel習題詳解/index.html">
+      <div class="q">會推導，但數字／單位老是算錯</div>
+      <div class="arrow">↓</div>
+      <div class="c-body">Kittel 習題詳解 —— 約 90 題全解，答案 <code>boxed</code>，純靠題量練手感。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><span class="lk pri">習題詳解 →</span></div>
+    </a>
+
+    <a class="card sx a-blue" href="考古題/單元整理.html">
+      <div class="q">不知道這一章值不值得花時間</div>
+      <div class="arrow">↓</div>
+      <div class="c-body">單元整理 §1 頻率表 —— 13 年 × 10 單元的出現次數，一眼看完。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><span class="lk pri">頻率表 →</span></div>
+    </a>
+
+    <a class="card sx a-blue" href="考古題/單元整理.html">
+      <div class="q">想知道 2027 最可能考什麼</div>
+      <div class="arrow">↓</div>
+      <div class="c-body">單元整理 §12 —— 2021–2025 固定題型清單，預測力最強的一節。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><span class="lk pri">§12 固定題型 →</span></div>
+    </a>
+
+    <a class="card sx a-green" href="考古題/詳解/index.html">
+      <div class="q">某道考古題完全沒頭緒</div>
+      <div class="arrow">↓</div>
+      <div class="c-body">逐題詳解該年份 —— 符號就地展開 ＋ 不跳代數的 Step 解答。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><span class="lk pri">逐題詳解 →</span></div>
+    </a>
+
+    <a class="card sx a-blue" href="考點地圖.html">
+      <div class="q">想一次看到「考點 × 數學工具 × 站內位置」</div>
+      <div class="arrow">↓</div>
+      <div class="c-body">考點地圖 —— 整本可考內容的總表，含每個考點用到哪個數學原理。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><span class="lk pri">考點地圖 →</span></div>
+    </a>
+
+    <a class="card sx a-green" href="質檢報告.html">
+      <div class="q">懷疑站上某個數字是錯的</div>
+      <div class="arrow">↓</div>
+      <div class="c-body">質檢報告 —— 33 檔用 Python 獨立重算過，也明列「未涵蓋」的範圍。</div>
+      <div class="spacer"></div>
+      <div class="c-foot"><span class="lk pri">質檢報告 →</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════ §8 ══════════════════════════ -->
+<section id="s8">
+  <div class="shead"><span class="n">⑧</span><h2>誠實缺口：這個庫還沒有的東西</h2></div>
+  <p class="slede">紅條 ＝ 會實際影響備考成效，建議補；橘條 ＝ 已知限制，知道就好。</p>
+
+  <h3 class="grp">🔴 建議補（會影響成效）</h3>
+  <div class="grid g-auto">
+    <div class="card a-red">
+      <div class="c-top"><span class="c-ico">1️⃣</span><span class="c-title"><code>note/</code> 完全空白<small>整個系統最大的洞</small></span></div>
+      <div class="c-meta"><span class="chip bad">0 檔</span><span class="chip bad">第一週就要補</span></div>
+      <div class="c-body">沒有任何「輸出容器」：沒有錯題本、沒有默寫紀錄、沒有進度追蹤。所有內容都是單向「讀進去」。28 週演練的成果若不落地，考前一週會無處可回看。</div>
+      <div class="c-note">✔ 補法：建 <code>note/錯題本.md</code>（格式見 <a href="#s3">§3 Day 4</a>）＋ <code>note/進度.md</code> 記每單元跑到 Step 幾。</div>
+    </div>
+
+    <div class="card a-red">
+      <div class="c-top"><span class="c-ico">2️⃣</span><span class="c-title">沒有預測卷<small>13 卷做第二輪就失去診斷力</small></span></div>
+      <div class="c-meta"><span class="chip bad">0 份</span><span class="chip warn">W18 前補</span></div>
+      <div class="c-body">目前只有 13 份「已考過」的舊卷。QFT 那套備考庫有「預測卷覆蓋」（依高頻題型自製新卷），固態<b>沒有</b>。舊卷做到第二輪會開始靠記憶而非能力答題。</div>
+      <div class="c-note">✔ 補法：依 <a href="考古題/單元整理.html">單元整理 §12</a> 的四段式結構，產 2–3 份 2027 預測卷（每段一題、含數值估算），留到 W24 之後當乾淨的模考。</div>
+    </div>
+
+    <div class="card a-red">
+      <div class="c-top"><span class="c-ico">3️⃣</span><span class="c-title">沒有考前速記卡<small>考前一週需要「一張紙掃完」</small></span></div>
+      <div class="c-meta"><span class="chip bad">0 份</span><span class="chip warn">W24 前補</span></div>
+      <div class="c-body">QFT 庫有可列印的 2-A4 cheat sheet（含關鍵代數），固態沒有。目前考前得翻 <a href="考古題/導讀.html">導讀</a> 的十個段落拼湊。</div>
+      <div class="c-note">✔ 補法：把 <a href="#s6">§6</a> 十張卡的「🔑 必背」抽出來，做成 2 頁可列印 A4（第一梯隊 1 頁、其餘 1 頁）。</div>
+    </div>
+  </div>
+
+  <h3 class="grp">🟠 已知限制（知道就好）</h3>
+  <div class="grid g-auto">
+    <div class="card a-amber">
+      <div class="c-top"><span class="c-ico">4️⃣</span><span class="c-title">章節導讀與先備知識沒有內嵌圖</span></div>
+      <div class="c-meta"><span class="chip warn">118 收合塊但 0 SVG</span><span class="chip n">低優先</span></div>
+      <div class="c-body">Kittel 章節導讀 10 章、先備知識 2 篇都缺內嵌圖。單元教學／Kittel 習題／考古詳解三大區塊已補滿（合計約 230 張）。</div>
+      <div class="c-note">✔ 影響有限：這兩區定位是「查術語／補基礎」，主讀在單元教學。</div>
+    </div>
+
+    <div class="card a-amber">
+      <div class="c-top"><span class="c-ico">5️⃣</span><span class="c-title">歷年原卷只有 .md，沒有 HTML</span></div>
+      <div class="c-meta"><span class="chip warn">公式不渲染</span></div>
+      <div class="c-body">13 份原卷是純文字 md，做計時模考時打開 md 版體驗差、圖形題看不到。</div>
+      <div class="c-note">✔ 解法：直接開 <code>ref/&lt;年份&gt;/</code> 底下的<b>原始 PDF</b>（13 份全在），那才是考卷原貌。</div>
+    </div>
+
+    <div class="card a-amber">
+      <div class="c-top"><span class="c-ico">6️⃣</span><span class="c-title">Safari 直開時跨資料夾連結會被擋</span></div>
+      <div class="c-meta"><span class="chip warn">瀏覽器安全機制</span></div>
+      <div class="c-body">用 <code>file://</code> 在 Safari 直開深層頁面時，頁內點「跨資料夾」連結會被沙箱擋（<code>Ignoring request to load this main resource because it is outside the sandbox</code>）。這不是連結寫錯。</div>
+      <div class="c-note">✔ 解法：用 <a href="#s9">§9</a> 的 <code>open</code> 指令直接跳頁；或用 Chrome 開這頁，卡片就能點。</div>
+    </div>
+
+    <div class="card a-amber">
+      <div class="c-top"><span class="c-ico">7️⃣</span><span class="c-title">ref/ 有 2 份 PDF 未轉檔</span></div>
+      <div class="c-meta"><span class="chip n">無實質影響</span></div>
+      <div class="c-body"><code>Chi_..._kittel.pdf</code>（474 頁純掃描、無 OCR 文字層）與 <code>ref/2021/量子力學一 QM1 2021.pdf</code>（非本考科）。</div>
+      <div class="c-note">✔ 前者內容已被 <code>Kittel_原文</code>／<code>Kittel_翻譯</code> 完整涵蓋；後者不是這科。</div>
+    </div>
+
+    <div class="card a-amber">
+      <div class="c-top"><span class="c-ico">8️⃣</span><span class="c-title">質檢的已知未涵蓋範圍</span></div>
+      <div class="c-meta"><span class="chip ok">數值 0 錯</span><span class="chip warn">但非全面</span></div>
+      <div class="c-body"><b>未</b>逐行重推純文字物理論述；SVG 非每像素擬合；OCR 讀不到的舊卷無法對照原始給定值；其餘 18 檔（章節導讀／先備／簡報／教材全文）僅做標準常數掃描。</div>
+      <div class="c-note">✔ 實務影響：定性敘述若與 Kittel 原文有出入，以 <a href="教材/Kittel_原文.html">Kittel 原文</a>為準（考試指定符號來源）。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ §9 ══════════════════════════ -->
+<section id="s9">
+  <div class="shead"><span class="n">⑨</span><h2>操作備忘</h2></div>
+
+  <div class="grid g-2">
+    <div class="card a-blue" style="grid-column:1/-1">
+      <div class="c-top"><span class="c-ico">⌨️</span><span class="c-title">直接跳到某一頁<small>Safari 連結被擋時用這個</small></span>
+        <button class="copybtn" data-copy="#cmds">⧉ 複製全部</button></div>
+      <div class="c-body" style="margin-bottom:.5rem">在終端機貼上即可。</div>
+<pre id="cmds"><code><span class="c"># 起手式三頁</span>
+open "/Users/jenyueh/AItotur/solidstatePhysics/導覽.html"
+open "/Users/jenyueh/AItotur/solidstatePhysics/考古題/單元整理.html"
+open "/Users/jenyueh/AItotur/solidstatePhysics/ref/2025/固態物理導論 Qualifying Exam of Introduction to Solid State Physics 2025.pdf"
+
+<span class="c"># 單元循環六步（把 01 換成你要的單元編號）</span>
+open "/Users/jenyueh/AItotur/solidstatePhysics/教材/Kittel章節導讀/ch01_晶體結構.html"
+open "/Users/jenyueh/AItotur/solidstatePhysics/單元教學/unit01_晶體結構.html"
+open "/Users/jenyueh/AItotur/solidstatePhysics/數學lab/index.html"
+open "/Users/jenyueh/AItotur/solidstatePhysics/模擬/index.html"
+open "/Users/jenyueh/AItotur/solidstatePhysics/教材/Kittel習題詳解/ch01_晶體結構.html"
+open "/Users/jenyueh/AItotur/solidstatePhysics/考古題/詳解/index.html"
+
+<span class="c"># 策略與稽核</span>
+open "/Users/jenyueh/AItotur/solidstatePhysics/考古題/導讀.html"
+open "/Users/jenyueh/AItotur/solidstatePhysics/考點地圖.html"
+open "/Users/jenyueh/AItotur/solidstatePhysics/質檢報告.html"
+
+<span class="c"># 想讓頁內連結全部可點：改用 Chrome 開</span>
+open -a "Google Chrome" "/Users/jenyueh/AItotur/solidstatePhysics/導覽.html"</code></pre>
+    </div>
+
+    <div class="card a-amber">
+      <div class="c-top"><span class="c-ico">✏️</span><span class="c-title">要改內容時的規則</span></div>
+      <div class="c-body">
+        <ul class="tight">
+          <li><b>真相源是 <code>.md</code></b>。每個 <code>.html</code> 把 markdown 放在 <code>&lt;script id="md-source"&gt;</code>，前端用 marked.js＋MathJax 渲染。<b>改完務必把 md-source 同步寫回同名 <code>.md</code></b>，否則兩邊分岔。</li>
+          <li><b>考古題詳解例外</b>：改／加 <code>考古題/詳解/固態_&lt;年&gt;_詳解.md</code> 後跑 <code>python3 考古題/詳解/_build_html.py</code> 重生 HTML＋index（會自動收錄新年份）。</li>
+          <li><b>不要開本機 http server</b>；要看哪一頁就直接 <code>open</code> 那一頁。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card a-red">
+      <div class="c-top"><span class="c-ico">🪤</span><span class="c-title">渲染陷阱（踩過的，務必記住）</span></div>
+      <div class="c-body">
+        <ul class="tight">
+          <li><code>&lt;figure&gt;</code>／<code>&lt;svg&gt;</code> 區塊內部<b>絕不可有空白行</b>（marked 遇空行會中斷 HTML 區塊），要從行首第 0 欄開始，前後各空一行。</li>
+          <li>SVG <code>&lt;text&gt;</code> 內<b>只能放 unicode，不可有 <code>$</code></b> —— MathJax 不渲染 SVG 內的 <code>$</code>。</li>
+          <li><code>&lt;details&gt;</code> 相反：標籤各佔一行，<code>&lt;/summary&gt;</code> 後要<b>空一行</b>（內容當 markdown 解析），內部可正常用 <code>$...$</code>。</li>
+          <li><code>\boldsymbol</code> 需 MathJax config 預載才不會變紅字。已預載：<code>unit01/06/08/10</code>、<code>Kittel ch05/08/09/10</code>、13 份考古詳解。其餘檔新增內容改用 <code>\mathbf</code>。</li>
+          <li>同一檔內 gradient／marker 的 <code>id</code> 必須唯一。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card a-grey" style="grid-column:1/-1">
+      <div class="c-top"><span class="c-ico">🗂️</span><span class="c-title">資料夾對照</span></div>
+      <div class="c-body">
+        <ul class="tight">
+          <li><code>導覽.html</code> — 本頁：現況盤點與起手式</li>
+          <li><code>index.html</code> — 總入口（純連結清單，找頁面用）</li>
+          <li><code>考點地圖.html</code> · <code>質檢報告.html</code> — 考點總表 · 稽查結果</li>
+          <li><code>單元教學/</code> — 主讀：10 篇從高中推到資格考</li>
+          <li><code>教材/</code> — 章節導讀 · 習題詳解 · 先備知識 · 9 本教材全文</li>
+          <li><code>考古題/</code> — 單元整理 · 導讀 · 歷年原卷 13 · 逐題詳解 13</li>
+          <li><code>數學lab/</code> · <code>模擬/</code> — 8 條填空推導 · 7 個拖參數模擬</li>
+          <li><code>ref/</code> — 原始 PDF 母片（13 份考卷＋簡報＋掃描課本），未動</li>
+          <li><code>note/</code> — <b>你的筆記（目前空的 —— 第一週要開檔）</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  固態物理導論 2027 資格考備考系統 · 盤點日 2026-07-25 · 全站 83 頁 HTML · self-contained，無外部依賴<br>
+  數字皆由實際掃描檔案取得。改動內容後本頁統計不會自動更新。
+</footer>
+
+<script>
+document.querySelectorAll('.copybtn').forEach(function(btn){
+  btn.addEventListener('click', function(e){
+    e.preventDefault(); e.stopPropagation();
+    var target = document.querySelector(btn.dataset.copy);
+    if(!target) return;
+    var text = target.innerText;
+    var done = function(){
+      var old = btn.textContent;
+      btn.textContent = '✓ 已複製'; btn.classList.add('done');
+      setTimeout(function(){ btn.textContent = old; btn.classList.remove('done'); }, 1600);
+    };
+    // file:// 不是 secure context，navigator.clipboard 常失敗 → 一律備妥 execCommand 後路
+    var fallback = function(){
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch(err) { btn.textContent = '請手動選取'; }
+      document.body.removeChild(ta);
+    };
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模擬⑤ 緊束縛能帶</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 模擬首頁</a>
+  <a href="sim_nfe_gap.html">③ NFE</a>
+  <a class="here" href="sim_tight_binding.html">⑤ TB</a>
+  <a href="sim_fermi_dos.html">④ FD</a>
+  <a href="../單元教學/unit06_能帶與Bloch電子.html">unit06</a>
+</div>
+
+<h1>⑤ 緊束縛（Tight-binding）E = −α − 2γ cos(ka)</h1>
+<p class="intro">
+  1D 最近鄰緊束縛：hopping γ 決定 <b>頻寬 bandwidth = 4γ</b>。
+  帶底曲率給有效質量 m* = ħ² / (2 γ a²)。調 γ 看帶子變寬、m* 變輕。
+</p>
+
+<div class="layout">
+  <div class="panel">
+    <h2>參數</h2>
+    <div class="control">
+      <label>hopping γ <span class="val" data-for="gamma">1</span></label>
+      <input id="gamma" type="range" min="0.1" max="2.5" step="0.05" value="1" data-digits="2">
+      <div class="hint">γ↑ → 電子更容易跳格點 → 帶子變寬、m* 變小</div>
+    </div>
+    <div class="control">
+      <label>在位能 α <span class="val" data-for="alpha">0</span></label>
+      <input id="alpha" type="range" min="-2" max="2" step="0.05" value="0" data-digits="2">
+      <div class="hint">整體上下平移能帶（不改形狀）</div>
+    </div>
+    <div class="control">
+      <label>晶格常數 a <span class="val" data-for="a">1</span></label>
+      <input id="a" type="range" min="0.5" max="2" step="0.05" value="1" data-digits="2">
+    </div>
+    <div class="control">
+      <label>標示波數 k₀/a <span class="val" data-for="k0">0</span></label>
+      <input id="k0" type="range" min="-3.14" max="3.14" step="0.02" value="0" data-digits="2">
+      <div class="hint">看該點的 E、群速度、m* 符號</div>
+    </div>
+
+    <div class="formula">
+      <span class="eq">E(k) = −α − 2γ cos(k a)</span>
+      <span class="eq">bandwidth = E_max − E_min = 4γ</span>
+      <span class="eq">v_g = (1/ħ) dE/dk = (2γ a / ħ) sin(k a)</span>
+      <span class="eq">1/m* = (1/ħ²) d²E/dk² = (2γ a² / ħ²) cos(k a)</span>
+      <span class="eq">帶底 k=0：m* &gt; 0；帶頂 k=π/a：m* &lt; 0（電洞）</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="plot-wrap"><svg id="plot"></svg></div>
+    <div class="legend">
+      <span style="color:#1a4d7c">E(k)</span>
+      <span style="color:#c47a12">拋物線近似（帶底）</span>
+    </div>
+    <div class="kpi" id="kpi"></div>
+    <div class="readout" id="readout"></div>
+  </div>
+</div>
+
+<footer>ħ=1 教學單位。負 m* 表示帶頂曲率向下——以電洞描述較方便。</footer>
+<script src="shared.js"></script>
+<script>
+(function () {
+  const plot = new SSP.Plot2D(document.getElementById("plot"), {
+    width: 680, height: 430,
+    xDomain: [-Math.PI, Math.PI],
+    yDomain: [-3, 3],
+    xLabel: "k · a",
+    yLabel: "E",
+  });
+
+  const R = SSP.bindAll(["gamma", "alpha", "a", "k0"], redraw);
+
+  function redraw() {
+    const g = R.gamma(), alpha = R.alpha(), a = R.a(), k0a = R.k0();
+    const ks = SSP.linspace(-Math.PI / a, Math.PI / a, 220);
+    const pts = ks.map((k) => [k * a, -alpha - 2 * g * Math.cos(k * a)]);
+    const Emin = -alpha - 2 * g;
+    const Emax = -alpha + 2 * g;
+    const pad = Math.max(0.4, 0.15 * (Emax - Emin));
+
+    // parabolic approx near k=0: E ≈ -α - 2γ + γ (ka)^2  (since cos x ≈ 1 - x²/2 → -2γ cos ≈ -2γ + γ (ka)^2)
+    const ptsPar = [];
+    for (let xa = -1.2; xa <= 1.2; xa += 0.05) {
+      ptsPar.push([xa, -alpha - 2 * g + g * xa * xa]);
+    }
+
+    plot.setDomains([-Math.PI, Math.PI], [Emin - pad, Emax + pad]);
+    plot.clear();
+    plot.hline(0, { stroke: "#ddd", dash: "2 2" });
+    plot.vline(0, { stroke: "#ccc", dash: "2 3" });
+    plot.vline(Math.PI, { stroke: "#aaa" });
+    plot.vline(-Math.PI, { stroke: "#aaa" });
+    plot.polyline(ptsPar, { stroke: "#c47a12", width: 1.7, dash: "5 4", opacity: 0.9 });
+    plot.polyline(pts, { stroke: "#1a4d7c", width: 2.7 });
+
+    // marker at k0
+    const k = k0a / a;
+    const Ek = -alpha - 2 * g * Math.cos(k0a);
+    const vg = 2 * g * a * Math.sin(k0a); // ħ=1
+    const invM = 2 * g * a * a * Math.cos(k0a); // ħ=1
+    const mstar = invM === 0 ? Infinity : 1 / invM;
+    plot.circle(k0a, Ek, 5, { fill: "#c0392b" });
+    plot.hline(Emin, { stroke: "#1a4d7c", dash: "2 2", opacity: 0.4 });
+    plot.hline(Emax, { stroke: "#1a4d7c", dash: "2 2", opacity: 0.4 });
+
+    document.getElementById("kpi").innerHTML = `
+      <div class="box"><div class="k">bandwidth 4γ</div><div class="v">${SSP.fmt(4 * g, 3)}</div></div>
+      <div class="box"><div class="k">E(k₀)</div><div class="v">${SSP.fmt(Ek, 3)}</div></div>
+      <div class="box"><div class="k">v_g (ħ=1)</div><div class="v">${SSP.fmt(vg, 3)}</div></div>
+      <div class="box"><div class="k">m* (ħ=1)</div><div class="v">${!isFinite(mstar) ? "∞" : SSP.fmt(mstar, 3)}</div></div>`;
+
+    const region =
+      Math.abs(k0a) < 0.4 ? "帶底附近：m*&gt;0，像一般電子" :
+      Math.abs(Math.abs(k0a) - Math.PI) < 0.4 ? "帶頂附近：m*&lt;0，宜用電洞" :
+      "帶腰：|m*| 大、色散較線性";
+
+    document.getElementById("readout").innerHTML = `
+      <strong>你應該看到</strong>
+      <ul>
+        <li>餘弦能帶：k=0 最低（若 γ&gt;0），k=±π/a 最高；寬度嚴格 4γ。</li>
+        <li>橘虛線：帶底拋物線近似 E≈E_min + γ (ka)² —— 由此讀 m*= ħ²/(2γ a²)。</li>
+        <li>加大 γ：帶子變胖、帶底更尖 → |m*| 變小（較「輕」）。</li>
+        <li>目前標點：${region}。</li>
+        <li>對照 NFE：緊束縛從原子軌域出發；NFE 從自由電子出發——兩邊在中間接合。</li>
+      </ul>`;
+  }
+
+  redraw();
+})();
+</script>
+</body>
+</html>

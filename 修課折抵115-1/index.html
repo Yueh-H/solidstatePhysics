@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>115-1 修課折抵路線 — Phys7018 固態物理導論 作戰室</title>
+<style>
+  :root{
+    --ink:#1c2733; --ink2:#4a5a6a; --muted:#7d8b99;
+    --brand:#1a4d7c; --brand-l:#eef5fb; --brand-b:#c5d5e5;
+    --good:#2e7d32; --good-bg:#eef9ee; --good-b:#9ccc9c;
+    --warn:#b26a00; --warn-bg:#fff8ee; --warn-b:#e0b97a;
+    --crit:#b3261e; --crit-bg:#fdeeed; --crit-b:#e6a29d;
+    --surface:#fff; --page:#fafafa; --line:#dde3e9;
+  }
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+       max-width:1080px;margin:2em auto;padding:0 1.2em 5em;line-height:1.75;color:var(--ink);background:var(--page)}
+  h1{color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:.3em;font-size:1.6em;margin-bottom:.2em}
+  h2{color:var(--brand);margin-top:2.2em;border-bottom:1px solid var(--line);padding-bottom:.25em;font-size:1.18em}
+  h3{font-size:1.02em;margin:1.4em 0 .4em;color:var(--ink)}
+  a{color:var(--brand)}
+  code{background:#eaf1f8;padding:1px 6px;border-radius:4px;font-size:.9em}
+  .sub{color:var(--ink2);margin:.3em 0}
+  .lede{background:var(--surface);border:1px solid var(--brand-b);border-left:5px solid var(--brand);
+        border-radius:8px;padding:1em 1.2em;margin:1.4em 0}
+  .box{border-radius:8px;padding:.9em 1.1em;margin:1em 0;border:1px solid;font-size:.95em}
+  .box.crit{background:var(--crit-bg);border-color:var(--crit-b);color:#5c1512}
+  .box.warn{background:var(--warn-bg);border-color:var(--warn-b);color:#5c3d00}
+  .box.good{background:var(--good-bg);border-color:var(--good-b);color:#1c4d1f}
+  .box.info{background:var(--brand-l);border-color:var(--brand-b);color:#20364a}
+  .box b{color:inherit}
+  table{border-collapse:collapse;width:100%;margin:.9em 0;font-size:.92em;background:var(--surface)}
+  th,td{border:1px solid var(--line);padding:.5em .65em;text-align:left;vertical-align:top}
+  th{background:var(--brand-l);color:var(--brand);font-weight:700;white-space:nowrap}
+  td.n{white-space:nowrap}
+  tr.past td{color:var(--muted);background:#f4f6f8}
+  tr.hot td{background:#fdf3f2}
+  .tag{display:inline-block;font-size:.78em;padding:.1em .5em;border-radius:99px;border:1px solid;white-space:nowrap;font-weight:700}
+  .tag.ok{background:var(--good-bg);border-color:var(--good-b);color:var(--good)}
+  .tag.q{background:var(--warn-bg);border-color:var(--warn-b);color:var(--warn)}
+  .tag.no{background:var(--crit-bg);border-color:var(--crit-b);color:var(--crit)}
+  .tag.mid{background:var(--brand-l);border-color:var(--brand-b);color:var(--brand)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8em;margin:1em 0}
+  .card{background:var(--surface);border:1px solid var(--brand-b);border-radius:10px;padding:.9em 1.1em;text-decoration:none;color:inherit;display:block}
+  .card:hover{border-color:var(--brand);box-shadow:0 3px 12px rgba(26,77,124,.14)}
+  .card .t{color:var(--brand);font-weight:700}
+  .card .s{color:var(--ink2);font-size:.9em;margin-top:.2em}
+  details{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:.6em .9em;margin:.6em 0}
+  summary{cursor:pointer;font-weight:700;color:var(--brand)}
+  details[open] summary{border-bottom:1px solid var(--line);padding-bottom:.4em;margin-bottom:.6em}
+  ul,ol{padding-left:1.4em} li{margin:.25em 0}
+  .src{font-size:.83em;color:var(--muted)}
+  .src a{color:var(--muted)}
+  footer{color:var(--muted);font-size:.85em;margin-top:3em;border-top:1px solid var(--line);padding-top:1em}
+
+  /* ---- 分數試算器 ---- */
+  .calc{background:var(--surface);border:1px solid var(--brand-b);border-radius:10px;padding:1em 1.2em;margin:1em 0}
+  .calc table{margin:.4em 0}
+  .calc input[type=number]{width:5.2em;padding:.25em .4em;border:1px solid var(--brand-b);border-radius:5px;
+        font:inherit;font-size:.95em;text-align:right;background:#fff;color:var(--ink)}
+  .calc input[type=text]{width:100%;padding:.25em .4em;border:1px solid var(--line);border-radius:5px;font:inherit;font-size:.95em;background:#fff;color:var(--ink)}
+  .calc button{font:inherit;font-size:.9em;padding:.3em .8em;border:1px solid var(--brand-b);background:var(--brand-l);
+        color:var(--brand);border-radius:6px;cursor:pointer}
+  .calc button:hover{background:#dfeaf5}
+  .hero{display:flex;flex-wrap:wrap;gap:1.6em;align-items:baseline;margin:.8em 0 .2em}
+  .hero .num{font-size:2.6em;font-weight:800;line-height:1;letter-spacing:-.02em}
+  .hero .grade{font-size:1.5em;font-weight:800}
+  .hero .lbl{font-size:.85em;color:var(--muted);display:block;font-weight:400;letter-spacing:0}
+  /* 等第標尺：單一量值 meter，非多系列圖 */
+  .scale{position:relative;height:34px;margin:1.1em 0 1.6em}
+  .scale .track{position:absolute;top:12px;left:0;right:0;height:10px;background:#e9edf1;border-radius:5px}
+  .scale .fill{position:absolute;top:12px;left:0;height:10px;border-radius:5px;background:var(--brand);transition:width .18s}
+  .scale .thr{position:absolute;top:4px;width:2px;height:26px;background:var(--ink)}
+  .scale .thr span{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:.72em;color:var(--ink2);white-space:nowrap}
+  .scale .end{position:absolute;top:26px;font-size:.72em;color:var(--muted)}
+  .warnline{font-size:.92em;margin-top:.5em}
+  @media print{body{max-width:none} details{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<p class="src"><a href="../index.html">← 回固態物理總入口</a></p>
+
+<h1>🎯 115-1 修課折抵路線 — Phys7018《固態物理導論》</h1>
+<p class="sub">目標：<b>學期成績 ≥ B+</b>（台大等第 B+ = 百分制 <b>77–79</b>），用修課折抵博班資格考。<br>
+盤點日 2026-07-26　｜　課表查證 2026-08-21　｜　<b>官方 syllabus 寫入 2026-09-15</b>　｜　期中 <b>11/02</b>　｜　期末 <b>12/21</b></p>
+
+<div class="lede">
+<b>這條路線是什麼</b>：原本的計畫是 2027 年初直接考資格考（本站其餘所有頁面都是為它做的）。這一區處理的是<b>另一條路</b>——修 115-1 的 Phys7018，用課程成績折抵。<br>
+<b>兩條路不是二選一</b>：讀的是同一本 Kittel、同一套內容。差別只在驗收方式——資格考是一次性閉卷；這門課是 <b>期中 40% ＋ 期末 40% ＋ 隨堂 quiz 20%</b>（<b>沒有作業分</b>）。12/11 前隨時可以停修退回 2027 資格考路線。
+</div>
+
+<div class="box crit">
+<b>⚠️ 開工前唯一的致命前提（P0）：「B+ 折抵資格考」這條規則，我查不到公開條文。</b><br>
+我查了台大物理系／應物所網站與教務處，只確認到兩件事：研究生及格標準是 B-（各系所可更嚴），以及資格考通過標準由招生與考試委員會就各單科訂定。<b>「修 Phys7018 拿 B+ 以上即可折抵資格考」這條規則本身沒有在公開頁面出現過。</b><br>
+這是整個計畫的單點失效處：如果門檻其實是 A-、或必須事先申請、或這條路根本不存在，那 16 週的努力方向就要改。<b>在 8/18 初選前，先把這條規則問到書面白紙黑字</b>（見下方 P0 清單）。在那之前，本頁其餘所有內容都是「條件成立才有效」。
+</div>
+
+<h2>🔥 現在該做什麼（依死線由近到遠）</h2>
+<table>
+<tr><th>日期</th><th>事件</th><th>你要做的事</th><th>性質</th></tr>
+<tr class="past"><td class="n">7/26–9/7</td><td>折抵規則／選課／開學</td>
+  <td>課已開、syllabus 已上。折抵條文若還沒有系辦書面，仍是 P0——學期成績 ≠ 資格考通過。</td><td><span class="tag no">P0 前提</span></td></tr>
+<tr class="hot"><td class="n">9/19（六）</td><td>網路退選截止</td><td>若確定不修，這天前退掉最乾淨。</td><td><span class="tag q">逃生口 1</span></td></tr>
+<tr class="hot"><td class="n">9/21（一）</td><td>網路加選截止</td><td>最後上車。過了這天沒選上就是等 116-1。</td><td><span class="tag no">硬死線</span></td></tr>
+<tr class="hot"><td class="n">9/23–9/24</td><td>網路確認選課結果</td><td><b>沒做確認 = 選課無效</b>。9/23 上午 10 時開始。設鬧鐘。</td><td><span class="tag no">硬死線</span></td></tr>
+<tr><td class="n">11/02（一）10:20–12:10</td><td><b>期中考</b>（新物 112，原上課時段）</td>
+  <td>範圍應是 Week 1–8：原子結構＋倒易空間。考後立刻估分、跑停修決策器。</td><td><span class="tag mid">檢查點</span></td></tr>
+<tr><td class="n">12/11（五）17:00</td><td>停修申請截止</td><td><b>最後止損點</b>。停修不留 F；過了這天就只能考完。</td><td><span class="tag q">逃生口 2</span></td></tr>
+<tr><td class="n">12/18（五）</td><td>上課結束</td><td>—</td><td><span class="tag mid">—</span></td></tr>
+<tr><td class="n">12/21（一）10:20–12:10</td><td><b>期末考</b>（新物 112，原上課時段）</td>
+  <td>範圍應是聲子＋近自由電子＋緊束縛。彈性週（12/28–12/31）仍可能被拿來補課，別預設放假。</td><td><span class="tag mid">決勝點</span></td></tr>
+<tr><td class="n">2027/1/4</td><td>教師繳交成績截止</td><td>結果揭曉。（補交最晚 2/19）</td><td><span class="tag mid">結算</span></td></tr>
+</table>
+<p class="src">日期來源：<a href="https://www.aca.ntu.edu.tw/w/aca/calendar">台大教務處．115 學年度行事曆</a>（第 3216 次行政會議通過版本，2026-07-26 讀取）。行事曆註明會隨教育部放假規定更動，開學前再核對一次。</p>
+
+<h2>📌 已查證的硬事實</h2>
+<table>
+<tr><th>項目</th><th>內容</th><th>狀態</th></tr>
+<tr><td>課號</td><td><code>Phys7018</code>（課程識別碼 <code>222 M1720</code>），<b>4 學分</b></td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td>開課單位</td><td>理學院物理系開課，同時開給 <b>物理所(2220)／應用物理所(2450)／物理系(2020)</b> 三個班次</td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td>授課語言</td><td>114-1 備註為<b>「本課程以英語授課」</b></td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td>加選方式</td><td><b>第 2 類：向教師取得授權碼後加選</b>。不是自由加選，拿不到授權碼就修不到</td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td>人數限制</td><td>114-1：本校修課人數上限 <b>70 人</b>，外系人數限制 <b>10 人</b></td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td>近年授課教師</td><td><b>114-1：江正天</b>；107-1～113-1：謝馬利歐；99-1～106-1：林敏聰；100-1～104-1：洪銘輝</td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td>114-1 上課時間</td><td>一 3,4（新物 112）＋ 五 6,7（新物 112）</td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td><b>115-1 開課資訊</b></td><td>授課教師 <b>江正天</b>（JIANG, ZHENG-TIAN）、一 3,4 ＋ 五 6,7（新物 112）、4 學分、英語授課</td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td><b>評分（官方 syllabus 2026-09-15）</b></td><td><b>期中 40%</b>（11/02 一 10:20–12:10）＋ <b>期末 40%</b>（12/21 一 10:20–12:10）＋ <b>隨堂 quiz 20%</b>（不定期、課堂上）。<b>沒有作業分。</b></td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td>指定／參考書</td><td>主軸 <b>Kittel 2018</b>；旁證 Ashcroft &amp; Mermin、Simon <i>Oxford Solid State Basics</i>、Cohen &amp; Louie、Jülich Autumn School。考試以課堂＋Kittel 為準。</td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td>預期課外時數</td><td>syllabus 寫 <b>每週約 8 小時</b>（課前／課後合計）</td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td>Office / TA</td><td>教師 (02) 2366-8203、ctchiang@as.edu.tw；TA 黃阜翔 r10222098@g.ntu.edu.tw、陳冠宇 r14245011@ntu.edu.tw</td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td>台大等第對照</td><td>A+ 90–100（4.3）／A 85–89（4.0）／A− 80–84（3.7）／<b>B+ 77–79（3.3）</b>／B 73–76（3.0）／B− 70–72（2.7，研究生及格）</td><td><span class="tag ok">已查證</span></td></tr>
+<tr><td><b>折抵資格考規則</b></td><td><b>查無公開條文</b>。必須向系辦取得書面確認（見 P0）</td><td><span class="tag no">未確認</span></td></tr>
+</table>
+<p class="src">來源：<a href="https://coursemap.aca.ntu.edu.tw/course_map_all/course.php?code=222+M1720">台大課程地圖 Phys7018</a>、<a href="https://nol.ntu.edu.tw/nol/coursesearch/search_result.php?current_sem=114-1&cstype=1&csname=%E5%9B%BA%E6%85%8B%E7%89%A9%E7%90%86">台大課程網 114-1 查詢</a>、<a href="https://www.aca.ntu.edu.tw/w/aca/UAADForms_21071417362908457">教務處．等第績分平均(GPA)單向轉換為百分制成績對照表</a>。教師最終登錄的是等第，百分制區間僅供換算參考。</p>
+
+<div class="box warn">
+<b>⚠️ 假日砍課會直接打在期中範圍上。</b>
+倒易空間是 Week 5–8，卻會少兩堂：<b>10/9（五）國慶補假</b>、<b>10/26（一）光復補假</b>——接觸時數 16→12，然後 <b>11/02 一早就期中</b>。原子結構 Week 1–4 也少兩堂（9/25 中秋、9/28 教師節）。週五還有 11/20 運動會（聲子尾聲）。12/25 行憲在期末之後，影響較小。<br>
+實務：倒易空間必須靠課外補滿，不能等老師講完再開始。彈性週 12/28–12/31 仍可能補課，別預設放假。
+</div>
+
+<h2>🎚️ B+ 是什麼意思：把目標翻成分數</h2>
+<p>官方公式：<code>總分 = 0.4×期中 + 0.4×期末 + 0.2×quiz</code>。B+ 下緣 <b>77</b>；作戰目標訂 <b>85（A）</b>，讓 77 當保底。沒有作業分＝<b>缺席 quiz 就是直接丟分</b>，沒有「回家補交」這條路。</p>
+
+<table>
+<tr><th>情境</th><th>Quiz</th><th>要 B+（77）</th><th>要 A（85）</th></tr>
+<tr><td>Quiz 正常出席</td><td>80</td><td>期中＋期末平均 <b>76</b></td><td>兩次考試平均 <b>86</b></td></tr>
+<tr><td>Quiz 偏弱／缺 1–2 次</td><td>70</td><td>考試平均 <b>79</b></td><td>考試平均 <b>89</b></td></tr>
+<tr><td>Quiz 幾乎沒到</td><td>50</td><td>考試平均 <b>84</b></td><td>考試平均 <b>94</b>（等於兩次都接近滿分）</td></tr>
+<tr><td>期中考完 70 分</td><td>假設之後 quiz 80</td><td>期末要 <b>≈83</b></td><td>期末要 <b>≈103</b> → A 幾乎沒了，B+ 還拼得過</td></tr>
+<tr><td>期中考完 60 分</td><td>假設之後 quiz 80</td><td>期末要 <b>≈93</b></td><td>不可能。這是停修灰區的上緣</td></tr>
+<tr><td>期中考完 50 分</td><td>quiz 80</td><td>期末要 &gt;100 → B+ 鎖死，<b>停修</b></td><td>不可能</td></tr>
+</table>
+<p class="src">「期中 70」那列把已考的 40% 鎖住，剩下期末 40% + quiz 20%。數字四捨五入到整數。</p>
+
+<div class="calc" id="calc">
+  <h3 style="margin-top:.2em">分數試算器 — 我現在的配置能拿幾分？</h3>
+  <p class="sub" style="font-size:.92em">預設已填官方權重（quiz 20 / 期中 40 / 期末 40）。「預期得分」改成你對自己的預估即可。</p>
+  <table id="rows">
+    <tr><th>評分項目</th><th style="width:7.5em">權重 %</th><th style="width:7.5em">預期得分</th><th style="width:3em"></th></tr>
+  </table>
+  <p><button type="button" id="addrow">＋ 新增項目</button>
+     <button type="button" id="reset">重設為預設</button>
+     <span id="wsum" class="src" style="margin-left:.8em"></span></p>
+
+  <div class="hero">
+    <div><span class="lbl">學期總分（預估）</span><span class="num" id="total">—</span></div>
+    <div><span class="lbl">等第</span><span class="grade" id="grade">—</span></div>
+    <div><span class="lbl">距 B+（77）</span><span class="grade" id="gap">—</span></div>
+  </div>
+  <div class="scale" id="scale">
+    <div class="track"></div><div class="fill" id="fill"></div>
+    <div class="thr" style="left:77%"><span>B+ 77</span></div>
+    <div class="thr" style="left:85%;background:var(--muted)"><span style="color:var(--muted)">A 85</span></div>
+    <div class="end" style="left:0">0</div><div class="end" style="right:0">100</div>
+  </div>
+  <p class="warnline" id="verdict"></p>
+</div>
+
+<div class="box info">
+<b>這就是考試主導，而且比「有作業」更硬。</b> 你手上最有用的資產是 2013–2025 考古題詳解——江正天的課綱就是資格考四段式（結構／倒易／聲子／電子）。整學期重心：<b>每堂到、quiz 不空、限時手寫</b>。Kittel 當考試聖經；Simon 當課前可讀的第一遍；Ashcroft / Cohen–Louie / Jülich 這學期不要當主線，卡住某一條推導再翻。
+</div>
+
+<h2>🗓️ 16 週作戰表（官方 syllabus）</h2>
+<p class="sub">進度欄已改成 2026-09-15 課程網／Canvas syllabus。本課<b>不教</b>半導體、磁性、超導——那些頁先別碰。期中範圍＝原子結構＋倒易空間；期末範圍＝聲子＋近自由電子＋緊束縛。</p>
+<table>
+<tr><th>週</th><th>日期</th><th>官方進度</th><th>本站資源</th><th>該週產出</th></tr>
+<tr class="past"><td class="n">1</td><td class="n">9/7–9/12</td><td>Atomic structure</td>
+ <td><a href="../教材/Kittel章節導讀/ch01_晶體結構.html">導讀 1</a>／<a href="../單元教學/unit01_晶體結構.html">單元 01</a>／<a href="../數學lab/lab_packing.html">Lab packing</a></td>
+ <td>Bravais／原胞／packing／Miller 能默畫</td></tr>
+<tr class="hot"><td class="n">2</td><td class="n">9/14–9/19</td><td>Atomic structure</td>
+ <td>同上；<a href="../默寫/ch01_原子結構_默寫卡.html">Ch.1 默寫卡</a>；鍵結若有講到再看 <a href="../單元教學/unit03_晶體鍵結.html">單元 03</a></td>
+ <td><b>9/19 退選截止</b>。驗收＝默寫卡 12 格（先藏答案）</td></tr>
+<tr><td class="n">3</td><td class="n">9/21–9/26</td><td>Atomic structure<br><span class="src">9/25 中秋，週五課停</span></td>
+ <td>單元 01 後半</td>
+ <td><b>9/23–24 選課確認</b>（漏做＝選課無效）</td></tr>
+<tr><td class="n">4</td><td class="n">9/28–10/3</td><td>Atomic structure 收尾<br><span class="src">9/28 教師節，週一課停 → 本週只剩週五</span></td>
+ <td><a href="../教材/Kittel習題詳解/ch01_晶體結構.html">Ch.1 習題</a></td>
+ <td>結構段手寫 2 題（限時）</td></tr>
+<tr><td class="n">5</td><td class="n">10/5–10/10</td><td><b>Reciprocal space 開始</b><br><span class="src">10/9 國慶補假，週五課停 → 本週只剩週一</span></td>
+ <td><a href="../教材/Kittel章節導讀/ch02_倒晶格與繞射.html">導讀 2</a>／<a href="../單元教學/unit02_倒晶格與繞射.html">單元 02</a>／<a href="../數學lab/lab_reciprocal.html">Lab 倒晶格</a></td>
+ <td>自己推 b<sub>i</sub>＝2π a<sub>j</sub>×a<sub>k</sub> / V。少一堂，課外補。倒晶格考古題<b>不要整卷背</b>，只練五種題型（見 <a href="../考古題/單元整理.html">單元整理 §3</a>）</td></tr>
+<tr><td class="n">6</td><td class="n">10/12–10/17</td><td>Reciprocal space：BZ／Bragg／Laue</td>
+ <td><a href="../模擬/sim_bragg_ewald.html">模擬 Bragg/Ewald</a></td>
+ <td>Ewald 作圖能畫、Bragg 能從 Laue 推回來</td></tr>
+<tr><td class="n">7</td><td class="n">10/18–10/24</td><td>Reciprocal space：結構因子／消光</td>
+ <td><a href="../數學lab/lab_structure_factor.html">Lab 結構因子</a></td>
+ <td><b>期中模考 #1</b>：考古題「結構＋繞射」段限時</td></tr>
+<tr><td class="n">8</td><td class="n">10/26–10/31</td><td>Reciprocal space 收尾<br><span class="src">10/26 光復補假，週一課停 → 本週只剩週五，下週一就是期中</span></td>
+ <td><a href="../考古題/單元整理.html">單元整理</a></td>
+ <td><b>期中模考 #2</b>。不要開始讀聲子</td></tr>
+<tr><td class="n">9</td><td class="n">11/2–11/7</td><td><b>11/02 一 10:20–12:10 期中</b><br>Phonon 開跑（應在週五）</td>
+ <td>考前：單元 01–02。考後：<a href="../單元教學/unit04_聲子與晶格振動.html">單元 04</a></td>
+ <td>考後估分 → 跑停修決策器。聲子從週五才啟動</td></tr>
+<tr><td class="n">10</td><td class="n">11/9–11/14</td><td>Phonon：單／雙原子鏈色散</td>
+ <td><a href="../數學lab/lab_dispersion.html">Lab 色散</a>／<a href="../模擬/sim_dispersion.html">模擬</a></td>
+ <td>ω(k)=ω_max|sin(ka/2)| 能從運動方程式推到</td></tr>
+<tr><td class="n">11</td><td class="n">11/16–11/21</td><td>Phonon：Debye／熱容<br><span class="src">11/20–21 運動會，週五可能停</span></td>
+ <td>單元 04 後半</td>
+ <td>彈性週補課安排至遲本週結束前應宣布</td></tr>
+<tr><td class="n">12</td><td class="n">11/23–11/28</td><td>NFE 開始（自由電子氣體當前置）</td>
+ <td><a href="../單元教學/unit05_自由電子費米氣體.html">單元 05</a>／<a href="../單元教學/unit06_能帶與Bloch電子.html">單元 06</a></td>
+ <td>E_F、DOS、Bloch 定理</td></tr>
+<tr><td class="n">13</td><td class="n">11/30–12/5</td><td>NFE：BZ 邊界能隙 2|U|</td>
+ <td><a href="../數學lab/lab_nfe.html">Lab NFE</a>／<a href="../模擬/sim_nfe_gap.html">模擬能隙</a></td>
+ <td>2×2 近自由電子本徵能自己算</td></tr>
+<tr><td class="n">14</td><td class="n">12/7–12/12</td><td>NFE 收尾</td>
+ <td>單元 06</td>
+ <td><b>12/11 17:00 停修死線</b></td></tr>
+<tr><td class="n">15</td><td class="n">12/14–12/19</td><td>Tight binding（12/18 上課結束）</td>
+ <td><a href="../模擬/sim_tight_binding.html">模擬緊束縛</a></td>
+ <td><b>期末模考</b>：聲子＋NFE＋TB 限時。TB 只有約一週，從第 14 週末預讀</td></tr>
+<tr><td class="n">16</td><td class="n">12/21–12/26</td><td><b>12/21 一 10:20–12:10 期末</b></td>
+ <td><a href="../考古題/詳解/index.html">逐題詳解</a></td>
+ <td>—</td></tr>
+<tr><td class="n">16+1</td><td class="n">12/28–12/31</td><td>彈性週：補課／考試（依公告）</td><td>—</td><td>別預設放假</td></tr>
+</table>
+
+<h2>🔁 每週固定節奏（對上 syllabus 的 8 小時）</h2>
+<p class="sub">一週兩堂（4 小時課）＋課外約 4 小時，合計對上老師寫的 <b>8 hours</b>。這是能穩定拿 A 的節奏。沒有作業分，這 4 小時全部拿去「讓 quiz 不空白、讓兩次考試會寫」。</p>
+<table>
+<tr><th>時機</th><th>時間</th><th>做什麼</th><th>為什麼</th></tr>
+<tr><td>課前</td><td>60 分</td><td>讀本站<b>章節導讀</b>（20 分）＋<b>單元教學</b>該節推導（40 分）。第一遍用 Simon 也行，考試回 Kittel。</td><td>英語授課。沒預習＝quiz 當下在查生字。預習把聽課變成核對。</td></tr>
+<tr><td>課中</td><td>—</td><td><b>人要在教室</b>。只記：①老師強調／重複的 ②跟本站不一樣的符號／近似。隨時準備 quiz。</td><td>quiz 20%、不定期、課堂上。缺席沒補考。這是這門課唯一的「出席＝分數」通道。</td></tr>
+<tr><td>課後 48h 內</td><td>2 小時</td><td>把該堂推導<b>不看書重寫一遍</b>。卡住翻<a href="../教材/Kittel習題詳解/ch01_晶體結構.html">習題詳解</a>或寫信給 TA。</td><td>沒有作業逼你動手，自己不寫就只剩聽過。48 小時內記憶還熱。</td></tr>
+<tr><td>週末</td><td>1–1.5 小時</td><td>做 <b>1 題</b>對應單元的考古題（<a href="../考古題/單元整理.html">單元整理</a>已切好），限時手寫。</td><td>修課和資格考合流。江正天課綱＝資格考四段式。</td></tr>
+</table>
+
+<h2>🛑 停修決策器（期中考後用）</h2>
+<p class="sub">期中 11/02 考完、分數出來後，到 12/11 停修截止大約 <b>5 週</b>。這裡算的是：剩下的期末＋quiz 要平均幾分，總分才碰得到 77。</p>
+<div class="calc" id="calc2">
+  <table>
+    <tr><td>期中考佔比 %</td><td><input type="number" id="m_w" value="40" min="0" max="100"></td>
+        <td>我的期中考分數</td><td><input type="number" id="m_s" value="70" min="0" max="100"></td></tr>
+    <tr><td>已確定的 quiz 佔比 %<br><span class="src">（期中前已考過的隨堂）</span></td><td><input type="number" id="o_w" value="10" min="0" max="100"></td>
+        <td>該部分平均分</td><td><input type="number" id="o_s" value="80" min="0" max="100"></td></tr>
+    <tr><td>剩餘（期末＋未考 quiz）佔比 %</td><td colspan="3"><b id="r_w">50</b> %（自動＝100 − 上面兩項）</td></tr>
+  </table>
+  <div class="hero">
+    <div><span class="lbl">剩下要平均拿到</span><span class="num" id="need">—</span></div>
+    <div><span class="lbl">才能達到 B+ (77)</span><span class="grade" id="need_verdict">—</span></div>
+  </div>
+  <p class="warnline" id="advice"></p>
+</div>
+
+<div class="box info">
+<b>停修的判準（建議先寫下來，別等到當下才想）：</b>
+<ol style="margin:.4em 0">
+<li><b>剩餘需求 &gt; 90 分</b> → 幾乎必敗，停修，把時間還給實驗室，回 2027 資格考路線。</li>
+<li><b>剩餘需求 77–90 分</b> → 灰色地帶。決定關鍵不是「我做不做得到」，而是<b>「這 5 週我能不能真的把每週 8 小時挪出來」</b>——如果實驗室正在燒，誠實一點。</li>
+<li><b>剩餘需求 &lt; 77 分</b> → 續修，照原節奏走。</li>
+<li><b>任何情況下</b>：停修不留 F、不影響 GPA，而資格考路線本來就存在。<b>停修不是失敗，是換賽道。</b>真正的失敗是拖過 12/11 才發現來不及。</li>
+</ol>
+</div>
+
+<h2>⚠️ 風險清單</h2>
+<table>
+<tr><th>風險</th><th>衝擊</th><th>怎麼壓</th></tr>
+<tr><td><b>折抵規則不成立</b>或門檻更高（要 A−／要事先申請／根本沒這條路）</td><td><span class="tag no">致命</span></td>
+ <td>8/18 初選前拿到系辦書面回覆。這是唯一必須在開工前關掉的風險。</td></tr>
+<tr><td><b>時間衝突</b>：4 學分 ≈ 每週 8–9 小時，而你同時在做離子阱實驗＋控制系統開發＋自媒體</td><td><span class="tag no">高</span></td>
+ <td>這是最現實的風險，而且無法靠「更努力」解決。開學前就決定<b>這學期哪件事要降速</b>；沒有降速對象就不要修。</td></tr>
+<tr><td><b>隨堂 quiz 20%、不定期、課堂上</b></td><td><span class="tag no">高</span></td>
+ <td>這門課沒有作業分。缺一次 quiz 就是把 20% 裡的一格打成 0。一 10:20、五 13:20 實驗室行程讓路，沒有「回去補交」。</td></tr>
+<tr><td><b>80% 壓在兩次考試</b>（各 2 小時）</td><td><span class="tag no">高</span></td>
+ <td>期中 11/02 只考結構＋倒易空間——範圍窄，反而沒有「不會的章可以棄」。倒易空間假日少兩堂，必須課外補滿。期末 12/21 是聲子＋NFE＋TB，TB 只有約一週。</td></tr>
+<tr><td><b>115-1 換老師</b></td><td><span class="tag mid">已解除</span></td>
+ <td>江正天續任第二輪。課綱＝資格考四段式 → 2019–2025 原卷當模考。</td></tr>
+<tr><td><b>英語授課</b> + 教科書英文</td><td><span class="tag mid">低</span></td>
+ <td>課前 60 分鐘用本站中文導讀；考試回 Kittel 符號。</td></tr>
+<tr><td><b>假日砍課／彈性週</b></td><td><span class="tag q">中</span></td>
+ <td>倒易空間少兩堂後緊接期中。12/28–12/31 別排死。</td></tr>
+</table>
+
+<h2>✅ P0 待確認清單（8/18 前收掉）</h2>
+<table>
+<tr><th>問誰</th><th>問什麼</th><th>要什麼形式的答案</th></tr>
+<tr><td><b>應物所／物理系系辦</b></td>
+ <td>①「修習指定科目成績達 X 以上得折抵／免考資格考」的<b>條文出處與原文</b>；②適用科目清單是否含 Phys7018；③門檻等第到底是 B+ 還是別的；④是否需<b>事先申請</b>、申請時程為何；⑤修課當學期是否需同時登記資格考</td>
+ <td><b>Email 書面回覆</b>，或研究生手冊／系所會議通過辦法的 PDF 連結。口頭回答請回信覆述一次留存。</td></tr>
+<tr><td><b>指導教授</b></td><td>這學期撥 4 學分（每週 8–9 小時）修這門課；哪個專案相應降速</td><td>當面談完後，用訊息覆述一次共識</td></tr>
+<tr><td><b>授課教師：江正天</b>（ctchiang@as.edu.tw）</td><td>評分已公布。仍要確認：考試是否 open book／可否計算機、quiz 次數與計分（掉最低？缺席＝0？）</td><td>當面或 email；TA 黃阜翔／陳冠宇可先問 quiz 慣例</td></tr>
+</table>
+<div class="box good">
+<b>問系辦時的一個建議</b>：不要問「請問修課可以折抵資格考嗎？」（容易得到「你自己看規定」）。直接問：<b>「我是應物所博士生，想確認若本學期修習 Phys7018 固態物理導論並取得 B+ 以上，是否可據以折抵資格考該科？想請教這項規定的條文出處，以及是否需要事先提出申請。」</b>——具體、可回答、且逼出條文出處。
+</div>
+
+<h2>🔗 接回原備考系統</h2>
+<p class="sub">修課路線和資格考路線讀的是同一批材料。下面是本站主要入口。</p>
+<div class="cards">
+  <a class="card" href="../index.html"><div class="t">🪨 總入口</div><div class="s">四層學習系統的單一入口</div></a>
+  <a class="card" href="../導覽.html"><div class="t">🧭 現況盤點 × 起手式</div><div class="s">全站有什麼、第一週做什麼、單元循環 SOP</div></a>
+  <a class="card" href="../考點地圖.html"><div class="t">🗺️ 考點 × 數學地圖</div><div class="s">考什麼 × 需要哪些數學</div></a>
+  <a class="card" href="../單元教學/index.html"><div class="t">🎓 單元學科（10 單元）</div><div class="s">從高中推到資格考，推導不跳步</div></a>
+  <a class="card" href="../教材/Kittel習題詳解/ch01_晶體結構.html"><div class="t">🧮 Kittel 習題詳解</div><div class="s">課本習題全解 — 沒有作業分，拿來當手寫訓練</div></a>
+  <a class="card" href="../考古題/單元整理.html"><div class="t">📊 單元整理（出題頻率）</div><div class="s">抓優先序用；已按單元切好</div></a>
+</div>
+
+<footer>
+115-1 修課折抵路線作戰室 · 建立於 2026-07-26 · self-contained，無外部依賴<br>
+本頁所有「已查證」項目都附了來源連結；標為「待確認／未確認」的項目<b>沒有</b>被查證過，不要當成事實使用。<br>
+2026-09-15 已寫入官方 syllabus：評分 期中 40／期末 40／quiz 20、期中 11/02、期末 12/21、16 週進度。下次更新：系辦折抵條文原文、quiz 計分慣例（是否掉最低）。
+</footer>
+
+<script>
+(function(){
+  // ---- 台大等第對照（來源：教務處等第/百分制對照表）----
+  var GRADES = [[90,'A+'],[85,'A'],[80,'A−'],[77,'B+'],[73,'B'],[70,'B−'],
+                [67,'C+'],[63,'C'],[60,'C−'],[0,'F']];
+  function gradeOf(s){ for(var i=0;i<GRADES.length;i++){ if(s>=GRADES[i][0]) return GRADES[i][1]; } return 'F'; }
+
+  var DEFAULTS = [['隨堂 quiz',20,80],['期中考',40,80],['期末考',40,80]];
+  var rows = document.getElementById('rows');
+
+  function addRow(name,w,s){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td><input type="text" class="nm"></td>'
+      + '<td><input type="number" class="w" min="0" max="100" step="1"></td>'
+      + '<td><input type="number" class="s" min="0" max="100" step="1"></td>'
+      + '<td><button type="button" class="del" title="刪除">✕</button></td>';
+    rows.appendChild(tr);
+    tr.querySelector('.nm').value = name;
+    tr.querySelector('.w').value  = w;
+    tr.querySelector('.s').value  = s;
+    tr.querySelector('.del').addEventListener('click', function(){ tr.remove(); calc(); });
+    tr.addEventListener('input', calc);
+  }
+  function loadDefaults(){
+    while(rows.rows.length>1) rows.deleteRow(1);
+    DEFAULTS.forEach(function(d){ addRow(d[0],d[1],d[2]); });
+    calc();
+  }
+
+  function calc(){
+    var ws=0, acc=0;
+    Array.prototype.forEach.call(rows.querySelectorAll('tr'), function(tr){
+      var wi=tr.querySelector('.w'), si=tr.querySelector('.s');
+      if(!wi||!si) return;
+      var w=parseFloat(wi.value)||0, s=parseFloat(si.value)||0;
+      ws += w; acc += w*s/100;
+    });
+    var total = ws>0 ? acc*100/ws : 0;          // 權重未滿 100 時按比例正規化
+    var g = gradeOf(total), gap = total-77;
+
+    document.getElementById('total').textContent = total.toFixed(1);
+    document.getElementById('grade').textContent = g;
+    document.getElementById('gap').textContent   = (gap>=0?'+':'') + gap.toFixed(1);
+    document.getElementById('fill').style.width  = Math.max(0,Math.min(100,total)) + '%';
+
+    var wsEl = document.getElementById('wsum');
+    wsEl.textContent = '權重合計 ' + ws + ' %'
+      + (Math.abs(ws-100)<0.01 ? '' : '（不等於 100，總分已按比例正規化）');
+
+    var v = document.getElementById('verdict'), t='', c='';
+    if(total>=85){ t='✅ 安全區。就算期末考掉 10 分仍在 B+ 以上，這是該有的配置。'; c='var(--good)'; }
+    else if(total>=80){ t='🟡 尚可，但緩衝只有 '+(total-77).toFixed(1)+' 分。期末考一次失常就掉出 B+ — 把某一項的目標再拉高。'; c='var(--warn)'; }
+    else if(total>=77){ t='🟠 剛好壓線（緩衝 '+gap.toFixed(1)+' 分）。以規劃來說這等於沒有緩衝，缺一次 quiz 或期末掉 5 分就可能掉到 B。'; c='var(--warn)'; }
+    else { t='🔴 未達 B+，還差 '+(77-total).toFixed(1)+' 分。折抵條件不成立 — 調整配置或重新評估這學期修不修。'; c='var(--crit)'; }
+    v.textContent = t; v.style.color = c;
+  }
+
+  document.getElementById('addrow').addEventListener('click', function(){ addRow('新項目',0,80); calc(); });
+  document.getElementById('reset').addEventListener('click', loadDefaults);
+  loadDefaults();
+
+  // ---- 停修決策器 ----
+  function calc2(){
+    var mw=parseFloat(document.getElementById('m_w').value)||0,
+        ms=parseFloat(document.getElementById('m_s').value)||0,
+        ow=parseFloat(document.getElementById('o_w').value)||0,
+        os=parseFloat(document.getElementById('o_s').value)||0;
+    var rw = 100-mw-ow;
+    document.getElementById('r_w').textContent = rw.toFixed(0);
+
+    var locked = mw*ms/100 + ow*os/100;         // 已鎖定的分數（以百分制總分計）
+    var need   = rw>0 ? (77-locked)*100/rw : NaN;
+
+    var nEl=document.getElementById('need'), vEl=document.getElementById('need_verdict'), aEl=document.getElementById('advice');
+    if(rw<=0){
+      nEl.textContent='—'; vEl.textContent='比例有誤'; vEl.style.color='var(--crit)';
+      aEl.textContent='剩餘佔比 ≤ 0：期中與已確定成績的佔比合計不能超過 100 %。'; aEl.style.color='var(--crit)'; return;
+    }
+    nEl.textContent = need.toFixed(1);
+    var t='', c='';
+    if(need>100){ vEl.textContent='不可能'; c='var(--crit)';
+      t='🔴 即使剩下全部滿分也到不了 77。<b>停修</b>（12/11 前），把時間還給實驗室，回 2027 資格考路線。'; }
+    else if(need>90){ vEl.textContent='幾乎不可能'; c='var(--crit)';
+      t='🔴 剩下要平均 '+need.toFixed(0)+' 分。除非期末考特別甜，否則<b>建議停修</b>。'; }
+    else if(need>77){ vEl.textContent='要拚'; c='var(--warn)';
+      t='🟠 灰色地帶。問自己的不是「做不做得到」，而是<b>「剩下 5 週能不能真的每週挪出 8 小時」</b>。挪不出來就停修。'; }
+    else if(need>0){ vEl.textContent='守得住'; c='var(--good)';
+      t='✅ 剩下平均拿 '+need.toFixed(0)+' 分即可。照原節奏走，別鬆手。'; }
+    else { vEl.textContent='已鎖定'; c='var(--good)';
+      t='✅ 已確定的分數就足以達到 B+（剩餘部分即使 0 分也達標）。'; }
+    aEl.innerHTML = t; aEl.style.color = c;
+  }
+  ['m_w','m_s','o_w','o_s'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', calc2);
+  });
+  calc2();
+})();
+</script>
+</body>
+</html>

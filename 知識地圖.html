@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理 — 考古題知識地圖</title>
+<style>
+  /* --- 站內共用樣式（內嵌自 模擬/shared.css，此頁 self-contained） --- */
+  :root {
+    --blue: #1a4d7c; --blue2: #2b6ca0; --blue-soft: #eef5fb; --border: #c5d5e5;
+    --bg: #fafafa; --card: #fff; --text: #222;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC",
+      "Microsoft JhengHei", sans-serif;
+    margin: 1.5em auto 4em; padding: 0 1.2em; line-height: 1.7;
+    color: var(--text); background: var(--bg);
+  }
+  h1 { color: var(--blue); border-bottom: 3px solid var(--blue); padding-bottom: 0.3em; font-size: 1.55em; line-height: 1.3; }
+  h2 { color: var(--blue); font-size: 1.15em; margin-top: 1.4em; border-bottom: 1px solid #ddd; padding-bottom: 0.2em; }
+  a { color: var(--blue2); }
+  .nav { display: flex; flex-wrap: wrap; gap: 0.5em; align-items: center; margin: 0.6em 0 1.2em; font-size: 0.92em; }
+  .nav a { text-decoration: none; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 0.35em 0.75em; color: #234; }
+  .nav a:hover { background: var(--blue-soft); border-color: var(--blue); }
+  .nav a.here { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .nav .home { font-weight: 600; }
+  .intro { background: var(--blue-soft); border-left: 4px solid #6aa1d6; border-radius: 4px; padding: 0.75em 1em; color: #334; font-size: 0.95em; margin: 0.8em 0 1.2em; }
+  .switch-row { display: flex; flex-wrap: wrap; gap: 0.5em; }
+  .switch-row button { border: 1px solid var(--border); background: #fff; border-radius: 8px; padding: 0.35em 0.8em; cursor: pointer; font-size: 0.9em; color: #234; }
+  .switch-row button:hover { border-color: var(--blue); background: var(--blue-soft); }
+  .switch-row button.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .switch-row button.on .sw { outline: 1.5px solid #fff; }
+  .panel { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1em 1.1em; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .panel h2 { margin-top: 0; border: none; padding: 0; font-size: 1.05em; }
+  footer { color: #888; font-size: 0.85em; margin-top: 2.5em; border-top: 1px solid #ddd; padding-top: 1em; }
+
+  body { max-width: 1280px; }
+  .maplayout {
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 360px);
+    gap: 1.1em;
+    align-items: start;
+  }
+  @media (max-width: 980px) { .maplayout { grid-template-columns: 1fr; } }
+
+  .graph-wrap {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.5em;
+    overflow-x: auto;
+  }
+  .graph-wrap svg { display: block; width: 100%; height: auto; min-width: 720px; }
+
+  /* --- SVG 元素 --- */
+  .edge path { fill: none; transition: opacity .15s, stroke-width .15s; }
+  .edge text {
+    font-size: 10.5px; fill: #456;
+    paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round;
+  }
+  .edge.cross path { stroke-dasharray: 5 4; }
+  .edge.cross text { display: none; }
+  .edge.hl path { stroke-width: 2.8 !important; opacity: 1 !important; }
+  .edge.hl text { display: block; font-weight: 700; fill: #123; }
+  .edge.dim path { opacity: 0.08 !important; }
+  .edge.dim text { display: none; }
+  .edge.hidden { display: none; }
+
+  .node { cursor: pointer; }
+  .node rect.box {
+    fill: #fff; stroke: var(--blue2); stroke-width: 1.4; rx: 10;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.10));
+    transition: stroke-width .12s;
+  }
+  .node:hover rect.box { stroke-width: 2.6; }
+  .node.sel rect.box { stroke: var(--blue); stroke-width: 3; }
+  .node.dim { opacity: 0.28; }
+  .node text.t { font-size: 13.5px; font-weight: 700; fill: #17395c; }
+  .node text.en { font-size: 8.5px; fill: #789; }
+  .node text.freq {
+    font-size: 9.5px; font-weight: 700; fill: #fff;
+    font-family: "SF Mono", Menlo, monospace;
+  }
+  .node.disc rect.box { stroke-dasharray: 6 4; stroke-width: 1.8; fill: #fdfdfd; }
+  .node.disc text.t { font-size: 12.5px; }
+  .node.disc text.en { font-size: 8px; }
+
+  /* --- 面板 --- */
+  .panel { position: sticky; top: 0.8em; max-height: calc(100vh - 2em); overflow-y: auto; }
+  .panel h2 { color: var(--blue); }
+  .panel .tierpill {
+    display: inline-block; font-size: 0.72em; color: #fff; border-radius: 999px;
+    padding: 0.1em 0.6em; vertical-align: middle; margin-left: 0.4em;
+  }
+  .panel .sec { font-weight: 700; color: var(--blue); font-size: 0.88em; margin: 0.9em 0 0.25em; }
+  .panel ul { margin: 0.2em 0 0.4em; padding-left: 1.15em; font-size: 0.88em; }
+  .panel li { margin: 0.28em 0; }
+  .panel .yrs { color: #977129; font-size: 0.85em; font-family: "SF Mono", Menlo, monospace; }
+  .panel .core { font-size: 0.88em; color: #334; background: var(--blue-soft); border-radius: 8px; padding: 0.5em 0.7em; }
+  .panel .links a {
+    display: inline-block; margin: 0.15em 0.3em 0.15em 0; font-size: 0.85em;
+    background: #fff; border: 1px solid var(--border); border-radius: 8px;
+    padding: 0.2em 0.6em; text-decoration: none;
+  }
+  .panel .links a:hover { background: var(--blue-soft); border-color: var(--blue); }
+  .dtag { display:inline-block; width: 0.72em; height: 0.72em; border-radius: 3px; margin-right: 0.35em; vertical-align: baseline; }
+
+  /* --- 過濾按鈕 --- */
+  .switch-row { margin: 0.8em 0 0.6em; }
+  .switch-row button .sw { display:inline-block; width:0.7em; height:0.7em; border-radius:3px; margin-right:0.35em; vertical-align:baseline; }
+
+  /* --- 關係總表 --- */
+  table.rel { width: 100%; border-collapse: collapse; font-size: 0.87em; margin: 0.8em 0 1.5em; }
+  table.rel th, table.rel td { border: 1px solid var(--border); padding: 0.42em 0.55em; text-align: left; vertical-align: top; }
+  table.rel th { background: #e8eef4; color: #1a4d7c; }
+  table.rel td.d { white-space: nowrap; font-weight: 700; }
+  table.rel td.y { white-space: nowrap; font-family: "SF Mono", Menlo, monospace; font-size: 0.9em; color: #977129; }
+  .legend { margin: 0.4em 0.2em 0.8em; }
+</style>
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 備考總入口</a>
+  <a href="考點地圖.html">考點地圖</a>
+  <a class="here" href="知識地圖.html">知識地圖</a>
+  <a href="學習卡片.html">學習卡片</a>
+  <a href="考古題/單元整理.html">單元整理</a>
+  <a href="考古題/詳解/index.html">歷年詳解</a>
+  <a href="導覽.html">備考導覽</a>
+</div>
+
+<h1>🧠 考古題知識地圖（2013–2025 · 13 卷）</h1>
+<p class="intro">
+  由 <b>13 份資格考原卷</b> 反推的知識結構。<b>實線</b>＝固態內部的知識依賴（誰是誰的地基）；
+  <b>彩色虛線</b>＝其他學問輸入固態的管道，每條線都附「關係一句話＋考過的年份」。
+  <b>點任一節點</b>看核心考點、代表考題與跨學科輸入；下方按鈕可只看某一門學問的管道。
+  完整的跨學科關係逐條列在頁尾總表。
+</p>
+
+<div class="switch-row" id="filters"></div>
+
+<div class="maplayout">
+  <div class="graph-wrap"><svg id="map" viewBox="0 0 1180 800" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <div class="panel" id="panel"></div>
+</div>
+
+<h2 id="reltable">跨學科關係總表（每條線的完整版）</h2>
+<p class="intro" style="font-size:0.9em">
+  「年份」欄是這條關係在考古題裡實際被考到的年份——不是理論上的關聯，而是<b>閱卷證據</b>。
+  年份越多，代表這條跨學科管道越是命題慣用路徑。
+</p>
+<table class="rel">
+  <thead><tr><th>外部學問</th><th>供給的工具／概念</th><th>進入的固態單元</th><th>明確關係（一句話）</th><th>年份證據</th></tr></thead>
+  <tbody id="reltbody"></tbody>
+</table>
+
+<footer>
+  資料來源：<a href="考古題/單元整理.html">考古題單元整理</a>（2013–2025 共 13 卷，NTU 應物所博士班資格考）。
+  梯隊定義與出題頻率同單元整理 §1；四段式結構（結構／繞射／聲子／電子）為 2019 後固定卷型。
+</footer>
+
+<script>
+/* ============ 資料 ============ */
+const TIER = {
+  1: { name: '第一梯隊', color: '#1a4d7c', note: '幾乎年年考，先吃滿' },
+  2: { name: '第二梯隊', color: '#2b6ca0', note: '高頻' },
+  3: { name: '第三梯隊', color: '#c47a12', note: '週期性出現' },
+  4: { name: '第四梯隊', color: '#999999', note: '零星但近年回溫' },
+};
+const DISC = {
+  math: { name: '數學工具',   en: 'Mathematics',        color: '#b8860b', x: 140, y: 110 },
+  em:   { name: '電磁學',     en: 'Electromagnetism',   color: '#c0392b', x: 385, y: 62  },
+  qm:   { name: '量子力學',   en: 'Quantum Mechanics',  color: '#6c3fa0', x: 870, y: 70  },
+  cm:   { name: '古典力學·波動', en: 'Mechanics & Waves', color: '#7a5c2e', x: 165, y: 668 },
+  stat: { name: '統計·熱物理', en: 'Statistical Physics', color: '#1e7a46', x: 545, y: 740 },
+  chem: { name: '化學·週期表', en: 'Chemistry',          color: '#0e7c86', x: 68,  y: 430 },
+};
+const UNITS = [
+  { id:'u1', name:'1 晶體結構', en:'Crystal Structure', tier:1, freq:11, x:200, y:300,
+    core:'Bravais lattice（2D 五種／3D 十四種）、primitive vs conventional cell、Wigner-Seitz cell、packing fraction（sc 0.52／bcc 0.68／fcc 0.74）、hcp 的 c/a=√(8/3)、Miller 指標與 [hkl]⊥(hkl)、lattice＋basis。',
+    exams:[
+      '<span class="yrs">[2025·40分]</span> 2D α/β 雙原子結構，依 b=a/3、a/6 推 primitive vectors、畫 cell、寫 basis 原子數',
+      '<span class="yrs">[2024·60分]</span> 給 lattice vector 認 Bravais、算原胞體積；hcp packing（含隔層半徑減半變形）',
+      '<span class="yrs">[2023·30分]</span> graphene 原胞／倒晶格／第一 BZ；sc packing=0.52 證明',
+      '<span class="yrs">[2021·25分]</span> hcp 等密度堆積、未填滿體積、c/a；石墨 c/a≈2.4 的力學意義',
+    ],
+    links:[['單元教學','單元教學/unit01_晶體結構.html'],['Lab：packing','數學lab/lab_packing.html']] },
+  { id:'u2', name:'2 倒晶格·繞射', en:'Reciprocal & Diffraction', tier:1, freq:11, x:455, y:230,
+    core:'倒晶格向量 b₁b₂b₃ 建構、Bragg ↔ von Laue 等價、structure factor 與消光規則（bcc: h+k+l 奇消；fcc: 全奇全偶）、Δk=G＝BZ 邊界、photon/neutron/electron 三探針差異、Ewald 球。',
+    exams:[
+      '<span class="yrs">[2025]</span> 由 a₁a₂ 推 b₁b₂；λ=2a/5 的 X-ray 是否繞射、算夾角',
+      '<span class="yrs">[2023·25分]</span> 四種探針峰位同、強度異的原因；Δk=G 推 Bragg law',
+      '<span class="yrs">[2022·30分]</span> tetragonal 倒晶格、畫第一 BZ；蛋白質結晶定形狀',
+      '<span class="yrs">[2021]</span> bcc (110) 可見而 fcc (110) 消光；NaCl 數值題',
+    ],
+    links:[['單元教學','單元教學/unit02_倒晶格與繞射.html'],['Lab：倒晶格','數學lab/lab_reciprocal.html'],['Lab：結構因子','數學lab/lab_structure_factor.html']] },
+  { id:'u3', name:'3 晶體鍵結', en:'Crystal Binding', tier:2, freq:8, x:225, y:498,
+    core:'五種鍵結（vdW／ionic／covalent／metallic／H）、Lennard-Jones U=4ε[(σ/r)¹²−(σ/r)⁶] 與 cohesive energy、平衡距離、Madelung 常數（1D 鏈=2ln2）、惰性氣體沸點比較。',
+    exams:[
+      '<span class="yrs">[2024]</span> LiCl 結成 NaCl 結構（α≈1.7476）的鍵能',
+      '<span class="yrs">[2023]</span> 1D 離子鏈推 Madelung 常數',
+      '<span class="yrs">[2020]</span> Li⁺Cl⁻ 分子鍵能；為何晶體比分子高 ~75%',
+      '<span class="yrs">[2019]</span> 給 E(r) 求移走原子能量；為何不能預測熱膨脹',
+    ],
+    links:[['單元教學','單元教學/unit03_晶體鍵結.html'],['Lab：Madelung','數學lab/lab_madelung.html']] },
+  { id:'u4', name:'4 聲子·晶格振動', en:'Phonons', tier:1, freq:11, x:485, y:452,
+    core:'單原子鏈 ω=2√(C/M)|sin(Ka/2)|、雙原子鏈 acoustic/optical gap、群速 vs 相速、Debye T³ 與 Dulong-Petit 兩極限、ω>ω_max ⇒ K 變複數（衰減波）、非諧性→熱膨脹。',
+    exams:[
+      '<span class="yrs">[2024]</span> ω>ω_max 的波傳播方程與物理意義',
+      '<span class="yrs">[2023]</span> 由聲速、質量、間距求彈簧常數與最高 normal mode 頻率',
+      '<span class="yrs">[2021]</span> 最高可傳聲頻；evanescent 振幅分布；非諧熱膨脹',
+      '<span class="yrs">[2020]</span> 何種振幅分布不傳聲；聲子為何是準粒子',
+    ],
+    links:[['單元教學','單元教學/unit04_聲子與晶格振動.html'],['Lab：色散','數學lab/lab_dispersion.html']] },
+  { id:'u5', name:'5 自由電子費米氣體', en:'Free Electron Gas', tier:2, freq:10, x:735, y:545,
+    core:'Drude → Sommerfeld、E_F=(ℏ²/2m)(3π²n)^{2/3}、DOS：3D∝E^{1/2}／2D 常數／1D∝E^{−1/2}、電子比熱 γT、σ=ne²τ/m、K=⅓Cvl、Wiedemann-Franz 與 Lorentz number。',
+    exams:[
+      '<span class="yrs">[2025]</span> Born-von Kármán 的 k 間距；2D spin-up DOS',
+      '<span class="yrs">[2023]</span> 1D DOS：E~k 與 E~k² 兩種色散',
+      '<span class="yrs">[2022]</span> Al（3 價）算電子密度、E_F、T_F；測 DOS 的實驗',
+      '<span class="yrs">[2020]</span> 電子熱容 vs 聲子熱容隨溫度變化',
+    ],
+    links:[['單元教學','單元教學/unit05_自由電子費米氣體.html'],['Lab：DOS','數學lab/lab_dos.html']] },
+  { id:'u6', name:'6 能帶·Bloch', en:'Energy Bands', tier:1, freq:11, x:730, y:295,
+    core:'Bloch 定理 ψ_k=u_k e^{ik·r}（平移算符證法）、NFE 在 BZ 邊界開 gap=2|U_G|（central equation）、Kronig-Penney、crystal momentum ℏK 非真動量、1/m*=(1/ℏ²)d²E/dk²、tight-binding E(k)=−α−2γcos(ka)。',
+    exams:[
+      '<span class="yrs">[2025]</span> 3D Bloch 波函數；1s tight-binding 能帶最高能量位置',
+      '<span class="yrs">[2024]</span> 2D 各向異性能帶（m₁=2m₂）的 DOS',
+      '<span class="yrs">[2021]</span> 吸收邊定 gap；valence band 頂 hole 的 m* 與速度',
+      '<span class="yrs">[2013–16]</span> Bloch 定理證明＋gap=2U 推導（年年整套）',
+    ],
+    links:[['單元教學','單元教學/unit06_能帶與Bloch電子.html'],['Lab：NFE','數學lab/lab_nfe.html']] },
+  { id:'u7', name:'7 半導體', en:'Semiconductors', tier:3, freq:6, x:985, y:250,
+    core:'holes、intrinsic n_i∝T^{3/2}e^{−E_g/2k_BT}、donor/acceptor、direct vs indirect gap（是否需聲子）、Hall 測載子、pn junction 的 built-in voltage、degenerate 判準。',
+    exams:[
+      '<span class="yrs">[2023]</span> degenerate 定義；ZnO（n=10²⁰cm⁻³）是否 degenerate',
+      '<span class="yrs">[2022·40分]</span> Si pn junction：兩側化學勢、built-in voltage、電場分布',
+      '<span class="yrs">[2016·25分]</span> 半導體 vs 金屬電導的溫度趨勢；direct/indirect；mobility',
+    ],
+    links:[['單元教學','單元教學/unit07_半導體.html']] },
+  { id:'u8', name:'8 磁性', en:'Magnetism', tier:4, freq:3, x:985, y:430,
+    core:'Langevin L(α)=cothα−1/α、Curie law χ=C/T、Landau level E_n=(n+½)ℏω_c、磁通量子化、T>T_C 自發磁化消失。',
+    exams:[
+      '<span class="yrs">[2025]</span> ferromagnet 在 T>T_C 的總磁矩',
+      '<span class="yrs">[2018·20分]</span> 磁場下 Fermi surface 的 Landau level（軌道磁通量子化）',
+      '<span class="yrs">[2013]</span> 由 Boltzmann factor 推 M(H)=NmL(α)',
+    ],
+    links:[['單元教學','單元教學/unit08_磁性.html'],['Lab：Langevin','數學lab/lab_langevin.html']] },
+  { id:'u9', name:'9 超導', en:'Superconductivity', tier:4, freq:2, x:975, y:590,
+    core:'零電阻＋Meissner effect（不只是完美導體）、type I vs type II、H_c1/H_c2 與 vortex state、BCS 配對概念。',
+    exams:[
+      '<span class="yrs">[2025]</span> type I/II 哪種允許磁場以 vortex 穿透、周圍仍超導',
+      '<span class="yrs">[2013]</span> 超導體的電性與磁性',
+    ],
+    links:[['單元教學','單元教學/unit09_超導.html']] },
+  { id:'u10', name:'10 實驗·進階', en:'Experiments & Advanced', tier:4, freq:3, x:700, y:110,
+    core:'STM/AFM/MFM 原理與譜選擇、X-ray reflectivity 多層膜消峰、graphene 線性色散 ⇒ massless、測 electron DOS 的實驗技術。',
+    exams:[
+      '<span class="yrs">[2022]</span> 蛋白質結晶 X-ray 定形狀；測 DOS 的兩種技術',
+      '<span class="yrs">[2018]</span> Dirac point／graphene 線性色散',
+      '<span class="yrs">[2013]</span> STM 測 tunneling barrier height 該用哪種譜',
+    ],
+    links:[['單元教學','單元教學/unit10_實驗與進階.html']] },
+];
+
+/* 實線：固態內部依賴（from 是地基） */
+const CORE_EDGES = [
+  { from:'u1', to:'u2', label:'傅立葉對偶', text:'晶格的傅立葉變換＝倒晶格；WS cell 搬進倒空間＝第一 BZ', years:'15·22·24·25', curve:-30 },
+  { from:'u3', to:'u1', label:'鍵結決定結構', text:'共價方向性 → diamond 開放結構；層狀鍵結 → 石墨 c/a 異常', years:'20·21', curve:-20 },
+  { from:'u3', to:'u4', label:'鍵勁度→彈簧 C', text:'U(r) 在平衡點的曲率＝彈簧常數；非諧項 → 熱膨脹', years:'19·21·23', curve:20 },
+  { from:'u1', to:'u4', label:'週期陣列上的波', text:'質點鏈架在晶格上 → ω(K) 具晶格週期性', years:'19·21', curve:18 },
+  { from:'u2', to:'u4', label:'K 活在 BZ 裡', text:'聲子波向量摺回第一 BZ；zone boundary 駐波、ω_max', years:'18', curve:12 },
+  { from:'u2', to:'u6', label:'G 向量開能隙', text:'繞射條件 Δk=G ＝ BZ 邊界 → NFE 在邊界開 gap=2|U_G|', years:'13–16·18', curve:-18 },
+  { from:'u5', to:'u6', label:'自由→近自由', text:'自由電子拋物帶＋週期位勢微擾＝能帶結構', years:'14–16·20', curve:16 },
+  { from:'u4', to:'u5', label:'比熱共治', text:'C/T=γ+AT²：低溫比熱＝電子線性項＋聲子立方項', years:'14·15·20', curve:22 },
+  { from:'u6', to:'u7', label:'能帶+摻雜', text:'gap、有效質量、hole 概念直接建構半導體物理', years:'16·21·23', curve:-14 },
+  { from:'u5', to:'u8', label:'Fermi 面遇磁場', text:'磁場下 Fermi surface 重組成 Landau level', years:'18', curve:-16 },
+  { from:'u5', to:'u9', label:'電子海→配對', text:'金屬電子氣是超導的舞台（Cooper 配對、零電阻）', years:'13·25', curve:18 },
+  { from:'u8', to:'u9', label:'磁場 vs 超導態', text:'Meissner 排斥、type II 讓磁場以 vortex 進入', years:'13·25', curve:14 },
+  { from:'u2', to:'u10', label:'繞射的應用端', text:'XRR 多層膜消峰、蛋白質結晶學都是繞射原理延伸', years:'13·22', curve:-20 },
+  { from:'u6', to:'u10', label:'Dirac 色散', text:'graphene 線性 E(k) ⇒ massless 準粒子', years:'18', curve:16 },
+];
+
+/* 虛線：外部學問 → 固態單元 */
+const CROSS_EDGES = [
+  { from:'math', to:'u1', label:'向量體積·幾何', tool:'外積與三重積、立體幾何計數', text:'原胞體積=|a₁·(a₂×a₃)|；packing fraction 是幾何填充計算', years:'20·21·24', curve:-14 },
+  { from:'math', to:'u2', label:'傅立葉級數', tool:'週期函數的 G 展開', text:'structure factor＝晶格密度的傅立葉係數；消光＝係數為零', years:'13–16·20·21', curve:-22 },
+  { from:'math', to:'u4', label:'複數波向量', tool:'複指數解、解析延拓', text:'ω>ω_max 時 K 變複數 → 空間衰減的 evanescent 波', years:'21·24', curve:-40 },
+  { from:'math', to:'u6', label:'二階導=曲率', tool:'泰勒展開、曲率', text:'1/m*=(1/ℏ²)d²E/dk²：能帶曲率的倒數就是有效質量', years:'17·21', curve:-60 },
+  { from:'qm',  to:'u2', label:'物質波', tool:'de Broglie 波、雙狹縫', text:'電子／中子繞射成立的前提：粒子有波長 λ=h/p', years:'19·23', curve:-30 },
+  { from:'qm',  to:'u4', label:'振動量子化', tool:'諧振子量子化、準粒子', text:'晶格 normal mode 量子化成聲子（能量 ℏω 的準粒子）', years:'20', curve:40 },
+  { from:'qm',  to:'u5', label:'k 空間量子化', tool:'邊界條件→離散態', text:'Born-von Kármán 週期邊界 → k 網格 → 填 Fermi 球', years:'17·25', curve:26 },
+  { from:'qm',  to:'u6', label:'對稱→Bloch', tool:'平移算符與 H 對易、微擾論', text:'[H,T]=0 給出 Bloch 定理；週期位勢一階微擾在 BZ 邊界開 gap', years:'13–16·25', curve:14 },
+  { from:'qm',  to:'u8', label:'磁中量子化', tool:'迴旋運動量子化', text:'E_n=(n+½)ℏω_c 的 Landau level、磁通量子 h/e', years:'18', curve:-18 },
+  { from:'qm',  to:'u10', label:'穿隧效應', tool:'位壘穿隧', text:'STM 電流 ∝ e^{−2κz}，由 I-Z 譜反推 barrier height', years:'13', curve:12 },
+  { from:'stat', to:'u3', label:'kT vs 鍵能', tool:'能量尺度比較', text:'熔沸點 ≈ 鍵能/k_B：惰性氣體沸點排序、Kr 熔點估算', years:'13·14·15', curve:20 },
+  { from:'stat', to:'u4', label:'Bose 佔據數', tool:'Planck/Bose-Einstein 分布', text:'聲子佔據數 → Debye T³（低溫）與 Dulong-Petit（高溫）', years:'13·14·16', curve:10 },
+  { from:'stat', to:'u5', label:'Fermi-Dirac', tool:'費米分布、簡併氣體', text:'f(E,T) 決定電子比熱 γT、各種溫度行為', years:'16·20', curve:-10 },
+  { from:'stat', to:'u7', label:'載子統計', tool:'化學勢、Boltzmann 尾巴', text:'n_i∝T^{3/2}e^{−E_g/2k_BT}；degenerate 判準 E_F 進帶內', years:'22·23', curve:-52 },
+  { from:'stat', to:'u8', label:'Boltzmann 權重', tool:'配分函數', text:'磁矩取向的 Boltzmann 平均 → Langevin L(α)、Curie law', years:'13·25', curve:-30 },
+  { from:'em',  to:'u2', label:'波的干涉', tool:'相位差、路徑差', text:'Bragg 2d sinθ=nλ 是 EM 波（X-ray）與晶面的干涉條件', years:'21·23·25', curve:-12 },
+  { from:'em',  to:'u3', label:'偶極→vdW', tool:'偶極-偶極交互作用', text:'漲落偶極感應偶極 → −1/r⁶ 吸引（London/vdW）', years:'13·14', curve:-26 },
+  { from:'em',  to:'u5', label:'傳輸·Hall', tool:'Lorentz 力、電流密度', text:'σ=ne²τ/m（Ohm）；Hall 效應定載子正負與濃度', years:'14·15·16', curve:36 },
+  { from:'em',  to:'u9', label:'Meissner', tool:'磁場邊界條件', text:'超導體排斥磁場（B=0），type II 允許量子化磁通渦旋', years:'13·25', curve:60 },
+  { from:'cm',  to:'u4', label:'耦合振子鏈', tool:'F=ma、簡正模', text:'牛頓第二定律解質點鏈 → 色散關係、群速/相速', years:'13·19·21·23', curve:-16 },
+  { from:'cm',  to:'u5', label:'碰撞圖像', tool:'平均自由徑、弛豫時間', text:'Drude：電子如彈珠碰撞，τ 之間自由加速', years:'13·14', curve:26 },
+  { from:'cm',  to:'u6', label:'等效牛頓定律', tool:'F=ma 類比', text:'ℏ dk/dt=F、dv_g/dt=F/m*：晶格中的「牛頓定律」', years:'16·17·21', curve:-70 },
+  { from:'chem', to:'u1', label:'真實晶體', tool:'實際材料結構', text:'NaCl、CaF₂、diamond、graphene：lattice+basis 的真實案例', years:'22·23·25', curve:-14 },
+  { from:'chem', to:'u3', label:'鍵結分類', tool:'電負度、價電子組態', text:'五種鍵結的化學根源：誰給電子、誰共享、誰只靠漲落', years:'13–16·19·20', curve:12 },
+  { from:'chem', to:'u7', label:'價電子→摻雜', tool:'週期表', text:'Si(IV) 摻 P(V)=donor、B(III)=acceptor；Al 有 3 個價電子', years:'16·22', curve:-40 },
+];
+
+/* ============ 繪圖 ============ */
+const svg = document.getElementById('map');
+const NS = 'http://www.w3.org/2000/svg';
+const nodePos = {};
+UNITS.forEach(u => nodePos[u.id] = { x: u.x, y: u.y, w: 148, h: 58 });
+Object.entries(DISC).forEach(([id, d]) => nodePos[id] = { x: d.x, y: d.y, w: 128, h: 48 });
+
+function el(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  (parent || svg).appendChild(e);
+  return e;
+}
+
+/* 邊界交點：從節點中心往目標方向縮到矩形邊上 */
+function anchor(fromId, toId) {
+  const a = nodePos[fromId], b = nodePos[toId];
+  const dx = b.x - a.x, dy = b.y - a.y;
+  const sx = (a.w / 2 + 6) / Math.abs(dx || 1e-9), sy = (a.h / 2 + 6) / Math.abs(dy || 1e-9);
+  const s = Math.min(sx, sy, 0.45);
+  return { x: a.x + dx * s, y: a.y + dy * s };
+}
+
+const defs = el('defs', {});
+function marker(id, color) {
+  const m = el('marker', { id, viewBox:'0 0 10 10', refX:'9', refY:'5', markerWidth:'7', markerHeight:'7', orient:'auto-start-reverse' }, defs);
+  el('path', { d:'M0,0 L10,5 L0,10 z', fill: color }, m);
+}
+marker('arr-core', '#7d97ad');
+Object.entries(DISC).forEach(([id, d]) => marker('arr-' + id, d.color));
+
+const edgeLayer = el('g', {});
+const nodeLayer = el('g', {});
+const edgeEls = [];
+
+function drawEdge(e, kind) {
+  const p1 = anchor(e.from, e.to), p2 = anchor(e.to, e.from);
+  const mx = (p1.x + p2.x) / 2, my = (p1.y + p2.y) / 2;
+  const dx = p2.x - p1.x, dy = p2.y - p1.y, L = Math.hypot(dx, dy) || 1;
+  const cx = mx - dy / L * (e.curve || 0), cy = my + dx / L * (e.curve || 0);
+  const g = el('g', { class: 'edge ' + kind }, edgeLayer);
+  const color = kind === 'core' ? '#7d97ad' : DISC[e.from].color;
+  el('path', {
+    d: `M${p1.x},${p1.y} Q${cx},${cy} ${p2.x},${p2.y}`,
+    stroke: color, 'stroke-width': kind === 'core' ? 1.7 : 1.5,
+    opacity: kind === 'core' ? 0.8 : 0.5,
+    'marker-end': `url(#arr-${kind === 'core' ? 'core' : e.from})`,
+  }, g);
+  const lx = 0.25 * p1.x + 0.5 * cx + 0.25 * p2.x, ly = 0.25 * p1.y + 0.5 * cy + 0.25 * p2.y;
+  const t = el('text', { x: lx, y: ly - 4, 'text-anchor': 'middle' }, g);
+  t.textContent = e.label;
+  g.dataset.from = e.from; g.dataset.to = e.to; g.dataset.kind = kind;
+  edgeEls.push(g);
+}
+CORE_EDGES.forEach(e => drawEdge(e, 'core'));
+CROSS_EDGES.forEach(e => drawEdge(e, 'cross'));
+
+const nodeEls = {};
+function drawUnit(u) {
+  const p = nodePos[u.id];
+  const g = el('g', { class: 'node unit', transform: `translate(${p.x - p.w/2},${p.y - p.h/2})` }, nodeLayer);
+  el('rect', { class:'box', width: p.w, height: p.h, rx: 10 }, g);
+  el('rect', { width: 5, height: p.h, rx: 2.5, fill: TIER[u.tier].color }, g);
+  const t1 = el('text', { class:'t', x: 14, y: 24 }, g); t1.textContent = u.name;
+  const t2 = el('text', { class:'en', x: 14, y: 39 }, g); t2.textContent = u.en;
+  const bw = 40;
+  el('rect', { x: p.w - bw - 8, y: p.h - 20, width: bw, height: 15, rx: 7.5, fill: TIER[u.tier].color }, g);
+  const t3 = el('text', { class:'freq', x: p.w - bw/2 - 8, y: p.h - 8.5, 'text-anchor':'middle' }, g);
+  t3.textContent = u.freq + '/13';
+  g.addEventListener('click', ev => { ev.stopPropagation(); select(u.id); });
+  nodeEls[u.id] = g;
+}
+function drawDisc(id, d) {
+  const p = nodePos[id];
+  const g = el('g', { class: 'node disc', transform: `translate(${p.x - p.w/2},${p.y - p.h/2})` }, nodeLayer);
+  el('rect', { class:'box', width: p.w, height: p.h, rx: 12, stroke: d.color }, g);
+  const t1 = el('text', { class:'t', x: p.w/2, y: 21, 'text-anchor':'middle', fill: d.color }, g);
+  t1.textContent = d.name; t1.style.fill = d.color;
+  const t2 = el('text', { class:'en', x: p.w/2, y: 36, 'text-anchor':'middle' }, g);
+  t2.textContent = d.en;
+  g.addEventListener('click', ev => { ev.stopPropagation(); select(id); });
+  nodeEls[id] = g;
+}
+UNITS.forEach(drawUnit);
+Object.entries(DISC).forEach(([id, d]) => drawDisc(id, d));
+
+/* ============ 互動 ============ */
+let filter = 'all', selected = null;
+
+function applyState() {
+  edgeEls.forEach(g => {
+    const kind = g.dataset.kind, from = g.dataset.from, to = g.dataset.to;
+    let visible = filter === 'all' || (filter === 'core' ? kind === 'core' : (kind === 'cross' && from === filter));
+    g.classList.toggle('hidden', !visible);
+    if (!visible) return;
+    if (selected) {
+      const adj = from === selected || to === selected;
+      g.classList.toggle('hl', adj);
+      g.classList.toggle('dim', !adj);
+    } else if (filter !== 'all' && filter !== 'core' && kind === 'cross') {
+      g.classList.add('hl'); g.classList.remove('dim');
+    } else {
+      g.classList.remove('hl', 'dim');
+    }
+  });
+  const adjNodes = new Set();
+  if (selected) {
+    adjNodes.add(selected);
+    edgeEls.forEach(g => {
+      if (g.classList.contains('hidden')) return;
+      if (g.dataset.from === selected) adjNodes.add(g.dataset.to);
+      if (g.dataset.to === selected) adjNodes.add(g.dataset.from);
+    });
+  }
+  Object.entries(nodeEls).forEach(([id, g]) => {
+    g.classList.toggle('sel', id === selected);
+    g.classList.toggle('dim', !!selected && !adjNodes.has(id));
+  });
+}
+
+function crossListFor(id) {
+  const rows = [];
+  CROSS_EDGES.forEach(e => {
+    if (e.from === id || e.to === id) rows.push(e);
+  });
+  return rows;
+}
+function coreListFor(id) {
+  return CORE_EDGES.filter(e => e.from === id || e.to === id);
+}
+
+const panel = document.getElementById('panel');
+function showDefault() {
+  panel.innerHTML = `
+    <h2>怎麼讀這張圖</h2>
+    <div class="core">
+      <b>實線（灰藍）</b>：固態內部的知識依賴，箭頭指向「靠它建起來」的單元。<br>
+      <b>彩色虛線</b>：外部學問輸入固態的管道。<br>
+      <b>右下角數字</b>：13 卷考古題中出現的年數。左側色條＝梯隊。
+    </div>
+    <div class="sec">梯隊（＝備考優先序）</div>
+    <ul>${Object.entries(TIER).map(([k, t]) =>
+      `<li><span class="dtag" style="background:${t.color}"></span><b>${t.name}</b>：${t.note}</li>`).join('')}
+    </ul>
+    <div class="sec">外部學問（點節點看它供給了什麼）</div>
+    <ul>${Object.entries(DISC).map(([k, d]) =>
+      `<li><span class="dtag" style="background:${d.color}"></span>${d.name}</li>`).join('')}
+    </ul>
+    <div class="sec">主幹一句話</div>
+    <div class="core" style="font-size:0.86em">
+      結構(1) 經傅立葉變成倒晶格(2)；倒晶格給出 BZ，聲子(4)與電子能帶(6)都活在裡面；
+      自由電子(5)加上週期位勢成為能帶(6)，再摻雜成半導體(7)；
+      磁性(8)、超導(9)是電子氣的兩種集體命運。<b>這正是近年考卷的四段式順序。</b>
+    </div>`;
+}
+function select(id) {
+  selected = (selected === id) ? null : id;
+  applyState();
+  if (!selected) { showDefault(); return; }
+  if (DISC[id]) {
+    const d = DISC[id];
+    const rows = CROSS_EDGES.filter(e => e.from === id);
+    panel.innerHTML = `
+      <h2><span class="dtag" style="background:${d.color}"></span>${d.name} <span style="font-size:0.6em;color:#789">${d.en}</span></h2>
+      <div class="core">這門學問輸入固態的 <b>${rows.length} 條管道</b>（虛線）。年份＝考古題實際考過這條關係的年。</div>
+      <div class="sec">供給清單</div>
+      <ul>${rows.map(e => {
+        const u = UNITS.find(x => x.id === e.to);
+        return `<li><b>${e.label}</b> → ${u.name}<br>${e.text}<br><span class="yrs">考過：${e.years}</span></li>`;
+      }).join('')}</ul>`;
+    return;
+  }
+  const u = UNITS.find(x => x.id === id);
+  const tier = TIER[u.tier];
+  const cross = crossListFor(id);
+  const core = coreListFor(id);
+  panel.innerHTML = `
+    <h2>${u.name} <span class="tierpill" style="background:${tier.color}">${tier.name} · ${u.freq}/13 年</span></h2>
+    <div class="sec">核心考點</div>
+    <div class="core">${u.core}</div>
+    <div class="sec">代表考題（近年優先）</div>
+    <ul>${u.exams.map(x => `<li>${x}</li>`).join('')}</ul>
+    <div class="sec">跨學科輸入（${cross.length} 條）</div>
+    <ul>${cross.map(e => {
+      const d = DISC[e.from];
+      return `<li><span class="dtag" style="background:${d.color}"></span><b>${d.name} · ${e.label}</b><br>${e.text}<br><span class="yrs">考過：${e.years}</span></li>`;
+    }).join('') || '<li>（無）</li>'}</ul>
+    <div class="sec">固態內部關係（${core.length} 條）</div>
+    <ul>${core.map(e => {
+      const other = e.from === id ? e.to : e.from;
+      const o = UNITS.find(x => x.id === other);
+      const dir = e.from === id ? '→' : '←';
+      return `<li><b>${dir} ${o.name}</b>：${e.text} <span class="yrs">(${e.years})</span></li>`;
+    }).join('')}</ul>
+    <div class="sec">站內連結</div>
+    <div class="links">${u.links.map(([t, h]) => `<a href="${h}">${t}</a>`).join('')}
+      <a href="考古題/詳解/index.html">歷年詳解</a>
+      <a href="考古題/單元整理.html">單元整理</a>
+    </div>`;
+}
+svg.addEventListener('click', () => { if (selected) { selected = null; applyState(); showDefault(); } });
+
+/* 過濾按鈕 */
+const filtersDiv = document.getElementById('filters');
+const FILTERS = [['all', '全部', '#456'], ['core', '只看固態主幹', '#7d97ad']]
+  .concat(Object.entries(DISC).map(([id, d]) => [id, d.name, d.color]));
+FILTERS.forEach(([id, name, color]) => {
+  const b = document.createElement('button');
+  b.innerHTML = `<span class="sw" style="background:${color}"></span>${name}`;
+  if (id === 'all') b.classList.add('on');
+  b.addEventListener('click', () => {
+    filter = id;
+    filtersDiv.querySelectorAll('button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    applyState();
+  });
+  filtersDiv.appendChild(b);
+});
+
+/* 關係總表 */
+const tbody = document.getElementById('reltbody');
+const order = ['math', 'qm', 'stat', 'em', 'cm', 'chem'];
+order.forEach(did => {
+  const d = DISC[did];
+  CROSS_EDGES.filter(e => e.from === did).forEach((e, i, arr) => {
+    const u = UNITS.find(x => x.id === e.to);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      ${i === 0 ? `<td class="d" rowspan="${arr.length}" style="border-left:4px solid ${d.color}">${d.name}</td>` : ''}
+      <td>${e.tool}</td>
+      <td>${u.name}</td>
+      <td>${e.text}</td>
+      <td class="y">${e.years}</td>`;
+    tbody.appendChild(tr);
+  });
+});
+
+showDefault();
+applyState();
+</script>
+</body>
+</html>

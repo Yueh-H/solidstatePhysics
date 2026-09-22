@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理先備知識 — ⚛️ 物理先備知識</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">先備知識目錄</a> &nbsp;·&nbsp; <a href="../index.html">← 教材直讀</a> &nbsp;·&nbsp; <a href="../Kittel章節導讀/index.html">📑 章節導讀</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- 固態物理物理先備 -->
+# ⚛️ 固態物理 — 物理先備知識
+> 讀 Kittel（[教材直讀](../index.html)）卡在物理時來這。每個概念：高中起點→為什麼 Kittel 要→範例→圖→用在哪。
+
+---
+
+本頁挑出讀 Kittel《Introduction to Solid State Physics》最常卡住的 **8 個物理先備概念**。對象設定：**只有高中物理＋普物（大一物理）程度**。每個概念都用一個可摺疊的 `<details>
+<summary><b>1. 波動、波向量、波長（wave, wavevector, wavelength）</b></summary>
+
+**你高中學過的**：
+高中講過「波」：水波、繩波、聲波。一個沿 $x$ 方向跑的橫波，某點的位移 $y$ 會隨時間上下振盪，你看過這種式子——
+$$y(x,t)=A\sin(kx-\omega t)$$
+也記得幾條基本關係：波速 $v=f\lambda$（速度＝頻率 × 波長）、週期 $T=\dfrac1f$（轉一圈要多久）、波長 $\lambda$（一個完整波形的長度）。把這些寫清楚就是這一節的全部素材。
+
+一句話：**波＝一個會「邊跑邊振盪」的形狀，用「波長 $\lambda$」量空間上多長重複一次、用「頻率 $f$」量時間上多快重複一次。**
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $y$ | 波在某點某時刻的位移（displacement），例如繩子上下偏離平衡的高度 |
+| $A$ | 振幅（amplitude）：位移的最大值，$\lvert y\rvert$ 的上限 |
+| $x$ | 位置（position），波傳播方向上的座標 |
+| $t$ | 時間（time） |
+| $\lambda$ | 波長（wavelength）：空間上一個完整波形的長度（相位走 $2\pi$ 的距離） |
+| $f$ | 頻率（frequency）：每秒振盪幾次，單位 $\text{Hz}=\text{s}^{-1}$ |
+| $T$ | 週期（period）：振盪一次所需時間，$T=\dfrac1f$ |
+| $k$ | 波向量／波數（wavevector / wavenumber），$k=\dfrac{2\pi}{\lambda}$，單位 $\text{rad/m}$；量「每單位長度增加的相位」 |
+| $\omega$ | 角頻率（angular frequency），$\omega=2\pi f=\dfrac{2\pi}{T}$，單位 $\text{rad/s}$；量「每單位時間增加的相位」 |
+| $v$ | 相速度（phase velocity），$v=\dfrac{\omega}{k}=\lambda f$：單一波形（某個固定相位點）前進的速度 |
+| $v_g$ | 群速度（group velocity），$v_g=\dfrac{d\omega}{dk}$：波包（能量／訊號）整體前進的速度 |
+| $\mathbf k$ | 三維波向量（vector），方向＝波傳播方向，大小 $\lvert\mathbf k\rvert=\dfrac{2\pi}{\lambda}$ |
+| $\mathbf r$ | 三維位置向量（position vector） |
+| $\hbar$ | 約化普朗克常數，$\hbar=1.05\times10^{-34}\ \text{J·s}$（範例估量級時用） |
+
+**為什麼 Kittel 需要**：
+固態物理幾乎**所有東西都是波**：X 光繞射用的是電磁波、晶格振動（聲子 phonon）是原子位移的波、電子在晶體裡是 de Broglie 物質波（Bloch 波）。但 Kittel 不用你熟的「波長 $\lambda$」當主角，而是一律改用 **波向量（wavevector）** $k=\dfrac{2\pi}{\lambda}$。原因有二：（1）晶體的週期性配上 $k$ 最自然——倒晶格（reciprocal lattice）就是 $k$ 的空間；（2）色散關係（dispersion relation）一律寫成 $\omega(k)$，群速度、有效質量都要對 $k$ 微分才漂亮。不熟 $k$ 與 $\lambda$ 的互換，就讀不下去第 2、4、5、6 章。
+
+**第一步：把一維行進波的每個字看懂**
+一維沿 $+x$ 跑的行進波（travelling wave）：
+$$y(x,t)=A\sin(kx-\omega t)$$
+括號裡的 $kx-\omega t$ 叫**相位（phase）**，它決定「此刻在波形的哪個位置」。拆開看：
+- **空間部分 $kx$**：位置每前進 $\lambda$，相位剛好增加 $2\pi$（回到同一個波形）。要求 $k\cdot\lambda=2\pi$，於是
+$$\boxed{\,k=\frac{2\pi}{\lambda}\,}$$
+$k$ 就是「每單位長度塞進多少弧度的相位」——波越短（$\lambda$ 越小），$k$ 越大。
+- **時間部分 $\omega t$**：時間每過一個週期 $T$，相位也增加 $2\pi$。要求 $\omega\cdot T=2\pi$，於是
+$$\boxed{\,\omega=\frac{2\pi}{T}=2\pi f\,}$$
+- **負號**：$-\omega t$ 表示波形隨時間往 $+x$ 方向移動（要維持相位不變，$x$ 必須隨 $t$ 增加）。
+
+**第二步：相速度——一個固定相位點跑多快**
+盯著波形上某一點（例如波峰），它的相位 $kx-\omega t=$ 常數。對 $t$ 微分：$k\dfrac{dx}{dt}-\omega=0$，所以這點前進的速度（相速度 phase velocity）
+$$\boxed{\,v=\frac{dx}{dt}=\frac{\omega}{k}\,}$$
+把 $\omega=2\pi f$、$k=\dfrac{2\pi}{\lambda}$ 代進去，$2\pi$ 約掉，立刻回到高中那條
+$$v=\frac{\omega}{k}=\frac{2\pi f}{2\pi/\lambda}=\lambda f$$
+所以「$v=\lambda f$」和「$v=\omega/k$」是**同一件事**，只是換了波長／波向量兩種語言。
+
+**第三步：相速度 vs 群速度（為什麼要分兩種速度）**
+單一純正弦波只有一個 $k$、一個 $\omega$，它的「波形」以相速 $v=\omega/k$ 前進。但真正傳遞能量、訊號（或一個電子）的，是好幾個相近 $k$ 疊加成的**波包（wave packet）**。波包整體（包絡）前進的速度叫**群速度（group velocity）**：
+$$\boxed{\,v_g=\frac{d\omega}{dk}\,}$$
+- 若 $\omega=vk$（$v$ 與 $k$ 無關，叫**無色散 non-dispersive**，例如真空中的光），則 $v_g=\dfrac{d\omega}{dk}=v$——群速＝相速，兩者一樣。
+- 若 $\omega(k)$ 是彎的（**有色散 dispersive**，例如晶格中的聲子、晶體中的電子），則 $v_g\neq v$：波形跑得比能量快或慢。聲子、電子的「能量真正往哪跑、跑多快」要看 $v_g=d\omega/dk$，不是相速。這正是固態物理一定要把 $\omega$ 寫成 $k$ 的函數的理由。
+
+**第四步：三維平面波**
+三維時 $k$ 變成向量 $\mathbf k$，方向就是波傳播方向，波寫成複指數（見概念 2 Euler）
+$$\psi(\mathbf r,t)=e^{i(\mathbf k\cdot\mathbf r-\omega t)},\qquad \lvert\mathbf k\rvert=\frac{2\pi}{\lambda}$$
+這裡 $\mathbf k\cdot\mathbf r$（見概念 1 內積）就是該點的空間相位：沿著 $\mathbf k$ 方向每走一步，相位線性增加。這個 $e^{i(\mathbf k\cdot\mathbf r-\omega t)}$ 就是貫穿全書的「平面波」主角。
+
+**範例①（給 $\lambda$ 算 $k$：X 光波向量）**：
+某 X 光波長 $\lambda=1.5\ \text{Å}=1.5\times10^{-10}\ \text{m}$，求波向量大小 $k$。直接代 $k=2\pi/\lambda$：
+$$k=\frac{2\pi}{\lambda}=\frac{2\pi}{1.5\times10^{-10}\ \text{m}}\approx 4.19\times10^{10}\ \text{rad/m}$$
+記住數量級：晶格間距 $\sim\text{Å}$，所以 $k\sim10^{10}\ \text{m}^{-1}$——這正是布里淵區（Brillouin zone）邊界 $\pi/a$ 的尺度，也是 X 光能拿來探測晶格的原因（波長與晶格同量級）。
+
+**範例②（聲子／電子波長的量級）**：
+- **聲子**：晶格振動最短的波長約等於兩倍原子間距，$\lambda_{\min}\approx2a\approx2\times3\ \text{Å}=6\ \text{Å}$，對應 $k_{\max}=\dfrac{2\pi}{\lambda_{\min}}\approx10^{10}\ \text{m}^{-1}$——和布里淵區邊界 $\pi/a$ 同量級。比這更短的波「裝不進」離散的原子鏈，這就是布里淵區為什麼有邊界。
+- **電子**：金屬中費米電子的 de Broglie 波長 $\lambda=\dfrac{2\pi}{k_F}$，而 $k_F\sim10^{10}\ \text{m}^{-1}$，同樣給出 $\lambda\sim\text{Å}$ 級。三種波（X 光、聲子、電子）的波向量都落在 $10^{10}\ \text{m}^{-1}$ 附近，這不是巧合——它們都被同一個晶格尺度 $a\sim\text{Å}$ 綁住。
+
+**🔍 多一步（為什麼固態物理一律用波向量 $k$，而不用波長 $\lambda$）**：
+高中用 $\lambda$ 很自然，但進了晶體，$k$ 才是「對的語言」。三個層層相扣的理由：
+
+1. **倒晶格長在 $k$ 空間，不長在 $\lambda$ 空間。** 晶體的週期位能 $U(\mathbf r)$ 只能用倒晶格向量 $\mathbf G$ 當頻率展開（見概念 3 傅立葉），而 $\mathbf G$ 本身就是一個波向量（單位 $\text{rad/m}$）。繞射條件寫成 $\Delta\mathbf k=\mathbf G$——兩個都是 $k$，直接相減就好；若硬換成波長，$\dfrac{1}{\lambda'}-\dfrac{1}{\lambda}$ 這種「倒數相減」既不線性也不向量化，完全寫不漂亮。**$k$ 與晶格的數學是同一個空間的向量，$\lambda$ 不是。**
+
+2. **布里淵區是用 $k$ 切出來的。** 離散原子鏈裝不下波長短於 $2a$ 的波，等價的說法是「$k$ 只要落在 $[-\pi/a,\ \pi/a]$ 就涵蓋所有不重複的波」——這個區間（第一布里淵區）是 $k$ 的範圍。$k+\dfrac{2\pi}{a}$ 與 $k$ 在離散晶格上**完全等價**（相位差剛好 $2\pi$ 整數倍），這個「平移 $2\pi/a$ 等價」的週期性只有在 $k$ 空間才看得見；換成 $\lambda$ 就消失了。
+
+3. **色散 $\omega(k)$ 與群速度都要對 $k$ 微分。** 聲子、電子的物理核心是色散關係 $\omega(k)$，能量真正傳遞的速度是群速 $v_g=\dfrac{d\omega}{dk}$，能帶電子的有效質量是 $\dfrac{1}{m^*}=\dfrac{1}{\hbar^2}\dfrac{d^2E}{dk^2}$（見概念 7）。這些都是「對 $k$ 微分」。若用 $\lambda$，每次都要透過 $k=2\pi/\lambda$ 換鏈式法則，又多一層 $\dfrac{dk}{d\lambda}=-\dfrac{2\pi}{\lambda^2}$ 的累贅。
+
+**結論**：$\lambda$ 適合描述「單一波多長」，但晶體的一切（週期、繞射、能帶、速度）都是「對 $k$ 做加減與微分」。用 $k$ 是讓晶體的數學變線性、變向量、變週期的關鍵選擇——這也是為什麼翻開 Kittel 第 2 章以後，幾乎看不到 $\lambda$、滿頁都是 $k$ 和 $\mathbf G$。
+
+**圖**：
+
+![一維行進波 y=A sin(kx−ωt)，標出波長 λ=2π/k](../../figs/f00_wave.svg)
+
+圖中標出一個完整波長 $\lambda$ 對應相位走 $2\pi$，所以 $k=\dfrac{2\pi}{\lambda}$。
+
+**用在 Kittel**：
+- 第 2 章 [倒晶格與繞射（unit02_倒晶格與繞射.html）](../../單元教學/unit02_倒晶格與繞射.html)：繞射條件用 $\Delta\mathbf k=\mathbf G$（散射波向量差等於倒晶格向量）。
+- 第 4 章 [聲子與晶格振動（unit04_聲子與晶格振動.html）](../../單元教學/unit04_聲子與晶格振動.html)：色散關係 $\omega(k)$ 整章都在畫 $\omega$ 對 $k$，群速 $v_g=d\omega/dk$ 決定聲速。
+- Bloch 定理：電子波 $\psi_k(\mathbf r)=e^{i\mathbf k\cdot\mathbf r}u_k(\mathbf r)$，$\mathbf k$ 就是晶體動量。
+
+</details>
+
+---
+
+<details>
+<summary><b>2. 簡諧振子（simple harmonic oscillator, SHO）與量子化能階</b></summary>
+
+**你高中學過的**
+彈簧上的質點：偏離平衡位置 $x$ 時受到一個**恢復力（restoring force）** $F=-kx$——力的方向永遠指回平衡點（負號就是這個意思），大小正比於拉開的距離。普物把它解出來，得到**簡諧運動（simple harmonic motion）**：位置隨時間做正弦振盪，角頻率 $\omega=\sqrt{k/m}$（彈簧越硬 $k$ 越大、質量 $m$ 越小，振得越快）。能量在「動能」與「位能」之間來回倒，但總和守恆：
+
+$$E=\tfrac12 kx^2+\tfrac12 mv^2$$
+
+一句話：**彈簧拉開越遠、回拉越用力；放手後就以固定頻率 $\omega=\sqrt{k/m}$ 來回振，總能量守恆。**
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $F$ | 作用在質點上的恢復力（restoring force），單位牛頓 $\text{N}$；負號代表方向指回平衡點 |
+| $k$ | 彈簧常數／力常數（spring constant / force constant），單位 $\text{N/m}$；越大代表彈簧越硬、回拉越強 |
+| $x$ | 偏離平衡位置的位移（displacement），單位 $\text{m}$；平衡點取為 $x=0$ |
+| $m$ | 振動質點（晶體中即原子）的質量（mass），單位 $\text{kg}$ |
+| $v$ | 質點速度（velocity），$v=\dfrac{dx}{dt}$，單位 $\text{m/s}$ |
+| $\omega$ | 振動角頻率（angular frequency），$\omega=\sqrt{k/m}$，單位 $\text{rad/s}$ |
+| $E$ | 古典總能量（total energy）＝動能＋位能，連續可取任意值 |
+| $E_n$ | 量子化後第 $n$ 階的能量（quantized energy level），只能取離散值 |
+| $n$ | 量子數（quantum number），$n=0,1,2,\dots$ 的非負整數；也＝該模式的聲子數 |
+| $\hbar$ | 約化普朗克常數（reduced Planck constant），$\hbar=\dfrac{h}{2\pi}=1.05\times10^{-34}\ \text{J·s}$ |
+
+**為什麼 Kittel 需要**
+晶體裡每個原子都被鄰居「彈簧般」拉住：偏離平衡就有恢復力，於是整塊晶體就是一大堆耦合的簡諧振子。把它們解耦後（用簡正模 normal mode，見〈多一步〉），每個獨立振動模式都是一個標準 SHO。量子力學接著告訴我們一件關鍵的事：**簡諧振子的能量不是連續的，而是一格一格的** $E_n=(n+\tfrac12)\hbar\omega$。每一份能量 $\hbar\omega$ 就是一個**聲子（phonon）**。聲子＝量子化的晶格振動，這是第 4、5 章（晶格振動、比熱）的靈魂；不熟 SHO 與它的量子化能階，就讀不下去 Einstein／Debye 比熱。
+
+**第一步：古典 SHO——頻率與能量**
+從 $F=-kx$ 配上牛頓第二定律 $F=m\dfrac{d^2x}{dt^2}$，得到運動方程 $m\ddot{x}=-kx$，解是正弦振盪，角頻率
+
+$$\omega=\sqrt{\frac{k}{m}}$$
+
+位能是「力對位移積分」得來的拋物線 $U(x)=\tfrac12 kx^2$，再加上動能 $\tfrac12 mv^2$，總能量
+
+$$E=\tfrac12 kx^2+\tfrac12 mv^2$$
+
+在古典圖像裡 $E$ **可以是任意非負實數**——你給多大的初始振幅，就有多大的能量，連續無間隙。這點等一下會被量子力學推翻。
+
+**第二步：量子化——能量變成一格一格**
+解 SHO 的薛丁格方程（Kittel 不要求你會解，只要會用結論）得到：能量**只能**取離散值
+
+$$\boxed{\,E_n=\left(n+\tfrac12\right)\hbar\omega,\qquad n=0,1,2,\dots\,}$$
+
+逐項讀懂這條式子：
+- **能階等間距**：相鄰兩階差 $E_{n+1}-E_n=\hbar\omega$，是一個與 $n$ 無關的固定值。每往上跳一階，就多吸收一份 $\hbar\omega$ 的能量——**這一份 $\hbar\omega$ 就是一個聲子**。
+- **零點能（zero-point energy）**：最低階 $n=0$ 的能量並非 $0$，而是 $E_0=\tfrac12\hbar\omega$。即使在絕對零度，原子也停不下來（測不準原理逼出來的殘餘振動）。
+- **量子數 $n$ ＝聲子數**：$n$ 不只是「第幾階」，物理上就是「這個振動模式裡有幾個聲子」。$n=0$ 是沒有聲子的基態，$n=3$ 代表這個模式被激發了 3 個聲子。
+
+對照第一步的古典 $E$（連續），量子的 $E_n$ 變成一把等距的梯子，這個「等間距 $\hbar\omega$ ＋零點能 $\tfrac12\hbar\omega$」的結構是聲子概念的全部根基。
+
+**範例（每個符號都代進去算）**
+
+① **給 $k,m$ 算 $\omega$。** 設一個原子振動模型 $k=15\ \text{N/m}$、$m=4.0\times10^{-26}\ \text{kg}$（約一個輕原子）：
+
+$$\omega=\sqrt{\frac{k}{m}}=\sqrt{\frac{15}{4.0\times10^{-26}}}=\sqrt{3.75\times10^{26}}\approx1.9\times10^{13}\ \text{rad/s}$$
+
+落在晶格振動典型的 $10^{13}\ \text{rad/s}$ 量級 ✓。
+
+② **算零點能與聲子能量。** 取一晶格振動模式 $\omega=3\times10^{13}\ \text{rad/s}$，基態能量（零點能）：
+
+$$E_0=\tfrac12\hbar\omega=\tfrac12(1.05\times10^{-34})(3\times10^{13})\approx1.6\times10^{-21}\ \text{J}\approx0.010\ \text{eV}$$
+
+相鄰能階間距，也就是**一個聲子的能量**：
+
+$$\hbar\omega=(1.05\times10^{-34})(3\times10^{13})\approx3.2\times10^{-21}\ \text{J}\approx0.020\ \text{eV}$$
+
+對照室溫熱能 $k_BT\approx0.026\ \text{eV}$：因為 $\hbar\omega\lesssim k_BT$，這種模式**室溫下容易被熱激發**出聲子（接概念 4 波茲曼因子）。
+
+**🔍 多一步（聲子＝量子化的晶格簡正模）**
+這一步把「為什麼一塊有 $\sim10^{23}$ 個原子、彼此用彈簧耦合的晶體，竟能歸結成『一堆獨立 SHO』」補清楚——這正是聲子能存在的根本理由。
+
+1. **耦合的振子無法各自獨立。** 一維鏈中第 $j$ 個原子的位移 $u_j$ 同時被左右鄰居拉扯，運動方程 $m\ddot{u}_j=-k(u_j-u_{j-1})-k(u_j-u_{j+1})$ 彼此牽連，不能單獨解某一個原子。
+
+2. **改用簡正模（normal mode）座標解耦。** 把所有原子的位移做傅立葉變換（概念 3），換成一組以波向量 $k$ 標記的集體座標 $Q_k$。神奇的是，在這組新座標下，原本糾纏的方程**完全分離**成一條條互不相干的方程：
+
+$$\ddot{Q}_k=-\omega_k^2\,Q_k$$
+
+每一個 $Q_k$ 就是一個**獨立的簡諧振子**，角頻率 $\omega_k$ 由色散關係 $\omega(k)$ 給出。也就是說——**$N$ 個耦合原子 ＝ $N$ 個獨立 SHO**，只是改用「集體振動」而非「單顆原子」當主角。
+
+3. **每個簡正模量子化 → 聲子。** 既然每個簡正模都是標準 SHO，第二步的結論直接套用：第 $k$ 個模式的能量是 $E_{n_k}=(n_k+\tfrac12)\hbar\omega_k$。這裡的**激發數 $n_k$ 就是該模式的聲子數**——多激發一個量子，就說「多了一個動量為 $\hbar k$、能量為 $\hbar\omega_k$ 的聲子」。
+
+4. **接概念 4（波茲曼）。** 每個模式平均有幾個聲子？由熱平衡分布決定。把模式能階 $(n+\tfrac12)\hbar\omega$ 代入波茲曼權重 $e^{-E/k_BT}$（概念 4），求平均就得到平均聲子數
+
+$$\langle n\rangle=\frac{1}{e^{\hbar\omega/k_BT}-1}\qquad(\textbf{普朗克／玻色分布})$$
+
+溫度越高、$\hbar\omega$ 越小，模式裡的聲子越多。Einstein／Debye 比熱整套計算，本質就是「對所有簡正模，把這個 $\langle n\rangle\hbar\omega$ 加總、再對 $T$ 微分」。**結論：聲子不是某個原子的振動，而是整塊晶體一個簡正模的量子化激發；數聲子＝用波茲曼／普朗克分布數每個 SHO 的激發數。**
+
+**圖**
+
+![簡諧振子拋物線位能與等距量子化能階 E_n=(n+½)ℏω](../../figs/f00_sho.svg)
+
+圖中拋物線是位能 $U=\tfrac12 kx^2$，水平線是等距能階，間隔 $\hbar\omega$；最低那條不貼底，離谷底 $\tfrac12\hbar\omega$ 正是零點能。
+
+**用在 Kittel**
+- 第 4 章 [聲子與晶格振動（unit04_聲子與晶格振動.html）](../../單元教學/unit04_聲子與晶格振動.html)：把 $N$ 個原子的振動展開成 $N$ 個獨立簡正模，每個模式量子化成聲子；Einstein／Debye 比熱就是在數聲子。
+- 零點能與平均聲子數 $\langle n\rangle$ 由波茲曼／普朗克分布決定（見概念 4）。
+
+</details>
+
+---
+
+<details>
+<summary><b>3. 盒中粒子／量子井（particle in a box）</b></summary>
+
+**你高中學過的**
+普物量子部分通常講過：把電子關在長度 $L$ 的「盒子」裡，因為兩端波函數必須為零（像兩端固定的弦），只有特定波長能「裝得下」，於是能量被量子化成 $E_n\propto n^2$。這是最簡單、最會考的量子模型。把它寫清楚——盒子裡的粒子是一個量子物質波，描述它的 **波函數（wavefunction）** $\psi(x)$ 在兩端「被釘住」（值為 $0$），中間只能放整數個半波長，就像吉他弦只能發出基音與它的泛音。一句話：**把波關進有限空間、兩端釘死，可放的波長就被「挑」成一組離散值，能量也跟著離散。**
+
+**為什麼 Kittel 需要**
+固態物理的「自由電子模型（free electron model）」就是把整塊金屬看成一個大盒子，電子在裡面自由跑，邊界條件給出**離散的容許 $k$ 值**，再由此數出費米能（Fermi energy）、態密度（density of states）。施主電子（donor）的束縛軌道、量子點（quantum dot）的能階，全都是「盒子」的變形。最關鍵的兩個收穫：（1）**能階為什麼離散**——邊界條件像篩子，只讓「整數個半波」通過，挑出 $k_n=n\pi/L$；（2）**邊界條件有兩種選法**——硬牆（hard-wall）給離散能階、週期（periodic）給自由電子的容許 $k$，後者正是第 5 章在 $k$ 空間數態的基礎。會盒中粒子，第 5、7 章就有地基。
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $L$ | 盒子（量子井）的寬度（box / well width），單位 $\text{m}$ |
+| $x$ | 盒內位置座標（position），$0\le x\le L$ |
+| $\psi(x)$ | 波函數（wavefunction）；$\lvert\psi\rvert^2$ 為找到粒子的機率密度 |
+| $\psi_n(x)$ | 第 $n$ 個量子態（駐波 standing wave）的波函數 |
+| $n$ | 量子數（quantum number），正整數 $n=1,2,3,\dots$；標記第幾個能階 |
+| $k_n$ | 第 $n$ 態的波向量（wavevector），硬牆時 $k_n=\dfrac{n\pi}{L}$ |
+| $\lambda_n$ | 第 $n$ 態的波長（wavelength），$\lambda_n=\dfrac{2L}{n}$ |
+| $E_n$ | 第 $n$ 態的能量（energy level），$E_n=\dfrac{\hbar^2k_n^2}{2m}$ |
+| $m$ | 粒子（電子）質量（mass），自由電子 $m=9.11\times10^{-31}\ \text{kg}$ |
+| $\hbar$ | 約化普朗克常數（reduced Planck constant），$\hbar=\dfrac{h}{2\pi}=1.05\times10^{-34}\ \text{J·s}$ |
+| $h$ | 普朗克常數（Planck constant），$h=6.63\times10^{-34}\ \text{J·s}$ |
+| $n_x,n_y,n_z$ | 三維盒子各方向的量子數（整數） |
+
+**第一步：邊界條件像篩子（為什麼只剩整數 $n$）**
+一維、長度 $L$、無限深井（牆外位能無限大，粒子進不去）。井內波函數是駐波，可寫成 $\psi(x)=A\sin(kx)$。兩端被「釘死」這件事用數學寫出來就是 **邊界條件（boundary condition）**：
+$$\psi(0)=0,\qquad \psi(L)=0$$
+左端 $\psi(0)=A\sin0=0$ 自動成立；右端要求 $\sin(kL)=0$，而 $\sin$ 為零只發生在它的零點 $kL=n\pi$（$n$ 為正整數）。於是 $k$ **不能任意取**，只能是
+$$k_n=\frac{n\pi}{L},\qquad n=1,2,3,\dots$$
+這就是「離散」的源頭：邊界條件像一個篩子，把連續的 $k$ 篩成一格一格的 $k_n$。對應波長 $\lambda_n=\dfrac{2\pi}{k_n}=\dfrac{2L}{n}$——剛好是「井內放得下整數個半波長」（$L=n\cdot\frac{\lambda_n}{2}$）。
+
+**第二步：能量跟著離散（$E_n\propto n^2$）**
+自由粒子能量與波向量的關係是 $E=\dfrac{\hbar^2k^2}{2m}$（動能 $\frac{p^2}{2m}$ 配 de Broglie $p=\hbar k$）。把篩出來的 $k_n=\frac{n\pi}{L}$ 代進去：
+$$\boxed{\,E_n=\frac{\hbar^2 k_n^2}{2m}=\frac{n^2\pi^2\hbar^2}{2mL^2}=\frac{n^2 h^2}{8mL^2},\qquad n=1,2,3,\dots\,}$$
+（末式用 $\hbar=h/2\pi$ 換成 $h$。）逐項讀懂：
+- **$E_n\propto n^2$**：能階越往上越疏（$1,4,9,16,\dots$），不像簡諧振子那樣等距。
+- **$E_n\propto 1/L^2$**：盒子越大（$L$ 越大）能階越密、越低；盒子縮到原子尺度，能階間距就跳到 eV 級。
+- **最低能量 $E_1\ne0$**：粒子永遠在動（與測不準原理一致），這跟簡諧振子的零點能同源。
+- 三維盒子（各邊 $L$）：能量是三方向之和 $E=\dfrac{\pi^2\hbar^2}{2mL^2}(n_x^2+n_y^2+n_z^2)$，$E\propto(n_x^2+n_y^2+n_z^2)$。
+
+**範例（每個符號都代進去算）**：
+電子關在 $L=1\ \text{nm}=10^{-9}\ \text{m}$ 的一維井，求基態 $n=1$ 能量。代入 $E_n=\dfrac{n^2h^2}{8mL^2}$：
+$$E_1=\frac{h^2}{8mL^2}=\frac{(6.63\times10^{-34})^2}{8(9.11\times10^{-31})(10^{-9})^2}\approx6.0\times10^{-20}\ \text{J}\approx0.38\ \text{eV}.$$
+$n=2$ 是它的 $4$ 倍 $\approx1.5\ \text{eV}$、$n=3$ 是 $9$ 倍 $\approx3.4\ \text{eV}$——間距隨 $n^2$ 拉開。盒子縮小到 Å 尺度，能階間距就跳到 eV 級——這正是原子能階的量級。
+
+換個用途估**施主軌道（donor orbit）量級**：半導體裡施主電子被正離子核吸住，可借「氫原子放大版」量級——把氫的基態能 $13.6\ \text{eV}$ 乘上 $\dfrac{m^*/m}{\varepsilon_r^2}$，矽中 $m^*\approx0.2\,m$、$\varepsilon_r\approx12$，得束縛能 $\approx13.6\times\dfrac{0.2}{12^2}\approx0.02\ \text{eV}$。同一個「電子被關在小空間 → 能量量子化」的精神，只是這次「盒子」是庫侖位能井（見概念 5），量級落在 meV～10 meV，所以室溫即可游離出載子。
+
+**圖**
+
+![一維無限深井內波函數與能階 E_n∝n²](../../figs/f00_particlebox.svg)
+
+圖中井內畫出 $n=1,2,3$ 的駐波，能階間距隨 $n^2$ 拉開。
+
+**🔍 多一步（離散從哪來＋硬牆 BC vs 週期 BC 的差別）**：
+這一步把「能階為什麼離散」與「兩種邊界條件給出什麼」一次講清楚——這是接上第 5 章 $k$ 空間計數的關鍵岔路。
+
+1. **離散來自「駐波條件挑整數」**：連續的波向量 $k$ 本來什麼值都能取，是**邊界條件**把它篩成離散的。硬牆要求 $\psi(0)=\psi(L)=0$，等於要求井內塞「整數個半波長」（$L=n\cdot\frac{\lambda}{2}$），$\sin(kL)=0$ 的解只在 $kL=n\pi$ 處，故 $k_n=\dfrac{n\pi}{L}$。沒有邊界條件就沒有篩子，也就沒有離散——這是所有「束縛態能階離散」的共同機制。
+
+2. **硬牆 BC（$k_n=n\pi/L$）**：波函數兩端必須為零（駐波 $\sin$），相鄰容許 $k$ 的間距是 $\dfrac{\pi}{L}$，且 $k$ **只取正值**（$n$ 為正整數；$-n$ 與 $+n$ 是同一個駐波，沒有獨立的「向左跑」狀態）。這給出**離散能階** $E_n=\dfrac{n^2\pi^2\hbar^2}{2mL^2}$，適合描述「真的被牆關住」的束縛態（量子點、施主軌道）。
+
+3. **週期 BC（$k_n=2\pi n/L$）**：把金屬想成「首尾相接」（$\psi(x+L)=\psi(x)$，又稱 Born–von Kármán 條件），波函數用行進波 $e^{ikx}$。週期性要求 $e^{ikL}=1$，即 $kL=2\pi n$，故
+$$k_n=\frac{2\pi n}{L},\qquad n=0,\pm1,\pm2,\dots$$
+注意三點差別：（a）相鄰容許 $k$ 的間距是 $\dfrac{2\pi}{L}$，是硬牆的**兩倍寬**；（b）$n$ 可正可負可零，**$+n$ 與 $-n$ 是兩個獨立狀態**（分別向右、向左跑的行進波），對應載流（電流）很自然；（c）每個容許 $k$ 點在 $k$ 空間佔的「體積」是 $\dfrac{2\pi}{L}$（3D 為 $(\frac{2\pi}{L})^3$）——這就是 Kittel 第 5 章**數態**的單位格子，由它算出費米球內的態數、態密度。
+
+一句話對照：**硬牆 BC 給「離散能階」（用在束縛態），週期 BC 給「均勻分布的容許 $k$」（用在自由電子數態與輸運）。** 兩者在 $L$ 很大時算出的整體物理量（如態密度）一致，但週期 BC 讓「向左/向右」對稱、計數乾淨，所以自由電子模型一律採用它。
+
+**用在 Kittel**
+- 第 5 章 [自由電子費米氣體（unit05_自由電子費米氣體.html）](../../單元教學/unit05_自由電子費米氣體.html)：三維盒子＋**週期邊界條件** → 均勻分布的容許 $k$ 點（每點佔 $(2\pi/L)^3$） → 費米球、態密度、電子比熱。
+- 第 7 章 [半導體（unit07_半導體.html）](../../單元教學/unit07_半導體.html)：施主軌道近似為「氫原子放大版」的束縛態；量子點＝小盒子（**硬牆**），能階因尺寸而離散（$E_n\propto n^2/L^2$，尺寸越小能階越疏）。
+
+</details>
+
+---
+
+<details>
+<summary><b>4. 波茲曼因子（Boltzmann factor）$e^{-E/k_BT}$</b></summary>
+
+**你高中學過的**
+高中／普物熱學講過「溫度越高，分子動得越快」「能量按統計分布」。你可能看過理想氣體的能量隨溫度增加，也聽過「高能量狀態比較難被佔據」。波茲曼因子（Boltzmann factor）就是把這句話寫成數學：一個態能量越高，被佔據的機會越小，而且是**指數**地小。
+
+**為什麼 Kittel 需要**
+固態物理要回答「在溫度 $T$，某個能量 $E$ 的狀態被佔據的機率有多大？」——這決定了**比熱、磁化率、半導體載子濃度**等幾乎所有溫度相關的量。波茲曼因子 $e^{-E/k_BT}$ 是古典統計的核心；量子版（費米–狄拉克 Fermi–Dirac、玻色–愛因斯坦 Bose–Einstein）在「能量比 $k_BT$ 高很多」的尾巴上也都退回成它。會這一條，第 5、7、8 章的溫度相依性才有地基。
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $E$ | 某個量子態的能量（energy of a state） |
+| $E_i$ | 第 $i$ 個態的能量（energy of state $i$）；下標 $i$ 為態的編號 |
+| $k_B$ | 波茲曼常數（Boltzmann constant），$k_B=1.38\times10^{-23}\ \text{J/K}=8.62\times10^{-5}\ \text{eV/K}$ |
+| $T$ | 絕對溫度（absolute temperature），單位 $\text{K}$ |
+| $k_BT$ | 在溫度 $T$ 的「特徵熱能」（thermal energy scale）；室溫 $300\ \text{K}$ 時 $k_BT\approx0.0259\ \text{eV}\approx\tfrac{1}{40}\ \text{eV}$ |
+| $P_i$ | 態 $i$ 被佔據的機率（probability of occupying state $i$），$0\le P_i\le1$ |
+| $Z$ | 配分函數（partition function），$Z=\sum_i e^{-E_i/k_BT}$，當作機率的歸一化常數 |
+| $\Delta E$ | 兩個態的能量差（energy gap），$\Delta E=E_1-E_2$（或視文脈為兩階之差） |
+| $e^{-E/k_BT}$ | 波茲曼因子（Boltzmann factor）；態能量 $E$ 的相對權重（無單位） |
+
+**為什麼是「指數」：相對機率 $\propto e^{-E/k_BT}$**
+波茲曼分布（Boltzmann distribution）的核心敘述只有一句：**一個態能量為 $E$ 時，它被佔據的相對機率正比於 $e^{-E/k_BT}$**：
+$$P(E)\propto e^{-E/k_BT}.$$
+讀法：能量出現在指數的分子、熱能 $k_BT$ 出現在分母。當 $E\ll k_BT$（能量比熱能小）時 $e^{-E/k_BT}\approx1$，幾乎不被壓制；當 $E\gg k_BT$ 時 $e^{-E/k_BT}\to0$，**被指數狠狠壓死**。這就是「高能態難佔據」的精確版本——不是線性變難，而是指數變難。
+
+**第一步：配分函數 $Z$ 與機率 $P_i$（把「正比」變成「等於」）**
+「正比」要變成真正的機率，得讓所有態的機率加起來等於 $1$。把所有態的權重加總，得到**配分函數（partition function）**：
+$$Z=\sum_i e^{-E_i/k_BT}.$$
+於是第 $i$ 個態的佔據機率為
+$$\boxed{\,P_i=\frac{e^{-E_i/k_BT}}{Z}=\frac{e^{-E_i/k_BT}}{\sum_j e^{-E_j/k_BT}}\,}.$$
+$Z$ 在這裡只扮演「歸一化常數（normalization）」的角色，保證 $\sum_i P_i=1$。（$Z$ 其實還能再微分出能量、熵等熱力學量，但這裡先當分母用。）
+
+**第二步：兩態佔據比——$Z$ 直接消掉**
+若只想比較兩個態 $1$、$2$ 誰比較容易被佔據，取機率之比時**分母 $Z$ 完全約掉**，只剩乾淨的指數：
+$$\boxed{\,\frac{P_1}{P_2}=\frac{e^{-E_1/k_BT}}{e^{-E_2/k_BT}}=e^{-(E_1-E_2)/k_BT}=e^{-\Delta E/k_BT}\,}.$$
+這就是最常用的形式：**只要知道能量差 $\Delta E=E_1-E_2$ 與溫度，就能算出兩態佔據比**，連 $Z$ 是什麼都不必知道。若 $E_1>E_2$（態 1 較高），$\Delta E>0$，比值 $<1$——高能態被佔得比較少，符合直覺。
+
+**範例（每個符號都代進去算）**
+兩能階差 $\Delta E=0.1\ \text{eV}$（態 1 較高、態 2 較低），問室溫（$T=300\ \text{K}$，$k_BT\approx0.0259\ \text{eV}$）下高階相對低階的佔據比。
+$$\frac{P_1}{P_2}=e^{-\Delta E/k_BT}=e^{-0.1/0.0259}=e^{-3.86}\approx0.021.$$
+也就是高階只有低階的約 $2\%$。若升溫到 $T=1000\ \text{K}$（$k_BT\approx0.086\ \text{eV}$）：
+$$\frac{P_1}{P_2}=e^{-0.1/0.086}=e^{-1.16}\approx0.31,$$
+比值升到約 $31\%$——溫度一高，高能態就好佔多了。記住這個量級感：室溫 $k_BT\approx\tfrac{1}{40}\ \text{eV}$，凡是能量差比它大好幾倍的態，佔據率都被指數壓到很小。
+
+**圖**
+
+![波茲曼因子佔據率對能量，三條曲線對應不同 kT](../../figs/f00_boltzmann.svg)
+
+圖中三條曲線是不同 $k_BT$：$k_BT$ 越大（溫度越高），高能量處的佔據率掉得越慢。
+
+**🔍 多一步（高溫／低溫極限，與費米–狄拉克的古典極限）**
+
+**(1) 高溫極限 $k_BT\gg\Delta E$：趨近均分。** 當熱能遠大於能階差時，指數的指數值很小，用 $e^{-x}\approx1$（$x\ll1$，泰勒首項，見概念 9 之數學先備）：
+$$\frac{P_1}{P_2}=e^{-\Delta E/k_BT}\approx e^{0}=1.$$
+也就是**各能階幾乎被佔得一樣多**——熱擾動大到「看不出」能階差，這正是古典「能量均分（equipartition）」的精神：足夠高溫時每個自由度平均分到 $\tfrac12 k_BT$。
+
+**(2) 低溫極限 $k_BT\ll\Delta E$：只佔基態。** 反過來，熱能遠小於能階差時，指數變成很大的負數：
+$$\frac{P_1}{P_2}=e^{-\Delta E/k_BT}\to 0\quad(T\to0).$$
+高能態的佔據率被指數壓到趨近 $0$，**粒子全擠在最低的基態**。聲子（概念 2）在低溫被「凍結」、磁矩（概念 6）在低溫完全對齊磁場，都是這個極限。
+
+**(3) 它是費米–狄拉克在 $E-\mu\gg k_BT$ 的古典極限（接概念 8）。** 量子的費米–狄拉克分布是
+$$f(E)=\frac{1}{e^{(E-\mu)/k_BT}+1},$$
+其中 $\mu$ 是化學勢（chemical potential）。當態的能量遠高於 $\mu$，即 $E-\mu\gg k_BT$ 時，分母的指數 $e^{(E-\mu)/k_BT}$ 變得非常大，那個 $+1$ 相對可忽略：
+$$f(E)\approx\frac{1}{e^{(E-\mu)/k_BT}}=e^{-(E-\mu)/k_BT}\ \propto\ e^{-E/k_BT}.$$
+**這就回到了波茲曼因子**：在高能尾巴（佔據率本來就稀疏、包立不相容幾乎不起作用）的地方，量子統計與古典統計重合。所以波茲曼因子不是被費米–狄拉克取代，而是它在「稀疏佔據」極限下的特例——這條銜接會在概念 8 完整展開。
+
+**用在 Kittel**
+- 第 5 章 [自由電子費米氣體（unit05_自由電子費米氣體.html）](../../單元教學/unit05_自由電子費米氣體.html)：費米–狄拉克分布的高能尾巴就回到 $e^{-E/k_BT}$（見概念 8）。
+- 第 7 章 [半導體（unit07_半導體.html）](../../單元教學/unit07_半導體.html)：本質載子濃度 $n_i\propto e^{-E_g/2k_BT}$——能隙 $E_g$ 一進指數，載子隨溫度暴增。
+- 第 8 章 [磁性（unit08_磁性.html）](../../單元教學/unit08_磁性.html)：朗之萬（Langevin）順磁，磁矩在 $-\boldsymbol\mu\cdot\mathbf B$ 能量上按 $e^{-E/k_BT}$ 分布（見概念 6）。
+
+</details>
+
+---
+
+<details>
+<summary><b>5. 庫侖位能（Coulomb potential energy）$U=-\dfrac{q^2}{4\pi\varepsilon_0 r}$</b></summary>
+
+**你高中學過的**
+高中電學：兩點電荷間庫侖力 $F=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q_1q_2}{r^2}$，同號相斥、異號相吸。普物把力沿距離積分成位能，得到 $U=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q_1q_2}{r}$。一句話：**位能隨距離以 $1/r$ 變化，異號電荷的位能是負的（束縛）。**
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $U$ | 庫侖位能（Coulomb potential energy），單位 $\text{J}$ 或 $\text{eV}$；負值代表吸引／束縛 |
+| $q$ | 電荷量（charge）；一對正負離子各帶 $+q,-q$ |
+| $q_1,q_2$ | 兩個相互作用電荷（含正負號） |
+| $e$ | 基本電荷（elementary charge），$e=1.602\times10^{-19}\ \text{C}$ |
+| $\varepsilon_0$ | 真空電容率（vacuum permittivity），$\varepsilon_0=8.85\times10^{-12}\ \text{F/m}$ |
+| $\varepsilon_r$ | 相對介電常數（relative permittivity / dielectric constant），無因次，真空為 $1$、介質中 $>1$ |
+| $r$ | 兩電荷間距（separation），單位 $\text{m}$ 或 $\text{nm}$ |
+| $\alpha$ | 馬德隆常數（Madelung constant），把整個晶格幾何加總進一個無因次數字 |
+| $U_{\text{tot}}$ | 一對離子在晶格中的總庫侖位能，$U_{\text{tot}}=\alpha\,U_{\text{最近鄰}}$ |
+| $E_b$ | 施主束縛能（donor binding energy），半導體中束縛電子所需能量 |
+| $m^*$ | 電子有效質量（effective mass，見概念 7） |
+
+常用組合（電子電荷時超好用）：$\dfrac{e^2}{4\pi\varepsilon_0}=1.44\ \text{eV·nm}$——只要把距離用 $\text{nm}$ 代進去，位能立刻是 $\text{eV}$。
+
+**為什麼 Kittel 需要**
+固體之所以「黏在一起」，最常見的就是離子鍵（ionic bond）——正負離子靠庫侖吸引。要算離子晶體的內聚能（cohesive energy），就要把所有離子對的庫侖位能加起來，這個和叫 **馬德隆能量（Madelung energy）**。半導體裡施主電子被正離子核吸住，束縛能也是庫侖問題（氫原子的放大版），只是介質的**介電屏蔽（dielectric screening）** 把作用大幅削弱。不會庫侖位能，第 3、7 章寸步難行。
+
+**第一步：一對正負電荷的位能**
+把庫侖力沿距離積分（$U(r)=-\int_\infty^r F\,dr'$），得到兩電荷的位能 $U=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q_1q_2}{r}$。對一對正負電荷（$q_1=+q,\,q_2=-q$）：
+$$U=-\frac{q^2}{4\pi\varepsilon_0 r}\quad(\text{吸引，負號代表束縛}).$$
+距離 $r$ 越近，$U$ 越深（越負）；$r\to\infty$ 時 $U\to0$。**這個 $-1/r$ 的「井」就是離子被綁住的原因。**
+
+**第二步：離子晶體要把所有離子加總 → 馬德隆常數**
+晶體裡一顆參考離子不是只跟一個鄰居作用，而是跟**全部**正負離子作用。把它們的庫侖貢獻全加起來，可寫成「最近鄰那一項」乘上一個純幾何因子：
+$$\boxed{\,U_{\text{tot}}=-\alpha\,\frac{q^2}{4\pi\varepsilon_0 r}\,}$$
+- $r$：最近鄰距離（nearest-neighbour distance）。
+- $\alpha$：**馬德隆常數（Madelung constant）**，把整個晶格的幾何（誰是引力、誰是斥力、各在多遠）加總進一個無因次數字。NaCl 結構 $\alpha\approx1.748$。
+- $\alpha>1$ 代表「加總後比單一最近鄰對更穩」——下面〈多一步〉解釋為什麼。
+
+**第三步：介電屏蔽把 $\varepsilon_0\to\varepsilon_0\varepsilon_r$**
+電荷若不在真空、而在介質（如半導體晶格）中，周圍原子會被極化、部分抵消電場，這叫**屏蔽（screening）**。效果就是把分母的 $\varepsilon_0$ 換成 $\varepsilon_0\varepsilon_r$：
+$$U=-\frac{q^2}{4\pi\varepsilon_0\varepsilon_r\, r}.$$
+$\varepsilon_r$ 通常是好幾甚至十幾（如 Si 約 $11.7$、Ge 約 $16$），所以介質中的庫侖作用比真空弱 $\varepsilon_r$ 倍。**這直接讓半導體施主的束縛能變得很小**（見〈多一步〉）。
+
+**範例（每個符號都代進去算）**
+一對相距 $r=0.28\ \text{nm}$ 的 $\text{Na}^+$、$\text{Cl}^-$（各帶 $\pm e$），求最近鄰庫侖位能：
+$$U=-\frac{e^2}{4\pi\varepsilon_0 r}=-\frac{1.44\ \text{eV·nm}}{0.28\ \text{nm}}\approx-5.1\ \text{eV}.$$
+負號表示吸引、束縛。再乘上 NaCl 的馬德隆常數 $\alpha\approx1.748$，每對離子在**整個晶格**中的庫侖能：
+$$U_{\text{tot}}=-\alpha\,\frac{e^2}{4\pi\varepsilon_0 r}\approx-5.1\times1.748\approx-9.0\ \text{eV}.$$
+這就是離子晶體又硬又穩的原因——比單一離子對（$-5.1\ \text{eV}$）深了快一倍。
+
+**🔍 多一步（為什麼晶體比孤立分子穩？屏蔽如何讓施主能階只有 meV）**
+這一步把兩個關鍵「為什麼」補清楚。
+
+1. **為什麼晶體比孤立分子穩（$\alpha>1$ 的意義）？**
+一個孤立 NaCl「分子」只有一對正負離子，位能就是 $-\dfrac{e^2}{4\pi\varepsilon_0 r}$。但在晶體裡，參考的 $\text{Na}^+$ 被**一整圈**離子包圍：最近的 $6$ 個 $\text{Cl}^-$（引力，距離 $r$）、次近的 $12$ 個 $\text{Na}^+$（斥力，距離 $\sqrt2\,r$）、再外面 $8$ 個 $\text{Cl}^-$（引力，距離 $\sqrt3\,r$）……把這些正負貢獻**全部加總**：
+$$\alpha=\frac{6}{1}-\frac{12}{\sqrt2}+\frac{8}{\sqrt3}-\cdots\;\longrightarrow\;1.748\;(\text{NaCl}).$$
+引力項（異號、較近）勝過斥力項（同號、較遠），淨結果是一個**大於 $1$** 的數。$\alpha>1$ 直接說：**把整個晶格的庫侖貢獻加總後，每對離子比孤立分子更束縛**——這就是離子固體比孤立分子穩定的數學來源。（這個交錯求和的收斂技巧見概念 4 等比／交錯級數。）
+
+2. **屏蔽如何讓施主能階只有 meV 量級？**
+半導體裡摻入施主（如 Si 中的 P），多出的電子被 $+e$ 的施主核吸住，就像一個「放大版氫原子」。氫原子束縛能 $13.6\ \text{eV}$ 來自庫侖位能；放進晶體後有兩個修正同時把它壓下去：
+$$E_b=13.6\ \text{eV}\times\frac{m^*/m}{\varepsilon_r^{2}}.$$
+- **介電屏蔽 $\varepsilon_r$**：庫侖作用被削弱 $\varepsilon_r$ 倍，束縛能正比於 $1/\varepsilon_r^{2}$（因為能量同時受位能與軌道半徑兩重影響）。Si 的 $\varepsilon_r\approx11.7\Rightarrow1/\varepsilon_r^2\approx1/137$。
+- **有效質量 $m^*$**：電子在晶體中「變輕」，$m^*/m$ 常為 $0.1\sim0.3$，再壓一個數量級。
+代入估算：$E_b\sim13.6\times\dfrac{0.2}{11.7^2}\approx0.02\ \text{eV}=20\ \text{meV}$——果然只有 **meV 量級**（實測 Si 施主約 $30\sim50\ \text{meV}$）。正因束縛能這麼小，室溫熱能 $k_BT\approx26\ \text{meV}$（概念 4）就足以把施主電子游離到導帶，半導體因此導電。**屏蔽 + 有效質量，把原本 eV 級的庫侖束縛壓成 meV 級**，這是摻雜半導體能工作的核心。
+
+**圖**
+
+![庫侖位能 U=−q²/(4πε₀r) 隨距離 r 的 1/r 曲線](../../figs/f00_coulomb.svg)
+
+圖中 $U\propto -1/r$：距離近時位能深（強束縛），拉遠時趨近 0。
+
+**用在 Kittel**
+- 第 3 章 [晶體鍵結（unit03_晶體鍵結.html）](../../單元教學/unit03_晶體鍵結.html)：離子鍵、馬德隆能量（$\alpha$ 把整個晶格加總），再加上短程排斥得到平衡間距與內聚能。
+- 第 7 章 [半導體（unit07_半導體.html）](../../單元教學/unit07_半導體.html)：施主束縛能用氫原子模型 $E_b=13.6\ \text{eV}\times\dfrac{m^*/m}{\varepsilon_r^2}$，分母的 $\varepsilon_r$ 是介電屏蔽後的庫侖作用，束縛能因此只有 meV 量級。
+
+</details>
+
+---
+
+<details>
+<summary><b>6. 磁矩與磁能（magnetic moment）$U=-\boldsymbol\mu\cdot\mathbf B$、波耳磁子</b></summary>
+
+**你高中學過的**
+高中講過電流迴路或磁針在磁場裡會受力矩、想轉到跟磁場同方向；也學過「磁針順著磁場排最穩定」。普物把磁針抽象成 **磁矩（magnetic moment）** $\boldsymbol\mu$（一個向量，大小 $\mu$、方向是磁針 N 極指向），在磁場 $\mathbf B$ 中它有一個**方向相關**的能量：磁矩跟磁場越「對齊」越穩（能量越低），越「對著幹」越不穩（能量越高）。寫成數學就是
+$$U=-\boldsymbol\mu\cdot\mathbf B=-\mu B\cos\theta,$$
+其中 $\theta$ 是 $\boldsymbol\mu$ 與 $\mathbf B$ 的夾角。
+
+一句話：**磁矩在磁場裡的能量，由它跟磁場的夾角決定——同向最低、反向最高。**
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $\boldsymbol\mu$ | 磁矩向量（magnetic moment），大小 $\mu$、方向為磁針 N 極指向；單位 $\text{J/T}$ |
+| $\mu$ | 磁矩大小（magnitude），$\mu=\lvert\boldsymbol\mu\rvert$ |
+| $\mathbf B$ | 磁場向量（magnetic field / flux density），單位特斯拉 $\text{T}$ |
+| $B$ | 磁場大小，$B=\lvert\mathbf B\rvert$ |
+| $\theta$ | $\boldsymbol\mu$ 與 $\mathbf B$ 的夾角（angle）；$\theta=0$ 同向、$\theta=\pi$ 反向 |
+| $U$ | 磁矩在磁場中的位能（potential energy），$U=-\boldsymbol\mu\cdot\mathbf B$ |
+| $\mu_B$ | 波耳磁子（Bohr magneton），電子磁矩的自然單位；$\mu_B=\dfrac{e\hbar}{2m_e}$ |
+| $e$ | 基本電荷（elementary charge），$e=1.60\times10^{-19}\ \text{C}$ |
+| $\hbar$ | 約化普朗克常數（reduced Planck constant），$\hbar=1.05\times10^{-34}\ \text{J·s}$ |
+| $m_e$ | 電子質量（electron mass），$m_e=9.11\times10^{-31}\ \text{kg}$ |
+| $\omega_c$ | 迴旋角頻率（cyclotron angular frequency），$\omega_c=\dfrac{eB}{m}$ |
+| $E_n$ | 磁場中自由電子的 Landau 能階（Landau level energy） |
+| $n$ | Landau 能階指標（非負整數），$n=0,1,2,\dots$ |
+
+**為什麼 Kittel 需要**
+磁性整章（第 8 章）的起點就是「原子帶磁矩，磁矩在磁場裡有能量 $U=-\boldsymbol\mu\cdot\mathbf B$」。順磁（paramagnetism）是磁矩**想對齊磁場**、卻被**熱擾動打散**，兩股力量在拉鋸——把 $U=-\boldsymbol\mu\cdot\mathbf B$ 配上波茲曼因子（概念 4）就導出居里定律（Curie law）。電子自旋磁矩的基本單位是 **波耳磁子（Bohr magneton）** $\mu_B$，是整章磁矩量級的「尺」。而 Landau 能階則是磁場讓電子的**軌道運動**量子化（形式跟簡諧振子一樣，概念 2），是 Landau 抗磁與量子振盪的基礎。不熟這三件事，第 8 章每一節都會卡。
+
+**第一步：能量為什麼長 $-\mu B\cos\theta$（同向最低）**
+向量內積 $\boldsymbol\mu\cdot\mathbf B=\mu B\cos\theta$，所以
+$$U=-\boldsymbol\mu\cdot\mathbf B=-\mu B\cos\theta.$$
+逐個夾角讀出來：
+- $\theta=0$（同向）：$\cos\theta=1$，$U=-\mu B$ —— **最低能量、最穩定**。
+- $\theta=\dfrac{\pi}{2}$（垂直）：$\cos\theta=0$，$U=0$。
+- $\theta=\pi$（反向）：$\cos\theta=-1$，$U=+\mu B$ —— **最高能量、最不穩**。
+
+負號的物理意義就是「對齊磁場是放能（往低處去）」，所以磁矩**自然想轉去同向**——這就是磁針會指向磁場、指南針會指北的能量版說法。
+
+**第二步：磁矩的自然單位——波耳磁子 $\mu_B$**
+電子的自旋與軌道磁矩，大小都是 $\mu_B$ 的整數或半整數倍，所以拿 $\mu_B$ 當「尺」最方便：
+$$\mu_B=\frac{e\hbar}{2m_e}=9.27\times10^{-24}\ \text{J/T}=5.79\times10^{-5}\ \text{eV/T}.$$
+看分子分母就懂它的來源：$e\hbar$ 是「電荷 × 角動量量子」，除以 $2m_e$ 把它換算成磁矩——這正是「一個帶 $\hbar$ 角動量的電子」對應的磁矩量級。記住 $\mu_B\sim10^{-23}\ \text{J/T}$ 這個數量級，第 8 章估算磁化率時會一直用到。
+
+**第三步：磁場讓電子軌道量子化——Landau 能階**
+磁場中的自由電子，垂直磁場的平面運動會被磁場「圈成圓」，做迴旋運動，角頻率
+$$\omega_c=\frac{eB}{m}\quad(\text{cyclotron frequency，迴旋頻率}).$$
+量子力學把這個圓周運動量子化，能量變成**等距的一格一格**——形式跟簡諧振子（概念 2）一模一樣：
+$$E_n=\left(n+\tfrac12\right)\hbar\omega_c,\qquad n=0,1,2,\dots$$
+這些離散能階叫 **Landau 能階（Landau levels）**，間距 $\hbar\omega_c=\dfrac{e\hbar B}{m}\propto B$：磁場越強，能階拉得越開。這是 Landau 抗磁與 de Haas–van Alphen 量子振盪的根。
+
+**範例（每個符號都代進去算）**
+一個 $\mu=1\ \mu_B$ 的磁矩，在 $B=1\ \text{T}$ 中，**順排**（$\theta=0$，$U=-\mu_B B$）與**逆排**（$\theta=\pi$，$U=+\mu_B B$）的能量差：
+$$\Delta U=U_{\text{逆}}-U_{\text{順}}=(+\mu_B B)-(-\mu_B B)=2\mu_B B.$$
+代數字（用 $\mu_B=5.79\times10^{-5}\ \text{eV/T}$）：
+$$\Delta U=2\mu_B B=2(5.79\times10^{-5}\ \text{eV/T})(1\ \text{T})\approx1.16\times10^{-4}\ \text{eV}.$$
+拿它跟室溫熱能比：室溫 $k_BT\approx0.0259\ \text{eV}$，所以
+$$\frac{\Delta U}{k_BT}\approx\frac{1.16\times10^{-4}}{0.0259}\approx4.5\times10^{-3}.$$
+磁能比熱能小了 200 多倍——**室溫下熱擾動遠遠壓過磁能**，磁矩只被磁場「稍微」拉向同向，沒辦法乖乖排好。這正是順磁磁化率很小、且隨溫度 $\propto1/T$（居里定律）的物理原因，下面〈多一步〉把它算清楚。
+
+**🔍 多一步（順磁＝磁矩想對齊 vs 熱擾動打散的拉鋸 → 居里定律 $\chi\propto1/T$）**
+把 $U=-\mu B\cos\theta$ 配上波茲曼因子（概念 4），看磁矩**平均**對齊多少。
+
+1. **設定拉鋸**：磁矩想往低能量（$\theta=0$，對齊）去，權重 $\propto e^{-U/k_BT}=e^{\mu B\cos\theta/k_BT}$；但熱擾動把方向打散，傾向各方向均勻。兩者拉鋸下，沿磁場方向的平均磁矩
+$$\langle\mu_z\rangle=\mu\,\langle\cos\theta\rangle,\qquad \langle\cos\theta\rangle=\frac{\displaystyle\int\cos\theta\,e^{\mu B\cos\theta/k_BT}\,d\Omega}{\displaystyle\int e^{\mu B\cos\theta/k_BT}\,d\Omega}.$$
+
+2. **小場展開（高溫 / 弱場：$\mu B\ll k_BT$）**：令 $x=\dfrac{\mu B}{k_BT}\ll1$，把指數展開 $e^{x\cos\theta}\approx1+x\cos\theta$。代入後利用 $\langle\cos\theta\rangle$ 在等向分布下為 $0$、$\langle\cos^2\theta\rangle=\tfrac13$，得到
+$$\langle\cos\theta\rangle\approx\frac{x}{3}=\frac{\mu B}{3k_BT}.$$
+（這就是 Langevin 函數 $L(x)=\coth x-\tfrac1x$ 在小 $x$ 的領頭項 $L(x)\approx x/3$。）
+
+3. **磁化率 $\chi\propto1/T$**：設單位體積有 $N$ 個磁矩，磁化強度
+$$M=N\langle\mu_z\rangle=N\mu\cdot\frac{\mu B}{3k_BT}=\frac{N\mu^2}{3k_BT}\,B.$$
+磁化率 $\chi=\dfrac{\partial M}{\partial H}\propto\dfrac{M}{B}$，於是
+$$\boxed{\ \chi=\frac{N\mu^2}{3k_BT}=\frac{C}{T}\ },\qquad C=\frac{N\mu^2}{3k_B}.$$
+
+**重點：磁能進指數、熱能 $k_BT$ 當分母，小場展開後磁化率自然冒出 $1/T$ —— 這就是居里定律。** 溫度越高、熱擾動越猛，磁矩越排不齊，$\chi$ 越小；這把概念 6（磁能）與概念 4（波茲曼因子）接了起來。
+
+**圖**
+
+![磁場中電子的 Landau 能階](../../figs/f08_landau.svg)
+
+圖中磁場把連續能量切成等距的 Landau 能階 $E_n=(n+\tfrac12)\hbar\omega_c$，間距 $\hbar\omega_c\propto B$。
+
+**用在 Kittel**
+- 第 8 章 [磁性（unit08_磁性.html）](../../單元教學/unit08_磁性.html)：朗之萬／居里順磁（$U=-\boldsymbol\mu\cdot\mathbf B$ ＋波茲曼分布）、Landau 抗磁與能階量子化、波耳磁子當磁矩單位。
+
+</details>
+
+---
+
+<details>
+<summary><b>7. 牛頓第二定律 $F=ma$、動量 $p=mv$（Newton）</b></summary>
+
+**你高中學過的**
+牛頓力學的核心：$F=ma$（合力＝質量×加速度）、動量 $p=mv$（momentum＝質量×速度）、衝量改變動量 $F\,\Delta t=\Delta p$。更一般的寫法是 $F=\dfrac{dp}{dt}$（力等於動量對時間的變化率），質量固定時就退回 $F=ma$。這是高中物理最熟的部分。
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $F$ | 力（force），單位 $\text{N}$；外力寫成 $\mathbf F_{\text{ext}}$ |
+| $m$ | 質量（mass，真空／自由電子質量 $m=9.11\times10^{-31}\ \text{kg}$） |
+| $a$ | 加速度（acceleration），$a=\dfrac{dv}{dt}$，單位 $\text{m/s}^2$ |
+| $p$ | 動量（momentum），$p=mv$，單位 $\text{kg·m/s}$ |
+| $v$ | 速度（velocity）；晶體中為群速度（group velocity） |
+| $\tau$ | 鬆弛時間（relaxation time），兩次碰撞間的平均時間 |
+| $m^*$ | 有效質量（effective mass），把晶格作用打包後的「等效質量」 |
+| $\sigma$ | 電導率（electrical conductivity），單位 $\text{S/m}$ |
+| $n$ | 載子數密度（carrier number density），單位電子數／體積 |
+| $e$ | 基本電荷（elementary charge），$e=1.6\times10^{-19}\ \text{C}$ |
+| $\mathbf k$ | 波向量（wavevector）；$\hbar\mathbf k$ 為晶體動量（crystal momentum） |
+| $E$ 或 $E(k)$ | 能帶能量（band energy），電子能量隨 $\mathbf k$ 的函數（dispersion） |
+| $\hbar$ | 約化普朗克常數（reduced Planck constant），$\hbar=1.05\times10^{-34}\ \text{J·s}$ |
+
+**為什麼 Kittel 需要**
+電子在晶體裡受到電場、磁場的力，怎麼動？固態物理用一個漂亮的近似：**晶體裡的電子仍服從 $F=\dfrac{dp}{dt}$，只是把質量 $m$ 換成「有效質量（effective mass）」$m^*$**，把晶格週期位能對電子的全部複雜作用打包進 $m^*$ 這一個數字。Drude 輸運模型（電導、電阻）也是直接對電子寫牛頓方程＋碰撞阻力。沒有 $F=ma$ 的直覺，就抓不到有效質量與電導公式的來源。
+
+**第一步：半古典運動方程（把牛頓搬進晶體）**
+晶體裡電子的「動量」不是 $mv$，而是晶體動量 $\hbar\mathbf k$。外力改變的是 $\hbar\mathbf k$：
+$$\hbar\frac{d\mathbf k}{dt}=\mathbf F_{\text{ext}}.$$
+這就是牛頓第二定律 $\dfrac{dp}{dt}=F$ 的晶體版（把 $p$ 換成 $\hbar\mathbf k$）。電子的實際速度不是 $\hbar k/m$，而是能帶 $E(k)$ 的斜率——**群速度（group velocity）**：
+$$v=\frac{1}{\hbar}\frac{dE}{dk}.$$
+（這跟波包速度 $v_g=d\omega/dk$ 同一個來源，因為 $E=\hbar\omega$。）
+
+**第二步：對群速度微分 → 有效質量 → 回到 $F=m^*a$**
+加速度是群速度對時間的變化率。把 $v=\dfrac1\hbar\dfrac{dE}{dk}$ 對 $t$ 微分，並用連鎖律 $\dfrac{d}{dt}=\dfrac{dk}{dt}\dfrac{d}{dk}$：
+$$a=\frac{dv}{dt}=\frac{1}{\hbar}\frac{d^2E}{dk^2}\frac{dk}{dt}.$$
+再把第一步的 $\hbar\dfrac{dk}{dt}=F_{\text{ext}}$（即 $\dfrac{dk}{dt}=F_{\text{ext}}/\hbar$）代進去：
+$$a=\frac{1}{\hbar^2}\frac{d^2E}{dk^2}\,F_{\text{ext}}.$$
+和牛頓 $a=F/m^*$ 對照，括住係數就定義出**有效質量（effective mass）**：
+$$\frac{1}{m^*}=\frac{1}{\hbar^2}\frac{d^2E}{dk^2}\quad\Rightarrow\quad F=m^*a.$$
+能帶曲率越大（$d^2E/dk^2$ 越大），有效質量 $m^*$ 越小、電子越「輕」越好加速；曲率為負（能帶頂）時 $m^*<0$，正是電洞（hole）概念的由來。
+
+**第三步：Drude 模型（牛頓方程＋碰撞阻力 → 電導）**
+把晶體電子當帶有效質量 $m^*$、受電場力 $-eE$、又被碰撞拖住（阻力 $-m^*v/\tau$，$\tau$ 為鬆弛時間）的牛頓粒子：
+$$m^*\frac{dv}{dt}=-eE-\frac{m^*v}{\tau}.$$
+穩態（$dv/dt=0$）時，$-eE=m^*v/\tau$，解出漂移速度 $v=-\dfrac{eE\tau}{m^*}$。電流密度 $J=-nev=\dfrac{ne^2\tau}{m^*}E$，對照 $J=\sigma E$ 立刻得電導率：
+$$\sigma=\frac{ne^2\tau}{m^*}.$$
+電導全由載子密度 $n$、鬆弛時間 $\tau$ 與有效質量 $m^*$ 決定——$m^*$ 越小、$\tau$ 越長，材料越會導電。
+
+**範例（具體算一題）**
+電場 $E=100\ \text{V/m}$ 作用在電子（先用真空質量 $m$）上的加速度：
+$$a=\frac{F}{m}=\frac{eE}{m}=\frac{(1.6\times10^{-19})(100)}{9.11\times10^{-31}}\approx1.76\times10^{13}\ \text{m/s}^2.$$
+若在某半導體中有效質量 $m^*=0.1\,m$，同樣電場下加速度變 10 倍 $\approx1.76\times10^{14}\ \text{m/s}^2$——電子「變輕」就跑得更快，這直接反映在更高的遷移率（mobility，$\mu=e\tau/m^*$，$m^*$ 越小遷移率越高）。
+
+**🔍 多一步（為什麼能把晶格的複雜作用打包進 $m^*$，還能繼續用牛頓式？）**
+晶體裡電子真正感受到的，是上千萬個離子核加上其他電子的週期位能，硬算每一個的庫侖力是不可能的。能寫成乾淨的 $F=m^*a$，關鍵在**前面第二步那條 $\dfrac1{m^*}=\dfrac1{\hbar^2}\dfrac{d^2E}{dk^2}$**——它正是把「位能的所有細節」事先濃縮進能帶函數 $E(k)$，再對 $E(k)$ 取二階導數（即曲率）得到的；這跟「數學先備」偏微分那節用二階導數量曲率、決定凹凸與曲率半徑是同一招。
+
+理由分三層：
+- **位能的資訊已經藏進 $E(k)$。** 解 Bloch 電子的薛丁格方程時，週期位能已被完整算進去，輸出就是能帶 $E(k)$。之後談電子怎麼動，只要看 $E(k)$，不必再回頭碰位能——位能的複雜度被「一次性消化」成一條曲線。
+- **二階導數 $\dfrac{d^2E}{dk^2}$ 就是慣性。** 牛頓的 $m$ 本質是「同樣的力，加速度多大」的反比係數。第二步推導顯示，這個反比係數正好是能帶曲率的倒數（乘 $\hbar^2$）。曲率＝二階導數，量的是 $E(k)$ 在該點彎得多急；彎得急（曲率大）代表同樣推一把、$k$ 一變速度就大變，等效「很輕」。所以 $m^*$ 不是新假設，而是曲率自動算出來的慣性。
+- **只要外力比晶格力「溫和又緩慢」，打包就成立（半古典條件）。** 外場（電場、磁場）相對晶格內場很弱、且空間變化遠比晶格常數慢時，電子像沿著固定的 $E(k)$ 曲線被外力推著走（這叫半古典近似 semiclassical approximation）。晶格的作用全在 $E(k)$ 的形狀裡，外力只負責沿曲線移動 $k$。於是 $\hbar\dot k=F_{\text{ext}}$ 配上由曲率定義的 $m^*$，就讓牛頓 $F=m^*a$ 重新成立——代價是 $m^*$ 可能隨方向不同（張量）、隨位置（$k$）改變、甚至為負。
+
+一句話：**$m^*$ 不是把難題藏起來，而是把難題（週期位能）先解進 $E(k)$，再用「曲率＝慣性」把結果翻譯回你熟悉的牛頓語言。**
+
+**圖**
+（本概念無專屬圖；有效質量的曲率概念見能帶圖 [unit06_能帶與Bloch電子.html](../../單元教學/unit06_能帶與Bloch電子.html)。）
+
+**用在 Kittel**
+- 第 5 章 [自由電子費米氣體（unit05_自由電子費米氣體.html）](../../單元教學/unit05_自由電子費米氣體.html)：Drude 輸運、電導 $\sigma=ne^2\tau/m$、霍爾效應。
+- 第 6 章 [能帶與 Bloch 電子（unit06_能帶與Bloch電子.html）](../../單元教學/unit06_能帶與Bloch電子.html)：有效質量由能帶曲率定義，$F=m^*a$ 把牛頓定律搬進晶體。
+
+</details>
+
+---
+
+<details>
+<summary><b>8. 費米–狄拉克 vs 古典分布、包立不相容（Fermi–Dirac, Pauli exclusion）</b></summary>
+
+**你高中學過的**
+高中化學講過「電子排軌道，每個軌域最多兩個電子（自旋相反）」——這就是 **包立不相容原理（Pauli exclusion principle）** 的雛形：**同一個量子態（含自旋）最多只能塞 1 個電子**，所以一個軌域（兩個自旋態）最多 2 個。普物也提過電子是 **費米子（fermion）**（半整數自旋的粒子），與之相對的是可以無限疊在同一態上的 **玻色子（boson）**。把這條規則寫成「在溫度 $T$、能量 $E$ 的態被佔據的機率」，就是費米–狄拉克分布。各符號：
+- 「態（state）」：一個確定的量子態，這裡指「某個 $k$ ＋某個自旋」的單電子態；包立原理說它佔據數 $\le1$。
+- 「佔據機率（occupation probability）」：在熱平衡溫度 $T$ 下，這個態平均被填的機率，記作 $f(E)$，介於 $0$ 與 $1$。
+
+一句話：**費米子受包立限制（每態 $\le1$），所以低能態先被填滿、只有頂層附近的電子能被熱動到。**
+
+**📖 本節符號一覽（先看這個，後面都用到）**
+
+| 符號 | 完整定義 |
+|---|---|
+| $f(E)$ | 費米–狄拉克分布；能量 $E$ 的單電子態的平均佔據機率（occupation probability），$0\le f\le 1$ |
+| $E$ | 單電子態的能量（energy of a single-electron state） |
+| $\mu$ | 化學勢（chemical potential）；$f=\tfrac12$ 的那個能量，$T=0$ 時等於費米能 $E_F$ |
+| $E_F$ | 費米能（Fermi energy）；$T=0$ 時被填電子的最高能量（台階位置） |
+| $k_B$ | 波茲曼常數（Boltzmann constant），$=1.38\times10^{-23}\ \text{J/K}=8.62\times10^{-5}\ \text{eV/K}$（見概念 4） |
+| $T$ | 絕對溫度（absolute temperature），單位 $\text{K}$ |
+| $k_BT$ | 特徵熱能（thermal energy scale）；室溫 $300\ \text{K}$ 時 $\approx0.0259\ \text{eV}$ |
+| $E-\mu$ | 能量相對化學勢的偏移；決定 $f$ 落在台階哪一側 |
+| $\dfrac{k_BT}{E_F}$ | 被激發比例（excited fraction）；費米面附近能被熱激發的電子佔總數的比例 |
+| $N$ | 電子總數（total number of electrons） |
+| $\Delta N$ | 被熱激發的電子數（number of thermally excited electrons），$\sim N\,k_BT/E_F$ |
+| $C_{\text{el}}$ | 電子比熱（electronic heat capacity），結論為 $\propto T$ |
+
+**為什麼 Kittel 需要**
+金屬裡有 $\sim10^{23}$ 個電子，為什麼室溫下它們對比熱的貢獻只有古典預期的百分之一？因為電子是費米子，受包立原理限制：低能態被「填滿」，只有費米面（Fermi surface）附近一薄層（厚度 $\sim k_BT$）的電子能被熱激發。古典波茲曼分布（概念 4）允許任意多個粒子擠進同一低能態、且每個粒子都能自由吸熱，算出的比熱是與 $T$ 無關的常數（Dulong–Petit），完全對不上金屬電子的實驗。必須改用 **費米–狄拉克分布（Fermi–Dirac distribution）**。這是理解金屬比熱、電導、態密度的關鍵，貫穿第 5、6 章。
+
+**第一步：寫下分布、認識每個符號**
+費米–狄拉克分布（佔據機率，已內含包立上限「每態 $\le1$」，因為公式天生 $0\le f\le1$）：
+$$f(E)=\frac{1}{e^{(E-\mu)/k_BT}+1}$$
+- $\mu$：化學勢（chemical potential）。它是 $f(\mu)=\tfrac12$ 的那個能量（代 $E=\mu$ 得分母 $1+1=2$）。**$T=0$ 時 $\mu=E_F$**（費米能）。
+- 分母那個 **$+1$** 是費米子的招牌（玻色子是 $-1$）；正是它把 $f$ 鎖在 $\le1$，對應包立「每態最多一個」。
+
+**第二步：兩個極端溫度的形狀**
+- **$T=0$（台階 step）**：當 $T\to0$，指數 $(E-\mu)/k_BT$ 變成 $\pm\infty$。
+  - $E<E_F$：指數 $\to-\infty$，$e^{-\infty}=0$，$f=\dfrac{1}{0+1}=1$（**全滿**）。
+  - $E>E_F$：指數 $\to+\infty$，$e^{+\infty}=\infty$，$f=\dfrac{1}{\infty}=0$（**全空**）。
+  - 在 $E=E_F$ 處由 $1$ 直角掉到 $0$——像一個台階。
+- **$T>0$（抹開 smeared）**：台階在 $E_F$ 附近被「抹開」一個寬度 $\sim k_BT$ 的過渡帶；只有這層裡的態的 $f$ 介於 $0$ 與 $1$ 之間（部分佔據），其餘地方仍是滿或空。溫度越高，這層越厚。
+
+**第三步：古典極限——回到波茲曼（接概念 4）**
+看遠高於化學勢的能態，即 $E-\mu\gg k_BT$：此時指數 $e^{(E-\mu)/k_BT}\gg1$，分母的 $+1$ 可以略去：
+$$f(E)=\frac{1}{e^{(E-\mu)/k_BT}+1}\;\approx\;\frac{1}{e^{(E-\mu)/k_BT}}=e^{-(E-\mu)/k_BT}$$
+這正是 **波茲曼因子**（概念 4）的形狀 $e^{-E/k_BT}$（差一個常數 $e^{\mu/k_BT}$）。物理意義：高能尾巴上每態的佔據機率都遠小於 1，「會不會撞到別人」已不重要，包立限制失效，費米子退化成古典粒子。**這說明費米–狄拉克在稀薄／高能極限會自動接回波茲曼。**
+
+**範例（每個符號都代進去算）**
+某金屬費米能 $E_F=5\ \text{eV}$，室溫 $T=300\ \text{K}$ 故 $k_BT\approx0.0259\ \text{eV}$，問「能被熱激發」的電子比例約多少？
+能被動到的只有費米面附近 $\sim k_BT$ 寬那層，佔總能量範圍 $\sim E_F$ 的比例：
+$$\frac{k_BT}{E_F}\approx\frac{0.0259\ \text{eV}}{5\ \text{eV}}\approx0.0052\approx0.5\%$$
+只有約 0.5% 的電子（費米面附近那層）能參與吸熱，難怪電子比熱比古典 Dulong–Petit 預期小兩個數量級，而且隨 $T$ 線性增長（見下面〈多一步〉）。
+
+**🔍 多一步（為什麼比熱是線性 $\propto T$，而不是古典常數）**
+古典每個粒子貢獻固定 $\frac32k_B$（與 $T$ 無關 → 常數比熱）。費米子不同，關鍵在「被激發的電子數**自己也隨 $T$ 增加**」：
+- 能被熱激發的只有費米面附近 $\sim k_BT$ 寬那層，**被激發電子數** $\Delta N\sim N\cdot\dfrac{k_BT}{E_F}$。
+- 每個被激發電子多吸 $\sim k_BT$ 能量。所以多出來的熱能
+$$U_{\text{thermal}}\sim \underbrace{N\frac{k_BT}{E_F}}_{\text{被激發數}}\times\underbrace{k_BT}_{\text{每個能量}}\sim \frac{N k_B^2 T^2}{E_F}.$$
+- 比熱 $C=\dfrac{dU}{dT}\sim\dfrac{2Nk_B^2}{E_F}\,T\ \propto T$。
+
+**重點：能量 $\propto T^2$（因為「激發比例」與「每個能量」各貢獻一個 $T$），所以比熱 $\propto T$。** 這就是金屬電子比熱線性的根；嚴格係數要 Sommerfeld 展開，但量級與「線性」在這一步就看出來了。
+
+**圖**
+
+![費米–狄拉克分布：T=0 為台階，T>0 在 E_F 附近抹開約 k_BT 寬](../../figs/f05_fermi_dirac.svg)
+
+圖中 $T=0$ 是直角台階；升溫後僅在 $E_F$ 附近 $\sim k_BT$ 範圍變化，遠處與波茲曼因子 [（見 f00_boltzmann.svg）](../../figs/f00_boltzmann.svg) 重合。
+
+**用在 Kittel**
+- 第 5 章 [自由電子費米氣體（unit05_自由電子費米氣體.html）](../../單元教學/unit05_自由電子費米氣體.html)：費米能、費米面、態密度、電子比熱 $\propto T$、Sommerfeld 展開全靠這個分布。
+- 第 6 章 [能帶與 Bloch 電子（unit06_能帶與Bloch電子.html）](../../單元教學/unit06_能帶與Bloch電子.html)：用費米能落在能隙內或能帶中判別絕緣體／金屬。
+
+</details>
+
+---
+
+> 📌 **小提醒**：這 8 個概念彼此相扣——簡諧振子（2）量子化成聲子、配波茲曼因子（4）數聲子；盒中粒子（3）給容許 $k$（1），再用費米–狄拉克（8）填電子；庫侖（5）撐起鍵結與束縛能；磁能（6）＋波茲曼（4）給順磁；牛頓（7）＋有效質量描述輸運。卡在哪個就回到對應 `<details>`，再回 [Kittel 教材直讀](../index.html)。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理 — 互動系統模擬</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="../index.html">← 備考總入口</a>
+  <a class="here" href="index.html">模擬首頁</a>
+  <a href="../數學lab/index.html">數學 Lab</a>
+  <a href="../考點地圖.html">考點地圖</a>
+  <a href="../單元教學/index.html">單元教學</a>
+  <a href="../考古題/單元整理.html">單元整理</a>
+</div>
+
+<h1>🔬 固態物理 — 互動系統模擬</h1>
+<p class="intro">
+  拖動參數，即時看物理曲線怎麼變。對齊 Kittel 主線與單元教學：
+  聲子色散、布拉格／Ewald、近自由電子能隙、費米–狄拉克／DOS、
+  緊束縛、半導體載子、朗之萬／居里。
+  <br>用法：直接 <code>open</code> 任一頁（file:// 即可，不必開 server）。
+  每個模擬都有<strong>即時讀數</strong>與<strong>你應該看到什麼</strong>提示。
+</p>
+
+<div class="cards">
+  <a class="card" href="sim_dispersion.html">
+    <div class="t">① 單原子／雙原子鏈色散</div>
+    <div class="s">拖 C、M、m → 即時 ω(k)。看聲學支、光學支、能隙從哪來。</div>
+    <span class="tag">unit04 · 聲子</span>
+  </a>
+  <a class="card" href="sim_bragg_ewald.html">
+    <div class="t">② 布拉格／Ewald 球</div>
+    <div class="s">拖 λ、晶格常數 a → 反射條件亮起。建立 Δk = G 的幾何直覺。</div>
+    <span class="tag">unit02 · 繞射</span>
+  </a>
+  <a class="card" href="sim_nfe_gap.html">
+    <div class="t">③ 近自由電子（NFE）能隙</div>
+    <div class="s">調 |U_G| → 布里淵區邊界裂開 2|U_G|。自由電子如何長出能帶。</div>
+    <span class="tag">unit06 · 能帶</span>
+  </a>
+  <a class="card" href="sim_fermi_dos.html">
+    <div class="t">④ 費米–狄拉克 ＋ DOS</div>
+    <div class="s">調 T、E_F → f(E)、占據與電子熱容。為什麼 C_el = γT。</div>
+    <span class="tag">unit05 · 費米氣體</span>
+  </a>
+  <a class="card" href="sim_tight_binding.html">
+    <div class="t">⑤ 緊束縛 E = −2γ cos(ka)</div>
+    <div class="s">調 hopping γ → band width、曲率與有效質量 m*。</div>
+    <span class="tag">unit06 · 能帶</span>
+  </a>
+  <a class="card" href="sim_semiconductor.html">
+    <div class="t">⑥ 半導體載子濃度</div>
+    <div class="s">調 T、E_g、N_d → 本質 vs 外質區，n(T) 怎麼拐彎。</div>
+    <span class="tag">unit07 · 半導體</span>
+  </a>
+  <a class="card" href="sim_langevin_curie.html">
+    <div class="t">⑦ 朗之萬／居里</div>
+    <div class="s">調 T、磁場 → M(T)、χ∝1/T。自發磁化如何消失（示意）。</div>
+    <span class="tag">unit08 · 磁性</span>
+  </a>
+</div>
+
+<h2>建議怎麼用</h2>
+<ol>
+  <li>先在單元教學讀完該章的「你高中學過的 → 定義」。</li>
+  <li>開對應模擬，只動<strong>一個</strong>滑桿，說出曲線會怎麼變，再對答案。</li>
+  <li>對回考古題／Kittel 習題裡的同一公式，用模擬驗證極限（T→0、γ→0…）。</li>
+</ol>
+
+<footer>
+  solidstatePhysics/模擬 · standalone HTML（shared.css + shared.js）· 參數為教學單位制，重點在趨勢與公式結構，非整數值材料資料庫。
+</footer>
+</body>
+</html>

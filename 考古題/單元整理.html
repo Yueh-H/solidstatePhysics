@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理導論 — 單元整理（2013–2025 依 Kittel 章節）</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="導讀.html">← 導讀</a> &nbsp;·&nbsp; <a href="詳解/index.html">詳解目錄 →</a> &nbsp;·&nbsp; <a href="../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../教材/index.html">📖 教材直讀</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- 固態物理導論 資格考古題：依單元彙整 (NTU 應物所博士班資格考) -->
+<!-- 資料來源：歷年原卷/ 2013–2025，共 13 份 -->
+
+# 固態物理導論 — 資格考古題單元整理（2013–2025）
+
+NTU 應用物理所博士班資格考「固態物理導論」歷年考題,依 **Kittel 章節單元** 重新歸類。
+每題標註 `[年份 · 配分]`,方便看出**哪些單元年年必考、哪些是冷門**。
+
+> 範圍依 C. Kittel《Introduction to Solid State Physics》。原始整卷在 `歷年原卷/固態物理導論_<年>.md`;
+> 此檔是跨年份的單元彙整,供 **2027 資格考備考** 用。
+
+---
+
+## 0. 先看這個:考題風格的三個世代
+
+題目風格隨命題老師換過三次,看懂這點能抓對準備方向:
+
+| 期間 | 風格 | 特徵 |
+|---|---|---|
+| **2013–2016** | Kittel 硬核推導 | 一卷 15–17 題、120–156 分;大量證明題(Bloch 定理、Kronig-Penney、Wiedemann-Franz、Langevin)。最接近教科書。 |
+| **2017–2018** | 概念導向 | 題數少、每題 10–20%;重 band dispersion / energy gap 的物理圖像,出現 Landau level、Dirac point、graphene。 |
+| **2019–2025** | closed-book + 估算 | **固定四大段:Crystal structure / Diffraction / Phonons / Electrons**(偶爾加 Magnetism/SC)。重觀念 + 數值估算(費米能、pn junction、packing factor)。 |
+
+**對 2027 最有預測力的是 2019–2025 的四段式結構**——下面第 11 節有近年固定題型清單。
+
+---
+
+## 1. 出題頻率總覽(單元 × 年份)
+
+`●` 該年該單元有題;數字 = 該單元在那年的子題密度概覽。
+
+| 單元 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 出現次數 |
+|---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| 1 晶體結構 | ● | ● | ● | ● | | | ● | ● | ● | ● | ● | ● | ● | **11** |
+| 2 倒晶格 / 繞射 | ● | ● | ● | ● | | ● | ● | ● | ● | ● | ● | | ● | **11** |
+| 3 晶體鍵結 | ● | ● | ● | ● | | | ● | ● | | | ● | ● | | **8** |
+| 4 聲子 / 晶格振動 | ● | ● | ● | ● | | ● | ● | ● | ● | ● | ● | ● | | **11** |
+| 5 自由電子費米氣體 | ● | ● | ● | ● | ● | | | ● | ● | ● | ● | | ● | **10** |
+| 6 能帶 / Bloch | ● | ● | ● | ● | ● | ● | ● | ● | ● | | | ● | ● | **11** |
+| 7 半導體 | ● | | | ● | ● | | | | ● | ● | ● | | | **6** |
+| 8 磁性 | ● | | | | | ● | | | | | | | ● | **3** |
+| 9 超導 | ● | | | | | | | | | | | | ● | **2** |
+| 10 實驗 / 進階 | ● | | | | | ● | | | | ● | | | | **3** |
+
+**結論(備考優先序):**
+- **第一梯隊(幾乎年年考,先吃滿):** 1 晶體結構、2 倒晶格/繞射、4 聲子、6 能帶/Bloch。
+- **第二梯隊(高頻):** 3 鍵結、5 自由電子費米氣體。
+- **第三梯隊(週期性出現,別放掉):** 7 半導體。
+- **第四梯隊(零星但近年回溫,2025 又考):** 8 磁性、9 超導。
+
+---
+
+## 2. 單元一：晶體結構(Crystal Structure)
+
+**核心考點:** Bravais lattice 定義/2D 五種/3D 十四種、primitive cell vs conventional cell、
+Wigner-Seitz cell、packing fraction(sc 0.52 / bcc 0.68 / fcc 0.74)、hcp 的 c/a=√(8/3)、
+Miller 指標與 `[hkl]⊥(hkl)`、basis 與 lattice 的區別。
+
+歷年題目:
+- **[2013·14pts]** Bravais lattice 定義;2D/3D 有幾種;primitive cell;bcc 的 primitive cell 是哪種 Bravais(算角度與晶格常數);fcc 各項參數(體積、最近鄰數、packing fraction);證 `[hkl]⊥(hkl)` 與面間距。
+- **[2014·15pts]** 同上 Bravais 整套(a)–(g)。
+- **[2015·24pts]** primitive / Wigner-Seitz cell;2D 五種 Bravais(畫圖);fcc 換基底後的晶面指標;倒晶格基底;fcc packing fraction;**hcp 倒晶格仍為 simple hexagonal**、理想 c/a。
+- **[2016·部分 of 25pts]** 3D lattice 種類;primitive / WS cell。
+- **[2019·15pts]** 晶體與液體差異;給 basis + lattice vector 畫晶格。
+- **[2020·25pts]** 三種 cubic lattice 的 filling factor;鑽石硬度能否用 packing density 解釋。
+- **[2021·25pts]** hcp:還有哪種等密度堆積、未填滿體積百分比、c/a、石墨 c/a≈2.4 對力學性質的意義。
+- **[2022·部分]** CaF₂(fcc + basis)畫 conventional/primitive cell、Ca–F 距離。
+- **[2023·30pts]** graphene primitive cell 原子數、基底/晶格向量、倒晶格與第一 BZ;sc packing=0.52 證明;1D 離子鏈 Madelung。
+- **[2024·35+25pts]** 給 lattice vector 認 Bravais、算 primitive cell 體積/倒晶格/第一 BZ;hcp packing factor(含「每隔一層半徑減半」變形)。
+- **[2025·40pts]** 2D 結構由 α/β 兩種原子組成,依 b=a/3、b=a/6 推 primitive vector、畫 cell、寫 basis 原子數。
+
+> **必背:** sc/bcc/fcc/diamond/hcp 的 packing fraction 推導、hcp 理想 c/a=√(8/3)≈1.633、
+> bcc↔fcc 互為倒晶格、`[hkl]⊥(hkl)` 與 d_hkl 公式。
+
+---
+
+## 3. 單元二：倒晶格與繞射(Reciprocal Lattice & Diffraction)
+
+**核心考點:** 倒晶格向量 b₁,b₂,b₃ 的建構、Bragg ↔ von Laue 等價性、structure factor(sc/bcc/fcc/diamond)、
+消光規則(systematic absence)、繞射條件 Δk=G 與 BZ 邊界的關係、photon/neutron/electron 三種繞射的差異。
+
+歷年題目:
+- **[2013]** Bragg/von Laue 等價(10);structure factor sc/bcc/fcc/diamond(15);**X-ray reflectivity 多層膜為何每第三個峰消失**(20,進階)。
+- **[2014]** Bragg/von Laue 等價;structure factor;三種繞射(photon/neutron/electron)差異。
+- **[2015]** Bragg/von Laue;倒晶格基底(含 hcp);fcc 倒晶格結構。
+- **[2016·25pts]** bcc 倒晶格;structure factor bcc/fcc/diamond;`[hkl]⊥(hkl)`;三種繞射差異;Bragg/von Laue。
+- **[2018]** 證 X-ray 繞射條件;證該條件 = BZ 邊界(用 WS cell);bcc 的 (100)/(111)/(300) 消光。
+- **[2019]** 雙狹縫(電子波粒);繞射峰移到大角度的成因(兩個原因)。
+- **[2020]** 為何只看到亮點無暗點;diamond vs zincblende 能否由繞射區分;非彈性散射對譜的影響。
+- **[2021]** lattice constant 定義;為何 bcc (110) 一階可見而 fcc (110) 不可見;NaCl(λ=0.084nm,θ=8.35°)算晶格間距;最高繞射階數。
+- **[2022·30pts]** tetragonal(a=b=5Å,c=8Å)倒晶格、畫第一 BZ;蛋白質結晶 X-ray 如何定形狀。
+- **[2023·25pts]** 為何 electron/X-ray/neutron/He 給相同峰位但強度不同;Δk=G、由繞射條件推 Bragg's law。
+- **[2025]** 由 1(a)/1(b) 的 a₁,a₂ 推倒晶格 b₁,b₂;λ=2a/5 的 X-ray 是否繞射、算夾角。
+
+> **必背:** structure factor 各晶格的消光規則(bcc: h+k+l 奇消失;fcc: hkl 需全奇或全偶;diamond 額外條件)、
+> Bragg 2d sinθ=nλ、Ewald 球與 Δk=G、三種探針(電荷 vs 核 vs 磁)決定強度差異。
+
+> **不要把倒晶格考古題全部背下來。** 有幫助的是練下面五種題型，不是背 2013–2025 的數字。資格考不會再出同一組 $a$。現在（第 1–4 週）也不要開始背——倒晶格是 Week 5–8、期中 11/02 才考。
+>
+> | 幾乎每年都有 | 背答案沒用、要會推 |
+> |---|---|
+> | 由 $\mathbf a_i$ 寫 $\mathbf b_i=2\pi\,\mathbf a_j\times\mathbf a_k/V$ | 代一組數字就算 $V$ 和 $\mathbf b$ |
+> | Bragg 與 von Laue 等價 | 推一次，不要背兩個名字 |
+> | 結構因子消光：bcc $h+k+l$ 奇消失；fcc 全奇或全偶 | 代入 $S_{\mathbf G}=\sum e^{i\mathbf G\cdot\mathbf r_j}$ 現場算 |
+> | bcc 與 fcc **互為**倒晶格 | 用 Kittel Fig. 10／11 推一次 |
+> | 第一 BZ＝倒晶格的 Wigner–Seitz 胞 | 會畫，不是背面積 |
+>
+> 2019–2025 原卷當**限時模考**（同一口氣），10 月底期中前每週 1 題。不要今晚把倒晶格整疊背完。
+
+---
+
+## 4. 單元三：晶體鍵結(Crystal Binding)
+
+**核心考點:** 四/五種鍵結(van der Waals、ionic、covalent、metallic、hydrogen)、
+Lennard-Jones 位能與 cohesive energy、平衡最近鄰距離、Madelung 常數、為何惰性氣體 cohesive energy 同但沸點不同。
+
+歷年題目:
+- **[2013]** 主要鍵結類型(各舉例);由兩諧振子/兩偶極推 van der Waals,估 Kr 熔點。
+- **[2014]** 鍵結類型;Lennard-Jones(各項物理意義、fcc 平衡距離與 cohesive energy、解釋四惰性氣體沸點為何不同)。
+- **[2015]** 四種鍵結辨識 + 解釋 + 舉例;Lennard-Jones 沸點差異。
+- **[2016]** 鍵結類型(各舉兩例);Lennard-Jones 完整計算。
+- **[2019]** 給 E(r) 求移走原子所需能量;此式能否預測熱膨脹(為何不能)。
+- **[2020]** Li⁺Cl⁻ 成分子的鍵能估算;為何晶體中能量比分子高 ~75%。
+- **[2023]** 1D 離子鏈如何推 Madelung 常數。
+- **[2024]** LiCl 結晶成 NaCl 結構(α≈1.7476)的鍵能。
+
+> **必背:** Lennard-Jones `U=4ε[(σ/r)¹²−(σ/r)⁶]`、惰性氣體 cohesive energy 推導、
+> Madelung 常數(1D 鏈 = 2ln2)、ionic 結合能 = Madelung + 排斥項。
+
+---
+
+## 5. 單元四：聲子 / 晶格振動(Phonons / Lattice Vibrations)
+
+**核心考點:** 單原子/雙原子鏈色散關係、acoustic vs optical branch、群速與相速、
+Debye 模型(Debye frequency、Debye T³ 定律)、Einstein 模型、Dulong-Petit、
+最高頻率以上無傳播波(evanescent)、非諧性與熱膨脹。
+
+歷年題目:
+- **[2013]** 單原子線鏈總能量推導;Debye vs Einstein DOS;Dulong-Petit 定律。
+- **[2014·15pts]** `C/T=γ+AT²`;定性推 Debye T³(K 空間允許模態)。
+- **[2015]** 同上 C/T 電子+聲子熱容。
+- **[2016·15pts]** Debye 模型 Debye frequency;高溫推出 Dulong-Petit;Einstein 模型;晶格 vs 電子比熱比較。
+- **[2018]** 聲子能帶與電子能帶在 BZ 中 momentum/k 的差異。
+- **[2019]** 1D 同質量鏈:鄰近質點振幅比與相位;聲子速度;速度-頻率關係圖。
+- **[2020]** 受聲壓的晶體振幅分布;何種振幅分布下聲音不傳;金屬為何不能透光(聲子圖像);聲子為何是準粒子。
+- **[2021]** 振幅分布圖;單原子鏈可傳的最高聲頻;高於最高頻時振幅分布(evanescent);熱膨脹的微觀過程與「非諧」。
+- **[2022]** 為何銀與金的聲子色散長得像。
+- **[2023]** 由聲速(1.08×10⁴ m/s)、原子質量、間距求等效彈簧常數與最高 normal mode 角頻率。
+- **[2024]** 頻率高於 ω_max 的波傳播方程式與其物理意義。
+
+> **必背:** 單原子鏈 `ω=2√(C/M)|sin(Ka/2)|`、雙原子鏈 acoustic/optical gap、
+> Debye T³(低溫)與 Dulong-Petit(高溫)兩極限、ω>ω_max ⇒ K 變複數(衰減波)。
+
+---
+
+## 6. 單元五：自由電子費米氣體(Free Electron Fermi Gas)
+
+**核心考點:** Drude → Sommerfeld、Fermi energy/temperature/wavevector、
+DOS(1D/2D/3D 各不同)、電子比熱 ∝T 的來源、Ohm's law 與 σ=ne²τ/m、
+熱導率 K=⅓Cvl、Wiedemann-Franz 與 Lorentz number、thermoelectric(thermopower/Peltier)。
+
+歷年題目:
+- **[2013]** Drude 理論描述、成就與失敗;Sommerfeld 修正及其成就/失敗。
+- **[2014·30pts]** Ohm's law 推 σ=ne²τ/m;mobility μ=eτ/m;熱導率 K=⅓Cvl;電子熱導率;**Wiedemann-Franz 與 Lorentz number**;thermoelectric(thermopower/Peltier 關係)。
+- **[2015·20pts]** 同 2014 的 Ohm/熱導/Wiedemann-Franz。
+- **[2016·15pts]** 畫不同溫度 Fermi 分布;Sommerfeld 對 Drude 的修正;證 3D `U₀=⅗NE_F`;**2D 電子氣**的 n–k_F 關係、g(E)、μ–E_F。
+- **[2017]** 3D N 個自由電子在 0K 占據 k 空間球,推 N 與 k_F/V 關係。
+- **[2020]** 電子熱容隨溫變化(從 0K、從室溫起);聲子/電子熱容比隨溫變化。
+- **[2021]** 金屬電子濃度加倍 ⇒ 平均電子能變化。
+- **[2022]** 鋁(每原子 3 價電子)算電子密度、Fermi energy、Fermi temperature;測 DOS 的兩種實驗技術。
+- **[2023]** 1D DOS:E~k 與 E~k² 兩種色散。
+- **[2025]** Bloch 波函數 k 間距(Born-von Kármán);**2D 自由電子 spin-up DOS**。
+
+> **必背:** 3D DOS `g(E)∝E^½`、2D DOS = 常數、1D DOS ∝E^(−½);電子比熱 `C_el=γT`、
+> `E_F=(ℏ²/2m)(3π²n)^(2/3)`、Wiedemann-Franz `K/σT=Lorentz number=π²k_B²/3e²`。
+
+---
+
+## 7. 單元六：能帶理論 / Bloch 電子(Energy Bands)
+
+**核心考點:** Bloch 定理(陳述 + 證明,用平移算符與 Hamiltonian 對易)、energy gap 的來源、
+nearly free electron vs free electron、Kronig-Penney 模型、central equation、
+crystal momentum ℏK(非真動量)、effective mass(可為負)、tight-binding。
+
+歷年題目:
+- **[2013]** Bloch 定理陳述 + 證明;gap 來源,`U(x)=2U cosGx` 證 BZ 邊界 gap=2U(含 central equation)。
+- **[2014]** Bloch 定理證明(平移算符 / Kittel 法);free vs nearly-free 比較與 gap 來源;Kronig-Penney(P≪1 求 k=0 最低能、k=π/a band gap)。
+- **[2015·20pts]** Bloch function 形式 + 證明;gap 來源;半導體 gap 的溫度依賴;Kronig-Penney。
+- **[2016·25pts]** Bloch 定理 + 證明;free vs nearly-free + gap;**crystal momentum ℏK 為何不是動量**;為何 K 可限於第一 BZ;Kronig-Penney。
+- **[2017]** 電子與聲子的 band dispersion / gap 物理起源(畫圖);Brillouin zone 建構;用能帶圖描述 insulator/metal/semimetal/n/p;**effective mass 定義(牛頓第二定律式)、可否為負**。
+- **[2018]** 由自由電子簡單模型解釋 gap 來源;gap 如何由位能高度決定;Dirac point/graphene 線性色散 ⇒ massless。
+- **[2019]** 1D 量子井能階(2→1 放紅光,求 3→1);井寬加倍對放光能量的影響;gap 加倍 ⇒ 平均能量變化。
+- **[2020]** gap 來源;能量落在 gap 內的電子會怎樣;gap 加倍 ⇒ 平均電子能變化。
+- **[2021]** gap 來源;吸收 λ<λ₀ ⇒ gap 寬度;valence band 頂 `E=−10⁻³⁷|k|²` 求 hole 的有效質量與速度。
+- **[2024]** 2D 各向異性能帶 `m₁=2m₂` 時的 DOS。
+- **[2025]** 3D Bloch 波函數;1D tight-binding(H 原子 1s)能帶最高能量在 k 空間何處。
+
+> **必背:** Bloch 定理 `ψ_k(r)=u_k(r)e^(ik·r)` 與兩種證法、NFE 在 BZ 邊界開 gap=2|U_G|、
+> Kronig-Penney 超越方程、`1/m*=(1/ℏ²)d²E/dk²`(負質量出現在 band 頂)、tight-binding `E(k)=−α−2γcos(ka)`。
+
+---
+
+## 8. 單元七：半導體(Semiconductors)
+
+**核心考點:** holes、intrinsic vs extrinsic、donor/acceptor、direct vs indirect gap、
+mobility 與測量(Hall)、effective mass、pn junction(built-in voltage)、degenerate semiconductor、gap 的溫度依賴。
+
+歷年題目:
+- **[2013]** holes 是什麼;intrinsic / extrinsic 半導體。
+- **[2016·25pts]** 為何半導體電導隨溫升高、金屬隨溫降低;direct/indirect gap 各舉例與吸收過程;holes 的電性;**由 Bloch 電子運動方程推 effective mass equation**;電子/電洞 mobility 與測量、無缺陷時低溫 mobility;donor/acceptor(Si 為例)、donor 能階。
+- **[2017]** effective mass(牛頓式定義);可否為負。
+- **[2021]** valence band hole 的有效質量與速度(見單元六)。
+- **[2022·部分 of 40pts]** Si pn junction(N_d=N_a=10¹⁷)算兩側化學勢、built-in voltage、畫電場分布。
+- **[2023]** n 型半導體「degenerate」定義;ZnO(m*=0.27m_e,n=10²⁰cm⁻³)是否 degenerate。
+
+> **必背:** intrinsic carrier `n_i∝T^(3/2)exp(−E_g/2k_BT)`、built-in voltage、
+> Hall effect 測載子型別與濃度、direct/indirect 吸收(是否需聲子)。
+
+---
+
+## 9. 單元八：磁性(Magnetism)
+
+**核心考點:** Langevin/Brillouin 順磁、Curie law、Landau level(磁場下能階量子化、磁通量子化)、
+ferromagnetism 與 Curie temperature。
+
+歷年題目:
+- **[2013]** 磁性儲存媒體的物理極限;**Langevin function**:N 個隨機取向 nano-magnet 在外場 H,由 Boltzmann factor 推 `M(H)=NmL(α)`,`L(α)=cothα−1/α`。
+- **[2018·20pts]** 磁場 B 下 Fermi surface 的 **Landau level** 存在(概念 + 盡量定量;提示:軌道磁通量子化)。
+- **[2025]** ferromagnet 在 T>T_C 的總磁矩。
+
+> **必背:** Langevin `L(α)=cothα−1/α`、Curie law `χ=C/T`、Landau level `E_n=(n+½)ℏω_c`、
+> T>T_C 時自發磁化消失(順磁)。
+
+---
+
+## 10. 單元九：超導(Superconductivity)
+
+**核心考點:** 零電阻與 Meissner effect、type I vs type II、磁通渦旋(vortex)。
+
+歷年題目:
+- **[2013]** 超導體的電性與磁性。
+- **[2025]** type I / type II 中,哪一種允許磁場穿透並形成 vortex(周圍仍超導)。
+
+> **必背:** Meissner effect、type II 的下/上臨界場 H_c1/H_c2 與 vortex state、BCS 配對概念。
+
+---
+
+## 11. 單元十：實驗技術 / 進階主題(Misc / Advanced)
+
+零星但出現過,別完全略過:
+- **[2013]** STM / AFM / MFM 縮寫與原理;測 tunneling barrier height 該用哪種譜(I/V/Z、Z feedback on/off)。
+- **[2013]** X-ray reflectivity 多層膜(Mo/Si)為何每第三峰消失(數學證明)。
+- **[2018]** Dirac point / graphene 線性色散 ⇒ massless 粒子(見單元六)。
+- **[2022]** 蛋白質結晶 X-ray 定形狀;測 electron DOS 的實驗技術。
+
+---
+
+## 12. 近年(2021–2025)固定題型清單 ★ 最該優先準備
+
+2019 起每卷幾乎都是 **Crystal structure / Diffraction / Phonons / Electrons** 四大段,各約 25%。
+把以下「近年高頻具體題型」練熟,2027 命中率最高:
+
+**Crystal structure**
+- packing factor / filling factor(sc, bcc, fcc, diamond, hcp)— 2020,2021,2023,2024 都考
+- hcp 的 c/a、未填滿體積 — 2021,2024
+- 給 lattice vector 認 Bravais、算 primitive cell 體積 — 2024,2025
+- 含 basis 的結構(CaF₂、graphene、2D 雙原子)— 2022,2023,2025
+
+**Diffraction**
+- 由 a_i 推倒晶格 b_i、畫第一 BZ — 2022,2024,2025
+- 消光規則(bcc/fcc (110)、diamond vs zincblende)— 2020,2021
+- 數值題:給 λ、θ 算晶格間距 / 繞射角 — 2021,2025
+- Δk=G 推 Bragg、三種探針強度差異 — 2023
+
+**Phonons**
+- 單原子鏈色散、ω_max、ω>ω_max 衰減波 — 2021,2024
+- 由聲速/質量/間距求彈簧常數與 ω_max — 2023
+- 振幅分布、非諧熱膨脹 — 2020,2021
+
+**Electrons**
+- 算電子密度 → Fermi energy / temperature(金屬,如 Al)— 2022
+- DOS(1D/2D、E~k vs E~k²、各向異性)— 2023,2024,2025
+- effective mass / hole velocity — 2021
+- pn junction、degenerate semiconductor — 2022,2023
+
+**(偶爾加)Magnetism / Superconductivity** — 2025 又回來考,別裸考。
+
+---
+
+### 配套素材
+- 教材(在 `../教材/`):`Kittel_原文.md`、`Kittel_翻譯.md`、`講義.md`、
+  `固態物理導論_林盛煇.md`、`簡介簡報/solid-1~4.md`(蕭智仁簡報)。
+- 解答:`../教材/Kittel_解答手冊.md`。
+- 原始整卷:`歷年原卷/固態物理導論_2013.md` … `_2025.md`。
+- 已歸檔(非本考科):`archive/量子力學/`、`archive/古典電力學/`。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

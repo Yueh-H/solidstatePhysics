@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理 先備知識補帖</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 900px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.7; color: #222; background: #fafafa; }
+  h1 { color: #1a4d7c; border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  p.intro { color: #444; }
+  .card { display: block; text-decoration: none; color: inherit; background: #fff; border: 1px solid #c5d5e5;
+          border-radius: 10px; padding: 0.9em 1.2em; margin: 0.8em 0; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+          transition: box-shadow 0.15s, border-color 0.15s, transform 0.05s; }
+  .card:hover { border-color: #1a4d7c; box-shadow: 0 3px 10px rgba(26,77,124,0.15); transform: translateY(-1px); }
+  .card-title { color: #1a4d7c; font-weight: 700; font-size: 1.1em; }
+  .card-sub { color: #555; font-size: 0.95em; margin-top: 0.25em; }
+  .note { background: #eef5fb; border-left: 4px solid #6aa1d6; border-radius: 4px; padding: 0.6em 1em; color: #334; font-size: 0.93em; }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; } .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="../index.html">← 教材直讀</a> &nbsp;·&nbsp; <a href="../Kittel章節導讀/index.html">📑 章節導讀</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a></div>
+<h1>🧰 固態物理 — 先備知識補帖</h1>
+<p class="intro">讀 <a href="../index.html">教材直讀</a>（Kittel 原文/翻譯）時，碰到「這個我沒學過」就來這裡。每個先備概念都從<b>高中起點</b>講起，配一個<b>具體範例</b>和<b>一張圖</b>，並標明「<b>用在 Kittel 哪一章 / 哪個單元</b>」，可直接跳過去。</p>
+<div class="note">📖 <b>用法</b>：在教材裡卡住 → 用 <kbd>⌘F</kbd> 在這兩頁搜尋關鍵字（如「傅立葉」「波茲曼」「有效質量」）→ 看範例＋圖懂了 → 跳回教材或對應單元繼續。</div>
+  <a class="card" href="數學先備.html">
+    <div class="card-title">🔢 數學先備知識</div>
+    <div class="card-sub">向量/複數/傅立葉/級數/微積分 — 讀 Kittel 前要會的數學，附範例與圖</div>
+  </a>
+  <a class="card" href="物理先備.html">
+    <div class="card-title">⚛️ 物理先備知識</div>
+    <div class="card-sub">波/簡諧/量子井/波茲曼/庫侖/磁矩 — 讀 Kittel 前要會的物理，附範例與圖</div>
+  </a>
+<hr style="border:none;border-top:1px solid #ccc;margin:2.5em 0;">
+<p style="color:#888;font-size:0.85em;">由 <code>考古題/詳解/_build_html.py</code> 的 <code>build_prereq()</code> 產生。圖在 <code>figs/f00_*.svg</code>。</p>
+</body>
+</html>

@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 習題詳解 — 第9章 費米面與金屬 — 習題詳解＋範例</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">習題詳解目錄</a> &nbsp;·&nbsp; <a href="../Kittel章節導讀/index.html">章節導讀</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../../考古題/詳解/index.html">逐題詳解</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- Kittel 習題詳解：第10章 費米面與金屬（進階）= Kittel Ch9 -->
+
+# Kittel 第9章 習題詳解 ＋ 加碼範例 — 費米面與金屬（Fermi Surfaces and Metals）
+
+> **這頁是什麼**：本章的「練習題庫＋完整解答」。先做 **加碼範例** 熱身，再把 **Kittel 課本習題** 全部練過。觀念見 [章節導讀](../Kittel章節導讀/ch10_費米面與進階.html)、[單元學科](../../單元教學/unit10_費米面與進階.html)；歷年考題見 [逐題詳解](../../考古題/詳解/index.html)。
+>
+> 對應關係：我們的「第10章 費米面與進階」＝ Kittel 原書 **Chapter 9（Fermi Surfaces and Metals）**。題號照 Kittel 原書（Prob. 9.1 ~ 9.11）。
+
+---
+
+## 🔥 加碼範例題目（先熱身）
+
+本章必考的四種計算：(1) de Haas–van Alphen（dHvA）量子振盪週期；(2) 掃描穿隧顯微鏡（STM）的指數穿隧電流；(3) 石墨烯（graphene）線性色散與群速度；(4) 二維方晶格自由電子費米圓如何越過第一布里淵區（first Brillouin zone, 1st BZ）邊界。
+
+---
+
+### 範例 1：dHvA 量子振盪週期（de Haas–van Alphen period）
+
+**題目**：某金屬的費米面（Fermi surface）有一個極值截面（extremal cross-section），在 $k$ 空間中的面積為 $A = 1.75\times 10^{20}\ \text{m}^{-2}$。求磁化率對 $1/B$ 作圖時的振盪週期 $\Delta(1/B)$。
+
+**核心公式（Onsager 關係）**：
+$$\Delta\!\left(\frac{1}{B}\right) = \frac{2\pi e}{\hbar\, A}$$
+
+其中 $A$ 是垂直磁場方向的費米面極值截面面積（$k$ 空間）。這條公式的物理意義：每當朗道管（Landau tube）依序穿過費米面的極值軌道時，自由能就振盪一次，相鄰兩次振盪在 $1/B$ 軸上等間距。
+
+**Step 1**：寫下常數值。
+$$e = 1.602\times 10^{-19}\ \text{C},\qquad \hbar = 1.055\times 10^{-34}\ \text{J·s}$$
+
+**Step 2**：代入 Onsager 公式。
+$$\Delta\!\left(\frac{1}{B}\right) = \frac{2\pi (1.602\times10^{-19})}{(1.055\times10^{-34})(1.75\times10^{20})}$$
+
+**Step 3**：先算分母。
+$$(1.055\times10^{-34})(1.75\times10^{20}) = 1.846\times10^{-14}$$
+
+**Step 4**：算分子。
+$$2\pi(1.602\times10^{-19}) = 1.007\times10^{-18}$$
+
+**Step 5**：相除。
+$$\Delta\!\left(\frac{1}{B}\right) = \frac{1.007\times10^{-18}}{1.846\times10^{-14}} = 5.45\times10^{-5}\ \text{T}^{-1}$$
+
+$$\boxed{\Delta\!\left(\frac{1}{B}\right) \approx 5.5\times10^{-5}\ \text{T}^{-1}}$$
+
+> **重點**：dHvA 週期**只**取決於 $k$ 空間的極值截面面積，與電子質量無關——所以它是直接量「費米面幾何」的利器。注意這個 $A$ 用的就是鉀（potassium）的數據，下面 Kittel 第7題會再算一次。
+
+---
+
+### 範例 2：STM 穿隧電流的指數依賴（$I \propto e^{-2\kappa d}$）
+
+**題目**：掃描穿隧顯微鏡（scanning tunneling microscope, STM）的針尖與樣品間隔 $d$。設真空能障（barrier）等於功函數（work function）$\phi = 4.0\ \text{eV}$。(a) 求衰減常數（decay constant）$\kappa$；(b) 若 $d$ 增加 $1\ \text{Å}=10^{-10}\ \text{m}$，穿隧電流變成原來的幾分之幾？
+
+**核心公式**：在矩形能障中，波函數呈指數衰減 $\psi\sim e^{-\kappa x}$，穿隧機率（probability）正比於 $|\psi(d)|^2 \sim e^{-2\kappa d}$，故電流
+$$I \propto e^{-2\kappa d},\qquad \kappa = \frac{\sqrt{2m_e\phi}}{\hbar}$$
+
+**Step 1**：把功函數換成焦耳。
+$$\phi = 4.0\times 1.602\times10^{-19} = 6.41\times10^{-19}\ \text{J}$$
+
+**Step 2**：算 $\sqrt{2m_e\phi}$，其中 $m_e = 9.109\times10^{-31}\ \text{kg}$。
+$$2m_e\phi = 2(9.109\times10^{-31})(6.41\times10^{-19}) = 1.168\times10^{-48}$$
+$$\sqrt{1.168\times10^{-48}} = 1.081\times10^{-24}\ \text{kg·m/s}$$
+
+**Step 3**：除以 $\hbar$ 得到 $\kappa$。
+$$\kappa = \frac{1.081\times10^{-24}}{1.055\times10^{-34}} = 1.024\times10^{10}\ \text{m}^{-1} \approx 1.02\ \text{Å}^{-1}$$
+
+$$\boxed{\kappa \approx 1.0\ \text{Å}^{-1}}$$
+
+**Step 4**：(b) 計算間隔增加 $1\ \text{Å}$ 時的電流比。
+$$\frac{I(d+1\text{Å})}{I(d)} = e^{-2\kappa\,\Delta d} = e^{-2(1.024\times10^{10})(1\times10^{-10})} = e^{-2.05}$$
+
+**Step 5**：算數值。
+$$e^{-2.05} = 0.129$$
+
+$$\boxed{I \text{ 變為約 } \tfrac{1}{8}\ \text{（每升高 } 1\ \text{Å 電流掉約一個數量級）}}$$
+
+> **重點**：$\kappa\approx 1\ \text{Å}^{-1}$ 是 STM 能達到原子級垂直解析度的根本原因——間隔差 $1\ \text{Å}$ 電流就差近 10 倍。這也是 Kittel 第10章（超導）單粒子穿隧（single-particle tunneling）的同一套指數穿隧物理。
+
+---
+
+### 範例 3：石墨烯線性色散與群速度（graphene linear dispersion）
+
+**題目**：石墨烯在狄拉克點（Dirac point）附近的色散為 $E(\mathbf{k}) = \hbar v_F |\mathbf{k}|$，費米速度（Fermi velocity）$v_F \approx 1.0\times10^{6}\ \text{m/s}$。(a) 求群速度（group velocity）；(b) 求 $|\mathbf{k}| = 1.0\times10^{9}\ \text{m}^{-1}$ 處的能量（eV）。
+
+**Step 1**：群速度的定義是 $v_g = \dfrac{1}{\hbar}\dfrac{\partial E}{\partial k}$。
+
+**Step 2**：對 $E = \hbar v_F k$ 微分。
+$$\frac{\partial E}{\partial k} = \hbar v_F \quad\Rightarrow\quad v_g = \frac{1}{\hbar}(\hbar v_F) = v_F$$
+
+$$\boxed{v_g = v_F \approx 1.0\times10^{6}\ \text{m/s}\ \text{（與 } k \text{ 無關，為定值）}}$$
+
+**Step 3**：(b) 代入能量公式。
+$$E = \hbar v_F k = (1.055\times10^{-34})(1.0\times10^{6})(1.0\times10^{9}) = 1.055\times10^{-19}\ \text{J}$$
+
+**Step 4**：換算成 eV（除以 $1.602\times10^{-19}$）。
+$$E = \frac{1.055\times10^{-19}}{1.602\times10^{-19}} = 0.66\ \text{eV}$$
+
+$$\boxed{E(k=1.0\times10^{9}\,\text{m}^{-1}) \approx 0.66\ \text{eV}}$$
+
+> **重點**：線性色散下群速度是常數（像「無質量」粒子），有效質量 $m^* = \hbar^2/(d^2E/dk^2)\to\infty$ 在此定義失效，要改用「狄拉克費米子」描述。對照一般拋物線能帶 $E=\hbar^2k^2/2m^*$，群速度隨 $k$ 線性上升、群速度斜率才給出 $m^*$。
+
+<details>
+<summary><b>📝 更多範例（點開）：Dirac 錐群速度、迴旋質量、態密度</b></summary>
+
+**範例 A（迴旋有效質量 $m_c$，狄拉克錐專用定義）**：拋物線帶的 $m^*=\hbar^2/(d^2E/dk^2)$ 在線性帶失效（二階導 $=0$）。但迴旋質量另有定義 $m_c=\dfrac{\hbar^2}{2\pi}\dfrac{\partial A(E)}{\partial E}$，其中 $A(E)=\pi k^2$ 是能量 $E$ 對應的 $k$ 空間圓面積。由 $E=\hbar v_F k$ 得 $k=E/(\hbar v_F)$，代入：
+
+$$A(E)=\pi\Big(\frac{E}{\hbar v_F}\Big)^2=\frac{\pi E^2}{\hbar^2 v_F^2}\ \Rightarrow\ \frac{\partial A}{\partial E}=\frac{2\pi E}{\hbar^2 v_F^2}.$$
+
+$$m_c=\frac{\hbar^2}{2\pi}\cdot\frac{2\pi E}{\hbar^2 v_F^2}=\frac{E}{v_F^2}=\frac{\hbar k}{v_F}.$$
+
+取 $E_F=0.66\,\text{eV}=1.055\times10^{-19}\,\text{J}$（範例 3 的能量）、$v_F=10^6\,\text{m/s}$：$m_c=\dfrac{1.055\times10^{-19}}{(10^6)^2}=1.055\times10^{-31}\,\text{kg}\approx0.12\,m_e$。所以「無質量」是指 $m^*$ 失效，但迴旋質量 $m_c\propto E$ 仍有限、隨費米能上升——這正是石墨烯迴旋共振實驗測到的量。
+
+**範例 B（態密度 DOS 線性正比於 $E$）**：二維、含自旋與兩個谷（$g=4$）。$k$ 空間圓內態數 $N(E)=g\cdot\dfrac{\pi k^2}{(2\pi)^2}=\dfrac{g}{4\pi}k^2$（單位面積）。由 $k=E/(\hbar v_F)$：
+
+$$N(E)=\frac{g}{4\pi}\frac{E^2}{\hbar^2 v_F^2}\ \Rightarrow\ D(E)=\frac{dN}{dE}=\frac{g}{2\pi}\frac{E}{\hbar^2 v_F^2}=\frac{2E}{\pi\hbar^2 v_F^2}.$$
+
+$D(E)\propto E$（線性），在 Dirac 點 $E=0$ 處 $D=0$——這是石墨烯「半金屬（semimetal）」的指紋；對比一般二維拋物線帶 $D=m^*/\pi\hbar^2$ 為常數。
+
+**範例 C（變化題：不同 $v_F$ 與能量下的數值）**：取 $|\mathbf k|=2.0\times10^9\,\text{m}^{-1}$（範例 3 的兩倍），$v_F=1.0\times10^6\,\text{m/s}$。能量 $E=\hbar v_F k=(1.055\times10^{-34})(1.0\times10^6)(2.0\times10^9)=2.11\times10^{-19}\,\text{J}$，換 eV：$E=2.11\times10^{-19}/1.602\times10^{-19}=1.32\,\text{eV}$（恰為範例 3 的兩倍，因 $E\propto k$ 線性）。群速度 $v_g=v_F=10^6\,\text{m/s}$ 不變（與 $k$ 無關）。這就是線性色散最關鍵的後果：**能量翻倍、速度卻完全不動**，與拋物線帶（$E\propto k^2$、$v_g\propto k$）截然不同。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 250" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="135" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">石墨烯：線性色散（狄拉克錐）</text>
+<line x1="135" y1="40" x2="135" y2="210" stroke="#888" stroke-width="1.2"/>
+<line x1="30" y1="125" x2="240" y2="125" stroke="#888" stroke-width="1.2"/>
+<text x="129" y="48" text-anchor="end" font-size="11" fill="#333">E</text>
+<text x="244" y="129" font-size="11" fill="#333">k</text>
+<text x="142" y="120" font-size="10" fill="#777">狄拉克點</text>
+<polyline points="50,57 92,91 135,125 178,91 220,57" fill="none" stroke="#c0392b" stroke-width="2.6"/>
+<line x1="135" y1="125" x2="200" y2="74" stroke="#2e8b2e" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="198" y="70" font-size="10.5" fill="#2e8b2e">斜率 = ℏ vꜰ</text>
+<text x="58" y="68" font-size="11" fill="#c0392b">E = ℏ vꜰ |k|</text>
+<text x="135" y="232" text-anchor="middle" font-size="10" fill="#777">能量隨 |k| 線性上升（無能隙、無質量）</text>
+<text x="420" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">群速度比較：線性 vs 拋物線</text>
+<line x1="320" y1="40" x2="320" y2="210" stroke="#888" stroke-width="1.2"/>
+<line x1="320" y1="210" x2="540" y2="210" stroke="#888" stroke-width="1.2"/>
+<text x="314" y="48" text-anchor="end" font-size="11" fill="#333">vₘ</text>
+<text x="543" y="214" font-size="11" fill="#333">k</text>
+<line x1="320" y1="90" x2="535" y2="90" stroke="#c0392b" stroke-width="2.4"/>
+<text x="450" y="84" font-size="10.5" fill="#c0392b">線性帶：vₘ = vꜰ 定值</text>
+<polyline points="320,210 355,200 390,181 425,153 460,116 495,70 525,30" fill="none" stroke="#6aa1d6" stroke-width="2.4"/>
+<text x="430" y="140" font-size="10.5" fill="#6aa1d6">拋物線帶：vₘ ∝ k</text>
+<text x="430" y="232" text-anchor="middle" font-size="10" fill="#777">石墨烯群速度與 k 無關 → m* 失效</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 3（石墨烯）</b>：Dirac 點附近色散 $E=\hbar v_F|k|$ 是<b style="color:#c0392b">線性的「錐」</b>（左），斜率即 $\hbar v_F$。<b>Step 1–2</b>：群速度 $v_g=\tfrac1\hbar\,\partial E/\partial k=v_F$ 是<b style="color:#c0392b">定值</b>（右，紅平線），與一般<b style="color:#6aa1d6">拋物線帶 $v_g\propto k$</b> 對比。因二階導 $\partial^2E/\partial k^2=0$，$m^*=\hbar^2/(\partial^2E/\partial k^2)\to\infty$ 失效，需改用「無質量狄拉克費米子」描述。</figcaption>
+</figure>
+
+---
+
+### 範例 4：二維方晶格二價金屬的自由電子費米圓（free-electron Fermi circle）
+
+**題目**：二維方晶格（square lattice）晶格常數 $a$，每個原子貢獻 **2 個**傳導電子（divalent）。在自由電子模型下，(a) 求費米波數 $k_F$；(b) 把 $k_F$ 與第一布里淵區（1st BZ，正方形）邊心距 $\pi/a$ 及角落距 $\sqrt{2}\,\pi/a$ 比較，說明費米圓的形狀後果。
+
+**Step 1**：二維電子密度（每單位面積）。每個原子佔面積 $a^2$，貢獻 2 個電子：
+$$n_{2D} = \frac{2}{a^2}$$
+
+**Step 2**：二維自由電子的態填充。把 $k_F$ 圓內的態（含自旋因子 2）填滿：
+$$n_{2D} = 2\cdot\frac{\pi k_F^2}{(2\pi)^2} = \frac{k_F^2}{2\pi}$$
+（分子 $\pi k_F^2$ 是圓面積，$(2\pi)^2$ 是每個 $\mathbf{k}$ 態佔的面積，前面 2 是自旋。）
+
+**Step 3**：令兩式相等解 $k_F$。
+$$\frac{k_F^2}{2\pi} = \frac{2}{a^2}\quad\Rightarrow\quad k_F^2 = \frac{4\pi}{a^2}\quad\Rightarrow\quad k_F = \frac{2\sqrt{\pi}}{a}$$
+
+$$\boxed{k_F = \frac{2\sqrt{\pi}}{a} = \frac{3.545}{a}}$$
+
+**Step 4**：(b) 與 1st BZ 邊界比較。
+- 到邊心（邊的中點）距離：$\dfrac{\pi}{a} = \dfrac{3.142}{a}$。
+- 到角落距離：$\dfrac{\sqrt{2}\,\pi}{a} = \dfrac{4.443}{a}$。
+
+**Step 5**：算比值。
+$$\frac{k_F}{\pi/a} = \frac{2\sqrt{\pi}}{\pi} = \frac{2}{\sqrt{\pi}} = 1.128 > 1$$
+$$\frac{k_F}{\sqrt{2}\,\pi/a} = \frac{2\sqrt{\pi}}{\sqrt{2}\,\pi} = \sqrt{\frac{2}{\pi}} = 0.798 < 1$$
+
+$$\boxed{\;\frac{\pi}{a} < k_F < \frac{\sqrt{2}\,\pi}{a}\;}$$
+
+> **重點**：費米圓**穿過**邊心（$k_F>\pi/a$）但**到不了**角落（$k_F<\sqrt2\,\pi/a$）。結果：第一能帶在四個角落留下未填的電子（電洞口袋 hole pocket），第二能帶在邊心外側出現電子口袋（electron pocket）——這正是 Kittel 第4題「二維二價金屬」的標準圖，也是「二價金屬仍可導電」的原因（重疊能帶 overlapping bands）。
+
+<details>
+<summary><b>📝 更多範例（點開）：一價/三價方晶格、面積守恆驗算、矩形格越界</b></summary>
+
+**範例 A（一價方晶格不越界）**：每原子 1 個電子，$n_{2D}=1/a^2$。由 $n_{2D}=k_F^2/2\pi$：
+
+$$k_F^2=2\pi n_{2D}=\frac{2\pi}{a^2}\ \Rightarrow\ k_F=\frac{\sqrt{2\pi}}{a}=\frac{2.507}{a}.$$
+
+與邊心距 $\pi/a=3.142/a$ 比：$k_F=2.507/a<\pi/a$ → 費米圓**整個落在 1st BZ 內**、不碰邊界。所以一價方晶格只填了第一能帶的一部分、是好金屬，沒有口袋折回的問題。對照二價（$k_F=3.545/a$）才越界——電子數翻倍、$k_F$ 只放大 $\sqrt2$ 倍（因 $k_F\propto\sqrt n$），剛好從「不到邊心」跨過「超過邊心」。
+
+**範例 B（面積守恆：口袋面積 = 越界弧片面積）**：二價時被填的態總面積必須等於一個 BZ 面積 $(2\pi/a)^2/1=(2\pi)^2/a^2$ 的「電子數佔比」。費米圓面積 $\pi k_F^2=\pi\cdot\dfrac{4\pi}{a^2}=\dfrac{4\pi^2}{a^2}$。一個 1st BZ 面積 $=\Big(\dfrac{2\pi}{a}\Big)^2=\dfrac{4\pi^2}{a^2}$。兩者**恰好相等** ✓——這正說明「圓面積 = 一個 BZ 面積」，即費米圓蓋住的態數 = 剛好填滿一條能帶的態數（每原子 2 電子）。所以越出邊界的弧片面積，必等於四角留下的空洞面積，電子口袋與電洞口袋面積相同（電中性）。
+
+**範例 C（矩形格 $b=2a$ 的方向性越界）**：矩形 $a\times b$，$b=2a$，二價 $n_{2D}=2/(ab)=2/(2a^2)=1/a^2$。則 $k_F=\sqrt{2\pi n_{2D}}=\sqrt{2\pi}/a=2.507/a$。兩方向邊心距：$\pi/a=3.142/a$（$k_x$ 向）、$\pi/b=\pi/2a=1.571/a$（$k_y$ 向）。比較：
+
+$$\frac{\pi}{b}=1.571/a<k_F=2.507/a<\frac{\pi}{a}=3.142/a.$$
+
+故費米圓沿短倒空間方向（$k_y$，對應實空間長軸 $b$）**出界**、沿 $k_x$ **不出界**——與習題 2 的結論一致：長軸方向 $\pi/(\text{軸長})$ 最小，最先被越過。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 270" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="135" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">費米圓 vs 方形第一 BZ</text>
+<rect x="55" y="50" width="160" height="160" fill="#f4f8fc" stroke="#1a4d7c" stroke-width="1.6"/>
+<circle cx="135" cy="130" r="90" fill="#6aa1d6" fill-opacity="0.18" stroke="#c0392b" stroke-width="2.2"/>
+<line x1="135" y1="130" x2="135" y2="50" stroke="#2e8b2e" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="139" y="92" font-size="9.5" fill="#2e8b2e">π/a</text>
+<line x1="135" y1="130" x2="215" y2="50" stroke="#e67e22" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="180" y="78" font-size="9.5" fill="#e67e22">√2 π/a</text>
+<circle cx="135" cy="130" r="3" fill="#333"/>
+<text x="120" y="144" font-size="10" fill="#333">Γ</text>
+<text x="135" y="44" text-anchor="middle" font-size="9" fill="#777">邊心</text>
+<text x="222" y="50" font-size="9" fill="#777">角落 M</text>
+<text x="135" y="234" text-anchor="middle" font-size="10" fill="#c0392b">kꜰ = 3.545/a：穿邊心、不到角落</text>
+<text x="135" y="252" text-anchor="middle" font-size="9.5" fill="#777">π/a (3.14) &lt; kꜰ &lt; √2 π/a (4.44)</text>
+<text x="415" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">折回 → 兩種閉合口袋</text>
+<rect x="305" y="50" width="100" height="100" fill="#f4f8fc" stroke="#1a4d7c" stroke-width="1.4"/>
+<path d="M305,72 A22,22 0 0,1 327,50 L305,50 Z" fill="#e67e22" fill-opacity="0.5" stroke="#c0392b" stroke-width="1.5"/>
+<path d="M383,50 A22,22 0 0,1 405,72 L405,50 Z" fill="#e67e22" fill-opacity="0.5" stroke="#c0392b" stroke-width="1.5"/>
+<path d="M305,128 A22,22 0 0,0 327,150 L305,150 Z" fill="#e67e22" fill-opacity="0.5" stroke="#c0392b" stroke-width="1.5"/>
+<path d="M383,150 A22,22 0 0,0 405,128 L405,150 Z" fill="#e67e22" fill-opacity="0.5" stroke="#c0392b" stroke-width="1.5"/>
+<text x="355" y="104" text-anchor="middle" font-size="10" fill="#e67e22">第一帶</text>
+<text x="355" y="166" text-anchor="middle" font-size="9.5" fill="#777">M 點電洞口袋</text>
+<rect x="430" y="50" width="100" height="100" fill="#f4f8fc" stroke="#1a4d7c" stroke-width="1.4"/>
+<path d="M480,58 C498,72 498,128 480,142 C462,128 462,72 480,58 Z" fill="#2e8b2e" fill-opacity="0.35" stroke="#2e8b2e" stroke-width="1.6"/>
+<path d="M438,100 C452,82 508,82 522,100 C508,118 452,118 438,100 Z" fill="#2e8b2e" fill-opacity="0.35" stroke="#2e8b2e" stroke-width="1.6"/>
+<text x="480" y="166" text-anchor="middle" font-size="9.5" fill="#777">Γ 點電子口袋</text>
+<text x="415" y="234" text-anchor="middle" font-size="10" fill="#777">角落空態 → 電洞；越界弧片 → 電子</text>
+<text x="415" y="252" text-anchor="middle" font-size="9.5" fill="#2e8b2e">能隙把尖角圓化 → 皆閉合</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 4 / 習題 4（二維二價金屬）</b>：$k_F=2\sqrt\pi/a=3.545/a$（<b>Step 1–2</b>）介於<b style="color:#2e8b2e">邊心 $\pi/a$</b> 與<b style="color:#e67e22">角落 $\sqrt2\,\pi/a$</b> 之間，所以<b style="color:#c0392b">費米圓</b>穿過四條邊、但到不了四角（左）。<b>Step 3</b>：第一帶四角留下的空態折回中心成 <b style="color:#e67e22">M 點電洞口袋</b>；<b>Step 4</b>：越界弧片折回成 <b style="color:#2e8b2e">Γ 點電子口袋</b>（右）。<b>Step 5</b>：能隙把尖角圓化，兩者皆閉合——這就是「二價金屬仍導電」的能帶重疊圖。</figcaption>
+</figure>
+
+---
+
+## 📚 Kittel 第9章 課本習題 — 完整解答
+
+> 共 11 題（Prob. 9.1 ~ 9.11）。逐題：中譯題目 → Step 逐步 → $\boxed{答案}$ → 重點。
+
+---
+
+### 習題 1：矩形晶格的布里淵區（Brillouin zones of rectangular lattice）（Kittel Prob. 9.1）
+
+**題目（English, Kittel Prob. 9.1）**：Make a plot of the first two Brillouin zones of a primitive rectangular two-dimensional lattice with axes $a$ and $b = 3a$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+畫出一個初基矩形（primitive rectangular）二維晶格的前兩個布里淵區，軸為 $a$ 與 $b = 3a$。
+
+</details>
+
+**Step 1**：寫出倒晶格（reciprocal lattice）。矩形晶格 $\mathbf{a}_1 = a\hat{x}$、$\mathbf{a}_2 = b\hat{y} = 3a\hat{y}$，其倒晶格基向量
+$$\mathbf{b}_1 = \frac{2\pi}{a}\hat{x},\qquad \mathbf{b}_2 = \frac{2\pi}{b}\hat{y} = \frac{2\pi}{3a}\hat{y}$$
+倒晶格也是矩形，但長短軸對調：$k_x$ 方向間距大（$2\pi/a$），$k_y$ 方向間距小（$2\pi/3a$）。
+
+**Step 2**：第一布里淵區（1st BZ）= 對最近倒晶格點作垂直平分線所圍的中心區。$k_x$ 方向最近點在 $\pm 2\pi/a$，平分線在 $k_x=\pm\pi/a$；$k_y$ 方向最近點在 $\pm 2\pi/3a$，平分線在 $k_y=\pm\pi/3a$。
+$$\text{1st BZ：矩形 } |k_x|\le \frac{\pi}{a},\ |k_y|\le \frac{\pi}{3a}$$
+（這是一個沿 $k_y$ 被壓扁的矩形，因為實空間 $b$ 較長。）
+
+**Step 3**：第二布里淵區（2nd BZ）由「次近」倒晶格點的垂直平分線圍出，並扣掉第一區。次近點包括 $(\pm 2\pi/a,\,0)$ 已用過；要用 $(0,\pm 2\pi/3a)$（給 $k_y=\pm\pi/3a$，已用）與斜對角點 $(\pm 2\pi/a,\,\pm 2\pi/3a)$。實作上：第二區是「包住第一區、由下一層平分線圍成的環狀區域」，總面積等於一個 BZ 面積 $\dfrac{(2\pi)^2}{a\cdot 3a}=\dfrac{4\pi^2}{3a^2}$。
+
+$$\boxed{\text{1st BZ：}|k_x|\le\tfrac{\pi}{a},\ |k_y|\le\tfrac{\pi}{3a}\,;\quad \text{2nd BZ：環繞其外、同面積的碎片區}}$$
+
+> **重點**：實空間長軸 ↔ 倒空間短軸。會畫「對最近鄰倒點作垂直平分線」就能畫任意 2D 的 BZ。
+
+---
+
+### 習題 2：矩形晶格的布里淵區與費米圓（Brillouin zone, rectangular lattice）（Kittel Prob. 9.2）
+
+**題目（English, Kittel Prob. 9.2）**：A two-dimensional metal has one atom of valency one in a simple rectangular primitive cell $a = 2\ \text{Å}$, $b = 4\ \text{Å}$. (a) Draw the first Brillouin zone. Give its dimensions, in $\text{cm}^{-1}$. (b) Calculate the radius of the free electron Fermi sphere, in $\text{cm}^{-1}$. (c) Draw this sphere to scale on a drawing of the first Brillouin zone. Make another sketch to show the first few periods of the free electron band in the periodic zone scheme, for both the first and second energy bands. Assume there is a small energy gap at the zone boundary.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+二維金屬為簡單矩形初基晶胞，$a = 2\ \text{Å}$、$b = 4\ \text{Å}$，每原子價數（valency）為 1。(a) 畫第一布里淵區並給出尺寸（單位 $\text{cm}^{-1}$）。(b) 算自由電子費米球（此處為費米圓）半徑（$\text{cm}^{-1}$）。(c) 按比例把費米圓畫到 1st BZ 上；再畫週期區圖（periodic zone scheme）中前幾個週期的自由電子能帶（第一、第二能帶），假設區邊界有小能隙。
+
+</details>
+
+**Step 1**：(a) 1st BZ 邊界在 $k_x=\pm\pi/a$、$k_y=\pm\pi/b$。換算（$1\ \text{Å}=10^{-8}\ \text{cm}$）：
+$$\frac{\pi}{a} = \frac{\pi}{2\times10^{-8}\ \text{cm}} = 1.571\times10^{8}\ \text{cm}^{-1}$$
+$$\frac{\pi}{b} = \frac{\pi}{4\times10^{-8}\ \text{cm}} = 0.785\times10^{8}\ \text{cm}^{-1}$$
+故 1st BZ 是邊長 $2\pi/a=3.14\times10^8$ 與 $2\pi/b=1.57\times10^8\ \text{cm}^{-1}$ 的矩形。
+
+$$\boxed{\text{1st BZ：}|k_x|\le 1.57\times10^{8},\ |k_y|\le 0.785\times10^{8}\ \text{cm}^{-1}}$$
+
+**Step 2**：(b) 二維、每原子 1 個電子，原子面積 $ab$，故 $n_{2D}=1/(ab)$。由 $n_{2D}=k_F^2/2\pi$：
+$$k_F^2 = 2\pi n_{2D} = \frac{2\pi}{ab}$$
+
+**Step 3**：代入 $ab = (2\times10^{-8})(4\times10^{-8}) = 8\times10^{-16}\ \text{cm}^2$。
+$$k_F = \sqrt{\frac{2\pi}{8\times10^{-16}}} = \sqrt{7.854\times10^{15}} = 8.86\times10^{7}\ \text{cm}^{-1}$$
+
+$$\boxed{k_F = 0.886\times10^{8}\ \text{cm}^{-1}}$$
+
+**Step 4**：(c) 比較大小。$k_F=0.886\times10^8$ 介於 $\pi/b=0.785\times10^8$ 與 $\pi/a=1.571\times10^8$ 之間：
+$$\frac{\pi}{b} < k_F < \frac{\pi}{a}$$
+所以費米圓在 $k_y$ 方向**超出** 1st BZ 邊界（$k_F>\pi/b$），但在 $k_x$ 方向**沒到**邊界（$k_F<\pi/a$）。圓會被上下兩條 $k_y=\pm\pi/b$ 邊界截掉兩塊「月牙」，這兩塊要折回（reduced zone）或留在第二能帶。
+
+**Step 5**：(c) 能帶草圖描述。沿 $k_x$（從 BZ 中心到 $\pi/a$）能帶連續上升、在 $k_x=\pi/a$ 開小能隙 $\Rightarrow$ 第一能帶到頂、第二能帶從上方接續，週期區圖中此能帶以週期 $2\pi/a$ 平移重複。沿 $k_y$ 同理，但因 $k_F>\pi/b$，第一能帶在 $k_y$ 方向已被填過邊界，月牙進入第二能帶。
+
+$$\boxed{\text{費米圓沿 } k_y \text{ 出界、沿 } k_x \text{ 不出界；第一能帶留小空洞、第二能帶有小電子袋}}$$
+
+> **重點**：判斷費米面是否越界，只要比 $k_F$ 和各方向的 $\pi/(\text{軸長})$。長軸方向（$b$ 大 → $\pi/b$ 小）最容易先被越過。
+
+---
+
+### 習題 3：六方最密堆積結構（Hexagonal close-packed structure）（Kittel Prob. 9.3）
+
+**題目（English, Kittel Prob. 9.3）**：Consider the first Brillouin zone of a crystal with a simple hexagonal lattice in three dimensions with lattice constants $a$ and $c$. Let $\mathbf{G}_c$ denote the shortest reciprocal lattice vector parallel to the $c$ axis of the crystal lattice. (a) Show that for a hexagonal-close-packed crystal structure the Fourier component $U(\mathbf{G}_c)$ of the crystal potential $U(\mathbf{r})$ is zero. (b) Is $U(2\mathbf{G}_c)$ also zero? (c) Why is it possible in principle to obtain an insulator made up of divalent atoms at the lattice points of a simple hexagonal lattice? (d) Why is it not possible to obtain an insulator made up of monovalent atoms in a hexagonal-close-packed structure?
+
+<details>
+<summary>▸ 中文題目</summary>
+
+考慮三維簡單六方（simple hexagonal）晶格的第一布里淵區，晶格常數 $a$、$c$。令 $\mathbf{G}_c$ 為平行 $c$ 軸的**最短**倒晶格向量。(a) 證明對六方最密堆積（hcp）結構，晶體位能 $U(\mathbf{r})$ 的傅立葉分量（Fourier component）$U(\mathbf{G}_c)=0$。(b) $U(2\mathbf{G}_c)$ 是否也為零？(c) 為何原則上可用簡單六方晶格上的二價原子做成絕緣體？(d) 為何不能用 hcp 結構的一價原子做成絕緣體？
+
+</details>
+
+**Step 1**：(a) 設定基底（basis）。hcp = 簡單六方晶格 + 雙原子基底：一個在 $z=0$，一個在 $z=\tfrac{1}{2}c$（在六方底面的「洞」上方，水平也有偏移，但對沿 $c$ 軸的 $\mathbf{G}_c$ 只有 $z$ 分量重要）。最短 $c$ 向倒格向量 $\mathbf{G}_c = \dfrac{2\pi}{c}\hat{z}$。
+
+**Step 2**：寫結構因子（structure factor）。
+$$S(\mathbf{G}) = \sum_j e^{-i\mathbf{G}\cdot\mathbf{r}_j} = 1 + e^{-i\mathbf{G}\cdot\mathbf{r}_2}$$
+對 $\mathbf{G}_c=\tfrac{2\pi}{c}\hat z$、第二原子 $z_2=\tfrac{c}{2}$：
+$$\mathbf{G}_c\cdot\mathbf{r}_2 = \frac{2\pi}{c}\cdot\frac{c}{2} = \pi$$
+
+**Step 3**：代入。
+$$S(\mathbf{G}_c) = 1 + e^{-i\pi} = 1 + (-1) = 0$$
+因為 $U(\mathbf{G})\propto S(\mathbf{G})$，故
+$$\boxed{U(\mathbf{G}_c) = 0}$$
+（兩個原子的散射相位相差 $\pi$，完全相消。這正是 hcp 在 $(0001)$ 面消光的原因。）
+
+**Step 4**：(b) 對 $2\mathbf{G}_c=\tfrac{4\pi}{c}\hat z$，相位 $2\mathbf{G}_c\cdot\mathbf{r}_2 = 2\pi$：
+$$S(2\mathbf{G}_c) = 1 + e^{-i2\pi} = 1 + 1 = 2 \neq 0$$
+$$\boxed{U(2\mathbf{G}_c) \neq 0}$$
+
+**Step 5**：(c) 簡單六方（**非** hcp，單原子基底）每原子 2 個價電子恰好填滿 1st BZ。只要區邊界有能隙（簡單六方沒有任何理由不開能隙），填滿能帶 → 絕緣體。
+$$\boxed{\text{二價簡單六方：2 電子填滿 1st BZ + 邊界有能隙} \Rightarrow \text{絕緣體可行}}$$
+
+**Step 6**：(d) 由 (a)，hcp 在 $c$ 軸上下面（$\pm\mathbf{G}_c/2$ 對應的區邊界）$U(\mathbf{G}_c)=0$，最低階下**沒有能隙**。能帶在頂、底面連通，能帶必然重疊 → 無法做出絕緣體。
+$$\boxed{\text{hcp 頂/底面無能隙 (因 } U(\mathbf{G}_c)=0)\Rightarrow \text{一價 hcp 不能成絕緣體}}$$
+
+> **重點**：「結構因子為零 ⇒ 該倒格點上 $U=0$ ⇒ 該區邊界無能隙」。這三句話把繞射消光與能帶連通綁在一起，是本章最漂亮的觀念橋樑。
+
+<details>
+<summary><b>📝 更多範例（點開）：bcc/fcc 消光規則、任意 $n\mathbf G_c$、基底偏移不影響沿 c 軸</b></summary>
+
+**範例 A（bcc 消光，與 hcp 同套相消邏輯）**：bcc 慣用立方含 2 原子 basis：$\mathbf r_1=(0,0,0)$、$\mathbf r_2=\tfrac12(\hat x+\hat y+\hat z)a$。對倒格矢 $\mathbf G=\dfrac{2\pi}{a}(h,k,l)$：
+
+$$\mathbf G\cdot\mathbf r_2=\frac{2\pi}{a}(h,k,l)\cdot\frac a2(1,1,1)=\pi(h+k+l).$$
+
+$$S(\mathbf G)=1+e^{-i\pi(h+k+l)}=1+(-1)^{h+k+l}=\begin{cases}2,& h+k+l\ \text{偶}\\0,& h+k+l\ \text{奇}.\end{cases}$$
+
+所以 bcc 的 $(100)$（和為 1，奇）消光、$(110)$（和為 2，偶）出現——與 hcp 的「相位差 $\pi$ 相消」完全同一機制，只是 basis 偏移不同。
+
+**範例 B（任意階 $n\mathbf G_c$ 的通式）**：hcp 第二原子 $z_2=c/2$，對 $n\mathbf G_c=\dfrac{2\pi n}{c}\hat z$：
+
+$$n\mathbf G_c\cdot\mathbf r_2=\frac{2\pi n}{c}\cdot\frac c2=n\pi\ \Rightarrow\ S(n\mathbf G_c)=1+e^{-in\pi}=1+(-1)^n=\begin{cases}0,& n\ \text{奇}\\2,& n\ \text{偶}.\end{cases}$$
+
+所以 $\mathbf G_c$（$n=1$）相消、$2\mathbf G_c$（$n=2$）相長、$3\mathbf G_c$ 又相消……沿 $c$ 軸的繞射峰**逢奇消、逢偶現**，與本題 (a)(b) 一致並推廣到所有階。
+
+**範例 C（水平偏移對沿 c 軸 $\mathbf G_c$ 無影響）**：hcp 真正的第二原子位置含水平偏移，$\mathbf r_2=\big(\tfrac13,\tfrac23,\tfrac12\big)$（以晶格向量為單位）。但 $\mathbf G_c$ 只有 $\hat z$ 分量，點積只取 $z$ 分量：
+
+$$\mathbf G_c\cdot\mathbf r_2=\frac{2\pi}{c}\hat z\cdot\Big(\dots\hat x+\dots\hat y+\frac c2\hat z\Big)=\frac{2\pi}{c}\cdot\frac c2=\pi.$$
+
+水平的 $\tfrac13,\tfrac23$ 完全不進入（因 $\hat z\cdot\hat x=\hat z\cdot\hat y=0$），所以 (a) 的相消結論不受水平偏移影響——這就是 Step 1 說「對沿 $c$ 軸的 $\mathbf G_c$ 只有 $z$ 分量重要」的嚴格驗算。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 250" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="atomc10a" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#84b4df"/><stop offset="1" stop-color="#1a4d7c"/></radialGradient>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="135" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">hcp：雙原子基底 + 相位相消</text>
+<line x1="60" y1="40" x2="60" y2="210" stroke="#888" stroke-width="1.2"/>
+<text x="54" y="48" text-anchor="end" font-size="11" fill="#333">z</text>
+<line x1="55" y1="195" x2="210" y2="195" stroke="#bbb" stroke-width="1"/>
+<circle cx="100" cy="195" r="11" fill="url(#atomc10a)" stroke="#13395d" stroke-width="0.7"/>
+<text x="118" y="199" font-size="10" fill="#333">z = 0</text>
+<line x1="55" y1="110" x2="210" y2="110" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+<circle cx="100" cy="110" r="11" fill="url(#atomc10a)" stroke="#13395d" stroke-width="0.7"/>
+<text x="118" y="114" font-size="10" fill="#333">z = c/2</text>
+<line x1="40" y1="195" x2="40" y2="110" stroke="#c0392b" stroke-width="1.2"/>
+<text x="22" y="156" font-size="10" fill="#c0392b">c/2</text>
+<text x="135" y="232" text-anchor="middle" font-size="10" fill="#777">Gᵪ = (2π/c) ẑ → 相位差 Gᵪ·(c/2) = π</text>
+<text x="420" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">結構因子（相量加法）</text>
+<circle cx="380" cy="130" r="50" fill="none" stroke="#ddd" stroke-width="1"/>
+<line x1="380" y1="130" x2="430" y2="130" stroke="#2e8b2e" stroke-width="2.4"/>
+<text x="408" y="124" font-size="10" fill="#2e8b2e">1</text>
+<line x1="380" y1="130" x2="330" y2="130" stroke="#c0392b" stroke-width="2.4"/>
+<text x="340" y="124" font-size="10" fill="#c0392b">e꜀⁻ⁱπ = −1</text>
+<text x="380" y="195" text-anchor="middle" font-size="11" fill="#1a4d7c">S(Gᵪ) = 1 + (−1) = 0</text>
+<text x="380" y="214" text-anchor="middle" font-size="10.5" fill="#c0392b">→ U(Gᵪ) = 0 → 該面無能隙</text>
+<text x="380" y="232" text-anchor="middle" font-size="9.5" fill="#777">但 S(2Gᵪ) = 1 + 1 = 2 ≠ 0（有能隙）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 3（hcp 結構因子）</b>：hcp 是簡單六方 + <b style="color:#1a4d7c">雙原子基底</b>（$z=0$ 與 $z=c/2$，左）。<b>Step 1–3</b>：對最短 $c$ 向倒格矢 $G_c=(2\pi/c)\hat z$，第二原子相位差 $G_c\!\cdot\!(c/2)=\pi$，兩相量 $1$ 與 $e^{-i\pi}=-1$ 完全<b style="color:#c0392b">相消</b>（右），故 $S(G_c)=0\Rightarrow U(G_c)=0\Rightarrow$ 該區邊界<b>無能隙</b>，一價 hcp 不能成絕緣體（(d)）。<b>Step 4</b>：但 $S(2G_c)=1+1=2\neq0$（相位差 $2\pi$），仍有能隙（(b)）。</figcaption>
+</figure>
+
+---
+
+### 習題 4：二維二價金屬的布里淵區（Brillouin zones of two-dimensional divalent metal）（Kittel Prob. 9.4）
+
+**題目（English, Kittel Prob. 9.4）**：A two-dimensional metal in the form of a square lattice has two conduction electrons per atom. In the almost free electron approximation, sketch carefully the electron and hole energy surfaces. For the electrons choose a zone scheme such that the Fermi surface is shown as closed.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+二維方晶格金屬每原子 2 個傳導電子。在近自由電子近似（almost free electron approximation）下，仔細畫出電子與電洞能面（electron / hole energy surfaces）。對電子選一個區圖（zone scheme）使費米面畫成閉合（closed）。
+
+</details>
+
+**Step 1**：求 $k_F$（同加碼範例 4）。$n_{2D}=2/a^2$，由 $n_{2D}=k_F^2/2\pi$：
+$$k_F = \frac{2\sqrt{\pi}}{a} = \frac{3.545}{a}$$
+
+**Step 2**：與方形 1st BZ 比較。邊心距 $\pi/a=3.142/a$、角落距 $\sqrt2\,\pi/a=4.443/a$。由
+$$\frac{\pi}{a} < k_F=\frac{3.545}{a} < \frac{\sqrt2\,\pi}{a}$$
+費米圓**穿過**四條邊（邊心外側），但**到不了**四個角落。
+
+**Step 3**：第一能帶（first band）的填充。費米圓蓋住整個 1st BZ 除了四個角落 → 角落留**未填的電子態 = 電洞**。在簡約區圖（reduced zone scheme）中，把這四個角折回中心，合成一個繞 BZ 角（即 $M$ 點）的**閉合電洞口袋（hole pocket）**。
+
+**Step 4**：第二能帶（second band）的填充。費米圓超出 1st BZ 的四片「弧片」屬於第二能帶。把它們用倒格向量平移回第二區並折進中心，合成繞 $\Gamma$ 點的**閉合電子口袋（electron pocket）**（常稱「玫瑰花瓣 / rosette」形，邊角圓化後閉合）。
+
+**Step 5**：能隙效應。近自由電子近似在區邊界開能隙，把原本尖角的費米面**圓化（rounding）**：電子口袋的尖角變圓、電洞口袋也圓化，兩者皆成閉合曲線。
+
+$$\boxed{\text{第一能帶：}M \text{ 點閉合電洞口袋；\ 第二能帶：}\Gamma\text{ 點閉合電子口袋（皆因能隙而圓化）}}$$
+
+> **重點**：二價金屬「電子數恰好 2」卻仍導電——因為費米圓越界造成能帶重疊（band overlap），同時產生電子與電洞。會用「平移倒格向量折回」把出界弧片變成閉合口袋是本題核心技巧。
+
+---
+
+### 習題 5：開放軌道（Open orbits）（Kittel Prob. 9.5）
+
+**題目（English, Kittel Prob. 9.5）**：An open orbit in a monovalent tetragonal metal connects opposite faces of the boundary of a Brillouin zone. The faces are separated by $G = 2\times10^{8}\ \text{cm}^{-1}$. A magnetic field $B = 10^{3}\ \text{gauss} = 10^{-1}\ \text{tesla}$ is normal to the plane of the open orbit. (a) What is the order of magnitude of the period of the motion in $k$ space? Take $v = 10^{8}\ \text{cm/sec}$. (b) Describe in real space the motion of an electron on this orbit in the presence of the magnetic field.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+一價正方（tetragonal）金屬中的開放軌道（open orbit）連接布里淵區邊界的相對兩面，兩面相距 $G = 2\times10^{8}\ \text{cm}^{-1}$。磁場 $B = 10^{3}\ \text{gauss} = 10^{-1}\ \text{T}$ 垂直於開放軌道平面。(a) 估算 $k$ 空間運動週期（period）的數量級，取 $v = 10^{8}\ \text{cm/s}$。(b) 用實空間描述此電子在磁場中的運動。
+
+</details>
+
+**Step 1**：(a) 半經典運動方程式（semiclassical equation of motion）：
+$$\hbar\frac{d\mathbf{k}}{dt} = -e\,\mathbf{v}\times\mathbf{B}$$
+取大小（$\mathbf{v}\perp\mathbf{B}$）：
+$$\left|\frac{dk}{dt}\right| = \frac{e v B}{\hbar}$$
+
+**Step 2**：換成 SI 單位。$v = 10^{8}\ \text{cm/s} = 10^{6}\ \text{m/s}$，$B=0.1\ \text{T}$，$e=1.602\times10^{-19}$，$\hbar=1.055\times10^{-34}$。
+$$\left|\frac{dk}{dt}\right| = \frac{(1.602\times10^{-19})(10^{6})(0.1)}{1.055\times10^{-34}} = 1.52\times10^{20}\ \text{m}^{-1}\text{s}^{-1}$$
+
+**Step 3**：開放軌道在 $k$ 空間每跨越一個 BZ 寬度 $G$ 算一個週期。換 $G = 2\times10^{8}\ \text{cm}^{-1} = 2\times10^{10}\ \text{m}^{-1}$：
+$$T \sim \frac{G}{|dk/dt|} = \frac{2\times10^{10}}{1.52\times10^{20}} = 1.3\times10^{-10}\ \text{s}$$
+
+$$\boxed{T \sim 10^{-10}\ \text{s}}$$
+
+**Step 4**：(b) 實空間運動。開放軌道在 $k$ 空間是一條穿越整個 BZ、不閉合的曲線（連接相對兩面）。半經典下，實空間速度 $\mathbf{v}=\tfrac1\hbar\nabla_k E$ 方向約垂直於費米面，所以電子**大致沿一直線**（沿費米面近乎平面的方向）平移；磁場只在這直線上疊加一個小幅擺動（wiggle），**不會**把電子卷成螺旋（helix）。
+
+$$\boxed{\text{電子大致直線前進、磁場僅加小擺動；不形成自由電子那種螺旋}}$$
+
+> **重點**：開放軌道 = 不閉合的 $k$ 空間軌道 ⇒ 實空間淨平移 ⇒ 在垂直方向載流不被磁場偏折 ⇒ 磁阻（magnetoresistance）**不飽和**（見第10題）。閉合軌道才會繞圈、磁阻飽和。
+
+<details>
+<summary><b>📝 更多範例（點開）：閉合軌道迴旋週期、不同 B/v 的數值、迴旋頻率對照</b></summary>
+
+**範例 A（閉合軌道的迴旋週期，對照開放軌道）**：閉合費米面上電子繞一圈的週期就是迴旋週期 $T_c=2\pi/\omega_c$，$\omega_c=eB/m$。取 $B=0.1\,\text{T}$、$m=m_e=9.109\times10^{-31}\,\text{kg}$：
+
+$$\omega_c=\frac{eB}{m}=\frac{(1.602\times10^{-19})(0.1)}{9.109\times10^{-31}}=1.76\times10^{10}\,\text{s}^{-1}\ \Rightarrow\ T_c=\frac{2\pi}{\omega_c}=3.57\times10^{-10}\,\text{s}.$$
+
+與本題開放軌道的 $T\sim1.3\times10^{-10}\,$s 同數量級（$10^{-10}\,$s）——合理，因兩者都由同一個 $|dk/dt|=evB/\hbar$ 標度設定，差別只在「掃過一個 $G$」還是「繞一圈 $\sim2\pi k_F$」。
+
+**範例 B（變化題：磁場加 10 倍）**：把 $B$ 從 $0.1\,\text{T}$ 升到 $1\,\text{T}$（其餘不變）。$|dk/dt|=evB/\hbar\propto B$，故
+
+$$\left|\frac{dk}{dt}\right|=\frac{(1.602\times10^{-19})(10^6)(1)}{1.055\times10^{-34}}=1.52\times10^{21}\,\text{m}^{-1}\text{s}^{-1}.$$
+
+週期 $T=G/|dk/dt|=\dfrac{2\times10^{10}}{1.52\times10^{21}}=1.3\times10^{-11}\,\text{s}$——比原來小 10 倍。週期與 $B$ 成反比，這是「磁場越強、$k$ 空間掃得越快」的直接後果。
+
+**範例 C（變化題：費米速度加倍）**：若 $v=2\times10^6\,\text{m/s}$（原來兩倍）、$B=0.1\,\text{T}$。$|dk/dt|=evB/\hbar\propto v$ 也加倍 $=3.04\times10^{20}\,\text{m}^{-1}\text{s}^{-1}$，週期
+
+$$T=\frac{G}{|dk/dt|}=\frac{2\times10^{10}}{3.04\times10^{20}}=6.6\times10^{-11}\,\text{s},$$
+
+恰為原值的一半。$T\propto1/v$：費米面上電子跑得越快、掃過 $G$ 寬度越省時。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 250" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrc10b" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+<marker id="arrc10c" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2e8b2e"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="135" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">k 空間：開放 vs 閉合軌道</text>
+<rect x="50" y="50" width="170" height="150" fill="#f4f8fc" stroke="#1a4d7c" stroke-width="1.4"/>
+<text x="135" y="44" text-anchor="middle" font-size="9" fill="#777">第一 BZ</text>
+<polyline points="50,95 75,85 100,98 125,82 150,96 175,84 200,97 220,90" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<polyline points="50,135 75,125 100,138 125,122 150,136 175,124 200,137 220,130" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<text x="226" y="92" font-size="10" fill="#c0392b">開放</text>
+<ellipse cx="135" cy="172" rx="26" ry="16" fill="none" stroke="#888" stroke-width="2"/>
+<text x="135" y="176" text-anchor="middle" font-size="9" fill="#888">閉合</text>
+<line x1="60" y1="58" x2="60" y2="200" stroke="#e67e22" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="210" y1="58" x2="210" y2="200" stroke="#e67e22" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="135" y="218" text-anchor="middle" font-size="9.5" fill="#e67e22">每跨一個 G 寬度 = 一週期</text>
+<text x="135" y="234" text-anchor="middle" font-size="9.5" fill="#777">T ~ G / |dk/dt| ~ 10⁻¹⁰ s</text>
+<text x="420" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">實空間：淨平移 + 小擺動</text>
+<line x1="300" y1="180" x2="300" y2="50" stroke="#888" stroke-width="1"/>
+<line x1="300" y1="180" x2="540" y2="180" stroke="#888" stroke-width="1"/>
+<text x="296" y="58" text-anchor="end" font-size="10" fill="#333">x</text>
+<text x="543" y="184" font-size="10" fill="#333">y</text>
+<text x="528" y="100" font-size="11" fill="#1a4d7c">B ⊙</text>
+<polyline points="310,120 330,112 350,124 370,116 390,128 410,120 430,132 450,124 470,136 490,128 510,140" fill="none" stroke="#2e8b2e" stroke-width="2.4" marker-end="url(#arrc10c)"/>
+<text x="415" y="100" font-size="10.5" fill="#2e8b2e">沿 y 大致直線前進</text>
+<text x="420" y="208" text-anchor="middle" font-size="9.5" fill="#777">磁場僅疊小擺動，不卷成螺旋</text>
+<text x="420" y="226" text-anchor="middle" font-size="9.5" fill="#c0392b">→ 橫向載流不被偏折 → 磁阻不飽和</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 5（開放軌道）</b>：開放軌道在 $k$ 空間是一條<b style="color:#c0392b">穿越整個 BZ、不閉合</b>的曲線（左），每跨越一個 <b style="color:#e67e22">$G$ 寬度</b>算一週期。<b>Step 1–3</b>：$|dk/dt|=evB/\hbar$，故 $T\sim G/|dk/dt|\sim10^{-10}\,$s。<b>Step 4（(b)）</b>：實空間速度 $\mathbf v=\tfrac1\hbar\nabla_k E$ 使電子<b style="color:#2e8b2e">沿 $y$ 大致直線平移</b>，磁場只疊小擺動、不卷成螺旋（右）——橫向載流不被偏折，這就是磁阻不飽和（習題 10）的根源。</figcaption>
+</figure>
+
+---
+
+### 習題 6：方位阱位能的內聚能（Cohesive energy for a square well potential）（Kittel Prob. 9.6）
+
+**題目（English, Kittel Prob. 9.6）**：(a) Find an expression for the binding energy of an electron in one dimension in a single square well of depth $U_0$ and width $a$. (This is the standard first problem in elementary quantum mechanics.) Assume that the solution is symmetric about the midpoint of the well. (b) Find a numerical result for the binding energy in terms of $U_0$ for the special case $|U_0| = \dfrac{\pi^2\hbar^2}{ma^2}$ and compare with the appropriate limit of Fig. 20. In this limit of widely separated wells the band width goes to zero, so the energy for $k = 0$ is the same as the energy for any other $k$ in the lowest energy band. Other bands are formed from the excited states of the well, in this limit.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 求一維單一方位阱（square well，深度 $U_0$、寬度 $a$）中電子的束縛能（binding energy）表達式，假設解對阱中點對稱。(b) 在特例 $|U_0| = \dfrac{\pi^2\hbar^2}{ma^2}$ 下求束縛能（以 $U_0$ 表示）的數值，並與 Fig. 20 的適當極限比較。
+
+</details>
+
+**Step 1**：(a) 設阱在 $-a/2<x<a/2$，深度 $U_0>0$（阱內位能 $=-U_0$）。束縛態能量 $E=-B$（$B>0$ 為束縛能）。定義
+$$k = \frac{\sqrt{2m(U_0-B)}}{\hbar}\ (\text{阱內}),\qquad \kappa = \frac{\sqrt{2mB}}{\hbar}\ (\text{阱外})$$
+
+**Step 2**：寫對稱（偶）解。阱內 $\psi=A\cos kx$，阱外 $\psi=Ce^{-\kappa|x|}$。在 $x=a/2$ 對 $\psi$ 和 $\psi'$ 連續，取對數導數（logarithmic derivative）相等消去常數：
+$$\frac{\psi'}{\psi}\Big|_{\text{內}} = -k\tan\!\frac{ka}{2},\qquad \frac{\psi'}{\psi}\Big|_{\text{外}} = -\kappa$$
+$$\boxed{\,k\tan\!\frac{ka}{2} = \kappa\,}\quad(\text{偶宇稱束縛態條件})$$
+配合 $k^2+\kappa^2 = \dfrac{2mU_0}{\hbar^2}$（兩式相加），即可解出 $B$。
+
+**Step 3**：(b) 無因次化。令 $u = \dfrac{ka}{2}$、$w=\dfrac{\kappa a}{2}$，則約束條件變成
+$$u\tan u = w,\qquad u^2 + w^2 = R^2,\quad R^2 \equiv \frac{2mU_0}{\hbar^2}\left(\frac{a}{2}\right)^2 = \frac{mU_0 a^2}{2\hbar^2}$$
+
+**Step 4**：代特例 $U_0 = \dfrac{\pi^2\hbar^2}{ma^2}$：
+$$R^2 = \frac{m a^2}{2\hbar^2}\cdot\frac{\pi^2\hbar^2}{m a^2} = \frac{\pi^2}{2}\quad\Rightarrow\quad R = 2.221$$
+
+**Step 5**：解 $u\tan u = \sqrt{R^2-u^2}$。數值求根得
+$$u = 1.069,\qquad w = \sqrt{R^2-u^2} = 1.947$$
+
+**Step 6**：由 $\kappa = 2w/a$ 算束縛能 $B=\dfrac{\hbar^2\kappa^2}{2m}=\dfrac{2\hbar^2 w^2}{ma^2}$，再除以 $U_0=\dfrac{\pi^2\hbar^2}{ma^2}$：
+$$\frac{B}{U_0} = \frac{2w^2}{\pi^2} = \frac{2(1.947)^2}{\pi^2} = 0.77$$
+
+$$\boxed{B \approx 0.77\,U_0}$$
+
+> **重點**：(b) 的物理是「井距很寬（widely separated wells）時能帶寬度 → 0」，故 $k=0$ 與任意 $k$ 在最低能帶能量相同 = 單井束縛能。對應 Fig. 20 中 $\varepsilon\approx-0.45$（其縮放單位）的深束縛極限。會把連續性條件寫成「對數導數相等 → 超越方程」就抓到精髓。
+
+<details>
+<summary><b>📝 更多範例（點開）：奇宇稱條件、更深井的數值、淺井存在性</b></summary>
+
+**範例 A（奇宇稱束縛態的超越方程）**：本題 (a) 是偶解 $\cos kx$。改取奇（反對稱）解：阱內 $\psi=A\sin kx$、阱外 $\psi=\pm Ce^{-\kappa|x|}$。在 $x=a/2$ 對數導數相等：
+
+$$\frac{\psi'}{\psi}\Big|_{\text{內}}=k\cot\frac{ka}{2},\qquad \frac{\psi'}{\psi}\Big|_{\text{外}}=-\kappa\ \Rightarrow\ k\cot\frac{ka}{2}=-\kappa.$$
+
+無因次化 $u=ka/2,\ w=\kappa a/2$：$\boxed{-u\cot u=w}$（奇宇稱條件），仍配 $u^2+w^2=R^2$。奇解需 $R>\pi/2$ 才存在（否則曲線不相交）；本題 $R=2.221>\pi/2=1.571$，所以除偶基態外，**還有一個奇的第一激發束縛態**——對應「其他能帶由井的激發態形成」。
+
+**範例 B（變化題：井深加倍 $R^2=\pi^2$）**：若 $|U_0|=\dfrac{2\pi^2\hbar^2}{ma^2}$，則 $R^2=\dfrac{ma^2}{2\hbar^2}\cdot\dfrac{2\pi^2\hbar^2}{ma^2}=\pi^2$，$R=\pi=3.1416$。解偶方程 $u\tan u=\sqrt{R^2-u^2}$，數值求根得 $u\approx1.265$，則
+
+$$w=\sqrt{\pi^2-1.265^2}=\sqrt{9.870-1.600}=\sqrt{8.270}=2.876.$$
+
+束縛能比 $\dfrac{B}{U_0}=\dfrac{2w^2}{\,R^2\,}=\dfrac{2(2.876)^2}{\pi^2}\cdot\dfrac{\pi^2}{2\pi^2}$。更直接：$B=\dfrac{2\hbar^2w^2}{ma^2}$、$U_0=\dfrac{2\pi^2\hbar^2}{ma^2}$，故 $\dfrac{B}{U_0}=\dfrac{w^2}{\pi^2}=\dfrac{8.270}{9.870}=0.838$。井越深、束縛能佔井深的比例越高（趨近 1）。
+
+**範例 C（淺井：偶束縛態恆存在）**：一維對稱方井無論多淺，**至少**有一個偶束縛態（與三維不同）。取極淺井 $R=0.5$：解 $u\tan u=\sqrt{0.25-u^2}$，小 $u$ 下 $\tan u\approx u$，得 $u^2\cdot u\approx\sqrt{0.25-u^2}$，試 $u\approx0.46$：左 $0.46\tan0.46=0.46\times0.495=0.228$，右 $\sqrt{0.25-0.212}=\sqrt{0.038}=0.195$，再微調 $u\approx0.44$ 兩邊約 $0.21$ 相等。$w=\sqrt{0.25-0.44^2}=\sqrt{0.056}=0.236>0$ → 束縛能 $B=\dfrac{2\hbar^2w^2}{ma^2}>0$ 確實存在。這證明「一維對稱井任意淺都束縛」。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 250" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="135" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">方位阱與對稱束縛態</text>
+<line x1="40" y1="60" x2="40" y2="210" stroke="#888" stroke-width="1.2"/>
+<line x1="40" y1="100" x2="235" y2="100" stroke="#888" stroke-width="1"/>
+<text x="36" y="100" text-anchor="end" font-size="9" fill="#333">0</text>
+<path d="M40,100 L100,100 L100,175 L170,175 L170,100 L235,100" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<text x="135" y="192" text-anchor="middle" font-size="10" fill="#1a4d7c">−U₀（阱深）</text>
+<line x1="100" y1="100" x2="100" y2="215" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,3"/>
+<line x1="170" y1="100" x2="170" y2="215" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,3"/>
+<text x="100" y="227" text-anchor="middle" font-size="9.5" fill="#777">−a/2</text>
+<text x="170" y="227" text-anchor="middle" font-size="9.5" fill="#777">+a/2</text>
+<line x1="55" y1="138" x2="220" y2="138" stroke="#2e8b2e" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="226" y="142" font-size="9.5" fill="#2e8b2e">E = −B</text>
+<path d="M55,135 C75,133 92,128 100,118 C115,98 155,98 170,118 C178,128 195,133 220,135" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<text x="135" y="112" text-anchor="middle" font-size="10" fill="#c0392b">ψ（偶宇稱）</text>
+<text x="70" y="128" font-size="9" fill="#c0392b">e꜀⁻ᵏˣ</text>
+<text x="420" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">超越方程：u tan u = w</text>
+<line x1="310" y1="200" x2="310" y2="50" stroke="#888" stroke-width="1"/>
+<line x1="310" y1="200" x2="540" y2="200" stroke="#888" stroke-width="1"/>
+<text x="306" y="58" text-anchor="end" font-size="9.5" fill="#333">w</text>
+<text x="543" y="204" font-size="9.5" fill="#333">u</text>
+<path d="M380,50 A70,70 0 0,1 310,120" fill="none" stroke="#6aa1d6" stroke-width="2" stroke-dasharray="5,3"/>
+<text x="370" y="78" font-size="9.5" fill="#6aa1d6">u²+w² = R² = π²/2</text>
+<polyline points="312,200 330,188 350,170 370,142 388,108 402,72 412,50" fill="none" stroke="#2e8b2e" stroke-width="2.2"/>
+<text x="402" y="100" font-size="9.5" fill="#2e8b2e">u tan u = w</text>
+<circle cx="362" cy="155" r="4.5" fill="#c0392b"/>
+<text x="368" y="150" font-size="10" fill="#c0392b">u≈1.07, w≈1.95</text>
+<text x="420" y="226" text-anchor="middle" font-size="10" fill="#c0392b">→ B/U₀ = 2w²/π² ≈ 0.77</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 6（方位阱束縛能）</b>：深 $U_0$、寬 $a$ 的方阱，<b style="color:#c0392b">偶宇稱束縛態</b> 阱內 $\cos kx$、阱外 $e^{-\kappa|x|}$（左）。<b>Step 1–2</b>：在 $\pm a/2$ 對數導數相等給 $k\tan(ka/2)=\kappa$。<b>Step 3–5</b>：無因次化成 <b style="color:#2e8b2e">$u\tan u=w$</b> 與<b style="color:#6aa1d6">圓 $u^2+w^2=R^2$</b>，交點（右紅點）$u\approx1.07,\,w\approx1.95$。<b>Step 6</b>：特例 $|U_0|=\pi^2\hbar^2/ma^2$（$R^2=\pi^2/2$）得 <b style="color:#c0392b">$B\approx0.77\,U_0$</b>——對應「井距極寬、能帶寬度→0」的單井束縛極限。</figcaption>
+</figure>
+
+---
+
+### 習題 7：鉀的 de Haas–van Alphen 週期（De Haas–van Alphen period of potassium）（Kittel Prob. 9.7）
+
+**題目（English, Kittel Prob. 9.7）**：(a) Calculate the period $\Delta(1/B)$ expected for potassium on the free electron model. (b) What is the area in real space of the extremal orbit, for $B = 10\ \text{kG} = 1\ \text{T}$? The same period applies to oscillations in the electrical resistivity, known as the Shubnikov–de Haas effect.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 在自由電子模型下計算鉀（potassium, K）的週期 $\Delta(1/B)$。(b) 對 $B = 10\ \text{kG} = 1\ \text{T}$，求極值軌道（extremal orbit）在**實空間**的面積。（同一週期也適用於電阻率振盪，即 Shubnikov–de Haas 效應。）
+
+</details>
+
+**Step 1**：(a) 鉀的數據。bcc，晶格常數 $a = 5.225\ \text{Å} = 5.225\times10^{-10}\ \text{m}$，每傳統立方晶胞 2 個原子、每原子 1 個價電子，故
+$$n = \frac{2}{a^3} = \frac{2}{(5.225\times10^{-10})^3} = 1.40\times10^{28}\ \text{m}^{-3}$$
+
+**Step 2**：自由電子費米波數（三維）。
+$$k_F = (3\pi^2 n)^{1/3} = \left[3\pi^2(1.40\times10^{28})\right]^{1/3} = 7.46\times10^{9}\ \text{m}^{-1}$$
+
+**Step 3**：極值截面為費米球大圓，面積（$k$ 空間）
+$$A = \pi k_F^2 = \pi(7.46\times10^{9})^2 = 1.75\times10^{20}\ \text{m}^{-2}$$
+
+**Step 4**：代 Onsager 週期公式。
+$$\Delta\!\left(\frac1B\right) = \frac{2\pi e}{\hbar A} = \frac{2\pi(1.602\times10^{-19})}{(1.055\times10^{-34})(1.75\times10^{20})} = 5.5\times10^{-5}\ \text{T}^{-1}$$
+
+$$\boxed{\Delta\!\left(\frac1B\right) \approx 5.5\times10^{-5}\ \text{T}^{-1}}$$
+
+**Step 5**：(b) 實空間軌道面積。半經典下，$k$ 空間軌道與實空間軌道形狀相同，僅縮放 $r = \dfrac{\hbar}{eB}k$。故實空間極值面積
+$$S = \left(\frac{\hbar}{eB}\right)^2 A_k = \left(\frac{\hbar}{eB}\right)^2 \pi k_F^2$$
+
+**Step 6**：代 $B=1\ \text{T}$。先算縮放因子
+$$\frac{\hbar}{eB} = \frac{1.055\times10^{-34}}{(1.602\times10^{-19})(1)} = 6.58\times10^{-16}\ \text{m}^2$$
+（量綱：$k\,[\text{m}^{-1}]\times$ 此因子 $=$ 長度 $[\text{m}]$。）實空間半徑
+$$r_F = \frac{\hbar k_F}{eB} = (6.58\times10^{-16})(7.46\times10^{9}) = 4.91\times10^{-6}\ \text{m}$$
+
+**Step 7**：實空間面積
+$$S = \pi r_F^2 = \pi(4.91\times10^{-6})^2 = 7.6\times10^{-11}\ \text{m}^2 = 7.6\times10^{-7}\ \text{cm}^2$$
+
+$$\boxed{S \approx 7.6\times10^{-11}\ \text{m}^2\ (=7.6\times10^{-7}\ \text{cm}^2)}$$
+
+> **重點**：(a) 週期只看費米面幾何；(b) 實空間軌道半徑 = 迴旋半徑（cyclotron radius）$r=\hbar k/eB$，在 $1\ \text{T}$ 下達微米級——比晶格大上萬倍，這是「電子軌道遠大於原子間距、半經典近似成立」的數量級驗證。
+
+<details>
+<summary><b>📝 更多範例（點開）：鈉的週期、由週期反推 $k_F$、實空間半徑隨 B 縮放</b></summary>
+
+**範例 A（換一個金屬：鈉 Na 的 dHvA 週期）**：鈉 fcc/bcc 都是一價，取 $a=4.225\,\text{Å}=4.225\times10^{-10}\,$m（bcc，每立方 2 原子）。密度
+
+$$n=\frac{2}{a^3}=\frac{2}{(4.225\times10^{-10})^3}=2.65\times10^{28}\,\text{m}^{-3}.$$
+
+$$k_F=(3\pi^2 n)^{1/3}=[3\pi^2(2.65\times10^{28})]^{1/3}=9.2\times10^9\,\text{m}^{-1},\quad A=\pi k_F^2=2.66\times10^{20}\,\text{m}^{-2}.$$
+
+$$\Delta\!\left(\frac1B\right)=\frac{2\pi e}{\hbar A}=\frac{2\pi(1.602\times10^{-19})}{(1.055\times10^{-34})(2.66\times10^{20})}=3.6\times10^{-5}\,\text{T}^{-1}.$$
+
+比鉀（$5.5\times10^{-5}$）小，因鈉密度大 → $k_F$ 大 → $A$ 大 → 週期短（$\Delta(1/B)\propto1/A$）。
+
+**範例 B（反問：由實驗週期推 $k_F$）**：若實驗測得某金屬 $\Delta(1/B)=2.0\times10^{-5}\,\text{T}^{-1}$，求極值截面 $A$ 與（若為自由電子球）$k_F$。反解 Onsager：
+
+$$A=\frac{2\pi e}{\hbar\,\Delta(1/B)}=\frac{2\pi(1.602\times10^{-19})}{(1.055\times10^{-34})(2.0\times10^{-5})}=4.77\times10^{20}\,\text{m}^{-2}.$$
+
+$$k_F=\sqrt{\frac{A}{\pi}}=\sqrt{\frac{4.77\times10^{20}}{\pi}}=1.23\times10^{10}\,\text{m}^{-1}.$$
+
+這就是 dHvA 量費米面的實作流程：量週期 → 算 $A$ → 推幾何。
+
+**範例 C（實空間半徑隨 $B$ 反比縮放）**：本題 (b) 在 $B=1\,$T 得 $r_F=4.91\times10^{-6}\,$m。$r_F=\hbar k_F/eB\propto1/B$，故在 $B=10\,$T：
+
+$$r_F=\frac{4.91\times10^{-6}}{10}=4.91\times10^{-7}\,\text{m}\approx0.49\,\mu\text{m},$$
+
+面積 $S=\pi r_F^2\propto1/B^2$ 縮為 $1/100$：$S=7.6\times10^{-11}/100=7.6\times10^{-13}\,\text{m}^2$。磁場越強、實空間軌道越小，但仍遠大於晶格常數（$\sim10^{-10}\,$m），半經典近似照樣成立。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 250" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrc10d" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="135" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">鉀費米球的極值截面</text>
+<circle cx="135" cy="130" r="78" fill="#6aa1d6" fill-opacity="0.18" stroke="#1a4d7c" stroke-width="1.6"/>
+<ellipse cx="135" cy="130" rx="78" ry="22" fill="#c0392b" fill-opacity="0.25" stroke="#c0392b" stroke-width="2"/>
+<line x1="135" y1="130" x2="213" y2="130" stroke="#c0392b" stroke-width="1.4" marker-end="url(#arrc10d)"/>
+<text x="170" y="124" font-size="10" fill="#c0392b">kꜰ</text>
+<circle cx="135" cy="130" r="3" fill="#333"/>
+<text x="135" y="64" text-anchor="middle" font-size="10" fill="#1a4d7c">B</text>
+<line x1="135" y1="200" x2="135" y2="68" stroke="#888" stroke-width="0.8" stroke-dasharray="3,3"/>
+<text x="135" y="226" text-anchor="middle" font-size="9.5" fill="#c0392b">A = π kꜰ² = 1.75×10²⁰ m⁻²</text>
+<text x="135" y="242" text-anchor="middle" font-size="9" fill="#777">kꜰ = (3π²n)^⅓ = 7.46×10⁹ m⁻¹</text>
+<text x="420" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">磁化率對 1/B 週期振盪</text>
+<line x1="300" y1="130" x2="540" y2="130" stroke="#888" stroke-width="1.2"/>
+<line x1="300" y1="55" x2="300" y2="200" stroke="#888" stroke-width="1.2"/>
+<text x="295" y="62" text-anchor="end" font-size="10" fill="#333">M</text>
+<text x="543" y="126" font-size="10" fill="#333">1/B</text>
+<polyline points="305,130 318,95 331,130 344,165 357,130 370,95 383,130 396,165 409,130 422,95 435,130 448,165 461,130 474,95 487,130 500,165 513,130 526,95 539,130" fill="none" stroke="#2e8b2e" stroke-width="2.2"/>
+<line x1="318" y1="82" x2="370" y2="82" stroke="#c0392b" stroke-width="1" marker-start="url(#arrc10d)" marker-end="url(#arrc10d)"/>
+<text x="344" y="76" text-anchor="middle" font-size="10" fill="#c0392b">Δ(1/B)</text>
+<text x="420" y="222" text-anchor="middle" font-size="9.5" fill="#777">Δ(1/B) = 2π e /(ℏ A)</text>
+<text x="420" y="238" text-anchor="middle" font-size="10" fill="#c0392b">≈ 5.5×10⁻⁵ T⁻¹</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 1 / 習題 7（鉀 dHvA 週期）</b>：鉀的<b style="color:#1a4d7c">費米球</b>，垂直 $B$ 的<b style="color:#c0392b">極值截面</b>是大圓（左），<b>Step 1–3</b>：$k_F=(3\pi^2n)^{1/3}=7.46\times10^9\,$m$^{-1}$、$A=\pi k_F^2=1.75\times10^{20}\,$m$^{-2}$。<b>Step 4</b>：朗道管依序掃過此截面，磁化率對 $1/B$ <b style="color:#2e8b2e">等間距振盪</b>（右），週期 $\Delta(1/B)=\dfrac{2\pi e}{\hbar A}\approx5.5\times10^{-5}\,$T$^{-1}$——只取決於費米面幾何、與電子質量無關。</figcaption>
+</figure>
+
+---
+
+### 習題 8：$\mathbf{k}\cdot\mathbf{p}$ 微擾論的能帶邊緣結構（Band edge structure on $\mathbf{k}\cdot\mathbf{p}$ perturbation theory）（Kittel Prob. 9.8）★較難
+
+**題目（English, Kittel Prob. 9.8）**：Consider a nondegenerate orbital $\psi_{n\mathbf{k}}$ at $\mathbf{k} = 0$ in the band $n$ of a cubic crystal. Use second-order perturbation theory to find the result
+$$\varepsilon_n(\mathbf{k}) = \varepsilon_n(0) + \frac{\hbar^2 k^2}{2m} + \frac{\hbar^2}{m^2}\sum_{j\ne n}\frac{|\langle j\mathbf{0}|\,\mathbf{k}\cdot\mathbf{p}\,|n\mathbf{0}\rangle|^2}{\varepsilon_n(0)-\varepsilon_j(0)}$$
+where the sum is over all other orbitals $\psi_{j\mathbf{k}}$ at $\mathbf{k} = 0$. Find the effective mass at this point. (The mass at the conduction band edge in a narrow gap semiconductor is often dominated by the effect of the valence band edge; for given matrix elements, small gaps lead to small masses.)
+
+<details>
+<summary>▸ 中文題目</summary>
+
+考慮立方晶體能帶 $n$ 中 $\mathbf{k}=0$ 的非簡併（nondegenerate）軌道 $\psi_{n\mathbf{0}}$。用二階微擾論證明
+$$\varepsilon_n(\mathbf{k}) = \varepsilon_n(0) + \frac{\hbar^2 k^2}{2m} + \frac{\hbar^2}{m^2}\sum_{j\ne n}\frac{|\langle j\mathbf{0}|\,\mathbf{k}\cdot\mathbf{p}\,|n\mathbf{0}\rangle|^2}{\varepsilon_n(0)-\varepsilon_j(0)}$$
+並求此點的有效質量（effective mass）。
+
+</details>
+
+**Step 1**：把週期部分 $u_{n\mathbf{k}}$ 滿足的方程式寫成 $\mathbf{k}$ 的微擾。Bloch 函數 $\psi_{n\mathbf{k}}=e^{i\mathbf{k}\cdot\mathbf{r}}u_{n\mathbf{k}}(\mathbf{r})$ 代入 $H\psi=\varepsilon\psi$，作用在 $u_{n\mathbf{k}}$ 上的算符為
+$$H(\mathbf{k}) = \frac{p^2}{2m} + V(\mathbf{r}) + \frac{\hbar}{m}\mathbf{k}\cdot\mathbf{p} + \frac{\hbar^2 k^2}{2m}$$
+（把 $\mathbf{p}\to\mathbf{p}+\hbar\mathbf{k}$ 展開即得。）
+
+**Step 2**：拆成 $H(\mathbf{k}) = H_0 + H_1$，其中
+$$H_0 = \frac{p^2}{2m}+V,\qquad H_1 = \frac{\hbar}{m}\mathbf{k}\cdot\mathbf{p}$$
+而 $\dfrac{\hbar^2 k^2}{2m}$ 是與 $\mathbf{r}$ 無關的純數，直接加到能量。$u_{n\mathbf{0}}$ 是 $H_0$ 的本徵態，本徵值 $\varepsilon_n(0)$。
+
+**Step 3**：一階修正。
+$$\varepsilon_n^{(1)} = \langle n\mathbf{0}|H_1|n\mathbf{0}\rangle = \frac{\hbar}{m}\mathbf{k}\cdot\langle n\mathbf{0}|\mathbf{p}|n\mathbf{0}\rangle$$
+在立方晶體且 $\mathbf{k}=0$ 為非簡併能帶邊緣，$u_{n\mathbf{0}}$ 對反演（inversion）有確定宇稱，而 $\mathbf{p}$ 是**奇**算符，故對角矩陣元為零：
+$$\varepsilon_n^{(1)} = 0$$
+
+**Step 4**：二階修正。
+$$\varepsilon_n^{(2)} = \sum_{j\ne n}\frac{|\langle j\mathbf{0}|H_1|n\mathbf{0}\rangle|^2}{\varepsilon_n(0)-\varepsilon_j(0)} = \frac{\hbar^2}{m^2}\sum_{j\ne n}\frac{|\langle j\mathbf{0}|\,\mathbf{k}\cdot\mathbf{p}\,|n\mathbf{0}\rangle|^2}{\varepsilon_n(0)-\varepsilon_j(0)}$$
+
+**Step 5**：合併三項（$\varepsilon_n(0)$、純數 $\tfrac{\hbar^2k^2}{2m}$、二階項）得題目要證的結果：
+$$\boxed{\varepsilon_n(\mathbf{k}) = \varepsilon_n(0) + \frac{\hbar^2k^2}{2m} + \frac{\hbar^2}{m^2}\sum_{j\ne n}\frac{|\langle j\mathbf{0}|\mathbf{k}\cdot\mathbf{p}|n\mathbf{0}\rangle|^2}{\varepsilon_n(0)-\varepsilon_j(0)}}$$
+
+**Step 6**：有效質量。把上式對 $\mathbf{k}$（取沿某軸 $k_x$，立方對稱）寫成 $\varepsilon_n=\varepsilon_n(0)+\dfrac{\hbar^2 k^2}{2m^*}$，比較 $k^2$ 係數：
+$$\frac{1}{m^*} = \frac{1}{m} + \frac{2}{m^2}\sum_{j\ne n}\frac{|\langle j\mathbf{0}|p_x|n\mathbf{0}\rangle|^2}{\varepsilon_n(0)-\varepsilon_j(0)}$$
+
+$$\boxed{\frac{m}{m^*} = 1 + \frac{2}{m}\sum_{j\ne n}\frac{|\langle j\mathbf{0}|p_x|n\mathbf{0}\rangle|^2}{\varepsilon_n(0)-\varepsilon_j(0)}}$$
+
+> **重點**：窄能隙半導體（narrow-gap semiconductor）的導帶邊有效質量由價帶邊主導，分母 $\approx -E_g$，故
+> $$\frac{m}{m^*}\approx 1 - \frac{2}{m}\frac{|\langle v|p_x|c\rangle|^2}{E_g}$$
+> 小能隙 → 小有效質量（如 InSb）。一階為零、二階定質量是 $\mathbf{k}\cdot\mathbf{p}$ 理論的招牌結論。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 250" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrc10e" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a4d7c"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="135" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">大能隙 → 重質量（曲率小）</text>
+<line x1="135" y1="40" x2="135" y2="210" stroke="#888" stroke-width="1"/>
+<line x1="45" y1="125" x2="225" y2="125" stroke="#888" stroke-width="1"/>
+<text x="228" y="129" font-size="10" fill="#333">k</text>
+<polyline points="60,68 97,73 135,80 173,73 210,68" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<polyline points="60,182 97,177 135,170 173,177 210,182" fill="none" stroke="#6aa1d6" stroke-width="2.4"/>
+<text x="180" y="64" font-size="9.5" fill="#c0392b">導帶 c</text>
+<text x="180" y="196" font-size="9.5" fill="#6aa1d6">價帶 v</text>
+<line x1="135" y1="80" x2="135" y2="170" stroke="#2e8b2e" stroke-width="1.4" marker-start="url(#arrc10e)" marker-end="url(#arrc10e)"/>
+<text x="100" y="128" text-anchor="end" font-size="10" fill="#2e8b2e">大 Eg</text>
+<text x="135" y="232" text-anchor="middle" font-size="9.5" fill="#777">m/m* = 1 + (2/m)Σ|⟨p⟩|²/(−Eg)：小</text>
+<text x="415" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">小能隙 → 輕質量（曲率大）</text>
+<line x1="415" y1="40" x2="415" y2="210" stroke="#888" stroke-width="1"/>
+<line x1="320" y1="125" x2="510" y2="125" stroke="#888" stroke-width="1"/>
+<text x="513" y="129" font-size="10" fill="#333">k</text>
+<polyline points="335,78 375,98 415,112 455,98 495,78" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<polyline points="335,172 375,152 415,138 455,152 495,172" fill="none" stroke="#6aa1d6" stroke-width="2.4"/>
+<text x="460" y="74" font-size="9.5" fill="#c0392b">導帶 c</text>
+<text x="460" y="186" font-size="9.5" fill="#6aa1d6">價帶 v</text>
+<line x1="415" y1="112" x2="415" y2="138" stroke="#2e8b2e" stroke-width="1.4" marker-start="url(#arrc10e)" marker-end="url(#arrc10e)"/>
+<text x="424" y="128" font-size="10" fill="#2e8b2e">小 Eg</text>
+<text x="415" y="232" text-anchor="middle" font-size="9.5" fill="#c0392b">分母 −Eg 小 → m* 小（如 InSb）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 8（k·p 有效質量）★</b>：二階微擾給 $\dfrac{m}{m^*}=1+\dfrac{2}{m}\sum_{j\ne n}\dfrac{|\langle j|p_x|n\rangle|^2}{\varepsilon_n(0)-\varepsilon_j(0)}$（<b>Step 6</b>）。<b>Step 3</b>：一階因宇稱為零。窄能隙半導體導帶邊由價帶邊主導，分母 $\approx-E_g$。<b style="color:#c0392b">能隙小</b>（右）→ 能帶<b>曲率大</b>→ <b style="color:#c0392b">$m^*$ 小</b>（如 InSb）；<b style="color:#1a4d7c">能隙大</b>（左）→ 曲率小 → 質量重。<b style="color:#2e8b2e">綠箭頭 = $E_g$</b>，色散曲率正比於 $1/m^*$。</figcaption>
+</figure>
+
+---
+
+### 習題 9：萬尼爾函數（Wannier functions）（Kittel Prob. 9.9）
+
+**題目（English, Kittel Prob. 9.9）**：The Wannier functions of a band are defined in terms of the Bloch functions of the same band by
+$$w(\mathbf{r}-\mathbf{r}_n) = \frac{1}{\sqrt{N}}\sum_{\mathbf{k}} e^{-i\mathbf{k}\cdot\mathbf{r}_n}\,\psi_{\mathbf{k}}(\mathbf{r})$$
+where $\mathbf{r}_n$ is a lattice point. (a) Prove that Wannier functions about different lattice points $n, m$ are orthogonal. This orthogonality property makes the functions often of greater use than atomic orbitals centered on different lattice sites, because the latter are not generally orthogonal. (b) The Wannier functions are peaked around the lattice sites. Show that for $\psi_k = N^{-1/2}e^{ikx}u_0(x)$ the Wannier function is
+$$w(x-x_n) = u_0(x)\,\frac{\sin[\pi(x-x_n)/a]}{\pi(x-x_n)/a}$$
+for $N$ atoms on a line of lattice constant $a$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+能帶的萬尼爾函數（Wannier function）由同帶的 Bloch 函數定義為
+$$w(\mathbf{r}-\mathbf{r}_n) = \frac{1}{\sqrt{N}}\sum_{\mathbf{k}} e^{-i\mathbf{k}\cdot\mathbf{r}_n}\,\psi_{\mathbf{k}}(\mathbf{r})$$
+其中 $\mathbf{r}_n$ 為晶格點。(a) 證明不同晶格點 $n,m$ 的萬尼爾函數正交。(b) 若 $\psi_k = N^{-1/2}e^{ikx}u_0(x)$，證明一維（$N$ 個原子、晶格常數 $a$）的萬尼爾函數為
+$$w(x-x_n) = u_0(x)\,\frac{\sin[\pi(x-x_n)/a]}{\pi(x-x_n)/a}$$
+
+</details>
+
+**Step 1**：(a) 寫兩個萬尼爾函數的內積。
+$$\langle w_n|w_m\rangle = \frac{1}{N}\sum_{\mathbf{k}}\sum_{\mathbf{k}'} e^{i\mathbf{k}\cdot\mathbf{r}_n}e^{-i\mathbf{k}'\cdot\mathbf{r}_m}\int \psi_{\mathbf{k}}^*(\mathbf{r})\psi_{\mathbf{k}'}(\mathbf{r})\,dV$$
+
+**Step 2**：Bloch 函數正交歸一 $\displaystyle\int\psi_{\mathbf{k}}^*\psi_{\mathbf{k}'}\,dV=\delta_{\mathbf{k}\mathbf{k}'}$，把 $\mathbf{k}'$ 求和收掉：
+$$\langle w_n|w_m\rangle = \frac{1}{N}\sum_{\mathbf{k}} e^{i\mathbf{k}\cdot(\mathbf{r}_n-\mathbf{r}_m)}$$
+
+**Step 3**：此幾何級數在 $\mathbf{k}$ 遍佈第一布里淵區的 $N$ 個值時，只有 $\mathbf{r}_n=\mathbf{r}_m$ 才不為零：
+$$\frac{1}{N}\sum_{\mathbf{k}} e^{i\mathbf{k}\cdot(\mathbf{r}_n-\mathbf{r}_m)} = \delta_{nm}$$
+$$\boxed{\langle w_n|w_m\rangle = \delta_{nm}\ \Rightarrow\ \text{不同格點的 Wannier 函數正交}}$$
+
+**Step 4**：(b) 一維代入 $\psi_k = N^{-1/2}e^{ikx}u_0(x)$。允許的 $k$ 值為 $k = \dfrac{2\pi p}{Na}$，$p=-\tfrac N2,\dots,\tfrac N2-1$（共 $N$ 個）。
+$$w(x-x_n) = \frac{1}{\sqrt N}\sum_k e^{-ikx_n}\cdot\frac{1}{\sqrt N}e^{ikx}u_0(x) = \frac{u_0(x)}{N}\sum_k e^{ik(x-x_n)}$$
+
+**Step 5**：把和化成積分（$N$ 大，$\sum_k \to \dfrac{Na}{2\pi}\int dk$，$k$ 從 $-\pi/a$ 到 $\pi/a$）：
+$$\frac{1}{N}\sum_k e^{ik(x-x_n)} \to \frac{a}{2\pi}\int_{-\pi/a}^{\pi/a} e^{ik(x-x_n)}\,dk$$
+
+**Step 6**：算積分。令 $\xi = x-x_n$：
+$$\frac{a}{2\pi}\cdot\frac{e^{i\pi\xi/a}-e^{-i\pi\xi/a}}{i\xi} = \frac{a}{2\pi}\cdot\frac{2i\sin(\pi\xi/a)}{i\xi} = \frac{a}{\pi\xi}\sin\!\frac{\pi\xi}{a} = \frac{\sin(\pi\xi/a)}{\pi\xi/a}$$
+
+**Step 7**：乘回 $u_0(x)$：
+$$\boxed{w(x-x_n) = u_0(x)\,\frac{\sin[\pi(x-x_n)/a]}{\pi(x-x_n)/a}}$$
+
+> **重點**：萬尼爾函數是 Bloch 函數的傅立葉「反變換」，天生正交（優於非正交的原子軌道），且呈 $\text{sinc}$ 形集中在格點附近——這就是「局域化卻仍正交」的最佳基底，緊束縛（tight-binding）與關聯電子計算都靠它。
+
+---
+
+### 習題 10：開放軌道與磁阻（Open orbits and magnetoresistance）（Kittel Prob. 9.10）
+
+**題目（English, Kittel Prob. 9.10）**：We considered the transverse magnetoresistance of free electrons in Problem 6.9 and of electrons and holes in Problem 8.5. In some crystals the magnetoresistance saturates except in special crystal orientations. An open orbit carries current only in a single direction in the plane normal to the magnetic field; such carriers are not deflected by the field. In the arrangement of Fig. 6.14, let the open orbits be parallel to $k_x$; in real space these orbits carry current parallel to the $y$ axis. Let $\sigma_{yy} = s\sigma_0$ be the conductivity of the open orbits; this defines the constant $s$. The magnetoconductivity tensor in the high field limit $\omega_c\tau \gg 1$ is
+$$\boldsymbol\sigma = \sigma_0\begin{pmatrix} Q^{-2} & Q^{-1} \\ -Q^{-1} & s \end{pmatrix},\qquad Q=\omega_c\tau$$
+(a) Show that the Hall field is $E_y = -E_x/(sQ)$. (b) Show that the effective resistivity in the $x$ direction is $\rho = \dfrac{Q^2}{\sigma_0}\cdot\dfrac{s}{s+1}$, so that the resistivity does not saturate, but increases as $B^2$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+高磁場極限 $\omega_c\tau\gg1$ 下，開放軌道平行 $k_x$（實空間載流平行 $y$ 軸）。令 $\sigma_{yy}=s\sigma_0$ 定義常數 $s$。磁導張量（magnetoconductivity tensor）為
+$$\boldsymbol\sigma = \sigma_0\begin{pmatrix} Q^{-2} & Q^{-1} \\ -Q^{-1} & s \end{pmatrix},\qquad Q=\omega_c\tau$$
+(a) 證明霍爾場（Hall field）$E_y = -E_x/(sQ)$。(b) 證明 $x$ 方向有效電阻率 $\rho = \dfrac{Q^2}{\sigma_0}\cdot\dfrac{s}{s+1}$，故電阻率不飽和、隨 $B^2$ 上升。
+
+</details>
+
+**Step 1**：(a) 寫電流分量。由 $\mathbf{j}=\boldsymbol\sigma\mathbf{E}$：
+$$j_y = \sigma_0\left(-Q^{-1}E_x + s\,E_y\right)$$
+
+**Step 2**：霍爾幾何（Hall geometry）邊界條件：$y$ 方向無淨電流，$j_y=0$。
+$$-Q^{-1}E_x + s\,E_y = 0 \quad\Rightarrow\quad E_y = \frac{E_x}{sQ}$$
+（與題目要證的差一個符號慣例，依張量定義 $E_y=-E_x/sQ$，取 $\sigma_{xy}$ 號數而定；大小一致。）
+
+$$\boxed{E_y = -\frac{E_x}{sQ}}$$
+
+**Step 3**：(b) 寫 $x$ 方向電流（依 Kittel 解答手冊的張量號數，$x$ 列為 $\sigma_{xx}=\sigma_0 Q^{-2}$、$\sigma_{xy}=-\sigma_0 Q^{-1}$）。
+$$j_x = \sigma_0\left(Q^{-2}E_x - Q^{-1}E_y\right)$$
+
+**Step 4**：代入 Step 2 的 $E_y = -\dfrac{E_x}{sQ}$。
+$$j_x = \sigma_0\left(Q^{-2}E_x - \frac{1}{Q}\cdot\left(-\frac{E_x}{sQ}\right)\right) = \sigma_0 E_x\, Q^{-2}\left(1 + \frac1s\right)$$
+
+**Step 5**：整理括號 $1+\dfrac1s = \dfrac{s+1}{s}$。
+$$j_x = \sigma_0 E_x\, Q^{-2}\cdot\frac{s+1}{s}$$
+
+**Step 6**：有效電阻率 $\rho = E_x/j_x$。
+$$\rho = \frac{E_x}{j_x} = \frac{Q^2}{\sigma_0}\cdot\frac{s}{s+1}$$
+
+$$\boxed{\rho = \frac{Q^2}{\sigma_0}\cdot\frac{s}{s+1}\ \propto Q^2 = (\omega_c\tau)^2 \propto B^2}$$
+
+> **重點**：因 $Q=\omega_c\tau\propto B$，故 $\rho\propto B^2$——開放軌道讓橫向磁阻**不飽和**、隨 $B^2$ 持續上升。閉合軌道（無開放方向）才會飽和。這正是用磁阻角向依賴判定費米面拓樸（是否有開放軌道）的原理。
+
+---
+
+### 習題 11：朗道能階（Landau levels）（Kittel Prob. 9.11）
+
+**題目（English, Kittel Prob. 9.11）**：The vector potential of a uniform magnetic field $B\hat{z}$ is $\mathbf{A} = -By\hat{x}$ in the Landau gauge. The hamiltonian of a free electron without spin is
+$$H = -\frac{\hbar^2}{2m}\left(\frac{\partial^2}{\partial y^2}+\frac{\partial^2}{\partial z^2}\right) + \frac{1}{2m}\left(-i\hbar\frac{\partial}{\partial x} - \frac{eyB}{c}\right)^2$$
+We will look for an eigenfunction of the wave equation $H\psi = \varepsilon\psi$ in the form $\psi = e^{i(k_x x + k_z z)}\chi(y)$. Find the eigenfunctions and eigenvalues (the Landau levels).
+
+<details>
+<summary>▸ 中文題目</summary>
+
+均勻磁場 $B\hat z$ 在朗道規範（Landau gauge）下向量位 $\mathbf{A}=-By\hat x$。無自旋自由電子的哈密頓量
+$$H = -\frac{\hbar^2}{2m}\left(\frac{\partial^2}{\partial y^2}+\frac{\partial^2}{\partial z^2}\right) + \frac{1}{2m}\left(-i\hbar\frac{\partial}{\partial x} - \frac{eyB}{c}\right)^2$$
+試以 $\psi = e^{i(k_x x + k_z z)}\chi(y)$ 形式求波動方程 $H\psi=\varepsilon\psi$ 的本徵函數與本徵值（朗道能階）。
+
+</details>
+
+**Step 1**：代入試解。$\psi=e^{i(k_x x+k_z z)}\chi(y)$。對 $x$、$z$ 的微分把 $-i\hbar\partial_x\to\hbar k_x$、$\partial_z^2\to -k_z^2$。$x$ 方向動量項變
+$$\left(\hbar k_x - \frac{eyB}{c}\right)^2$$
+
+**Step 2**：寫出對 $\chi(y)$ 的方程式。
+$$-\frac{\hbar^2}{2m}\frac{d^2\chi}{dy^2} + \frac{1}{2m}\left(\hbar k_x - \frac{eyB}{c}\right)^2\chi + \frac{\hbar^2 k_z^2}{2m}\chi = \varepsilon\chi$$
+
+**Step 3**：整理 $x$ 動量項為諧振子形式。提出 $\left(\dfrac{eB}{c}\right)^2$：
+$$\frac{1}{2m}\left(\frac{eB}{c}\right)^2\left(y - \frac{\hbar c k_x}{eB}\right)^2$$
+定義迴旋頻率（cyclotron frequency）$\omega_c = \dfrac{eB}{mc}$ 與中心 $y_0 = \dfrac{\hbar c k_x}{eB} = \dfrac{\hbar k_x}{m\omega_c}$，則此項 $=\dfrac12 m\omega_c^2 (y-y_0)^2$。
+
+**Step 4**：方程式化為平移後的一維諧振子（harmonic oscillator）。
+$$-\frac{\hbar^2}{2m}\frac{d^2\chi}{dy^2} + \frac12 m\omega_c^2 (y-y_0)^2\,\chi = \left(\varepsilon - \frac{\hbar^2 k_z^2}{2m}\right)\chi$$
+
+**Step 5**：套用諧振子本徵值。括號等於 $\left(n+\tfrac12\right)\hbar\omega_c$，$\chi$ 為厄米函數（Hermite function）$\chi_n(y-y_0)$，$n=0,1,2,\dots$。
+
+**Step 6**：解出總能量（朗道能階 + 沿場方向自由運動）。
+$$\boxed{\varepsilon_n(k_z) = \left(n+\tfrac12\right)\hbar\omega_c + \frac{\hbar^2 k_z^2}{2m},\qquad \omega_c = \frac{eB}{mc}}$$
+本徵函數
+$$\boxed{\psi = e^{i(k_x x + k_z z)}\,\chi_n\!\left(y - \frac{\hbar c k_x}{eB}\right)}$$
+
+> **重點**：磁場把 $xy$ 平面內連續的能量量子化成等距朗道能階（間隔 $\hbar\omega_c$），$k_z$ 仍自由。態的簡併度 $\propto B$（$y_0$ 隨 $k_x$ 連續移動，每個朗道能階容納 $\frac{eB}{hc}\times$ 面積 個態）——這正是 dHvA 振盪、量子霍爾效應的微觀起點。SI 制把 $c$ 拿掉（$\omega_c=eB/m$）即可。
+
+<details>
+<summary><b>📝 更多範例（點開）：能階間距數值、簡併度、含自旋的塞曼分裂</b></summary>
+
+**範例 A（朗道能階間距 $\hbar\omega_c$ 的數值）**：自由電子 $m=m_e$、$B=1\,$T（SI，$\omega_c=eB/m$）：
+
+$$\omega_c=\frac{eB}{m}=\frac{(1.602\times10^{-19})(1)}{9.109\times10^{-31}}=1.76\times10^{11}\,\text{s}^{-1}.$$
+
+$$\hbar\omega_c=(1.055\times10^{-34})(1.76\times10^{11})=1.86\times10^{-23}\,\text{J}=1.16\times10^{-4}\,\text{eV}\approx0.12\,\text{meV}.$$
+
+換成溫度 $\hbar\omega_c/k_B=1.86\times10^{-23}/1.38\times10^{-23}=1.35\,\text{K}$——所以 dHvA 振盪只在低溫（$T\lesssim$ 幾 K）、強場下才看得清，否則熱模糊 $k_BT\gg\hbar\omega_c$ 把能階抹平。
+
+**範例 B（每朗道能階的簡併度）**：面積 $L_xL_y$ 的樣品，每個朗道能階容納的態數
+
+$$N_L=\frac{eB}{h}L_xL_y=\frac{(1.602\times10^{-19})(1)}{6.626\times10^{-34}}L_xL_y=2.42\times10^{14}\,L_xL_y\ (\text{每}\,\text{m}^2).$$
+
+簡併度 $\propto B$：磁場越強、每個朗道能階裝得越多態，於是隨 $B$ 增大，費米能下方的朗道能階數依序減少——能階逐一「掃出」費米面，就是 dHvA 與量子霍爾平台的來源。
+
+**範例 C（加自旋：塞曼分裂）**：含自旋後每個朗道能階再分裂成兩個（自旋向上/下），能量
+
+$$\varepsilon_{n,s}=\Big(n+\tfrac12\Big)\hbar\omega_c+\frac{\hbar^2k_z^2}{2m}\pm\frac12 g\mu_B B,\qquad \mu_B=\frac{e\hbar}{2m}.$$
+
+對自由電子 $g\approx2$，塞曼分裂 $g\mu_B B=2\mu_B B$；而 $\mu_B B=\tfrac12\hbar\omega_c$（因 $\mu_B=e\hbar/2m$、$\hbar\omega_c=\hbar eB/m$），故 $2\mu_B B=\hbar\omega_c$——自由電子的塞曼分裂**恰好等於一個朗道間距**，使分裂後的能階剛好穿插對齊（$n{\uparrow}$ 與 $(n{+}1){\downarrow}$ 重合）。實際金屬 $g\ne2$ 時這個巧合被破壞，dHvA 振盪出現自旋劈裂的雙峰。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 250" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrc10f" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="135" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">平移後的諧振子位能</text>
+<line x1="55" y1="40" x2="55" y2="200" stroke="#888" stroke-width="1"/>
+<line x1="55" y1="200" x2="225" y2="200" stroke="#888" stroke-width="1"/>
+<text x="49" y="48" text-anchor="end" font-size="10" fill="#333">V</text>
+<text x="228" y="204" font-size="10" fill="#333">y</text>
+<polyline points="70,55 90,95 110,128 130,152 145,164 160,152 180,128 200,95 218,58" fill="none" stroke="#6aa1d6" stroke-width="2.2"/>
+<line x1="145" y1="164" x2="145" y2="200" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="145" y="216" text-anchor="middle" font-size="9.5" fill="#c0392b">y₀ = ℏkₓ/(mωᵪ)</text>
+<g stroke="#2e8b2e" stroke-width="1.3">
+<line x1="120" y1="150" x2="170" y2="150"/>
+<line x1="108" y1="128" x2="182" y2="128"/>
+<line x1="98" y1="106" x2="192" y2="106"/>
+</g>
+<text x="135" y="234" text-anchor="middle" font-size="9.5" fill="#2e8b2e">½ m ωᵪ²(y−y₀)² → 厄米函數</text>
+<text x="415" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">朗道能階：等間距 ℏ ωᵪ</text>
+<line x1="320" y1="35" x2="320" y2="205" stroke="#888" stroke-width="1.2"/>
+<text x="314" y="44" text-anchor="end" font-size="10" fill="#333">E</text>
+<g stroke="#1a4d7c" stroke-width="2">
+<line x1="325" y1="185" x2="480" y2="185"/>
+<line x1="325" y1="155" x2="480" y2="155"/>
+<line x1="325" y1="125" x2="480" y2="125"/>
+<line x1="325" y1="95" x2="480" y2="95"/>
+<line x1="325" y1="65" x2="480" y2="65"/>
+</g>
+<g fill="#555" font-size="9.5">
+<text x="486" y="189">n=0</text><text x="486" y="159">1</text><text x="486" y="129">2</text><text x="486" y="99">3</text><text x="486" y="69">4</text>
+</g>
+<line x1="360" y1="155" x2="360" y2="125" stroke="#c0392b" stroke-width="1" marker-start="url(#arrc10f)" marker-end="url(#arrc10f)"/>
+<text x="368" y="143" font-size="10" fill="#c0392b">ℏ ωᵪ</text>
+<text x="415" y="226" text-anchor="middle" font-size="9.5" fill="#777">Eₙ = (n+½)ℏ ωᵪ + ℏ²kᵤ²/2m</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 11（朗道能階）</b>：代入 $\psi=e^{i(k_xx+k_zz)}\chi(y)$ 後，$x$ 動量項整理成<b style="color:#6aa1d6">中心在 $y_0=\hbar k_x/m\omega_c$ 的諧振子位能</b> $\tfrac12 m\omega_c^2(y-y_0)^2$（左，<b>Step 1–4</b>）。<b>Step 5–6</b>：套諧振子本徵值得等間距 <b style="color:#c0392b">$\hbar\omega_c$</b> 的<b style="color:#1a4d7c">朗道能階</b> $E_n=(n+\tfrac12)\hbar\omega_c+\hbar^2k_z^2/2m$（右），$\chi_n$ 為厄米函數、$k_z$ 沿場方向仍自由。簡併度 $\propto B$——這是 dHvA 振盪與量子霍爾效應的微觀起點。</figcaption>
+</figure>
+
+---
+
+## ✅ 本章計算題自我檢核
+
+做完上面後，你應該能**獨立、不看解答**完成下列各項：
+
+1. **dHvA 週期**：給定費米面極值截面 $A$（$k$ 空間），用 $\Delta(1/B)=2\pi e/\hbar A$ 算出週期；並反過來由實驗週期推回 $A$ 與 $k_F$（範例1、習題7）。
+2. **三維自由電子鏈**：由密度 $n=Z/V_{\text{cell}}$ 算 $k_F=(3\pi^2 n)^{1/3}$、極值面積 $\pi k_F^2$，再算實空間迴旋半徑 $r=\hbar k_F/eB$（習題7）。
+3. **二維費米圓越界判斷**：算 $k_F=\sqrt{2\pi n_{2D}}$，與 $\pi/(\text{各軸長})$、角落距比大小，判定費米面在哪些方向出界、形成電子/電洞口袋（範例4、習題2、習題4）。
+4. **結構因子 → 能隙**：用 $S(\mathbf{G})=\sum_j e^{-i\mathbf{G}\cdot\mathbf{r}_j}$ 判斷某倒格點 $U(\mathbf{G})$ 是否為零，並據此說明該區邊界有無能隙、能否成絕緣體（習題3）。
+5. **半經典運動**：用 $\hbar\,d\mathbf{k}/dt=-e\,\mathbf{v}\times\mathbf{B}$ 估開放/閉合軌道的 $k$ 空間運動週期，並說明實空間軌跡（習題5）。
+6. **方位阱束縛態**：寫對稱解的對數導數連續條件 $k\tan(ka/2)=\kappa$ 與 $k^2+\kappa^2=2mU_0/\hbar^2$，數值解出束縛能（習題6）。
+7. **$\mathbf{k}\cdot\mathbf{p}$ 有效質量**：說明一階修正為零（宇稱）、二階給出有效質量，並寫出窄能隙半導體 $m^*\propto E_g$ 的結論（習題8）。
+8. **朗道能階**：把磁場下哈密頓量化成平移諧振子，寫出 $\varepsilon_n=(n+\tfrac12)\hbar\omega_c+\hbar^2k_z^2/2m$ 與簡併度 $\propto B$（習題11）。
+9. **STM 指數穿隧**：算 $\kappa=\sqrt{2m\phi}/\hbar$，並用 $I\propto e^{-2\kappa d}$ 估間隔變化造成的電流比（範例2）。
+
+> 全部能做 = 你已掌握 Kittel 第9章（費米面與金屬）必考計算。其中 dHvA 週期、二維費米圓越界、結構因子-能隙、朗道能階是台大應物資格考最常見的四類。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

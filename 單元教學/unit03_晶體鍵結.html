@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理 單元 03 — 晶體鍵結（Crystal Binding）</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">單元目錄</a> &nbsp;·&nbsp; <a href="../考古題/單元整理.html">單元整理</a> &nbsp;·&nbsp; <a href="../考古題/詳解/index.html">逐題詳解</a> &nbsp;·&nbsp; <a href="../教材/index.html">📖 教材直讀</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- 固態物理 單元03：晶體鍵結（Crystal Binding） · 從高中到資格考 -->
+
+# 固態物理 單元03 — 晶體鍵結（Crystal Binding）
+### 從高中概念建到資格考
+
+> **使用說明**：本篇從你高中會的東西（庫侖定律、彈簧位能、單變數微分求極值、等比/泰勒級數）出發，一路接到 Kittel 第 3 章等級。符號點 `▸` 就地展開（你高中學過的→為什麼→定義→範例1/2/3）。專有名詞第一次出現用「中文（English）」對照。配套：[單元整理](../考古題/單元整理.html)（出題頻率）、[逐題詳解](../考古題/詳解/index.html)、[教材直讀](../教材/index.html)。
+> **慣例（本篇符號）**：最近鄰距離 $R$ 或 $r$；藍納–瓊斯參數 $\varepsilon$（能量尺度）、$\sigma$（長度尺度）；庫侖常數捷徑 $\dfrac{e^2}{4\pi\varepsilon_0}=14.40\ \text{eV·Å}$；馬德隆常數（Madelung constant）$\alpha$；原子數 $N$、原子對數視情況；普朗克常數 $\hbar$、波茲曼常數 $k_B=1.38\times10^{-23}\,$J/K $=1.38\times10^{-16}\,$erg/K；內聚能（cohesive energy）$U_0$（取負，越負越穩）。
+>
+> 📖 **本單元權威出處與教材對照（Textbook & Reference Alignment）**：
+> - **Kittel 原文 8e**：Chapter 3（Crystal Binding and Elastic Constants, pp. 53–84），核心公式：Eq. (2) Lennard-Jones 位能、Eq. (8)–(12) 惰性氣體晶體平衡距離與內聚能、Eq. (20)–(23) 馬德隆位能。
+> - **林盛煇《固態物理導論》**：第 3 章（§3.1 化學鍵結類型、§3.2 凡得瓦晶體與 LJ 位能、§3.3 離子晶體與馬德隆常數、§3.4 共價與金屬鍵結）。
+> - **Ashcroft & Mermin**：Ch. 19（Cohesion of Solids）、Ch. 20（Cohesion in Covalent and Ionic Crystals）。
+> - **臺大資格考真題對照**：2013–2025 共 8 次命題（2013, 2014, 2015, 2016, 2019, 2020, 2023, 2024），第二梯隊重點單元。
+
+---
+
+## 🧭 為什麼要這個單元？（在解決什麼問題、與其他章節的關係）
+
+### 為什麼要學「晶體鍵結」？
+
+unit01 告訴你晶體「長什麼結構」，卻沒回答更根本的問題：**原子為什麼要湊在一起？又為什麼選這種結構、這個晶格常數，而不是別的？** 鍵結從「能量」回答——原子靠**降低總能量**而結合。五種鍵結（凡得瓦、離子、共價、金屬、氫鍵）給出不同的結構、硬度與熔點。它是 unit01 的「為什麼」，並為 unit04 的振動先鋪好彈簧。
+
+### 在解決什麼問題？
+
+> **核心問題**：把晶體拆回自由原子要花多少能量（**內聚能 cohesive energy**）？平衡晶格常數、彈性與熱膨脹又從哪來？
+
+做法：寫出每對原子的位能 $U(r)=$（吸引項）$-$（排斥項），對整個晶格求和、再對 $r$ 求極小。離子晶體的吸引和要用 **Madelung 常數**（在 unit01 的 lattice 上求和），惰性氣體用 **Lennard–Jones** $U=4\varepsilon[(\sigma/r)^{12}-(\sigma/r)^6]$。
+
+### 與其他章節的關係
+
+| 相關章節 | 關係 |
+|---|---|
+| **01 晶體結構（往前接）** | Madelung 求和在 unit01 的 lattice 上做；離子半徑比（unit01 §4.6）決定 NaCl/CsCl/ZnS 選哪種結構 |
+| **04 聲子（往後給）** | 位能井底部的曲率 $U''(r_0)$ 就是彈簧常數 → 聲子頻率；井的不對稱（非諧性）→ 熱膨脹 |
+| **05–06 電子（對照）** | 共價/金屬鍵的微觀機制最終要靠能帶與電子共有來解釋 |
+
+> **一句話**：unit01 給「形狀」，unit03 給「為什麼是這形狀 + 多穩」——而那個位能井的曲率，正好是 unit04 聲子的起點。
+
+---
+
+## 🎯 這個單元在考什麼（出題地位）
+
+晶體鍵結是**第二梯隊（高頻）**單元：2013–2025 共 13 卷裡出現 **8 次**（2013, 2014, 2015, 2016, 2019, 2020, 2023, 2024）。它**不在** 2019 起的「四大段固定結構」（Crystal structure / Diffraction / Phonons / Electrons）裡，但常常**附在晶體結構那一段尾巴**（2020 把 Madelung 接在 filling factor 後面、2023 把 1D Madelung 接在 graphene 後面），所以**不能裸考**。典型配分 **5–15%**。
+
+| 最常見題型 | 出過的年份 | 對應本篇章節 |
+|---|---|---|
+| 五種鍵結辨識＋舉例（看圖或純文字） | 2013, 2014, 2015, 2016 | §1 |
+| 凡得瓦力由兩諧振子/兩偶極推 $-1/r^6$、估熔點 | 2013 | §2 |
+| 藍納–瓊斯：兩項意義、$R_0$、fcc 內聚能、四惰性氣體沸點 | 2014, 2015, 2016 | §3 |
+| 1D 離子鏈馬德隆常數 $=2\ln2$ | 2023 | §4 |
+| LiCl（NaCl 結構）鍵能、為何晶體比分子高 | 2020, 2024 | §5 |
+| 給 $E(r)$ 求移走原子能量、能否預測熱膨脹 | 2019 | §6 |
+
+> **一句話**：這個單元只有三條主軸——**凡得瓦（中性原子）→ 藍納–瓊斯**、**離子（帶電）→ 馬德隆**、**位能井形狀 → 平衡距離/內聚能/熱膨脹**。把這三條的標準推導練到能默寫，配分幾乎全拿。
+
+## 🧗 高中起點：你已經會的
+
+- **庫侖定律**：兩點電荷位能 $U=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q_1q_2}{r}$，異號吸引（$U<0$）、同號排斥（$U>0$）。← 離子鍵與馬德隆常數的全部基礎。
+- **彈簧位能 $\tfrac12kx^2$ 與簡諧振子**：力 $=-dU/dx$，平衡在位能最低點。← 凡得瓦兩諧振子模型、位能井展開。
+- **單變數微分求極值**：$dU/dr=0$ 找平衡距離、$d^2U/dr^2>0$ 確認是極小（井底）。← 藍納–瓊斯平衡距離與內聚能的核心手法。
+- **等比級數與交錯級數**：$1-\tfrac12+\tfrac13-\cdots=\ln2$（由 $\ln(1+x)$ 在 $x=1$）。← 1D 馬德隆常數。
+- **泰勒展開 $\sqrt{1+x}\approx1+\tfrac{x}{2}-\tfrac{x^2}{8}$、$\ln(1+x)=x-\tfrac{x^2}{2}+\cdots$**。← 凡得瓦零點能差、馬德隆級數。
+- **熱能 $\sim k_BT$**：溫度的能量尺度。← 用「鍵能 $\sim k_BT_m$」估熔點。
+
+---
+
+## 📚 主線：從高中一路推到考試級
+
+### 1. 五種鍵結（Five Types of Crystal Binding）：先學會辨識
+
+> 📖 **本節核心出處與說明（Ref）**：
+> - **權威教材**：Kittel 8e Ch. 3 pp. 53–75 ｜ 林盛煇 §3.1 ｜ A&M Ch. 19
+> - **歷年考題**：[NTU 2013](../考古題/詳解/固態_2013_詳解.html), [2014](../考古題/詳解/固態_2014_詳解.html), [2015](../考古題/詳解/固態_2015_詳解.html), [2016](../考古題/詳解/固態_2016_詳解.html)
+> - **觀念說明**：凡得瓦鍵（惰性氣體）、離子鍵（強庫侖）、共價鍵（方向性電子共用）、金屬鍵（自由電子海非定域化）、氫鍵（電負度極化分子間）。
+
+
+**你高中學過的**：你知道「離子鍵」（NaCl，電子轉移）和「共價鍵」（H₂、鑽石，共用電子對）。普化還教過「金屬鍵」（電子海）和「分子間作用力」（凡得瓦、氫鍵）。
+
+**為什麼需要新東西**：固態物理把這五種鍵結放在同一張表上比較——機制、強弱、典型材料、物理性質（硬度、熔點、導電性），考試常要你「看一張電荷分布圖辨識是哪種鍵」或「各舉一兩個例子」。
+
+**定義（中英對照）**：依機制分五類，由弱到強大致是 凡得瓦 < 氫鍵 < 金屬 ≲ 離子 ≲ 共價。
+
+| 鍵結 | 機制 | 典型材料 | 性質 |
+|---|---|---|---|
+| **凡得瓦（van der Waals）** | 瞬時偶極–感應偶極吸引（London 色散力），$\propto -1/r^6$；近距泡利排斥 $\propto +1/r^{12}$ | Ar、Kr、固態 CH₄ | 鍵弱、熔點極低、絕緣 |
+| **氫鍵（hydrogen bond）** | H 居間橋接兩個電負性原子（O、N、F）的偶極吸引 | 冰 H₂O、HF、DNA | 中弱、決定水/冰的反常 |
+| **金屬（metallic bond）** | 價電子完全離域成電子海，正離子實浸於其中；鍵無方向性 | Na、Cu、Al | 延展、導電導熱佳 |
+| **離子（ionic bond）** | 電子整顆轉移形成 $\pm$ 離子，靠庫侖（馬德隆）吸引；排斥來自閉殼重疊 | NaCl、KCl、CsCl | 鍵強、硬脆、熔點高、熔融才導電 |
+| **共價（covalent bond）** | 相鄰原子共用價電子對，形成方向性強的飽和鍵（如 $sp^3$） | diamond、Si、Ge | 硬、熔點高、能隙大（半導體/絕緣） |
+
+> **辨識口訣（2015 看圖題）**：全中性閉殼球＝凡得瓦；正負離子交替＝離子；核間有共用電子對橋接＝共價；正核泡在均勻電子海＝金屬。圖上若標電荷數（如 Ar 是 $18^+$ 核＋$18$ 電子的中性球；K$^+$ 是 $19^+/18e$），數一數電子數就能分。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 660 215" width="100%" style="max-width:720px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="ionA3a" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#84b4df"/><stop offset="1" stop-color="#1a4d7c"/></radialGradient>
+<radialGradient id="ionB3a" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#f0a79b"/><stop offset="1" stop-color="#c0392b"/></radialGradient>
+<radialGradient id="neu3a" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#cfcfcf"/><stop offset="1" stop-color="#7a7a7a"/></radialGradient>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="11">
+<g transform="translate(0,0)">
+<text x="65" y="18" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">離子 ionic</text>
+<circle cx="42" cy="70" r="18" fill="url(#ionA3a)"/><text x="42" y="74" text-anchor="middle" font-size="11" fill="#fff">+</text>
+<circle cx="90" cy="70" r="22" fill="url(#ionB3a)"/><text x="90" y="74" text-anchor="middle" font-size="11" fill="#fff">−</text>
+<line x1="58" y1="70" x2="70" y2="70" stroke="#333" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="65" y="108" text-anchor="middle" fill="#555">電子整顆轉移</text>
+<text x="65" y="124" text-anchor="middle" fill="#c0392b">~3–8 eV</text>
+</g>
+<g transform="translate(132,0)">
+<text x="65" y="18" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">共價 covalent</text>
+<circle cx="42" cy="70" r="20" fill="url(#neu3a)"/><circle cx="90" cy="70" r="20" fill="url(#neu3a)"/>
+<circle cx="62" cy="64" r="3.5" fill="#2e8b2e"/><circle cx="70" cy="76" r="3.5" fill="#2e8b2e"/>
+<text x="66" y="108" text-anchor="middle" fill="#555">共用電子對(綠)</text>
+<text x="66" y="124" text-anchor="middle" fill="#c0392b">~4–7 eV(最強)</text>
+</g>
+<g transform="translate(264,0)">
+<text x="66" y="18" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">金屬 metallic</text>
+<rect x="20" y="40" width="92" height="60" rx="6" fill="#eaf2fb" stroke="#6aa1d6"/>
+<g fill="url(#ionA3a)"><circle cx="38" cy="58" r="9"/><circle cx="78" cy="58" r="9"/><circle cx="58" cy="84" r="9"/><circle cx="98" cy="84" r="9"/></g>
+<g fill="#2e8b2e"><circle cx="55" cy="50" r="2"/><circle cx="95" cy="52" r="2"/><circle cx="40" cy="78" r="2"/><circle cx="78" cy="76" r="2"/><circle cx="68" cy="64" r="2"/></g>
+<text x="66" y="116" text-anchor="middle" fill="#555">正核泡電子海(綠)</text>
+<text x="66" y="132" text-anchor="middle" fill="#c0392b">~1–4 eV</text>
+</g>
+<g transform="translate(396,0)">
+<text x="66" y="18" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">凡得瓦 vdW</text>
+<circle cx="42" cy="70" r="20" fill="url(#neu3a)"/><circle cx="92" cy="70" r="20" fill="url(#neu3a)"/>
+<text x="42" y="74" text-anchor="middle" font-size="9" fill="#fff">δ+ δ−</text>
+<text x="92" y="74" text-anchor="middle" font-size="9" fill="#fff">δ+ δ−</text>
+<text x="67" y="108" text-anchor="middle" fill="#555">瞬時偶極 ∝1/r⁶</text>
+<text x="67" y="124" text-anchor="middle" fill="#c0392b">~0.01–0.1 eV(最弱)</text>
+</g>
+<g transform="translate(528,0)">
+<text x="66" y="18" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">氫鍵 H-bond</text>
+<circle cx="36" cy="70" r="18" fill="url(#ionB3a)"/><text x="36" y="74" text-anchor="middle" fill="#fff">O</text>
+<circle cx="76" cy="70" r="9" fill="url(#neu3a)"/><text x="76" y="73" text-anchor="middle" font-size="9" fill="#fff">H</text>
+<circle cx="112" cy="70" r="18" fill="url(#ionB3a)"/><text x="112" y="74" text-anchor="middle" fill="#fff">N</text>
+<line x1="85" y1="70" x2="96" y2="70" stroke="#e67e22" stroke-width="2" stroke-dasharray="3,2"/>
+<text x="70" y="108" text-anchor="middle" fill="#555">H 橋接(橘虛線)</text>
+<text x="70" y="124" text-anchor="middle" fill="#c0392b">~0.1–0.5 eV</text>
+</g>
+<line x1="20" y1="148" x2="640" y2="148" stroke="#ccc" stroke-width="1"/>
+<text x="20" y="168" font-size="11.5" fill="#333">鍵強由弱到強：</text>
+<text x="120" y="168" font-size="11.5" fill="#2e8b2e">凡得瓦 &lt; 氫鍵 &lt; 金屬 ≲ 離子 ≲ 共價</text>
+<text x="20" y="190" font-size="10.5" fill="#777">辨識：中性球＝vdW／正負交替＝離子／核間電子對＝共價／核泡電子海＝金屬／H 居中＝氫鍵</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">五種鍵結一眼對照（2015 看圖題就考辨識）。<b style="color:#c0392b">紅球＝負離子/電負性原子</b>、<b style="color:#1a4d7c">藍球＝正離子/正核</b>、<b style="color:#2e8b2e">綠點＝共用或離域電子</b>。鍵能量級從凡得瓦（~0.01–0.1 eV，極弱、熔點低）一路升到共價（~4–7 eV，最強、最硬）。考試只要會「看圖認鍵 + 各舉一例 + 比強弱」即可。</figcaption>
+</figure>
+
+<details>
+<summary><b>▸ 內聚能（cohesive energy）U_0</b></summary>
+
+### 你高中學過的
+把分子拆開要吸熱（鍵能）；越穩的鍵，拆開要的能量越多。
+
+### 為什麼要這個
+要量化「這個鍵結有多強」，需要一個統一定義：把晶體拆成「無窮遠、靜止、彼此分開的中性原子」要加多少能量。這個值就是內聚能，是本單元所有計算的最終目標。
+
+### 定義
+內聚能 = 把晶體分離成無窮遠靜止的中性自由原子所需加入的能量。本篇取**位能井底相對 $U=0$（原子已分離）的落差**，習慣寫成負值 $U_0<0$，$|U_0|$ 越大越穩。離子晶體的同類量稱**晶格能（lattice energy）**（拆成自由**離子**而非中性原子）。
+
+**範例 1（熱身）**：單一離子對 $+e,-e$ 相距 $R$，$U=-\dfrac{e^2}{4\pi\varepsilon_0 R}$，$|U|$ 就是把它拉開的能量。
+**範例 2（中階）**：惰性氣體 Ar 的內聚能 $\sim0.08$ eV/原子——對照鑽石（共價）$\sim7$ eV/原子，差兩個數量級，正反映「凡得瓦 ≪ 共價」。
+**範例 3（考題）**：fcc 惰性氣體 $U_0=-8.6\,N\varepsilon$（§3）；LiCl 晶格能 $\approx-8.6$ eV/離子對（§5）。
+</details>
+
+> **小結**：鍵結 = 「誰被誰吸住」。凡得瓦/離子有乾淨的解析模型（本單元主推），共價/金屬/氫鍵多半只考定性辨識與舉例。
+
+---
+
+### 2. 凡得瓦力（van der Waals interaction）：由兩諧振子推 $-1/r^6$
+
+**你高中學過的**：兩個中性原子「不帶電」，照理沒有庫侖力。但惰性氣體確實會凝結成固體——一定有某種微弱吸引。
+
+**為什麼需要新東西**：中性原子的電子雲會**瞬時漲落**形成瞬時偶極，這個偶極在鄰近原子上**感應**出另一個偶極，兩偶極互相吸引。要算出這個吸引隨距離怎麼變（答案是 $-1/r^6$），最乾淨的做法是「兩個耦合諧振子」模型——這正是 2013 第 5 題。
+
+**定義（中英對照）**：把每個原子模型成一維諧振子（電子相對離子位移 $x_i$、彈簧常數 $C$、$\omega_0=\sqrt{C/m}$）。兩振子相距 $R$，偶極矩 $p_i=ex_i$，偶極–偶極耦合使兩者頻率分裂，**零點能（zero-point energy）下降**，降幅 $\propto -1/R^6$。
+
+<details>
+<summary><b>▸ 簡正模與零點能：ω_0, x_±</b></summary>
+
+### 你高中學過的
+單一彈簧振子角頻率 $\omega_0=\sqrt{C/m}$；兩個耦合振子可換成「同相/反相」兩個獨立模態。
+
+### 為什麼要這個
+兩振子直接算很糾纏；換成**簡正座標** $x_\pm=\tfrac1{\sqrt2}(x_1\pm x_2)$ 後，耦合項對角化、兩個模各自獨立，頻率變 $\omega_\pm$，能量就好算了。
+
+### 定義
+- 簡正模：使 Hamiltonian 變成兩個獨立諧振子的座標組合。
+- 零點能：量子諧振子最低能 $\tfrac12\hbar\omega$（即使 $T=0$ 也有，源自測不準原理）。兩個耦合振子的零點能 $\tfrac12\hbar(\omega_++\omega_-)$ 比未耦合的 $\hbar\omega_0$ **低**——這個降低就是凡得瓦吸引。
+
+**範例 1（熱身）**：未耦合兩振子零點能 $=2\times\tfrac12\hbar\omega_0=\hbar\omega_0$。
+**範例 2（中階）**：耦合後 $\omega_\pm=\omega_0\sqrt{1\mp 2e^2/CR^3}$，一個升一個降。
+**範例 3（考題）**：降幅 $\propto R^{-6}$（見下方 Step 4），這就是 $-A/R^6$ 吸引。
+</details>
+
+#### Step 1 — 寫未耦合的 Hamiltonian
+
+兩個獨立諧振子（無交互作用）：
+
+$$H_0=\frac{p_1^2}{2m}+\frac12 C x_1^2+\frac{p_2^2}{2m}+\frac12 C x_2^2,\qquad \omega_0=\sqrt{C/m}.$$
+
+> **小結**：兩個原子各是一個彈簧，頻率都是 $\boxed{\omega_0=\sqrt{C/m}}$。
+
+#### Step 2 — 加上偶極–偶極耦合
+
+兩個共線偶極 $ex_1,ex_2$ 相距 $R$，靜電作用展開到領先項（偶極–偶極 $\propto 1/R^3$）：
+
+$$H_1\approx-\frac{2e^2}{R^3}\,x_1x_2.$$
+
+> **小結**：耦合項 $\boxed{-\dfrac{2e^2}{R^3}x_1x_2}$ 把兩振子綁在一起；負號表示「同向位移」較省能。
+
+#### Step 3 — 換簡正座標，把耦合對角化
+
+令 $x_\pm=\tfrac1{\sqrt2}(x_1\pm x_2)$，則 $x_1^2+x_2^2=x_+^2+x_-^2$、$2x_1x_2=x_+^2-x_-^2$，位能部分變成
+
+$$\tfrac12C(x_1^2+x_2^2)-\tfrac{2e^2}{R^3}x_1x_2=\tfrac12\Big(C-\tfrac{2e^2}{R^3}\Big)x_+^2+\tfrac12\Big(C+\tfrac{2e^2}{R^3}\Big)x_-^2.$$
+
+兩個獨立模的頻率：
+
+$$\omega_\pm=\sqrt{\frac{C\mp 2e^2/R^3}{m}}=\omega_0\sqrt{1\mp\frac{2e^2}{CR^3}}.$$
+
+> **小結**：耦合把單一 $\omega_0$ 分裂成 $\boxed{\omega_\pm=\omega_0\sqrt{1\mp 2e^2/CR^3}}$，一升一降。
+
+#### Step 4 — 算零點能差，得 $-1/R^6$
+
+零點能差 = 耦合後 $-$ 未耦合。用 $\sqrt{1+u}\approx1+\tfrac u2-\tfrac{u^2}8$，令 $u=\mp\tfrac{2e^2}{CR^3}$：
+
+$$
+\begin{aligned}
+\Delta U &= \tfrac12\hbar(\omega_++\omega_-)-\hbar\omega_0 \\
+&\approx \tfrac12\hbar\omega_0\Big[\big(1-\tfrac u2-\tfrac{u^2}{8}\big)+\big(1+\tfrac u2-\tfrac{u^2}{8}\big)-2\Big] \\
+&= -\tfrac12\hbar\omega_0\cdot\tfrac{u^2}{4}.
+\end{aligned}
+$$
+
+**一階 $\mp\tfrac u2$ 相消、二階 $-\tfrac{u^2}8$ 同號相加**（這是關鍵：吸引來自二階）。代回 $u^2=\big(\tfrac{2e^2}{CR^3}\big)^2$：
+
+$$\boxed{\Delta U=-\frac{\hbar\omega_0}{8}\Big(\frac{2e^2}{CR^3}\Big)^2=-\frac{\hbar\omega_0\,e^4}{2C^2}\cdot\frac{1}{R^6}\equiv-\frac{A}{R^6}<0.}$$
+
+> **小結**：凡得瓦吸引 $\propto -1/R^6$ 的物理來源是「耦合使零點能下降」，且**只有二階項存活**。係數 $A\propto\omega_0 e^4/C^2$ 與原子的極化率有關——這就是為什麼極化率大的原子（Xe）凡得瓦更強（§3 沸點題的伏筆）。
+
+<details>
+<summary><b>📝 更多範例（點開）：兩振子零點能差、根號泰勒展開、1/R⁶ 來源</b></summary>
+
+**範例 A（一步步展開 $\omega_\pm$）**：令小量 $u=\dfrac{2e^2}{CR^3}$，則 $\omega_\pm=\omega_0\sqrt{1\mp u}$。用 $\sqrt{1+v}\approx1+\tfrac v2-\tfrac{v^2}8$，分別代 $v=-u$（取 $+$ 模）與 $v=+u$（取 $-$ 模）：
+$$\omega_+=\omega_0\Big(1-\tfrac u2-\tfrac{u^2}8\Big),\qquad \omega_-=\omega_0\Big(1+\tfrac u2-\tfrac{u^2}8\Big).$$
+相加：$\omega_++\omega_-=\omega_0\big[(1-\tfrac u2-\tfrac{u^2}8)+(1+\tfrac u2-\tfrac{u^2}8)\big]=\omega_0\big(2-\tfrac{u^2}4\big)$。**一階 $\mp\tfrac u2$ 互消**、二階 $-\tfrac{u^2}8$ 同號相加成 $-\tfrac{u^2}4$。
+
+**範例 B（從 $\omega_++\omega_-$ 算零點能差）**：零點能差
+$$\Delta U=\tfrac12\hbar(\omega_++\omega_-)-\hbar\omega_0=\tfrac12\hbar\,\omega_0\big(2-\tfrac{u^2}4\big)-\hbar\omega_0=\hbar\omega_0-\tfrac{\hbar\omega_0u^2}8-\hbar\omega_0=-\tfrac{\hbar\omega_0}{8}u^2.$$
+代回 $u^2=\big(\tfrac{2e^2}{CR^3}\big)^2=\dfrac{4e^4}{C^2R^6}$：
+$$\Delta U=-\frac{\hbar\omega_0}{8}\cdot\frac{4e^4}{C^2R^6}=-\frac{\hbar\omega_0\,e^4}{2C^2}\cdot\frac1{R^6}\equiv-\frac A{R^6}.$$
+每一步都不跳：先求和、再乘 $\tfrac12\hbar$、減 $\hbar\omega_0$、最後代 $u^2$。
+
+**範例 C（為什麼是 $1/R^6$ 不是 $1/R^3$）**：耦合項本身 $\propto1/R^3$（範例 A 的 $u\propto R^{-3}$），但它的**一階效應相消**；存活的是二階 $u^2\propto(R^{-3})^2=R^{-6}$。所以「偶極–偶極是 $1/R^3$，但能量降低是 $1/R^6$」——這正是常見陷阱「來自二階、不是一階」。
+
+**範例 D（數量級檢核）**：若 $\hbar\omega_0\sim10$ eV、$e^2/(CR^3)\sim0.1$，則 $u\sim0.2$，$\Delta U\sim-\tfrac{10}{8}(0.2)^2\approx-0.05$ eV——正是惰性氣體 ~0.01–0.1 eV 的凡得瓦量級，與 §1 表一致。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 260" width="100%" style="max-width:640px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="atom3b" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#cfe0f2"/><stop offset="1" stop-color="#9bbbdd"/></radialGradient>
+<marker id="arr3b" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif">
+<text x="280" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">瞬時偶極 → 感應偶極 → 吸引（∝ −1/R⁶）</text>
+<circle cx="150" cy="120" r="48" fill="url(#atom3b)" stroke="#6aa1d6"/>
+<circle cx="410" cy="120" r="48" fill="url(#atom3b)" stroke="#6aa1d6"/>
+<text x="150" y="190" text-anchor="middle" font-size="11.5" fill="#555">原子 1（瞬時漲落）</text>
+<text x="410" y="190" text-anchor="middle" font-size="11.5" fill="#555">原子 2（被感應）</text>
+<circle cx="170" cy="120" r="22" fill="none" stroke="#1a4d7c" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="128" y="124" font-size="13" fill="#c0392b">−</text><text x="190" y="124" font-size="13" fill="#1a4d7c">+</text>
+<circle cx="392" cy="120" r="22" fill="none" stroke="#1a4d7c" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="372" y="124" font-size="13" fill="#c0392b">−</text><text x="436" y="124" font-size="13" fill="#1a4d7c">+</text>
+<line x1="118" y1="100" x2="200" y2="100" stroke="#888" stroke-width="1.4" marker-end="url(#arr3b)"/>
+<text x="160" y="92" text-anchor="middle" font-size="10" fill="#888">p₁ = e x₁</text>
+<line x1="362" y1="100" x2="444" y2="100" stroke="#888" stroke-width="1.4" marker-end="url(#arr3b)"/>
+<text x="404" y="92" text-anchor="middle" font-size="10" fill="#888">p₂(感應)</text>
+<line x1="198" y1="120" x2="362" y2="120" stroke="#333" stroke-width="1"/>
+<line x1="198" y1="116" x2="202" y2="120" stroke="#333" stroke-width="1"/><line x1="198" y1="124" x2="202" y2="120" stroke="#333" stroke-width="1"/>
+<line x1="362" y1="116" x2="358" y2="120" stroke="#333" stroke-width="1"/><line x1="362" y1="124" x2="358" y2="120" stroke="#333" stroke-width="1"/>
+<text x="280" y="114" text-anchor="middle" font-size="13" fill="#333">R</text>
+<line x1="240" y1="148" x2="320" y2="148" stroke="#c0392b" stroke-width="2" marker-end="url(#arr3b)"/>
+<line x1="320" y1="148" x2="240" y2="148" stroke="#c0392b" stroke-width="2" marker-end="url(#arr3b)"/>
+<text x="280" y="166" text-anchor="middle" font-size="11" fill="#c0392b">兩偶極互相吸引</text>
+<text x="280" y="218" text-anchor="middle" font-size="11.5" fill="#333">零點能 ½ħ(ω₊+ω₋) &lt; ħω₀ → 能量下降量 ΔU = −A/R⁶</text>
+<text x="280" y="240" text-anchor="middle" font-size="10.5" fill="#777">一階 ∓u/2 相消、二階 −u²/8 同號相加（吸引來自二階）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">凡得瓦力的物理圖像：原子 1 的電子雲<b>瞬時漲落</b>出一個偶極 p₁，它在原子 2 上<b style="color:#c0392b">感應</b>出方向一致的 p₂，兩偶極互相吸引。量子上等價於「兩耦合諧振子的零點能下降」（½ħ(ω₊+ω₋) 比未耦合的 ħω₀ 低）。展開後<b>一階項相消、只剩二階</b>，給出 ΔU = −A/R⁶（2013 第 5 題的全部精髓）。</figcaption>
+</figure>
+
+#### Step 5 — 用鍵能 $\sim k_BT_m$ 估熔點（2013 Kr）
+
+給 $U(R)\approx-10^{-58}\,\mathrm{erg\,cm^6}/R^6$、$R=4\,$Å $=4\times10^{-8}\,$cm。先算鍵能大小：
+
+$$R^6=(4\times10^{-8})^6=4^6\times10^{-48}=4096\times10^{-48}=4.096\times10^{-45}\,\mathrm{cm^6},$$
+$$|U|=\frac{10^{-58}}{4.096\times10^{-45}}=2.44\times10^{-14}\,\mathrm{erg}.$$
+
+熔點時熱能與鍵能同量級，取 $k_BT_m\approx|U|$（$k_B=1.38\times10^{-16}\,$erg/K）：
+
+$$\boxed{T_m\approx\frac{|U|}{k_B}=\frac{2.44\times10^{-14}}{1.38\times10^{-16}}\approx177\,\mathrm{K}.}$$
+
+> **小結**：估得 $\sim177$ K，與氪實際熔點 $116$ K 同量級（差約 1.5 倍）。這是「$k_BT_m\sim$ 鍵能」的**粗估**，沒算配位數與多體和，**量級對**即達題意。
+
+<details>
+<summary><b>📝 更多範例（點開）：k_B T_m ~ |U| 反覆練（R⁶、單位、反推）</b></summary>
+
+**範例 A（換不同 $R$ 重算鍵能）**：同 $U(R)=-10^{-58}\,\mathrm{erg\,cm^6}/R^6$，改 $R=3.8\,$Å $=3.8\times10^{-8}\,$cm：
+$$R^6=(3.8\times10^{-8})^6=3.8^6\times10^{-48}=3010\times10^{-48}=3.01\times10^{-45}\,\mathrm{cm^6},$$
+$$|U|=\frac{10^{-58}}{3.01\times10^{-45}}=3.32\times10^{-14}\,\mathrm{erg},\qquad T_m\approx\frac{3.32\times10^{-14}}{1.38\times10^{-16}}\approx241\,\mathrm{K}.$$
+$R$ 小一點 → $R^6$ 小 → $|U|$ 大 → $T_m$ 高（鍵越短越強）。
+
+**範例 B（eV 與 erg 互換）**：把範例 A 的 $|U|=3.32\times10^{-14}$ erg 換成 eV（$1\,\mathrm{eV}=1.602\times10^{-12}\,$erg）：
+$$|U|=\frac{3.32\times10^{-14}}{1.602\times10^{-12}}=0.0207\ \mathrm{eV}\approx0.02\ \mathrm{eV}.$$
+落在凡得瓦 ~0.01–0.1 eV 區間，自洽。
+
+**範例 C（由熔點反推鍵能）**：已知氬熔點 $T_m\approx84$ K，反推鍵能尺度：
+$$|U|\sim k_BT_m=(1.38\times10^{-16})(84)=1.16\times10^{-14}\,\mathrm{erg}=\frac{1.16\times10^{-14}}{1.602\times10^{-12}}=7.2\times10^{-3}\ \mathrm{eV}.$$
+量級對（氬實際 $\varepsilon\approx0.0104$ eV，同數量級）。
+
+**範例 D（為何只能粗估）**：$k_BT_m\sim|U|$ 沒乘配位數（fcc 有 12 鄰），也忽略熔化是「破壞部分鍵」而非全拆，故係數常差 1–3 倍。題目只要**量級**（$10^2$ K）對即可，別追求精確。
+</details>
+
+---
+
+### 3. 藍納–瓊斯位能（Lennard–Jones potential）：惰性氣體晶體完整計算
+
+> 📖 **本節核心出處與說明（Ref）**：
+> - **權威教材**：Kittel 8e Ch. 3 Eq. (2), (8)–(12) pp. 55, 58–60 ｜ 林盛煇 §3.2
+> - **歷年考題**：[NTU 2014](../考古題/詳解/固態_2014_詳解.html), [2016](../考古題/詳解/固態_2016_詳解.html)
+> - **觀念說明**：LJ 12-6 位能 $U(r) = 4\varepsilon[(\sigma/r)^{12} - (\sigma/r)^6]$。FCC 晶格和求和導出平衡最近鄰間距 $R_0 = 1.09\sigma$，每莫耳內聚能 $U_{\text{tot}} = -8.61 N\varepsilon$。
+
+
+**你高中學過的**：分子間有「近距硬排斥 + 遠距軟吸引」，合起來是一個有最小值的位能井。
+
+**為什麼需要新東西**：§2 給了吸引項 $-1/r^6$；近距還要一個排斥項（電子雲重疊的泡利排斥）。把兩項湊起來、選好參數，就是惰性氣體的標準模型——藍納–瓊斯位能。考試要你：說兩項意義、極小化求平衡距離 $R_0$、對 fcc 晶體求內聚能、解釋四惰性氣體沸點為何不同（2014/2015/2016）。
+
+**定義（中英對照）**：單一原子對的藍納–瓊斯位能
+
+$$\boxed{U(r)=4\varepsilon\Big[\Big(\frac\sigma r\Big)^{12}-\Big(\frac\sigma r\Big)^6\Big]}$$
+
+- $(\sigma/r)^{12}$（正，主導短程）：電子雲重疊的**泡利排斥（Pauli repulsion）**。
+- $(\sigma/r)^6$（負）：瞬時偶極–感應偶極的**凡得瓦吸引**（§2 的 $-1/r^6$）。
+
+<details>
+<summary><b>▸ 藍納–瓊斯能量與長度尺度：ε, σ</b></summary>
+
+### 你高中學過的
+位能井有「多深」和「在多遠」兩個特徵；藍納–瓊斯用兩個參數各管一個。
+
+### 為什麼要這個
+$\varepsilon$ 與 $\sigma$ 把所有原子的差異「打包」成兩個數；以 $\varepsilon,\sigma$ 為單位時，Ne/Ar/Kr/Xe 的公式**完全同形**——這是 §3 沸點題的關鍵伏筆。
+
+### 定義
+- $\varepsilon$（能量尺度）：井最深處（單對）的深度即 $-\varepsilon$（在 $r=2^{1/6}\sigma$ 處 $U=-\varepsilon$）。
+- $\sigma$（長度尺度）：$U(\sigma)=0$，即「位能恰好過零」的距離。
+
+**範例 1（熱身）**：單對極小由 $dU/dr=0$ 得 $r=2^{1/6}\sigma\approx1.12\sigma$，井深 $-\varepsilon$。
+**範例 2（中階）**：Ne→Xe 的 $\varepsilon$ 遞增（極化率→凡得瓦強度），$\sigma$ 也遞增。
+**範例 3（考題）**：fcc 晶格和把單對的 $4$ 換成 $A_{12},A_6$（見下），$R_0\approx1.09\sigma$。
+</details>
+
+<details>
+<summary><b>▸ fcc 晶格和 A_12, A_6（lattice sums）</b></summary>
+
+### 你高中學過的
+晶體裡一個原子不是只對一個鄰居，而是對**所有**鄰居加總；每個鄰居距離是「最近鄰距離 $R$」的某個倍數 $p_{ij}R$。
+
+### 為什麼要這個
+把整個 fcc 晶格的求和濃縮成兩個純數 $A_{12},A_6$，內聚能就只剩 $\varepsilon,\sigma,R$ 三個量。
+
+### 定義
+固定一個原子，對其餘所有原子 $j$ 求和：$p_{ij}=r_{ij}/R$（以最近鄰距離為單位的距離）。fcc 結果（Kittel）：
+
+$$A_{12}=\sum_j p_{ij}^{-12}=12.13229,\qquad A_6=\sum_j p_{ij}^{-6}=14.45489.$$
+
+**範例 1（熱身）**：12 個最近鄰 $p=1$ 各貢獻 1 → 兩個和都「不遠離 12」（最近鄰主導）。
+**範例 2（中階）**：$A_{12}<A_6$，因為高次方衰減快、遠鄰對 $A_{12}$ 幾乎沒貢獻。
+**範例 3（考題）**：hcp 也幾乎相同（$12.13,\ 14.45$），故 fcc/hcp 內聚能差極小，惰性氣體選 fcc 只贏一點點。
+</details>
+
+把單對的 $U$ 對所有原子對求和，$N$ 個原子的總位能（每對算一次，故前面是 $2N\varepsilon$ 而非 $4N\varepsilon$）：
+
+$$U(R)=2N\varepsilon\Big[A_{12}\Big(\frac\sigma R\Big)^{12}-A_6\Big(\frac\sigma R\Big)^6\Big].$$
+
+#### Step 1 — 極小化 $dU/dR=0$ 求平衡距離
+
+$$
+\frac{dU}{dR}=2N\varepsilon\Big[-12A_{12}\frac{\sigma^{12}}{R^{13}}+6A_6\frac{\sigma^6}{R^7}\Big]=0
+\ \Longrightarrow\ 12A_{12}\frac{\sigma^6}{R^6}=6A_6.
+$$
+
+> **小結**：平衡條件 $\boxed{12A_{12}(\sigma/R)^6=6A_6}$，即「排斥的導數 = 吸引的導數」。
+
+#### Step 2 — 解出 $R_0$
+
+$$
+\Big(\frac{R_0}{\sigma}\Big)^6=\frac{2A_{12}}{A_6}=\frac{2(12.132)}{14.454}=1.679
+\ \Longrightarrow\ \boxed{R_0=\Big(\frac{2A_{12}}{A_6}\Big)^{1/6}\sigma\approx1.09\,\sigma.}
+$$
+
+> **小結**：fcc 平衡最近鄰距離 $R_0\approx1.09\sigma$（比單對的 $1.12\sigma$ 略縮，因晶格和把井底稍微往內拉）。**$R_0\propto\sigma$，不含 $\varepsilon$**。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 540 270" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif">
+<text x="270" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">藍納–瓊斯位能 U(r) = 4ε[(σ/r)¹² − (σ/r)⁶]</text>
+<line x1="62" y1="143.4" x2="510" y2="143.4" stroke="#aaa" stroke-width="1"/>
+<line x1="70" y1="30" x2="70" y2="245" stroke="#888" stroke-width="1.2"/>
+<line x1="70" y1="245" x2="510" y2="245" stroke="#888" stroke-width="1.2"/>
+<text x="58" y="38" text-anchor="end" font-size="11" fill="#555">U</text>
+<text x="500" y="262" text-anchor="middle" font-size="11" fill="#555">r →</text>
+<text x="46" y="147" text-anchor="end" font-size="10.5" fill="#888">0</text>
+<polyline points="70.0,102.2 79.6,177.1 89.2,206.4 98.7,214.2 108.3,212.0 117.9,205.8 127.5,198.2 137.1,190.8 146.6,183.9 156.2,177.9 165.8,172.7 175.4,168.3 185.0,164.5 194.5,161.4 204.1,158.7 213.7,156.5 223.3,154.7 232.8,153.1 242.4,151.8 252.0,150.6 261.6,149.7 271.2,148.9 280.7,148.2 290.3,147.6 299.9,147.1 309.5,146.6 319.1,146.2 328.6,145.9 338.2,145.6 347.8,145.4 357.4,145.2 367.0,145.0 376.5,144.8 386.1,144.7 395.7,144.5 405.3,144.4 414.9,144.3 424.4,144.2 434.0,144.1 443.6,144.1 453.2,144.0 462.7,144.0 472.3,143.9 481.9,143.9 491.5,143.8" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<line x1="100.3" y1="143.4" x2="100.3" y2="214.3" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,2"/>
+<line x1="70" y1="214.3" x2="100.3" y2="214.3" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,2"/>
+<circle cx="100.3" cy="214.3" r="4" fill="#c0392b"/>
+<text x="100.3" y="234" text-anchor="middle" font-size="11" fill="#c0392b">r₀ = 2^(1/6)σ ≈ 1.12σ</text>
+<text x="64" y="218" text-anchor="end" font-size="11" fill="#c0392b">−ε</text>
+<text x="80" y="138" text-anchor="middle" font-size="10.5" fill="#2e8b2e">σ</text>
+<circle cx="74.3" cy="143.4" r="3" fill="#2e8b2e"/>
+<text x="155" y="80" font-size="10.5" fill="#e67e22">排斥 ∝ +1/r¹²(泡利)</text>
+<text x="330" y="135" font-size="10.5" fill="#2e8b2e">吸引 ∝ −1/r⁶(凡得瓦)</text>
+<text x="300" y="200" font-size="11" fill="#333">井底：dU/dr=0 ⇒ 力 F=−dU/dr=0（平衡）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">兩項相加成一個位能井：<b style="color:#e67e22">短程排斥 +1/r¹²</b>（電子雲重疊的泡利排斥）＋<b style="color:#2e8b2e">遠程吸引 −1/r⁶</b>（凡得瓦）。井底在 <b style="color:#c0392b">r₀ = 2^(1/6)σ ≈ 1.12σ</b>，深度 −ε。<b>由 dU/dr=0 解 r₀</b>：力 F=−dU/dr 在此處恰為零（吸力＝斥力），就是平衡距離；fcc 晶格和把它略拉到 1.09σ。σ 是 U=0 的過零點。</figcaption>
+</figure>
+
+![藍納–瓊斯位能：$r_0=2^{1/6}\sigma$ 處最低 $-\varepsilon$（平衡）](../figs/f03_lennard_jones.svg)
+
+#### Step 3 — 代回求內聚能
+
+用 $(\sigma/R_0)^6=\dfrac{A_6}{2A_{12}}$（Step 2 的倒數），則 $(\sigma/R_0)^{12}=\dfrac{A_6^2}{4A_{12}^2}$：
+
+$$
+U(R_0)=2N\varepsilon\Big[A_{12}\frac{A_6^2}{4A_{12}^2}-A_6\frac{A_6}{2A_{12}}\Big]
+=2N\varepsilon\Big(\frac{A_6^2}{4A_{12}}-\frac{A_6^2}{2A_{12}}\Big)=-N\varepsilon\frac{A_6^2}{2A_{12}}.
+$$
+
+$$\boxed{U_0=-N\varepsilon\frac{A_6^2}{2A_{12}}=-N\varepsilon\frac{(14.454)^2}{2(12.132)}\approx-8.6\,N\varepsilon.}$$
+
+> **小結**：fcc 惰性氣體內聚能 $U_0\approx-8.6N\varepsilon$。**$|U_0|\propto\varepsilon$，不含 $\sigma$**。$R_0,U_0$ 都只含 $\varepsilon,\sigma$ → 以 $\varepsilon,\sigma$ 為單位時 Ne/Ar/Kr/Xe 完全同形。
+
+<details>
+<summary><b>📝 更多範例（點開）：單對極小、R_0 完整代數、代回求 U_0</b></summary>
+
+**範例 A（單原子對的 $r_0=2^{1/6}\sigma$ 完整推）**：對 $U(r)=4\varepsilon[(\sigma/r)^{12}-(\sigma/r)^6]$ 求導：
+$$\frac{dU}{dr}=4\varepsilon\Big[-12\frac{\sigma^{12}}{r^{13}}+6\frac{\sigma^6}{r^7}\Big]=0\ \Rightarrow\ 12\frac{\sigma^{12}}{r^{13}}=6\frac{\sigma^6}{r^7}.$$
+兩邊乘 $r^{13}/(6\sigma^6)$：$2\sigma^6=r^6\Rightarrow r^6=2\sigma^6\Rightarrow r_0=2^{1/6}\sigma\approx1.1225\sigma$。代回井深：$(\sigma/r_0)^6=\tfrac12$、$(\sigma/r_0)^{12}=\tfrac14$，故 $U(r_0)=4\varepsilon(\tfrac14-\tfrac12)=4\varepsilon(-\tfrac14)=-\varepsilon$ ✓。
+
+**範例 B（fcc 的 $R_0$ 數字一步步算）**：$\Big(\dfrac{R_0}\sigma\Big)^6=\dfrac{2A_{12}}{A_6}=\dfrac{2(12.132)}{14.454}=\dfrac{24.264}{14.454}=1.6787$。開 6 次方：取對數 $\tfrac16\ln1.6787=\tfrac16(0.5180)=0.0863$，$e^{0.0863}=1.0902$。故 $R_0\approx1.090\sigma$。比單對 $1.1225\sigma$ 略縮（晶格和把井底往內拉約 2.9%）。
+
+**範例 C（代回 $U_0$ 不跳步）**：用 $(\sigma/R_0)^6=\dfrac{A_6}{2A_{12}}$，平方得 $(\sigma/R_0)^{12}=\dfrac{A_6^2}{4A_{12}^2}$。代入 $U_0=2N\varepsilon[A_{12}(\sigma/R_0)^{12}-A_6(\sigma/R_0)^6]$：
+$$=2N\varepsilon\Big[A_{12}\frac{A_6^2}{4A_{12}^2}-A_6\frac{A_6}{2A_{12}}\Big]=2N\varepsilon\Big[\frac{A_6^2}{4A_{12}}-\frac{A_6^2}{2A_{12}}\Big]=2N\varepsilon\Big(-\frac{A_6^2}{4A_{12}}\Big)=-\frac{N\varepsilon A_6^2}{2A_{12}}.$$
+數字：$\dfrac{A_6^2}{2A_{12}}=\dfrac{14.454^2}{2(12.132)}=\dfrac{208.92}{24.264}=8.61$，故 $U_0\approx-8.61N\varepsilon$。
+
+**範例 D（具體代 Ar 數值）**：Ar 的 $\varepsilon=0.0104$ eV、$\sigma=3.40$ Å。則平衡最近鄰 $R_0=1.090\times3.40=3.71$ Å，每原子內聚能 $U_0/N=-8.61\times0.0104=-0.0896$ eV $\approx-0.09$ eV/原子，與實驗 $-0.080$ eV 同量級（差在零點能修正，§3 Step 4）。
+</details>
+
+#### Step 4 — 為何四惰性氣體沸點不同
+
+模型只說「$R_0\propto\sigma$、$|U_0|\propto\varepsilon$」**形式相同**，不是**絕對值相同**。從 Ne 到 Xe，原子越大、極化率越高 → 凡得瓦強度 $\varepsilon$ **遞增**（Ne < Ar < Kr < Xe）→ 實際 $|U_0|\propto\varepsilon$ 遞增 → 拆開越難 → **沸點/熔點遞增**（實測熔點約 24→84→116→161 K）。
+
+> **小結**：差異全藏在各自的 $\varepsilon$ 值裡。**補充**：最輕的 Ne **零點能**最大（量子效應，Kittel：Ne/Ar/Kr/Xe 修正約 28/10/6/4%），進一步削弱其有效結合，使其熔沸點偏低更明顯。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 290" width="100%" style="max-width:640px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif">
+<text x="280" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">鍵能（內聚能）對熔點：越強的鍵熔點越高</text>
+<line x1="80" y1="40" x2="80" y2="240" stroke="#888" stroke-width="1.2"/>
+<line x1="80" y1="240" x2="540" y2="240" stroke="#888" stroke-width="1.2"/>
+<text x="70" y="46" text-anchor="end" font-size="10" fill="#555">高</text>
+<text x="70" y="238" text-anchor="end" font-size="10" fill="#555">低</text>
+<text x="40" y="145" text-anchor="middle" font-size="11" fill="#555" transform="rotate(-90 40 145)">鍵能 / 熔點（對數示意）</text>
+<rect x="100" y="195" width="60" height="45" fill="#6aa1d6"/>
+<text x="130" y="256" text-anchor="middle" font-size="11" fill="#333">凡得瓦</text>
+<text x="130" y="270" text-anchor="middle" font-size="10" fill="#777">Ar 84K</text>
+<text x="130" y="188" text-anchor="middle" font-size="10" fill="#c0392b">~0.08eV</text>
+<rect x="180" y="170" width="60" height="70" fill="#e67e22"/>
+<text x="210" y="256" text-anchor="middle" font-size="11" fill="#333">氫鍵</text>
+<text x="210" y="270" text-anchor="middle" font-size="10" fill="#777">冰 273K</text>
+<text x="210" y="163" text-anchor="middle" font-size="10" fill="#c0392b">~0.3eV</text>
+<rect x="260" y="120" width="60" height="120" fill="#2e8b2e"/>
+<text x="290" y="256" text-anchor="middle" font-size="11" fill="#333">金屬</text>
+<text x="290" y="270" text-anchor="middle" font-size="10" fill="#777">Cu 1358K</text>
+<text x="290" y="113" text-anchor="middle" font-size="10" fill="#c0392b">~3eV</text>
+<rect x="340" y="95" width="60" height="145" fill="#1a4d7c"/>
+<text x="370" y="256" text-anchor="middle" font-size="11" fill="#333">離子</text>
+<text x="370" y="270" text-anchor="middle" font-size="10" fill="#777">NaCl 1074K</text>
+<text x="370" y="88" text-anchor="middle" font-size="10" fill="#c0392b">~8eV</text>
+<rect x="420" y="75" width="60" height="165" fill="#c0392b"/>
+<text x="450" y="256" text-anchor="middle" font-size="11" fill="#333">共價</text>
+<text x="450" y="270" text-anchor="middle" font-size="10" fill="#777">鑽石 ~3800K</text>
+<text x="450" y="68" text-anchor="middle" font-size="10" fill="#c0392b">~7eV/鍵</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">鍵能與熔點的對應（柱高為對數示意，非等比）。凡得瓦最弱（Ar 熔點僅 84 K），共價/離子最強（鑽石、NaCl 熔點上千 K）。同一族裡也成立：惰性氣體 Ne→Xe 因 ε 遞增，熔點依序 <b style="color:#c0392b">24 → 84 → 116 → 161 K</b>（這就是 §3 沸點題的答案）。粗估守則 <b>k<sub>B</sub>T<sub>m</sub> ~ 鍵能</b>：鍵能越大 → 熔點越高。</figcaption>
+</figure>
+
+#### Step 5 — 體積模數 $B\propto U''$（井底曲率）
+
+**體積模數（bulk modulus）** 量「壓縮晶體有多硬」，定義 $B=-V\dfrac{dP}{dV}$。對 $T=0$ 晶體 $P=-dU/dV$，故 $B=V\dfrac{d^2U}{dV^2}\Big|_{V_0}$——**就是位能對體積的二階導**（井底曲率）。井越「尖」（$U''$ 越大），晶體越硬。fcc 體積 $V=\dfrac{N}{\sqrt2}R^3$（每原子佔 $R^3/\sqrt2$），把 $U(R)$ 換成 $U(V)$ 後求二階導，Kittel 的標準結果是
+
+$$\boxed{B=\frac{4\,\varepsilon}{\sigma^3}\cdot\big(\text{僅含 }A_{12},A_6\text{ 的純數}\big)\approx\frac{75\,\varepsilon}{\sigma^3}\quad(\text{fcc 惰性氣體}).}$$
+
+關鍵概念只有一句：**$B\propto U''(R_0)=$ 井底曲率 $=$ unit04 的彈簧常數 $\kappa$**。$|U_0|\propto\varepsilon$、$R_0\propto\sigma$，故 $B\propto\varepsilon/\sigma^3$。
+
+> **小結**：$B$、$\kappa$、聲速、聲子頻率全來自同一個量——位能井底的二階導 $U''(R_0)$。井越尖 → 越硬 → 聲速越快。這是 §3 通往 unit04 的橋。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 540 230" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg" id="bulkmod3g">
+<g font-family="-apple-system,sans-serif">
+<text x="270" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">井底曲率 U″(R₀) → 體積模數 B / 彈簧常數 κ</text>
+<line x1="72" y1="120" x2="510" y2="120" stroke="#aaa" stroke-width="1"/>
+<line x1="80" y1="32" x2="80" y2="205" stroke="#888" stroke-width="1.2"/>
+<line x1="80" y1="205" x2="510" y2="205" stroke="#888" stroke-width="1.2"/>
+<text x="68" y="38" text-anchor="end" font-size="11" fill="#555">U</text>
+<text x="500" y="222" text-anchor="middle" font-size="11" fill="#555">R →</text>
+<polyline points="120,52 135,96 150,128 165,150 180,164 195,172 210,176 225,177 240,176 255,173 270,169 285,165 300,160 315,156 330,152 345,148 360,145 375,142 390,140 405,138 420,136 435,135 450,134 465,133 480,132 495,131" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<polyline points="170,52 185,108 200,148 215,168 225,174 235,168 250,148 265,108 280,52" fill="none" stroke="#c0392b" stroke-width="2" stroke-dasharray="5,3"/>
+<circle cx="225" cy="177" r="4" fill="#1a4d7c"/>
+<text x="225" y="195" text-anchor="middle" font-size="11" fill="#1a4d7c">R₀（井底）</text>
+<text x="300" y="100" font-size="10.5" fill="#c0392b">紅虛＝井底配的拋物線</text>
+<text x="300" y="116" font-size="10.5" fill="#c0392b">½U″(R₀)(R−R₀)²</text>
+<text x="300" y="138" font-size="10.5" fill="#1a4d7c">曲率 U″ 越大 → B、κ 越大 → 越硬</text>
+<text x="300" y="160" font-size="10.5" fill="#2e8b2e">B = V·U″(V₀)；κ = U″(R₀)（→ unit04）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">體積模數 B 與彈簧常數 κ 都來自<b style="color:#1a4d7c">位能井底的二階導 U″(R₀)</b>（井底配一條<b style="color:#c0392b">紅色拋物線</b>，其張口由 U″ 決定）。U″ 越大 → 井越「尖」→ 晶體越硬、聲速越快。這把 §3（鍵結）和 unit04（聲子）接在同一個量上：B=V·U″(V₀)、κ=U″(R₀)。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：二階導求曲率、B ∝ U''、與彈簧常數同源</b></summary>
+
+**範例 A（單對 LJ 井底曲率 $U''(r_0)$）**：$U(r)=4\varepsilon[(\sigma/r)^{12}-(\sigma/r)^6]$。一階 $U'=4\varepsilon[-12\sigma^{12}r^{-13}+6\sigma^6r^{-7}]$。二階
+$$U''=4\varepsilon[156\,\sigma^{12}r^{-14}-42\,\sigma^6r^{-8}].$$
+在 $r_0=2^{1/6}\sigma$ 處 $(\sigma/r_0)^6=\tfrac12$：$\sigma^{12}r_0^{-14}=r_0^{-2}(\sigma/r_0)^{12}=r_0^{-2}\cdot\tfrac14$，$\sigma^6r_0^{-8}=r_0^{-2}(\sigma/r_0)^6=r_0^{-2}\cdot\tfrac12$。代入：
+$$U''(r_0)=4\varepsilon\,r_0^{-2}\big[156\cdot\tfrac14-42\cdot\tfrac12\big]=4\varepsilon\,r_0^{-2}[39-21]=\frac{72\varepsilon}{r_0^2}.$$
+這個 $\kappa=72\varepsilon/r_0^2$ 就是把井近似成 $\tfrac12\kappa(r-r_0)^2$ 的彈簧常數。
+
+**範例 B（$\kappa$ 代 Ar 數值）**：$\varepsilon=0.0104$ eV、$r_0=1.12\times3.40=3.81$ Å。$\kappa=72(0.0104)/3.81^2=0.749/14.5=0.0516$ eV/Å²。換 SI：$1\,\mathrm{eV/Å^2}=16.0\,\mathrm{N/m}$，故 $\kappa\approx0.83$ N/m——正是惰性氣體軟、聲速低的根源。
+
+**範例 C（為何 $B\propto U''$）**：把 $U$ 在 $R_0$ 展開 $U\approx U_0+\tfrac12U''(R_0)(R-R_0)^2$。$B=V\,d^2U/dV^2$，而 $dV\propto R^2dR$，故 $B$ 與 $U''$ 成正比（差一個只含 $R_0$ 的幾何因子）。井越尖（$U''$ 大）→ $B$ 越大 → 越難壓縮。
+
+**範例 D（同源關係一覽）**：同一個 $U''(R_0)$ 給出三件事——彈簧常數 $\kappa=U''(R_0)$（unit04 聲子）、體積模數 $B\propto U''$（本節）、聲速 $v=\sqrt{\kappa a^2/M}$（unit04）。背一個曲率，三題通吃。
+</details>
+
+---
+
+### 4. 馬德隆常數（Madelung constant）：1D 離子鏈完整推到 $2\ln2$
+
+> 📖 **本節核心出處與說明（Ref）**：
+> - **權威教材**：Kittel 8e Ch. 3 Eq. (20)–(23) pp. 64–66 ｜ 林盛煇 §3.3 ｜ A&M Ch. 20
+> - **歷年考題**：[NTU 2020](../考古題/詳解/固態_2020_詳解.html), [2023 Q1（30分）](../考古題/詳解/固態_2023_詳解.html), [2024 Q2](../考古題/詳解/固態_2024_詳解.html)
+> - **觀念說明**：庫侖交互作用長程求和因子，1D 離子鏈 $\alpha_{\text{1D}} = 2\ln 2 \approx 1.386$；3D NaCl 結構 $\alpha_{\text{NaCl}} \approx 1.7476$。
+
+
+**你高中學過的**：兩點電荷庫侖位能 $U=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q_1q_2}{r}$，異號吸引（負）、同號排斥（正）。
+
+**為什麼需要新東西**：離子晶體裡，一個離子不是只對「一個」反離子，而是對**整個格子**所有離子求和：近的反號吸（負）、稍遠的同號斥（正）、再遠的反號吸……要把這個無窮交錯級數加起來，結果是一個純數 $\alpha$ 乘上「單一對的庫侖能」。$\alpha$ 就是馬德隆常數。1D 鏈是少數能**閉式**算出的（$=2\ln2$），正是 2023 第 3 題。
+
+**定義（中英對照）**：把整格的庫侖能寫成
+
+$$U_{\text{ref}}=-\frac{\alpha\,q^2}{4\pi\varepsilon_0 R},$$
+
+其中 $R$ = 最近鄰陰陽離子距離，$\alpha$ = 把「整格庫侖和」打包成的無因次數（馬德隆常數）。
+
+<details>
+<summary><b>▸ 馬德隆常數 α（Madelung constant）</b></summary>
+
+### 你高中學過的
+等比/交錯級數可以加出有限值，例如 $1-\tfrac12+\tfrac13-\cdots=\ln2$。
+
+### 為什麼要這個
+庫侖力是長程的（$\propto 1/r$），一個離子的能量必須對「整格」求和才正確；$\alpha$ 把這個結構相關的求和結果裝進一個數，鍵能就只剩 $\alpha,q,R$。
+
+### 定義
+$\alpha=\sum_j \dfrac{(\pm)}{p_j}$，$p_j=r_j/R$（以最近鄰距離為單位的距離），符號 $\pm$ 依該離子是反號（吸，取 $+$）或同號（斥，取 $-$）。注意級數**交錯**才會收斂。
+
+**範例 1（熱身）**：分子「等效 $\alpha=1$」——只有一對反離子。
+**範例 2（中階）**：1D 鏈 $\alpha_{1D}=2\ln2\approx1.386$（下方完整推）。
+**範例 3（考題）**：3D NaCl（rock-salt）$\alpha\approx1.7476$、CsCl $\approx1.763$（只能數值/Ewald 求，因條件收斂）。
+</details>
+
+#### Step 1 — 設定 1D 交錯離子鏈
+
+等間距 $R$ 的交錯離子鏈 $\cdots+\,-\,+\,-\cdots$，電荷 $\pm q$。取一個 $+$ 離子當參考，算它與**其餘所有**離子的庫侖位能總和 $U_{\text{ref}}$。
+
+> **小結**：參考離子左右對稱，每個距離各有 2 顆。
+
+#### Step 2 — 逐殼層列出庫侖和
+
+- 距 $R$：2 顆 $-$（吸引，負）；距 $2R$：2 顆 $+$（排斥，正）；距 $3R$：2 顆 $-$；距 $4R$：2 顆 $+$；…
+
+$$
+U_{\text{ref}}=\frac{q^2}{4\pi\varepsilon_0}\Big[-\frac{2}{R}+\frac{2}{2R}-\frac{2}{3R}+\frac{2}{4R}-\cdots\Big]
+=-\frac{q^2}{4\pi\varepsilon_0 R}\cdot 2\Big(1-\tfrac12+\tfrac13-\tfrac14+\cdots\Big).
+$$
+
+> **小結**：括號裡是**交錯調和級數** $\boxed{1-\tfrac12+\tfrac13-\tfrac14+\cdots}$，前面乘 2（左右對稱）。
+
+#### Step 3 — 收斂這個交錯級數
+
+由 $\ln(1+x)=x-\dfrac{x^2}2+\dfrac{x^3}3-\cdots$ 取 $x=1$：
+
+$$1-\tfrac12+\tfrac13-\tfrac14+\cdots=\ln 2.$$
+
+> **小結**：交錯調和級數 $\boxed{=\ln2}$。這是「交錯」才收斂的關鍵——若全同號會發散（無物理）。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 620 230" width="100%" style="max-width:700px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="pos3c" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#84b4df"/><stop offset="1" stop-color="#1a4d7c"/></radialGradient>
+<radialGradient id="neg3c" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#f0a79b"/><stop offset="1" stop-color="#c0392b"/></radialGradient>
+</defs>
+<g font-family="-apple-system,sans-serif">
+<text x="310" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">1D 交錯離子鏈：α = 2(1 − ½ + ⅓ − ¼ + ⋯) = 2 ln2 ≈ 1.386</text>
+<line x1="40" y1="70" x2="600" y2="70" stroke="#ccc" stroke-width="1"/>
+<g>
+<circle cx="120" cy="70" r="15" fill="url(#neg3c)"/><text x="120" y="74" text-anchor="middle" fill="#fff">−</text>
+<circle cx="180" cy="70" r="15" fill="url(#pos3c)"/><text x="180" y="74" text-anchor="middle" fill="#fff">+</text>
+<circle cx="240" cy="70" r="15" fill="url(#neg3c)"/><text x="240" y="74" text-anchor="middle" fill="#fff">−</text>
+<circle cx="310" cy="70" r="18" fill="url(#pos3c)" stroke="#13395d" stroke-width="2"/><text x="310" y="75" text-anchor="middle" font-size="13" fill="#fff">+</text>
+<circle cx="380" cy="70" r="15" fill="url(#neg3c)"/><text x="380" y="74" text-anchor="middle" fill="#fff">−</text>
+<circle cx="440" cy="70" r="15" fill="url(#pos3c)"/><text x="440" y="74" text-anchor="middle" fill="#fff">+</text>
+<circle cx="500" cy="70" r="15" fill="url(#neg3c)"/><text x="500" y="74" text-anchor="middle" fill="#fff">−</text>
+</g>
+<text x="310" y="108" text-anchor="middle" font-size="10.5" fill="#777">↑ 取此 + 為參考離子，算它對其餘所有離子的庫侖和</text>
+<g stroke-width="1.4" fill="none">
+<path d="M310,52 A40,40 0 0,0 380,52" stroke="#2e8b2e"/>
+<text x="345" y="36" text-anchor="middle" font-size="10" fill="#2e8b2e">R: −2/R (吸)</text>
+<path d="M310,90 A70,70 0 0,1 440,90" stroke="#c0392b"/>
+<text x="375" y="128" text-anchor="middle" font-size="10" fill="#c0392b">2R: +2/2R (斥)</text>
+<path d="M310,46 A95,95 0 0,0 500,46" stroke="#2e8b2e"/>
+<text x="405" y="30" text-anchor="middle" font-size="10" fill="#2e8b2e">3R: −2/3R (吸)</text>
+</g>
+<rect x="60" y="150" width="500" height="62" fill="#f6f9fc" stroke="#dce6f1" rx="6"/>
+<text x="310" y="172" text-anchor="middle" font-size="12" fill="#333">U = −(q²/4πε₀R)·2(1 − ½ + ⅓ − ¼ + ⋯)</text>
+<text x="310" y="195" text-anchor="middle" font-size="12" fill="#c0392b">交錯調和級數 → ln2，乘 2（左右對稱）⇒ α = 2 ln2</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">一維離子鏈馬德隆常數的可視化（2023 第 3 題）。取中央 <b style="color:#1a4d7c">+ 離子</b>為參考：距 R 有 2 顆 −（<b style="color:#2e8b2e">吸引，負</b>）、距 2R 有 2 顆 +（<b style="color:#c0392b">排斥，正</b>）、距 3R 有 2 顆 −…… 符號交錯。提出 2（左右各一）後括號正是<b>交錯調和級數 1−½+⅓−¼+⋯ = ln2</b>，故 α = 2 ln2 ≈ 1.386。關鍵：交錯才收斂，全同號會發散。</figcaption>
+</figure>
+
+#### Step 4 — 比對定義，讀出馬德隆常數
+
+寫成 $U_{\text{ref}}=-\dfrac{\alpha\,q^2}{4\pi\varepsilon_0 R}$，比對 Step 2、Step 3：
+
+$$\boxed{\alpha_{1D}=2\ln 2\approx1.386.}$$
+
+> **小結**：1D 馬德隆的精髓是「交錯調和級數 $\to\ln2$」，再乘 2（雙向）得 $2\ln2$。負號表示鏈整體**束縛**（穩定）。3D NaCl 的 $1.748$ 沒有閉式，只能用 Evjen/Ewald 法（直接逐項相加是**條件收斂**、順序會影響結果，不能亂加）。
+
+<details>
+<summary><b>📝 更多範例（點開）：交錯級數求和、ln(1+x) 用法、部分和收斂</b></summary>
+
+**範例 A（從 $\ln(1+x)$ 一步步得 $\ln2$）**：泰勒級數 $\ln(1+x)=x-\dfrac{x^2}2+\dfrac{x^3}3-\dfrac{x^4}4+\cdots$（收斂於 $-1<x\le1$）。代 $x=1$：
+$$\ln(1+1)=1-\tfrac12+\tfrac13-\tfrac14+\cdots=\ln2\approx0.6931.$$
+故 $\alpha_{1D}=2\times0.6931=1.3863$。每一步：寫級數 → 代 $x=1$ → 認出就是括號 → 乘 2。
+
+**範例 B（部分和逼近，看它怎麼收斂）**：交錯調和級數的部分和
+$$S_1=1,\ S_2=0.5,\ S_3=0.833,\ S_4=0.583,\ S_5=0.783,\ S_6=0.617,\ \ldots\to0.6931.$$
+奇數項偏高、偶數項偏低，**夾逼**收斂到 $\ln2$（交錯級數的特性：誤差不超過下一項）。$S_{10}\approx0.6456$ 已接近。
+
+**範例 C（為什麼非交錯會發散）**：若所有項同號 $1+\tfrac12+\tfrac13+\tfrac14+\cdots$（調和級數）→ 發散（$\to\infty$）。物理上對應「全同號離子」無法束縛——必須正負交錯，吸引才能贏過排斥而收斂。
+
+**範例 D（每原子 vs 每對；2 的來源）**：括號前的 2 來自「參考離子左右各一串」。若改算「每個鍵」而非「每個離子」，要再除以配位數避免重複計——1D 每離子 2 個最近鄰，故每鍵能 $=\tfrac12\times$每離子能。算內聚能時務必講清楚是「每離子」還是「每對」。
+</details>
+
+![1D 離子鏈；Madelung 常數 $\alpha=2\ln2\approx1.386$](../figs/f03_madelung_chain.svg)
+
+---
+
+### 5. 離子內聚能 ＝ 馬德隆 ＋ 排斥（LiCl 鍵能；晶體 vs 分子）
+
+**你高中學過的**：庫侖吸引讓 $+e,-e$ 越靠越穩；但靠太近，閉殼電子雲重疊會強烈排斥——所以有一個平衡距離。
+
+**為什麼需要新東西**：離子晶體的完整鍵能 = 長程庫侖（馬德隆，吸）＋ 短程泡利排斥（Born 模型）。考試會給 $\alpha$ 與距離要你算鍵能（2024 LiCl），或問「為何晶體比分子穩約 75%」（2020）。
+
+**定義（中英對照）**：含 Born 排斥 $\propto R^{-n}$ 的離子內聚能，平衡時（先極小化 $dU/dR=0$ 消去排斥參數）化簡為
+
+$$\boxed{U_0=-\frac{\alpha\,e^2}{4\pi\varepsilon_0 R_0}\Big(1-\frac1n\Big)},\qquad n\approx7\text{–}9.$$
+
+純庫侖（不含排斥、或題目沒給 $n$）時取 $U=-\dfrac{\alpha e^2}{4\pi\varepsilon_0 R}$。用捷徑 $\dfrac{e^2}{4\pi\varepsilon_0}=14.40\ \text{eV·Å}$，$R$ 以 Å 代入即得 eV。
+
+<details>
+<summary><b>▸ Born 排斥指數 n（短程排斥模型）</b></summary>
+
+### 你高中學過的
+靠太近會排斥；排斥比吸引「硬」很多（隨距離衰減快得多）。
+
+### 為什麼要這個
+純庫侖會讓 $R\to0$（崩塌），必須加一個更陡的排斥 $B/R^n$（$n\gg1$）撐開，給出有限平衡 $R_0$。
+
+### 定義
+排斥項 $+B/R^n$，$n\approx7$–$9$。極小化後，排斥對鍵能的「折扣」恰是因子 $(1-1/n)$——所以平衡鍵能比純馬德隆小約 $10$–$14\%$。
+
+**範例 1（熱身）**：$n\to\infty$（硬球）→ $(1-1/n)\to1$ → 回到純馬德隆。
+**範例 2（中階）**：$n=7$ → 乘 $1-\tfrac17=\tfrac67\approx0.857$。
+**範例 3（考題）**：LiCl 用 $R=2.57$ Å、$n=7$：純庫侖 $-9.79$ eV $\to$ 修正 $-8.4$ eV，貼近實驗晶格能 $\approx-8.6$ eV。
+</details>
+
+#### Step 1 — LiCl 鍵能（2024，純馬德隆主解）
+
+題目：LiCl 結晶成 NaCl 結構（$\alpha\approx1.7476$），atomic separation $5.14$ Å。字面把 $R=5.14$ Å 當最近鄰距離：
+
+$$U=-\frac{\alpha e^2}{4\pi\varepsilon_0 R}=-1.7476\times\frac{14.40\ \text{eV·Å}}{5.14\ \text{Å}}=-1.7476\times2.802=\boxed{-4.90\ \text{eV／離子對}.}$$
+
+> **小結**：負號 = 結合（晶體比分開的離子穩 4.9 eV）。**字面讀法答 $-4.90$ eV**。
+
+#### Step 2 — 物理較合的讀法（很可能是出題真意）
+
+真實 LiCl 的**立方晶格常數** $a_{\text{cube}}=5.14$ Å，而 rock-salt 的**最近鄰** Li–Cl 距離是 $R=a_{\text{cube}}/2=2.57$ Å。若 $5.14$ Å 指 cube edge：
+
+$$U=-1.7476\times\frac{14.40}{2.57}=-1.7476\times5.603=\boxed{-9.79\ \text{eV}.}$$
+
+再加 Born 排斥（$n\approx7$，乘 $\tfrac67$）：$U_0\approx-9.79\times\tfrac67=-8.4$ eV——與 LiCl 實驗晶格能（$\approx-8.6$ eV/對）相符。
+
+> **小結**：兩種讀法都寫上、講清楚取捨。**忠於字面 $\to-4.90$ eV；物理較合 $\to-9.79$ eV（Born 修正後 $-8.4$ eV，貼近實驗）**。考場兩個都列、註明判據最穩。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 540 275" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif">
+<text x="270" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">離子晶體總能 = 馬德隆吸引 + Born 排斥</text>
+<line x1="62" y1="126" x2="510" y2="126" stroke="#aaa" stroke-width="1"/>
+<line x1="70" y1="30" x2="70" y2="248" stroke="#888" stroke-width="1.2"/>
+<line x1="70" y1="248" x2="510" y2="248" stroke="#888" stroke-width="1.2"/>
+<text x="58" y="36" text-anchor="end" font-size="11" fill="#555">U</text>
+<text x="500" y="265" text-anchor="middle" font-size="11" fill="#555">R →</text>
+<text x="46" y="130" text-anchor="end" font-size="10.5" fill="#888">0</text>
+<polyline points="70.0,53.7 79.8,84.1 89.5,100.9 99.3,110.6 109.1,116.3 118.9,119.7 128.6,121.8 138.4,123.2 148.2,124.1 158.0,124.7 167.7,125.0 177.5,125.3 187.3,125.5 197.0,125.6 206.8,125.7 226.4,125.8 245.9,125.9 285.0,125.9 343.6,125.9 412.0,126.0 500.0,126.0" fill="none" stroke="#e67e22" stroke-width="1.8" stroke-dasharray="5,3"/>
+<polyline points="70.0,235.0 89.5,222.9 109.1,213.2 128.6,205.3 148.2,198.7 167.7,193.1 187.3,188.3 206.8,184.1 226.4,180.5 245.9,177.3 265.5,174.4 285.0,171.9 304.5,169.6 324.1,167.5 343.6,165.6 363.2,163.9 382.7,162.3 402.3,160.9 421.8,159.5 441.4,158.3 460.9,157.1 480.5,156.0 500.0,155.0" fill="none" stroke="#2e8b2e" stroke-width="1.8" stroke-dasharray="5,3"/>
+<polyline points="70.0,162.8 79.8,186.7 89.5,197.9 99.3,202.4 109.1,203.5 118.9,202.8 128.6,201.2 138.4,199.1 148.2,196.8 158.0,194.4 167.7,192.1 177.5,189.9 187.3,187.8 197.0,185.8 206.8,183.9 216.6,182.0 226.4,180.3 236.1,178.7 245.9,177.2 255.7,175.7 265.5,174.4 275.2,173.1 285.0,171.8 294.8,170.7 304.5,169.6 314.3,168.5 324.1,167.5 333.9,166.5 343.6,165.6 353.4,164.7 363.2,163.9 373.0,163.1 382.7,162.3 392.5,161.6 402.3,160.8 412.0,160.2 421.8,159.5 431.6,158.9 441.4,158.3 451.1,157.7 460.9,157.1 470.7,156.6 480.5,156.0 490.2,155.5 500.0,155.0" fill="none" stroke="#1a4d7c" stroke-width="2.6"/>
+<line x1="109.1" y1="126" x2="109.1" y2="203.5" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,2"/>
+<line x1="70" y1="203.5" x2="109.1" y2="203.5" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,2"/>
+<circle cx="109.1" cy="203.5" r="4" fill="#c0392b"/>
+<text x="109.1" y="222" text-anchor="middle" font-size="11" fill="#c0392b">R₀</text>
+<text x="64" y="207" text-anchor="end" font-size="11" fill="#c0392b">U₀</text>
+<text x="240" y="118" font-size="10.5" fill="#e67e22">Born 排斥 +B/Rⁿ (n≈7–9)</text>
+<text x="320" y="172" font-size="10.5" fill="#2e8b2e">馬德隆吸引 −αe²/4πε₀R</text>
+<text x="180" y="205" font-size="10.5" fill="#1a4d7c">總能 = 兩者相加</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">離子鍵能井 = <b style="color:#2e8b2e">長程庫侖吸引（馬德隆，−αe²/4πε₀R）</b> ＋ <b style="color:#e67e22">短程 Born 排斥（+B/Rⁿ，n≈7–9）</b>，兩條虛線相加成<b style="color:#1a4d7c">實藍井</b>。極小化 dU/dR=0 定出平衡 <b style="color:#c0392b">R₀</b> 與井底 U₀。消去排斥參數後得 U₀ = −(αe²/4πε₀R₀)(1−1/n)：括號 (1−1/n) 就是「排斥扣掉的折扣」，約 10–14%，使晶格能略小於純馬德隆。</figcaption>
+</figure>
+
+#### Step 3 — 為何晶體比分子高約 75%（2020）
+
+**分子裡**每個離子只「看到一個」反離子，等效 $\alpha=1$；單對庫侖能（$R=5.14$ Å）：
+
+$$|U_{\text{molecule}}|=\frac{e^2}{4\pi\varepsilon_0 R}=\frac{14.40}{5.14}=2.80\ \text{eV}.$$
+
+**晶體裡**每個離子看到整格（6 反號吸、12 同號斥、8 反號吸……），求和 = 馬德隆 $\alpha_{\text{NaCl}}=1.748$。鍵長相近 ⇒ $R$ 相近、排斥因子相消，取比：
+
+$$\frac{U_{\text{crystal}}}{U_{\text{molecule}}}\approx\frac{\alpha}{1}=1.748\ \Rightarrow\ \boxed{\text{高約 }74.8\%\approx75\%.}$$
+
+> **小結**：這「75%」幾乎就是 $\alpha_{\text{NaCl}}-1=0.748$。**長程庫侖求和（每個離子被整格穩定）**才是晶體比孤立分子更穩的原因，與鍵長無關。
+
+<details>
+<summary><b>📝 更多範例（點開）：14.40 eV·Å / R 捷徑、Born 折扣、晶體 vs 分子</b></summary>
+
+**範例 A（NaCl 純庫侖鍵能）**：NaCl 最近鄰 $R=2.82$ Å、$\alpha=1.7476$。用捷徑 $\dfrac{e^2}{4\pi\varepsilon_0}=14.40\,\text{eV·Å}$：
+$$U=-\frac{\alpha e^2}{4\pi\varepsilon_0R}=-1.7476\times\frac{14.40}{2.82}=-1.7476\times5.106=-8.92\ \text{eV／離子對}.$$
+加 Born 折扣（$n=8$，乘 $1-\tfrac18=\tfrac78=0.875$）：$U_0\approx-8.92\times0.875=-7.81$ eV，貼近實驗 $-7.9$ eV。
+
+**範例 B（Born 折扣對不同 $n$）**：折扣因子 $1-\tfrac1n$：
+$$n=7:\ \tfrac67=0.857;\quad n=8:\ \tfrac78=0.875;\quad n=9:\ \tfrac89=0.889;\quad n\to\infty:\ 1.$$
+$n$ 越大（排斥越硬）→ 折扣越接近 1 → 越接近純馬德隆。一般離子晶體 $n\approx8$，故晶格能約為純庫侖的 $87\%$。
+
+**範例 C（CsCl 結構換 $\alpha$）**：CsCl 結構 $\alpha=1.7627$、最近鄰 $R=3.57$ Å：
+$$U=-1.7627\times\frac{14.40}{3.57}=-1.7627\times4.034=-7.11\ \text{eV／離子對}.$$
+$\alpha$ 略大但 $R$ 也大，兩者競爭——這就是為何半徑比決定選 NaCl 還是 CsCl 結構（見 §1 與 unit01 §4.6）。
+
+**範例 D（晶體 vs 分子比值再練）**：KCl 分子（等效 $\alpha=1$）對晶體（$\alpha_{\text{NaCl}}=1.748$），鍵長相近時排斥因子相消：
+$$\frac{U_{\text{crystal}}}{U_{\text{molecule}}}\approx\frac{1.748}{1}=1.748\ \Rightarrow\ \text{晶體高約 }74.8\%.$$
+與 NaCl 同——這個 75% 是「長程求和」的普遍結果，不限於某種離子。
+</details>
+
+---
+
+### 6. 位能井形狀（E(r) curve）：平衡、移走能量、熱膨脹
+
+**你高中學過的**：彈簧位能 $\tfrac12kx^2$ 的底就是平衡點；力 $=-dU/dr$，平衡 ⟺ 力為零 ⟺ $dU/dr=0$。
+
+**為什麼需要新東西**：給一條任意鍵能曲線 $E(r)$，要會（a）找靜止位置 $r_0$、（b）算「移走一個原子要多少能量」、（c）判斷它能不能描述熱膨脹（2019 第 4 題）。關鍵是**井的形狀**：對稱拋物線不行，非對稱（非簡諧）才行。
+
+**定義（中英對照）**：
+- 平衡（靜止位置）：$\left.\dfrac{dE}{dr}\right|_{r_0}=0$ 且 $\dfrac{d^2E}{dr^2}\Big|_{r_0}>0$（極小）。
+- 移走能量 $=E(\text{free})-E(r_0)=0-E(r_0)=|E(r_0)|$（取 $E=0$ 為「原子已分離」的參考）。
+- 井在 $r_0$ 展開 $E\approx E_0+\tfrac12\kappa(r-r_0)^2+b(r-r_0)^3+\cdots$；**$b\neq0$（非簡諧（anharmonic））才有熱膨脹**。
+
+<details>
+<summary><b>▸ 非簡諧項 b（非簡諧 anharmonicity ⇒ 熱膨脹）</b></summary>
+
+### 你普物學過的
+純彈簧 $\tfrac12kx^2$ 是對稱井，振動的時間平均位置永遠是中心，與振幅無關。
+
+### 為什麼要這個
+真實鍵能井**左陡右緩**（小 $r$ 排斥硬、大 $r$ 吸引軟）。升溫使振幅變大時，原子在「軟的大 $r$ 側」停留較久，平均鍵長變長 → 熱膨脹。純簡諧井做不到這件事。
+
+### 定義
+展開 $E\approx E_0+\tfrac12\kappa(r-r_0)^2+b(r-r_0)^3$，$b<0$（右緩）。平均位移近似 $\langle r-r_0\rangle\simeq -\dfrac{3b}{\kappa^2}k_BT>0$，隨 $T$ 線性增。
+
+**範例 1（熱身）**：$E=\tfrac12k(r-r_0)^2$ → 純簡諧 → $\langle r\rangle=r_0$ 與 $T$ 無關 → **無**熱膨脹。
+**範例 2（中階）**：藍納–瓊斯 $4\varepsilon[(\sigma/r)^{12}-(\sigma/r)^6]$ → 井不對稱 → 升溫膨脹。
+**範例 3（考題）**：$E\propto r^2-2r-7\sqrt r$（2019）→ 非拋物線、$E'''\neq0$ → 可描述熱膨脹。
+</details>
+
+#### Step 1 — 找靜止位置 $r_0$（一階導為零，2019 題）
+
+題目 $E(r)=16\,\tfrac{\text{eV}}{\text{nm}}\,(r^2-2r-7\sqrt r)$：
+
+$$\frac{dE}{dr}=16\Big(2r-2-\tfrac72 r^{-1/2}\Big)=0\ \Longrightarrow\ 2r-2-\frac{3.5}{\sqrt r}=0.$$
+
+無漂亮解析根，數值夾出：$r=2.18$ 給 $\approx-0.01$、$r=2.19$ 給 $\approx+0.015$，故 $\boxed{r_0\approx2.18\ \text{nm}}$。二階導 $\dfrac{d^2E}{dr^2}=16(2+\tfrac74 r^{-3/2})>0$ 處處成立 → 唯一極小 ✓。
+
+> **小結**：$dE/dr=0$ 定 $r_0\approx2.18$ nm；$E''>0$ 確認是井底。
+
+#### Step 2 — 算井底能量 $E(r_0)$
+
+$$r_0^2-2r_0-7\sqrt{r_0}=2.18^2-2(2.18)-7\sqrt{2.18}=4.75-4.36-10.34\approx-9.94,$$
+$$E(r_0)=16\times(-9.94)\ \text{eV}\approx-159\ \text{eV}.$$
+
+> **小結**：井底 $\boxed{E(r_0)\approx-159\ \text{eV}}$。
+
+#### Step 3 — 移走 = 抬到自由參考 $E=0$
+
+取 $E=0$ 為「原子已分離、不再束縛」。把原子由 $r_0$ 移走所需能量：
+
+$$\Delta E=0-E(r_0)=|E(r_0)|\approx\boxed{1.6\times10^{2}\ \text{eV}\ (\approx159\ \text{eV}).}$$
+
+> **小結**：固定步驟——**$dE/dr=0$ 定 $r_0$ → 代回得井底 → 與 $E=0$ 的落差就是 binding energy**。（159 eV 數值偏大，純由題給係數 16 決定，照算即可。）
+
+#### Step 4 — 能否預測熱膨脹？
+
+**可以。** 理由：熱膨脹來自位能井的**非簡諧（非對稱）**。本題 $E(r)$ 不是對稱拋物線——三階導
+
+$$\frac{d^3E}{dr^3}=16\Big(-\tfrac{21}{8}r^{-5/2}\Big)<0$$
+
+非零 → 井**左陡右緩**。升溫振幅變大時，原子在軟的大 $r$ 側停留較久，$\langle r\rangle>r_0$ 且隨 $T$ 增 → 平均鍵長隨溫增加 → **晶體膨脹**。
+
+> **小結**：**$E'''\neq0$（非簡諧）⇒ 能描述熱膨脹**。反例：純 $\tfrac12\kappa(r-r_0)^2$ 對稱、$\langle r\rangle=r_0$ 不隨 $T$ 變 → **不能**預測熱膨脹（這正是「簡諧近似無熱膨脹」的課本結論）。
+
+<details>
+<summary><b>📝 更多範例（點開）：dE/dr = 0 夾根、井底值、移走能量、判熱膨脹</b></summary>
+
+**範例 A（另一條 $E(r)$ 找 $r_0$）**：設 $E(r)=\dfrac A{r^{12}}-\dfrac B{r^6}$（LJ 形）。$\dfrac{dE}{dr}=-\dfrac{12A}{r^{13}}+\dfrac{6B}{r^7}=0\Rightarrow12A=6Br^6\Rightarrow r_0^6=\dfrac{2A}B\Rightarrow r_0=\Big(\dfrac{2A}B\Big)^{1/6}$。井底 $E(r_0)$：用 $r_0^6=2A/B$，得 $E(r_0)=\dfrac A{(2A/B)^2}-\dfrac B{2A/B}=\dfrac{B^2}{4A}-\dfrac{B^2}{2A}=-\dfrac{B^2}{4A}$。
+
+**範例 B（純庫侖+排斥的 $r_0$）**：$E(r)=-\dfrac C r+\dfrac D{r^9}$。$\dfrac{dE}{dr}=\dfrac C{r^2}-\dfrac{9D}{r^{10}}=0\Rightarrow Cr^8=9D\Rightarrow r_0=\Big(\dfrac{9D}C\Big)^{1/8}$。代回 $E(r_0)=-\dfrac C{r_0}+\dfrac D{r_0^9}=-\dfrac C{r_0}\big(1-\tfrac19\big)=-\dfrac{8C}{9r_0}$——正是 Born 折扣 $(1-1/n)$，$n=9$。
+
+**範例 C（移走能量 = 井深）**：上一例把原子由 $r_0$ 移到 $r\to\infty$（$E\to0$）所需能量 $=0-E(r_0)=\dfrac{8C}{9r_0}$。固定步驟：$dE/dr=0$ 定 $r_0$ → 代回得井底 → 與 $E(\infty)=0$ 落差即 binding energy。
+
+**範例 D（判能否描述熱膨脹）**：對範例 A 的 LJ 井算三階導 $\dfrac{d^3E}{dr^3}=-\dfrac{12\cdot13\cdot14\,A}{r^{15}}+\dfrac{6\cdot7\cdot8\,B}{r^9}$，在 $r_0$ 不為零 → 非簡諧 → **能**描述熱膨脹。反例純拋物線 $E=\tfrac12\kappa(r-r_0)^2$，$E'''=0$ → **不能**。判準只看「$E'''(r_0)$ 是否為零」。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 540 250" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif">
+<text x="270" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">位能井的形狀：非簡諧（左陡右緩）才有熱膨脹</text>
+<line x1="72" y1="126" x2="510" y2="126" stroke="#aaa" stroke-width="1"/>
+<line x1="80" y1="35" x2="80" y2="225" stroke="#888" stroke-width="1.2"/>
+<line x1="80" y1="225" x2="510" y2="225" stroke="#888" stroke-width="1.2"/>
+<text x="68" y="40" text-anchor="end" font-size="11" fill="#555">E</text>
+<text x="500" y="242" text-anchor="middle" font-size="11" fill="#555">r →</text>
+<text x="64" y="130" text-anchor="end" font-size="10.5" fill="#888">0</text>
+<text x="180" y="40" font-size="10.5" fill="#888">E=0：原子已分離（自由）</text>
+<polyline points="85.7,151.0 92.1,164.7 98.4,176.0 104.8,184.7 111.2,191.0 117.5,194.7 123.9,196.0 130.3,194.7 136.6,191.0 143.0,184.7 149.4,176.0 155.7,164.7 162.1,151.0 168.4,134.7 174.8,116.0 181.2,94.7 187.5,71.0 193.9,44.7" fill="none" stroke="#999" stroke-width="1.6" stroke-dasharray="5,3"/>
+<polyline points="80.0,35.0 90.2,107.5 100.4,164.1 110.5,188.3 120.7,195.7 130.9,194.7 141.1,189.9 151.3,183.5 161.5,176.8 171.6,170.4 181.8,164.6 192.0,159.4 202.2,154.9 212.4,151.0 222.5,147.6 232.7,144.7 242.9,142.3 253.1,140.1 263.3,138.3 273.5,136.8 283.6,135.4 293.8,134.3 304.0,133.3 314.2,132.4 324.4,131.6 334.5,131.0 344.7,130.4 354.9,129.9 365.1,129.5 375.3,129.1 385.5,128.8 395.6,128.5 405.8,128.3 416.0,128.0 426.2,127.8 436.4,127.7 446.5,127.5 456.7,127.4 466.9,127.2 477.1,127.1 487.3,127.0 497.5,126.9" fill="none" stroke="#1a4d7c" stroke-width="2.6"/>
+<line x1="123.9" y1="126" x2="123.9" y2="196" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,2"/>
+<circle cx="123.9" cy="196" r="4" fill="#c0392b"/>
+<text x="123.9" y="214" text-anchor="middle" font-size="11" fill="#c0392b">r₀（靜止位置）</text>
+<text x="64" y="200" text-anchor="end" font-size="11" fill="#c0392b">E(r₀)</text>
+<line x1="148" y1="160" x2="148" y2="126" stroke="#e67e22" stroke-width="1.6" marker-end="url(#updel3f)"/>
+<defs><marker id="updel3f" markerWidth="9" markerHeight="9" refX="3" refY="1" orient="auto"><path d="M0,6 L3,0 L6,6 Z" fill="#e67e22"/></marker></defs>
+<text x="150" y="100" font-size="10.5" fill="#e67e22">移走能量 = |E(r₀)|</text>
+<text x="150" y="186" font-size="10.5" fill="#999">灰：對稱拋物線</text>
+<text x="150" y="170" font-size="10.5" fill="#1a4d7c">藍：真實井</text>
+<text x="270" y="150" font-size="10.5" fill="#1a4d7c">右側「緩」→ 升溫 ⟨r⟩&gt;r₀ → 熱膨脹</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">位能井形狀決定一切（2019 第 4 題）。<b>靜止位置 r₀</b> 在井底（dE/dr=0、E″&gt;0）；<b style="color:#e67e22">移走一個原子要的能量 = 把它從 E(r₀) 抬到自由參考 E=0，即 |E(r₀)|</b>。對比兩條線：<b style="color:#999">灰色對稱拋物線</b>左右一樣 → ⟨r⟩=r₀ 不隨 T 變 → 無熱膨脹；<b style="color:#1a4d7c">藍色真實井「左陡右緩」（E‴≠0，非簡諧）</b> → 升溫振幅變大時原子在軟的右側停留較久 → ⟨r⟩&gt;r₀ 且隨 T 增 → 晶體膨脹。</figcaption>
+</figure>
+
+---
+
+## 🔑 必背公式速查（考前最後看）
+
+| 公式與物理主題 | $\boxed{\ }$ 數學形式 | 物理說明與何時用 | 權威出處（Ref） |
+|---|---|---|---|
+| Lennard-Jones 12-6 位能 | $U(r)=4\varepsilon[(\sigma/r)^{12}-(\sigma/r)^6]$ | 凡得瓦晶體位能，$r^{-12}$ 為泡利排斥，$r^{-6}$ 為誘導偶極吸引 | Kittel 8e Ch. 3 Eq. (2) p. 55 ｜ 林盛煇 §3.2 ｜ 2013–2016 |
+| FCC 惰性氣體平衡間距 | $R_0=\left(\frac{2A_{12}}{A_6}\right)^{1/6}\sigma \approx 1.09\sigma$ | 平衡最近鄰距離，由晶格和極值條件定出 | Kittel 8e Ch. 3 Eq. (9) p. 58 ｜ 林盛煇 §3.2 ｜ 2014, 2016 |
+| 惰性氣體總凝集能 | $U_{\text{tot}}(R_0)=-N\varepsilon \frac{A_6^2}{2A_{12}} \approx -8.61 N\varepsilon$ | 結合能計算，解釋惰性氣體低凝集能本質 | Kittel 8e Ch. 3 Eq. (11) p. 59 ｜ 林盛煇 §3.2 ｜ 2014, 2016 |
+| 惰性氣體沸點差異起源 | 沸點正比於電極化率與質量引起的量子零點振動效應 | 解釋同為 LJ 晶體但 He、Ne、Ar、Kr、Xe 沸點劇烈上升 | Kittel 8e Ch. 3 Table 4 p. 60 ｜ 林盛煇 §3.2 ｜ 2013, 2014, 2015 |
+| 馬德隆庫侖交互作用能 | $U_{\text{Coulomb}}=-\frac{N\alpha e^2}{4\pi\varepsilon_0 R}$ | 離子晶體長程靜電引力主導項 | Kittel 8e Ch. 3 Eq. (20) p. 64 ｜ 林盛煇 §3.3 ｜ 2020, 2023, 2024 |
+| 一維離子鏈馬德隆常數 | $\alpha_{\text{1D}}=2\ln 2 \approx 1.3863$ | 交錯正負電荷一維級數嚴格推導 | Kittel 8e Ch. 3 p. 66 ｜ 林盛煇 §3.3 ｜ 2023 Q1 (30分) |
+| NaCl 晶體馬德隆常數 | $\alpha_{\text{NaCl}} \approx 1.7476$ | 三維離子晶體庫侖總和數值解 | Kittel 8e Ch. 3 Table 7 p. 65 ｜ 林盛煇 §3.3 ｜ 2024 Q2 (25分) |
+| 離子晶體總凝集能 | $U_{\text{tot}}=N\left(-\frac{\alpha e^2}{4\pi\varepsilon_0 R} + \frac{zB}{R^n}\right)$ | 平衡時滿足 $R_0^{n-1}=\frac{4\pi\varepsilon_0 n z B}{\alpha e^2}$ | Kittel 8e Ch. 3 Eq. (23) p. 65 ｜ 林盛煇 §3.3 ｜ 2020, 2024 |
+| 體積彈性模數（Bulk Modulus） | $B = V\frac{d^2 U}{dV^2}\Big|_{V_0}$ | 晶體抗壓縮能力的巨觀力學量度 | Kittel 8e Ch. 3 Eq. (13) p. 60 ｜ 林盛煇 §3.2 ｜ 2014, 2016 |
+
+## 📚 本單元權威參考文獻與出處對照（References）
+
+1. **Charles Kittel, *Introduction to Solid State Physics***, 8th Edition, John Wiley & Sons, 2005.
+   - **Chapter 3: Crystal Binding and Elastic Constants** (pp. 53–84)
+     - Crystals of inert gases & van der Waals interaction: pp. 53–57, Eq. (1)–(7)
+     - Equilibrium lattice constants & cohesive energy: pp. 58–60, Eq. (8)–(12)
+     - Ionic crystals & electrostatic/Madelung energy: pp. 61–67, Eq. (17)–(24)
+     - Evaluation of the Madelung constant: pp. 65–67
+     - Covalent crystals & metallic bonds: pp. 70–75
+2. **林盛煇,《固態物理導論》**, 新文京開發出版.
+   - **第 3 章：晶體之鍵結** (pp. 81–118)
+     - §3.1 固體鍵結分類（凡得瓦、離子、共價、金屬、氫鍵）
+     - §3.2 凡得瓦晶體與 Lennard-Jones 12-6 位能
+     - §3.3 離子晶體之結合能與馬德隆常數計算
+     - §3.4 共價鍵與金屬鍵之物理圖像
+3. **Neil W. Ashcroft & N. David Mermin, *Solid State Physics***, Saunders College Publishing, 1976.
+   - **Chapter 19: Classification of Solids and Cohesion** (pp. 373–394)
+   - **Chapter 20: Cohesion in Covalent and Ionic Crystals** (pp. 395–414)
+4. **國立臺灣大學應用物理學研究所博士班資格考試題**：
+   - 2024 Q2 (25分): LiCl 在 NaCl 結構下的晶體鍵能計算與馬德隆常數
+   - 2023 Q1 (30分): 一維交錯離子鏈馬德隆常數級數展開與解析推導
+   - 2020 Q3: LiF/LiCl 分子鍵能與晶體凝集能差異（馬德隆增益 ~75%）
+   - 2019 Q3: 勢能曲線 E(r) 與熱膨脹微觀機制
+   - 2016 Q2 & 2014 Q3: Lennard-Jones 位能各項物理意義、FCC 平衡間距推導
+   - 2015 Q3 & 2013 Q4: 四大鍵結辨識、凡得瓦力與惰性氣體沸點遞增趨勢
+
+---
+
+## 📝 歷年考題實戰
+
+- **[2024 Q3]** LiCl 結晶成 NaCl 結構（$\alpha\approx1.7476$）、$a=5.14$ Å，求一離子對鍵能。字面 $R=5.14\Rightarrow-4.90$ eV；物理（$R=a/2=2.57$）$\Rightarrow-9.79$ eV，Born 修正後 $-8.4$ eV 貼近實驗。→ [2024 詳解](../考古題/詳解/固態_2024_詳解.html)
+- **[2023 Q1c]** 說明 1D 離子鏈如何推馬德隆常數：交錯庫侖和 $\to 2(1-\tfrac12+\tfrac13-\cdots)=2\ln2\approx1.386$。→ [2023 詳解](../考古題/詳解/固態_2023_詳解.html)
+- **[2020 Q1]** filling factor 後接離子鍵：Li$^+$Cl$^-$ 成分子放能 $2.80$ eV；為何晶體能量比分子高約 75%（$\approx\alpha_{\text{NaCl}}-1$）。→ [2020 詳解](../考古題/詳解/固態_2020_詳解.html)
+- **[2019 Q4]** 給 $E(r)\propto r^2-2r-7\sqrt r$：求移走一原子能量（$\approx159$ eV）；此式能否預測熱膨脹（能，因非簡諧 $E'''\neq0$）。→ [2019 詳解](../考古題/詳解/固態_2019_詳解.html)
+- **[2016 Q3]** 五類鍵結＋各兩例；藍納–瓊斯兩項意義、fcc $R_0\approx1.09\sigma$、$U_0\approx-8.6N\varepsilon$、四惰性氣體沸點為何不同。→ [2016 詳解](../考古題/詳解/固態_2016_詳解.html)
+- **[2015 Q3]** 四張電荷分布圖辨識鍵結（vdW/ionic/covalent/metallic）＋詳述＋舉例；藍納–瓊斯沸點差異（$|U_0|\propto\varepsilon$ 遞增）。→ [2015 詳解](../考古題/詳解/固態_2015_詳解.html)
+- **[2014 Q5/Q6]** 五類鍵結＋舉例；藍納–瓊斯完整計算（$R_0\approx1.09\sigma$、$U_0\approx-8.6N\varepsilon$、沸點）。→ [2014 詳解](../考古題/詳解/固態_2014_詳解.html)
+- **[2013 Q4/Q5]** 五類鍵結；由兩諧振子/兩偶極推凡得瓦 $-1/R^6$，估氪熔點（$\approx177$ K，與實際 $116$ K 同量級）。→ [2013 詳解](../考古題/詳解/固態_2013_詳解.html)
+
+## ✅ 自我檢核 ＋ 常見陷阱
+
+你應該能不看書回答/默寫：
+
+1. 五種鍵結的機制、強弱序、各舉一兩例（凡得瓦/氫鍵/金屬/離子/共價）。
+2. 用兩諧振子推凡得瓦 $-1/R^6$：寫得出簡正座標 $x_\pm$、$\omega_\pm$、「一階消二階存活」這句。
+3. 藍納–瓊斯兩項分別是什麼物理（$r^{12}$ 泡利排斥、$r^6$ 凡得瓦），並背 $R_0\approx1.09\sigma$、$U_0\approx-8.6N\varepsilon$ 的來路。
+4. 為何四惰性氣體 cohesive energy「公式同形」卻沸點不同（差在 $\varepsilon$、加 Ne 零點能）。
+5. 1D 離子鏈馬德隆 $=2\ln2$ 的四步（交錯級數 $\to\ln2$，乘 2）。
+6. 離子鍵能 = 馬德隆（吸）+ Born 排斥（折扣 $1-1/n$）；用 $14.40\,\text{eV·Å}/R$ 代數。
+7. 為何晶體比分子穩約 75%（$\approx\alpha_{\text{NaCl}}-1$，長程求和）。
+8. 給 $E(r)$ 求 $r_0$、移走能量、判斷能否描述熱膨脹（看 $E'''$ 是否為零）。
+
+常見陷阱（中英對照）：
+
+- **最近鄰距離 $R$ vs 立方邊 $a$（nearest-neighbor distance vs cube edge）**：rock-salt 的 $R=a/2$，LiCl 題若把 cube edge 當 $R$ 會差 2 倍 → 鍵能差 2 倍。看清「atomic separation」指哪個。
+- **凡得瓦吸引來自二階、不是一階（second-order, not first）**：兩諧振子推導裡一階項相消，吸引完全來自二階 → 才會是 $1/R^6$ 而非 $1/R^3$。
+- **馬德隆級數是條件收斂（conditionally convergent）**：3D 直接逐項相加會因順序而異，必須用 Evjen/Ewald；1D 因交錯才乾淨收斂。
+- **簡諧井無熱膨脹（harmonic ⇒ no thermal expansion）**：熱膨脹一定要非簡諧（$E'''\neq0$）；若題目給對稱拋物線，答案是「不能預測熱膨脹」。
+- **內聚能 vs 晶格能（cohesive vs lattice energy）**：前者拆成中性原子、後者拆成自由離子；離子晶體常混用，看題目參考態。
+
+## 🔭 信心評估 ＋ 下一步
+
+**信心評估**：本單元三條主軸（凡得瓦兩諧振子、藍納–瓊斯極小化、1D 馬德隆）都是標準完整推導，數值（$177$ K、$1.09\sigma$、$-8.6N\varepsilon$、$2\ln2$、LiCl $-4.90/-9.79$ eV、$75\%$、$159$ eV）均已對照 anchor 詳解重算。把這三條練到能默寫、再記熟五種鍵結表與 $14.40\,\text{eV·Å}$ 捷徑，5–15% 配分幾乎全拿。
+
+**下一步**：本單元的位能井 $E''(r_0)=\kappa$（彈簧常數）與非簡諧項，正是 **單元04 聲子／晶格振動** 的入口——$\kappa$ 給出聲子色散與聲速，非簡諧項給出熱膨脹與聲子–聲子散射。離子鍵的庫侖求和則與 **單元01 晶體結構**（NaCl/CsCl 結構、配位數）緊密相連，建議交叉複習。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

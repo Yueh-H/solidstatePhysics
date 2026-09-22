@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel Ch. 1 — every bridge and every box</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  svg: { fontCache: 'global', scale: 1.06 }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  :root{--blue:#1a4d7c;--blue2:#2b6ca0;--soft:#eef5fb;--border:#c5d5e5;--ink:#1c2733;--gold:#8a6d1d}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+       max-width:900px;margin:1.3em auto 4.5em;padding:0 1.1em;line-height:1.7;color:var(--ink);background:#fafafa}
+  h1{color:var(--blue);border-bottom:3px solid var(--blue);padding-bottom:.3em;font-size:1.35em}
+  h2{color:var(--blue);font-size:1.12em;margin:1.7em 0 .45em;border-bottom:1px solid #ddd;padding-bottom:.2em}
+  a{color:var(--blue2)}
+  .nav{font-size:.9em;margin:0 0 .8em;display:flex;gap:.5em;flex-wrap:wrap}
+  .nav a{text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.25em .65em;color:#234}
+  .lede{background:var(--soft);border-left:4px solid #6aa1d6;border-radius:4px;padding:.75em 1em;margin:0 0 1em;font-size:.95em}
+  .zh{display:none;margin:.4em 0 0;padding:.5em .75em;background:#f7f4ee;border-left:3px solid #c4a574;border-radius:0 6px 6px 0;color:#5c4a2e;font-size:.92em}
+  body.show-zh .zh{display:block}
+  .toolbar{margin:0 0 1em}
+  .toolbar button{font:inherit;font-size:.9em;padding:.3em .85em;border:1px solid var(--border);background:#fff;border-radius:999px;cursor:pointer}
+  .toolbar button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .box{background:#fff;border:2px solid var(--blue);border-radius:12px;padding:.85em 1em;margin:0 0 .75em}
+  .box .n{display:inline-grid;place-items:center;min-width:1.7rem;height:1.7rem;padding:0 .35rem;border-radius:8px;
+          background:var(--blue);color:#fff;font-size:.78rem;font-weight:700;margin-right:.4em}
+  .box h3{display:inline;font-size:1.02em;color:var(--blue);margin:0}
+  .ref{font-size:.82em;color:#5a6a7a;margin:.35em 0 0}
+  table{border-collapse:collapse;width:100%;font-size:.9em;margin:.5em 0;background:#fff}
+  th,td{border:1px solid #dde3e9;padding:.45em .55em;text-align:left;vertical-align:top}
+  th{background:var(--soft);color:var(--blue)}
+  .bridge{background:#fffdf6;border:1px solid #e2d3a8;border-radius:10px;padding:.7em .9em;margin:0 0 .55em}
+  .bridge .lab{font-size:.75em;font-weight:700;letter-spacing:.06em;color:var(--gold);text-transform:uppercase}
+  footer{color:#888;font-size:.84em;margin-top:2em;border-top:1px solid #ddd;padding-top:.8em}
+  mjx-container[jax="CHTML"][display="true"]{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="ch01_名詞定義.html">名詞定義（中英）</a>
+  <a href="ch01_怎麼畫.html">How to draw</a>
+  <a href="ch01_小考滿分卡.html">Quiz card</a>
+  <a href="../教材/Kittel章節導讀/ch01_晶體結構.html">導讀 1</a>
+  <a href="../單元教學/unit01_晶體結構.html">Unit 01</a>
+</div>
+
+<h1>Chapter 1 — every bridge and every box</h1>
+<div class="lede">
+<b>Bridge 橋</b> = the high-school picture that the new word is sitting on.<br>
+<b>Box 框</b> = the one line you recopy on a quiz. There are not fifty of them. Kittel Ch. 1 is these boxes, not the whole book.
+<div class="zh"><b>橋</b>＝這個新詞踩在哪個高中畫面。<b>框</b>＝小考要默寫的那一行。第一章就這些，不是整本 Kittel。</div>
+</div>
+<div class="toolbar"><button type="button" id="btnZh">中文旁註</button></div>
+
+<h2>A · Bridges（概念橋）</h2>
+<p class="ref">Each row: high-school picture → the Ch. 1 name. If you cannot say the left column, the right column is just a vocabulary list.</p>
+
+<div class="bridge">
+  <div class="lab">Bridge 1</div>
+  Wallpaper that repeats forever, specified by a tiny tile.
+  <div class="zh">能無限重複的壁紙，用一小塊磁磚就能講完。</div>
+  $$\longrightarrow\quad \text{crystal structure}=\text{lattice}\times\text{basis}$$
+</div>
+<div class="bridge">
+  <div class="lab">Bridge 2</div>
+  Integer steps along three arrows: $n_1\mathbf a_1+n_2\mathbf a_2+n_3\mathbf a_3$.
+  <div class="zh">沿三支箭各走整數步。</div>
+  $$\longrightarrow\quad \text{lattice translation }\mathbf T$$
+</div>
+<div class="bridge">
+  <div class="lab">Bridge 3</div>
+  Smallest tile that covers the wall with no leftover.
+  <div class="zh">能鋪滿又不重複的最小一塊。</div>
+  $$\longrightarrow\quad \text{primitive cell (exactly 1 lattice point)}$$
+</div>
+<div class="bridge">
+  <div class="lab">Bridge 4</div>
+  Voronoi cell: region closer to this base station than to any other.
+  <div class="zh">離這座基地台最近的勢力範圍。</div>
+  $$\longrightarrow\quad \text{Wigner–Seitz cell}$$
+</div>
+<div class="bridge">
+  <div class="lab">Bridge 5</div>
+  Which polygons tile the plane: triangles, squares, hexagons — not pentagons.
+  <div class="zh">正多邊形密鋪：沒有正五邊形。</div>
+  $$\longrightarrow\quad \text{5 Bravais lattices in 2D, 14 in 3D; no 5-fold axis}$$
+</div>
+<div class="bridge">
+  <div class="lab">Bridge 6</div>
+  Intercept form of a line: $x/a+y/b=1$, then take reciprocals.
+  <div class="zh">直線截距式再取倒數。</div>
+  $$\longrightarrow\quad \text{Miller indices }(hkl)$$
+</div>
+<div class="bridge">
+  <div class="lab">Bridge 7</div>
+  How many equal balls touch this ball; what fraction of the box is ball.
+  <div class="zh">一顆球貼幾顆；球佔盒子幾成。</div>
+  $$\longrightarrow\quad \mathrm{CN},\quad \eta=N\cdot\tfrac43\pi r^3/V_{\mathrm{cell}}$$
+</div>
+<div class="bridge">
+  <div class="lab">Bridge 8</div>
+  Stacking oranges: third layer either back over the first ($ABAB$) or in the other hollow ($ABCABC$).
+  <div class="zh">疊橘子：第三層回到第一層正上方，或換另一個凹洞。</div>
+  $$\longrightarrow\quad \mathrm{hcp}\ (ABAB)\ \text{vs}\ \mathrm{fcc}\ (ABCABC)$$
+</div>
+
+<h2>B · Boxes（全部公式框）</h2>
+<p class="ref">Recopy the boxed line. Derivation lives in Unit 01; the quiz wants the box. All numbers: Kittel 8e Ch. 1 Table 2 / Fig. 8 / 13 / 18 / 21 unless noted.</p>
+
+<div class="box" id="b1">
+  <span class="n">1</span><h3> The whole chapter</h3>
+  $$\boxed{\text{crystal structure}=\text{lattice}\times\text{basis}}$$
+  $$\mathbf T=n_1\mathbf a_1+n_2\mathbf a_2+n_3\mathbf a_3,\qquad n_i\in\mathbb Z$$
+  <p class="ref">Kittel: lattice translation vectors; basis and the crystal structure. sc = simple cubic, bcc = body-centered cubic, fcc = face-centered cubic.</p>
+  <div class="zh">整章一句話。lattice＝怎麼重複；basis＝每格放什麼。</div>
+</div>
+
+<div class="box" id="b2">
+  <span class="n">2</span><h3> Primitive-cell volume</h3>
+  $$\boxed{V_c=\lvert\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)\rvert}$$
+  Conventional cube volume is always $a^3$. Primitive volumes: sc $a^3$, bcc $\tfrac12 a^3$, fcc $\tfrac14 a^3$.
+  <p class="ref">Kittel Table 2.</p>
+</div>
+
+<div class="box" id="b3">
+  <span class="n">3</span><h3> Counting atoms in the conventional cube</h3>
+  $$\boxed{\text{corner }=\tfrac18,\quad \text{face }=\tfrac12,\quad \text{body }=1}$$
+  $$
+  N_{\mathrm{sc}}=8\times\tfrac18=1,\quad
+  N_{\mathrm{bcc}}=8\times\tfrac18+1=2,\quad
+  N_{\mathrm{fcc}}=8\times\tfrac18+6\times\tfrac12=4
+  $$
+  <p class="ref">Kittel: one lattice point per primitive cell; Table 2 “lattice points per cell”.</p>
+</div>
+
+<div class="box" id="b4">
+  <span class="n">4</span><h3> Contact (hard spheres) → $r$ in terms of $a$</h3>
+  $$
+  \boxed{
+  \begin{aligned}
+  \mathrm{sc}:&\quad 2r=a\\
+  \mathrm{bcc}:&\quad 4r=\sqrt{3}\,a\\
+  \mathrm{fcc}:&\quad 4r=\sqrt{2}\,a
+  \end{aligned}}
+  $$
+  Equivalent nn distances (Kittel Table 2): $a$, $\frac{\sqrt3}{2}a$, $a/\sqrt2$.
+  <p class="ref">Table 2 nn distance + footnote: packing = hard spheres. Draw the red line: edge / body diagonal / face diagonal.</p>
+</div>
+
+<div class="box" id="b5">
+  <span class="n">5</span><h3> Packing fraction</h3>
+  $$\boxed{\eta=\frac{N\cdot\frac43\pi r^3}{a^3}}$$
+  $$
+  \boxed{
+  \eta_{\mathrm{sc}}=\frac{\pi}{6}=0.524,\quad
+  \eta_{\mathrm{bcc}}=\frac{\pi\sqrt3}{8}=0.680,\quad
+  \eta_{\mathrm{fcc}}=\frac{\pi\sqrt2}{6}=0.740
+  }
+  $$
+  fcc form $\pi\sqrt2/6$ is Kittel’s; same as $\pi/(3\sqrt2)$. hcp has the same $0.74$. Diamond $\approx0.34$.
+  <p class="ref">Kittel Table 2; diamond §; hcp § (both close-packings occupy 0.74).</p>
+</div>
+
+<div class="box" id="b6">
+  <span class="n">6</span><h3> Coordination number</h3>
+  $$\boxed{\mathrm{CN}:\ \mathrm{sc}=6,\ \mathrm{bcc}=8,\ \mathrm{fcc}=\mathrm{hcp}=12,\ \mathrm{diamond}=4}$$
+  <p class="ref">Table 2; diamond § (4 nn, tetrahedral).</p>
+</div>
+
+<div class="box" id="b7">
+  <span class="n">7</span><h3> Names of the three cubic lattices</h3>
+  $$
+  \boxed{
+  \begin{aligned}
+  \mathrm{sc}&=\text{simple cubic}=\text{corners only}\\
+  \mathrm{bcc}&=\text{body-centered cubic}=\text{corners}+\text{body centre}\\
+  \mathrm{fcc}&=\text{face-centered cubic}=\text{corners}+\text{face centres}
+  \end{aligned}}
+  $$
+  <p class="ref">Kittel Fig. 8 and Table 2. Only sc’s conventional cube is primitive.</p>
+  <div class="zh">sc 簡單立方；bcc 體心立方；fcc 面心立方。</div>
+</div>
+
+<div class="box" id="b8">
+  <span class="n">8</span><h3> fcc primitive vectors</h3>
+  $$
+  \boxed{
+  \mathbf a_1=\tfrac a2(\hat x+\hat y),\ 
+  \mathbf a_2=\tfrac a2(\hat y+\hat z),\ 
+  \mathbf a_3=\tfrac a2(\hat z+\hat x)
+  }
+  $$
+  Length $\frac a2\sqrt2$, angle $60^\circ$, $V=a^3/4$.
+  <p class="ref">Kittel Fig. 11.</p>
+</div>
+
+<div class="box" id="b9">
+  <span class="n">9</span><h3> bcc primitive vectors</h3>
+  $$
+  \boxed{
+  \mathbf a_1=\tfrac a2(\hat x+\hat y-\hat z),\ 
+  \mathbf a_2=\tfrac a2(-\hat x+\hat y+\hat z),\ 
+  \mathbf a_3=\tfrac a2(\hat x-\hat y+\hat z)
+  }
+  $$
+  $V=a^3/2$. (Kittel Fig. 10; one common sign convention.)
+  <p class="ref">Kittel Fig. 10.</p>
+</div>
+
+<div class="box" id="b10">
+  <span class="n">10</span><h3> Miller indices</h3>
+  $$\boxed{\text{intercepts}\ \to\ \text{reciprocals}\ \to\ \text{lowest integers}=(hkl)}$$
+  Example: intercepts $3,2,2$ → $(233)$. Intercepts $4,1,2$ → $(142)$. Parallel to an axis → that index is $0$.
+  Direction $[uvw]$; family $\{hkl\}$.
+  <p class="ref">Kittel § Indices of planes, Fig. 13–14.</p>
+</div>
+
+<div class="box" id="b11">
+  <span class="n">11</span><h3> Cubic interplanar spacing</h3>
+  $$\boxed{d_{hkl}=\frac{a}{\sqrt{h^2+k^2+l^2}}}$$
+  In the <b>cubic</b> system only: $[hkl]\perp(hkl)$.
+  <p class="ref">Standard cubic geometry (used with Fig. 14). Not true in a general crystal system — Kittel states the cubic perpendicularity.</p>
+</div>
+
+<div class="box" id="b12">
+  <span class="n">12</span><h3> Density from the cube</h3>
+  $$\boxed{\rho=\frac{N\,M}{N_A a^3}}$$
+  <p class="ref">Mass of $N$ atoms per conventional cube. Used with Table 2’s $N$.</p>
+</div>
+
+<div class="box" id="b13">
+  <span class="n">13</span><h3> CsCl is not bcc</h3>
+  $$\boxed{\mathrm{CsCl}=\text{simple cubic lattice}+\text{basis }\{\mathrm{Cs},\mathrm{Cl}\}}$$
+  Sites $000$ and $\tfrac12\tfrac12\tfrac12$ are <b>different ions</b> → not equivalent lattice points → not bcc. CN $=8$.
+  <p class="ref">Kittel Fig. 18, § Cesium chloride.</p>
+</div>
+
+<div class="box" id="b14">
+  <span class="n">14</span><h3> NaCl</h3>
+  $$\boxed{\mathrm{NaCl}=\text{fcc lattice}+\text{basis }\{\mathrm{Na},\mathrm{Cl}\}}$$
+  4 NaCl per conventional cube. CN $=6$.
+  <p class="ref">Kittel § Sodium chloride, Fig. 15–17. Basis: one ion at $000$, the other at $\tfrac12\tfrac12\tfrac12$ along the body diagonal (or Cl at $000$, Na at $\tfrac12 00$, etc.).</p>
+</div>
+
+<div class="box" id="b15">
+  <span class="n">15</span><h3> Diamond / zincblende</h3>
+  $$\boxed{\text{diamond}=\text{fcc}+\{000,\ \tfrac14\tfrac14\tfrac14\}\ \text{(same atom)}}$$
+  Conventional cube: 8 atoms. CN $=4$. Packing $\approx0.34$. ZnS (zincblende): same geometry, two species.
+  <p class="ref">Kittel Fig. 22–24.</p>
+</div>
+
+<div class="box" id="b16">
+  <span class="n">16</span><h3> Ideal hcp</h3>
+  $$\boxed{\left(\frac{c}{a}\right)_{\mathrm{ideal}}=\sqrt{\frac83}=1.633}$$
+  Stacking $ABAB\cdots$ (hcp) vs $ABCABC\cdots$ (fcc). Both: $\eta=0.74$, CN $=12$. Space lattice of hcp is <b>simple hexagonal</b> with a 2-atom basis.
+  <p class="ref">Kittel Fig. 19–21. Second basis atom at $\tfrac23\mathbf a_1+\tfrac13\mathbf a_2+\tfrac12\mathbf a_3$.</p>
+</div>
+
+<div class="box" id="b17">
+  <span class="n">17</span><h3> Bravais count / no five-fold</h3>
+  $$\boxed{\text{2D: 5 types};\quad \text{3D: 14 types};\quad \text{allowed rotations }1,2,3,4,6}$$
+  Honeycomb (graphene) is <b>not</b> a 1-point Bravais lattice (two environments) → triangular lattice + 2-carbon basis.
+  <p class="ref">Kittel Table 1; § Fundamental types of lattices.</p>
+</div>
+
+<h2>C · What is <i>not</i> a Ch. 1 box</h2>
+<ul>
+  <li>Reciprocal lattice $\mathbf b_i$, Bragg, $S_{\mathbf G}$ — <b>Chapter 2</b>.</li>
+  <li>Phonons — Ch. 4–5. Nearly-free electron / tight binding — Ch. 7.</li>
+  <li>The $a\times a\sqrt2$ bcc slice is a drawing aid, not a Kittel box (derived from Table 2 nn).</li>
+</ul>
+
+<footer>
+Recopy boxes 1, 4, 5, 7, 13 for a pop quiz. The rest before the midterm (1 Nov).
+<div class="zh">小考先默 1、4、5、7、13。其餘期中 11/02 前。</div>
+</footer>
+<script>
+document.getElementById('btnZh').onclick=function(){
+  document.body.classList.toggle('show-zh');
+  this.classList.toggle('on', document.body.classList.contains('show-zh'));
+};
+</script>
+</body>
+</html>

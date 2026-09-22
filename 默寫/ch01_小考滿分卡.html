@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz full-mark card — Q1 Q2 Q5</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  :root{--blue:#1a4d7c;--blue2:#2b6ca0;--soft:#eef5fb;--border:#c5d5e5;--ink:#1c2733}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+       max-width:780px;margin:1.3em auto 4em;padding:0 1.1em;line-height:1.7;color:var(--ink);background:#fafafa}
+  h1{color:var(--blue);border-bottom:3px solid var(--blue);padding-bottom:.3em;font-size:1.3em}
+  h2{color:var(--blue);font-size:1.05em;margin:1.3em 0 .35em}
+  a{color:var(--blue2)}
+  .nav{font-size:.9em;margin:0 0 .8em;display:flex;gap:.5em;flex-wrap:wrap}
+  .nav a{text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.25em .65em;color:#234}
+  .lede{background:var(--soft);border-left:4px solid #6aa1d6;border-radius:4px;padding:.7em .9em;margin:0 0 1em;font-size:.94em}
+  .zh{display:none;margin:.35em 0 0;padding:.45em .7em;background:#f7f4ee;border-left:3px solid #c4a574;border-radius:0 6px 6px 0;color:#5c4a2e;font-size:.9em}
+  body.show-zh .zh{display:block}
+  .toolbar{margin:0 0 .8em}
+  .toolbar button{font:inherit;font-size:.88em;padding:.3em .8em;border:1px solid var(--border);background:#fff;border-radius:999px;cursor:pointer}
+  .toolbar button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:.9em 1em;margin:0 0 .8em}
+  .prompt{font-weight:700;color:var(--blue);margin:0 0 .4em}
+  .boxed{display:block;margin:.5em 0;padding:.5em .7em;border:2px solid var(--blue);border-radius:8px;font-weight:700;color:var(--blue)}
+  ol.steps{margin:.3em 0;padding-left:1.25em}
+  ol.steps li{margin:.25em 0}
+  footer{color:#888;font-size:.84em;margin-top:1.8em;border-top:1px solid #ddd;padding-top:.8em}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="ch01_小考模擬.html">8-min slips</a>
+  <a href="ch01_練習題.html">Set A</a>
+</div>
+<h1>Full-mark card — recopy tonight, cover, rewrite</h1>
+<p style="font-size:.95em"><b>sc</b> = simple cubic（簡單立方，只有角）．
+<b>bcc</b> = body-centered cubic（體心立方，角＋體心）．
+<b>fcc</b> = face-centered cubic（面心立方，角＋每個面心）．
+Ref. Kittel 8e Ch. 1 Table 2 / Fig. 8.</p>
+<div class="lede">
+Three slips that actually fit an 8-minute quiz. Recopy each boxed block in English from memory. If you cannot rewrite it with the book closed, you do not have full marks yet.
+<div class="zh">這三張才是小考長度。今晚用英文默寫框起來的區塊。合上書寫不出來＝還沒滿分。</div>
+</div>
+<div class="toolbar"><button type="button" id="btnZh">中文旁註</button></div>
+
+<div class="card">
+  <p class="prompt">Q1 · Define lattice, basis, crystal structure. Write $\mathbf T$.</p>
+  <div class="zh">定義三個詞，寫平移向量。</div>
+  <p><b>Lattice:</b> the set of mathematical points $\mathbf R=n_1\mathbf a_1+n_2\mathbf a_2+n_3\mathbf a_3$ with $n_i$ integers.<br>
+     <b>Basis:</b> the atom or group of atoms attached to each lattice point.<br>
+     <b>Crystal structure</b> = lattice $\times$ basis.</p>
+  <span class="boxed">$\mathbf T=n_1\mathbf a_1+n_2\mathbf a_2+n_3\mathbf a_3,\quad n_i\in\mathbb Z$</span>
+  <p>One sentence for the paper: <i>A crystal structure is a lattice of points together with a basis of atoms on each point.</i></p>
+  <p style="font-size:.85em;color:#5a6a7a"><b>Ref.</b> Kittel 8e Ch. 1, lattice translation vectors and “basis and the crystal structure”.</p>
+</div>
+
+<div class="card">
+  <p class="prompt">Q2 · fcc: $N$, CN, contact, derive $\eta$.</p>
+  <div class="zh">fcc：每胞原子數、配位數、相切、推出填充率。不要只寫 0.74。</div>
+  <ol class="steps">
+    <li>$N=8\times\frac18+6\times\frac12=4$ atoms per conventional cube.</li>
+    <li>CN $=12$ (nearest neighbours along face diagonals).</li>
+    <li>Contact along the face diagonal: four radii on $\sqrt2\,a$, so $4r=\sqrt2\,a$, $r=\sqrt2\,a/4$.</li>
+    <li>$\eta=\dfrac{4\cdot\frac43\pi r^3}{a^3}$. Substitute $r^3=(\sqrt2)^3 a^3/64=2\sqrt2\,a^3/64=\sqrt2\,a^3/32$:<br>
+        $\eta=4\cdot\frac43\pi\cdot\dfrac{\sqrt2}{32}=\dfrac{\pi\sqrt2}{6}=\dfrac{\pi}{3\sqrt2}\approx0.740$.</li>
+  </ol>
+  <span class="boxed">fcc: $N=4$, CN $=12$, $4r=\sqrt2\,a$, $\eta=\pi\sqrt2/6=\pi/(3\sqrt2)\approx0.74$</span>
+  <p style="font-size:.85em;color:#5a6a7a"><b>Ref.</b> Kittel 8e Ch. 1 Table 2 (points per cell, CN, nn $=a/\sqrt2$, packing $\pi\sqrt2/6$) and Fig. 8.</p>
+</div>
+
+<div class="card">
+  <p class="prompt">Q5 · CsCl: Bravais lattice? Basis? Why not bcc?</p>
+  <div class="zh">角是 Cs、體心是 Cl。看起來像 bcc，但不是。</div>
+  <p>Cs at the 8 corners, Cl at the body centre (or swapped).</p>
+  <ol class="steps">
+    <li>Corner and centre are <b>different chemical species</b> → they are not equivalent lattice points.</li>
+    <li>A bcc lattice requires every point (corner and centre) to be the same environment. Here they are not.</li>
+    <li>Therefore the Bravais lattice is <b>simple cubic</b>, with a two-atom basis {Cs, Cl}.</li>
+    <li>Count: $8\times\frac18=1$ Cs and $1$ Cl per cube. Ratio $1:1$.</li>
+  </ol>
+  <span class="boxed">CsCl = sc lattice + 2-atom basis. Not bcc.</span>
+  <p>Exam sentence: <i>CsCl is not bcc because the corner and body-centre sites are occupied by different atoms, so they are not equivalent lattice points.</i></p>
+  <p style="font-size:.85em;color:#5a6a7a"><b>Ref.</b> Kittel 8e Ch. 1 Fig. 18: space lattice simple cubic; basis Cs⁺ at 000, Cl⁻ at $\tfrac12\tfrac12\tfrac12$.</p>
+</div>
+
+<footer>
+Cover the page. Rewrite the three boxed lines + the CsCl sentence in English. That is tonight’s full-mark drill — not Set A, not five textbooks.
+</footer>
+<script>
+document.getElementById('btnZh').onclick=function(){
+  document.body.classList.toggle('show-zh');
+  this.classList.toggle('on', document.body.classList.contains('show-zh'));
+};
+</script>
+</body>
+</html>

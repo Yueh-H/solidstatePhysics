@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理網站 — 質檢報告（Quality Audit）</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  table { border-collapse: collapse; margin: 1em 0; width: 100%; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+  .pass { color: #2e7d32; font-weight: 700; }
+  .fix { color: #e67e22; font-weight: 700; }
+  .badge { display:inline-block; padding:2px 9px; border-radius:12px; font-size:0.8em; font-weight:700; color:#fff; }
+  .b-green{background:#2e8b2e;} .b-orange{background:#e67e22;} .b-blue{background:#1a4d7c;} .b-grey{background:#888;}
+  .card { background:#fff; border:1px solid #d8e2ec; border-radius:10px; padding:0.4em 1.2em; margin:1em 0; box-shadow:0 1px 4px rgba(0,0,0,0.04); }
+  .kpi { display:flex; flex-wrap:wrap; gap:14px; margin:1.2em 0; }
+  .kpi div { flex:1 1 130px; background:#fff; border:1px solid #d8e2ec; border-radius:10px; padding:0.8em 1em; text-align:center; }
+  .kpi b { display:block; font-size:1.9em; color:#1a4d7c; line-height:1.1; }
+  .kpi span { font-size:0.85em; color:#666; }
+  figure { margin:1.2em 0; text-align:center; }
+  figcaption { font-size:0.9em; color:#555; margin-top:0.4em; }
+  details { background:#f7fafd; border:1px solid #c5d5e5; border-radius:8px; padding:0.5em 1em; margin:0.6em 0; }
+  summary { cursor:pointer; color:#1a4d7c; font-weight:600; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">← 回首頁</a> &nbsp;·&nbsp; <a href="考古題/詳解/index.html">考古題詳解</a> &nbsp;·&nbsp; <a href="單元教學/index.html">單元教學</a></div>
+
+<h1>固態物理網站 — 質檢報告</h1>
+<p style="color:#666">Quality Audit · 稽查日期 2026-06 · 方法:<b>可執行 Python 獨立重算</b>當客觀裁判(不靠 AI 自評)</p>
+
+<div class="kpi">
+  <div><b>33</b><span>檔受檢<br>(13 考古題+10 單元+10 Kittel)</span></div>
+  <div><b>145</b><span>算式窮舉<br>重算</span></div>
+  <div><b>240</b><span>SVG 折線<br>幾何驗證</span></div>
+  <div><b>2</b><span class="fix">找到並修正<br>的真錯誤</span></div>
+</div>
+
+<blockquote><b>一句話結論</b>:數值與標準公式維度經獨立程式重算 <span class="pass">0 個錯誤</span>;SVG 幾何體檢找到 <b class="fix">2 張上下顛倒的曲線圖(已修正)</b>;承重物理規則(消光/對偶/相切/配位數)<span class="pass">方向全部正確</span>;原卷可機讀的給定值<span class="pass">全部對得上</span>。</blockquote>
+
+<h2>🎯 為什麼要這樣查</h2>
+<p>本站有大量內容由 AI 生成,而 AI 最危險的特性是「<b>自信地錯</b>」——數字、正負號、factor-of-2、看似合理的物理。漂亮的圖與流暢的文字反而會<b>掩蓋</b>錯誤。所以可信度不來自「寫得漂亮」,而來自「<b>每個主張能否被一個獨立、客觀的方法重新驗證</b>」。本次以程式重算為主裁判,人工只負責判讀旗標真偽。</p>
+
+<h2>📋 五個維度的稽查結果</h2>
+
+<h3>① 承重物理規則(逐條對地面真值)</h3>
+<div class="card">
+<p><span class="badge b-green">通過</span> 掃 33 檔,檢查最承重、寫反最傷的規則陳述:</p>
+<ul>
+<li><b>消光方向</b>:bcc「$h{+}k{+}l$ 奇 → 消光」、fcc「混奇偶 → 消光」、diamond「$h{+}k{+}l\equiv 2\!\pmod 4$ → 額外消光」——無一寫反。</li>
+<li><b>倒晶格對偶</b>:bcc ↔ fcc 互為倒晶格——無寫成 bcc→bcc。</li>
+<li><b>相切方向</b>:sc $2r{=}a$、bcc $4r{=}\sqrt3 a$、fcc $4r{=}\sqrt2 a$、diamond $2r{=}\tfrac{\sqrt3}4a$——方向正確。</li>
+<li><b>配位數</b>:sc 6、bcc 8、fcc/hcp 12、diamond 4——全對。</li>
+</ul>
+<p style="color:#888;font-size:0.9em">6 個自動旗標經人工查證全為 regex 跨句誤報(視窗掃到鄰句另一結構的數字)。</p>
+</div>
+
+<h3>② SVG 圖形幾何(255 條折線)</h3>
+<div class="card">
+<p><span class="badge b-green">基礎層通過</span> 240 條曲線折線:<b>0 條出界</b>(超 viewBox)、<b>x 全單調</b>。</p>
+<p><span class="badge b-orange">深層找到 2 張真錯誤 → 已修正</span> 比對「曲線取樣點 vs 該圖標明的方程」,發現兩張<b>全區間對稱曲線被上下顛倒</b>:</p>
+<table>
+<tr><th>圖</th><th>應為</th><th>原本(錯)</th><th>狀態</th></tr>
+<tr><td>unit04 聲子色散 $\omega=\omega_{\max}\lvert\sin\tfrac{ka}{2}\rvert$<br>(全區 $-\pi/a..+\pi/a$)</td><td>$k{=}0$ 處 $\omega{=}0$ 的谷形 ∪</td><td>畫成 $k{=}0$ 處 $\omega$ 最大的丘形 ∩(與自己 caption 矛盾)</td><td><span class="fix">已修</span></td></tr>
+<tr><td>unit05 自由電子 $E=\dfrac{\hbar^2k^2}{2m}$<br>(全區 $-k_F..+k_F$)</td><td>$k{=}0$ 處 $E{=}0$ 的 ∪ 拋物線</td><td>畫成 $k{=}0$ 處 $E$ 最大的 ∩</td><td><span class="fix">已修</span></td></tr>
+</table>
+<p>修法:用物理公式<b>重新生成</b>正確曲線(非僅反射,因 $\lvert\sin\rvert$ 反射後曲率會相反),HTML 與 .md 同步更新並重驗通過。<b>文字數值本身正確</b>(維度①④已驗),只有圖被畫反——正是純數字稽查抓不到、卻會誤導學生的 bug。</p>
+<details><summary>誤報說明:另 5 張考古題色散圖一度被旗標,實為正確</summary>
+<p>2019/2020/2021/2023/2024 的色散圖只畫<b>半區 $[0,\pi/a]$ 單調上升</b>(caption 明載),$\lvert\sin\rvert$ 的凹性讓中點高於弦而被粗略偵測器誤判。逐一核對 x 軸範圍後確認<b>全部正確</b>。</p></details>
+</div>
+
+<h3>③ 原卷給定值對照(逐年)</h3>
+<div class="card">
+<p><span class="badge b-green">可機讀者全部一致</span> 把詳解引用的給定值與掃描原卷比對:</p>
+<table>
+<tr><th>年份</th><th>對上的給定值</th></tr>
+<tr><td>2019</td><td>$1.9$ eV、$1$ nm ✓</td></tr>
+<tr><td>2020</td><td>$5.14$ Å ✓</td></tr>
+<tr><td>2021</td><td>$8.35^\circ$ ✓</td></tr>
+<tr><td>2022</td><td>$1.12$ eV、$300$ K、$5.451$ Å、$5/8$ Å、$90^\circ$ ✓</td></tr>
+<tr><td>2023</td><td>graphene 鍵長 $0.14$ nm ✓</td></tr>
+</table>
+<p style="color:#888;font-size:0.9em">「詳解有/原卷無」者經查皆為詳解<b>自行算出的中間值</b>(如 $0.633$ eV、$159$ eV)或<b>補的標準常數</b>(庫侖捷徑 $14.4$ eV·Å、室溫 $300$ K),非抄錯。其餘年份 OCR 掃描過於模糊、機器讀不到數字,無法自動比對(列為限制,見下)。</p>
+</div>
+
+<h3>④ 算術窮舉重算(145 條自包含算式)</h3>
+<div class="card">
+<p><span class="badge b-green">通過</span> 抓全站「$A\,\text{op}\,B=C$」型自包含算式 145 條,用 Python 重算。32 個旗標<b>逐一查證全為 parser 誤報</b>:把分數/根號誤讀成整數($\tfrac35{\to}35$、$\tfrac23{\to}23$、$\sqrt3{\to}3$、$\pi^2/3{\to}2/3$)、或抓到多項式/座標片段、或漏掉 $\times10^n$ 與 %。<b>真正的算術錯誤:0</b>。</p>
+</div>
+
+<h3>⑤ 其餘教材區塊(標準常數掃描)</h3>
+<div class="card">
+<p><span class="badge b-green">通過</span> 把標準常數(填充率、$c/a$、空隙比、鍵角、Madelung)的掃描延伸到另外 18 檔(Kittel 章節導讀 10、先備知識 2、簡報 4、講義/林盛煇 2)——<b>全部一致</b>。</p>
+</div>
+
+<h2>📐 已驗證的「地面真值」(獨立程式計算)</h2>
+<blockquote style="font-size:0.95em">
+填充率 sc/bcc/fcc/diamond $=0.5236/0.6802/0.7405/0.3401$;hcp $c/a=\sqrt{8/3}=1.6330$;四面體/八面體空隙比 $=0.2247/0.4142$;四面體鍵角 $=\arccos(-\tfrac13)=109.47^\circ$;1D Madelung $\alpha=2\ln2=1.3863$;Lorenz $L=\tfrac{\pi^2}{3}(k_B/e)^2=2.443\times10^{-8}$;2D 六方/正方填充 $=0.9069/0.7854$。<br>
+材料抽驗:Cu fcc $a=3.61$ Å、Mg hcp $\rho=1.72$ g/cm³、Sn BCS $2\Delta=1.12$ meV、Ge 施主軌道 $a_d=69.7$ Å($\varepsilon_r{=}15.8$) … 全部 $\checkmark$。
+</blockquote>
+
+<h2>⚠️ 誠實聲明:本次『未』完全涵蓋</h2>
+<ol>
+<li><b>純文字論述未逐行重推</b>:已驗證「承重規則」與所有數值,但未對每一段定性物理敘述做獨立從零重證。</li>
+<li><b>SVG 幾何為抽驗+方向體檢</b>:已查邊界、單調、對稱曲線方向;未對每一張圖的每個像素與方程逐點擬合。</li>
+<li><b>原卷對照受限於 OCR</b>:多數掃描卷字層模糊,機器讀不到數字,只能比對讀得到的部分(讀得到者全對)。</li>
+<li><b>算術窮舉限「自包含」式</b>:跨多步、需代入物理常數的長算式以維度①④抽驗覆蓋,非每個數字都獨立重算。</li>
+<li><b>其餘區塊僅標準常數掃描</b>:章節導讀/先備/簡報/全文教材只做了 canonical 常數比對,未做完整逐題稽查。</li>
+</ol>
+
+<h2>✅ 總結</h2>
+<p>全站三大複習主力(13 年考古題詳解、10 章單元教學、10 章 Kittel 習題詳解,共 33 檔)的<b>數值答案、標準公式、承重物理規則</b>,經客觀可重現的程式重算,<span class="pass">全數正確</span>;SVG 幾何體檢額外<b class="fix">揪出並修正 2 張畫反的曲線圖</b>。這份報告本身(列明方法、逐項證據、與<b>未涵蓋範圍</b>)即是可信度的一部分——一個會抓自己錯、並誠實標註邊界的系統,才值得信任。</p>
+
+<hr>
+<p style="color:#999;font-size:0.85em">配套純文字報告:<code>_質檢報告_主表.md</code>(全站)、<code>考古題/詳解/_質檢報告.md</code>(13 年細表)。本頁可離線直接開啟。</p>
+</body>
+</html>

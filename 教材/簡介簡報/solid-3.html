@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>教材 — 蕭智仁《深入淺出固態物理》簡報 (3)</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="../index.html">← 教材目錄</a> &nbsp;·&nbsp; <a href="../../考古題/導讀.html">導讀</a> &nbsp;·&nbsp; <a href="../../考古題/單元整理.html">單元整理</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- source: 固態物理簡介/solid-3.pdf -->
+
+## **深入淺出固態物理理論** 
+
+**==> picture [631 x 64] intentionally omitted <==**
+
+**蕭智仁 政治大學應用物理所** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **更進階的數學工具** 
+
+## **� 複習：數學篇** 
+
+- **矩陣的本徵值、本徵向量與對角化** 
+
+- **微分方程的矩陣解** 
+
+- **內積空間與傅立葉轉換** 
+
+- **算子理論** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **量子力學 � 複習：薛丁格方程式** 
+
+# **� 矩陣力學與觀測算符** 
+
+## **� 測不準原理** 
+
+- **電子自旋與原子軌道** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **： 複習 數學篇** ~~v~~ v **� 若** a = (cosα,sinα),b = (cosβ,sin β) **求兩者的內積？** 
+
+v v ⋅ = ⋅ a b α sinα sin (cos , ) (cosβ, β) = cosαcos + sinαsin β β = − − − cosαcos sinαsin ( β) ( β) = − **：** cos α + **幾何意義** ( ( β)) = cos α − ( β) α −β β α 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **： 複習 數學篇** 
+
+**==> picture [473 x 374] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+−<br>cosθ sinθ 0 x<br>   <br>   <br>v v<br>O = sinθ cosθ 0 v = Ov = ?<br> ;  y ;<br>   <br> 0 0 1  z <br>−<br>cosθ sinθ 0 x<br> []  []  []  []<br>v<br>Ov = sinθ cosθ 0<br>  y <br>z (xcosθ-ysinθ-ysin-ysinθ, ycosθ+xsinθ, z)<br>0 0 1 z<br>  <br>−<br>x cosθ sinθ<br> y <br>  θ<br>=<br> x sinθ+ y cosθ y<br> <br>z<br> <br>**----- End of picture text -----**<br>
+
+
+**==> picture [242 x 108] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+z (xcosθ-ysinθ-ysin-ysinθ, ycosθ+xsinθ, z)<br>θ (x, y, z)<br>y<br>**----- End of picture text -----**<br>
+
+
+**==> picture [10 x 9] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+x<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **： 複習 數學篇** 
+
+− cosθ sinθ 0 cosθ sinθ 0         ' ' = = − = O sinθ cosθ 0 O sinθ cosθ 0 O O ?  ;  ;      0 0 1  0 0 1 − cosθ sinθ 0 cosθ sinθ 0 [] [] [] [] ' = − O O  sinθ cosθ 0 sinθ cosθ 0 **  **  0 0 1 0 0 1 2 2 −  cos θ+ sin θ sinθcosθ cosθsinθ 0   2 2 = −  cosθsinθ cosθsinθ cos θ+ sin θ 0   0 0 1   1 0 0     − ' 1 = =  0 1 0 ⇒ O O    0 0 1 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **： 複習 數學篇** 
+
+**==> picture [643 x 99] intentionally omitted <==**
+
+� **根據這樣的定義** , **複數向量的絕對值** , **也就是自己對自己的** * * * **內積** , **仍然保持為非負實數** , c c + c c + c c + ... ≥ 0 1 1 2 2 3 3 
+
+**==> picture [569 x 39] intentionally omitted <==**
+
+## **� : 性質** 
+
+**==> picture [475 x 82] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **： 複習 數學篇** 
+
+## **� 其實矩陣上的各元素不見得只會出現實數，有時候 還可以出現複數** 
+
+**==> picture [721 x 375] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **： 複習 數學篇** 
+
+**==> picture [721 x 446] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+**==> picture [691 x 170] intentionally omitted <==**
+
+**==> picture [721 x 439] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **： 複習 數學篇** 
+
+## **� 球座標系的微分 (用於計算原子軌道)** 
+
+**==> picture [373 x 141] intentionally omitted <==**
+
+**==> picture [328 x 133] intentionally omitted <==**
+
+**==> picture [373 x 133] intentionally omitted <==**
+
+**==> picture [328 x 158] intentionally omitted <==**
+
+1 0 0 dr       v j dr = dx = 0 r 0 dθ gij       0 0 r sinθ dφ 
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **： 複習 數學篇** 
+
+## **� 向量分析** 
+
+**==> picture [551 x 116] intentionally omitted <==**
+
+**==> picture [603 x 7] intentionally omitted <==**
+
+**==> picture [721 x 271] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **： 複習 數學篇 � 直角座標系向量分析** 
+
+**==> picture [193 x 40] intentionally omitted <==**
+
+- **梯度** 
+
+**==> picture [391 x 22] intentionally omitted <==**
+
+- **散度** 
+
+- **旋度** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **： 複習 數學篇** 
+
+## **� 正交座標系向量分析** 
+
+**==> picture [634 x 157] intentionally omitted <==**
+
+**==> picture [601 x 198] intentionally omitted <==**
+
+wikipedia 
+
+**： 複習 數學篇** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+**==> picture [516 x 199] intentionally omitted <==**
+
+**==> picture [721 x 271] intentionally omitted <==**
+
+**： 複習 數學篇** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+**==> picture [533 x 196] intentionally omitted <==**
+
+**==> picture [721 x 271] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+**： 複習 數學篇 � 球座標系向量分析** h = 1  1 ) ) v v ) ) j = = = = dr gijdq ⇒ dr hidqiei drr + rdθθ + r sinθdφφ h2 r h = r sinθ  3 r[)] ) φ ) θ 
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **： 複習 數學篇** 
+
+**==> picture [664 x 200] intentionally omitted <==**
+
+**==> picture [664 x 257] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **： 複習 數學篇** 
+
+**==> picture [469 x 199] intentionally omitted <==**
+
+**==> picture [186 x 25] intentionally omitted <==**
+
+**==> picture [469 x 260] intentionally omitted <==**
+
+**==> picture [186 x 162] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **、 矩陣的本徵值 本徵向量與對角化 � 零空間 (核)** Null(M) v v v = v ≠ Mv 0 ⇒ v ∈ M ,0 Null( ) 
+
+**==> picture [511 x 115] intentionally omitted <==**
+
+**==> picture [511 x 257] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **、 矩陣的本徵值 本徵向量與對角化** 
+
+**� 本徵值與本徵向量(或稱為特徵值與特徵向量)** v v v � **若** Mv = λv λ= ? v = ? , � λ & v[v] **各代表本徵值與本徵向量** 
+
+- **:** 
+
+- **本徵值與本徵向量的幾何意義 矩陣改變向量, 其實 等價於把這個向量的基底用本徵向量來表達而本徵,** v v v 
+
+- **向量經過矩陣作用後變化λ倍** 
+
+**==> picture [577 x 236] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+v<br>v v<br>=<br>MV c λv + c λv<br>1 1 1 2 2 2<br>v M λ M<br>MV 2<br>⇔<br>v v v v<br>V = c v + c v<br>1 1 2 2<br>V<br>[v][v] 2<br>[v][v] 1<br>[λ] 1<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **、 矩陣的本徵值 本徵向量與對角化** 
+
+**� 求本徵值與本徵向量** v v v = − = Mv λv ⇔ M λI v 0 ( ) **� 若** v[v] ≠ 0 **只能有** det M − λI = 0 or  det λI − M = 0 ( ) ( ( ) ) **�** det(λI − M) = 0 **是一個λ的多項式, 又被稱為特徵多 項式 � 解出特徵值λ之後代回 λI-M, 求出λI-M的零空間, 這 個零空間就對應到本徵向量所在的空間** v v v v **�** Mv = λv ⇔ M cv = λ cv ( ) ( ) **所以一個本徵向量的任 意倍數也都是特徵向量 � 特徵多項式中若某λ有n重根, 但是那個λ所對應的本 n 徵向量空間不一定有 維空間 (通常是小於n)** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **、 矩陣的本徵值 本徵向量與對角化 � 本徵值與本徵向量範例** 
+
+**==> picture [565 x 157] intentionally omitted <==**
+
+**==> picture [565 x 261] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **、 矩陣的本徵值 本徵向量與對角化** 
+
+**==> picture [585 x 169] intentionally omitted <==**
+
+**==> picture [585 x 164] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **、 矩陣的本徵值 本徵向量與對角化 � 矩陣對角化** 
+
+- **矩陣** A **若可寫成** P[-1] AP=D, D **是對角矩陣** , **則** A **可對角化** 
+
+**==> picture [397 x 127] intentionally omitted <==**
+
+**==> picture [397 x 260] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **、 矩陣的本徵值 本徵向量與對角化** 
+
+## **� 厄密矩陣 Hermitian: M[†] = (M[T] )*=M** 
+
+**==> picture [622 x 179] intentionally omitted <==**
+
+- **:** 
+
+- **厄密矩陣重要性質** 
+
+   - 1. **本徵值為實數** 
+
+   - 2. **不同本徵值所對應的本徵向量** , **彼此正交** 
+
+**==> picture [206 x 34] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **、 矩陣的本徵值 本徵向量與對角化** 
+
+**==> picture [721 x 452] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+厄密矩陣舉例 本徵值與向量1 本徵值與向量2<br>0 1 1 1<br>     <br>= = = = − =<br>σ λ v c λ v c<br>x 1 ;1 1 2 ;1 2<br> []  []  []  []  [] −  []<br>1 0 1  1<br>−<br>0 i 1 1<br>     <br>= = = = − =<br>σ λ v c λ v c<br>x 1 ;1 1 2 ;1 2<br> []  []  []  []  [] −  []<br> i 0   i   i <br>1 0 1 0<br>     <br>= = = = − =<br>σ λ v c λ v c<br>z 1 ;1 1 2 ;1 2<br> [] −  []  []  []  []  []<br> 0 1  0 1<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **、 矩陣的本徵值 本徵向量與對角化** 
+
+- **證明: 厄密矩陣M的本徵向量v, 所對應的本徵值λ為 實數 (λ[∗] = λ)** 
+
+**==> picture [529 x 311] intentionally omitted <==**
+
+**==> picture [250 x 25] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **、 矩陣的本徵值 本徵向量與對角化** 
+
+- **證明: 設厄密矩陣M有兩相異本徵值λ1,λ2對應本徵向 量v1,v2, 則 <v1|v2>=0** 
+
+**==> picture [721 x 388] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **微分方程式的矩陣解** 
+
+## **� +a +…+a +a +a 解齊次方程 y[(n)] ny[(n-1)] 3y[’’] 2y[’] 1y=0 +…+a +a +a 由於 y[(n) ] = -(any[(n-1)] 3y[’’] 2y[’] 1y)** 
+
+**==> picture [721 x 369] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+=<br> y1 y<br>y1  d d<br>= =<br> []  [] y2 dx y dx y1<br>n<br>令 yv =  y2  []  y3 = dxd 22 y = dxd y2 ⇒ dxd nn y = dxd yn = −∑ a j dxd jj−−11 y<br>M  M j =1<br> []  []<br> yn  d n−1 d<br>= =<br> yn dx n−1 y dx yn −1<br>L<br> 0 1 0 0 <br>d<br> dx y1    y1 <br>L<br>  0 0 1 0  <br>d  <br>⇔ d v =  dx y2  =  0 0 0 L 0  y2 <br>dx y    <br>M   M<br> M M M O M <br> [] d  []  []  []<br> dx yn   − a − a − a L − a  yn <br> 1 2 3 n <br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **微分方程式的矩陣解** 
+
+**==> picture [474 x 174] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+L<br> 0 1 0 0 <br>d<br> dx y1    y1 <br>L<br>  0 0 1 0  <br>d  <br>d v =  dx y2  =  L  y2 <br>0 0 0 0<br>若有 dx y    <br>M   M<br> M M M O M <br> [] d  []  []  []<br> dx yn   − a − a − a L − a  yn <br> 1 2 3 n <br>v<br>= λ<br>yλ<br>**----- End of picture text -----**<br>
+
+
+v λt[v] **(解矩陣本徵值本徵向量) 得解** y( )t = y0e yλ 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **微分方程式的矩陣解** 
+
+|**�解方程式**<br>dt<br>d<br>x<br>m<br>β<br>−<br>=<br>2<br>2|**�解方程式**<br>dt<br>d<br>x<br>m<br>β<br>−<br>=<br>2<br>2|dt<br>d|kx<br>x<br>−<br>;|m<br>,|k<br>β<br>><br>0<br>,||||||||
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|m<br>k<br>dt<br>d<br>m<br>dt<br>d<br>x<br>x<br>x<br>x<br>β<br><br><br><br>=<br>⇒<br>=<br>+<br>+<br>2<br>2<br>0<br>v||dt<br>d<br>x<br>x<br>x<br>x<br><br><br><br><br><br><br>=<br><br><br><br>2<br>1|||||||||||
+|m<br>m<br>k<br>dt<br>d<br>x<br>x<br>x<br>x<br>β<br><br><br><br><br><br><br><br><br><br><br><br><br>−<br>−<br>=<br><br><br><br><br><br><br>⇒<br>1<br>0<br>2<br>1<br>2<br>1|||||||||||||
+|m<br>m<br>k<br>m<br>m<br>k<br>I<br>β<br>β<br>λ<br>λ<br>λ<br><br><br>−<br>−<br>−<br>−<br>=<br><br><br><br><br><br><br>−<br><br><br><br><br><br><br>−<br>−<br>1<br>det<br>1<br>0<br>det||||=<br><br>|λ<br>+<br>⇒<br>0<br>2|m<br>β|λ<br>+|||m<br>k|=|0|
+|~~( ~~)<br>m<br>k<br>m<br>m<br>β<br>β<br>λ<br>±<br>=<br><br><br><br><br>−<br>±<br>−<br>=<br>2<br>1<br>4<br>2<br>2<br>1<br>)<br>(||(<br>)<br>m<br>β<br>∆<br>±<br>−<br>;|||~~( ~~)<br>m<br>β<br>=<br>∆<br>2|−|m<br>k<br>4||||||
+||||||||||||||
+|(<br>)<br>(<br>)<br>t<br>t<br>Be<br>Ae<br>x<br>m<br>m<br>β<br>β<br>∆<br>−<br>−<br>∆<br>+<br>−<br>+<br>=<br>><br>∆<br>2<br>1<br>2<br>1<br>g;<br>overdampin<br>:<br>0|||(<br>)<br>t<br>i<br>t<br>i<br>t<br>Be<br>Ae<br>e<br>x<br>m<br>ω<br>ω<br>β<br>ω<br>−<br>−<br>+<br>=<br>=<br><<br>∆<br>2<br>n,<br>oscillatio<br>:<br>0|||||−|∆||||
+
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **內積空間與傅立葉轉換** 
+
+## **� 廣義向量空間** 
+
+**==> picture [535 x 169] intentionally omitted <==**
+
+**==> picture [535 x 123] intentionally omitted <==**
+
+**==> picture [493 x 129] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **內積空間與傅立葉轉換 �** x :V ×V a C **內積空間的廣義內積 <x|y>** y 
+
+- **:** 
+
+- **有以下性質者, 就可建構成內積** 
+
+**==> picture [383 x 113] intentionally omitted <==**
+
+x x > 0 � **自身內積為非負實數** 
+
+� x ≡ x x **長度的定義** ⇒ x y ≤ x y � **以上各性質可對應傳統向量內積** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **內積空間與傅立葉轉換** 
+
+## **� 內積的基底變換 (必須建立在基底的完備性之上)** � **離散基底** 
+
+## � **連續基底** 
+
+**==> picture [276 x 274] intentionally omitted <==**
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **內積空間與傅立葉轉換** 
+
+## **� : 範例 積分轉換** 
+
+ ,0 if x ≠ x0 x0 x = δ(x − x0 ) ∞ if x = x  , 0 δ x − x dx = 1 (∫ ( 0 ) ) x ≡ x x x dx 0 f 0 f ∫ **= δ(x** − **x** 0 **) f (x)dx = f (x** 0 **) ∫** δ x − f g ≡ f x x g dx ([x] 0 ) ∫ * = ∫ ( x0 f ) x g dx f ([x] 0 ) * = x x dx f ( )g( ) ∫ x f ( ) x[x] 0 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **內積空間與傅立葉轉換** 
+
+## **� 傅立葉轉換** 
+
+**==> picture [685 x 163] intentionally omitted <==**
+
+**==> picture [685 x 95] intentionally omitted <==**
+
+**==> picture [672 x 123] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **內積空間與傅立葉轉換 � 傅立葉級數(週期性問題)** 
+
+**==> picture [691 x 163] intentionally omitted <==**
+
+**==> picture [691 x 26] intentionally omitted <==**
+
+**==> picture [517 x 108] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+**算子理論 � 向量空間與函數空間** v v v L L v v v ⇔ x x x { 1, 2, 3, } {f1( ), f 2 ( ), f3( ), } ik x ik x ik x � **如** 1 2 3 L e e e , , , { } **� 把函數 f  表達成函數空間 {f1, f2, f3,…} 的向量** 
+
+**==> picture [339 x 40] intentionally omitted <==**
+
+**==> picture [532 x 68] intentionally omitted <==**
+
+**� Dirac notation:** U = ⇒ U = U = f g f f g 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **算子理論** 
+
+- **如同函數空間可當作向量空間, 算子可對應到矩陣** 
+
+**==> picture [659 x 239] intentionally omitted <==**
+
+- **Hermitian operator: 基底正交** 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **算子理論 � 離散基底** 
+
+**==> picture [362 x 141] intentionally omitted <==**
+
+## **� 連續基底** 
+
+= Q Q Q Q dQ ∫ = = Qψ Q Q Q ψ dQ Qψ(Q) Q dQ ∫ ∫ * = = Q ψ Q Q Q ψ dQ ψ (Q)Qψ(Q)dQ ψ ∫ ∫ 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **: 複習 薛丁格方程式** 
+
+**==> picture [355 x 199] intentionally omitted <==**
+
+**==> picture [192 x 100] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+= =<br>E hν hω<br><br><br>h<br>= =<br>P hk<br> λ<br>**----- End of picture text -----**<br>
+
+
+**==> picture [415 x 246] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **: 複習 薛丁格方程式** 
+
+**==> picture [643 x 199] intentionally omitted <==**
+
+**==> picture [260 x 43] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **: 複習 薛丁格方程式** 
+
+**==> picture [511 x 199] intentionally omitted <==**
+
+**==> picture [511 x 258] intentionally omitted <==**
+
+wikipedia 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **: 複習 薛丁格方程式** 
+
+## **� 不隨時變的薛丁格方程式** 
+
+ && ∂Ψ 2 ∞ 2 = h * ∂ Schrodinger equation: ih H Ψ T = − Ψ Ψdx ∫ 2  ∂t 2m −∞ ∂x  2 h 2  Hamiltonian operator: H = − ∇+V  2m 2 2 **∂Ψ h ∂Ψ** && ⇒ ih = − 2 +V Ψ...time-dependent Schrodinger equation (1-D) ∂t 2m ∂x too difficult to solve simplify the problem 
+
+2 2 h ∂ && ψ ⇒ Eψ = − 2 +Vψ...time-independent Schrodinger equation 2m ∂x 2 ⇒ x ⇒Ψ x t ⇒Ψ ⇒ x ψ( ) ( , ) Q( , p) 
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **: 複習 薛丁格方程式** 
+
+2 2 1 d h 1 ∂ ϕ ψ = = − ih E +V 2 dt 2m ∂x ϕ ψ 2 2 h ∂ && ψ − = +V (x)ψ Eψ...time-dependent Schrodinger equation 2 2m ∂x 
+
+where (V x) is the potential energy of the particle 1. The infinite square well  2. The harmonic oscillator case 3. The free particle  4. The delta-funciton potential  5. The finite square well  
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **: 複習 薛丁格方程式** 
+
+**==> picture [432 x 209] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+�<br>(無限深)位能井問題<br>=<br>≤ x ≤ a Ψ t 0<br>0, if 0  (0, )<br>V (x) =  ⇒ B C. : <br>∞ Ψ a t = 0<br> , otherwise  ( , )<br>2 2<br>h 1 ∂<br>ψ<br>− =<br>+V E<br>2<br>2m ∂x<br>ψ<br>**----- End of picture text -----**<br>
+
+
+**==> picture [228 x 163] intentionally omitted <==**
+
+**==> picture [418 x 96] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+solution:<br>2 2 2<br>2 nπ n π h<br>= =<br>x x E<br>ψn ( ) sin( )   and    n 2<br>a a 2ma<br>**----- End of picture text -----**<br>
+
+
+even and odd 1. they are alternately  some important properties: 2. they are mut ually orthonormal 
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **: 複習 薛丁格方程式 � 簡諧振盪系統** 
+
+**==> picture [491 x 220] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+1<br>2 2<br>V x = mω x<br>( )<br>2<br>Hooke's law<br>F = −kx 2 2<br>h 1 ∂<br>ψ<br>− =<br>+V E<br>1 2 2<br>V (x) = kx 2mψ ∂x<br>2<br>h2 ∂2ψ 1 2 2<br>⇒− 2m ∂x 2 + 2 mω x ψ = Eψ<br>(1) ladder operators (algebraic method)<br>solving by <br>(2) power series method (analytic method)<br>**----- End of picture text -----**<br>
+
+
+**==> picture [586 x 161] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+1<br>−<br>solution (1): a+ [=] ( ip + mωx)<br>2hmω<br>ψn = 1n! (a+ )nψ0, ψ0 = ( mπωh )1/ 4 e- m2ωh x2 , and En = (n + 12)hω<br>solution (2):<br>mω 1/ 4 1 -ξ2 /2 1 H (ξ) is Hermite polynomials<br>ψn = ( ) H n (ξ)e , and En = (n + )hω<br>n<br>πh 2<br>2 n!<br>**----- End of picture text -----**<br>
+
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **: 複習 薛丁格方程式** 
+
+**==> picture [721 x 465] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+ψn ( [x] ) 2<br>ψn ( [x] )<br> 1 n<br>=<br>ψn (a + ) ψ0<br>n!<br><br>En = (n + 12)hω<br>The excited state<br>2<br>ψn ( [x] )<br>The ground state<br>**----- End of picture text -----**<br>
+
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **矩陣力學與觀測算符** 
+
+α is bra vector 
+
+> β is ket vector 
+
+α β is inner product Q is expertation value of an observalue Q Qˆ   is operator (or matrix) 
+
+ˆ ˆ ˆ ˆ Commutative:   PQ ≠ QP ˆ ˆ ˆ ˆ ˆ ˆ − Comutator: ≡ P PQ QP [ ,Q] Norm: α ≡ α α α α ≥ α Schwarz inequality: β β β α + ≥ α + Triangle inequality: β ( β ) 
+
+2 
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **矩陣力學與觀測算符 � 波函數與物理量** 
+
+**==> picture [665 x 214] intentionally omitted <==**
+
+**==> picture [668 x 113] intentionally omitted <==**
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **矩陣力學與觀測算符** 
+
+ˆ ˆ ˆ Ψ QΨ = QΨ Ψ ,  where  is hermitian operatorQ ˆ ˆ ˆ Ψ QΨ ≠ QΨ Ψ ,  where  is not hermitian operatorQ ˆ QΨ = qΨ ...eigenvalue equation  ˆ  is Q hermitian operator  where is ei envale **q g** Ψ is eigenfunction  
+
+**==> picture [75 x 103] intentionally omitted <==**
+
+Spectrum: the collection of all the eigenvalues of an operator. Degenerate: sometimes two (or more) L.I. eigenfunctions share ue. the same eigenval 
+
+n Example: eigenvalue equatio 
+
+**==> picture [377 x 47] intentionally omitted <==**
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **矩陣力學與觀測算符** 
+
+## **� 厄密算符 Hermitian operators** 
+
+**==> picture [375 x 84] intentionally omitted <==**
+
+## � **動量算符** 
+
+**==> picture [413 x 37] intentionally omitted <==**
+
+- **“能量”算符** (Hamiltonian) 
+
+**==> picture [413 x 243] intentionally omitted <==**
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **測不準原理** 
+
+- **波函數具有“相位” 的性質, 以數學結構上會存在 觀測的極限問題** 
+
+**� 如果單只想量某個物理量量得很準, 是可以辦到的 (只受限於實驗條件), 但是要同時量兩個物理量很準 x 有時候可以辦到(如 , py)[, ] 而某些狀況下會有問題 (如x, px), 要看兩物理算符是否commute而定 � 所謂準不準, 看標準差** 2 2 σ = A − A = A − A Ψ A − A Ψ A ( ) ( ) ( ) = f f , where f = (A − A ) Ψ 2 σB = g g , where g = (B − B ) Ψ 
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+**==> picture [706 x 450] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+測不準原理<br>2<br>2 2<br>� 藉由Schwarz不等式,                                                     σAσB = f f g g ≥ f g<br>又<br>(1)<br>z<br>For any complex number<br>2<br>2 2 2 2 1 *<br> <br>= = −<br>z z + z ≥ z z z<br>Re( ) Im( ) Im( ) ( )<br>[ ] [ ] [ ]<br> <br>2i<br> <br>z =<br>letting    f g<br>2<br>2 1<br> <br>= −<br>⇒  <br>f g   f g g f  <br>2i<br> <br>2<br>1<br>2 2  <br>−<br>⇒ σ ≥<br>A [σ] B  [ f g g f ]<br>2i<br> <br>**----- End of picture text -----**<br>
+
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **測不準原理** 
+
+|**�基於**||(2)|(2)|(2)|||||||||||||||||||||||||||||||
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|||f||(<br>=<br> g|ˆ<br>−<br>A<br>A|||)<br>Ψ|||(<br>)<br>ˆ<br>−<br>Ψ = Ψ<br>B<br>B|||||||(<br>ˆ<br>−<br>A|||A|)(<br>ˆ<br>−<br>B<br>B||||)<br>Ψ|||||||||
+||||||||||||||||||||||||||||||||||||
+|||=||(<br>ˆ<br>ˆ<br> Ψ<br>AB|ˆ<br>−<br>A B|||ˆ<br>−<br>B||||A|+|)<br>A<br>B|Ψ||||||||||||||||||||
+||||||||||||||||||||||||||||||||||||
+|||=||ˆ<br>ˆ<br> Ψ<br>Ψ −<br>AB<br>B|||||Ψ|||ˆ<br>Ψ −<br>Ψ<br>A<br>A|||ˆ<br>Ψ <br>B||||+<br>A||B||Ψ||Ψ||||||||||
+||||||||||||||||||||||||||||||||||||
+|||=<br>**=**<br>so<br>f||ˆ ˆ<br>ˆ ˆ<br>−<br>AB<br>**AB**<br>−<br>−<br> g<br>g|B<br>**A**<br> f|A<br>**B**<br>=|−<br>A<br>ˆ<br>ˆ<br>AB|||||+<br>B<br>A<br>B<br>ˆ<br>ˆ<br>ˆ<br>,<br><br>−<br>= <br>BA<br>A|||ˆ<br><br><br> B||||commutator||||||||||||||||
+|**�舉例**<br>2<br>⇒<br>Aσ<br>σ|2<br>B|[<br>]<br>2<br>,<br>2<br>1<br><br><br><br><br><br><br>≥<br>B<br>A<br>i<br>ˆ<br>ˆ<br>let<br>(3<br>ˆ<br>ˆ<br>ˆ ˆ<br>ˆˆ<br>ˆ ˆ<br>[ , ]<br>)<br><br>=<br>=<br><br>=<br>=<br><br>=<br>−<br>=<br>h<br>A<br>x<br>x<br>d<br>B<br>p<br>i dx<br>x p<br>xp<br>px<br>x||||||h<br>i|d<br> dx|||−<br>h<br>i|dx<br> dx|=<br>h<br>i|⇒<br>⇒|σ<br>σ|||2<br>x<br>x<br>σ<br>σ|2<br>p<br>p|≥<br>≥|2<br>2<br>1<br>h<br><br><br><br>i||[<br>,<br>x||p|]|<br><br>|2|=|<br><br>|2<br>h|<br><br>|2|
+
+
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **測不準原理** 
+
+## **- � 能量 時間的測不準原理 (時間不是算符)** 
+
+Q is expertation value of an observalue  (Q x, p,t) 
+
+**==> picture [651 x 374] intentionally omitted <==**
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+**==> picture [694 x 457] intentionally omitted <==**
+
+solved by the method separation of variables let   ψ(r,θ,φ) = R(r)Y (θ,φ) 
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+**==> picture [691 x 99] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+電子自旋與原子軌道<br>1 d  2 dR  2mr 2 1  1 ∂  ∂Y  1 ∂ 2Y <br>⇒  r  − 2 [V (r) − E] = −   sinθ  + 2 2  = −l(l +1)<br>R dr  dr  h Y sinθ ∂θ ∂θ sin θ ∂φ <br>**----- End of picture text -----**<br>
+
+
+separation constant 
+
+**==> picture [673 x 355] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+The Radial Equation The Angular Equation<br>Part 1 The Angular Equation<br>sinθ ∂  sinθ∂Y + ∂ 2Y2 = −l(l +1)sin 2 θY<br>∂θ ∂θ ∂φ<br>separation of variables<br>let   (Y θ,φ) = Θ(θ)Φ(φ)<br> 1  d  dΘ  2  d 2Φ 2<br> sinθ  sinθ + l(l +1)sin θ = − 2 = m<br>Θ  dθ dθ   dφ<br>...<br>solutions<br>Φ = eimφ m (2l +1) (l − m )! imφ m ∈= (−1)m   for m ≥ 0<br>⇒ Θ = APl m (cosθ) ⇒ Yl (θ,φ) =∈ 4π (l + m )!e Pl (cosθ), where ∈= 1         for m ≤ 0<br>Legendre function<br>**----- End of picture text -----**<br>
+
+
+The Radial Equation The Angular Equation 
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **電子自旋與原子軌道** 
+
+Part 2 The Radial Equation 
+
+**==> picture [623 x 406] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+d  2 dR 2mr 2<br> r − 2 [V (r) − E] = l(l +1)R From Coulomb's law<br>dr  dr  h<br>change varibles    (u r) ≡ rR(r) e2 1<br>V (r) = −<br>h2 d 2u  h2 l(l +1)  4πε0 r<br>⇒− + V + u = Eu<br>2  2 <br>2m dr 2m r<br> <br>2<br>−<br>2mE me<br>let ε0 ≡ h ,ρ ≡ κr, and ρ0 ≡ 2πε h2κ<br>0<br>⇒ d 2 u =  1− ρ0 + l(l +1)  u<br>2  2 <br>d<br>ρ  ρ ρ <br>...<br>solutions<br>Laguerre polynomial<br><br>u(ρ) = ρl +1e−ρL2nl−−+l1 1(2ρ), ρ ≡ κr = r<br> an<br>l<br>−−<br> 2 3 (n l 1)! −r / na  2r  2l +1 2r<br>⇒∴ Rnl (r) = ( ) 3 e   Ln−−l 1( )<br> na 2n[(n + l)!]  na  na<br> 2<br>  m  e2   1 E1 = −13.6 eV The ground state<br>En = −  2    2 ⇒<br>  2h  4πε0   n E2 = −3.4 eV<br>  <br>**----- End of picture text -----**<br>
+
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **電子自旋與原子軌道** 
+
+## combine part 1 and part solutions 
+
+m = R r Y θ = ... ψnlm nl ( ) l ( ,φ) 
+
+**==> picture [200 x 66] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+2<br>2<br> <br>m  e  1<br>E = −  <br>n 2   2<br> 2h  4πε0   n<br> <br>**----- End of picture text -----**<br>
+
+
+**** n :  principal quantum number where l :  azimuthal quantum number m : magnetic quantum number 
+
+**==> picture [186 x 186] intentionally omitted <==**
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **電子自旋與原子軌道** 
+
+- **n** 
+
+- **氫原子光譜 (能量只跟主量子數 有關)** 
+
+**==> picture [386 x 108] intentionally omitted <==**
+
+Planck formula 
+
+**==> picture [433 x 259] intentionally omitted <==**
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **電子自旋與原子軌道** 
+
+## **� 電子的圓周運動與軌道角動量量子化(奇數個)** 
+
+Example: the bead-on-a-ring ˆ d Consider the operator  Q ≡ i dφ ˆ Is  hermitian?Q . Find its eigenfunctions and eigenvalues 
+
+**==> picture [494 x 272] intentionally omitted <==**
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **電子自旋與原子軌道** 
+
+orbital quantum number:  l = 0, 1, 2, ... n −1 orbital angular momentum: L = l(l +1)h [J.s] ∂ L = ih z =l 0 ⇒ L = 0 ∂φ ex:=l 1 ⇒ L = 2h =l 2 ⇒ L = 6h orbial angular momentum for z component: Lz = mlh orbit ntum number: m = −l ~ l al magnetic qua l ex: **l** = **1 l** = **2** l = 0 ⇒ m = 0 ⇒ L = 0 l z −⇒1 Lz = −h l = 1 ⇒ m = 0 ⇒ L = 0 l  z ⇒1 L = h  z −⇒2 Lz = −2h −⇒1 L = −h z  l = 2 ⇒ m = 0 ⇒ L = 0 l  z ⇒1 L = h z  ⇒2 Lz = 2h www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **電子自旋與原子軌道** 
+
+## **� 電子自旋現象與Stern-Gerlach實驗 � 分裂成偶數條, 所以不屬於軌道角動量** 
+
+**==> picture [676 x 73] intentionally omitted <==**
+
+**==> picture [676 x 162] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+=<br>T 0 K<br>Hight  .T<br>**----- End of picture text -----**<br>
+
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **電子自旋與原子軌道** 
+
+## **� 電子自旋** 
+
+1 s = spin quantum number: 2 spin angular momentum: S = s(s +1)h [J.s] 1 3 ex:=s ⇒ S = h 2 2  **spin angular momentum for z component: S** z **= m** s **h** m = ±s spin magnetic quantum number: s 
+
+ex: 
+
+**==> picture [251 x 108] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+1 h<br>− ⇒ S = −<br>1  2 z 2<br>s = ⇒ m<br>2 s = 1 ⇒ S = h<br>z<br> 2 2<br>**----- End of picture text -----**<br>
+
+
+**==> picture [45 x 48] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+1<br>s =<br>2<br>**----- End of picture text -----**<br>
+
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **電子自旋與原子軌道** 
+
+## **� 總角動量** 
+
+**==> picture [345 x 392] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+1<br>angular quantum number:  j = l ± ,   l = 0, 1, 2, ... n −1<br>2<br>total angular momentum:   J = L +S = j( j +1)h [J.s]<br>total angular momentum for z component: J z = m jh<br>total magnetic quantum number: m j = − j ~ j<br>ex:<br>  1 1<br>− ⇒ J = − h<br> z<br>1  2 2<br> ⇒ m j = <br> 2 1 ⇒ J = 1 h<br>z<br>  2 2<br><br> − 3 ⇒ J = − 3 h<br>z<br>  2 2<br>l = 1  ⇒ j =  <br> − 1 ⇒ J = − 1 h<br> 3  2 z 2<br>⇒ m<br> 2 j = 1 ⇒ J = 1 h<br>z<br>  2 2<br> <br>3 3<br>  2 ⇒ J z = 2 h<br>**----- End of picture text -----**<br>
+
+
+**==> picture [56 x 301] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+1<br> =<br>j<br>2<br>3<br> =<br>j<br>2<br>**----- End of picture text -----**<br>
+
+
+**==> picture [179 x 221] intentionally omitted <==**
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+**==> picture [16 x 30] intentionally omitted <==**
+
+**==> picture [681 x 16] intentionally omitted <==**
+
+## **電子自旋與原子軌道 � 真實的原子能級, 不同角動量的能量不同, 這是因為 電子間的交互作用** 
+
+**==> picture [276 x 127] intentionally omitted <==**
+
+**==> picture [276 x 239] intentionally omitted <==**
+
+www.che.ccu.edu.tw/~rheology/study_group/kwang/QM_01.ppt 
+
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

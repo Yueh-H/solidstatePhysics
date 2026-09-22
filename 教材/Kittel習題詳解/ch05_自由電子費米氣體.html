@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 習題詳解 — 第6章 自由電子費米氣體 — 習題詳解＋範例</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">習題詳解目錄</a> &nbsp;·&nbsp; <a href="../Kittel章節導讀/index.html">章節導讀</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../../考古題/詳解/index.html">逐題詳解</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- Kittel 習題詳解：第6章 自由電子費米氣體 -->
+
+# Kittel 第6章 習題詳解 ＋ 加碼範例 — 自由電子費米氣體（Free Electron Fermi Gas）
+
+> **這頁是什麼**：本章的「練習題庫＋完整解答」。先做 **加碼範例** 熱身，再把 **Kittel 課本習題** 全部練過。觀念見 [章節導讀](../Kittel章節導讀/ch05_自由電子費米氣體.html)、[單元學科](../../單元教學/unit05_自由電子費米氣體.html)；歷年考題見 [逐題詳解](../../考古題/詳解/index.html)。
+
+---
+
+## 0. 開工前先背熟的公式（全章共用）
+
+> 以下用 SI 制（$\hbar$ 已含進去），需要時再換成 Gaussian（高斯）制。$N$＝電子總數，$V$＝體積，$n=N/V$＝電子數密度（number density）。
+
+**三維（3D）自由電子氣體，自旋簡併度 2：**
+
+$$
+k_F=\left(3\pi^2 n\right)^{1/3},\qquad
+\varepsilon_F=\frac{\hbar^2 k_F^2}{2m}=\frac{\hbar^2}{2m}\left(3\pi^2 n\right)^{2/3}
+$$
+
+$$
+v_F=\frac{\hbar k_F}{m},\qquad T_F=\frac{\varepsilon_F}{k_B}
+$$
+
+**三維態密度（density of states，DOS）：**
+
+$$
+D(\varepsilon)=\frac{V}{2\pi^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\varepsilon^{1/2}
+=\frac{3}{2}\,\frac{N}{\varepsilon_F}\left(\frac{\varepsilon}{\varepsilon_F}\right)^{1/2}
+$$
+
+**常用常數（建議背量級）：**
+
+| 量 | 數值 |
+|---|---|
+| $\hbar$ | $1.055\times10^{-34}\ \text{J·s}=1.055\times10^{-27}\ \text{erg·s}$ |
+| $m_e$ | $9.11\times10^{-31}\ \text{kg}=9.11\times10^{-28}\ \text{g}$ |
+| $k_B$ | $1.381\times10^{-23}\ \text{J/K}=8.617\times10^{-5}\ \text{eV/K}$ |
+| $e$ | $1.602\times10^{-19}\ \text{C}$ |
+| $c$ | $3\times10^{10}\ \text{cm/s}$ |
+| $1\ \text{eV}$ | $1.602\times10^{-19}\ \text{J}=1.602\times10^{-12}\ \text{erg}$ |
+| $1\ \text{Ry}$（雷德伯）| $13.6\ \text{eV}$ |
+| 波耳半徑 $a_H$ | $0.529\times10^{-8}\ \text{cm}$ |
+
+---
+
+## 🔥 加碼範例題目（先熱身）
+
+### 範例 1：鈉（Na）的 $\varepsilon_F$、$T_F$、$v_F$ 從密度算起
+
+**題目**：金屬鈉每個原子貢獻 1 個導電電子（conduction electron），導電電子密度 $n=2.65\times10^{22}\ \text{cm}^{-3}$。求 (a) 費米波向量 $k_F$、(b) 費米能量 $\varepsilon_F$（eV）、(c) 費米溫度 $T_F$、(d) 費米速度 $v_F$。
+
+**Step 1：算 $k_F$。** 用 $k_F=(3\pi^2 n)^{1/3}$。先算括號內：
+
+$$
+3\pi^2 n=3\times 9.87\times 2.65\times10^{22}=7.85\times10^{23}\ \text{cm}^{-3}
+$$
+
+**Step 2：開立方根。**
+
+$$
+k_F=(7.85\times10^{23})^{1/3}=9.2\times10^{7}\ \text{cm}^{-1}=0.92\times10^{8}\ \text{cm}^{-1}
+$$
+
+（與 Kittel 表 1 的 $0.92\times10^8\ \text{cm}^{-1}$ 一致。）
+
+**Step 3：算 $\varepsilon_F=\dfrac{\hbar^2 k_F^2}{2m}$（用 CGS，$\hbar=1.055\times10^{-27}\ \text{erg·s}$，$m=9.11\times10^{-28}\ \text{g}$）。**
+
+$$
+\varepsilon_F=\frac{(1.055\times10^{-27})^2\,(9.2\times10^{7})^2}{2\times 9.11\times10^{-28}}
+=\frac{1.113\times10^{-54}\times 8.46\times10^{15}}{1.822\times10^{-27}}\ \text{erg}
+$$
+
+$$
+\varepsilon_F=\frac{9.42\times10^{-39}}{1.822\times10^{-27}}=5.17\times10^{-12}\ \text{erg}
+$$
+
+**Step 4：換成 eV（除以 $1.602\times10^{-12}\ \text{erg/eV}$）。**
+
+$$
+\varepsilon_F=\frac{5.17\times10^{-12}}{1.602\times10^{-12}}=3.23\ \text{eV}
+$$
+
+**Step 5：費米溫度 $T_F=\varepsilon_F/k_B$。**
+
+$$
+T_F=\frac{3.23\ \text{eV}}{8.617\times10^{-5}\ \text{eV/K}}=3.75\times10^{4}\ \text{K}
+$$
+
+**Step 6：費米速度 $v_F=\hbar k_F/m$。**
+
+$$
+v_F=\frac{1.055\times10^{-27}\times 9.2\times10^{7}}{9.11\times10^{-28}}=1.07\times10^{8}\ \text{cm/s}
+$$
+
+$$
+\boxed{k_F=0.92\times10^{8}\ \text{cm}^{-1},\quad \varepsilon_F=3.23\ \text{eV},\quad T_F=3.75\times10^{4}\ \text{K},\quad v_F=1.07\times10^{8}\ \text{cm/s}}
+$$
+
+> **重點**：四個量全部由 $n$ 一個輸入推出，且全部對上 Kittel 表 1。注意 $T_F\sim 10^4\ \text{K}$ 遠大於室溫 $300\ \text{K}$，所以室溫下電子氣是「高度簡併（degenerate）」的——這是金屬電子比熱很小的根本原因。
+
+<details>
+<summary><b>📝 更多範例（點開）：$k_F,\varepsilon_F,v_F,T_F$ 換不同金屬／單位再算幾遍</b></summary>
+
+**範例 A（鉀 K，每步開立方根不跳）**：K 的 $n=1.40\times10^{22}\ \text{cm}^{-3}$。先算括號 $3\pi^2 n=3\times9.87\times1.40\times10^{22}=4.14\times10^{23}\ \text{cm}^{-3}$。開立方根：把它寫成 $414\times10^{21}$，$(414)^{1/3}=7.45$、$(10^{21})^{1/3}=10^7$，故 $k_F=7.45\times10^{7}\ \text{cm}^{-1}=0.75\times10^{8}\ \text{cm}^{-1}$（對上 Kittel 表 1 的 $0.75$）。再 $\varepsilon_F=\dfrac{\hbar^2 k_F^2}{2m}=\dfrac{(1.055\times10^{-27})^2(7.45\times10^{7})^2}{2\times9.11\times10^{-28}}=\dfrac{1.113\times10^{-54}\times5.55\times10^{15}}{1.822\times10^{-27}}=\dfrac{6.18\times10^{-39}}{1.822\times10^{-27}}=3.39\times10^{-12}\ \text{erg}$。換 eV：$3.39\times10^{-12}/1.602\times10^{-12}=2.12\ \text{eV}$（表 1：$2.12$，吻合）。
+
+**範例 B（用比例法跳過開立方，鋁 Al）**：Al 每原子貢獻 3 個電子，$n_{\text{Al}}=18.1\times10^{22}\ \text{cm}^{-3}$。以 Na（$n=2.65\times10^{22}$、$k_F=0.92\times10^8$、$\varepsilon_F=3.23\ \text{eV}$）為基準。$k_F\propto n^{1/3}$：$\dfrac{n_{\text{Al}}}{n_{\text{Na}}}=\dfrac{18.1}{2.65}=6.83$，$6.83^{1/3}=e^{\frac13\ln6.83}=e^{\frac13\times1.921}=e^{0.640}=1.90$，故 $k_F^{\text{Al}}=1.90\times0.92\times10^8=1.75\times10^{8}\ \text{cm}^{-1}$。$\varepsilon_F\propto n^{2/3}$：$6.83^{2/3}=1.90^2=3.60$，$\varepsilon_F^{\text{Al}}=3.60\times3.23=11.6\ \text{eV}$（表 1：$11.6$，吻合）。
+
+**範例 C（同一題求 $v_F$ 與 $T_F$，鉀）**：承範例 A，$v_F=\dfrac{\hbar k_F}{m}=\dfrac{1.055\times10^{-27}\times7.45\times10^{7}}{9.11\times10^{-28}}=\dfrac{7.86\times10^{-20}}{9.11\times10^{-28}}=8.63\times10^{7}\ \text{cm/s}=0.86\times10^{8}\ \text{cm/s}$。$T_F=\dfrac{\varepsilon_F}{k_B}=\dfrac{2.12\ \text{eV}}{8.617\times10^{-5}\ \text{eV/K}}=2.46\times10^{4}\ \text{K}$。比 Na 小（因 K 較鬆、密度低）——與「全部 $\propto n$ 冪次」一致。
+
+**範例 D（反推：由 $\varepsilon_F$ 求密度 $n$）**：已知某金屬 $\varepsilon_F=5.0\ \text{eV}=5.0\times1.602\times10^{-12}=8.01\times10^{-12}\ \text{erg}$。由 $\varepsilon_F=\dfrac{\hbar^2}{2m}(3\pi^2 n)^{2/3}$ 反解：先 $(3\pi^2 n)^{2/3}=\dfrac{2m\varepsilon_F}{\hbar^2}=\dfrac{2\times9.11\times10^{-28}\times8.01\times10^{-12}}{(1.055\times10^{-27})^2}=\dfrac{1.46\times10^{-38}}{1.113\times10^{-54}}=1.31\times10^{16}$。取 $3/2$ 次方：$3\pi^2 n=(1.31\times10^{16})^{3/2}=1.50\times10^{24}$，故 $n=\dfrac{1.50\times10^{24}}{29.6}=5.07\times10^{22}\ \text{cm}^{-3}$。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 460 250" width="100%" style="max-width:520px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="fsc5a" cx="0.38" cy="0.35" r="0.75"><stop offset="0" stop-color="#9cc3e6"/><stop offset="1" stop-color="#3f74a8"/></radialGradient>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="40" y1="190" x2="270" y2="190" stroke="#bbb" stroke-width="1.1"/>
+<line x1="155" y1="215" x2="155" y2="40" stroke="#bbb" stroke-width="1.1"/>
+<text x="262" y="184" font-size="11" fill="#888">k_x</text>
+<text x="162" y="50" font-size="11" fill="#888">k_y</text>
+<circle cx="155" cy="120" r="72" fill="url(#fsc5a)" stroke="#1a4d7c" stroke-width="2"/>
+<line x1="155" y1="120" x2="222" y2="92" stroke="#c0392b" stroke-width="2"/>
+<text x="190" y="98" font-size="12" fill="#c0392b">kꜰ</text>
+<circle cx="155" cy="120" r="2.6" fill="#13395d"/>
+<g fill="#13395d"><circle cx="125" cy="100" r="1.8"/><circle cx="155" cy="100" r="1.8"/><circle cx="185" cy="100" r="1.8"/><circle cx="110" cy="120" r="1.8"/><circle cx="140" cy="120" r="1.8"/><circle cx="170" cy="120" r="1.8"/><circle cx="200" cy="120" r="1.8"/><circle cx="125" cy="140" r="1.8"/><circle cx="155" cy="140" r="1.8"/><circle cx="185" cy="140" r="1.8"/></g>
+<text x="155" y="218" text-anchor="middle" font-size="11.5" fill="#1a4d7c">費米球：k ≤ kꜰ 全填</text>
+<text x="320" y="70" font-size="12.5" font-weight="bold" fill="#1a4d7c">由 n 一條輸入：</text>
+<text x="320" y="98" font-size="12" fill="#13395d">kꜰ = (3π²n)^⅓</text>
+<text x="320" y="122" font-size="12" fill="#2e8b2e">Eꜰ = ℏ²kꜰ²/2m ∝ n^⅔</text>
+<text x="320" y="146" font-size="12" fill="#e67e22">v_F = ℏkꜰ/m</text>
+<text x="320" y="170" font-size="12" fill="#c0392b">Tꜰ = Eꜰ/k_B</text>
+<text x="320" y="200" font-size="11" fill="#888">Na: kꜰ≈0.92×10⁸ cm⁻¹</text>
+<text x="320" y="218" font-size="11" fill="#888">Eꜰ≈3.2 eV, Tꜰ≈3.8×10⁴ K</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 1（Na）的幾何圖像</b>：T=0 時電子填滿 k 空間一個<b style="color:#1a4d7c">半徑 kꜰ 的費米球</b>（藍）。所有四個量都由電子密度 n 一條輸入串出：<b style="color:#13395d">kꜰ=(3π²n)^⅓</b> 是球半徑、<b style="color:#2e8b2e">Eꜰ=ℏ²kꜰ²/2m ∝ n^⅔</b> 是球面能量、<b style="color:#e67e22">v_F=ℏkꜰ/m</b>、<b style="color:#c0392b">Tꜰ=Eꜰ/k_B</b>。代 Na 的 n=2.65×10²² cm⁻³ 即得 kꜰ≈0.92×10⁸ cm⁻¹、Eꜰ≈3.2 eV、Tꜰ≈3.8×10⁴ K——全對上 Kittel 表 1。Tꜰ ≫ 室溫 300 K，故金屬電子氣高度簡併。</figcaption>
+</figure>
+
+---
+
+### 範例 2：銅（Cu）vs 鈉（Na）——$\varepsilon_F$ 只看密度
+
+**題目**：銅的導電電子密度 $n_{\text{Cu}}=8.45\times10^{22}\ \text{cm}^{-3}$，鈉 $n_{\text{Na}}=2.65\times10^{22}\ \text{cm}^{-3}$。不重算積分，只用比例關係求 $\varepsilon_F^{\text{Cu}}$，並與表 1 的 $7.00\ \text{eV}$ 比較。
+
+**Step 1：寫出比例關係。** 因為 $\varepsilon_F\propto n^{2/3}$，
+
+$$
+\frac{\varepsilon_F^{\text{Cu}}}{\varepsilon_F^{\text{Na}}}=\left(\frac{n_{\text{Cu}}}{n_{\text{Na}}}\right)^{2/3}
+$$
+
+**Step 2：算密度比。**
+
+$$
+\frac{n_{\text{Cu}}}{n_{\text{Na}}}=\frac{8.45}{2.65}=3.19
+$$
+
+**Step 3：取 $2/3$ 次方。**
+
+$$
+(3.19)^{2/3}=e^{\frac{2}{3}\ln 3.19}=e^{\frac{2}{3}\times 1.160}=e^{0.773}=2.17
+$$
+
+**Step 4：乘上 $\varepsilon_F^{\text{Na}}=3.23\ \text{eV}$。**
+
+$$
+\varepsilon_F^{\text{Cu}}=2.17\times 3.23=7.01\ \text{eV}
+$$
+
+$$
+\boxed{\varepsilon_F^{\text{Cu}}\approx 7.0\ \text{eV}\quad(\text{表 1：}7.00\ \text{eV，吻合})}
+$$
+
+> **重點**：考試常考「不用算積分、用 $\varepsilon_F\propto n^{2/3}$ 比例」。記住 $\varepsilon_F\propto n^{2/3}$、$k_F\propto n^{1/3}$、$D(\varepsilon_F)\propto n^{1/3}$。
+
+<details>
+<summary><b>📝 更多範例（點開）：比例法（$\propto n^{1/3},n^{2/3}$）多算幾組</b></summary>
+
+**範例 A（$k_F$ 比例，Ag vs Cu）**：銀 $n_{\text{Ag}}=5.86\times10^{22}$、銅 $n_{\text{Cu}}=8.45\times10^{22}\ \text{cm}^{-3}$。$k_F\propto n^{1/3}$：$\dfrac{k_F^{\text{Ag}}}{k_F^{\text{Cu}}}=\left(\dfrac{5.86}{8.45}\right)^{1/3}=(0.693)^{1/3}=e^{\frac13\ln0.693}=e^{\frac13(-0.366)}=e^{-0.122}=0.885$。已知 $k_F^{\text{Cu}}=1.36\times10^8$，故 $k_F^{\text{Ag}}=0.885\times1.36\times10^8=1.20\times10^{8}\ \text{cm}^{-1}$（表 1：$1.20$）。
+
+**範例 B（$\varepsilon_F$ 比例，二價金屬 Zn vs Na）**：鋅 $n_{\text{Zn}}=13.2\times10^{22}$、鈉 $n_{\text{Na}}=2.65\times10^{22}\ \text{cm}^{-3}$。$\varepsilon_F\propto n^{2/3}$：$\dfrac{\varepsilon_F^{\text{Zn}}}{\varepsilon_F^{\text{Na}}}=\left(\dfrac{13.2}{2.65}\right)^{2/3}=(4.98)^{2/3}=e^{\frac23\ln4.98}=e^{\frac23\times1.606}=e^{1.071}=2.92$。乘 $\varepsilon_F^{\text{Na}}=3.23\ \text{eV}$：$\varepsilon_F^{\text{Zn}}=2.92\times3.23=9.4\ \text{eV}$（表 1：$9.39$，吻合）。
+
+**範例 C（同密度比同時推三量）**：若某金屬密度是 Na 的 $8$ 倍（$n=8n_{\text{Na}}$）。則 $k_F\propto n^{1/3}$ 變 $8^{1/3}=2$ 倍 → $k_F=2\times0.92\times10^8=1.84\times10^{8}\ \text{cm}^{-1}$；$\varepsilon_F\propto n^{2/3}$ 變 $8^{2/3}=4$ 倍 → $\varepsilon_F=4\times3.23=12.9\ \text{eV}$；$v_F\propto k_F\propto n^{1/3}$ 變 $2$ 倍 → $v_F=2\times1.07\times10^8=2.14\times10^{8}\ \text{cm/s}$。整數比例最好心算。
+
+**範例 D（態密度 $D(\varepsilon_F)\propto n^{1/3}$）**：因 $D(\varepsilon_F)=\dfrac{3N}{2\varepsilon_F}$ 且 $N\propto n$、$\varepsilon_F\propto n^{2/3}$，故 $D(\varepsilon_F)\propto\dfrac{n}{n^{2/3}}=n^{1/3}$。Cu 對 Na 的密度比 $3.19$，$D$ 之比 $=3.19^{1/3}=1.47$——即 Cu 每體積每能量的態數約 Na 的 $1.5$ 倍。
+
+**範例 E（$T_F$ 比例，回收同一個 $\varepsilon_F$ 比）**：$T_F=\varepsilon_F/k_B\propto\varepsilon_F\propto n^{2/3}$。承範例 B 的 Zn：$T_F^{\text{Zn}}=2.92\times T_F^{\text{Na}}=2.92\times3.75\times10^4=1.10\times10^{5}\ \text{K}$。所以 $T_F$ 的比例與 $\varepsilon_F$ 同步，不用另算。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="58" y1="205" x2="450" y2="205" stroke="#333" stroke-width="1.5"/>
+<line x1="58" y1="205" x2="58" y2="30" stroke="#333" stroke-width="1.5"/>
+<text x="452" y="221" font-size="11" fill="#333">n / n(Na)</text>
+<text x="22" y="44" fill="#333">比值</text>
+<polyline points="58,165 110,140 170,122 235,108 305,97 380,88 445,80" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<text x="250" y="100" font-size="11.5" fill="#1a4d7c">kꜰ ∝ n^⅓</text>
+<polyline points="58,165 110,118 170,90 235,70 305,55 380,43 445,33" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<text x="250" y="52" font-size="11.5" fill="#c0392b">Eꜰ ∝ n^⅔</text>
+<circle cx="58" cy="165" r="3.5" fill="#13395d"/>
+<text x="58" y="185" text-anchor="middle" font-size="10.5" fill="#888">1（Na）</text>
+<line x1="235" y1="205" x2="235" y2="70" stroke="#2e8b2e" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="235" y="220" text-anchor="middle" font-size="10.5" fill="#2e8b2e">Cu: 3.19×</text>
+<text x="300" y="135" font-size="10.5" fill="#2e8b2e">→ Eꜰ ×2.17 = 7.0 eV</text>
+<text x="120" y="70" font-size="10.5" fill="#888">同一張表只靠密度比就推完</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 2：只靠密度比的 scaling</b>。以 Na 為基準（橫軸 = n⁄n(Na)），<b style="color:#1a4d7c">kꜰ ∝ n^⅓</b>（藍，升得慢）、<b style="color:#c0392b">Eꜰ ∝ n^⅔</b>（紅，升得快）。Cu 密度是 Na 的 <b style="color:#2e8b2e">3.19 倍</b>，於是 Eꜰ 乘 3.19^⅔ = 2.17，得 7.0 eV——完全不必重算積分。考試遇到「換金屬」就走這條捷徑：kꜰ、vF 走 ⅓ 次方，Eꜰ、TF 走 ⅔ 次方。</figcaption>
+</figure>
+
+---
+
+### 範例 3：1D / 2D / 3D 態密度的能量依賴
+
+**題目**：對自由電子氣體（自旋簡併 2），證明每單位長度／面積／體積的態密度對能量的依賴為
+
+$$
+D_{1D}\propto \varepsilon^{-1/2},\qquad D_{2D}=\text{常數},\qquad D_{3D}\propto \varepsilon^{+1/2}
+$$
+
+並寫出 2D 的精確值。
+
+**Step 1：通則。** $d$ 維中能量 $<\varepsilon$ 的態數 $N(\varepsilon)\propto k_F^d \propto \varepsilon^{d/2}$（因 $\varepsilon\propto k^2$ 故 $k\propto\varepsilon^{1/2}$）。態密度 $D=dN/d\varepsilon\propto \varepsilon^{d/2-1}$。
+
+**Step 2：代入維度。**
+- $d=1$：$D\propto \varepsilon^{1/2-1}=\varepsilon^{-1/2}$（能量越低態越密）。
+- $d=2$：$D\propto \varepsilon^{0}=$ 常數。
+- $d=3$：$D\propto \varepsilon^{3/2-1}=\varepsilon^{+1/2}$。
+
+**Step 3：2D 精確值。** 二維 $k$ 空間中，半徑 $k$ 的圓內面積 $\pi k^2$；每個態占 $(2\pi/L)^2$，再乘自旋 2：
+
+$$
+N(\varepsilon)=2\cdot\frac{\pi k^2}{(2\pi/L)^2}=\frac{L^2 k^2}{2\pi}=\frac{L^2}{2\pi}\cdot\frac{2m\varepsilon}{\hbar^2}
+$$
+
+**Step 4：對 $\varepsilon$ 微分，再除以面積 $A=L^2$ 得「每單位面積」DOS。**
+
+$$
+D_{2D}(\varepsilon)=\frac{1}{A}\frac{dN}{d\varepsilon}=\frac{1}{2\pi}\cdot\frac{2m}{\hbar^2}=\frac{m}{\pi\hbar^2}
+$$
+
+$$
+\boxed{D_{1D}\propto\varepsilon^{-1/2},\quad D_{2D}=\frac{m}{\pi\hbar^2}=\text{常數},\quad D_{3D}\propto\varepsilon^{+1/2}}
+$$
+
+> **重點**：2D DOS 與能量無關，是 Kittel 習題 3（二維化學勢）的關鍵。這個 $m/\pi\hbar^2$ 一定要會自己推出來。
+
+<details>
+<summary><b>📝 更多範例（點開）：1D/2D/3D 態密度的完整推導與精確係數</b></summary>
+
+**範例 A（3D DOS 從頭推到 $\dfrac{V}{2\pi^2}\big(\tfrac{2m}{\hbar^2}\big)^{3/2}\varepsilon^{1/2}$）**：3D $k$ 空間半徑 $k$ 球內體積 $\tfrac43\pi k^3$，每態占 $(2\pi/L)^3$，乘自旋 2：$N=2\cdot\dfrac{\frac43\pi k^3}{(2\pi/L)^3}=\dfrac{V k^3}{3\pi^2}$。代 $k=\big(\tfrac{2m\varepsilon}{\hbar^2}\big)^{1/2}$ 得 $N=\dfrac{V}{3\pi^2}\big(\tfrac{2m}{\hbar^2}\big)^{3/2}\varepsilon^{3/2}$。微分：$D=\dfrac{dN}{d\varepsilon}=\dfrac{V}{3\pi^2}\big(\tfrac{2m}{\hbar^2}\big)^{3/2}\cdot\tfrac32\varepsilon^{1/2}=\dfrac{V}{2\pi^2}\big(\tfrac{2m}{\hbar^2}\big)^{3/2}\varepsilon^{1/2}$ ✓。
+
+**範例 B（1D DOS 精確係數）**：1D 中 $|k|<k$ 的線段長 $2k$，每態占 $2\pi/L$，乘自旋 2：$N=2\cdot\dfrac{2k}{2\pi/L}=\dfrac{2Lk}{\pi}$。代 $k=\big(\tfrac{2m\varepsilon}{\hbar^2}\big)^{1/2}$：$N=\dfrac{2L}{\pi}\big(\tfrac{2m}{\hbar^2}\big)^{1/2}\varepsilon^{1/2}$。微分：$D=\dfrac{dN}{d\varepsilon}=\dfrac{2L}{\pi}\big(\tfrac{2m}{\hbar^2}\big)^{1/2}\cdot\tfrac12\varepsilon^{-1/2}=\dfrac{L}{\pi}\big(\tfrac{2m}{\hbar^2}\big)^{1/2}\varepsilon^{-1/2}$。果然 $\propto\varepsilon^{-1/2}$（能帶底發散）。
+
+**範例 C（用 $D(\varepsilon_F)=\dfrac{3N}{2\varepsilon_F}$ 算 Na 的精確值）**：3D 在 $\varepsilon_F$ 的 DOS 可寫 $D(\varepsilon_F)=\dfrac{3}{2}\dfrac{N}{\varepsilon_F}$（由 $N=\tfrac23 C\varepsilon_F^{3/2}$、$D=C\varepsilon_F^{1/2}$ 相除得 $D=\tfrac32 N/\varepsilon_F$）。Na 每體積 $n=2.65\times10^{22}\ \text{cm}^{-3}$、$\varepsilon_F=3.23\ \text{eV}=5.17\times10^{-12}\ \text{erg}$：$\dfrac{D}{V}=\dfrac{3}{2}\dfrac{n}{\varepsilon_F}=\dfrac{3}{2}\dfrac{2.65\times10^{22}}{5.17\times10^{-12}}=7.69\times10^{33}\ \text{erg}^{-1}\text{cm}^{-3}$。
+
+**範例 D（2D：給定面密度求 $\varepsilon_F$）**：2D 每單位面積 $n=10^{12}\ \text{cm}^{-2}$（典型 2DEG）。由 $n=\int_0^{\varepsilon_F}D\,d\varepsilon=\dfrac{m}{\pi\hbar^2}\varepsilon_F$（因 $D$ 是常數，積分就是矩形面積）反解 $\varepsilon_F=\dfrac{\pi n\hbar^2}{m}$。代電子質量 $m=9.11\times10^{-28}\ \text{g}$、$\hbar=1.055\times10^{-27}$：$\varepsilon_F=\dfrac{\pi\times10^{12}\times(1.055\times10^{-27})^2}{9.11\times10^{-28}}=\dfrac{3.50\times10^{-42}}{9.11\times10^{-28}}=3.84\times10^{-15}\ \text{erg}=2.4\times10^{-3}\ \text{eV}$。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 540 200" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<g transform="translate(0,0)">
+<text x="95" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#c0392b">1D：D ∝ ε^(−½)</text>
+<line x1="32" y1="160" x2="170" y2="160" stroke="#333" stroke-width="1.4"/>
+<line x1="32" y1="160" x2="32" y2="35" stroke="#333" stroke-width="1.4"/>
+<polyline points="36,42 40,64 46,82 56,100 72,115 94,126 124,136 165,142" fill="none" stroke="#c0392b" stroke-width="2.2"/>
+<text x="174" y="164" fill="#333">ε</text>
+<text x="22" y="44" text-anchor="end" font-size="10.5" fill="#888">D</text>
+<text x="100" y="152" text-anchor="middle" font-size="10.5" fill="#c0392b">底部發散</text>
+</g>
+<g transform="translate(185,0)">
+<text x="95" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e8b2e">2D：D = 常數</text>
+<line x1="32" y1="160" x2="170" y2="160" stroke="#333" stroke-width="1.4"/>
+<line x1="32" y1="160" x2="32" y2="35" stroke="#333" stroke-width="1.4"/>
+<polyline points="32,92 165,92" fill="none" stroke="#2e8b2e" stroke-width="2.4"/>
+<polyline points="32,92 32,160" fill="none" stroke="#2e8b2e" stroke-width="1.3" stroke-dasharray="3,3"/>
+<text x="174" y="164" fill="#333">ε</text>
+<text x="22" y="44" text-anchor="end" font-size="10.5" fill="#888">D</text>
+<text x="100" y="83" text-anchor="middle" font-size="11.5" fill="#2e8b2e">m/πℏ²</text>
+</g>
+<g transform="translate(370,0)">
+<text x="95" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">3D：D ∝ ε^(+½)</text>
+<line x1="32" y1="160" x2="170" y2="160" stroke="#333" stroke-width="1.4"/>
+<line x1="32" y1="160" x2="32" y2="35" stroke="#333" stroke-width="1.4"/>
+<polyline points="32,160 46,148 66,134 92,118 124,101 165,82" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<text x="174" y="164" fill="#333">ε</text>
+<text x="22" y="44" text-anchor="end" font-size="10.5" fill="#888">D</text>
+<text x="105" y="152" text-anchor="middle" font-size="10.5" fill="#1a4d7c">底部 → 0</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 3：態密度的維度三件套</b> D ∝ ε^(d⁄2 − 1)。來源是 N(ε) ∝ k^d ∝ ε^(d⁄2)，微分降一冪。<b style="color:#c0392b">1D ∝ ε^(−½)</b>（能帶底 ε→0 發散，van Hove 奇點）；<b style="color:#2e8b2e">2D = 常數 m⁄πℏ²</b>（與 ε 完全無關，正是習題 3 二維化學勢能解析積分的關鍵）；<b style="color:#1a4d7c">3D ∝ ε^(+½)</b>（從 0 上升）。記法一招通殺：冪次 = d⁄2 − 1。</figcaption>
+</figure>
+
+---
+
+### 範例 4：維德曼–夫蘭茲定律（Wiedemann–Franz law）
+
+**題目**：自由電子氣體的電導率 $\sigma=ne^2\tau/m$，熱導率（thermal conductivity）$\kappa=\dfrac{\pi^2}{3}\dfrac{n k_B^2 T \tau}{m}$。證明 $\dfrac{\kappa}{\sigma T}=L$ 為與材料無關的常數（勞侖茲數，Lorenz number），並算出其數值。
+
+**Step 1：相除。** 把 $\kappa$ 除以 $\sigma$：
+
+$$
+\frac{\kappa}{\sigma}=\frac{\dfrac{\pi^2}{3}\dfrac{n k_B^2 T\tau}{m}}{\dfrac{ne^2\tau}{m}}
+$$
+
+**Step 2：消去 $n,\tau,m$。** 分子分母都有 $n\tau/m$，約掉：
+
+$$
+\frac{\kappa}{\sigma}=\frac{\pi^2}{3}\frac{k_B^2 T}{e^2}
+$$
+
+**Step 3：除以 $T$ 得勞侖茲數。**
+
+$$
+L=\frac{\kappa}{\sigma T}=\frac{\pi^2}{3}\left(\frac{k_B}{e}\right)^2
+$$
+
+**Step 4：代數值（SI）。** $k_B/e=1.381\times10^{-23}/1.602\times10^{-19}=8.62\times10^{-5}\ \text{V/K}$。
+
+$$
+L=\frac{\pi^2}{3}\,(8.62\times10^{-5})^2=3.29\times 7.43\times10^{-9}=2.45\times10^{-8}\ \text{W·}\Omega\text{/K}^2
+$$
+
+$$
+\boxed{L=\frac{\pi^2}{3}\left(\frac{k_B}{e}\right)^2=2.45\times10^{-8}\ \text{W·}\Omega\,\text{K}^{-2}}
+$$
+
+> **重點**：$L$ 與 $n$、$\tau$、$m$ 全無關——這正是自由電子模型最漂亮的成功之一，實驗在多數金屬量到 $2.2$–$2.7\times10^{-8}$，吻合得很好。
+
+---
+
+## 📚 Kittel 第6章 課本習題 — 完整解答
+
+> 以下逐題對應 Kittel 8e 第6章 Problems 1–10。
+
+### 習題 1：電子氣體的動能（Kinetic energy of electron gas）
+
+**題目（English, Kittel Prob. 6.1）**：Show that the kinetic energy of a three-dimensional gas of $N$ free electrons at $0\ \text{K}$ is
+
+$$
+U_0=\frac{3}{5}N\varepsilon_F .
+$$
+
+<details>
+<summary>▸ 中文題目</summary>
+
+證明三維 $N$ 個自由電子氣體在 $0\ \text{K}$ 時的總動能為
+
+$$
+U_0=\frac{3}{5}N\varepsilon_F
+$$
+
+</details>
+
+**Step 1：寫出總能量為對占據態的積分。** $0\ \text{K}$ 時所有 $\varepsilon\le\varepsilon_F$ 的軌域填滿，
+
+$$
+U_0=\int_0^{\varepsilon_F}\varepsilon\,D(\varepsilon)\,d\varepsilon
+$$
+
+**Step 2：代入 3D 態密度 $D(\varepsilon)=C\,\varepsilon^{1/2}$**，其中 $C=\dfrac{V}{2\pi^2}\left(\dfrac{2m}{\hbar^2}\right)^{3/2}$（常數）。
+
+$$
+U_0=C\int_0^{\varepsilon_F}\varepsilon^{3/2}\,d\varepsilon=C\cdot\frac{2}{5}\varepsilon_F^{5/2}
+$$
+
+**Step 3：同樣寫出電子總數 $N$。**
+
+$$
+N=\int_0^{\varepsilon_F}D(\varepsilon)\,d\varepsilon=C\int_0^{\varepsilon_F}\varepsilon^{1/2}\,d\varepsilon=C\cdot\frac{2}{3}\varepsilon_F^{3/2}
+$$
+
+**Step 4：兩式相除消去 $C$。**
+
+$$
+\frac{U_0}{N}=\frac{\frac{2}{5}\varepsilon_F^{5/2}}{\frac{2}{3}\varepsilon_F^{3/2}}=\frac{3}{5}\varepsilon_F
+$$
+
+$$
+\boxed{U_0=\frac{3}{5}N\varepsilon_F}
+$$
+
+> **重點**：每個電子平均動能 $=\frac{3}{5}\varepsilon_F$，不是 $\frac{1}{2}\varepsilon_F$。技巧是「用同一個 $C$ 把 $U_0$ 與 $N$ 都寫出來再相除」，免去查常數。
+
+<details>
+<summary><b>📝 更多範例（點開）：$U_0=\tfrac35 N\varepsilon_F$ 的變化題與數值</b></summary>
+
+**範例 A（Na 的每電子平均動能數值）**：每電子平均動能 $\langle\varepsilon\rangle=\tfrac35\varepsilon_F$。Na 的 $\varepsilon_F=3.23\ \text{eV}$，故 $\langle\varepsilon\rangle=\tfrac35\times3.23=1.94\ \text{eV}$。對照古典 $\tfrac32 k_BT$ 在室溫只有 $0.039\ \text{eV}$——電子氣的「零點動能」比熱運動大 $50$ 倍，這就是簡併。
+
+**範例 B（總動能 $U_0$ 的絕對值）**：取 $1\ \text{cm}^3$ 的 Na，$N=nV=2.65\times10^{22}$ 個。$U_0=\tfrac35 N\varepsilon_F=\tfrac35\times2.65\times10^{22}\times5.17\times10^{-12}\ \text{erg}=0.6\times2.65\times5.17\times10^{10}=8.22\times10^{10}\ \text{erg}=8.22\times10^{3}\ \text{J}$（每 cm³）。
+
+**範例 C（一般冪次 DOS $D\propto\varepsilon^{s}$ 的平均能量）**：若 $D=C\varepsilon^{s}$，則 $U_0=C\int_0^{\varepsilon_F}\varepsilon^{s+1}d\varepsilon=\dfrac{C}{s+2}\varepsilon_F^{s+2}$，$N=C\int_0^{\varepsilon_F}\varepsilon^{s}d\varepsilon=\dfrac{C}{s+1}\varepsilon_F^{s+1}$。相除：$\dfrac{U_0}{N}=\dfrac{s+1}{s+2}\varepsilon_F$。3D 取 $s=\tfrac12$：$\dfrac{3/2}{5/2}=\dfrac35$ ✓。2D 取 $s=0$：$\dfrac{1}{2}$，即 2D 平均動能 $=\tfrac12\varepsilon_F$。1D 取 $s=-\tfrac12$：$\dfrac{1/2}{3/2}=\dfrac13$。
+
+**範例 D（總動能 vs 維度的另一寫法）**：3D 用 $U_0=\tfrac35 N\varepsilon_F$。若改問「每體積能量密度」$u=U_0/V=\tfrac35 n\varepsilon_F$，Na：$u=\tfrac35\times2.65\times10^{22}\times5.17\times10^{-12}=8.22\times10^{10}\ \text{erg/cm}^3$——正是習題 2 算壓力 $p=\tfrac23 u$ 的輸入。代 $p=\tfrac23\times8.22\times10^{10}=5.5\times10^{10}\ \text{dyne/cm}^2$。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="occ5a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9cc3e6"/><stop offset="1" stop-color="#6aa1d6"/></linearGradient>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="55" y1="200" x2="445" y2="200" stroke="#333" stroke-width="1.5"/>
+<line x1="55" y1="200" x2="55" y2="30" stroke="#333" stroke-width="1.5"/>
+<text x="450" y="216" fill="#333">ε</text>
+<text x="20" y="42" fill="#333">D(ε)</text>
+<path d="M55,200 L80,184 L110,170 L145,156 L185,143 L230,131 L280,121 L310,115 L310,200 Z" fill="url(#occ5a)" stroke="#1a4d7c" stroke-width="1.6"/>
+<polyline points="55,200 80,184 110,170 145,156 185,143 230,131 280,121 310,115" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<polyline points="310,115 345,109 385,103 430,98" fill="none" stroke="#1a4d7c" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="175" y="178" text-anchor="middle" font-size="11.5" fill="#13395d">填滿 ∝ √ε（D ∝ ε^½）</text>
+<line x1="310" y1="200" x2="310" y2="107" stroke="#c0392b" stroke-width="1.3" stroke-dasharray="4,3"/>
+<text x="310" y="218" text-anchor="middle" font-size="12" fill="#c0392b">εꜰ</text>
+<text x="380" y="118" font-size="11" fill="#888">空態（T=0 切斷）</text>
+<line x1="55" y1="158" x2="310" y2="158" stroke="#2e8b2e" stroke-width="1.3" stroke-dasharray="5,4"/>
+<line x1="218" y1="200" x2="218" y2="158" stroke="#2e8b2e" stroke-width="2.4"/>
+<text x="218" y="170" text-anchor="middle" font-size="14" font-weight="bold" fill="#2e8b2e">↑</text>
+<text x="150" y="151" text-anchor="middle" font-size="12" fill="#2e8b2e">平均動能 = ⅗ εꜰ</text>
+<text x="218" y="218" text-anchor="middle" font-size="10.5" fill="#2e8b2e">⅗εꜰ</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 1：U₀ = ⅗ N εꜰ 的圖像</b>。T=0 時把態由低能往上填，<b style="color:#c0392b">填到 εꜰ 切斷</b>，而 D(ε) ∝ √ε。<b style="color:#1a4d7c">藍色面積</b> = 總電子數 N（= ∫₀^εꜰ D dε，本題 Step 3）；對 ε 加權的面積 = 總動能 U₀（Step 2）。兩者相除消掉常數 C，得每顆電子<b style="color:#2e8b2e">平均動能僅 ⅗ εꜰ</b>（綠線，&lt; εꜰ，因大多數電子能量低於球面）。技巧：用同一個 C 把 U₀ 與 N 都寫出再相除，免去查任何常數。</figcaption>
+</figure>
+
+---
+
+### 習題 2：電子氣體的壓力與體積彈性模量（Pressure and bulk modulus）
+
+**題目（English, Kittel Prob. 6.2）**：(a) Derive a relation connecting the pressure and volume of an electron gas at $0\ \text{K}$. Hint: Use the result of Problem 1 and the relation between $\varepsilon_F$ and the electron concentration. The result may be written as $p=\frac{2}{3}(U_0/V)$. (b) Show that the bulk modulus $B=-V(\partial p/\partial V)$ of an electron gas at $0\ \text{K}$ is $B=\frac{5}{3}p=\frac{10}{9}(U_0/V)$. (c) Estimate for potassium, using Table 1, the value of the electron gas contribution to $B$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 推導 $0\ \text{K}$ 電子氣體的壓力 $p$ 與體積 $V$ 的關係，提示用習題 1 與 $\varepsilon_F$ 對 $n$ 的關係，結果可寫成 $p=\frac{2}{3}(U_0/V)$。(b) 證明體積彈性模量（bulk modulus）$B=-V(\partial p/\partial V)$ 為 $B=\frac{5}{3}p=\frac{10}{9}(U_0/V)$。(c) 用表 1 估算鉀（K）的電子氣對 $B$ 的貢獻。
+
+</details>
+
+**Step 1：把 $U_0$ 寫成只含 $N,V$ 的式子。** 由 $\varepsilon_F=\dfrac{\hbar^2}{2m}(3\pi^2 N/V)^{2/3}$ 與 $U_0=\frac{3}{5}N\varepsilon_F$：
+
+$$
+U_0=\frac{3}{5}N\cdot\frac{\hbar^2}{2m}(3\pi^2)^{2/3}\left(\frac{N}{V}\right)^{2/3}
+=\underbrace{\frac{3}{5}\frac{\hbar^2}{2m}(3\pi^2)^{2/3}N^{5/3}}_{\text{常數}A}\;V^{-2/3}
+$$
+
+**Step 2：壓力定義 $p=-\partial U_0/\partial V$（$N$ 固定）。**
+
+$$
+p=-\frac{\partial}{\partial V}\left(A\,V^{-2/3}\right)=-A\left(-\frac{2}{3}\right)V^{-5/3}=\frac{2}{3}A\,V^{-5/3}
+$$
+
+**Step 3：與 $U_0=A\,V^{-2/3}$ 比較，得 $p=\frac{2}{3}U_0/V$。**
+
+$$
+\frac{p}{U_0/V}=\frac{\frac{2}{3}A V^{-5/3}}{A V^{-2/3}/V}=\frac{2}{3}\quad\Rightarrow\quad p=\frac{2}{3}\frac{U_0}{V}
+$$
+
+$$
+\boxed{p=\frac{2}{3}\frac{U_0}{V}}
+$$
+
+**Step 4：(b) 算 $B=-V\,\partial p/\partial V$。** 由 Step 2，$p=\frac{2}{3}A\,V^{-5/3}$：
+
+$$
+\frac{\partial p}{\partial V}=\frac{2}{3}A\left(-\frac{5}{3}\right)V^{-8/3}=-\frac{5}{3}\cdot\frac{p}{V}
+$$
+
+**Step 5：代入 $B$ 定義。**
+
+$$
+B=-V\cdot\left(-\frac{5}{3}\frac{p}{V}\right)=\frac{5}{3}p
+$$
+
+再用 $p=\frac{2}{3}U_0/V$：
+
+$$
+B=\frac{5}{3}\cdot\frac{2}{3}\frac{U_0}{V}=\frac{10}{9}\frac{U_0}{V}
+$$
+
+$$
+\boxed{B=\frac{5}{3}p=\frac{10}{9}\frac{U_0}{V}}
+$$
+
+**Step 6：(c) 鉀的數值。** 表 1：$n_K=1.40\times10^{22}\ \text{cm}^{-3}$，$\varepsilon_F=2.12\ \text{eV}=2.12\times1.602\times10^{-12}=3.40\times10^{-12}\ \text{erg}$。先算 $U_0/V=\frac{3}{5}n\varepsilon_F$：
+
+$$
+\frac{U_0}{V}=\frac{3}{5}(1.40\times10^{22})(3.40\times10^{-12})=2.85\times10^{10}\ \text{erg/cm}^3
+$$
+
+**Step 7：乘上 $10/9$。**
+
+$$
+B=\frac{10}{9}\times 2.85\times10^{10}=3.2\times10^{10}\ \text{dyne/cm}^2
+$$
+
+$$
+\boxed{B_{\text{K(自由電子)}}\approx 3.2\times10^{10}\ \text{dyne/cm}^2}
+$$
+
+> **重點**：實驗值 $B_K\approx 3.1\times10^{10}\ \text{dyne/cm}^2$，自由電子模型估得很準（鹼金屬最準）。鍵：$1\ \text{erg/cm}^3=1\ \text{dyne/cm}^2$，單位天然吻合。
+
+<details>
+<summary><b>📝 更多範例（點開）：電子氣壓強 $p$、體積彈性模量 $B$ 多算幾個金屬</b></summary>
+
+**範例 A（鈉 Na 的壓強與 B）**：Na 的 $n=2.65\times10^{22}\ \text{cm}^{-3}$、$\varepsilon_F=3.23\ \text{eV}=5.17\times10^{-12}\ \text{erg}$。先 $\dfrac{U_0}{V}=\tfrac35 n\varepsilon_F=0.6\times2.65\times10^{22}\times5.17\times10^{-12}=8.22\times10^{10}\ \text{erg/cm}^3$。壓強 $p=\tfrac23\dfrac{U_0}{V}=\tfrac23\times8.22\times10^{10}=5.48\times10^{10}\ \text{dyne/cm}^2$。$B=\tfrac{10}{9}\dfrac{U_0}{V}=\tfrac{10}{9}\times8.22\times10^{10}=9.1\times10^{10}\ \text{dyne/cm}^2$（實驗 $B_{\text{Na}}\approx6.4\times10^{10}$，量級對）。
+
+**範例 B（銅 Cu）**：$n=8.45\times10^{22}$、$\varepsilon_F=7.00\ \text{eV}=1.12\times10^{-11}\ \text{erg}$。$\dfrac{U_0}{V}=0.6\times8.45\times10^{22}\times1.12\times10^{-11}=5.68\times10^{11}\ \text{erg/cm}^3$。$B=\tfrac{10}{9}\times5.68\times10^{11}=6.3\times10^{11}\ \text{dyne/cm}^2$。注意 Cu 密度高 $\Rightarrow B$ 比鹼金屬大一個量級——但實驗 $B_{\text{Cu}}\approx1.4\times10^{12}$，自由電子只占一半（過渡金屬有 d 電子鍵結，模型低估，合理）。
+
+**範例 C（標度關係 $B\propto n^{5/3}$）**：由 $B=\tfrac{10}{9}\dfrac{U_0}{V}=\tfrac{10}{9}\cdot\tfrac35 n\varepsilon_F=\tfrac23 n\varepsilon_F$，而 $\varepsilon_F\propto n^{2/3}$，故 $B\propto n\cdot n^{2/3}=n^{5/3}$。Cu 對 Na 的密度比 $3.19$，$B$ 之比 $=3.19^{5/3}=e^{\frac53\ln3.19}=e^{\frac53\times1.160}=e^{1.933}=6.9$。驗算：範例 B 的 $6.3\times10^{11}\div$ 範例 A 的 $9.1\times10^{10}=6.9$ ✓。
+
+**範例 D（由 $p$ 反推 $\varepsilon_F$）**：若量到某電子氣壓強 $p=1.0\times10^{11}\ \text{dyne/cm}^2$、密度 $n=4\times10^{22}\ \text{cm}^{-3}$。由 $p=\tfrac23\cdot\tfrac35 n\varepsilon_F=\tfrac25 n\varepsilon_F$ 反解 $\varepsilon_F=\dfrac{5p}{2n}=\dfrac{5\times1.0\times10^{11}}{2\times4\times10^{22}}=6.25\times10^{-12}\ \text{erg}=3.9\ \text{eV}$。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="60" y1="205" x2="450" y2="205" stroke="#333" stroke-width="1.5"/>
+<line x1="60" y1="205" x2="60" y2="32" stroke="#333" stroke-width="1.5"/>
+<text x="452" y="221" fill="#333">V</text>
+<text x="24" y="46" fill="#333">p, U₀</text>
+<polyline points="78,48 92,72 112,98 138,124 172,148 215,168 268,184 330,194 440,201" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<text x="180" y="70" font-size="11.5" fill="#1a4d7c">U₀ = A·V^(−⅔)</text>
+<polyline points="78,70 92,108 112,140 138,165 172,182 215,193 268,199 330,202 440,203" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<text x="210" y="125" font-size="11.5" fill="#c0392b">p = −∂U₀/∂V = ⅔ U₀/V</text>
+<text x="210" y="143" font-size="10.5" fill="#c0392b">∝ V^(−5⁄3)</text>
+<rect x="250" y="150" width="190" height="40" fill="#f7fafd" stroke="#c5d5e5" stroke-width="1" rx="4"/>
+<text x="345" y="167" text-anchor="middle" font-size="11" fill="#13395d">B = −V ∂p/∂V = ⅗ p = 10⁄9 · U₀/V</text>
+<text x="345" y="184" text-anchor="middle" font-size="10.5" fill="#2e8b2e">B ∝ n^(5⁄3)（密度越高越硬）</text>
+<text x="120" y="100" font-size="10.5" fill="#888">壓縮（V↓）→ U₀↑、p↑</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 2：電子氣的 p–V 與體積模量 B</b>。零點動能 <b style="color:#1a4d7c">U₀ = A·V^(−⅔)</b>（壓縮 V↓ 使每電子 εꜰ↑、總動能↑）。壓強 <b style="color:#c0392b">p = −∂U₀/∂V = ⅔·U₀/V ∝ V^(−5⁄3)</b>（電子氣即使 T=0 也有壓強，純量子簡併壓）。再微分得 <b style="color:#13395d">B = −V·∂p/∂V = ⅗p = 10⁄9·U₀/V</b>。因 B = ⅔nεꜰ 而 εꜰ∝n^⅔，故 <b style="color:#2e8b2e">B ∝ n^(5⁄3)</b>——密度越高的金屬越硬。鹼金屬（低 n）這個自由電子估計最準。</figcaption>
+</figure>
+
+---
+
+### 習題 3：二維化學勢（Chemical potential in two dimensions）
+
+**題目（English, Kittel Prob. 6.3）**：Show that the chemical potential of a Fermi gas in two dimensions is given by
+
+$$
+\mu(T)=k_B T\,\ln\!\left[\exp\!\left(\frac{\pi n\hbar^2}{m k_B T}\right)-1\right]
+$$
+
+for $n$ electrons per unit area. Note: The density of orbitals of a free electron gas in two dimensions is independent of energy, $D(\varepsilon)=m/\pi\hbar^2$ per unit area of specimen.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+證明二維費米氣體（每單位面積 $n$ 個電子）的化學勢（chemical potential）為
+
+$$
+\mu(T)=k_B T\,\ln\!\left[\exp\!\left(\frac{\pi n\hbar^2}{m k_B T}\right)-1\right]
+$$
+
+提示：二維自由電子氣每單位面積態密度與能量無關，$D(\varepsilon)=m/\pi\hbar^2$。
+
+</details>
+
+**Step 1：寫出粒子數守恆（每單位面積）。** 用費米–狄拉克分布（Fermi–Dirac distribution）$f(\varepsilon)=\dfrac{1}{e^{(\varepsilon-\mu)/k_BT}+1}$：
+
+$$
+n=\int_0^\infty D(\varepsilon)\,f(\varepsilon)\,d\varepsilon=\frac{m}{\pi\hbar^2}\int_0^\infty\frac{d\varepsilon}{e^{(\varepsilon-\mu)/k_BT}+1}
+$$
+
+**Step 2：換變數 $x=(\varepsilon-\mu)/k_BT$，故 $d\varepsilon=k_BT\,dx$，下限 $\varepsilon=0\Rightarrow x=-\mu/k_BT$。**
+
+$$
+n=\frac{m k_B T}{\pi\hbar^2}\int_{-\mu/k_BT}^{\infty}\frac{dx}{e^{x}+1}
+$$
+
+**Step 3：解析積分。** 利用 $\displaystyle\int\frac{dx}{e^x+1}=x-\ln(e^x+1)=-\ln(1+e^{-x})$。代入上下限：
+
+$$
+\int_{a}^{\infty}\frac{dx}{e^x+1}=\Big[-\ln(1+e^{-x})\Big]_{a}^{\infty}=0-\big(-\ln(1+e^{-a})\big)=\ln(1+e^{-a})
+$$
+
+其中 $a=-\mu/k_BT$，故 $e^{-a}=e^{\mu/k_BT}$：
+
+$$
+n=\frac{m k_B T}{\pi\hbar^2}\ln\!\left(1+e^{\mu/k_BT}\right)
+$$
+
+**Step 4：反解 $\mu$。** 先整理：
+
+$$
+\frac{\pi n\hbar^2}{m k_B T}=\ln\!\left(1+e^{\mu/k_BT}\right)
+\;\Rightarrow\;
+1+e^{\mu/k_BT}=\exp\!\left(\frac{\pi n\hbar^2}{m k_B T}\right)
+$$
+
+**Step 5：移項並取對數。**
+
+$$
+e^{\mu/k_BT}=\exp\!\left(\frac{\pi n\hbar^2}{m k_B T}\right)-1
+\;\Rightarrow\;
+\frac{\mu}{k_BT}=\ln\!\left[\exp\!\left(\frac{\pi n\hbar^2}{m k_B T}\right)-1\right]
+$$
+
+$$
+\boxed{\mu(T)=k_B T\,\ln\!\left[\exp\!\left(\frac{\pi n\hbar^2}{m k_B T}\right)-1\right]}
+$$
+
+> **重點**：二維 DOS 是常數，使積分能解析做出來（一維、三維都做不到）。檢查極限：$T\to 0$ 時 $\exp(\cdots)\gg1$，$\mu\to \pi n\hbar^2/m=\varepsilon_F$（2D 費米能量），合理。
+
+<details>
+<summary><b>📝 更多範例（點開）：二維化學勢的極限、數值與相關積分</b></summary>
+
+**範例 A（低溫展開，$\mu$ 偏離 $\varepsilon_F$ 多少）**：把 $\mu=k_BT\ln\big[e^{\varepsilon_F/k_BT}-1\big]$ 寫成 $\mu=k_BT\ln\Big[e^{\varepsilon_F/k_BT}\big(1-e^{-\varepsilon_F/k_BT}\big)\Big]=\varepsilon_F+k_BT\ln\big(1-e^{-\varepsilon_F/k_BT}\big)$。其中 $\varepsilon_F\equiv\dfrac{\pi n\hbar^2}{m}$。低溫 $k_BT\ll\varepsilon_F$ 時 $e^{-\varepsilon_F/k_BT}$ 極小，$\ln(1-x)\approx-x$，故 $\mu\approx\varepsilon_F-k_BT\,e^{-\varepsilon_F/k_BT}$——指數小的修正，幾乎不動。
+
+**範例 B（高溫古典極限）**：$k_BT\gg\varepsilon_F$ 時 $\dfrac{\varepsilon_F}{k_BT}\ll1$，$e^{\varepsilon_F/k_BT}\approx1+\dfrac{\varepsilon_F}{k_BT}$，故 $e^{\varepsilon_F/k_BT}-1\approx\dfrac{\varepsilon_F}{k_BT}=\dfrac{\pi n\hbar^2}{mk_BT}$。代回 $\mu=k_BT\ln\dfrac{\pi n\hbar^2}{mk_BT}$，因括號 $\ll1$ 對數為負 → $\mu<0$，回到古典理想氣體（化學勢為負且隨升溫更負）✓。
+
+**範例 C（數值，2DEG）**：取 $n=10^{12}\ \text{cm}^{-2}$、$m=$ 電子質量。先 $\varepsilon_F=\dfrac{\pi n\hbar^2}{m}=\dfrac{\pi\times10^{12}\times(1.055\times10^{-27})^2}{9.11\times10^{-28}}=3.84\times10^{-15}\ \text{erg}=2.4\times10^{-3}\ \text{eV}$。對應 $T_F=\varepsilon_F/k_B=27.8\ \text{K}$。在 $T=1\ \text{K}$（$\ll T_F$）：$\varepsilon_F/k_BT=27.8$，修正 $k_BT\,e^{-27.8}\sim10^{-12}\ \text{eV}$，可忽略，$\mu\approx\varepsilon_F=2.4\ \text{meV}$。
+
+**範例 D（同類解析積分 $\int_a^\infty\frac{dx}{e^x+1}$ 的另一寫法）**：本題核心積分也可用 $\dfrac{1}{e^x+1}=\dfrac{e^{-x}}{1+e^{-x}}$，令 $u=1+e^{-x}$、$du=-e^{-x}dx$：$\int\dfrac{e^{-x}}{1+e^{-x}}dx=-\int\dfrac{du}{u}=-\ln u=-\ln(1+e^{-x})$，與正文 Step 3 一致。代上下限 $a\to\infty$ 得 $\ln(1+e^{-a})$，再用 $a=-\mu/k_BT$ 得 $\ln(1+e^{\mu/k_BT})$。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="55" y1="205" x2="445" y2="205" stroke="#333" stroke-width="1.5"/>
+<line x1="55" y1="205" x2="55" y2="30" stroke="#333" stroke-width="1.5"/>
+<text x="448" y="221" fill="#333">T</text>
+<text x="20" y="44" fill="#333">μ</text>
+<line x1="50" y1="60" x2="445" y2="60" stroke="#2e8b2e" stroke-width="1.4" stroke-dasharray="5,4"/>
+<text x="62" y="54" font-size="11.5" fill="#2e8b2e">εꜰ = πnℏ²/m</text>
+<circle cx="55" cy="60" r="4" fill="#2e8b2e"/>
+<text x="60" y="76" font-size="10.5" fill="#2e8b2e">T→0：μ→εꜰ</text>
+<polyline points="55,60 90,60 130,61 170,64 205,70 240,80 275,95 305,113 335,135 360,158 385,182 405,200" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<text x="300" y="100" font-size="12" fill="#1a4d7c">μ(T) 隨升溫下降</text>
+<text x="300" y="118" font-size="11" fill="#1a4d7c">（最終轉負，趨古典）</text>
+<line x1="55" y1="205" x2="445" y2="205" stroke="#333" stroke-width="0"/>
+<line x1="50" y1="205" x2="445" y2="205" stroke="#c0392b" stroke-width="0.8" stroke-dasharray="2,3"/>
+<text x="410" y="200" font-size="10.5" fill="#888">μ&lt;0</text>
+<rect x="300" y="150" width="138" height="46" fill="#f7fafd" stroke="#c5d5e5" stroke-width="1" rx="4"/>
+<text x="369" y="167" text-anchor="middle" font-size="11" fill="#13395d">μ = kT·ln[e^(πnℏ²/mkT) − 1]</text>
+<text x="369" y="186" text-anchor="middle" font-size="10.5" fill="#888">（只有 2D 常數 DOS 能解析解）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 3：二維化學勢 μ(T)</b>。因 2D 態密度 D=m⁄πℏ² 是<b>常數</b>，粒子數積分 ∫ D·f dε 能解析做出（Step 3），反解得 <b style="color:#1a4d7c">μ(T)=kT·ln[exp(πnℏ²⁄mkT) − 1]</b>。低溫 T→0 時指數項 ≫ 1，ln 內 −1 可略，<b style="color:#2e8b2e">μ → πnℏ²⁄m = εꜰ</b>（綠線，2D 費米能量）——這是檢驗答案的關鍵極限。升溫 μ 單調下降，高溫最終轉負趨向古典理想氣體。一維、三維 DOS 不是常數，此積分做不出解析式。</figcaption>
+</figure>
+
+---
+
+### 習題 4：天體物理中的費米氣體（Fermi gases in astrophysics）
+
+**題目（English, Kittel Prob. 6.4）**：(a) Given $M_\odot\approx 2\times10^{33}\ \text{g}$ for the mass of the Sun, estimate the number of electrons in the Sun. In a white dwarf star this number of electrons may be ionized and contained in a sphere of radius $2\times10^{9}\ \text{cm}$; find the Fermi energy of the electrons in electron volts. (b) The energy of an electron in the relativistic limit $\varepsilon\gg mc^2$ is related to the wavevector as $\varepsilon=pc=\hbar kc$. Show that the Fermi energy in this limit is $\varepsilon_F\approx\hbar c(N/V)^{1/3}$, roughly. (c) If the above number of electrons were contained within a pulsar of radius $10\ \text{km}$, show that the Fermi energy would be $\sim10^{8}\ \text{eV}$. This value explains why pulsars are believed to be composed largely of neutrons rather than of protons and electrons, for the energy release in the reaction $n\to p+e^-$ is only $0.8\times10^{6}\ \text{eV}$, which is not large enough to enable many electrons to form a Fermi sea.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 太陽質量 $M_\odot\approx 2\times10^{33}\ \text{g}$，估算太陽中電子數；白矮星（white dwarf）把這些電子電離並裝進半徑 $2\times10^{9}\ \text{cm}$ 的球，求費米能量（eV）。(b) 相對論極限 $\varepsilon\approx pc=\hbar kc$ 時，證明 $\varepsilon_F\approx\hbar c(N/V)^{1/3}$。(c) 若同樣電子數裝進半徑 $10\ \text{km}$ 的脈衝星（pulsar），證明 $\varepsilon_F\sim10^{8}\ \text{eV}$。
+
+</details>
+
+**Step 1：(a) 估電子數。** 太陽主要是氫，每個氫原子（質子質量 $\approx1.67\times10^{-24}\ \text{g}$）帶 1 個電子：
+
+$$
+N\approx\frac{M_\odot}{m_p}=\frac{2\times10^{33}}{1.67\times10^{-24}}\approx 1.2\times10^{57}
+$$
+
+$$
+\boxed{N\approx 1\times10^{57}\ \text{個電子}}
+$$
+
+**Step 2：算白矮星電子密度。** 球體積 $V=\frac{4}{3}\pi R^3$，$R=2\times10^9\ \text{cm}$：
+
+$$
+V=\frac{4}{3}\pi(2\times10^9)^3=\frac{4}{3}\pi\times8\times10^{27}=3.35\times10^{28}\ \text{cm}^3
+$$
+
+$$
+n=\frac{N}{V}=\frac{1.2\times10^{57}}{3.35\times10^{28}}\approx 3.6\times10^{28}\ \text{cm}^{-3}
+$$
+
+**Step 3：判斷是否相對論。** 先用非相對論式估 $k_F$：
+
+$$
+k_F=(3\pi^2 n)^{1/3}=(29.6\times3.6\times10^{28})^{1/3}=(1.07\times10^{30})^{1/3}\approx 1.02\times10^{10}\ \text{cm}^{-1}
+$$
+
+非相對論 $\varepsilon_F=\hbar^2k_F^2/2m$：
+
+$$
+\varepsilon_F=\frac{(1.055\times10^{-27})^2(1.02\times10^{10})^2}{2\times9.11\times10^{-28}}=\frac{1.16\times10^{-34}}{1.82\times10^{-27}}=6.4\times10^{-8}\ \text{erg}
+$$
+
+換算 $=6.4\times10^{-8}/1.6\times10^{-12}\approx 4\times10^{4}\ \text{eV}$。約 $40\ \text{keV}$，與 $mc^2=511\ \text{keV}$ 相比尚屬「弱相對論」，故用非相對論式估算可接受。
+
+$$
+\boxed{\varepsilon_F^{\text{白矮星}}\sim 3\text{–}4\times10^{4}\ \text{eV}\ (\sim 0.03\ \text{MeV})}
+$$
+
+**Step 4：(b) 相對論極限。** 此時 $\varepsilon=\hbar kc$，但 $k_F$ 與電子密度的幾何關係不變（仍由態數填到費米球決定）：
+
+$$
+k_F=(3\pi^2 n)^{1/3}=(3\pi^2)^{1/3}\left(\frac{N}{V}\right)^{1/3}
+$$
+
+**Step 5：代入相對論色散 $\varepsilon_F=\hbar c\,k_F$。**
+
+$$
+\varepsilon_F=\hbar c\,(3\pi^2)^{1/3}\left(\frac{N}{V}\right)^{1/3}\approx\hbar c\left(\frac{N}{V}\right)^{1/3}
+$$
+
+（$(3\pi^2)^{1/3}\approx3.09$，量級估算丟掉。）
+
+$$
+\boxed{\varepsilon_F\approx\hbar c\left(\frac{N}{V}\right)^{1/3}}
+$$
+
+**Step 6：(c) 脈衝星數值。** $R=10\ \text{km}=10^6\ \text{cm}$，$V=\frac{4}{3}\pi(10^6)^3\approx4\times10^{18}\ \text{cm}^3$：
+
+$$
+n=\frac{1.2\times10^{57}}{4\times10^{18}}\approx 3\times10^{38}\ \text{cm}^{-3}
+$$
+
+$$
+n^{1/3}=(3\times10^{38})^{1/3}\approx 6.7\times10^{12}\ \text{cm}^{-1}
+$$
+
+**Step 7：用相對論式 $\varepsilon_F\approx\hbar c\,n^{1/3}$。**
+
+$$
+\varepsilon_F\approx(1.055\times10^{-27})(3\times10^{10})(6.7\times10^{12})=2.1\times10^{-4}\ \text{erg}
+$$
+
+換算 eV：
+
+$$
+\varepsilon_F=\frac{2.1\times10^{-4}}{1.6\times10^{-12}}\approx 1.3\times10^{8}\ \text{eV}\sim10^{8}\ \text{eV}
+$$
+
+$$
+\boxed{\varepsilon_F^{\text{脈衝星}}\sim 10^{8}\ \text{eV}}
+$$
+
+> **重點**：$10^8\ \text{eV}=100\ \text{MeV}$ 遠大於中子衰變釋放的 $0.8\ \text{MeV}$，所以電子無法填到那麼高的費米海，反應 $n\to p+e^-$ 被「費米海堵死」——脈衝星因此主要由中子組成。本題核心是「幾何關係 $k_F\propto n^{1/3}$ 不分相對論與否」。
+
+---
+
+### 習題 5：液態 He³（Liquid He³）
+
+**題目（English, Kittel Prob. 6.5）**：The atom He³ has spin $\frac{1}{2}$ and is a fermion. The density of liquid He³ is $0.081\ \text{g/cm}^3$ near absolute zero. Calculate the Fermi energy $\varepsilon_F$ and the Fermi temperature $T_F$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+He³ 原子自旋 $\frac{1}{2}$，是費米子（fermion）。近絕對零度時液態 He³ 密度 $\rho=0.081\ \text{g/cm}^3$。計算費米能量 $\varepsilon_F$ 與費米溫度 $T_F$。He³ 原子質量 $m_3=3\times1.66\times10^{-24}\ \text{g}$。
+
+</details>
+
+**Step 1：算數密度 $n$。** 一個 He³ 原子質量 $m_3=5.01\times10^{-24}\ \text{g}$：
+
+$$
+n=\frac{\rho}{m_3}=\frac{0.081}{5.01\times10^{-24}}=1.62\times10^{22}\ \text{cm}^{-3}
+$$
+
+**Step 2：算 $k_F=(3\pi^2 n)^{1/3}$。**
+
+$$
+3\pi^2 n=29.6\times1.62\times10^{22}=4.79\times10^{23}
+$$
+
+$$
+k_F=(4.79\times10^{23})^{1/3}=7.83\times10^{7}\ \text{cm}^{-1}
+$$
+
+**Step 3：算 $\varepsilon_F=\hbar^2k_F^2/2m_3$（注意用 He³ 原子質量，不是電子質量！）。**
+
+$$
+\varepsilon_F=\frac{(1.055\times10^{-27})^2(7.83\times10^{7})^2}{2\times5.01\times10^{-24}}
+=\frac{1.113\times10^{-54}\times6.13\times10^{15}}{1.00\times10^{-23}}
+$$
+
+$$
+\varepsilon_F=\frac{6.82\times10^{-39}}{1.00\times10^{-23}}=6.8\times10^{-16}\ \text{erg}
+$$
+
+**Step 4：換成 eV。**
+
+$$
+\varepsilon_F=\frac{6.8\times10^{-16}}{1.602\times10^{-12}}=4.2\times10^{-4}\ \text{eV}
+$$
+
+$$
+\boxed{\varepsilon_F\approx 4.2\times10^{-4}\ \text{eV}\ (\approx 0.4\ \text{meV})}
+$$
+
+**Step 5：算 $T_F=\varepsilon_F/k_B$。**
+
+$$
+T_F=\frac{4.2\times10^{-4}\ \text{eV}}{8.617\times10^{-5}\ \text{eV/K}}\approx 4.9\ \text{K}
+$$
+
+$$
+\boxed{T_F\approx 5\ \text{K}}
+$$
+
+> **重點**：因為 He³ 質量比電子大約 $5500$ 倍，$\varepsilon_F$ 與 $T_F$ 都比金屬電子小好幾個量級。$T_F\sim5\ \text{K}$ 解釋了為何只有在數 mK 量級才看到 He³ 的簡併費米液體行為。陷阱：質量要用 He³ 原子的，不是電子的。
+
+---
+
+### 習題 6：電導率的頻率依賴（Frequency dependence of the electrical conductivity）
+
+**題目（English, Kittel Prob. 6.6）**：Use the equation $m(dv/dt+v/\tau)=-eE$ for the electron drift velocity $v$ to show that the conductivity at frequency $\omega$ is
+
+$$
+\sigma(\omega)=\frac{\sigma(0)}{1-i\omega\tau},\qquad \text{where } \sigma(0)=\frac{ne^2\tau}{m}.
+$$
+
+<details>
+<summary>▸ 中文題目</summary>
+
+用電子漂移速度（drift velocity）方程 $m(dv/dt+v/\tau)=-eE$，證明頻率 $\omega$ 下的電導率為
+
+$$
+\sigma(\omega)=\frac{\sigma(0)}{1-i\omega\tau},\qquad \sigma(0)=\frac{ne^2\tau}{m}
+$$
+
+</details>
+
+**Step 1：假設場與速度都隨 $e^{-i\omega t}$ 振盪。** 設 $E=E_0 e^{-i\omega t}$、$v=v_0 e^{-i\omega t}$，則 $dv/dt=-i\omega v$。代入運動方程：
+
+$$
+m\left(-i\omega v+\frac{v}{\tau}\right)=-eE
+$$
+
+**Step 2：把 $v$ 提出來。**
+
+$$
+m v\left(\frac{1}{\tau}-i\omega\right)=-eE
+\;\Rightarrow\;
+v=\frac{-eE}{m\left(\frac{1}{\tau}-i\omega\right)}=\frac{-e\tau E}{m(1-i\omega\tau)}
+$$
+
+**Step 3：寫電流密度 $j=n(-e)v=\sigma E$。**
+
+$$
+j=n(-e)\cdot\frac{-e\tau E}{m(1-i\omega\tau)}=\frac{ne^2\tau}{m}\frac{E}{1-i\omega\tau}
+$$
+
+**Step 4：讀出電導率。** 與 $j=\sigma(\omega)E$ 比較：
+
+$$
+\sigma(\omega)=\frac{ne^2\tau/m}{1-i\omega\tau}=\frac{\sigma(0)}{1-i\omega\tau}
+$$
+
+$$
+\boxed{\sigma(\omega)=\frac{\sigma(0)}{1-i\omega\tau},\qquad \sigma(0)=\frac{ne^2\tau}{m}}
+$$
+
+> **重點**：$\omega\to0$ 回到 Drude 直流電導 $\sigma(0)$；$\omega\tau\gg1$ 時 $\sigma\to i\sigma(0)/\omega\tau$（純虛部，電子來不及碰撞，像無耗散的慣性響應）。關鍵技巧是「設 $e^{-i\omega t}$ 把微分變成乘 $-i\omega$」。
+
+<details>
+<summary><b>📝 更多範例（點開）：AC 電導 $\sigma(\omega)$ 的實虛部與電漿頻率</b></summary>
+
+**範例 A（分出實部與虛部）**：把 $\sigma(\omega)=\dfrac{\sigma(0)}{1-i\omega\tau}$ 的分母有理化（乘共軛 $1+i\omega\tau$）：$\sigma(\omega)=\dfrac{\sigma(0)(1+i\omega\tau)}{(1-i\omega\tau)(1+i\omega\tau)}=\dfrac{\sigma(0)(1+i\omega\tau)}{1+\omega^2\tau^2}$。故 $\text{Re}\,\sigma=\dfrac{\sigma(0)}{1+\omega^2\tau^2}$（耗散），$\text{Im}\,\sigma=\dfrac{\sigma(0)\,\omega\tau}{1+\omega^2\tau^2}$（慣性）。在 $\omega\tau=1$ 兩者相等 $=\tfrac12\sigma(0)$。
+
+**範例 B（高頻極限與電漿頻率）**：$\omega\tau\gg1$ 時 $\text{Re}\,\sigma\approx\dfrac{\sigma(0)}{\omega^2\tau^2}\to0$，$\text{Im}\,\sigma\approx\dfrac{\sigma(0)}{\omega\tau}=\dfrac{ne^2\tau/m}{\omega\tau}=\dfrac{ne^2}{m\omega}$。介電函數 $\varepsilon(\omega)=1+\dfrac{4\pi i\sigma}{\omega}=1+\dfrac{4\pi i}{\omega}\cdot\dfrac{ine^2}{m\omega}=1-\dfrac{4\pi ne^2}{m\omega^2}=1-\dfrac{\omega_p^2}{\omega^2}$，其中 $\omega_p^2=\dfrac{4\pi ne^2}{m}$（電漿頻率，plasma frequency）。
+
+**範例 C（Na 的弛豫時間 $\tau$）**：Na 室溫直流電導 $\sigma(0)=2.1\times10^{17}\ \text{s}^{-1}$（高斯制），$n=2.65\times10^{22}\ \text{cm}^{-3}$。由 $\sigma(0)=\dfrac{ne^2\tau}{m}$ 反解 $\tau=\dfrac{m\sigma(0)}{ne^2}$。高斯制 $e^2=(4.8\times10^{-10})^2=2.3\times10^{-19}$：$\tau=\dfrac{9.11\times10^{-28}\times2.1\times10^{17}}{2.65\times10^{22}\times2.3\times10^{-19}}=\dfrac{1.91\times10^{-10}}{6.1\times10^{3}}=3.1\times10^{-14}\ \text{s}$。
+
+**範例 D（電漿頻率數值）**：Na 的 $\omega_p=\sqrt{\dfrac{4\pi ne^2}{m}}=\sqrt{\dfrac{4\pi\times2.65\times10^{22}\times2.3\times10^{-19}}{9.11\times10^{-28}}}=\sqrt{8.4\times10^{31}}=9.2\times10^{15}\ \text{s}^{-1}$。對應 $\hbar\omega_p=1.055\times10^{-27}\times9.2\times10^{15}=9.7\times10^{-12}\ \text{erg}=6.1\ \text{eV}$（紫外）。故 Na 對可見光（$<3\ \text{eV}$）$\omega<\omega_p$，$\varepsilon<0$ → 反射，這就是金屬光澤。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="55" y1="205" x2="445" y2="205" stroke="#333" stroke-width="1.5"/>
+<line x1="55" y1="205" x2="55" y2="30" stroke="#333" stroke-width="1.5"/>
+<text x="448" y="221" fill="#333">ωτ</text>
+<text x="20" y="44" fill="#333">σ</text>
+<line x1="50" y1="60" x2="120" y2="60" stroke="#888" stroke-width="1"/>
+<text x="44" y="64" text-anchor="end" font-size="10.5" fill="#888">σ(0)</text>
+<polyline points="55,60 70,61 90,64 115,73 145,90 180,114 220,140 265,162 315,178 370,189 440,197" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<circle cx="55" cy="60" r="3.5" fill="#1a4d7c"/>
+<text x="120" y="52" font-size="11.5" fill="#1a4d7c">Re σ = σ(0)/(1+ω²τ²)</text>
+<text x="120" y="68" font-size="10.5" fill="#1a4d7c">（耗散：ω→0 給 Drude σ(0)）</text>
+<polyline points="55,205 75,170 95,150 120,135 150,127 180,127 210,131 245,140 285,151 330,162 380,173 440,184" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<text x="225" y="115" font-size="11.5" fill="#c0392b">Im σ = σ(0)·ωτ/(1+ω²τ²)</text>
+<line x1="150" y1="205" x2="150" y2="124" stroke="#2e8b2e" stroke-width="1.1" stroke-dasharray="3,3"/>
+<text x="150" y="220" text-anchor="middle" font-size="11" fill="#2e8b2e">ωτ = 1</text>
+<text x="370" y="160" font-size="10.5" fill="#888">ωτ≫1：σ→iσ(0)/ωτ</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 6：交流 Drude 電導 σ(ω)=σ(0)/(1−iωτ)</b>。設場 ∝ e^(−iωt) 把 d/dt → −iω（Step 1），解出 σ(ω) 後分成<b style="color:#1a4d7c">實部 Re σ = σ(0)/(1+ω²τ²)</b>（耗散；ω→0 回到直流 Drude σ(0)）與<b style="color:#c0392b">虛部 Im σ = σ(0)·ωτ/(1+ω²τ²)</b>（慣性響應，在 <b style="color:#2e8b2e">ωτ=1</b> 達峰）。高頻 ωτ≫1 時實部 →0、σ → iσ(0)/ωτ（純虛部，電子來不及碰撞，無耗散）。這正是金屬電漿振盪與紅外反射的源頭。</figcaption>
+</figure>
+
+---
+
+### 習題 7：自由電子的動態磁電導張量（Dynamic magnetoconductivity tensor）
+
+**題目（English, Kittel Prob. 6.7）**：A metal with a concentration $n$ of free electrons of charge $-e$ is in a static magnetic field $B\hat z$. The electric current density in the $xy$ plane is related to the electric field by the magnetoconductivity tensor. Assume that the frequency $\omega\gg\omega_c$ and $\omega\gg1/\tau$, where $\omega_c=eB/mc$ (cyclotron frequency, Gaussian units) and $\tau$ is the collision time. (a) Solve the drift velocity equation (51) to find the components of the magnetoconductivity tensor:
+
+$$
+\sigma_{xx}=\sigma_{yy}=\frac{i\omega_p^2}{4\pi\omega},\qquad
+\sigma_{xy}=-\sigma_{yx}=\frac{\omega_c\,\omega_p^2}{4\pi\omega^2},
+$$
+
+where $\omega_p^2=4\pi ne^2/m$. (b) Note from a Maxwell equation that the dielectric function tensor of the medium is related to the conductivity tensor as $\boldsymbol\varepsilon=\mathbf 1+i(4\pi/\omega)\boldsymbol\sigma$. Consider an electromagnetic wave with wavevector $\mathbf k=k\hat z$. Show the dispersion relation for this wave in the medium. (At a given frequency there are two modes of propagation with different wavevectors and different velocities, corresponding to circularly polarized waves; a linearly polarized wave therefore has its plane of polarization rotated by the magnetic field.)
+
+<details>
+<summary>▸ 中文題目</summary>
+
+濃度 $n$、電荷 $-e$ 的自由電子處於沿 $\hat z$ 的靜磁場 $B$。設 $\omega\gg\omega_c$、$\omega\gg1/\tau$（$\omega_c=eB/mc$ 為迴旋頻率，cyclotron frequency；高斯制）。(a) 解漂移速度方程，求磁電導張量分量
+
+$$
+\sigma_{xx}=\sigma_{yy}=\frac{i\omega_p^2}{4\pi\omega},\qquad
+\sigma_{xy}=-\sigma_{yx}=\frac{\omega_c\,\omega_p^2}{4\pi\omega^2},
+$$
+
+其中 $\omega_p^2=4\pi ne^2/m$。(b) 用 Maxwell 方程，介電張量 $\boldsymbol\varepsilon=\mathbf 1+i(4\pi/\omega)\boldsymbol\sigma$，對波向量 $\mathbf k=k\hat z$ 的電磁波，求色散關係。
+
+</details>
+
+**Step 1：寫含磁場的運動方程（忽略碰撞項，因 $\omega\gg1/\tau$）。** 高斯制羅倫茲力（Lorentz force），$\mathbf B=B\hat z$，電子電荷 $-e$：
+
+$$
+m\frac{d\mathbf v}{dt}=-e\mathbf E-\frac{e}{c}\,\mathbf v\times\mathbf B
+$$
+
+**Step 2：取 $xy$ 分量（$\mathbf v\times B\hat z$ 給出 $(v_yB,\,-v_xB,0)$）。** 設一切 $\propto e^{-i\omega t}$，故 $d/dt\to -i\omega$：
+
+$$
+-i\omega m v_x=-eE_x-\frac{e B}{c}v_y,\qquad
+-i\omega m v_y=-eE_y+\frac{e B}{c}v_x
+$$
+
+**Step 3：用 $\omega_c=eB/mc$ 整理。**
+
+$$
+-i\omega v_x+\omega_c v_y=-\frac{e}{m}E_x,\qquad
+-i\omega v_y-\omega_c v_x=-\frac{e}{m}E_y
+$$
+
+**Step 4：因 $\omega\gg\omega_c$，把 $\omega_c$ 當一階小量。零階解（丟掉 $\omega_c$）：**
+
+$$
+v_x^{(0)}=\frac{e}{m}\frac{E_x}{i\omega}=\frac{-ie}{m\omega}E_x,\qquad
+v_y^{(0)}=\frac{-ie}{m\omega}E_y
+$$
+
+**Step 5：一階修正（把 $v^{(0)}$ 代回含 $\omega_c$ 的項）。** 由第一式 $-i\omega v_x=-\frac{e}{m}E_x-\omega_c v_y$：
+
+$$
+v_x=\frac{-ie}{m\omega}E_x+\frac{\omega_c}{i\omega}v_y^{(0)}
+=\frac{-ie}{m\omega}E_x-\frac{i\omega_c}{\omega}\cdot\frac{-ie}{m\omega}E_y
+=\frac{-ie}{m\omega}E_x-\frac{e\omega_c}{m\omega^2}E_y
+$$
+
+**Step 6：電流 $j_x=n(-e)v_x=\sigma_{xx}E_x+\sigma_{xy}E_y$。** 逐項對應：
+
+$$
+\sigma_{xx}=n(-e)\cdot\frac{-ie}{m\omega}=\frac{ine^2}{m\omega}=\frac{i}{\omega}\cdot\frac{ne^2}{m}
+$$
+
+用 $\omega_p^2=4\pi ne^2/m\Rightarrow ne^2/m=\omega_p^2/4\pi$：
+
+$$
+\boxed{\sigma_{xx}=\sigma_{yy}=\frac{i\omega_p^2}{4\pi\omega}}
+$$
+
+**Step 7：取 $\sigma_{xy}$。**
+
+$$
+\sigma_{xy}=n(-e)\cdot\left(-\frac{e\omega_c}{m\omega^2}\right)=\frac{ne^2\omega_c}{m\omega^2}=\frac{\omega_c}{\omega^2}\cdot\frac{ne^2}{m}
+$$
+
+$$
+\boxed{\sigma_{xy}=-\sigma_{yx}=\frac{\omega_c\,\omega_p^2}{4\pi\omega^2}}
+$$
+
+**Step 8：(b) 介電張量。** $\varepsilon_{xx}=1+i\frac{4\pi}{\omega}\sigma_{xx}=1+i\frac{4\pi}{\omega}\cdot\frac{i\omega_p^2}{4\pi\omega}=1-\frac{\omega_p^2}{\omega^2}$。同理
+
+$$
+\varepsilon_{xx}=\varepsilon_{yy}=1-\frac{\omega_p^2}{\omega^2},\qquad
+\varepsilon_{xy}=-\varepsilon_{yx}=i\frac{4\pi}{\omega}\sigma_{xy}=\frac{i\,\omega_c\,\omega_p^2}{\omega^3}
+$$
+
+**Step 9：電磁波方程。** 對 $\mathbf k=k\hat z$、場 $\propto e^{i(kz-\omega t)}$，波方程 $k^2 c^2 E=\omega^2\boldsymbol\varepsilon\cdot E$ 給出（橫向 $xy$ 分量）行列式：
+
+$$
+\det\begin{pmatrix}\varepsilon_{xx}-\dfrac{c^2k^2}{\omega^2} & \varepsilon_{xy}\\[4pt] \varepsilon_{yx} & \varepsilon_{yy}-\dfrac{c^2k^2}{\omega^2}\end{pmatrix}=0
+$$
+
+**Step 10：展開（用 $\varepsilon_{xx}=\varepsilon_{yy}$、$\varepsilon_{yx}=-\varepsilon_{xy}$）。**
+
+$$
+\left(\varepsilon_{xx}-\frac{c^2k^2}{\omega^2}\right)^2+\varepsilon_{xy}^2=0
+\;\Rightarrow\;
+\frac{c^2k^2}{\omega^2}=\varepsilon_{xx}\pm i\varepsilon_{xy}
+$$
+
+$$
+\boxed{\frac{c^2k^2}{\omega^2}=1-\frac{\omega_p^2}{\omega^2}\mp\frac{\omega_c\,\omega_p^2}{\omega^3}}
+$$
+
+> **重點**：兩個 $\pm$ 解＝兩個圓偏振（circularly polarized）模式，傳播速度不同。線偏振波＝兩圓偏振之疊加，於是偏振面在磁場中被旋轉（法拉第旋轉，Faraday rotation）。技巧：把 $\omega_c$ 當微擾、只取到一階。
+
+---
+
+### 習題 8：自由電子費米氣體的內聚能（Cohesive energy）
+
+**題目（English, Kittel Prob. 6.8）**：We define the dimensionless length $r_s=r_0/a_H$, where $r_0$ is the radius of a sphere that contains one electron, and $a_H=\hbar^2/me^2$ is the Bohr radius. (a) Show that the average kinetic energy per electron in a free electron Fermi gas at $0\ \text{K}$ is $2.21/r_s^2$, where the energy is expressed in rydbergs, with $1\ \text{Ry}=me^4/2\hbar^2$. (b) Show that the coulomb energy of a point positive charge $e$ interacting with the uniform electron distribution of one electron in the volume of radius $r_0$ is $-3e^2/2r_0$, or $-3/r_s$ in rydbergs. (c) Show that the coulomb self-energy of the electron distribution in the sphere is $3e^2/5r_0$, or $6/5r_s$ in rydbergs. (d) The sum of (b) and (c) gives $-1.80/r_s$ for the total coulomb energy per electron. Show that the equilibrium value of $r_s$ is $2.45$. Will such a metal be stable with respect to separated H atoms?
+
+<details>
+<summary>▸ 中文題目</summary>
+
+定義無因次長度 $r_s=r_0/a_H$，$r_0$ 是「含一個電子的球」半徑，$a_H=\hbar^2/me^2$ 為波耳半徑。(a) 證明 $0\ \text{K}$ 每個電子平均動能 $=2.21/r_s^2$（單位雷德伯 Ry，$1\ \text{Ry}=me^4/2\hbar^2$）。(b) 證明點正電荷 $e$ 與半徑 $r_0$ 球內均勻分布的一個電子的庫侖能 $=-3e^2/2r_0=-3/r_s$（Ry）。(c) 證明該電子分布的庫侖自能（self-energy）$=3e^2/5r_0=6/5r_s$（Ry）。(d) (b)+(c) 給每電子總庫侖能 $-1.80/r_s$；證明平衡 $r_s=2.45$。此金屬相對於分離的 H 原子穩定嗎？
+
+</details>
+
+**Step 1：(a) 由 $N/V=1/(\frac{4}{3}\pi r_0^3)$ 寫出 $n$，代入 $\varepsilon_F$。** 一個電子占體積 $\frac{4}{3}\pi r_0^3$，故 $n=\dfrac{3}{4\pi r_0^3}$：
+
+$$
+\varepsilon_F=\frac{\hbar^2}{2m}(3\pi^2 n)^{2/3}=\frac{\hbar^2}{2m}\left(\frac{9\pi}{4}\right)^{2/3}\frac{1}{r_0^2}
+$$
+
+（用 $3\pi^2\cdot\frac{3}{4\pi}=\frac{9\pi}{4}$。）
+
+**Step 2：平均動能 $=\frac{3}{5}\varepsilon_F$（習題 1）。**
+
+$$
+\langle\text{KE}\rangle=\frac{3}{5}\cdot\frac{\hbar^2}{2m}\left(\frac{9\pi}{4}\right)^{2/3}\frac{1}{r_0^2}
+$$
+
+**Step 3：換成 Ry 與 $r_s$。** 用 $r_0=r_s a_H$、$a_H=\hbar^2/me^2$，且 $1\ \text{Ry}=\frac{me^4}{2\hbar^2}=\frac{e^2}{2a_H}$，故 $\frac{\hbar^2}{2m r_0^2}=\frac{\hbar^2}{2m a_H^2 r_s^2}=\frac{1}{r_s^2}\cdot\frac{\hbar^2}{2m a_H^2}$。又 $\frac{\hbar^2}{2m a_H^2}=\frac{\hbar^2}{2m}\cdot\frac{m^2e^4}{\hbar^4}=\frac{me^4}{2\hbar^2}=1\ \text{Ry}$。所以
+
+$$
+\langle\text{KE}\rangle=\frac{3}{5}\left(\frac{9\pi}{4}\right)^{2/3}\frac{1}{r_s^2}\ \text{Ry}
+$$
+
+**Step 4：算數字 $\frac{3}{5}(9\pi/4)^{2/3}$。** $9\pi/4=7.069$；$(7.069)^{2/3}=e^{\frac23\ln7.069}=e^{\frac23\times1.956}=e^{1.304}=3.685$；乘 $0.6$：
+
+$$
+\frac{3}{5}\times3.685=2.21
+$$
+
+$$
+\boxed{\langle\text{KE}\rangle=\frac{2.21}{r_s^2}\ \text{Ry}}
+$$
+
+**Step 5：(b) 點電荷與均勻球的庫侖能。** 半徑 $r_0$ 球內均勻分布總電荷 $-e$（電荷密度 $\rho=-e/(\frac43\pi r_0^3)$），中心點正電荷 $+e$。位能
+
+$$
+U_{\text{ion-e}}=(+e)\int\frac{\rho\,dV}{r}=e\cdot\rho\int_0^{r_0}\frac{4\pi r^2 dr}{r}=e\rho\cdot 4\pi\cdot\frac{r_0^2}{2}
+$$
+
+**Step 6：代入 $\rho=-\dfrac{3e}{4\pi r_0^3}$。**
+
+$$
+U_{\text{ion-e}}=e\cdot\left(-\frac{3e}{4\pi r_0^3}\right)\cdot 2\pi r_0^2=-\frac{3e^2}{2r_0}
+$$
+
+**Step 7：換 Ry。** $\dfrac{e^2}{r_0}=\dfrac{e^2}{r_s a_H}=\dfrac{2}{r_s}\cdot\dfrac{e^2}{2a_H}=\dfrac{2}{r_s}\ \text{Ry}$，故
+
+$$
+U_{\text{ion-e}}=-\frac{3}{2}\cdot\frac{2}{r_s}=-\frac{3}{r_s}\ \text{Ry}
+$$
+
+$$
+\boxed{U_{\text{ion-e}}=-\frac{3e^2}{2r_0}=-\frac{3}{r_s}\ \text{Ry}}
+$$
+
+**Step 8：(c) 均勻帶電球的自能。** 標準結果：總電荷 $Q$、半徑 $R$ 的均勻球自能 $=\dfrac{3}{5}\dfrac{Q^2}{R}$。此處 $Q=e$（取絕對值算大小）、$R=r_0$：
+
+$$
+U_{\text{self}}=\frac{3}{5}\frac{e^2}{r_0}=\frac{3}{5}\cdot\frac{2}{r_s}\ \text{Ry}=\frac{6}{5r_s}\ \text{Ry}
+$$
+
+$$
+\boxed{U_{\text{self}}=\frac{3e^2}{5r_0}=\frac{6}{5r_s}\ \text{Ry}}
+$$
+
+**Step 9：(d) 總庫侖能。** (b)+(c)：
+
+$$
+U_{\text{coul}}=-\frac{3}{r_s}+\frac{6}{5r_s}=\frac{-15+6}{5r_s}=-\frac{9}{5r_s}=-\frac{1.80}{r_s}\ \text{Ry}
+$$
+
+**Step 10：總能量＝動能＋庫侖能，對 $r_s$ 求極小。**
+
+$$
+E(r_s)=\frac{2.21}{r_s^2}-\frac{1.80}{r_s}
+$$
+
+$$
+\frac{dE}{dr_s}=-\frac{2\times2.21}{r_s^3}+\frac{1.80}{r_s^2}=0
+\;\Rightarrow\;
+\frac{1.80}{r_s^2}=\frac{4.42}{r_s^3}
+\;\Rightarrow\;
+r_s=\frac{4.42}{1.80}=2.45
+$$
+
+$$
+\boxed{r_s^{\text{平衡}}=2.45}
+$$
+
+**Step 11：判斷穩定性。** 代回 $E(2.45)=\dfrac{2.21}{6.00}-\dfrac{1.80}{2.45}=0.368-0.735=-0.367\ \text{Ry}=-5.0\ \text{eV}$。但孤立 H 原子的束縛能是 $-1\ \text{Ry}=-13.6\ \text{eV}$。
+
+$$
+\boxed{|E_{\text{metal}}|=0.37\ \text{Ry}<1\ \text{Ry}=|E_{\text{H 原子}}|\;\Rightarrow\;\text{此金屬相對分離 H 原子不穩定}}
+$$
+
+> **重點**：這題把「動能 $\propto1/r_s^2$（壓縮代價）」與「庫侖能 $\propto-1/r_s$（吸引）」做能量競爭，是凝聚態最經典的內聚能模型。結論：均勻電子氣模型解釋不了氫成金屬，因為孤立 H 原子更穩定。
+
+<details>
+<summary><b>📝 更多範例（點開）：$r_s$、各能量項與平衡點的變化題</b></summary>
+
+**範例 A（由真實密度算 $r_s$）**：$r_s=r_0/a_H$，$r_0$ 由 $\tfrac43\pi r_0^3=1/n$ 定。Na 的 $n=2.65\times10^{22}\ \text{cm}^{-3}$：$r_0^3=\dfrac{3}{4\pi n}=\dfrac{3}{4\pi\times2.65\times10^{22}}=9.01\times10^{-24}\ \text{cm}^3$，$r_0=2.08\times10^{-8}\ \text{cm}$。除以 $a_H=0.529\times10^{-8}\ \text{cm}$：$r_s=\dfrac{2.08}{0.529}=3.93$。（Na 實際 $r_s\approx3.9$，吻合。）
+
+**範例 B（在 $r_s=3.93$ 算每電子總能）**：$E(r_s)=\dfrac{2.21}{r_s^2}-\dfrac{1.80}{r_s}$。代 $r_s=3.93$：動能 $\dfrac{2.21}{15.4}=0.143\ \text{Ry}$，庫侖能 $-\dfrac{1.80}{3.93}=-0.458\ \text{Ry}$，總 $E=0.143-0.458=-0.315\ \text{Ry}=-4.3\ \text{eV}$。比平衡值 $E(2.45)=-0.367\ \text{Ry}$ 略高（因偏離極小），方向正確。
+
+**範例 C（驗證平衡點 $r_s=2.45$ 是極小，二階導）**：$E'(r_s)=-\dfrac{4.42}{r_s^3}+\dfrac{1.80}{r_s^2}$，$E''(r_s)=\dfrac{13.26}{r_s^4}-\dfrac{3.60}{r_s^3}=\dfrac{13.26-3.60 r_s}{r_s^4}$。在 $r_s=2.45$：分子 $13.26-3.60\times2.45=13.26-8.82=4.44>0$ → $E''>0$，確為極小（不是極大）✓。
+
+**範例 D（改係數的假想題）**：若庫侖能改為 $-2.40/r_s$（吸引更強），平衡點 $\dfrac{dE}{dr_s}=-\dfrac{4.42}{r_s^3}+\dfrac{2.40}{r_s^2}=0\Rightarrow r_s=\dfrac{4.42}{2.40}=1.84$（更小、更密）。代回 $E=\dfrac{2.21}{1.84^2}-\dfrac{2.40}{1.84}=0.653-1.304=-0.651\ \text{Ry}=-8.9\ \text{eV}$——吸引越強，平衡越擠、結合越深。通式：$E=\dfrac{a}{r_s^2}-\dfrac{b}{r_s}$ 的極小在 $r_s=2a/b$，$E_{\min}=-\dfrac{b^2}{4a}$。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 270" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="55" y1="150" x2="445" y2="150" stroke="#888" stroke-width="1.2"/>
+<line x1="55" y1="40" x2="55" y2="250" stroke="#333" stroke-width="1.5"/>
+<text x="448" y="146" fill="#888">r_s</text>
+<text x="20" y="50" fill="#333">E (Ry)</text>
+<text x="48" y="146" text-anchor="end" font-size="10.5" fill="#888">0</text>
+<polyline points="80,40 95,72 115,100 140,120 170,133 205,140 245,143 290,143 340,142 400,140" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<text x="120" y="58" font-size="11.5" fill="#1a4d7c">動能 +2.21/r_s²（壓縮代價）</text>
+<polyline points="80,240 100,222 125,206 155,193 195,182 245,174 305,169 375,165 440,162" fill="none" stroke="#c0392b" stroke-width="2.2"/>
+<text x="300" y="225" font-size="11.5" fill="#c0392b">庫侖能 −1.80/r_s（吸引）</text>
+<polyline points="80,75 95,108 115,135 140,153 165,165 195,173 225,177 245,178 275,178 320,176 375,173 440,169" fill="none" stroke="#2e8b2e" stroke-width="2.8"/>
+<text x="320" y="150" font-size="12.5" font-weight="bold" fill="#2e8b2e">總能 E = 2.21/r_s² − 1.80/r_s</text>
+<circle cx="245" cy="178" r="4.5" fill="#e67e22"/>
+<line x1="245" y1="178" x2="245" y2="150" stroke="#e67e22" stroke-width="1.1" stroke-dasharray="3,3"/>
+<text x="245" y="165" text-anchor="middle" font-size="10" fill="#888"> </text>
+<text x="245" y="195" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#e67e22">極小 r_s = 2.45</text>
+<text x="245" y="210" text-anchor="middle" font-size="10.5" fill="#e67e22">E ≈ −0.37 Ry</text>
+<line x1="55" y1="178" x2="245" y2="178" stroke="#e67e22" stroke-width="0.8" stroke-dasharray="2,3"/>
+<text x="100" y="252" text-anchor="middle" font-size="10.5" fill="#888">小 r_s：動能贏（斥）</text>
+<text x="380" y="252" text-anchor="middle" font-size="10.5" fill="#888">大 r_s：庫侖贏（弱）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 8：內聚能的能量競爭</b>。每電子能量 = <b style="color:#1a4d7c">動能 +2.21/r_s²</b>（壓縮代價，越擠越貴）＋ <b style="color:#c0392b">庫侖能 −1.80/r_s</b>（離子吸引）。兩者相加的<b style="color:#2e8b2e">總能 E(r_s)</b>有一個<b style="color:#e67e22">極小，由 dE/dr_s=0 解出 r_s = 2(2.21)/1.80 = 2.45</b>（Step 10）。代回得 E ≈ −0.37 Ry ≈ −5 eV。但孤立 H 原子束縛能 −1 Ry = −13.6 eV 更低 → <b>此均勻電子氣金屬相對分離 H 原子不穩定</b>。這是凝聚態最經典的「動能 vs 庫侖」拔河模型。</figcaption>
+</figure>
+
+---
+
+### 習題 9：靜態磁電導張量（Static magnetoconductivity tensor）
+
+**題目（English, Kittel Prob. 6.9）**：For the drift velocity theory of (51), show that the static current density can be written in matrix form as
+
+$$
+\mathbf j=\frac{\sigma_0}{1+(\omega_c\tau)^2}
+\begin{pmatrix}1 & -\omega_c\tau & 0\\ \omega_c\tau & 1 & 0\\ 0 & 0 & 1+(\omega_c\tau)^2\end{pmatrix}\mathbf E ,
+$$
+
+with $\sigma_0=ne^2\tau/m$. In the high magnetic field limit of $\omega_c\tau\gg1$, show that $\sigma_{yx}\to nec/B$. In this limit $\sigma_{xx}\to0$, to order $1/\omega_c\tau$. The quantity $\sigma_{yx}$ is called the Hall conductivity.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+對 (51) 的漂移速度理論，證明靜態（$\omega=0$）電流密度可寫成矩陣形式
+
+$$
+\mathbf j=\frac{\sigma_0}{1+(\omega_c\tau)^2}
+\begin{pmatrix}1 & -\omega_c\tau & 0\\ \omega_c\tau & 1 & 0\\ 0 & 0 & 1+(\omega_c\tau)^2\end{pmatrix}\mathbf E
+$$
+
+並在高磁場極限 $\omega_c\tau\gg1$ 證明 $\sigma_{yx}\to nec/B$（霍爾電導率，Hall conductivity），且 $\sigma_{xx}\to0$（到 $1/\omega_c\tau$ 階）。$\sigma_0=ne^2\tau/m$。
+
+</details>
+
+**Step 1：寫靜態（$d\mathbf v/dt=0$）含磁場漂移方程。** $\mathbf B=B\hat z$，電荷 $-e$（高斯制）：
+
+$$
+m\frac{\mathbf v}{\tau}=-e\mathbf E-\frac{e}{c}\mathbf v\times\mathbf B
+$$
+
+**Step 2：取分量（$\mathbf v\times B\hat z=(v_yB,-v_xB,0)$），並用 $\omega_c=eB/mc$。**
+
+$$
+\frac{v_x}{\tau}=-\frac{e}{m}E_x-\omega_c v_y,\qquad
+\frac{v_y}{\tau}=-\frac{e}{m}E_y+\omega_c v_x,\qquad
+\frac{v_z}{\tau}=-\frac{e}{m}E_z
+$$
+
+**Step 3：整理成線性方程組（乘 $\tau$）。**
+
+$$
+v_x+\omega_c\tau\,v_y=-\frac{e\tau}{m}E_x,\qquad
+-\omega_c\tau\,v_x+v_y=-\frac{e\tau}{m}E_y
+$$
+
+**Step 4：解二元一次方程。** 矩陣 $\begin{pmatrix}1&\omega_c\tau\\-\omega_c\tau&1\end{pmatrix}$ 的行列式 $=1+(\omega_c\tau)^2$，逆矩陣 $=\dfrac{1}{1+(\omega_c\tau)^2}\begin{pmatrix}1&-\omega_c\tau\\ \omega_c\tau&1\end{pmatrix}$：
+
+$$
+\begin{pmatrix}v_x\\v_y\end{pmatrix}
+=\frac{-e\tau/m}{1+(\omega_c\tau)^2}
+\begin{pmatrix}1&-\omega_c\tau\\ \omega_c\tau&1\end{pmatrix}
+\begin{pmatrix}E_x\\E_y\end{pmatrix}
+$$
+
+**Step 5：電流 $\mathbf j=n(-e)\mathbf v$，且 $\sigma_0=ne^2\tau/m$。** 把 $n(-e)\times(-e\tau/m)=ne^2\tau/m=\sigma_0$ 提出：
+
+$$
+\begin{pmatrix}j_x\\j_y\end{pmatrix}
+=\frac{\sigma_0}{1+(\omega_c\tau)^2}
+\begin{pmatrix}1&-\omega_c\tau\\ \omega_c\tau&1\end{pmatrix}
+\begin{pmatrix}E_x\\E_y\end{pmatrix}
+$$
+
+而 $z$ 分量不受磁場影響：$j_z=\sigma_0 E_z$。合併即得題目矩陣。
+
+$$
+\boxed{\mathbf j=\frac{\sigma_0}{1+(\omega_c\tau)^2}
+\begin{pmatrix}1 & -\omega_c\tau & 0\\ \omega_c\tau & 1 & 0\\ 0 & 0 & 1+(\omega_c\tau)^2\end{pmatrix}\mathbf E}
+$$
+
+**Step 6：高場極限 $\omega_c\tau\gg1$ 的 $\sigma_{yx}$。** 由矩陣，$\sigma_{yx}=\dfrac{\sigma_0\,\omega_c\tau}{1+(\omega_c\tau)^2}\approx\dfrac{\sigma_0\,\omega_c\tau}{(\omega_c\tau)^2}=\dfrac{\sigma_0}{\omega_c\tau}$。代 $\sigma_0=ne^2\tau/m$、$\omega_c=eB/mc$：
+
+$$
+\sigma_{yx}\approx\frac{ne^2\tau/m}{(eB/mc)\tau}=\frac{ne^2\tau}{m}\cdot\frac{mc}{eB\tau}=\frac{nec}{B}
+$$
+
+$$
+\boxed{\sigma_{yx}\to\frac{nec}{B}\quad(\omega_c\tau\gg1)}
+$$
+
+**Step 7：$\sigma_{xx}$ 的高場極限。**
+
+$$
+\sigma_{xx}=\frac{\sigma_0}{1+(\omega_c\tau)^2}\approx\frac{\sigma_0}{(\omega_c\tau)^2}\sim\frac{1}{(\omega_c\tau)^2}\to 0
+$$
+
+到 $1/\omega_c\tau$ 階為 $0$。
+
+$$
+\boxed{\sigma_{xx}\to 0\ \text{（到 }1/\omega_c\tau\text{ 階）}}
+$$
+
+> **重點**：高磁場下對角電導 $\sigma_{xx}\to0$，但非對角的霍爾電導 $\sigma_{yx}=nec/B$ 與 $\tau$ 無關——這是量子霍爾效應前身的古典版。$\sigma_{yx}$ 只看載子密度 $n$ 與磁場 $B$。
+
+<details>
+<summary><b>📝 更多範例（點開）：霍爾電導／霍爾係數的數值與變化題</b></summary>
+
+**範例 A（霍爾係數 $R_H=-1/nec$）**：高場 $\sigma_{yx}=nec/B$，而霍爾係數定義 $R_H=\dfrac{E_y}{j_x B}$。對單一載子，$R_H=-\dfrac{1}{nec}$（電子電荷 $-e$ 給負號）。Na 的 $n=2.65\times10^{22}\ \text{cm}^{-3}$，高斯制 $e=4.8\times10^{-10}$、$c=3\times10^{10}\ \text{cm/s}$：$R_H=-\dfrac{1}{2.65\times10^{22}\times4.8\times10^{-10}\times3\times10^{10}}=-\dfrac{1}{3.82\times10^{23}}=-2.6\times10^{-24}\ \text{(高斯制單位)}$。$R_H<0$ 確認載子帶負電。
+
+**範例 B（高場 $\sigma_{yx}$ 數值）**：取 $n=10^{22}\ \text{cm}^{-3}$、$B=10^4\ \text{G}=1\ \text{T}$。$\sigma_{yx}=\dfrac{nec}{B}=\dfrac{10^{22}\times4.8\times10^{-10}\times3\times10^{10}}{10^4}=\dfrac{1.44\times10^{23}}{10^4}=1.44\times10^{19}\ \text{s}^{-1}$（高斯制電導單位）。注意它與 $\tau$、$m$ 完全無關，只靠 $n,B$。
+
+**範例 C（判斷是否在高場區）**：高場條件 $\omega_c\tau\gg1$。取 $B=1\ \text{T}$、$m=$ 電子質量、$\tau=3\times10^{-14}\ \text{s}$。$\omega_c=\dfrac{eB}{mc}$（高斯制，$B=10^4\ \text{G}$）$=\dfrac{4.8\times10^{-10}\times10^4}{9.11\times10^{-28}\times3\times10^{10}}=\dfrac{4.8\times10^{-6}}{2.73\times10^{-17}}=1.76\times10^{11}\ \text{s}^{-1}$。$\omega_c\tau=1.76\times10^{11}\times3\times10^{-14}=5.3\times10^{-3}\ll1$ → 室溫弱場，尚未到高場極限（要更低溫更純的樣品讓 $\tau$ 變大）。
+
+**範例 D（霍爾角 $\tan\theta_H=\omega_c\tau$）**：由矩陣，$\dfrac{\sigma_{yx}}{\sigma_{xx}}=\dfrac{\sigma_0\omega_c\tau/(1+(\omega_c\tau)^2)}{\sigma_0/(1+(\omega_c\tau)^2)}=\omega_c\tau$，即霍爾角 $\tan\theta_H=\omega_c\tau$。承範例 C 的 $\omega_c\tau=5.3\times10^{-3}$，$\theta_H\approx5.3\times10^{-3}\ \text{rad}=0.3^\circ$——弱場下偏轉很小；要大霍爾角需 $\omega_c\tau\gtrsim1$。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="55" y1="205" x2="445" y2="205" stroke="#333" stroke-width="1.5"/>
+<line x1="55" y1="205" x2="55" y2="30" stroke="#333" stroke-width="1.5"/>
+<text x="448" y="221" fill="#333">ω_c τ</text>
+<text x="20" y="44" fill="#333">σ</text>
+<line x1="50" y1="55" x2="120" y2="55" stroke="#888" stroke-width="1"/>
+<text x="44" y="59" text-anchor="end" font-size="10.5" fill="#888">σ₀</text>
+<polyline points="55,55 75,62 100,80 130,107 165,135 205,158 250,174 300,185 355,192 440,198" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<circle cx="55" cy="55" r="3.5" fill="#1a4d7c"/>
+<text x="150" y="58" font-size="11.5" fill="#1a4d7c">σ_xx = σ₀/(1+(ω_cτ)²)</text>
+<text x="270" y="160" font-size="11" fill="#1a4d7c">高場 → 0</text>
+<polyline points="55,205 80,160 105,135 135,120 170,115 205,118 245,126 290,138 340,151 390,162 440,171" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<text x="230" y="105" font-size="11.5" fill="#c0392b">σ_yx = σ₀·ω_cτ/(1+(ω_cτ)²)</text>
+<line x1="155" y1="205" x2="155" y2="113" stroke="#2e8b2e" stroke-width="1.1" stroke-dasharray="3,3"/>
+<text x="155" y="220" text-anchor="middle" font-size="11" fill="#2e8b2e">ω_cτ = 1</text>
+<text x="370" y="148" font-size="10.5" fill="#888">σ_yx → nec/B（與 τ 無關）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 9：靜態磁電導張量分量 vs ω_cτ</b>。解含磁場的漂移方程（Step 4 解 2×2 線性方程組）得<b style="color:#1a4d7c">對角 σ_xx = σ₀/(1+(ω_cτ)²)</b>，隨磁場單調下降，高場 ω_cτ≫1 時 ∝ 1/(ω_cτ)² <b>→ 0</b>（Step 7）。<b style="color:#c0392b">非對角霍爾電導 σ_yx = σ₀·ω_cτ/(1+(ω_cτ)²)</b> 在 <b style="color:#2e8b2e">ω_cτ=1</b> 達峰，高場時 <b>σ_yx → nec/B 與 τ 完全無關</b>（Step 6）——只看載子密度 n 與磁場 B。這正是量子霍爾效應的古典前身。</figcaption>
+</figure>
+
+---
+
+### 習題 10：最大表面電阻（Maximum surface resistance）
+
+**題目（English, Kittel Prob. 6.10）**：Consider a square sheet of side $L$, thickness $d$, and electrical resistivity $\rho$. The resistance measured between opposite edges of the sheet is called the surface resistance: $R_{\text{sq}}=\rho L/Ld=\rho/d$, which is independent of the area $L^2$ of the sheet. ($R_{\text{sq}}$ is called the resistance per square and is expressed in ohms per square, because $\rho/d$ has the dimensions of ohms.) If we express $\rho$ by (44), then $R_{\text{sq}}=m/nde^2\tau$. Suppose now that the minimum value of the collision time is determined by scattering from the surfaces of the sheet, so that $\tau=d/v_F$, where $v_F$ is the Fermi velocity. Thus the maximum surface resistivity is $R_{\text{sq}}=mv_F/nd^2e^2$. Show for a monatomic metal sheet one atom in thickness that $R_{\text{sq}}=\hbar/e^2\approx 4.1\ \text{k}\Omega$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+邊長 $L$、厚度 $d$、電阻率 $\rho$ 的方形薄片，對邊量得的表面電阻（surface resistance，每方塊電阻）$R_{\text{sq}}=\rho/d$，與面積 $L^2$ 無關。用 $\rho=m/ne^2\tau$ 得 $R_{\text{sq}}=m/nde^2\tau$。若碰撞時間下限由表面散射決定 $\tau=d/v_F$，則最大值 $R_{\text{sq}}=mv_F/nd^2e^2$。證明對「一原子厚」的單原子金屬片，$R_{\text{sq}}=\hbar/e^2\approx 4.1\ \text{k}\Omega$（高斯制 $\hbar/e^2$ 換到 SI 為 $h/e^2$ 的 $1/2\pi$ ... 見下）。
+
+</details>
+
+**Step 1：寫一原子厚的條件。** 一原子厚 $\Rightarrow$ 每邊一個原子，數密度 $n\approx1/d^3$（每原子占體積 $d^3$，貢獻一個電子）。代入 $R_{\text{sq}}=mv_F/nd^2e^2$：
+
+$$
+R_{\text{sq}}=\frac{mv_F}{(1/d^3)\,d^2 e^2}=\frac{mv_F d}{e^2}
+$$
+
+**Step 2：用德布羅意關係（de Broglie）。** 若電子波長 $\approx d$（一原子尺度），則 $mv_F d\approx mv_F\lambda=h=2\pi\hbar$（$p\lambda=h$）。代入：
+
+$$
+R_{\text{sq}}=\frac{mv_F d}{e^2}\approx\frac{\hbar}{e^2}\quad(\text{以量級計，丟掉 }2\pi)
+$$
+
+**Step 3：算數值（高斯制 $e^2$ 的 SI 換算）。** 用 $\dfrac{\hbar}{e^2}$ 在高斯制其實對應 SI 的 $\dfrac{\hbar}{e^2/4\pi\varepsilon_0}=\dfrac{4\pi\varepsilon_0\hbar}{e^2}$。直接算量綱正確的版本——馮·克利青常數（von Klitzing）$\dfrac{h}{e^2}=25.8\ \text{k}\Omega$，故
+
+$$
+\frac{\hbar}{e^2}=\frac{h}{2\pi e^2}=\frac{25.8\ \text{k}\Omega}{6.28}=4.1\ \text{k}\Omega
+$$
+
+$$
+\boxed{R_{\text{sq}}\approx\frac{\hbar}{e^2}\approx 4.1\ \text{k}\Omega}
+$$
+
+> **重點**：單原子厚金屬片的最大方塊電阻是個只含基本常數 $\hbar/e^2$ 的「自然單位」，與材料細節無關，量級 $\sim4\ \text{k}\Omega$。它正是後來量子化電阻 $h/e^2=25.8\ \text{k}\Omega$ 的雛形。陷阱：$\hbar/e^2$（高斯）vs $h/e^2$（SI/量子霍爾）差一個 $2\pi$，本題答案是 $\hbar/e^2=h/2\pi e^2\approx4.1\ \text{k}\Omega$。
+
+---
+
+## ✅ 本章計算題自我檢核
+
+做完上面所有題後，你應該能「不看解答」獨立完成下列每一項：
+
+1. 給定金屬電子密度 $n$，從頭算出 $k_F$、$\varepsilon_F$（eV）、$T_F$、$v_F$，並驗證量級（$\varepsilon_F\sim$ 數 eV、$T_F\sim10^4$ K）。
+2. 推導 $U_0=\frac{3}{5}N\varepsilon_F$，並由此導出 $p=\frac{2}{3}U_0/V$、$B=\frac{5}{3}p$。
+3. 寫出 1D／2D／3D 態密度對能量的依賴（$\varepsilon^{-1/2}$／常數／$\varepsilon^{+1/2}$），並自己推出 2D 的 $D=m/\pi\hbar^2$。
+4. 用 2D 常數 DOS 解出二維化學勢的解析式，並檢查 $T\to0$ 極限給回 $\varepsilon_F$。
+5. 用 $\varepsilon_F\propto n^{2/3}$、$k_F\propto n^{1/3}$ 在不重算積分下做不同金屬／天體的比例估算（白矮星、脈衝星、相對論極限 $\varepsilon_F\approx\hbar c\,n^{1/3}$）。
+6. 對 He³ 之類非電子費米子，記得用「對的質量」算 $\varepsilon_F$、$T_F$。
+7. 設 $e^{-i\omega t}$ 解漂移方程，得到 $\sigma(\omega)=\sigma(0)/(1-i\omega\tau)$，並討論 $\omega\tau\gg1$ 行為。
+8. 含磁場的漂移方程解出磁電導張量（靜態與動態），導出霍爾電導 $\sigma_{yx}=nec/B$。
+9. 用「動能 $\propto1/r_s^2$＋庫侖能 $\propto-1/r_s$」做內聚能能量極小，求平衡 $r_s$ 並判斷穩定性。
+10. 記住 Wiedemann–Franz 勞侖茲數 $L=\frac{\pi^2}{3}(k_B/e)^2=2.45\times10^{-8}\ \text{W·}\Omega\text{/K}^2$ 與量子電阻 $h/e^2=25.8\ \text{k}\Omega$。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

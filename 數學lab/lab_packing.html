@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab ② Packing fraction</title>
+<link rel="stylesheet" href="../模擬/shared.css">
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 數學 Lab</a>
+  <a href="lab_reciprocal.html">① 倒基</a>
+  <a class="here" href="lab_packing.html">② packing</a>
+  <a href="lab_structure_factor.html">③ 結構因子</a>
+</div>
+
+<h1>② 填充率 Packing fraction（sc / bcc / fcc）</h1>
+<div class="goal">
+  <strong>f = n·(4/3πr³)/a³</strong>。下方可切換結構看<strong>硬球相切示意 + 數值</strong>，並附計算範例。
+</div>
+<div class="lab-progress" id="progress"></div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 1</span>通用公式 + 互動總覽</h3>
+  <div class="eqbox">f = n · (4/3 π r³) / a³ ，&nbsp; 2r = 最近鄰距離</div>
+  <div class="viz-panel">
+    <div class="viz-title">互動：選結構 · 調 a · 看 f 與 r</div>
+    <div class="switch-row" style="margin-bottom:0.5em">
+      <button type="button" id="pkSc" class="on">sc</button>
+      <button type="button" id="pkBcc">bcc</button>
+      <button type="button" id="pkFcc">fcc</button>
+    </div>
+    <svg id="vizPack" viewBox="0 0 520 300"></svg>
+    <div class="viz-controls">
+      <div>
+        <label>立方邊長 a（任意單位） <span class="v" data-val="aPack">1</span></label>
+        <input id="aPack" type="range" min="0.8" max="2" step="0.05" value="1" data-digits="2">
+      </div>
+    </div>
+    <div class="viz-kpi" id="packKpi"></div>
+  </div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>n 怎麼數：sc 角 8×1/8=1；bcc +體心=2；fcc 角1+面心 6×1/2=4。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>f 與 a 無關！r∝a，體積比無量綱，調 a 只改絕對大小。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>鑽石 packing≈0.34：fcc+2 原子 basis，鍵長約束使球更「鬆」。</div>
+  </div>
+  <div class="blank-row">
+    <span>r 與 a 由什麼決定？</span>
+    <input id="p1" type="text" data-answers="最近鄰|相切|nearest|nearest neighbor|硬球相切" placeholder="？">
+    <button type="button" data-check="p1" data-answers="最近鄰|相切|nearest|nearest neighbor|硬球相切">檢查</button>
+    <div class="fb" id="p1Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 2</span>sc：2r=a</h3>
+  <div class="eqbox">f_sc = π/6 ≈ 0.5236</div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A · 代數字</div>a=2，r=1，n=1 → f=4π/3 / 8 = π/6。</div>
+    <div class="ex-card"><div class="ex-h">範例 B · 空隙</div>未填滿比例 1−π/6≈0.476（約 48% 空隙）。</div>
+    <div class="ex-card"><div class="ex-h">範例 C · 考古</div>「證明 sc packing=0.52」= 推 π/6 並約分。</div>
+  </div>
+  <div class="blank-row">
+    <span>f_sc 精確 =</span>
+    <input id="p2" type="text" data-answers="pi/6|π/6" placeholder="π/6">
+    <button type="button" data-check="p2" data-answers="pi/6|π/6">檢查</button>
+    <div class="fb" id="p2Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 3</span>bcc：體對角</h3>
+  <div class="eqbox">體對角 = a√3 = 4r ⇒ r = √3 a/4 ， f = π√3/8 ≈ 0.6802</div>
+  <div class="viz-panel">
+    <div class="viz-title">SVG：體對角上兩個硬球相切</div>
+    <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="420" height="200" fill="#fcfdff"/>
+      <rect x="80" y="40" width="120" height="120" fill="none" stroke="#888" stroke-width="1.5"/>
+      <circle cx="80" cy="160" r="28" fill="rgba(26,77,124,0.25)" stroke="#1a4d7c"/>
+      <circle cx="200" cy="40" r="28" fill="rgba(26,77,124,0.25)" stroke="#1a4d7c"/>
+      <circle cx="140" cy="100" r="28" fill="rgba(192,57,43,0.3)" stroke="#c0392b"/>
+      <line x1="80" y1="160" x2="200" y2="40" stroke="#c47a12" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="230" y="90" fill="#234" font-size="13">角↔體心 = a√3 / 2 = 2r</text>
+      <text x="230" y="115" fill="#567" font-size="12">整條體對角 = 4r = a√3</text>
+    </svg>
+  </div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>√(1²+1²+1²)=√3，體對角長 a√3。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>角到體心是一半：a√3/2=2r。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>n=2 代入得 π√3/8≈0.68。</div>
+  </div>
+  <div class="blank-row">
+    <span>體對角 = a 的幾倍？</span>
+    <input id="p3" type="text" data-answers="sqrt(3)|√3|sqrt3" placeholder="√3">
+    <button type="button" data-check="p3" data-answers="sqrt(3)|√3|sqrt3">檢查</button>
+    <div class="fb" id="p3Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 4</span>fcc：面對角</h3>
+  <div class="eqbox">面對角 a√2 = 4r ⇒ r = a√2/4 ， f = π/(3√2) ≈ 0.7405</div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>面心到角：最近鄰，沿面對角一半。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>理想 hcp 也是 0.74（最密堆積）。</div>
+    <div class="ex-card"><div class="ex-h">範例 C · 比較</div>fcc 0.74 &gt; bcc 0.68 &gt; sc 0.52；金屬常 fcc/hcp/bcc。</div>
+  </div>
+  <div class="blank-row">
+    <span>f_fcc ≈（兩位小數）</span>
+    <input id="p4" type="text" data-answers="0.74|0.740|0.7405" placeholder="0.74">
+    <button type="button" data-check="p4" data-answers="0.74|0.740|0.7405">檢查</button>
+    <div class="fb" id="p4Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 5</span>對照表</h3>
+  <table class="tiny">
+    <tr><th></th><th>n</th><th>2r</th><th>f</th></tr>
+    <tr><td>sc</td><td>1</td><td>a</td><td>π/6≈0.52</td></tr>
+    <tr><td>bcc</td><td>2</td><td>a√3/2</td><td>π√3/8≈0.68</td></tr>
+    <tr><td>fcc</td><td>4</td><td>a/√2</td><td>π/(3√2)≈0.74</td></tr>
+  </table>
+  <div class="choice-row">
+    <span style="width:100%">填充率最高？</span>
+    <button type="button" data-choice="0">sc</button>
+    <button type="button" data-choice="0">bcc</button>
+    <button type="button" data-choice="1" data-okmsg="✓ fcc / 理想 hcp">fcc</button>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="done-banner" id="doneBanner">
+  <h3>完成</h3>
+  <p><a href="lab_structure_factor.html">③ 結構因子</a></p>
+</div>
+<div class="nav-steps">
+  <button type="button" id="btnPrev">← 上一步</button>
+  <button type="button" id="btnNext" class="primary">下一步 →</button>
+  <button type="button" id="btnReveal">一次展開全部</button>
+  <span class="meta" id="stepMeta"></span>
+</div>
+<footer>Lab ② packing + 互動硬球</footer>
+<script src="lab.js"></script>
+<script src="viz.js"></script>
+<script>
+new MathLab.StepLab({});
+(function () {
+  let mode = "sc";
+  const svg = document.getElementById("vizPack");
+  const readA = LabViz.bindRange("aPack", draw);
+  function setMode(m, btn) {
+    mode = m;
+    ["pkSc","pkBcc","pkFcc"].forEach((id) => document.getElementById(id).classList.remove("on"));
+    btn.classList.add("on");
+    draw();
+  }
+  document.getElementById("pkSc").onclick = function () { setMode("sc", this); };
+  document.getElementById("pkBcc").onclick = function () { setMode("bcc", this); };
+  document.getElementById("pkFcc").onclick = function () { setMode("fcc", this); };
+
+  function draw() {
+    const a = readA();
+    let n, r, f, title;
+    if (mode === "sc") {
+      n = 1; r = a / 2; f = Math.PI / 6; title = "sc：邊相切";
+    } else if (mode === "bcc") {
+      n = 2; r = (Math.sqrt(3) * a) / 4; f = (Math.PI * Math.sqrt(3)) / 8; title = "bcc：體對角相切";
+    } else {
+      n = 4; r = (Math.sqrt(2) * a) / 4; f = Math.PI / (3 * Math.sqrt(2)); title = "fcc：面對角相切";
+    }
+    LabViz.clear(svg);
+    svg.setAttribute("viewBox", "0 0 520 300");
+    LabViz.el(svg, "rect", { x: 0, y: 0, width: 520, height: 300, fill: "#fcfdff" });
+    LabViz.el(svg, "text", { x: 16, y: 22, fill: "#1a4d7c", "font-size": 13, "font-weight": 700 }, title);
+
+    // 2D schematic of conventional square face
+    const S = 140 * a;
+    const x0 = 60, y0 = 60;
+    LabViz.el(svg, "rect", {
+      x: x0, y: y0, width: S, height: S,
+      fill: "none", stroke: "#888", "stroke-width": 1.5,
+    });
+    const pr = (r / a) * (S / 1) * 0.95; // scale r relative to cell
+    const rr = Math.min(pr, S * 0.48);
+
+    function atom(cx, cy, col) {
+      LabViz.el(svg, "circle", {
+        cx, cy, r: rr,
+        fill: col, stroke: "#333", "stroke-width": 1, opacity: 0.75,
+      });
+    }
+    // corners
+    atom(x0, y0, "rgba(26,77,124,0.45)");
+    atom(x0 + S, y0, "rgba(26,77,124,0.45)");
+    atom(x0, y0 + S, "rgba(26,77,124,0.45)");
+    atom(x0 + S, y0 + S, "rgba(26,77,124,0.45)");
+    if (mode === "bcc") {
+      atom(x0 + S / 2, y0 + S / 2, "rgba(192,57,43,0.5)");
+      LabViz.el(svg, "line", {
+        x1: x0, y1: y0 + S, x2: x0 + S, y2: y0,
+        stroke: "#c47a12", "stroke-width": 1.5, "stroke-dasharray": "4 3",
+      });
+    }
+    if (mode === "fcc") {
+      atom(x0 + S / 2, y0, "rgba(30,122,70,0.5)");
+      atom(x0, y0 + S / 2, "rgba(30,122,70,0.5)");
+      atom(x0 + S, y0 + S / 2, "rgba(30,122,70,0.5)");
+      atom(x0 + S / 2, y0 + S, "rgba(30,122,70,0.5)");
+      LabViz.el(svg, "line", {
+        x1: x0, y1: y0, x2: x0 + S, y2: y0,
+        stroke: "#c47a12", "stroke-width": 1.5, "stroke-dasharray": "4 3",
+      });
+    }
+    if (mode === "sc") {
+      LabViz.el(svg, "line", {
+        x1: x0, y1: y0 + S, x2: x0 + S, y2: y0 + S,
+        stroke: "#c47a12", "stroke-width": 2,
+      });
+      LabViz.el(svg, "text", { x: x0 + S / 2 - 10, y: y0 + S + 18, fill: "#c47a12", "font-size": 12 }, "2r=a");
+    }
+
+    // bar chart of f
+    const fMax = 0.8;
+    const barH = 160;
+    const bx = 360, by = 220;
+    LabViz.el(svg, "text", { x: bx - 20, y: 40, fill: "#555", "font-size": 12 }, "f");
+    [["sc", Math.PI / 6, "#1a4d7c"], ["bcc", Math.PI * Math.sqrt(3) / 8, "#c47a12"], ["fcc", Math.PI / (3 * Math.sqrt(2)), "#1e7a46"]].forEach((row, i) => {
+      const h = (row[1] / fMax) * barH;
+      const x = bx + i * 42;
+      LabViz.el(svg, "rect", {
+        x, y: by - h, width: 30, height: h,
+        fill: row[2], opacity: row[0] === mode ? 1 : 0.35,
+      });
+      LabViz.el(svg, "text", { x: x + 15, y: by + 16, fill: "#456", "font-size": 11, "text-anchor": "middle" }, row[0]);
+      LabViz.el(svg, "text", { x: x + 15, y: by - h - 6, fill: row[2], "font-size": 10, "text-anchor": "middle" }, row[1].toFixed(2));
+    });
+
+    document.getElementById("packKpi").innerHTML =
+      `<span>n=<b>${n}</b></span>` +
+      `<span>r=<b>${LabViz.fmt(r, 3)}</b></span>` +
+      `<span>f=<b>${LabViz.fmt(f, 4)}</b></span>` +
+      `<span>空隙 1−f=<b>${LabViz.fmt(1 - f, 3)}</b></span>`;
+  }
+  draw();
+})();
+</script>
+</body>
+</html>

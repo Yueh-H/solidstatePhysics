@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice set — Kittel Ch.1 / Atomic structure (handwritten)</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  :root{--blue:#1a4d7c;--blue2:#2b6ca0;--soft:#eef5fb;--border:#c5d5e5;--ink:#1c2733;--muted:#6b7c90;--ok:#1e7a46}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+       max-width:900px;margin:1.4em auto 5em;padding:0 1.15em;line-height:1.7;color:var(--ink);background:#fafafa}
+  h1{color:var(--blue);border-bottom:3px solid var(--blue);padding-bottom:.3em;font-size:1.4em}
+  h2{color:var(--blue);font-size:1.12em;margin:1.6em 0 .4em;border-bottom:1px solid #ddd;padding-bottom:.2em}
+  a{color:var(--blue2)}
+  .nav{font-size:.92em;margin:0 0 1em;display:flex;flex-wrap:wrap;gap:.5em}
+  .nav a{text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.3em .7em;color:#234}
+  .nav a:hover{background:var(--soft);border-color:var(--blue)}
+  .lede,.warn,.ok{border-radius:6px;padding:.8em 1em;margin:0 0 1em;font-size:.95em}
+  .lede{background:var(--soft);border-left:4px solid #6aa1d6}
+  .warn{background:#fff8ee;border-left:4px solid #e0b97a;color:#5c3d00}
+  .ok{background:#eef9ee;border-left:4px solid #9ccc9c;color:#1c4d1f}
+  .zh{display:none;margin:.45em 0 0;padding:.55em .75em;background:#f7f4ee;border-left:3px solid #c4a574;
+      border-radius:0 6px 6px 0;color:#5c4a2e;font-size:.92em}
+  body.show-zh .zh{display:block}
+  .toolbar{display:flex;flex-wrap:wrap;gap:.5em;margin:0 0 1em;position:sticky;top:0;z-index:20;
+           background:rgba(250,250,250,.94);padding:.45em 0;backdrop-filter:blur(6px);border-bottom:1px solid #e3eaf1}
+  .toolbar button{font:inherit;font-size:.9em;padding:.35em .9em;border:1px solid var(--border);background:#fff;border-radius:999px;cursor:pointer}
+  .toolbar button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .q{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1em 1.15em;margin:0 0 .85em}
+  .q .tag{display:inline-block;font-size:.75em;font-weight:700;padding:.08em .5em;border-radius:99px;border:1px solid var(--border);color:var(--blue);margin-right:.35em}
+  .q h3{margin:.1em 0 .45em;font-size:1.05em;color:var(--blue)}
+  .write{border:1px dashed #b7c9db;background:#f4f7fb;border-radius:8px;min-height:7.5em;margin:.5em 0;padding:.6em .8em;color:var(--muted);font-size:.88em}
+  .ans{margin-top:.5em;padding:.75em .9em;background:#f7fbf8;border:1px solid #c5ddc8;border-radius:8px}
+  body.hide-ans .ans{display:none}
+  .boxed{display:block;margin:.5em 0;padding:.45em .7em;border:2px solid var(--blue);border-radius:8px;font-weight:700;color:var(--blue)}
+  footer{color:#888;font-size:.85em;margin-top:2em;border-top:1px solid #ddd;padding-top:1em}
+  @media print{
+    .toolbar,.nav,.lede,.warn,.ok{display:none!important}
+    .write{min-height:9em}
+    body.hide-ans .ans{display:none!important}
+    body:not(.show-zh) .zh{display:none!important}
+    .q{break-inside:avoid}
+  }
+</style>
+</head>
+<body class="hide-ans">
+<div class="nav">
+  <a href="../index.html">← Home</a>
+  <a href="ch01_原子結構_默寫卡.html">Formula card</a>
+  <a href="../教材/課程指定參考書.html">Course refs</a>
+  <a href="../單元教學/unit01_晶體結構.html">Unit 01</a>
+</div>
+
+<h1>Practice set — handwritten, English paper</h1>
+
+<div class="ok">
+<b>Before the honeymoon you need Set A in 40 minutes on paper, not “finish all of Kittel Ch. 1”.</b>
+Atomic structure runs through week 4 (last lecture <b>Fri 2 Oct</b>). If the trip is still 11–29 Sep, you miss weeks 2–3 — so Set A is the real deadline. Full chapter wrap-up is 2 Oct, not boarding time.
+<div class="zh">蜜月前要完成的是 A 卷 6 題能限時手寫完，不是整章讀完。缺課的是 Week 2–3；整章收尾死線是 10/2。</div>
+</div>
+<div class="lede">
+Write in <b>English</b> (the course and quizzes are in English). Paper, pen, timer. Draw every figure by hand. Star a problem if you stall &gt; 3 min; finish the set, then uncover answers. Re-do only the starred ones.
+<div class="zh">用英文寫（課與 quiz 都是英文）。白紙、筆、限時。圖一定手畫。卡超過 3 分鐘打星跳下一題，整卷寫完再揭答案。</div>
+</div>
+<div class="warn">No Kittel while writing. Uncover answers only after the whole set.
+<div class="zh">寫的時候不准開 Kittel。整卷寫完才揭答案。</div>
+</div>
+
+<div class="toolbar">
+  <button type="button" id="btnZh">中文旁註</button>
+  <button type="button" id="btnHide" class="on">Hide answers</button>
+  <button type="button" id="btnShow">Show answers</button>
+  <button type="button" id="btnPrint">Print blank</button>
+</div>
+
+<h2>Set A · required · 40 min</h2>
+
+<div class="q" id="a1">
+  <h3><span class="tag">A1 · draw</span> Three cubic cells</h3>
+  <p>Sketch the conventional cubes of sc, bcc, and fcc. For each, write: $N$ (atoms per conventional cell), coordination number CN, and the contact direction ($2r$ or $4r$ equal to what?).</p>
+  <div class="zh">畫 sc、bcc、fcc 的慣用立方。每個寫：$N$（每胞原子數）、配位數 CN、原子沿哪個方向相切（$2r$ 或 $4r$ 等於什麼）。</div>
+  <div class="write">Leave blank — draw on paper</div>
+  <div class="ans">
+    sc: $N=1$, CN $=6$, contact along the cube edge $2r=a$.<br>
+    bcc: $N=8\times\tfrac18+1=2$, CN $=8$, contact along the body diagonal $4r=\sqrt3\,a$.<br>
+    fcc: $N=8\times\tfrac18+6\times\tfrac12=4$, CN $=12$, contact along the face diagonal $4r=\sqrt2\,a$.<br>
+    Corner atom counts as $\tfrac18$, face-centre $\tfrac12$, body-centre $1$.
+    <div class="zh">角 $\tfrac18$、面心 $\tfrac12$、體心 $1$。bcc 沿體對角；fcc 沿面對角。</div>
+  </div>
+</div>
+
+<div class="q" id="a2">
+  <h3><span class="tag">A2 · derive</span> Three packing fractions (derivation required)</h3>
+  <p>Treat atoms as hard spheres in contact. Write the definition of the packing fraction $\eta$, then derive $\eta$ for sc, bcc, and fcc (include $r$ in terms of $a$). Give the decimal values last. Do not quote the decimals only.</p>
+  <div class="zh">原子當硬球、彼此相切。寫出 $\eta$ 定義，推出 sc、bcc、fcc 的 $\eta$（含 $r$ 與 $a$）。最後才給小數。不准只背 0.52／0.68／0.74。</div>
+  <div class="write">Derive on paper</div>
+  <div class="ans">
+    $\eta=N\cdot\frac43\pi r^3/a^3$.<br>
+    sc: $r=a/2$ → $\eta=\pi/6\approx0.524$.<br>
+    bcc: $r=\sqrt3\,a/4$ → $\eta=\pi\sqrt3/8\approx0.680$.<br>
+    fcc: $r=\sqrt2\,a/4$ → $\eta=\pi/(3\sqrt2)=\pi\sqrt2/6\approx0.740$.
+    <span class="boxed">$\eta_{\mathrm{sc}}=\pi/6,\quad\eta_{\mathrm{bcc}}=\pi\sqrt3/8,\quad\eta_{\mathrm{fcc}}=\pi/(3\sqrt2)$</span>
+  </div>
+</div>
+
+<div class="q" id="a3">
+  <h3><span class="tag">A3 · Miller</span> Intercepts and $d_{hkl}$</h3>
+  <p>(a) A plane intercepts the axes at $4a_1$, $1a_2$, $2a_3$. What are its Miller indices?<br>
+     (b) What is the difference between the plane $(110)$ and the direction $[110]$? In a cubic crystal, are they perpendicular?<br>
+     (c) Cubic lattice, $a=3.61$ Å. Find $d_{200}$ and $d_{111}$.</p>
+  <div class="zh">(a) 截距 $4,1,2$ 的 Miller 指標？(b) 面 $(110)$ 與方向 $[110]$ 差在哪？立方晶裡垂直嗎？(c) $a=3.61$ Å，求 $d_{200}$、$d_{111}$。</div>
+  <div class="write">Write on paper</div>
+  <div class="ans">
+    (a) Reciprocals $\tfrac14,1,\tfrac12$ → multiply by 4 → <b>$(142)$</b>.<br>
+    (b) $(hkl)$ labels a plane, $[uvw]$ a direction. In the cubic system $[hkl]\perp(hkl)$, so yes $[110]\perp(110)$. Not true in a general crystal system.<br>
+    (c) $d_{hkl}=a/\sqrt{h^2+k^2+l^2}$. $d_{200}=a/2=1.805$ Å; $d_{111}=a/\sqrt3\approx2.08$ Å.
+    <div class="zh">手順：截距 → 取倒數 → 最小整數。立方才保證 $[hkl]\perp(hkl)$。</div>
+  </div>
+</div>
+
+<div class="q" id="a4">
+  <h3><span class="tag">A4 · trap</span> Is CsCl bcc?</h3>
+  <p>CsCl: Cs at the cube corners, Cl at the body centre (or swapped).<br>
+     (a) What is the Bravais lattice? What is the basis?<br>
+     (b) Why is it <b>not</b> bcc?<br>
+     (c) How many Cs and Cl per conventional cube?</p>
+  <div class="zh">CsCl：Cs 在角、Cl 在體心。(a) Bravais 是哪種？basis 是什麼？(b) 為什麼不是 bcc？(c) 每胞幾顆 Cs、Cl？</div>
+  <div class="write">Write on paper</div>
+  <div class="ans">
+    (a) Bravais lattice = <b>simple cubic (sc)</b>; basis = one Cs + one Cl.<br>
+    (b) bcc requires every lattice point (corner and centre) to be equivalent — same species, same environment. Here corner and centre are different atoms, so it is sc with a two-atom basis.<br>
+    (c) Cs: $8\times\tfrac18=1$; Cl: body centre $=1$. Ratio $1:1$.
+    <div class="zh">角與體心不同種 → 不是 bcc。看起來像 bcc，骨子裡是 sc + 兩原子 basis。</div>
+  </div>
+</div>
+
+<div class="q" id="a5">
+  <h3><span class="tag">A5 · numbers</span> Copper, fcc</h3>
+  <p>Cu is fcc with $a=3.61$ Å. Find (a) the nearest-neighbour distance $d_{\mathrm{nn}}$; (b) $d_{200}$; (c) the hard-sphere radius $r$. Include units.</p>
+  <div class="zh">Cu 為 fcc，$a=3.61$ Å。求 (a) 最近鄰 $d_{\mathrm{nn}}$；(b) $d_{200}$；(c) 硬球半徑 $r$。寫單位。</div>
+  <div class="write">Compute on paper</div>
+  <div class="ans">
+    (a) $d_{\mathrm{nn}}=a/\sqrt2=3.61/1.414\approx2.55$ Å.<br>
+    (b) $d_{200}=a/2=1.805$ Å.<br>
+    (c) $2r=d_{\mathrm{nn}}$ → $r\approx1.28$ Å (equivalently $r=\sqrt2\,a/4$).
+    <span class="boxed">$d_{\mathrm{nn}}\approx2.55$ Å, $d_{200}=1.805$ Å, $r\approx1.28$ Å</span>
+  </div>
+</div>
+
+<div class="q" id="a6">
+  <h3><span class="tag">A6 · geometry</span> Ideal hcp $c/a$</h3>
+  <p>Hard-sphere close packing with $2r=a$. Prove that the ideal hcp axial ratio is $c/a=\sqrt{8/3}\approx1.633$. Then: do hcp and fcc have the same packing fraction and CN? How do their stacking sequences differ?</p>
+  <div class="zh">硬球密堆，$2r=a$。證明理想 hcp 的 $c/a=\sqrt{8/3}$。hcp 與 fcc 的填充率、配位數是否相同？堆疊序差在哪？提示：正四面體。</div>
+  <div class="write">Prove on paper. Hint: regular tetrahedron.</div>
+  <div class="ans">
+    Three mutually touching spheres in the base (edge $a$); the next sphere sits in the hollow → four centres form a regular tetrahedron of edge $a$. Circumradius of the base triangle $R=a/\sqrt3$. Height $h=\sqrt{a^2-R^2}=a\sqrt{2/3}$. The $c$ axis spans two layers: $c=2h=a\sqrt{8/3}$.<br>
+    $\eta$ and CN: both hcp and fcc have $0.74$ and CN $=12$. Stacking: $ABAB\cdots$ (hcp) vs $ABCABC\cdots$ (fcc).
+    <span class="boxed">$c/a=\sqrt{8/3}\approx1.633$</span>
+  </div>
+</div>
+
+<h2>Set B · extra · 10–15 min each</h2>
+
+<div class="q" id="b1">
+  <h3><span class="tag">B1</span> Lattice constant from density</h3>
+  <p>Al is fcc, atomic mass $M=27.0\,\mathrm{g\,mol^{-1}}$, density $\rho=2.70\,\mathrm{g\,cm^{-3}}$. Find $a$ in Å. Take $N_A=6.02\times10^{23}$.</p>
+  <div class="zh">Al 為 fcc，$M=27.0$，$\rho=2.70$。求 $a$（Å）。</div>
+  <div class="write">Compute on paper</div>
+  <div class="ans">
+    $\rho=4M/(N_A a^3)$ → $a=(4M/(N_A\rho))^{1/3}$.<br>
+    $4M=108$, $N_A\rho\approx1.625\times10^{24}$, $a^3\approx6.65\times10^{-23}$, $a\approx4.05\times10^{-8}\,\mathrm{cm}=4.05$ Å.
+  </div>
+</div>
+
+<div class="q" id="b2">
+  <h3><span class="tag">B2</span> Primitive vectors of fcc (disguised)</h3>
+  <p>Take $\mathbf a_1=\frac a2(\hat x+\hat y),\ \mathbf a_2=\frac a2(\hat y+\hat z),\ \mathbf a_3=\frac a2(\hat z+\hat x)$.<br>
+     Find $|\mathbf a_i|$, the angle between them, and the primitive-cell volume. Which Bravais lattice is this? How many lattice points in the conventional cube?</p>
+  <div class="zh">這組向量是哪種 Bravais？等長嗎、夾角、原胞體積？慣用立方含幾個格點？</div>
+  <div class="write">Compute on paper</div>
+  <div class="ans">
+    $|\mathbf a_i|=\frac a2\sqrt2$. $\mathbf a_1\cdot\mathbf a_2=a^2/4$ → $\cos\theta=\frac12$, $\theta=60^\circ$.<br>
+    $V=|\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)|=a^3/4$. Four points per conventional cube → <b>fcc</b>.
+  </div>
+</div>
+
+<div class="q" id="b3">
+  <h3><span class="tag">B3 · quals style</span> Is diamond hard because it packs densely?</h3>
+  <p>Rank the packing fractions of sc, bcc, fcc, and diamond. What is the CN of diamond? Is the statement “diamond is hard because its packing fraction is highest” true? Why?</p>
+  <div class="zh">比較四種填充率。鑽石 CN？「鑽石很硬是因為 packing 最高」對不對？</div>
+  <div class="write">Write on paper</div>
+  <div class="ans">
+    $\eta$: fcc/hcp $0.74$ $>$ bcc $0.68$ $>$ sc $0.52$ $>$ diamond $\approx0.34$.<br>
+    Diamond CN $=4$. Hardness comes from directional covalent ($sp^3$ tetrahedral) bonds, <b>not</b> from dense packing — diamond is the emptiest of the four. (2020 quals spirit.)
+    <div class="zh">鑽石最鬆。硬度來自共價鍵，不是填滿。</div>
+  </div>
+</div>
+
+<div class="q" id="b4">
+  <h3><span class="tag">B4</span> Lattice $\times$ basis: NaCl and diamond</h3>
+  <p>For each: name the Bravais lattice and the basis. How many Na and Cl in the NaCl conventional cube? How many atoms in the diamond conventional cube?</p>
+  <div class="zh">各寫 Bravais + basis。NaCl 慣用立方幾顆 Na／Cl？diamond 慣用立方幾顆原子？</div>
+  <div class="write">Write on paper</div>
+  <div class="ans">
+    NaCl: fcc + basis (Na at $000$, Cl at $\tfrac12 00$). Conventional cube: 4 Na + 4 Cl.<br>
+    diamond: fcc + basis ($000$ and $\tfrac14\tfrac14\tfrac14$, same species). Conventional cube: 8 atoms.
+  </div>
+</div>
+
+<div class="q" id="b5">
+  <h3><span class="tag">B5</span> Tungsten, bcc</h3>
+  <p>W is bcc with $a=3.16$ Å. Find the hard-sphere radius $r$ and the nearest-neighbour distance.</p>
+  <div class="zh">W 為 bcc，$a=3.16$ Å。求 $r$ 與最近鄰距離。</div>
+  <div class="write">Compute on paper</div>
+  <div class="ans">
+    $4r=\sqrt3\,a$ → $r=\sqrt3\,a/4\approx1.37$ Å.<br>
+    $d_{\mathrm{nn}}=2r=\sqrt3\,a/2\approx2.74$ Å.
+  </div>
+</div>
+
+<div class="q" id="b6">
+  <h3><span class="tag">B6</span> Why no five-fold axes?</h3>
+  <p>In two sentences: which rotational orders are allowed in a periodic lattice? Why can a pentagon not tile the plane? How many Bravais lattices in 2D and in 3D?</p>
+  <div class="zh">允許哪些旋轉重數？五邊形為什麼鋪不滿？2D、3D 各幾種 Bravais？</div>
+  <div class="write">Write on paper</div>
+  <div class="ans">
+    Allowed orders: $1,2,3,4,6$. Five-fold: a regular pentagon cannot tile the plane, so a 5-fold rotation does not map the lattice onto itself. 5 types in 2D, 14 in 3D.
+  </div>
+</div>
+
+<footer>
+After Set A, send the starred problem numbers — next round is only those types, in English again.<br>
+2026-09-15 · PHYS7018 Week 1–4 Atomic structure
+<div class="zh">寫完 A 卷把打星的題號回來說。</div>
+</footer>
+<script>
+(function(){
+  var hide=document.getElementById('btnHide'), show=document.getElementById('btnShow'), zh=document.getElementById('btnZh');
+  function setHide(on){
+    document.body.classList.toggle('hide-ans', on);
+    hide.classList.toggle('on', on);
+    show.classList.toggle('on', !on);
+  }
+  hide.onclick=function(){ setHide(true); };
+  show.onclick=function(){ setHide(false); };
+  zh.onclick=function(){
+    document.body.classList.toggle('show-zh');
+    zh.classList.toggle('on', document.body.classList.contains('show-zh'));
+  };
+  document.getElementById('btnPrint').onclick=function(){ setHide(true); window.print(); };
+})();
+</script>
+</body>
+</html>

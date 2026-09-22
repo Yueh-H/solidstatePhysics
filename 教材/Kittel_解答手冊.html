@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>教材 — Kittel 8e — 解答手冊</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">← 教材目錄</a> &nbsp;·&nbsp; <a href="../考古題/導讀.html">導讀</a> &nbsp;·&nbsp; <a href="../考古題/單元整理.html">單元整理</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- source: Kittel C.- Introduction To Solid State Physics 8Th Edition - SOLUTION MANUAL.pdf -->
+
+## **CHAPTER 1** 
+
+ˆ ˆ ˆ ˆ ˆ ˆ 1. The vectors **x** + **y** + **z** and −− **x y** + **z** are in the directions of two body diagonals of a cube. If θ is the angle between them, their scalar product gives cos θ = –1/3, whence θ = cos − 11/3 = 90 °+ 19 ° 28' = 109 ° 28'. 
+
+2. The plane (100) is normal to the x axis. It intercepts the a'  axis at 2a' and the c'  axis at 2c' ; therefore the indices referred to the primitive axes are (101). Similarly, the plane (001) will have indices (011) when referred to primitive axes. 
+
+3. The central dot of the four is at distance 
+
+**==> picture [79 x 71] intentionally omitted <==**
+
+**==> picture [130 x 27] intentionally omitted <==**
+
+from each of the other three dots, as projected onto the basal plane. If the (unprojected) dots are at the center of spheres in contact, then 
+
+**==> picture [97 x 33] intentionally omitted <==**
+
+or 
+
+**==> picture [140 x 26] intentionally omitted <==**
+
+1-1 
+
+## **CHAPTER 2** 
+
+1. The crystal plane with Miller indices hk � is a plane defined by the points **a** 1[/h, ] **[a]** 2[/k, and ] **a** 3[/][ �] . (a) Two vectors that lie in the plane may be taken as **a** 1[/h – ] **[a]** 2[/k and ] **a** 1 / h − **a** 3 / � . But each of these vectors gives zero as its scalar product with **G** = h **a** 1 + k **a** 2 + � **a** 3 , so that **G** must be perpendicular to the plane ˆ ˆ ˆ hk � . (b) If **n** is the unit normal to the plane, the interplanar spacing is **n** ⋅ **a** 1/h . But **n** = **G** / | **G** | , ˆ ˆ ˆ whence d(hk � ) = G ⋅ **a** 1 / h| **G** | = 2 π / | G| . (c) For a simple cubic lattice **G** = (2 π / a)(h **x** + k **y** + � **z** ) , whence 
+
+**==> picture [276 x 139] intentionally omitted <==**
+
+**==> picture [55 x 25] intentionally omitted <==**
+
+**==> picture [243 x 100] intentionally omitted <==**
+
+**==> picture [106 x 125] intentionally omitted <==**
+
+(c) Six vectors in the reciprocal lattice are shown as solid lines. The broken lines are the perpendicular bisectors at the midpoints. The inscribed hexagon forms the first Brillouin Zone. 
+
+3. By definition of the primitive reciprocal lattice vectors 
+
+**==> picture [299 x 49] intentionally omitted <==**
+
+For the vector identity, see G. A. Korn and T. M. Korn, Mathematical handbook for scientists and engineers, McGraw-Hill, 1961, p. 147. 
+
+4. (a) This follows by forming 
+
+2-1 
+
+**==> picture [222 x 67] intentionally omitted <==**
+
+1 (b) The first zero in sin M ε occurs for ε = 2 π /M. That this is the correct consideration follows from 2 
+
+**==> picture [302 x 52] intentionally omitted <==**
+
+**==> picture [170 x 24] intentionally omitted <==**
+
+**==> picture [347 x 55] intentionally omitted <==**
+
+we take the lattice structure factor from (48), and for the basis 
+
+**==> picture [132 x 22] intentionally omitted <==**
+
+Now S(fcc) = 0 only if all indices are even or all indices are odd. If all indices are even the structure factor of the basis vanishes unless v1 + v2 + v3 = 4n, where n is an integer. For example, for the reflection (222) we have S(basis) = 1 + e[–i3][π] = 0, and this reflection is forbidden. 
+
+**==> picture [265 x 86] intentionally omitted <==**
+
+The integral is not difficult; it is given as Dwight 860.81. Observe that f = 1 for G = 0 and f ∝ 1/G[4] for Ga 0 >> 1. 
+
+1 7. (a) The basis has one atom A at the origin and one atom B at a. The single Laue equation 2 
+
+**a** ⋅∆ **k =** 2 π× (integer) defines a set of parallel planes in Fourier space. Intersections with a sphere are a set of circles, so that the diffracted beams lie on a set of cones. (b) S(n) = fA[ + f] B[ e][–i][π][n][. For n odd, S = f] A[ – ] 
+
+2-2 
+
+fB; for n even, S = fA + fB. (c) If fA = fB the atoms diffract identically, as if the primitive translation vector 1 1 were a and the diffraction condition ( **a** ⋅∆ **k** ) = 2 π × (integer). 2 2 
+
+2-3 
+
+## **CHAPTER 3** 
+
+**==> picture [272 x 14] intentionally omitted <==**
+
+**==> picture [435 x 33] intentionally omitted <==**
+
+fcc: U(R) = 2N ε [12.132( σ R )12 − 14.454( σ R)6 ]. At equilibrium R 06 = 1.679 σ 6, and U(R 0 ) = 2N ε ( − 4.305). Thus the cohesive energy ratio bcc/fcc = **0.956** , so that the fcc structure is more stable than the bcc. 
+
+**==> picture [325 x 48] intentionally omitted <==**
+
+This will be decreased significantly by quantum corrections, so that it is quite reasonable to find the same melting points for H2 and Ne. 
+
+4. We have Na → Na[+] + e – 5.14 eV; Na + e → Na[–] + 0.78 eV. The Madelung energy in the NaCl structure, with Na[+] at the Na[+] sites and Na[–] at the Cl[–] sites, is 
+
+**==> picture [225 x 29] intentionally omitted <==**
+
+or 6.89 eV. Here R is taken as the value for metallic Na. The total cohesive energy of a Na[+] Na[–] pair in the hypothetical crystal is 2.52 eV referred to two separated Na atoms, or 1.26 eV per atom. This is larger than the observed cohesive energy 1.13 eV of the metal. We have neglected the repulsive energy of the Na[+] Na[–] structure, and this must be significant in reducing the cohesion of the hypothetical crystal. 
+
+5a. 
+
+**==> picture [274 x 34] intentionally omitted <==**
+
+In equilibrium 
+
+**==> picture [203 x 35] intentionally omitted <==**
+
+and 
+
+**==> picture [118 x 31] intentionally omitted <==**
+
+3-1 
+
+**==> picture [259 x 28] intentionally omitted <==**
+
+> bearing in mind that in equilibrium ( ∂ U ∂ R) = 0. R0 
+
+**==> picture [291 x 39] intentionally omitted <==**
+
+For a unit length 2NR0 = 1, whence 
+
+**==> picture [300 x 40] intentionally omitted <==**
+
+6. For KCl, λ = 0.34 × 10[–8] ergs and ρ = 0.326 × 10[–8] Å. For the imagined modification of KCl with the ZnS structure, z = 4 and α = 1.638. Then from Eq. (23) with x ≡ R0/ ρ we have 
+
+**==> picture [94 x 12] intentionally omitted <==**
+
+> By trial and error we find x � 9.2, or R0[ = 3.00 Å. The actual KCl structure has R] 0[ (exp) = 3.15 Å . For ] the imagined structure the cohesive energy is 
+
+**==> picture [158 x 34] intentionally omitted <==**
+
+U in units with R0 in Å. For the actual KCl structure, using the data of Table 7, we calculate 2 0.495, q[= −] 
+
+units as above. This is about 0.1% lower than calculated for the cubic ZnS structure. It is noteworthy that the difference is so slight. 
+
+7. The Madelung energy of Ba[+] O[–] is – α e[2] /R0 per ion pair, or –14.61 × 10[–12] erg = –9.12 eV, as compared with –4(9.12) = –36.48 eV for Ba[++] O[--] . To form Ba[+] and O[–] from Ba and O requires 5.19 – 1.5 = 3.7 eV; to form Ba[++] and O[--] requires 5.19 + 9.96 – 1.5 + 9.0 = 22.65 eV. Thus at the specified value of R0 the binding of Ba[+] O[–] is 5.42 eV and the binding of Ba[++] O[--] is 13.83 eV; the latter is indeed the stable form. 
+
+8. From (37) we have eXX = S11XX, because all other stress components are zero. By (51), 3S11 = 2 (C11 − C12 ) + 1 (C11 + C12 ). 
+
+**==> picture [209 x 15] intentionally omitted <==**
+
+further, also from (37), eyy = S21Xx, 
+
+whence σ = eyy exx = S21 S11 = − C12 (C11 + C12 ). 
+
+9. For a longitudinal phonon with K || [111], u = v = w. 
+
+3-2 
+
+**==> picture [189 x 34] intentionally omitted <==**
+
+This dispersion relation follows from (57a). 
+
+10. We take u = – w; v = 0. This displacement is ⊥ to the [111] direction. Shear waves are degenerate in this direction. Use (57a). 
+
+**==> picture [171 x 13] intentionally omitted <==**
+
+**==> picture [154 x 34] intentionally omitted <==**
+
+**==> picture [436 x 39] intentionally omitted <==**
+
+constant. 
+
+12a. We rewrite the element aij = p –[δ] ij[(][λ][ + p – q) as a] ij[ = p – ][λ′][δ] ij[, where ][λ′][ = ][λ][ + p – q, and ][δ] ij[ is the ] Kronecker delta function. With λ′ the matrix is in the “standard” form. The root λ′ = Rp gives λ = (R – 1)p + q, and the R – 1 roots λ′ = 0 give λ = q – p. 
+
+b. Set 
+
+**==> picture [138 x 54] intentionally omitted <==**
+
+as the displacements for waves in the [111] direction. On substitution in (57) we obtain the desired equation. Then, by (a), one root is 
+
+**==> picture [192 x 14] intentionally omitted <==**
+
+and the other two roots (shear waves) are 
+
+**==> picture [139 x 14] intentionally omitted <==**
+
+13. Set u(r,t) = u0e[i(K] ·[r – t)] and similarly for v and w. Then (57a) becomes 
+
+**==> picture [181 x 36] intentionally omitted <==**
+
+and similarly for (57b), (57c). The elements of the determinantal equation are 
+
+3-3 
+
+**==> picture [184 x 54] intentionally omitted <==**
+
+2 and so on with appropriate permutations of the axes. The sum of the three roots of ω ρ is equal to the sum of the diagonal elements of the matrix, which is 
+
+(C11 + 2C44)K[2] , where 
+
+**==> picture [154 x 37] intentionally omitted <==**
+
+for the sum of the (velocities)[2] of the 3 elastic modes in any direction of K. 
+
+14. The criterion for stability of a cubic crystal is that all the principal minors of the quadratic form be positive. The matrix is: 
+
+**==> picture [174 x 68] intentionally omitted <==**
+
+The principal minors are the minors along the diagonal. The first three minors from the bottom are C44, C442, C443; thus one criterion of stability is C44 > 0. The next minor is C11 C44[3] , or C11 > 0. Next: C443 (C112 – C122), whence |C12| < C11. Finally, (C11 + 2C12) (C11 – C12)2 > 0, so that C11 + 2C12 > 0 for stability. 
+
+3-4 
+
+## **CHAPTER 4** 
+
+1 2 1a. The kinetic energy is the sum of the individual kinetic energies each of the form 2 MuS . The force between atoms s and s+1 is –C(us – us+1); the potential energy associated with the stretching of this bond is 12 C(us − u _s_ + 1)2 , and we sum over all bonds to obtain the total potential energy. 
+
+**==> picture [333 x 26] intentionally omitted <==**
+
+us + 1[=] u cos[ ω t − (s + 1)Ka] = u{cos( ω t − sKa) ⋅ cos Ka + sin ( ω t − sKa) ⋅ sin Ka}. 
+
+**==> picture [231 x 29] intentionally omitted <==**
+
+We square and use the mean values over time: 
+
+**==> picture [201 x 26] intentionally omitted <==**
+
+Thus the square of u{} above is 
+
+**==> picture [257 x 26] intentionally omitted <==**
+
+The potential energy per bond is 1 Cu 2 (1 − cos  Ka), and by the dispersion relation ω[2] = (2C/M) (1 – 2 
+
+> cos Ka) this is equal to 1 M ω 2u 2. Just as for a simple harmonic oscillator, the time average potential 4 energy is equal to the time-average kinetic energy. 
+
+2. We expand in a Taylor series 
+
+**==> picture [230 x 34] intentionally omitted <==**
+
+On substitution in the equation of motion (16a) we have 
+
+**==> picture [144 x 28] intentionally omitted <==**
+
+which is of the form of the continuum elastic wave equation with 
+
+4-1 
+
+**==> picture [110 x 21] intentionally omitted <==**
+
+3. From Eq. (20) evaluated at K = π /a, the zone boundary, we have 
+
+**==> picture [89 x 34] intentionally omitted <==**
+
+Thus the two lattices are decoupled from one another; each moves independently. At ω[2] = 2C/M2 the motion is in the lattice described by the displacement v; at ω[2] = 2C/M1 the u lattice moves. 
+
+**==> picture [259 x 95] intentionally omitted <==**
+
+When K = k0, 
+
+**==> picture [162 x 28] intentionally omitted <==**
+
+> which in general will diverge because Σ 1 →∞ . p 
+
+5. By analogy with Eq. (18), 
+
+**==> picture [236 x 74] intentionally omitted <==**
+
+**==> picture [188 x 35] intentionally omitted <==**
+
+**==> picture [187 x 34] intentionally omitted <==**
+
+6. (a) The Coulomb force on an ion displaced a distance r from the center of a sphere of static or rigid conduction electron sea is – e[2] n(r)/r[2] , where the number of electrons within a sphere of radius r is (3/4 π R[3] ) (4 π r[3] /3). Thus the force is –e[2] r/R[2] , and the 
+
+4-2 
+
+force constant is e[2] /R[3] . The oscillation frequency ω D is (force constant/mass)[1/2] , or (e[2] /MR[3] )[1/2] . (b) For − 23 − 8 − 10 − 46 1 2 sodium M � 4 × 10 g and R � 2 × 10 cm; thus ω D � (5 × 10 ) (3 × 10 ) � 3 × 1013 s[−] 1 (c) The maximum phonon wavevector is of the order of 108 cm–1. If we suppose that ω 0 is associated with this maximum wavevector, the velocity defined by ω 0/Kmax ≈ 3 × 10[5] cm s[–1] , generally a reasonable order of magnitude. 
+
+7. The result (a) is the force of a dipole ep up on a dipole e0 u0 at a distance pa. Eq. (16a) becomes ω 2 = (2/ M)[ γ (1 − cosKa) + Σ ( − 1)P (2e2 / p3a 3)(1 − cos pKa)] . p>0 
+
+At the zone boundary ω[2] = 0 if 
+
+**==> picture [149 x 20] intentionally omitted <==**
+
+> or if σ Σ [1 −− ( 1)p ]p − 3 = 1. The summation is 2(1 + 3–3 + 5–3 + …) = 2.104 and this, by the properties of the zeta function, is also 7 ζ (3)/4. The sign of the square of the speed of sound in the limit Ka << 1 is 
+
+> given by the sign of 1 = 2 σ Σ ( − 1)p p − 3p2, which is zero when 1 – 2[–1] + 3[–1] – 4[–1] + … = 1/2 σ . The series p>0 is just that for log 2, whence the root is σ = 1/(2 log 2) = 0.7213. 
+
+4-3 
+
+## **CHAPTER 5** 
+
+1 1. (a) The dispersion relation is ω = ω m | sin 2 Ka|. We solve this for K to obtain − 1 2 2 1/ 2 K = (2/a)sin ( ω / ω m ) , whence dK/d ω = (2/ a)( ω m −ω )[−] and, from (15), D( ω ) 2 2 1/ 2 = (2L/ π a)( ω m −ω )[−] . This is singular at ω = ω m[. (b) The volume of a sphere of radius K in ] 3 3/2 Fourier space is Ω= 4 π K /3 = (4 π /3)[( ω 0 −ω ) / A] , and the density of orbitals near ω 0[ is ] 3 3 3/2 1/ 2 D( ω )= (L/2 π ) | d Ωω /d | = (L/2 π ) (2 π / A )( ω 0 −ω ) , provided ω < ω 0[. It is apparent that ] D( ω ) vanishes for ω above the minimum ω 0. 
+
+2. The potential energy associated with the dilation is 
+
+**==> picture [215 x 26] intentionally omitted <==**
+
+3 2 k BT , because the other degrees of freedom are to be associated with shear distortions of the lattice cell. 2 − 47 − 24 3 Thus < ( ∆ V) >= 1.5 × 10 ;( ∆ V)rms = 4.7 × 10 cm ; and ( ∆ V)rms / V = 0.125 . Now 3 ∆ a/a ≈∆ V/V , whence ( ∆ a)rms / a = 0.04 . 
+
+3. (a) < R 2 >= (h/2 / ρ V) Σω−[1] , where from (20) for a Debye spectrum Σω− 1 − 1 2 3 3 2 2 2 3 = ∫ω d D( ω ω ) = 3V ω D / 4 π v , whence < R >= 3h / ω D /8 π ρ v . (b) In one dimension from − 1 (15) we have D( ω ) = L/ π v , whence ∫ω d D( ω ) ω diverges at the lower limit. The mean square 2 1 2 2 strain in one dimension is < ( ∂ R/ ∂ x) >= 2 Σ K u 0 = (h/2MNv) / Σ K 2 2 3 = (h/2MNv)(K / D / 2) = h / ω D / 4MNv . 
+
+4. (a) The motion is constrained to each layer and is therefore essentially two-dimensional. Consider one plane of area A. There is one allowed value of K per area (2 π /L)[2] in K space, or (L/2 π )[2] = A/4 π[2] allowed values of K per unit area of K space. The total number of modes with wavevector less than K is, with ω = vK, 
+
+**==> picture [158 x 14] intentionally omitted <==**
+
+The density of modes of each polarization type is D( ω ) = dN/d ω = A ω /2 π v[2] . The thermal average phonon energy for the two polarization types is, for each layer, 
+
+**==> picture [293 x 29] intentionally omitted <==**
+
+ω D where ω D is defined by N = D( ω ) d ω . In the regime �ω D >> τ , we have ∫ D 
+
+**==> picture [124 x 28] intentionally omitted <==**
+
+5-1 
+
+2 Thus the heat capacity C = k B ∂ U/ ∂τ ∝ T 
+
+. 
+
+(b) If the layers are weakly bound together, the system behaves as a linear structure with each plane as a vibrating unit. By induction from the results for 2 and 3 dimensions, we expect C ∝ T . But this only holds at extremely low temperatures such that τ << �ω D ≈ � vNlayer / L , where Nlayer/L is the number of layers per unit length. 
+
+**==> picture [436 x 26] intentionally omitted <==**
+
+x = h / ω /k BT . The partition function Z = e − x/2 Σ e − sx = e − x/2 /(1 − e − x ) = [2sinh (x/2)] − 1 and the free energy is F = kBT log Z = kBT log[2 sinh(x/2)]. (b) With ω ( ∆ ) = ω (0) (1 – γ∆ ), the condition 1 ∂ F/ ∂∆= 0 becomes B ∆= γΣ 2 h[/] ω coth (h / ω /2k BT) on direct differentiation. The energy < n > h / ω is just the term to the right of the summation symbol, so that B ∆= γ U(T) . (c) By definition of γ , we have δω / ω = −γδ V/V , or d log ω = −δ d log V . But θ ∝ω D , whence d log θ = −γ d log V . 
+
+5-2 
+
+## **CHAPTER 6** 
+
+**==> picture [417 x 74] intentionally omitted <==**
+
+The total energy of N electrons is 
+
+**==> picture [64 x 26] intentionally omitted <==**
+
+**==> picture [436 x 189] intentionally omitted <==**
+
+whence B = 2.3 × 10[11] dyne cm[–2] . By experiment (Table 3.3), B = 1.2 × 10[11] dyne cm[–2] . 
+
+**==> picture [436 x 39] intentionally omitted <==**
+
+**==> picture [156 x 59] intentionally omitted <==**
+
+where the definite integral is evaluated with the help of Dwight [569.1]. 
+
+**==> picture [436 x 43] intentionally omitted <==**
+
+6-1 
+
+**==> picture [136 x 26] intentionally omitted <==**
+
+**==> picture [407 x 65] intentionally omitted <==**
+
+3 affected by relativity and is ≈ n[1/3] , where n is the electron concentration. Thus ε F � hck / F � hc / √ n. (c) A change of radius to 10 km = 10[6] cm makes the volume ≈ 4 × 10[18] cm[3] and the concentration ≈ 3 × 10[38] cm[–] 3 − 27 10 13 − 4 8 . Thus ε F ≈ 10 (3.10 )(10 ) ≈ 2.10 erg ≈ 10 eV. (The energy is relativistic.) 
+
+**==> picture [436 x 41] intentionally omitted <==**
+
+6. Let E, v vary as e[–iwt] . Then 
+
+**==> picture [172 x 30] intentionally omitted <==**
+
+and the electric current density is 
+
+**==> picture [147 x 30] intentionally omitted <==**
+
+7. (a) From the drift velocity equation 
+
+**==> picture [235 x 14] intentionally omitted <==**
+
+We solve for vx, vy to find 
+
+**==> picture [198 x 38] intentionally omitted <==**
+
+2 We neglect the terms in ω c . Because j = n(–e)v = σ E, the components of σ come out directly. (b) From the electromagnetic wave equation 
+
+**==> picture [92 x 13] intentionally omitted <==**
+
+we have, for solutions of the form e[i(kz – ][ω][t)] , the determinantal equation 
+
+**==> picture [150 x 36] intentionally omitted <==**
+
+6-2 
+
+2 2 2 3 Here ε xx = ε yy = 1 −ω P ω and ε xy = −ε yx = i ω ω c p ω . The determinantal equation gives the dispersion relation. 
+
+8. The energy of interaction with the ion is 
+
+**==> picture [142 x 20] intentionally omitted <==**
+
+3 where the electron charge density is –e(3/4 π r0 ). (b) The electron self-energy is 
+
+**==> picture [182 x 20] intentionally omitted <==**
+
+3 The average Fermi energy per electron is 3 ε F/5, from Problem 6.1; because N V = 3 4 π r0 , the average is 3 ( 9 π 4 ) 2 3 h / 2 10mr02 . The sum of the Coulomb and kinetic contributions is 
+
+**==> picture [85 x 30] intentionally omitted <==**
+
+which is a minimum at 
+
+**==> picture [181 x 29] intentionally omitted <==**
+
+The binding energy at this value of rs is less than 1 Ry; therefore separated H atoms are more stable. 
+
+9. From the magnetoconductivity matrix we have 
+
+**==> picture [146 x 29] intentionally omitted <==**
+
+2 For ω c τ >> 1, we have σ yx ≅σ 0 ω τ = c ( ne τ m )( mc eB τ) = neB c . 
+
+10. For a monatomic metal sheet one atom in thickness, n ≈ 1/d[3] , so that 
+
+**==> picture [144 x 16] intentionally omitted <==**
+
+> If the electron wavelength is d, then mvFd ≈ h / by the de Broglie relation and 
+
+**==> picture [90 x 16] intentionally omitted <==**
+
+in Gaussian units. Now 
+
+6-3 
+
+**==> picture [168 x 51] intentionally omitted <==**
+
+6-4 
+
+## **CHAPTER 7** 
+
+1a. The wavevector at the corner is longer than the wavevector at the midpoint of a side by the factor √ 2. As ε ∝ k[2] for a free electron, the energy is higher by ( √ 2)[2] = 2. b. In three dimensions the energy at a corner is higher by ( √ 3)[2] than at the midpoint of a face. c. Unless the band gap at the midpoint of a face is larger than the kinetic energy difference between this point and a corner, the electrons will spill over into the second zone in preference to filling up the corner states in the first zone. Divalent elements under these conditions will be metals and not insulators. 
+
+2. ε = h / 2 k 2 2m, where the free electron wavevector k may be written as the sum of a vector K in the reduced zone and of a reciprocal lattice vector G. We are interested in K along the [111] direction: from 
+
+**==> picture [439 x 162] intentionally omitted <==**
+
+3. (a) At k = 0 the determinantal equation is (P/Ka) sin Ka + cos Ka = 1. In the limit of small positive P this equation will have a solution only when Ka � 1. Expand the sine and cosine to obtain in lowest order 1 2 P � ( Ka ) . The energy is ε = 2 
+
+2 2 2 2 h / K 2m � h / P ma . (b) At k = π /a the determinantal equation is (P/Ka) sin Ka + cos Ka = –1. In the same limit this equation has solutions Ka = π + δ , where δ � 1 . We expand to obtain ( P π)(−δ) + ⎛⎜ −+ 1 1 δ 2 ⎞⎟ = − 1,  which has the solution δ = 0 and δ = 2P/ π . The energy gap is ⎝ 2 ⎠ 2 2 2 2 Eg = ( h / 2ma )( 2 πδ) � ( h / 2ma )( 4P ) . 
+
+4. (a) There are two atoms in the basis, and we label them a and b. Then the crystal potential may be ⎛ 1 1 1 ⎞ written as U = U1 + U2 = U1 ( r �) + U1 x + a, y + a, z + a ⎟[ and the Fourier transform has ] ⎜⎝ 4 4 4 ⎠ 1 components UG � = U1G � + U2G � = U1G � ⎛⎜⎝ 1 + ei ( G x + G y + Gz ) 4 a ⎟⎞⎠ .[ If ] G � = 2Ax,ˆ � then the exponential is 
+
+1 i Aa e 2 = ei[π] = − 1, and UG � = 2A = 0, so that this Fourier component vanishes. Note that the quantity in parentheses above is just the structure factor of the basis. (b) This follows directly from (44) with U set equal to zero. In a higher order approximation we would go back to Eq. (31) where any non-vanishing UG � enters. 
+
+7-1 
+
+**==> picture [242 x 38] intentionally omitted <==**
+
+The secular equation (46) is now 
+
+**==> picture [92 x 34] intentionally omitted <==**
+
+**==> picture [242 x 32] intentionally omitted <==**
+
+**==> picture [181 x 125] intentionally omitted <==**
+
+6. U(x,y) = – U[e[i (2][π][/a) (x+y)] + other sign combinations of ± x ± y]. The potential energy contains the four reciprocal lattice vectors (2 π /a) (±1; ±1). At the zone corner the wave function e[i(][π][/a) (x+y)] is mixed with e[–i ] ( π /a) (x+y). The central equations are 
+
+**==> picture [190 x 66] intentionally omitted <==**
+
+where λ = 2 ( h / 2 2m )(π a ) 2 . The gap is 2U. 
+
+7-2 
+
+**CHAPTER 8** 
+
+**==> picture [226 x 57] intentionally omitted <==**
+
+c. Overlap will be significant at a concentration 
+
+**==> picture [132 x 29] intentionally omitted <==**
+
+**==> picture [423 x 64] intentionally omitted <==**
+
+**==> picture [150 x 46] intentionally omitted <==**
+
+**==> picture [214 x 26] intentionally omitted <==**
+
+3. The electron contribution to the transverse current is 
+
+**==> picture [285 x 77] intentionally omitted <==**
+
+Here we have used 
+
+**==> picture [253 x 26] intentionally omitted <==**
+
+The total transverse (y-direction) current is 
+
+**==> picture [268 x 16] intentionally omitted <==**
+
+and to the same order the total current in the x-direction is 
+
+**==> picture [105 x 12] intentionally omitted <==**
+
+Because (*) gives 
+
+8-1 
+
+**==> picture [124 x 32] intentionally omitted <==**
+
+we have for the Hall constant 
+
+**==> picture [146 x 32] intentionally omitted <==**
+
+> 4. The velocity components are vx = hk / x / mt ; vy = hk / y / mt ; vz = hk / z/m � . The equation of motion in k space is h / dk/dt = − (e/c) v × B . Let B lie parallel to the kx axis; then dk x / dt = 0; dk y / dt = −ω� k z; ω� ≡ eB/m � c; dk z / dt = ω tk y; ω t ≡ eB/m ct . We differentiate 
+
+> with respect to time to obtain d2k y / dt 2 = −ω� dk z / dt ; on substitution for dkz[/dt we have ] 2 2 d k y / dt + ω ω� tk y = 0 , the equation of motion of a simple harmonic oscillator of natural frequency 
+
+**==> picture [152 x 14] intentionally omitted <==**
+
+5. Define Qe ≡ eB τ e / mec; Qh = eB τ h / mh[c] . In the strong field limit Q >> 1 the magnetoconductivity tensor (6.64) reduces to 
+
+**==> picture [260 x 55] intentionally omitted <==**
+
+2 2 We can write nec Qe/B for ne τ e / me and pec Qh[/B for ] pe τ h / mh . The strong field limit for σ yx follows directly. The Hall field is obtained when we set 
+
+**==> picture [196 x 36] intentionally omitted <==**
+
+The current density in the x direction is 
+
+**==> picture [178 x 36] intentionally omitted <==**
+
+using the Hall field for the standard geometry, we have 
+
+**==> picture [192 x 54] intentionally omitted <==**
+
+8-2 
+
+**CHAPTER 9** 1. 
+
+− π a = 0.78 × 108cm − 1 
+
+**==> picture [252 x 204] intentionally omitted <==**
+
+**==> picture [15 x 8] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+2a.<br>**----- End of picture text -----**<br>
+
+
+**==> picture [300 x 243] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+− a π = 0.78 × 108cm − 1<br>π 8 -1<br>= 0.78 × 10 cm<br>b<br>− π = 1.57 × 108cm − 1<br>a<br>**----- End of picture text -----**<br>
+
+
+9-1 
+
+**==> picture [97 x 139] intentionally omitted <==**
+
+c. 
+
+**==> picture [386 x 162] intentionally omitted <==**
+
+1 3a. In the hcp structure there is one atom whose z coordinate is 0 and one at c . The structure factor of 2 
+
+2 π ˆ the basis for G � c = z � is c 
+
+**==> picture [144 x 16] intentionally omitted <==**
+
+> so that by the same argument as in Problem 9.4 the corresponding component UG � c of the crystal potential is zero. 
+
+> b. But for U 2G � c the structure factor is 
+
+**==> picture [122 x 16] intentionally omitted <==**
+
+c. The two valence electrons can just fill the first BZ. All we need is an adequate energy gap at the zone boundary and for simple hex. there is no reason against a gap. 
+
+d. In hcp there will be no gap (at least in lowest order) on the top and bottom faces of the BZ, by the argument of part a. 
+
+9-2 
+
+4. 
+
+**==> picture [296 x 463] intentionally omitted <==**
+
+5a. h / dkdt � = − ec v � × B; � hGc / T = evB − 27 8 − 1 10 − 1 10 erg sec)(2 × 10 cm )(3 × 10 cm s ) � − 10 8 − 1 3 (5 × 10 esu)(10 cm d )(10 gauss) − 10 � 1.2 × 10 sec. 
+
+9-3 
+
+b. The electron moves in a direction normal to the Fermi surface -- more or less in a straight line if the Fermi surface is close to planar in the region of interest. The magnetic field puts a wiggle on the motion, but the field does not make the electron move in a helix, contrary to the behavior of a free electron. 
+
+6a. 
+
+**==> picture [256 x 79] intentionally omitted <==**
+
+**==> picture [175 x 91] intentionally omitted <==**
+
+Region II: 
+
+**==> picture [423 x 107] intentionally omitted <==**
+
+**==> picture [270 x 11] intentionally omitted <==**
+
+with k and q related to ε as above. 
+
+b. The lazy way here is to show that the ε ’s in the equations marked (*) above are equal when k and q are connected by (**), with ε = –0.45 as read off Fig. 20. This is indeed so. 
+
+**==> picture [405 x 26] intentionally omitted <==**
+
+**==> picture [179 x 30] intentionally omitted <==**
+
+9-4 
+
+b. 
+
+**==> picture [148 x 66] intentionally omitted <==**
+
+> 8. Write (17) as _H_ = _H_ 0 + _H_ 1 , where _H_ 1 = (h / m)k / ��⋅ p . Then (18) is an eigenfunction of _H_ 0 with 
+
+> the eigenvalue ε n[(0)] + h / 2 k 2 / 2m . In this representation the diagonal matrix element of _H_ 1 is equal to (h / m) / ∫ dV u 0 (r)k �� ⋅ p U � 0 (r). � In a cubic crystal U0 (r) � will be even or odd with respect to the 
+
+> inversion operation r �[→] −[r] � , but p � is an odd operator. It follows that the diagonal matrix element 
+
+> vanishes, and there is no first-order correction to the energy. The function U k � (r) � to first order in _H_ 1 is 
+
+**==> picture [183 x 33] intentionally omitted <==**
+
+and the energy to second order is 
+
+**==> picture [286 x 36] intentionally omitted <==**
+
+> The effective mass ratio is the coefficient of h / 2 k 2 / 2m , or 
+
+**==> picture [154 x 35] intentionally omitted <==**
+
+9a. 
+
+**==> picture [185 x 70] intentionally omitted <==**
+
+where the summation is zero unless n = m, when it is equal to N. 
+
+**==> picture [250 x 44] intentionally omitted <==**
+
+9-5 
+
+**==> picture [210 x 72] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+N 2<br>Σ ei2 π p(x − xn ) Na � ei2 π p(x − xn ) Nadp<br>P ∫<br>− N 2<br>= ei π (x − xn ) a − e −π i (x − xn ) a = sin [ π( x − x n ) a ]<br>,<br>i2 π( x − x n ) Na π (x − x n ) Na<br>**----- End of picture text -----**<br>
+
+
+whence 
+
+**==> picture [205 x 31] intentionally omitted <==**
+
+10a. jy = σ 0 (Q[–1] Ex + sEy) = 0 in the Hall geometry, whence Ey = – Ex/sQ. 
+
+b. We have jx = σ 0 (Q[–2] Ex – Q[–1] Ey), and with our result for Ey it follows that 
+
+**==> picture [121 x 14] intentionally omitted <==**
+
+**==> picture [159 x 24] intentionally omitted <==**
+
+9-6 
+
+## **CHAPTER 10** 
+
+d2B 1 1a. dx 2 = λ 2 B; this is the London equation. The proposed solution is seen directly to ⎛ 1 ⎞ satisfy this and to satisfy the boundary conditions B ⎜ ± δ ⎟ = Ba. (b) For δ < < λ L, ⎝ 2 ⎠ 
+
+**==> picture [134 x 73] intentionally omitted <==**
+
+therefore B ( x ) = Ba − Ba ( 1 8 λ 2 )(δ 2 − 4x 2 ) . 
+
+2a. From (4), dFS = − **M** d **B** a at T = 0. From Problem 1b, 
+
+**==> picture [162 x 26] intentionally omitted <==**
+
+whence 
+
+**==> picture [196 x 26] intentionally omitted <==**
+
+b. The average involves 
+
+**==> picture [191 x 57] intentionally omitted <==**
+
+whence 
+
+**==> picture [156 x 32] intentionally omitted <==**
+
+c. Let us set 
+
+**==> picture [117 x 32] intentionally omitted <==**
+
+10-1 
+
+where Baf is the critical field for the film and Bac is the bulk critical field. Then 
+
+**==> picture [293 x 122] intentionally omitted <==**
+
+Now in CGS in nonmagnetic material B and H are identical. We use this and we use the Maxwell equation 
+
+**==> picture [73 x 26] intentionally omitted <==**
+
+to obtain 
+
+**==> picture [221 x 109] intentionally omitted <==**
+
+If B ∼ ei ( **k** ⋅−ω **r** t ) , then 
+
+**==> picture [282 x 31] intentionally omitted <==**
+
+Thus the normal electrons play no role in the dispersion relation in the low frequency range. 
+
+4. The magnetic influence of the core may be described by adding the two-dimensional delta function Φ 0 δ( ρ ) , where φ 0 is the flux quantum. If the magnetic field is parallel to the z axis and div **B** = 0, then 
+
+**==> picture [104 x 16] intentionally omitted <==**
+
+or 
+
+10-2 
+
+**==> picture [161 x 34] intentionally omitted <==**
+
+2 This equation has the solution B (ρ) = (Φ 0 2 πλ ) K 0 (ρ λ) , where K0 is a hyperbolic Bessel function[*] infinite at the origin and zero at infinity: 
+
+**==> picture [244 x 42] intentionally omitted <==**
+
+The total flux is the flux quantum: 
+
+**==> picture [194 x 31] intentionally omitted <==**
+
+− 1 5. It is a standard result of mechanics that **E** = − grad ϕ− c ∂ **A** ∂ t. If grad ϕ = 0, when we differentiate the London equation we obtain ∂∂= j t c2 4 πλ L2 E. Now j = nqv and ( ) 2 ∂∂= j t nq ∂ v ∂= t ( nq m ) E. Compare the two equations for ∂ j/ ∂ t to find 2 2 2 c 4 πλ L = nq m. 
+
+*Handbook of mathematical functions, U.S. National Bureau of Standards AMS 55, sec. 9.6. 
+
+6. Let x be the coordinate in the plane of the junction and normal to B, with − w 2 ≤ x ≤ w 2. The flux through a rectangle of width 2x and thickness T is 2xTB = φ (x). The current through two elements at x and –x, each of width dx is 
+
+**==> picture [296 x 17] intentionally omitted <==**
+
+and the total current is 
+
+**==> picture [254 x 35] intentionally omitted <==**
+
+7a. For a sphere H ( inside ) = Ba −π 4 M 3; for the Meissner effect H ( inside ) = −π 4 M, whence Ba = −π 8 M 3. 
+
+b. The external field due to the sphere is that of a dipole of moment µ = MV, when V is the volume. In the equatorial plane at the surface of the sphere the field of the sphere is 3 −µ a = −π 4 M 3 = Ba 2. The total field in this position is 3Ba/2. 
+
+10-3 
+
+10-4 
+
+## **CHAPTER 11** 
+
+1. From Eq. (10), 
+
+**==> picture [102 x 28] intentionally omitted <==**
+
+**==> picture [221 x 32] intentionally omitted <==**
+
+The numerical result follows on using N = 6.02 × 10[23] mol[–1] . 
+
+2a. Eu[++] has a half-filled f shell. Thus S = 7 × 1/2 = 7/2. The orbitals mL = 3, 2, 1, 0, –1, –2, –3 have one spin orientation filled, so that L = Σ mL = 0. Also J = L + S = 7/2. Hence the ground state is[8] S7/2. 
+
+b. Yb[+++] has 13 electrons in the f shell, leaving one hole in the otherwise filled shell. Thus L = 3, S = 1/2, J = 7/2 -- we add S to L if the shell is more than half-filled. The ground state symbol is[2] F7/2. 
+
+c. Tb[+++] has 8 f electrons, or one more than Eu[++] . Thus L = 3; S = 7/2 – 1/2 = 3; and J = 6. The ground state is[7] F6. 
+
+3a. The relative occupancy probabilities are 
+
+**==> picture [217 x 92] intentionally omitted <==**
+
+The average magnetic moment is 
+
+**==> picture [212 x 60] intentionally omitted <==**
+
+b. At high temperatures e −∆ kT → 1 and 
+
+11-1 
+
+**==> picture [200 x 78] intentionally omitted <==**
+
+c. The energy levels as a function of field are: 
+
+**==> picture [154 x 108] intentionally omitted <==**
+
+If the field is applied to take the system from a to b we increase the entropy of the spin system from ≈ 0 to ≈ N log 2. If the magnetization is carried out constant total entropy, it is necessary that the lattice entropy be reduced, which means the temperature ↓ . 
+
+**==> picture [160 x 103] intentionally omitted <==**
+
+**==> picture [227 x 32] intentionally omitted <==**
+
+5a. If the concentration in the spin-up band is N[+] = 1/2 N (1 + ζ ), the kinetic energy of all the electrons in that band is 
+
+**==> picture [177 x 28] intentionally omitted <==**
+
+and the magnetic energy is –N[+] µ B = – 1/2 N(1 + ζ ) µ B. 
+
+**==> picture [228 x 23] intentionally omitted <==**
+
+11-2 
+
+**==> picture [214 x 119] intentionally omitted <==**
+
+6a. The number of pairs of electrons with parallel spin up is 
+
+**==> picture [123 x 26] intentionally omitted <==**
+
+so that the exchange energy among the up spins is 
+
+**==> picture [84 x 27] intentionally omitted <==**
+
+and among the down spins the exchange energy is 
+
+**==> picture [83 x 26] intentionally omitted <==**
+
+5 3 5 3 b. Using these results and those from Prob. 5 we have E tot = E0 ( 1 + ζ) + ( 1 −ζ) { } 
+
+− 1 VN2 1 + ζ 2 2 − N ζµ B. Thus (for ζ << 1) ( ) 8 
+
+**==> picture [178 x 123] intentionally omitted <==**
+
+and 
+
+**==> picture [127 x 44] intentionally omitted <==**
+
+11-3 
+
+c. For B = 0 and ζ = 0. 
+
+**==> picture [236 x 30] intentionally omitted <==**
+
+7a. The Boltzmann factor gives directly, with τ = kBT 
+
+**==> picture [216 x 52] intentionally omitted <==**
+
+because d tanh x/dx = sech[2] x. 
+
+b. The probability P( ∆ ) d ∆ that the upper energy level lies between ∆ and ∆ + d ∆ , referred to the midpoint as the zero of energy, is P( ∆ ) d ∆ = (d ∆ ) / ∆ 0. Thus, from (a), 
+
+**==> picture [208 x 111] intentionally omitted <==**
+
+where x ≡ ∆ / τ . The integrand is dominated by contributions from 0 < ∆ < τ , because sech x decreases exponentially for large values of x. Thus 
+
+**==> picture [171 x 31] intentionally omitted <==**
+
+**==> picture [184 x 31] intentionally omitted <==**
+
+11-4 
+
+## **CHAPTER 12** 
+
+**==> picture [153 x 18] intentionally omitted <==**
+
+**==> picture [273 x 108] intentionally omitted <==**
+
+These equations have a solution with time-dependence ∼ exp(–i ω t) if 
+
+**==> picture [253 x 18] intentionally omitted <==**
+
+1 2 2. U = ∑ k � n k h / ω k = h / ∫ d ωD(ω) ω < n (ω) > . If ω = Ak[2] , then d ω dk = 2Ak = 2 A ω , and 
+
+**==> picture [177 x 29] intentionally omitted <==**
+
+Then 
+
+**==> picture [145 x 27] intentionally omitted <==**
+
+At low temps, 
+
+**==> picture [251 x 36] intentionally omitted <==**
+
+[See Dwight 860.39] 
+
+5 2 2 3 2 3 2 U � 0.45 ( k BT ) / π A h / 3 2 C = dU dT � 0.113 k B ( k BT hA / ) . 
+
+12-1 
+
+3. 
+
+**==> picture [228 x 36] intentionally omitted <==**
+
+Non-trivial solution for B = 0 if 
+
+**==> picture [170 x 34] intentionally omitted <==**
+
+Now find χ = ( MA + MB ) B at T > TC : 
+
+**==> picture [207 x 51] intentionally omitted <==**
+
+4. The terms in Ue � + Uc + UK which involve exx[ are ] 
+
+**==> picture [185 x 26] intentionally omitted <==**
+
+Take ∂ / ∂ exx: 
+
+**==> picture [233 x 18] intentionally omitted <==**
+
+Further: 
+
+**==> picture [166 x 40] intentionally omitted <==**
+
+Solve this set of equations for exx: 
+
+**==> picture [161 x 35] intentionally omitted <==**
+
+Similarly for eyy, ezz, and by identical method for exy, etc. 
+
+12-2 
+
+**==> picture [189 x 61] intentionally omitted <==**
+
+> and expanding about small ϕ . 
+
+1 For minimum near ϕ = 0 we need K > 2 BaMs. Thus at Ba = 2K/Ms the magnetization reverses direction (we assume the magnetization reverses uniformly!). 
+
+b. If we neglect the magnetic energy of the bidomain particle, the energies of the single and bidomain particles will be roughly equal when 
+
+**==> picture [156 x 15] intentionally omitted <==**
+
+For Co the wall energy will be higher than for iron roughly in the ratio of the (anisotropy 2 constant K1)[1/2] , or 10. Thus σ w ≈ 3 ergs cm . For Co, Ms = 1400 (at room ° 2 6 3 6 − 6 temperature), so Ms ≈ 2 × 10 erg cm . We have dc ≈ 3 2 × 10 ≈ 1.10 cm, or � 100A, as the critical size. The estimate is very rough (the wall thickness is dc; the mag. en. is handled crudely). 
+
+6. Use the units of Eq. (9), and expand 
+
+**==> picture [200 x 28] intentionally omitted <==**
+
+**==> picture [297 x 64] intentionally omitted <==**
+
+but 1 – t is proportional to Tc – T, so that m ∞ Tc − T for T just below Tc. 
+
+7. The maximum demagnetization field in a Néel wall is –4 π Ms, and the maximum self1 energy density is ( 4 π Ms ) Ms[. In a wall of thickness Na, where ][a] is the lattice constant, 2 the demagnetization contribution to the surface energy is σ demag ≈π 2 Ms2Na. The total wall energy, exchange + demag, is σ w ≈π( 2 JS2 Na 2 ) + ( 2 π Ms2Na ) , by use of (56). The minimum is at 
+
+12-3 
+
+**==> picture [203 x 53] intentionally omitted <==**
+
+and is given by 
+
+**==> picture [298 x 20] intentionally omitted <==**
+
+which is larger than (59) for iron. (According to Table 8.1 of the book by R. M. White and T. H. Geballe, the Bloch wall thickness in Permalloy is 16 times that in iron; this large value of δ favors the changeover to Néel walls in thin films.) 
+
+8. (a) Consider the resistance of the up and down spins separately. Magnetizations parallel: 
+
+**==> picture [369 x 209] intentionally omitted <==**
+
+(b) For the ↑↓ magnetization configuration, an electron of a given spin direction must always go through a region where it is antiparallel to the magnetization. If σ _a_ → 0, then the conductance is blocked and the resistance _R_ is infinite. ↑↓ 
+
+12-4 
+
+## **CHAPTER 13** 
+
+1. Consider a coil which when empty has resistance R0 and inductance L0. The impedance is Z0 = R0 – i ω L0. When the coil is filled with material of permeability ′ ′′ µ = 1 + 4 πχ the impedance is Z = R 0 −ω i L0 ( 1 + 4 πχ) = R 0 −ω i L0 ( 1 + 4 πχ + 4 π χ i ) , or 
+
+**==> picture [177 x 28] intentionally omitted <==**
+
+**==> picture [205 x 79] intentionally omitted <==**
+
+Now 
+
+**==> picture [212 x 61] intentionally omitted <==**
+
+**==> picture [224 x 82] intentionally omitted <==**
+
+c. With Ω= −γ� B0z �[ˆ] we have 
+
+**==> picture [101 x 31] intentionally omitted <==**
+
+so that M � precesses about ˆx � with a frequency ω = γ B1[. The time t] 1/2[ to give t] 1/2[ω][ = ][π] t1/2 = π / γ B1. 
+
+d. The field B � 1 rotates in the xy plane with frequency Ω= γ B0. 
+
+13-1 
+
+**==> picture [407 x 32] intentionally omitted <==**
+
+b. 
+
+**==> picture [182 x 69] intentionally omitted <==**
+
+Now 
+
+**==> picture [211 x 83] intentionally omitted <==**
+
+4.  For small θ , we have UK −� K θ 2 . Now the magnetic energy density UM = − BMcos θ−� − BM + 1 BM θ 2 , so that with proper choice of the zero of energy the anisotropy energy is 2 equivalent to a field 
+
+**==> picture [58 x 12] intentionally omitted <==**
+
+along the z axis. This is valid for θ << 1. For a sphere the demagnetizing field is parallel to M and exerts no torque on the spin system. Thus B0 + BA is the effective field. 
+
+5. We may rewrite (48) with appropriate changes in M, and with Banisotropy = 0. Thus 
+
+**==> picture [206 x 46] intentionally omitted <==**
+
+The secular equation is 
+
+**==> picture [156 x 38] intentionally omitted <==**
+
+or 
+
+13-2 
+
+**==> picture [163 x 18] intentionally omitted <==**
+
+One root is ω 0 = 0; this is the uniform mode. The other root is 
+
+**==> picture [149 x 18] intentionally omitted <==**
+
+this is the exchange mode. 
+
+13-3 
+
+## **CHAPTER 14** 
+
+∂ϕ kz 1. E x0 = − = kA sin kx e , and at the boundary this is equal to Exi. The normal ∂ x component of **D** at the boundary, but outside the medium, is ε ( ω )kA cos kx, where for a plasma ε ( ω ) = 1 – ω p2/ ω 2. The boundary condition is –kA cos kx = ε ( ω )kA cos kx, or ε ( ω ) = –1, or ω p2 = 2 ω 2. This frequency ω = ω p 2 is that of a surface plasmon. 
+
+kz 2. A solution below the interface is of the form ϕ ( −= ) Acos kx e , and above the kz interface ϕ ( + ) = Acos kx e[−] , just as for Prob. (1). The condition that the normal component of **D** be continuous across the interface reduces to ε 1[(][ω][) = –][ε] 2[(][ω][), or ] 
+
+**==> picture [223 x 30] intentionally omitted <==**
+
+3. (a) The equation of motion of the electrons is 2 2 −ω xe = − (e/me )Ex + i ωω eye; −ω ye = − (e/me )E y −ωω i exe[.] For the holes, 
+
+2 2 −ω x h = (e/mh )Ex + i ωω h yh ; −ω yh = (e/mh )E y −ωω i hx h . 
+
+The result follows on forming ξ e = xe + iye and ξ h = xh + iyh. (b) Expand − 1 − 1 − 1 ( ω e + ω ) � ω e (1 −ω / ω e[)] and ( ω h −ω ) � ω h (1 + ω / ω h[)] . In this approximation + − 1 − 1 2 2 ( ξ h −ξ e )/ E � (c/B)( ω h + ω e ) = (c / eB )(mh + me ) . 
+
++ 2 + 4. From the solution to Problem 3 we have P = pe E / mh ω h ω , where we have dropped a term in ω[2] in comparison with ω h ω . The dielectric constant + + 2 2 2 2 ε ( ω ) = 1 + 4 π P / E � 4 π pe / mh ω h ω , and the dispersion relation ε ( ω ) ω = c k becomes 3 10 22 − 10 − 1 4 π pe[2] ω /(eB/c) = c[2] k[2] . Numerically, ω ≈ [(10 )(3 × 10 ) /(10)(3 × 10 )(5 × 10 )] ≈ 0.2 s . It is true that ωτ will be <<1 for any reasonable relaxation time, but ω c[τ][ > 1 can be ] shown to be the applicable criterion for helicon resonance. 
+
+2 2 2 2 2 2 5. md **r** /dt = − m ω **r** = − e **E** = 4 π e **P** /3 = −π 4 ne **r** /3 . Thus ωο = 4 π ne 3m. 
+
+6. md2 **r** dt 2 = −ω m 2 **r** = − (e c)( **v** × B **z** ˆ) − m ωο 2 **r** , where ω o2 = 4 π ne2/3m, from the solution to A. Thus, with ω c ≡ eB/mc, 2 2 −ω x = i ωω cy −ω o x ; −ω2 y = −ωω i cx −ω o2y . 
+
+14-1 
+
+2 2 2 2 Form ξ ≡ x + iy; then −ω ξ −ωω ξ + ω c ο ξ = 0, or ω + ωω c −ωο = 0, a quadratic equation for ω . 
+
+7. Eq. (53) becomes c2K 2E = ω2 [ ε(∞) E + 4 π P], where P is the ionic contribution to the polarization. Then (55) becomes 
+
+**==> picture [160 x 36] intentionally omitted <==**
+
+or 
+
+**==> picture [286 x 20] intentionally omitted <==**
+
+> One root at K = 0 is ω2 = ω T 2 + 4 π Nq2 ε(∞) M. For the root at low ω and K we neglect terms in ω[4] and in ω[2] K[2] . Then 
+
+**==> picture [233 x 36] intentionally omitted <==**
+
+where ε (0) is given by (58) with ω = 0. 
+
+2 2 15 − 1 − 8(a). σ = ne T m = ( ω p 4 π ) T = 0.73 × 10 s = 800( Ω cm)[1] 
+
+**==> picture [324 x 16] intentionally omitted <==**
+
+9. The kinetic energy of a Fermi gas of N electrons in volume V is 2 2 2 3 2 2 2 U = N(3 5)(h / 2m)(3 π N V) . Then dU/dV = – (2/3)U/V and d U/dV = (10/9)U/V . 2 2 2 2 The bulk modulus B = Vd U dV = (10 9) U V = (10 9) (3 5)n (mvF 2) = nmvF 3. 1 2 The velocity of sound v = (B ρ ) , where the density ρ = n (m + M) � nM, whence 1 2 v � (m 3M) vF. 
+
+10. The response is given, with ρ = 1/ τ , by 
+
+**==> picture [179 x 20] intentionally omitted <==**
+
+The conductivity σ does not enter this equation directly, although it may be written as σ 2 = ω p τ /4 π . For order of magnitude, 
+
+14-2 
+
+**==> picture [264 x 86] intentionally omitted <==**
+
+−λ t The homogeneous equation has a solution of the form x ( t > 0 ) = Ae sin (ω t + φ) , 1 2 where ω = ⎡ω p2 + (ρ 2 ) 2 and λ = ρ /2. To this we add the particular solution x = ⎣ ⎤⎦ � –e/m ω and find A and φ to satisfy the initial conditions x(0) = 0 and x ( 0 ) = 0. 
+
+11. The Laplacian ∇ϕ = 2 0, whence 
+
+**==> picture [75 x 28] intentionally omitted <==**
+
+This has solutions 
+
+**==> picture [182 x 55] intentionally omitted <==**
+
+This solution assures that ϕ will be continuous across the boundaries if B = A/cosh(Kd/2). To arrange that the normal component of D is continuous, we need ε ( ω ) ∂ϕ / ∂ z continuous, or ε ( ω ) = – tanh(Kd/2). 
+
+14-3 
+
+## **CHAPTER 15** 
+
+1a. The displacement under this force is 
+
+**==> picture [134 x 26] intentionally omitted <==**
+
+With ω = ω R + i ω I, the integral is ∫ α (ω) e −ω i R te ω It d ω . This integral is zero for t < 0 because we may then complete a contour with a semicircle in the upper half-plane, over which semicircle the integral vanishes. The integral over the entire contour is zero because α ( ω ) is analytic in the upper half-plane. Therefore x(t) = 0 for t < 0. 
+
+1b. We want 
+
+**==> picture [309 x 32] intentionally omitted <==**
+
+which is called the retarded Green’s function of the problem. We can complete a contour integral by adding to x(t) the integral around an infinite semicircle in the upper halfplane. The complete contour integral vanishes because the integrand is analytic everywhere within the contour. But the integral over the infinite semicircle vanishes at t < 0, for then 
+
+**==> picture [252 x 19] intentionally omitted <==**
+
+which → 0 as | ω | → ∞ . Thus the integral in (A) must also vanish. For t > 0 we can evaluate x(t) by carrying out a Cauchy integral in the lower half-plane. The residues at the poles are 
+
+**==> picture [248 x 29] intentionally omitted <==**
+
+so that 
+
+**==> picture [236 x 23] intentionally omitted <==**
+
+2. In the limit ω → ∞ we have 
+
+**==> picture [99 x 16] intentionally omitted <==**
+
+from (9), while from (11a) 
+
+15-1 
+
+**==> picture [132 x 32] intentionally omitted <==**
+
+3. The reflected wave in vacuum may be written as 
+
+**==> picture [168 x 18] intentionally omitted <==**
+
+where the sign of Ey has been reversed relative to Bz in order that the direction of energy flux (Poynting vector) be reversed in the reflected wave from that in the incident wave. For the transmitted wave in the dielectric medium we find 
+
+**==> picture [151 x 38] intentionally omitted <==**
+
+by use of the Maxwell equation c curl H = ε∂ E/ ∂ t and the dispersion relation εω[2] = c[2] k[2] for electromagnetic waves. 
+
+The boundary conditions at the interface at x = 0 are that Ey should be continuous: Ey (inc) + Ey (refl) = Ey (trans), or A – A' = A''. Also Bz should be continuous, so that A + A' = ε[1/2] A''. We solve for the ratio A'/A to obtain ε[1/2] (A – A') = A + A', whence 
+
+**==> picture [61 x 29] intentionally omitted <==**
+
+and 
+
+**==> picture [190 x 33] intentionally omitted <==**
+
+The power reflectance is 
+
+**==> picture [263 x 37] intentionally omitted <==**
+
+4. (a) From (11) we have 
+
+**==> picture [133 x 33] intentionally omitted <==**
+
+In the limit ω → ∞ the denominator comes out of the integrand and we have 
+
+15-2 
+
+**==> picture [146 x 32] intentionally omitted <==**
+
+(b) A superconductor has infinite conductivity at zero frequency and zero conductivity at frequencies up to ω g at the energy gap. We can replace the lost portion of the integral (approximately σ 'n ω g) by a delta function σ 'n ω g δ ( ω ) in σ 's( ω ) at the origin. Then the KK relation above gives 
+
+**==> picture [98 x 26] intentionally omitted <==**
+
+(c) At very high frequencies the drift velocity of the conduction electrons satisfies the free electron equation of motion 
+
+**==> picture [154 x 11] intentionally omitted <==**
+
+so that the current density is 
+
+**==> picture [124 x 15] intentionally omitted <==**
+
+and ωσ '' ( ω ) = ne[2] /m in this limit. Then use (a) to obtain the desired result. 
+
+5. From (11a) we have 
+
+**==> picture [223 x 37] intentionally omitted <==**
+
+6. n[2] – K[2] + 2inK = 1 + 4 π i σ 0/ ω . For normal metals at room temperature σ 0 ∼ 10[17] – 10[18] sec[–1] , so that in the infrared ω � σ 0[.] Thus n 2 � K 2, so that R � 1 − 2 n and n � ( 2 πσ 0 ω) , whence R � 1 − ( 2 ω πσ 0 ) . (The units of σ 0 are sec[–1] in CGS.) 
+
+7. The ground state of the line may be written ψ g = A B A1 1 2B2 … A NBN. Let the asterisk denote excited state; then if specific single atoms are excited the states are ∗ ∗ ϕ j = A B A1 1 2B2 … A j B j … A NBN; θ j = A B A1 1 2B2 … A Bj j … A NBN. The hamiltonian acts thusly: 
+
+**==> picture [135 x 34] intentionally omitted <==**
+
+15-3 
+
+An eigenstate for a single excitation will be of the form ψ k = ∑ eijka (αϕ j +βθ j ) . We j form 
+
+**==> picture [193 x 136] intentionally omitted <==**
+
+This is satisfied if 
+
+**==> picture [149 x 42] intentionally omitted <==**
+
+The eigenvalues are the roots of 
+
+**==> picture [128 x 37] intentionally omitted <==**
+
+15-4 
+
+## **CHAPTER 16** 
+
+**==> picture [236 x 28] intentionally omitted <==**
+
+**==> picture [439 x 45] intentionally omitted <==**
+
+3. Because the normal component of **D** is continuous across a boundary, Eair = ε Ediel, where Eair = 4 π Q/A, with Q the charge on the boundary. The potential drop between the ⎛ 1 ⎞ two plates is Eair qd + Ediel d = Eair d ⎜ q + ⎟ . For a plate of area A, the capacitance is ⎝ ε ⎠ 
+
+**==> picture [85 x 45] intentionally omitted <==**
+
+It is useful to define an effective dielectric constant by 
+
+**==> picture [60 x 29] intentionally omitted <==**
+
+If ε = ∞ , then ε eff = 1/q. We cannot have a higher effective dielectric constant than 1/q. For q = 10[–3] , ε eff = 10[3] . 
+
+4. The potential drop between the plates is E1 d + E2 qd. The charge density 
+
+**==> picture [286 x 26] intentionally omitted <==**
+
+by comparison of the way σ and ε enter the Maxwell equation for curl H. Thus 
+
+**==> picture [303 x 94] intentionally omitted <==**
+
+**==> picture [167 x 28] intentionally omitted <==**
+
+16-1 
+
+**==> picture [180 x 72] intentionally omitted <==**
+
+**==> picture [139 x 39] intentionally omitted <==**
+
+6. E = 2P1/a[3] . P2 = α E = 2 α P1/a[3] . This has solution p1 = p2 0 if 2 α = a 3; α = 1 a 3 . 2 
+
+7 (a). One condition is, from (43), 
+
+**==> picture [155 x 17] intentionally omitted <==**
+
+The other condition is 
+
+**==> picture [196 x 26] intentionally omitted <==**
+
+Thus 
+
+**==> picture [186 x 62] intentionally omitted <==**
+
+(b) From the first line of part (a), 
+
+**==> picture [201 x 35] intentionally omitted <==**
+
+8. In an electric field the equilibrium condition becomes − E + γ ( T − Tc ) P + g4P3 = 0 , where the term in g6 is neglected for a second-order transition. Now let P = Ps + ∆ P . If 2 we retain only linear terms in ∆ P , then − E + γ ( T − Tc ) ∆+ P g43Ps ∆= P 0 , with use of 2 2 (40). Further, we can eliminate[P] s because Ps = ( γ g4 )( Tc − T ) . Thus ∆ P E = 1 2 γ ( Tc − T ) . 
+
+16-2 
+
+**==> picture [257 x 25] intentionally omitted <==**
+
+**==> picture [118 x 23] intentionally omitted <==**
+
+**----- Start of picture text -----**<br>
+b.  ← 2a →<br>i i i i i i<br>**----- End of picture text -----**<br>
+
+
+Deforms to new stable structure of dimers, with lattice constant 2 × (former constant). 
+
+c. 
+
+**==> picture [303 x 172] intentionally omitted <==**
+
+10. The induced dipole moment on the atom at the origin is p = α E, where the electric 3 3 − 3 field is that of all other dipoles: E = ( 2 a ) ∑ pn = ( 4p a )(∑ n ) ;the sum is over positive integers. We assume all dipole moments equal to p. The self-consistency condition is that p = α (4p/a[3] ) ( Σ n[–3] ), which has the solution p = 0 unless α ≥ (a[3] /4) (1/ Σ n[–3] ). The value of the summation is 1.202; it is the zeta function ζ (3). 
+
+16-3 
+
+## **CHAPTER 17** 
+
+1. (a) The interference condition for a linear lattice is a cos θ = n λ . The values of θ that satisfy this condition each define a cone with axis parallel to the fiber axis and to the axis of the cylindrical film. Each cone intersects the film in a circle. When the film is flattened out, parallel lines result. (b) The intersection of a cone and a plane defines a conic section, here a hyperbola. (c) Let **a** , **b** be the primitive axes of a square lattice. The Laue equations (2.25) give **a** • ∆ **k** = 2 π q; **b** • ∆ **k** = 2 π r, where q, r are integers. Each equation defines a set of planes. The intersections of these planes gives a set of parallel lines, which play in diffraction from a two-dimensional structure the role played by reciprocal lattice points in diffraction from a three-dimensional structure. In the Ewald construction these lines intersect a sphere of radius k = 2 π / λ in a set of points. In two dimensions any wavelength (below some maximum) will give points; in three dimensions only special values of λ give points of intersection because one more Laue equation must be satisfied. The points correspond to the directions k' of the diffraction maxima. If the photographic plate is flat the diffraction pattern (2 dim.) will appear distorted. 
+
+**==> picture [215 x 67] intentionally omitted <==**
+
+Points near the direction of the incident beam are shown. 
+
+(d) The lattice of surface atoms in the 
+
+(110) surface of an fcc crystal is simple rectangular. The long side of the rectangle in crystal (real) space is a short side in the reciprocal lattice. This explains the 90° rotation between (21a) and (21b). 
+
+2. With the trial function x exp (–ax), the normalization integral is ∫ 0 ∞[dx][x] 2[exp] (− 2ax ) = 1 4a 3 . The kinetic energy operator applied to the trial function gives 
+
+**==> picture [254 x 18] intentionally omitted <==**
+
+while Vu = eEx[2] exp (–ax). The definite integrals that are needed have the form ∞ n[ exp(] − ax) = n! a n+1 . The expectation value of the energy is < ε >= h / 2 2m a 2 ∫ 0[dx x] ( ) + ( 3eE 2a ) , which has an extremum with respect to the range parameter a when d < ε > da = h / 2 2m 2a − 3eE 2a 2 = 0,  or a 3 = 3eEm 2h / 2 . The value of < ε > is a ( ) minimum at this value of a, so that 
+
+**==> picture [272 x 46] intentionally omitted <==**
+
+17-1 
+
+where the last factor has the value 1.89 …. The Airy function is treated in Sec. 10.4 of the NBS Handbook of mathematical functions. 
+
+**==> picture [253 x 30] intentionally omitted <==**
+
+where _A = L[2]_ . 
+
+> Note: There are two flaws in the answer _m_ / π _h_ 2 quoted in the text. First, the area _A_ is missing, meaning the quoted answer is a density per unit area. This should not be a major issue. Second, the _h_ should be replaced by � _._ 
+
+**==> picture [294 x 28] intentionally omitted <==**
+
+**==> picture [397 x 96] intentionally omitted <==**
+
+17-2 
+
+## **CHAPTER 18** 
+
+## **1.** _**Carbon nanotube band structure.**_ 
+
+**==> picture [296 x 14] intentionally omitted <==**
+
+(b) The angle between **K** and **b** 1is 30[o] ; A right triangle is formed in the first BZ with two sides of length _K_ and _b1_ /2.  Now _b1_ = 43 π _a_ , so: 
+
+_K = (b1_ /2)/cos(30[o] )=     4 π /3a . 
+
+(c) Quantization of _k_ along _x_ : _kx(na)=_ 2 π _j=  kx =_ 2 π _j/na._ 
+
+Assume _n_ = 3 _i_ , where _i_ is an integer.  Then _:  kx = K_ ( _j/2i)._ For _j = 2i, kx=K._ Then ∆ **K** = _k y_[ˆ] _j_ and there is a massless subband. 
+
+(d) For _n_ = 10, _kx_ =2 π _j/_ 10 _a_ = _K_ (3 _j_ /20).  The closest _k_ comes to _K_ is for _j_ = 7, where ∆ _kx = K/_ 20. Then: 
+
+**==> picture [161 x 12] intentionally omitted <==**
+
+The next closest is for _j_ = 6, where ∆ _kx = K_ /10, twice the previous one.  Therefore: ε 22 = 2 ε 11 . 
+
+**==> picture [267 x 51] intentionally omitted <==**
+
+**==> picture [243 x 12] intentionally omitted <==**
+
+_m_ * / _m_ = � _K_ / 20 _mvF_ = .012 . 
+
+## **2.** _**Filling subbands**_ 
+
+**==> picture [393 x 124] intentionally omitted <==**
+
+18-1 
+
+(2,1) subband:  same. 
+
+**==> picture [171 x 30] intentionally omitted <==**
+
+## **3.** _**Breit-Wigner form of a transmission resonance**_ 
+
+(a) cos( δϕ ) ≅ 1 − δϕ 2 / 2 ; | _ri_ | = 1 − | _ti_ |2 ≅ 1 − 12 | _ti_ |2 − 18 | _ti_ |4 The denominator of (29) is then: 1 + 1( − | _t_ 1 |2 )(1 − | _t_ 2 |2 ) − 21( − 12 | _t_ 1 |2 − 18 | _t_ 1 |4 )(1 − 12 | _t_ 2 |2 − 18 | _t_ 2 |4 )(1 − 12 δϕ 2 ) = 14 (| _t_ 1 |4 + | _t_ 2 |4 ) + 12 | _t_ 1 |2| _t_ 2 |2 +δϕ 2 = 14 (| _t_ 1 |2 + | _t_ 2 |2 ) 2 + δϕ 2 ℑ = 4 | _t_ 1 ||2 _t_ 2 |2 . (| _t_ 1 |2 + | _t_ 2 |2 ) 2 + 4 δϕ 2 
+
+(b) δϕ = 2 _L_ δ _k_ and δ _k_ / δε = ∆ _k_ / ∆ε = ( π / _L_ /) ∆ε .  Combining: δϕ = (2 _L_ )( π / _L_ ) δε / ∆ε => δϕ / 2 π = δε / ∆ε 
+
+(c)   Combining: 
+
+**==> picture [257 x 31] intentionally omitted <==**
+
+## **4.** _**Barriers in series and Ohm’s law**_ 
+
+(a) 
+
+**==> picture [425 x 160] intentionally omitted <==**
+
+## **5.** _**Energies of a spherical quantum dot**_ 
+
+**==> picture [418 x 57] intentionally omitted <==**
+
+18-2 
+
+**==> picture [424 x 138] intentionally omitted <==**
+
+## **6.** _**Thermal properties in 1D**_ 
+
+**==> picture [375 x 145] intentionally omitted <==**
+
+(b)  The heat flow to the right out of reservoir 1 is given by: 
+
+**==> picture [457 x 33] intentionally omitted <==**
+
+and similarly for _JL._ The difference is: 
+
+**==> picture [368 x 74] intentionally omitted <==**
+
+18-3 
+
+## **CHAPTER 20** 
+
+1. U = nEI. 
+
+− The number of ways to pick n from N is N! / (N n) !n!. The number of ways to put n − into N' = n'! / (N' n) !n!. 
+
+**==> picture [275 x 238] intentionally omitted <==**
+
+**==> picture [347 x 48] intentionally omitted <==**
+
+13.6 3 3a. h /ω = ε 2 ⋅ 4 eV. From Table 10.3 we have ε ( ∞ ) = 2.25 for NaCl, whence h /ω = 2.0 eV. The observed value quoted in Table 18.2 is 2.7 eV. 
+
+b. From Vol. I of Atomic energy levels, Circular 467 of the Nat. Bur. of Standards, 3p-3s = 16960 cm[–1] = 2.1 eV. 
+
+20-1 
+
+## **CHAPTER 21** 
+
+1. In fcc the nearest neighbors to a given atom lie in [110] and equivalent directions -- thus these directions are lines of closest packing. In bcc the nearest neighbors lie in [111] and equivalent directions. There is a lively interest in the channeling of fast ions along open channel directions in crystals. 
+
+2a. 
+
+**==> picture [325 x 52] intentionally omitted <==**
+
+b. 
+
+**==> picture [237 x 47] intentionally omitted <==**
+
+3. When a dislocation moves a distance L through the crystal, the crystal advances by a distance b. The work σ L[2] b may be expressed as 
+
+**==> picture [225 x 68] intentionally omitted <==**
+
+Thus F = σ b is the force/unit length on the dislocation. 
+
+21-1 
+
+## **CHAPTER 22** 
+
+1. Disordered state: S given by Eq. (2.48) with <f> as averaged over 3 Cu and 1 Au atom. Ordered state: S ( hk �) = fAu + fCu (e −π i ( k +�) + e − i ( h +�) + e −π i ( h + k ) ) Consider the following reflections: (x ≡ 
+
+refl. present) 
+
+|Indices<br>100<br>110<br>111<br>200<br>210<br>211<br>220<br>221<br>222|Disordered<br>no<br>no<br>x<br>x<br>no<br>no<br>x<br>no<br>x|Ordered|
+|---|---|---|
+|||x<br>x<br>x<br>x<br>x<br>x<br>x<br>x<br>x|
+
+
+
+2. C = ∂ E/ ∂ T; now use E from Eq. (5): E = E0 + 2NUP[2] . Thus Cconfig = 4NUP(T) ∂ P/ ∂ T, and we recall that U is negative, as otherwise an ordered state does not occur. From Fig. 7b, 
+
+**==> picture [162 x 86] intentionally omitted <==**
+
+in this region a treatment based on P alone gives Cconfig = 0. We should look at the short range order! 
+
+22-1 
+
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

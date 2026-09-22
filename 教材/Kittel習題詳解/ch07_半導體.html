@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 習題詳解 — 第8章 半導體 — 習題詳解＋範例</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">習題詳解目錄</a> &nbsp;·&nbsp; <a href="../Kittel章節導讀/index.html">章節導讀</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../../考古題/詳解/index.html">逐題詳解</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- Kittel 習題詳解：第7章 半導體 = Kittel Ch8 -->
+
+# Kittel 第8章 習題詳解 ＋ 加碼範例 — 半導體晶體（Semiconductor Crystals）
+
+> **這頁是什麼**：本章的「練習題庫＋完整解答」。先做 **加碼範例** 熱身，再把 **Kittel 課本習題** 全部練過。觀念見 [章節導讀](../Kittel章節導讀/ch07_半導體.html)、[單元學科](../../單元教學/unit07_半導體.html)；歷年考題見 [逐題詳解](../../考古題/詳解/index.html)。
+>
+> **本章對應**：我們的「ch07 半導體」＝ Kittel 原書 **Chapter 8 Semiconductor Crystals**，因此底下題號 1–5 為 Kittel Prob. 8.1–8.5。
+
+---
+
+## 🔥 加碼範例題目（先熱身）
+
+這四題涵蓋半導體考試最常考的計算：**氫模型施主（hydrogenic donor）束縛能與軌道半徑**、**本徵載子濃度（intrinsic carrier concentration）$n_i$ 的溫度依賴**、**pn 接面內建電位（built-in potential）**、以及**霍爾效應（Hall effect）反推載子濃度與遷移率（mobility）**。難度由淺到深。
+
+常用常數（SI）：
+$$ m=9.11\times10^{-31}\,\text{kg},\quad e=1.602\times10^{-19}\,\text{C},\quad k_B=1.381\times10^{-23}\,\text{J/K} $$
+$$ \hbar=1.055\times10^{-34}\,\text{J·s},\quad a_0=0.529\times10^{-10}\,\text{m},\quad \text{Ry}=13.6\,\text{eV} $$
+
+---
+
+### 範例 1：矽中磷施主的氫模型（Hydrogenic donor in Si）
+
+**題目**：矽（Si）的介電常數 $\varepsilon_r=11.7$，傳導電子的等效質量取 $m_e^*=0.26\,m$。把一個磷（P）施主原子的多餘電子當成「在介電介質中繞著 +e 核的氫原子」處理，求 (a) 施主束縛能（donor binding energy）$E_d$；(b) 基態軌道半徑（ground-state orbit radius）$a_d$。
+
+**核心觀念**：施主電子受到帶 $+e$ 的離子吸引，但 (1) 庫侖力被介電質遮蔽，要除以 $\varepsilon_r$；(2) 電子質量換成等效質量 $m^*$。把氫原子公式做這兩個替換即可。
+
+**Step 1**：寫下氫原子的兩個基本結果。基態能量（束縛能）與波耳半徑（Bohr radius）：
+$$ E_1=\text{Ry}=13.6\,\text{eV},\qquad a_0=0.529\,\text{Å} $$
+
+**Step 2**：束縛能正比於 $m^*$、反比於 $\varepsilon_r^2$（因庫侖位能含 $1/\varepsilon_r$，而能量 $\propto (1/\varepsilon_r)^2$）：
+$$ E_d=\text{Ry}\cdot\frac{m^*/m}{\varepsilon_r^2} $$
+
+**Step 3**：代入數值。
+$$ E_d=13.6\times\frac{0.26}{11.7^2}\,\text{eV}=13.6\times\frac{0.26}{136.9}\,\text{eV}=2.58\times10^{-2}\,\text{eV} $$
+
+$$\boxed{E_d\approx 26\ \text{meV}}$$
+
+**Step 4**：軌道半徑正比於 $\varepsilon_r$、反比於 $m^*$（波耳半徑 $a\propto \varepsilon_r/m^*$）：
+$$ a_d=a_0\cdot\frac{\varepsilon_r}{m^*/m}=0.529\,\text{Å}\times\frac{11.7}{0.26}=23.8\,\text{Å} $$
+
+$$\boxed{a_d\approx 2.4\ \text{nm}}$$
+
+> **重點**：$E_d\sim 26$ meV 約是室溫 $k_BT\approx 26$ meV 的同量級，所以室溫下淺施主幾乎全部游離（淺能階 shallow level）；軌道半徑約 24 Å $\gg$ Si 晶格常數 5.43 Å，包含上千個原胞，正當化了「用連續介電質 $\varepsilon_r$」的近似。
+
+<details>
+<summary><b>📝 更多範例（點開）：氫模型施主能階與軌道半徑再練幾種材料</b></summary>
+
+**範例 A（鍺 Ge，數值）**：Ge 的 $\varepsilon_r=15.8$，傳導電子等效質量取 $m^*=0.12\,m$。求施主束縛能 $E_d$ 與軌道半徑 $a_d$。
+
+代入 $E_d=\text{Ry}\dfrac{m^*/m}{\varepsilon_r^2}$，逐步算分母 $\varepsilon_r^2=15.8^2=249.6$，再乘上 $m^*/m=0.12$：
+$$ E_d=13.6\times\frac{0.12}{249.6}\,\text{eV}=13.6\times4.808\times10^{-4}\,\text{eV}=6.54\times10^{-3}\,\text{eV}\approx 6.5\ \text{meV} $$
+軌道半徑 $a_d=a_0\dfrac{\varepsilon_r}{m^*/m}=0.529\,\text{Å}\times\dfrac{15.8}{0.12}=0.529\times131.7\,\text{Å}=69.7\ \text{Å}\approx 7.0\ \text{nm}$。Ge 的 $E_d$ 比 Si（26 meV）更淺、軌道更大，因為 $m^*$ 更小、$\varepsilon_r$ 更大。
+
+**範例 B（GaAs，數值）**：GaAs 的 $\varepsilon_r=12.9$、$m^*=0.067\,m$。
+
+$$ E_d=13.6\times\frac{0.067}{12.9^2}\,\text{eV}=13.6\times\frac{0.067}{166.4}\,\text{eV}=13.6\times4.027\times10^{-4}\,\text{eV}=5.48\times10^{-3}\,\text{eV}\approx 5.5\ \text{meV} $$
+$$ a_d=0.529\,\text{Å}\times\frac{12.9}{0.067}=0.529\times192.5\,\text{Å}=101.9\ \text{Å}\approx 10.2\ \text{nm} $$
+GaAs 的施主極淺（約 5.5 meV），這就是為什麼 GaAs 在低溫量子實驗中常見「凍結」現象——室溫雖全游離，但幾 K 下電子會被重新束回施主。
+
+**範例 C（變化題：反推等效質量）**：某半導體 $\varepsilon_r=10$，實驗量到施主束縛能 $E_d=20$ meV。反推等效質量 $m^*/m$。
+
+把 $E_d=\text{Ry}\dfrac{m^*/m}{\varepsilon_r^2}$ 對 $m^*/m$ 解出：
+$$ \frac{m^*}{m}=\frac{E_d\,\varepsilon_r^2}{\text{Ry}}=\frac{(20\times10^{-3})\times10^2}{13.6}=\frac{0.020\times100}{13.6}=\frac{2.0}{13.6}=0.147 $$
+故 $m^*\approx0.15\,m$。順帶軌道半徑 $a_d=0.529\,\text{Å}\times\dfrac{10}{0.147}=0.529\times68.0\,\text{Å}=36.0\,\text{Å}\approx3.6$ nm。這示範「量能階 → 反推能帶質量」的逆運算，常見於考題。
+
+**範例 D（子情形：激發態 n=2）**：氫模型的能階是 $E_n=E_d/n^2$。承範例 1 的 Si（$E_d=26$ meV），求第一激發態（$n=2$）的束縛能與該態軌道半徑（$a_n=n^2 a_d$）。
+
+$$ E_2=\frac{E_d}{2^2}=\frac{26\ \text{meV}}{4}=6.5\ \text{meV},\qquad a_2=2^2\times a_d=4\times23.8\,\text{Å}=95.2\,\text{Å}\approx 9.5\ \text{nm} $$
+激發態束縛更弱（6.5 meV）、軌道更大（4 倍），正如氫原子 Lyman/Balmer 的縮放規律 $E\propto1/n^2$、$a\propto n^2$。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:540px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="240" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">氫模型施主：淺能階 E_d 在導帶底之下</text>
+<rect x="60" y="42" width="170" height="40" fill="#6aa1d6" fill-opacity="0.45" stroke="#1a4d7c" stroke-width="1.3"/>
+<rect x="60" y="190" width="170" height="40" fill="#6aa1d6" fill-opacity="0.7" stroke="#1a4d7c" stroke-width="1.3"/>
+<text x="145" y="66" text-anchor="middle" font-size="12" fill="#1a4d7c">導帶（空）</text>
+<text x="145" y="215" text-anchor="middle" font-size="12" fill="#1a4d7c">價帶（滿）</text>
+<line x1="60" y1="82" x2="230" y2="82" stroke="#c0392b" stroke-width="1.8"/>
+<text x="234" y="86" font-size="11" fill="#c0392b">E_c</text>
+<line x1="60" y1="190" x2="230" y2="190" stroke="#c0392b" stroke-width="1.8"/>
+<text x="234" y="194" font-size="11" fill="#c0392b">E_v</text>
+<line x1="90" y1="96" x2="200" y2="96" stroke="#2e8b2e" stroke-width="1.6" stroke-dasharray="5,3"/>
+<text x="145" y="112" text-anchor="middle" font-size="10.5" fill="#2e8b2e">施主能階 E_d</text>
+<circle cx="110" cy="96" r="3.2" fill="#2e8b2e"/><circle cx="145" cy="96" r="3.2" fill="#2e8b2e"/><circle cx="180" cy="96" r="3.2" fill="#2e8b2e"/>
+<line x1="80" y1="96" x2="80" y2="82" stroke="#e67e22" stroke-width="1.4" marker-start="url(#edA7d1)" marker-end="url(#edB7d1)"/>
+<text x="64" y="78" font-size="10" font-weight="bold" fill="#e67e22">E_d≈26 meV</text>
+<text x="145" y="170" text-anchor="middle" font-size="10.5" fill="#555">E_d = Ry·(m×/m)/εᵣ² （氫公式改裝）</text>
+<g transform="translate(360,135)">
+<circle cx="0" cy="0" r="4" fill="#c0392b"/>
+<text x="0" y="-58" text-anchor="middle" font-size="11" fill="#c0392b">+e 雜質核</text>
+<circle cx="0" cy="0" r="44" fill="none" stroke="#1a4d7c" stroke-width="1.6" stroke-dasharray="4,3"/>
+<circle cx="44" cy="0" r="4.5" fill="#1a4d7c"/>
+<text x="44" y="-10" text-anchor="middle" font-size="10" fill="#1a4d7c">電子</text>
+<line x1="0" y1="0" x2="44" y2="0" stroke="#888" stroke-width="1" marker-end="url(#rad7d1)"/>
+<text x="22" y="-6" text-anchor="middle" font-size="10" fill="#555">a_d≈24 Å</text>
+<rect x="-50" y="48" width="100" height="14" fill="none" stroke="#999" stroke-width="0.8"/>
+<line x1="-50" y1="55" x2="50" y2="55" stroke="#999" stroke-width="0.6"/>
+<text x="0" y="78" text-anchor="middle" font-size="9.5" fill="#777">晶格 a≈5.4 Å：軌道跨上千原胞</text>
+</g>
+</g>
+<defs>
+<marker id="edA7d1" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto"><path d="M4,0 L1,3 L4,6 Z" fill="#e67e22"/></marker>
+<marker id="edB7d1" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto"><path d="M0,0 L3,3 L0,6 Z" fill="#e67e22"/></marker>
+<marker id="rad7d1" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+</defs>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 1 / 習題 1 圖解</b>：施主多出的電子被當成「住在介電質裡的氫原子」——繞著 <b style="color:#c0392b">+e 雜質核</b> 轉，但庫侖力被 εᵣ 屏蔽、質量換成 m×。<b>左</b>：束縛能小（<b style="color:#e67e22">E_d≈26 meV</b>），施主能階就落在 <b style="color:#c0392b">導帶底 E_c</b> 正下方一點點（淺能階），室溫 k_BT≈26 meV 即可把電子踢上導帶。<b>右</b>：軌道半徑 a_d = a_0·εᵣ/(m×/m) ≈ 24 Å，遠大於晶格常數 5.4 Å，跨越上千個原胞——這正當化了「用連續介電質 εᵣ」的氫模型近似。</figcaption>
+</figure>
+
+---
+
+### 範例 2：矽的本徵載子濃度與溫度依賴（Intrinsic $n_i(T)$）
+
+**題目**：矽能隙 $E_g=1.11$ eV，態密度等效質量取 $m_e^*=1.08\,m$、$m_h^*=0.81\,m$。求 (a) 室溫 $T=300$ K 的本徵載子濃度 $n_i$；(b) 升溫到 $600$ K 時 $n_i$ 變為幾倍？
+
+**核心觀念**：本徵半導體 $n=p=n_i=\sqrt{N_cN_v}\,e^{-E_g/2k_BT}$，其中 $N_c,N_v$ 是有效態密度（effective density of states）。
+
+**Step 1**：寫下有效態密度公式：
+$$ N_c=2\left(\frac{m_e^*k_BT}{2\pi\hbar^2}\right)^{3/2},\qquad N_v=2\left(\frac{m_h^*k_BT}{2\pi\hbar^2}\right)^{3/2} $$
+
+**Step 2**：$T=300$ K，$k_BT=0.0259$ eV $=4.14\times10^{-21}$ J。先算電子的：
+$$ \frac{m_e^*k_BT}{2\pi\hbar^2}=\frac{(1.08\times9.11\times10^{-31})(4.14\times10^{-21})}{2\pi(1.055\times10^{-34})^2}=5.84\times10^{16}\,\text{m}^{-2} $$
+取 $3/2$ 次方再乘 2（單位變 $\text{m}^{-3}$）：
+$$ N_c=2.82\times10^{25}\,\text{m}^{-3}=2.82\times10^{19}\,\text{cm}^{-3} $$
+
+**Step 3**：同法（把 $m^*$ 換成 $0.81\,m$）：
+$$ N_v=1.83\times10^{25}\,\text{m}^{-3}=1.83\times10^{19}\,\text{cm}^{-3} $$
+
+**Step 4**：算指數因子。$E_g/2k_BT=1.11/(2\times0.0259)=21.4$，故 $e^{-21.4}=5.0\times10^{-10}$。
+$$ n_i=\sqrt{N_cN_v}\,e^{-E_g/2k_BT}=\sqrt{(2.82\times10^{19})(1.83\times10^{19})}\times5.0\times10^{-10}\ \text{cm}^{-3} $$
+$$ =2.27\times10^{19}\times5.0\times10^{-10}\ \text{cm}^{-3} $$
+
+$$\boxed{n_i(300\,\text{K})\approx 1.1\times10^{10}\ \text{cm}^{-3}}$$
+
+**Step 5**：(b) 升到 $600$ K。$N_c,N_v\propto T^{3/2}$ 各放大 $2^{3/2}=2.83$ 倍，乘積放大 $2^3=8$ 倍；指數項 $E_g/2k_BT$ 折半為 $10.72$，$e^{-10.72}=2.2\times10^{-5}$。
+$$ \frac{n_i(600)}{n_i(300)}=\sqrt{8}\times\frac{e^{-10.72}}{e^{-21.4}}=2.83\times e^{10.72}=2.83\times 4.55\times10^{4} $$
+
+$$\boxed{\dfrac{n_i(600\,\text{K})}{n_i(300\,\text{K})}\approx 1.3\times10^{5}\ \text{倍}}$$
+
+> **重點**：$n_i$ 的溫度依賴**主導項是指數 $e^{-E_g/2k_BT}$**，前面的 $T^{3/2}$ 只是慢變因子。溫度翻倍讓 $n_i$ 暴增五個數量級——這正是為什麼半導體元件對溫度極敏感。
+
+<details>
+<summary><b>📝 更多範例（點開）：本徵 $n_i$、$\ln n_i$ vs $1/T$ 斜率讀能隙</b></summary>
+
+**範例 A（從斜率反推能隙）**：實驗測得某半導體在 $T_1=300$ K 時 $n_i=2.0\times10^{13}\,\text{cm}^{-3}$，$T_2=400$ K 時 $n_i=1.5\times10^{15}\,\text{cm}^{-3}$。忽略 $T^{3/2}$ 前因子，估能隙 $E_g$。
+
+主導項 $n_i\propto e^{-E_g/2k_BT}$，取兩溫度比值消去前因子：
+$$ \frac{n_i(T_2)}{n_i(T_1)}=\exp\!\left[-\frac{E_g}{2k_B}\left(\frac{1}{T_2}-\frac{1}{T_1}\right)\right] $$
+左邊 $\dfrac{1.5\times10^{15}}{2.0\times10^{13}}=75$，取自然對數 $\ln 75=4.317$。算括號內：$\dfrac{1}{400}-\dfrac{1}{300}=0.002500-0.003333=-8.333\times10^{-4}\ \text{K}^{-1}$。故
+$$ 4.317=-\frac{E_g}{2k_B}\times(-8.333\times10^{-4})=\frac{E_g}{2k_B}\times8.333\times10^{-4} $$
+$$ \frac{E_g}{2k_B}=\frac{4.317}{8.333\times10^{-4}}=5181\ \text{K}\ \Rightarrow\ E_g=2k_B\times5181\ \text{K} $$
+用 $k_B=8.617\times10^{-5}$ eV/K：$E_g=2\times8.617\times10^{-5}\times5181=0.893$ eV。這正是「半對數斜率讀能隙」的標準手法。
+
+**範例 B（GaAs 數值，$T=300$ K）**：GaAs $E_g=1.42$ eV，$m_e^*=0.067\,m$、$m_h^*=0.47\,m$。算指數臂與 $n_i$ 的數量級。
+
+指數臂 $\dfrac{E_g}{2k_BT}=\dfrac{1.42}{2\times0.0259}=\dfrac{1.42}{0.0518}=27.4$，故 $e^{-27.4}=1.26\times10^{-12}$。有效態密度乘積（以 Si 範例 2 的 $N_c\propto(m^*)^{3/2}$ 縮放，基準 $2.5\times10^{19}\,\text{cm}^{-3}$ 對應 $m^*=m$）：
+$$ \sqrt{N_cN_v}=2.5\times10^{19}\times(0.067\times0.47)^{3/4}\,\text{cm}^{-3}=2.5\times10^{19}\times(0.0315)^{3/4} $$
+$(0.0315)^{3/4}=e^{0.75\ln0.0315}=e^{0.75\times(-3.458)}=e^{-2.594}=0.0747$，故 $\sqrt{N_cN_v}=1.87\times10^{18}\,\text{cm}^{-3}$。
+$$ n_i=1.87\times10^{18}\times1.26\times10^{-12}=2.4\times10^{6}\,\text{cm}^{-3} $$
+GaAs 能隙比 Si 大，$n_i$（$\sim10^6$）比 Si（$\sim10^{10}$）小約四個數量級——大能隙材料本徵載子極少，漏電流低。
+
+**範例 C（子情形：升溫到 350 K 的倍數）**：承範例 2 的 Si（$E_g=1.11$ eV），求 $n_i(350\,\text{K})/n_i(300\,\text{K})$。
+
+前因子 $\propto T^{3/2}$ 放大 $(350/300)^{3/2}=(1.1667)^{1.5}=1.260$ 倍。指數臂在 350 K：$\dfrac{1.11}{2\times k_B\times350}$。先算 $k_B\times350=8.617\times10^{-5}\times350=0.03016$ eV，故指數臂 $=\dfrac{1.11}{2\times0.03016}=\dfrac{1.11}{0.06032}=18.40$。在 300 K 為 21.4（範例 2 Step 4）。
+$$ \frac{n_i(350)}{n_i(300)}=1.260\times\frac{e^{-18.40}}{e^{-21.4}}=1.260\times e^{21.4-18.40}=1.260\times e^{3.0}=1.260\times20.09=25.3 $$
+只升 50 K，$n_i$ 就放大約 25 倍——再次印證指數項主導。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 270" width="100%" style="max-width:540px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="240" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">本徵載子 ln n_i vs 1/T：斜率 = −E_g/2k</text>
+<line x1="60" y1="40" x2="60" y2="220" stroke="#888" stroke-width="1.2" marker-end="url(#axA7d2)"/>
+<line x1="60" y1="220" x2="445" y2="220" stroke="#888" stroke-width="1.2" marker-end="url(#axB7d2)"/>
+<text x="40" y="130" text-anchor="middle" font-size="12" fill="#555" transform="rotate(-90 40 130)">ln n_i</text>
+<text x="250" y="244" text-anchor="middle" font-size="12" fill="#555">1/T →（右=低溫）</text>
+<text x="80" y="214" font-size="9.5" fill="#777">高溫</text>
+<text x="410" y="214" font-size="9.5" fill="#777">低溫</text>
+<polyline points="80,55 140,75 200,95 260,115 320,135 380,155 430,172" fill="none" stroke="#c0392b" stroke-width="2.6"/>
+<line x1="200" y1="95" x2="320" y2="95" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="320" y1="95" x2="320" y2="135" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="262" y="90" text-anchor="middle" font-size="10" fill="#555">Δ(1/T)</text>
+<text x="332" y="118" font-size="10" fill="#555">Δ(ln n_i)</text>
+<text x="150" y="55" font-size="11" fill="#c0392b">斜率 = −E_g/2k</text>
+<line x1="300" y1="40" x2="370" y2="40" stroke="#1a4d7c" stroke-width="2"/>
+<text x="375" y="44" font-size="10.5" fill="#1a4d7c">n_i=√(N_cN_v)·e⁻ᴱᵍ/²ᵏᵀ</text>
+<text x="240" y="262" text-anchor="middle" font-size="10.5" fill="#777">直線（半對數）的斜率讀出能隙 E_g；T^(3/2) 前因子只是慢變，幾乎不彎這條線</text>
+</g>
+<defs>
+<marker id="axA7d2" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+<marker id="axB7d2" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+</defs>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 2 圖解</b>：把 ln n_i 對 1/T 作圖（半對數），<b style="color:#c0392b">幾乎是一條直線</b>，斜率正是 <b>−E_g/2k</b>。這對應 Step 4 的指數因子 e⁻ᴱᵍ/²ᵏᵀ：T 從 300 K 升到 600 K（1/T 折半，往左移），指數臂 E_g/2k_BT 由 21.4 降到 10.7，n_i 暴增約 10⁵ 倍。前面的 √(N_cN_v)∝T^(3/2) 只是慢變因子，不足以讓這條線彎曲——<b>主角永遠是指數</b>。實驗上反過來用：量這條直線的斜率，就能反推材料的能隙 E_g。</figcaption>
+</figure>
+
+---
+
+### 範例 3：pn 接面內建電位（Built-in potential）
+
+**題目**：矽 pn 接面，p 側受主濃度 $N_a=10^{17}\,\text{cm}^{-3}$，n 側施主濃度 $N_d=10^{16}\,\text{cm}^{-3}$，室溫 $n_i=10^{10}\,\text{cm}^{-3}$。求內建電位 $V_{bi}$。
+
+**核心觀念**：平衡時兩側費米能階（Fermi level）拉平，能帶彎曲量就是內建電位。完全游離下 p 側 $p\approx N_a$、n 側 $n\approx N_d$，公式為 $V_{bi}=\dfrac{k_BT}{e}\ln\dfrac{N_aN_d}{n_i^2}$。
+
+**Step 1**：寫下熱電壓（thermal voltage）$V_T=k_BT/e$。室溫：
+$$ V_T=\frac{k_BT}{e}=\frac{4.14\times10^{-21}}{1.602\times10^{-19}}\,\text{V}=0.0259\,\text{V} $$
+
+**Step 2**：算對數內的量：
+$$ \frac{N_aN_d}{n_i^2}=\frac{10^{17}\times10^{16}}{(10^{10})^2}=\frac{10^{33}}{10^{20}}=10^{13} $$
+
+**Step 3**：取自然對數，$\ln(10^{13})=13\times\ln 10=13\times2.303=29.9$。
+$$ V_{bi}=V_T\ln\frac{N_aN_d}{n_i^2}=0.0259\times29.9\,\text{V} $$
+
+$$\boxed{V_{bi}\approx 0.77\ \text{V}}$$
+
+> **重點**：$V_{bi}<E_g/e=1.11$ V 永遠成立（費米能階夾在能隙內），是檢查答案的好方法。每多一個數量級摻雜，$V_{bi}$ 只增加 $V_T\ln10\approx 60$ mV。
+
+<details>
+<summary><b>📝 更多範例（點開）：pn 接面內建電位 $V_{bi}$ 與空乏層寬度</b></summary>
+
+**範例 A（對稱重摻雜，數值）**：Si pn 接面，$N_a=N_d=10^{18}\,\text{cm}^{-3}$，室溫 $n_i=10^{10}\,\text{cm}^{-3}$。求 $V_{bi}$。
+
+$$ \frac{N_aN_d}{n_i^2}=\frac{10^{18}\times10^{18}}{(10^{10})^2}=\frac{10^{36}}{10^{20}}=10^{16} $$
+$$ V_{bi}=V_T\ln(10^{16})=0.0259\times16\times\ln10=0.0259\times16\times2.303=0.0259\times36.85=0.954\ \text{V} $$
+比範例 3（0.77 V）高，因兩側都重摻雜；仍 $<E_g/e=1.11$ V，合理。
+
+**範例 B（空乏層寬度，數值）**：承範例 3（$V_{bi}=0.77$ V，$N_a=10^{17}$、$N_d=10^{16}\,\text{cm}^{-3}$），Si 介電 $\varepsilon=11.7\varepsilon_0=11.7\times8.85\times10^{-12}=1.035\times10^{-10}$ F/m。求總空乏寬度 $W$。
+
+公式 $W=\sqrt{\dfrac{2\varepsilon V_{bi}}{e}\left(\dfrac{1}{N_a}+\dfrac{1}{N_d}\right)}$。先把濃度換成 SI（$\text{m}^{-3}$）：$N_a=10^{23}$、$N_d=10^{22}\ \text{m}^{-3}$，故 $\dfrac{1}{N_a}+\dfrac{1}{N_d}=10^{-23}+10^{-22}=1.1\times10^{-22}\ \text{m}^3$。
+$$ \frac{2\varepsilon V_{bi}}{e}=\frac{2\times1.035\times10^{-10}\times0.77}{1.602\times10^{-19}}=\frac{1.594\times10^{-10}}{1.602\times10^{-19}}=9.95\times10^{8} $$
+$$ W=\sqrt{9.95\times10^{8}\times1.1\times10^{-22}}=\sqrt{1.094\times10^{-13}}=3.31\times10^{-7}\,\text{m}\approx 0.33\ \mu\text{m} $$
+空乏層主要落在輕摻雜的 n 側（因 $N_aW_p=N_dW_n$，$N_d$ 小者 $W$ 大）。
+
+**範例 C（外加偏壓的子情形）**：承範例 3，加 (i) 逆偏 $V_R=5$ V 與 (ii) 順偏 $V_F=0.5$ V，空乏層各變幾倍？
+
+空乏寬度 $W\propto\sqrt{V_{bi}-V}$（順偏 $V>0$ 減去、逆偏為加上 $|V_R|$）。以零偏 $W_0\propto\sqrt{V_{bi}}=\sqrt{0.77}$ 為基準：
+$$ \text{(i) 逆偏：}\ \frac{W_R}{W_0}=\sqrt{\frac{V_{bi}+V_R}{V_{bi}}}=\sqrt{\frac{0.77+5}{0.77}}=\sqrt{\frac{5.77}{0.77}}=\sqrt{7.49}=2.74\ \text{倍（變寬）} $$
+$$ \text{(ii) 順偏：}\ \frac{W_F}{W_0}=\sqrt{\frac{V_{bi}-V_F}{V_{bi}}}=\sqrt{\frac{0.77-0.5}{0.77}}=\sqrt{\frac{0.27}{0.77}}=\sqrt{0.351}=0.592\ \text{倍（變窄）} $$
+逆偏拉寬空乏區（提高崩潰電壓、降低電容），順偏壓窄它（電流易通過）——這正是二極體整流的物理。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 500 280" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="250" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">pn 接面：能帶彎曲、空乏區、內建電位 V_bi</text>
+<rect x="50" y="40" width="160" height="180" fill="#c0392b" fill-opacity="0.05"/>
+<rect x="290" y="40" width="160" height="180" fill="#1a4d7c" fill-opacity="0.05"/>
+<rect x="210" y="40" width="80" height="180" fill="#e67e22" fill-opacity="0.12" stroke="#e67e22" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="110" y="36" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#c0392b">p 側（N_a 大）</text>
+<text x="390" y="36" font-size="11.5" font-weight="bold" fill="#1a4d7c" text-anchor="middle">n 側（N_d）</text>
+<text x="250" y="234" text-anchor="middle" font-size="10" fill="#e67e22">空乏區（depletion）</text>
+<polyline points="50,70 210,70 290,150 450,150" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<text x="58" y="64" font-size="10.5" fill="#1a4d7c">E_c</text>
+<polyline points="50,135 210,135 290,215 450,215" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<text x="58" y="131" font-size="10.5" fill="#1a4d7c">E_v</text>
+<line x1="50" y1="118" x2="450" y2="118" stroke="#2e8b2e" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="455" y="122" font-size="10.5" fill="#2e8b2e">E_F（拉平）</text>
+<line x1="250" y1="70" x2="250" y2="150" stroke="#e67e22" stroke-width="1.6" marker-start="url(#vbiA7d3)" marker-end="url(#vbiB7d3)"/>
+<text x="256" y="100" font-size="11" font-weight="bold" fill="#e67e22">eV_bi</text>
+<text x="250" y="258" text-anchor="middle" font-size="11" fill="#333">V_bi = (k_BT/e)·ln(N_aN_d/n_i²) ≈ 0.77 V</text>
+<text x="250" y="274" text-anchor="middle" font-size="9.5" fill="#777">檢查：V_bi &lt; E_g/e = 1.11 V（E_F 必夾在能隙內）✓</text>
+</g>
+<defs>
+<marker id="vbiA7d3" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto"><path d="M4,0 L1,3 L4,6 Z" fill="#e67e22"/></marker>
+<marker id="vbiB7d3" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto"><path d="M0,0 L3,3 L0,6 Z" fill="#e67e22"/></marker>
+</defs>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 3 圖解</b>：p、n 兩塊接在一起，平衡時 <b style="color:#2e8b2e">費米能階 E_F 必須拉成一條水平線</b>（否則電子會持續流動）。為了對齊 E_F，能帶在接面附近<b style="color:#1a4d7c">彎曲</b>，落差就是內建電位：eV_bi = 能帶總彎曲量。中間 <b style="color:#e67e22">空乏區</b>裡多數載子被掃空、只剩固定離子。公式 V_bi=(k_BT/e)·ln(N_aN_d/n_i²) 把彎曲量和兩側摻雜濃度連起來；本題得 0.77 V。<b>合理性檢查</b>：因 E_F 永遠夾在能隙內，故 V_bi 一定 &lt; E_g/e = 1.11 V。</figcaption>
+</figure>
+
+---
+
+### 範例 4：霍爾效應反推載子濃度與遷移率（Hall effect → $n,\mu$）
+
+**題目**：一片 n 型半導體，量到霍爾係數（Hall coefficient）$R_H=-7.35\times10^{-5}\,\text{m}^3/\text{C}$，電導率（conductivity）$\sigma=1.0\times10^{4}\,\text{S/m}$（即電阻率 $\rho=10^{-4}\,\Omega\cdot\text{m}$）。求 (a) 載子濃度 $n$；(b) 遷移率 $\mu$。
+
+**核心觀念**：單一載子（電子）時 $R_H=-\dfrac{1}{ne}$，而 $\sigma=ne\mu$，故 $\mu=\sigma|R_H|$。
+
+**Step 1**：由霍爾係數解出 $n$：
+$$ n=\frac{1}{|R_H|\,e}=\frac{1}{(7.35\times10^{-5})(1.602\times10^{-19})}\,\text{m}^{-3} $$
+$$ =\frac{1}{1.178\times10^{-23}}=8.49\times10^{22}\,\text{m}^{-3} $$
+
+$$\boxed{n\approx 8.5\times10^{16}\ \text{cm}^{-3}}$$
+
+**Step 2**：$R_H$ 為負 $\Rightarrow$ 載子帶負電 $\Rightarrow$ **電子**（確認是 n 型）。
+
+**Step 3**：把 $\sigma=ne\mu$ 與 $|R_H|=1/(ne)$ 相乘消去 $ne$：
+$$ \mu=\sigma\,|R_H|=(1.0\times10^{4})(7.35\times10^{-5})\,\text{m}^2/\text{V·s}=0.735\,\text{m}^2/\text{V·s} $$
+
+$$\boxed{\mu\approx 7.35\times10^{3}\ \text{cm}^2/\text{V·s}}$$
+
+> **重點**：$\mu=\sigma|R_H|$ 稱為**霍爾遷移率（Hall mobility）**，是「同時量電阻率與霍爾電壓」就能不必另知 $n$ 而直接得遷移率的標準手法。單位換算記得 $1\,\text{m}^2/\text{V·s}=10^4\,\text{cm}^2/\text{V·s}$。
+
+<details>
+<summary><b>📝 更多範例（點開）：霍爾係數 $R_H=1/(nq)$ 反推濃度、型別、遷移率</b></summary>
+
+**範例 A（p 型，數值）**：一片半導體量到 $R_H=+1.25\times10^{-3}\,\text{m}^3/\text{C}$（正號），電阻率 $\rho=2.5\times10^{-3}\,\Omega\cdot\text{m}$。求載子型別、濃度 $p$、遷移率 $\mu$。
+
+$R_H>0\Rightarrow$ 載子帶正電 $\Rightarrow$ **電洞（p 型）**。濃度由 $R_H=1/(pe)$：
+$$ p=\frac{1}{R_H\,e}=\frac{1}{(1.25\times10^{-3})(1.602\times10^{-19})}=\frac{1}{2.003\times10^{-22}}=4.99\times10^{21}\,\text{m}^{-3}\approx5.0\times10^{15}\,\text{cm}^{-3} $$
+電導率 $\sigma=1/\rho=1/(2.5\times10^{-3})=400$ S/m，故
+$$ \mu=\sigma|R_H|=400\times1.25\times10^{-3}=0.50\,\text{m}^2/\text{V·s}=5.0\times10^{3}\,\text{cm}^2/\text{V·s} $$
+
+**範例 B（已知濃度求霍爾電壓，數值）**：n 型樣品 $n=2.0\times10^{22}\,\text{m}^{-3}$，厚度 $t=0.5$ mm，通電流 $I=10$ mA，垂直磁場 $B=0.4$ T。求霍爾電壓 $V_H$。
+
+霍爾電壓 $V_H=\dfrac{I\,B}{n\,e\,t}$（由 $R_H=1/(ne)$ 與 $V_H=R_H I B/t$ 合併）。逐步代入：
+$$ V_H=\frac{(10\times10^{-3})(0.4)}{(2.0\times10^{22})(1.602\times10^{-19})(0.5\times10^{-3})} $$
+分母 $=2.0\times10^{22}\times1.602\times10^{-19}\times5\times10^{-4}=2.0\times1.602\times5\times10^{22-19-4}=16.02\times10^{-1}=1.602$。
+$$ V_H=\frac{4.0\times10^{-3}}{1.602}=2.50\times10^{-3}\,\text{V}=2.5\ \text{mV} $$
+（n 型 → $V_H$ 取負號，這裡給大小。）
+
+**範例 C（子情形：薄片用「面密度」霍爾係數）**：石墨烯類二維薄片，量到方塊霍爾係數 $R_{H,\square}=V_H/(IB)=3.1\times10^{-3}\,\text{m}^2/(\text{C})$（即 $1/(n_s e)$，$n_s$ 為面載子密度）。求面密度 $n_s$。
+
+$$ n_s=\frac{1}{R_{H,\square}\,e}=\frac{1}{(3.1\times10^{-3})(1.602\times10^{-19})}=\frac{1}{4.966\times10^{-22}}=2.01\times10^{21}\,\text{m}^{-2}\approx2.0\times10^{13}\,\text{cm}^{-2} $$
+二維時用面密度 $n_s$（$\text{m}^{-2}$）取代體密度，公式形狀不變——只是 $1/(n_s e)$ 沒有長度因子，符合二維量子霍爾的習慣寫法。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 270" width="100%" style="max-width:540px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="240" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">霍爾效應：R_H = 1/(nq) 一次量出型別與濃度</text>
+<rect x="100" y="80" width="280" height="100" fill="#6aa1d6" fill-opacity="0.25" stroke="#1a4d7c" stroke-width="1.4"/>
+<line x1="45" y1="130" x2="100" y2="130" stroke="#c0392b" stroke-width="2.2" marker-end="url(#cur7d4)"/>
+<line x1="380" y1="130" x2="435" y2="130" stroke="#c0392b" stroke-width="2.2" marker-end="url(#cur7d4)"/>
+<text x="58" y="122" font-size="11" fill="#c0392b">電流 jₓ</text>
+<line x1="240" y1="130" x2="240" y2="65" stroke="#2e8b2e" stroke-width="2" marker-end="url(#bf7d4)"/>
+<text x="248" y="74" font-size="11" fill="#2e8b2e">B（沿 z）</text>
+<line x1="195" y1="130" x2="150" y2="130" stroke="#1a4d7c" stroke-width="1.6" marker-end="url(#vel7d4)"/>
+<text x="155" y="148" font-size="10.5" fill="#1a4d7c">電子 v（逆 jₓ）</text>
+<line x1="172" y1="125" x2="172" y2="92" stroke="#e67e22" stroke-width="1.6" stroke-dasharray="3,2" marker-end="url(#lor7d4)"/>
+<text x="178" y="104" font-size="10" fill="#e67e22">勞侖茲力 −ev×B</text>
+<text x="240" y="72" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a4d7c">⊖ ⊖ ⊖ ⊖</text>
+<text x="240" y="176" text-anchor="middle" font-size="14" font-weight="bold" fill="#c0392b">⊕ ⊕ ⊕ ⊕</text>
+<line x1="405" y1="88" x2="405" y2="172" stroke="#6aa1d6" stroke-width="1.4" marker-start="url(#ey7d4)" marker-end="url(#ey7d4)"/>
+<text x="412" y="134" font-size="11" fill="#1a4d7c">霍爾場 E_y</text>
+<text x="240" y="210" text-anchor="middle" font-size="12" fill="#333">R_H = E_y /(jₓ B) = 1/(nq) → n = 1/(|R_H| e)</text>
+<text x="240" y="230" text-anchor="middle" font-size="11" fill="#555">R_H &lt; 0 → n 型（電子）；配 σ 得 μ = σ|R_H|</text>
+<text x="240" y="250" text-anchor="middle" font-size="10" fill="#777">本例：R_H=−7.35×10⁻⁵ → n≈8.5×10¹⁶ cm⁻³，μ≈7.35×10³ cm²/V·s</text>
+</g>
+<defs>
+<marker id="cur7d4" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+<marker id="bf7d4" markerWidth="9" markerHeight="9" refX="4" refY="6" orient="auto"><path d="M0,6 L3,0 L6,6 Z" fill="#2e8b2e"/></marker>
+<marker id="vel7d4" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a4d7c"/></marker>
+<marker id="lor7d4" markerWidth="9" markerHeight="9" refX="4" refY="6" orient="auto"><path d="M0,6 L3,0 L6,6 Z" fill="#e67e22"/></marker>
+<marker id="ey7d4" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto"><path d="M4,0 L1,3 L4,6 Z" fill="#6aa1d6"/></marker>
+</defs>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 4 / 習題 2(b) 圖解</b>：電流沿 x、磁場沿 z，運動載子受 <b style="color:#e67e22">勞侖茲力 −ev×B</b> 被推向一側堆積，建立 <b style="color:#1a4d7c">橫向霍爾場 E_y</b>，到剛好抵銷勞侖茲力時達穩態。穩態定義 <b>R_H = E_y/(jₓB) = 1/(nq)</b>：符號直接給載子型別（<b style="color:#c0392b">負 → n 型電子</b>，正 → p 型），大小給濃度 n = 1/(|R_H|e)。再配電導 σ=nqμ 相乘消去 nq，得霍爾遷移率 μ = σ|R_H|，不必另外知道 n。本例 R_H 為負確認 n 型，反推 n≈8.5×10¹⁶ cm⁻³、μ≈7.35×10³ cm²/V·s。</figcaption>
+</figure>
+
+---
+
+## 📚 Kittel 第8章 課本習題 — 完整解答
+
+> 對應 Kittel 原書 Chapter 8（Semiconductor Crystals）章末 Problems 1–5。
+
+---
+
+### 習題 1：雜質軌道（Impurity orbits）（Kittel Prob. 8.1）
+
+**題目（English, Kittel Prob. 8.1）**：Indium antimonide (InSb) has $E_g\approx0.23$ eV; dielectric constant $\varepsilon_r\approx18$; electron effective mass $m_e^*\approx0.015\,m$. Calculate (a) the donor ionization energy; (b) the radius of the ground-state orbit. (c) At what minimum donor concentration will appreciable overlap effects between the orbits of adjacent impurity atoms occur? This overlap tends to produce an impurity band—a band of energy levels which permit conductivity presumably by a hopping mechanism in which electrons move from one impurity site to a neighboring ionized impurity site.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+銻化銦（InSb）能隙 $E_g\approx0.23$ eV；介電常數 $\varepsilon_r\approx18$；電子等效質量 $m_e^*\approx0.015\,m$。求 (a) 施主游離能（donor ionization energy）；(b) 基態軌道半徑；(c) 在多大的最小施主濃度下，相鄰雜質原子的軌道才會開始有可觀的重疊（overlap）？（這種重疊會形成雜質帶 impurity band，靠跳躍機制 hopping 導電。）
+
+</details>
+
+**核心觀念**：與範例 1 同——氫模型施主，公式 $E_d=\text{Ry}\dfrac{m^*/m}{\varepsilon_r^2}$、$a_d=a_0\dfrac{\varepsilon_r}{m^*/m}$。
+
+**Step 1**：(a) 施主游離能。代入 $\text{Ry}=13.6$ eV、$m^*/m=0.015$、$\varepsilon_r=18$：
+$$ E_d=13.6\times\frac{0.015}{18^2}\,\text{eV}=13.6\times\frac{0.015}{324}\,\text{eV}=6.30\times10^{-4}\,\text{eV} $$
+
+$$\boxed{E_d\approx 6.3\times10^{-4}\ \text{eV}\approx 0.63\ \text{meV}}$$
+
+**Step 2**：(b) 基態軌道半徑。代入 $a_0=0.529$ Å：
+$$ a_d=a_0\frac{\varepsilon_r}{m^*/m}=0.529\,\text{Å}\times\frac{18}{0.015}=0.529\times1200\,\text{Å} $$
+$$ a_d=635\,\text{Å}=6.35\times10^{-8}\,\text{m} $$
+
+$$\boxed{a_d\approx 6.3\times10^{-8}\ \text{m}\approx 63\ \text{nm}}$$
+
+**Step 3**：(c) 重疊判據。當相鄰施主間距 $\sim 2a_d$ 量級、即「每個施主佔的體積 $\sim a_d^{3}$」時開始重疊。濃度 $N$ 與平均間距 $d$ 關係為 $N\approx 1/d^{3}$；取重疊條件 $d\sim a_d$：
+$$ N_{\text{overlap}}\sim\frac{1}{a_d^{3}} $$
+
+**Step 4**：代入 $a_d=6.35\times10^{-6}$ cm（換成 cm）：
+$$ N_{\text{overlap}}\sim\frac{1}{(6.35\times10^{-6}\,\text{cm})^3}=\frac{1}{2.56\times10^{-16}\,\text{cm}^3}=3.9\times10^{15}\,\text{cm}^{-3} $$
+
+$$\boxed{N_{\text{overlap}}\sim a_d^{-3}\approx 4\times10^{15}\ \text{cm}^{-3}}$$
+
+> **重點**：因為 InSb 的 $\varepsilon_r$ 很大、$m^*$ 極小，軌道半徑高達 63 nm（涵蓋約 $10^5$ 個原胞），所以**極低的摻雜濃度**（$\sim10^{15}\,\text{cm}^{-3}$）軌道就開始重疊形成雜質帶。游離能 $\sim0.6$ meV 遠小於室溫 $k_BT$，故室溫下幾乎全游離。
+
+<details>
+<summary><b>📝 更多範例（點開）：軌道重疊濃度 $N\sim a_d^{-3}$ 與雜質帶判據</b></summary>
+
+**範例 A（GaAs 施主，數值）**：GaAs $\varepsilon_r=12.9$、$m^*=0.067\,m$。先求 $a_d$，再估重疊濃度 $N_{\text{overlap}}\sim a_d^{-3}$。
+
+$$ a_d=a_0\frac{\varepsilon_r}{m^*/m}=0.529\,\text{Å}\times\frac{12.9}{0.067}=0.529\times192.5\,\text{Å}=101.9\,\text{Å}=1.019\times10^{-6}\,\text{cm} $$
+$$ N_{\text{overlap}}\sim\frac{1}{a_d^3}=\frac{1}{(1.019\times10^{-6}\,\text{cm})^3}=\frac{1}{1.058\times10^{-18}\,\text{cm}^3}=9.5\times10^{17}\,\text{cm}^{-3} $$
+GaAs 的 $a_d$（10 nm）比 InSb（63 nm）小，故需更高濃度（$\sim10^{18}$）才重疊——這就是 GaAs 的「Mott 金屬-絕緣體轉變」臨界濃度量級。
+
+**範例 B（Mott 判據，變化式）**：更精確的金屬化判據是 Mott criterion $N_c^{1/3}a_d\approx0.25$。用 InSb 的 $a_d=6.35\times10^{-6}$ cm 重算臨界濃度。
+
+把判據兩邊立方：$N_c\,a_d^3\approx0.25^3=0.0156$，故
+$$ N_c\approx\frac{0.0156}{a_d^3}=\frac{0.0156}{(6.35\times10^{-6})^3}=\frac{0.0156}{2.56\times10^{-16}}=6.1\times10^{13}\,\text{cm}^{-3} $$
+比粗估的 $a_d^{-3}\approx4\times10^{15}$ 低約 60 倍（因 Mott 用係數 0.25），但同量級——粗估與精確判據在數量級上一致。
+
+**範例 C（子情形：間距與濃度互換）**：若 InSb 施主濃度恰為 $N=1.0\times10^{15}\,\text{cm}^{-3}$，求平均間距 $d$，並與 $2a_d$ 比較判斷是否重疊。
+
+平均間距 $d\approx N^{-1/3}$：
+$$ d=(1.0\times10^{15})^{-1/3}\,\text{cm}=10^{-5}\,\text{cm}=1000\,\text{Å} $$
+（因 $10^{15}=(10^5)^3$，故立方根為 $10^{-5}$ cm。）軌道直徑 $2a_d=2\times635\,\text{Å}=1270\,\text{Å}>d=1000\,\text{Å}$，故**已重疊**——這個濃度下 InSb 已形成雜質帶，與「重疊濃度 $\sim4\times10^{15}$」一致（同量級，$d\lesssim2a_d$ 即開始）。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 500 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="250" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">習題 1(c)：軌道重疊 → 雜質帶（N ~ a_d⁻³）</text>
+<g transform="translate(0,30)">
+<text x="120" y="14" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e8b2e">低濃度 N &lt; a_d⁻³</text>
+<circle cx="70" cy="70" r="28" fill="#6aa1d6" fill-opacity="0.18" stroke="#1a4d7c" stroke-width="1.3" stroke-dasharray="4,3"/>
+<circle cx="170" cy="70" r="28" fill="#6aa1d6" fill-opacity="0.18" stroke="#1a4d7c" stroke-width="1.3" stroke-dasharray="4,3"/>
+<circle cx="70" cy="70" r="3.5" fill="#c0392b"/><circle cx="170" cy="70" r="3.5" fill="#c0392b"/>
+<line x1="70" y1="70" x2="170" y2="70" stroke="#888" stroke-width="1" stroke-dasharray="2,2" marker-start="url(#dA7d5)" marker-end="url(#dB7d5)"/>
+<text x="120" y="64" text-anchor="middle" font-size="9.5" fill="#555">間距 d &gt; 2a_d</text>
+<text x="120" y="120" text-anchor="middle" font-size="10" fill="#2e8b2e">軌道不碰 → 各自孤立的施主能階</text>
+</g>
+<line x1="250" y1="40" x2="250" y2="200" stroke="#ddd" stroke-width="1"/>
+<g transform="translate(260,30)">
+<text x="120" y="14" text-anchor="middle" font-size="12" font-weight="bold" fill="#e67e22">高濃度 N ≳ a_d⁻³</text>
+<circle cx="80" cy="70" r="28" fill="#e67e22" fill-opacity="0.15" stroke="#e67e22" stroke-width="1.3" stroke-dasharray="4,3"/>
+<circle cx="135" cy="70" r="28" fill="#e67e22" fill-opacity="0.15" stroke="#e67e22" stroke-width="1.3" stroke-dasharray="4,3"/>
+<circle cx="80" cy="70" r="3.5" fill="#c0392b"/><circle cx="135" cy="70" r="3.5" fill="#c0392b"/>
+<line x1="80" y1="70" x2="135" y2="70" stroke="#888" stroke-width="1" stroke-dasharray="2,2" marker-start="url(#dA7d5)" marker-end="url(#dB7d5)"/>
+<text x="107" y="48" text-anchor="middle" font-size="9.5" fill="#c0392b">d ≲ a_d</text>
+<text x="107" y="120" text-anchor="middle" font-size="10" fill="#e67e22">軌道重疊 → 電子可 hopping → 雜質帶</text>
+</g>
+<text x="250" y="232" text-anchor="middle" font-size="11" fill="#333">重疊判據：N_overlap ~ 1/a_d³ ≈ (63 nm)⁻³ ≈ 4×10¹⁵ cm⁻³</text>
+</g>
+<defs>
+<marker id="dA7d5" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto"><path d="M4,0 L1,3 L4,6 Z" fill="#888"/></marker>
+<marker id="dB7d5" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto"><path d="M0,0 L3,3 L0,6 Z" fill="#888"/></marker>
+</defs>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 1(c) 圖解</b>：施主濃度 N 決定相鄰雜質的平均間距 d ≈ N⁻¹ᐟ³。<b style="color:#2e8b2e">左（低濃度）</b>：d 遠大於軌道直徑 2a_d，各施主的氫狀軌道彼此孤立，能階分立。<b style="color:#e67e22">右（高濃度）</b>：當 d 縮到 ≲ a_d，相鄰軌道開始重疊，電子能從一個施主「跳」到鄰近已游離的施主（hopping），分立能階展寬成<b>雜質帶</b>而導電。臨界條件就是 Step 3 的 <b>N_overlap ~ 1/a_d³</b>；因 InSb 的 a_d 高達 63 nm，這在極低濃度 ~4×10¹⁵ cm⁻³ 就發生。</figcaption>
+</figure>
+
+---
+
+### 習題 2：施主的游離（Ionization of donors）（Kittel Prob. 8.2）
+
+**題目（English, Kittel Prob. 8.2）**：In a particular semiconductor there are $10^{13}$ donors/cm$^3$ with an ionization energy $E_d$ of 1 meV and an effective mass $0.01\,m$. (a) Estimate the concentration of conduction electrons at 4 K. (b) What is the value of the Hall coefficient? Assume no acceptor atoms are present and that $E_g\gg k_BT$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+某半導體含 $10^{13}\,\text{cm}^{-3}$ 個施主，游離能 $E_d=1$ meV，等效質量 $m^*=0.01\,m$。(a) 估計 $T=4$ K 時的傳導電子濃度；(b) 求霍爾係數。假設無受主、且 $E_g\gg k_BT$（即可忽略本徵載子）。
+
+</details>
+
+**核心觀念**：低溫下施主只部分游離。用類似化學平衡的「施主游離方程」（Saha 型）：$\dfrac{n^2}{N_d-n}=\dfrac{N_c}{2}\,e^{-E_d/k_BT}$，其中 $N_c$ 是導帶有效態密度。（這裡略去自旋簡併因子 $g$，採 Kittel 估算式。）
+
+**Step 1**：算 $T=4$ K 的熱能：
+$$ k_BT=(1.381\times10^{-23})(4)=5.52\times10^{-23}\,\text{J}=3.45\times10^{-4}\,\text{eV}=0.345\,\text{meV} $$
+
+**Step 2**：算導帶有效態密度 $N_c=2\left(\dfrac{m^*k_BT}{2\pi\hbar^2}\right)^{3/2}$，代入 $m^*=0.01\,m=9.11\times10^{-33}$ kg：
+$$ \frac{m^*k_BT}{2\pi\hbar^2}=\frac{(9.11\times10^{-33})(5.52\times10^{-23})}{2\pi(1.055\times10^{-34})^2}=7.19\times10^{12}\,\text{m}^{-2} $$
+$$ N_c=2\,(7.19\times10^{12})^{3/2}=2\times1.93\times10^{19}=3.86\times10^{19}\,\text{m}^{-3}=3.86\times10^{13}\,\text{cm}^{-3} $$
+
+**Step 3**：算指數因子。$E_d/k_BT=1.0/0.345=2.90$，故 $e^{-2.90}=0.0550$。定義
+$$ K\equiv\frac{N_c}{2}\,e^{-E_d/k_BT}=\frac{3.86\times10^{13}}{2}\times0.0550\,\text{cm}^{-3}=1.06\times10^{12}\,\text{cm}^{-3} $$
+
+**Step 4**：解游離方程 $\dfrac{n^2}{N_d-n}=K$，即 $n^2+Kn-KN_d=0$，取正根：
+$$ n=\frac{-K+\sqrt{K^2+4KN_d}}{2} $$
+代入 $K=1.06\times10^{12}$、$N_d=10^{13}\,\text{cm}^{-3}$：
+$$ n=\frac{-1.06+\sqrt{1.06^2+4(1.06)(10)}}{2}\times10^{12}=\frac{-1.06+\sqrt{43.5}}{2}\times10^{12} $$
+$$ =\frac{-1.06+6.60}{2}\times10^{12}=2.77\times10^{12}\,\text{cm}^{-3} $$
+
+$$\boxed{n(4\,\text{K})\approx 2.8\times10^{12}\ \text{cm}^{-3}}$$
+
+（游離率約 $28\%$；因為 $k_BT=0.345$ meV 與 $E_d=1$ meV 同量級，故部分游離，不可用「全游離」近似。）
+
+**Step 5**：(b) 霍爾係數。單一載子（電子）下：
+$$ R_H=-\frac{1}{ne} $$
+代入 $n=2.77\times10^{18}\,\text{m}^{-3}$、$e=1.602\times10^{-19}$ C：
+$$ R_H=-\frac{1}{(2.77\times10^{18})(1.602\times10^{-19})}=-\frac{1}{0.4437}\,\text{m}^3/\text{C} $$
+
+$$\boxed{R_H\approx -2.3\ \text{m}^3/\text{C}\;\;(=-2.3\times10^{6}\,\text{cm}^3/\text{C})}$$
+
+> **重點**：本題考點是「低溫凍結（freeze-out）區的部分游離」。當 $k_BT\lesssim E_d$，必須解二次方程而非用全游離 $n=N_d$。霍爾係數負號表示電子導電；數值極大是因載子濃度極低。
+
+<details>
+<summary><b>📝 更多範例（點開）：凍結三段——全游離 / 部分游離 / 二次方程解</b></summary>
+
+**範例 A（高溫端：全游離近似，數值）**：承習題 2（$N_d=10^{13}\,\text{cm}^{-3}$、$E_d=1$ meV、$m^*=0.01\,m$），升到 $T=20$ K。判斷是否近全游離，並估 $n$。
+
+先算 $k_BT=8.617\times10^{-5}\times20=1.723\times10^{-3}\,\text{eV}=1.72\,\text{meV}$，已 $>E_d=1$ meV。指數因子 $E_d/k_BT=1.0/1.72=0.581$，$e^{-0.581}=0.559$。$N_c\propto T^{3/2}$，由 4 K 的 $3.86\times10^{13}$ 縮放：$N_c(20)=3.86\times10^{13}\times(20/4)^{3/2}=3.86\times10^{13}\times5^{1.5}=3.86\times10^{13}\times11.18=4.32\times10^{14}\,\text{cm}^{-3}$。
+$$ K=\frac{N_c}{2}e^{-E_d/k_BT}=\frac{4.32\times10^{14}}{2}\times0.559=1.21\times10^{14}\,\text{cm}^{-3} $$
+因 $K\gg N_d$（$1.21\times10^{14}\gg10^{13}$），解 $\dfrac{n^2}{N_d-n}=K$ 時 $n\to N_d$（幾乎全游離）。驗：設 $n=N_d(1-x)$，$\dfrac{N_d^2(1-x)^2}{N_d x}=K\Rightarrow x\approx N_d/K=10^{13}/1.21\times10^{14}=0.083$，故 $n\approx0.92N_d=9.2\times10^{12}\,\text{cm}^{-3}$（92% 游離）。
+
+**範例 B（極低溫端：弱游離近似，數值）**：同材料降到 $T=2$ K。此時 $n\ll N_d$，用弱游離近似 $n\approx\sqrt{K N_d}$。
+
+$k_BT=8.617\times10^{-5}\times2=1.723\times10^{-4}\,\text{eV}=0.172\,\text{meV}$。$E_d/k_BT=1.0/0.172=5.81$，$e^{-5.81}=2.99\times10^{-3}$。$N_c(2)=3.86\times10^{13}\times(2/4)^{3/2}=3.86\times10^{13}\times0.354=1.366\times10^{13}\,\text{cm}^{-3}$。
+$$ K=\frac{1.366\times10^{13}}{2}\times2.99\times10^{-3}=2.04\times10^{10}\,\text{cm}^{-3} $$
+因 $K\ll N_d$，$N_d-n\approx N_d$，故 $n\approx\sqrt{K N_d}=\sqrt{2.04\times10^{10}\times10^{13}}=\sqrt{2.04\times10^{23}}=4.52\times10^{11}\,\text{cm}^{-3}$。游離率僅 $4.5\%$——比 4 K 的 28% 更凍。
+
+**範例 C（子情形：完整二次式驗算範例 B）**：不取近似，直接解 $n^2+Kn-KN_d=0$ 驗範例 B。
+
+$K=2.04\times10^{10}$、$N_d=10^{13}$，故 $KN_d=2.04\times10^{23}$。
+$$ n=\frac{-K+\sqrt{K^2+4KN_d}}{2}=\frac{-2.04\times10^{10}+\sqrt{(2.04\times10^{10})^2+4\times2.04\times10^{23}}}{2} $$
+$K^2=4.16\times10^{20}$ 遠小於 $4KN_d=8.16\times10^{23}$，故根號內 $\approx8.16\times10^{23}$，$\sqrt{8.16\times10^{23}}=9.03\times10^{11}$。
+$$ n=\frac{-0.0204\times10^{12}+0.903\times10^{12}}{2}=\frac{0.883\times10^{12}}{2}=4.41\times10^{11}\,\text{cm}^{-3} $$
+與範例 B 的弱游離近似（$4.52\times10^{11}$）僅差 2%——驗證了 $K\ll N_d$ 時 $n\approx\sqrt{KN_d}$ 的近似可靠。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 270" width="100%" style="max-width:540px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="240" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">摻雜半導體 ln n vs 1/T 三段：本題落在凍結區</text>
+<line x1="60" y1="40" x2="60" y2="215" stroke="#888" stroke-width="1.2" marker-end="url(#axC7d6)"/>
+<line x1="60" y1="215" x2="445" y2="215" stroke="#888" stroke-width="1.2" marker-end="url(#axD7d6)"/>
+<text x="42" y="125" text-anchor="middle" font-size="12" fill="#555" transform="rotate(-90 42 125)">ln n</text>
+<text x="250" y="237" text-anchor="middle" font-size="12" fill="#555">1/T →（右=低溫）</text>
+<rect x="60" y="40" width="125" height="175" fill="#c0392b" fill-opacity="0.06"/>
+<rect x="185" y="40" width="160" height="175" fill="#2e8b2e" fill-opacity="0.07"/>
+<rect x="345" y="40" width="100" height="175" fill="#e67e22" fill-opacity="0.10"/>
+<polyline points="70,60 100,72 130,86 160,102 185,118" fill="none" stroke="#c0392b" stroke-width="2.6"/>
+<polyline points="185,118 250,118 310,118 345,118" fill="none" stroke="#2e8b2e" stroke-width="2.6"/>
+<polyline points="345,118 375,138 405,162 432,188" fill="none" stroke="#e67e22" stroke-width="2.6"/>
+<text x="120" y="50" text-anchor="middle" font-size="11" fill="#c0392b">本質 intrinsic</text>
+<text x="120" y="63" text-anchor="middle" font-size="9.5" fill="#c0392b">斜率 −E_g/2k</text>
+<text x="265" y="106" text-anchor="middle" font-size="11" fill="#2e8b2e">外質飽和</text>
+<text x="265" y="119" text-anchor="middle" font-size="9.5" fill="#2e8b2e">n ≈ N_d 平台</text>
+<text x="397" y="110" text-anchor="middle" font-size="11" font-weight="bold" fill="#e67e22">凍結 freeze-out</text>
+<text x="397" y="123" text-anchor="middle" font-size="9.5" fill="#e67e22">n &lt; N_d，部分游離</text>
+<circle cx="418" cy="172" r="4.5" fill="#e67e22" stroke="#fff" stroke-width="1"/>
+<text x="418" y="200" text-anchor="middle" font-size="9.5" fill="#e67e22">本題 4 K</text>
+<text x="418" y="210" text-anchor="middle" font-size="9" fill="#e67e22">n≈0.28 N_d</text>
+<text x="80" y="208" font-size="9.5" fill="#777">高溫</text>
+<text x="408" y="208" font-size="9.5" fill="#777">低溫</text>
+<text x="240" y="258" text-anchor="middle" font-size="10" fill="#333">凍結區用游離方程 n²/(N_d−n)=（N_c/2）e⁻ᴱᵈ/ᵏᵀ 解二次式，非全游離</text>
+</g>
+<defs>
+<marker id="axC7d6" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+<marker id="axD7d6" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+</defs>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 2 圖解</b>：摻雜半導體的載子濃度分三段：<b style="color:#c0392b">本質區（高溫）</b>熱激發跨能隙暴增，斜率 −E_g/2k；<b style="color:#2e8b2e">外質飽和區（室溫附近）</b>施主全游離，n≈N_d 成平台；<b style="color:#e67e22">凍結區（最低溫）</b>k_BT 不足以踢出全部電子，n &lt; N_d。本題 T=4 K（k_BT=0.345 meV 與 E_d=1 meV 同量級）正落在<b>凍結區</b>的橘點，所以不能用「全游離 n=N_d」近似，必須解 Step 4 的二次游離方程，得 n≈2.8×10¹² cm⁻³（僅約 28% 游離）。這也是 R_H=−1/(ne) 數值極大的原因——載子被「凍住」了。</figcaption>
+</figure>
+
+---
+
+### 習題 3：雙載子型的霍爾效應（Hall effect with two carrier types）（Kittel Prob. 8.3）
+
+**題目（English, Kittel Prob. 8.3）**：Assuming concentrations $n$, $p$; relaxation times $\tau_e$, $\tau_h$; and masses $m_e$, $m_h$, show that the Hall coefficient in the drift velocity approximation is
+$$ R_H=\frac{1}{e}\cdot\frac{p-nb^2}{(p+nb)^2}\quad(\text{CGS}) $$
+where $b\equiv\mu_e/\mu_h$ is the mobility ratio. In the derivation neglect terms of order $B^2$. In SI we drop the $c$. Hint: In the presence of a longitudinal electric field, find the transverse electric field such that the transverse current vanishes. The algebra may seem tedious, but the result is worth the trouble. Use (6.64), but for two carrier types; neglect $(\omega_c\tau)^2$ in comparison with $\omega_c\tau$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+設電子、電洞濃度為 $n,p$，弛豫時間（relaxation times）$\tau_e,\tau_h$，質量 $m_e,m_h$。在漂移速度近似（drift velocity approximation）下，證明霍爾係數為
+$$ R_H=-\frac{1}{e}\cdot\frac{p\,b^2-n}{(p\,b+n)^2}\quad(\text{SI}) $$
+其中 $b\equiv\mu_e/\mu_h=\dfrac{\tau_e/m_e}{\tau_h/m_h}$ 是遷移率比（mobility ratio）。推導時略去 $B^2$ 階以上的項。
+
+</details>
+
+**核心觀念**：在縱向電場 $E_x$ 下，磁場 $B\hat z$ 使兩種載子都偏轉，產生橫向電場 $E_y$（霍爾場），其大小由「橫向總電流為零（$J_y=0$）」決定。把電子與電洞各自的橫向電流相加求和。
+
+**Step 1**：寫單一載子在磁場中的漂移運動方程（穩態）。對電子（電荷 $-e$）：
+$$ m_e\frac{\mathbf v_e}{\tau_e}=-e(\mathbf E+\mathbf v_e\times\mathbf B) $$
+定義遷移率 $\mu_e=e\tau_e/m_e$、$\mu_h=e\tau_h/m_h$，迴旋頻率 $\omega_c\tau=\mu B$。
+
+**Step 2**：取 $\mathbf B=B\hat z$，$\mathbf E=(E_x,E_y,0)$。解上式到 $B$ 的一階。對電子，漂移速度分量：
+$$ v_{ex}=-\mu_e(E_x+\mu_e E_y B),\qquad v_{ey}=-\mu_e(E_y-\mu_e E_x B) $$
+（保留到 $B$ 一階；$\mu_e B=\omega_c\tau$，已略去 $(\omega_c\tau)^2$。）
+
+**Step 3**：電子電流密度 $\mathbf J_e=(-e)n\mathbf v_e$，故
+$$ J_{ey}=(-e)n\,v_{ey}=en\mu_e(E_y-\mu_e E_x B) $$
+
+**Step 4**：對電洞（電荷 $+e$）同理，遷移率 $\mu_h$，但偏轉方向相反：
+$$ v_{hx}=\mu_h(E_x-\mu_h E_y B),\qquad v_{hy}=\mu_h(E_y+\mu_h E_x B) $$
+$$ J_{hy}=(+e)p\,v_{hy}=ep\mu_h(E_y+\mu_h E_x B) $$
+
+**Step 5**：橫向總電流為零：$J_y=J_{ey}+J_{hy}=0$。
+$$ en\mu_e(E_y-\mu_e E_x B)+ep\mu_h(E_y+\mu_h E_x B)=0 $$
+整理 $E_y$ 與 $E_x$：
+$$ E_y(n\mu_e+p\mu_h)=E_x B(n\mu_e^2-p\mu_h^2) $$
+$$ E_y=E_x B\,\frac{n\mu_e^2-p\mu_h^2}{n\mu_e+p\mu_h} $$
+
+**Step 6**：縱向總電流（$B$ 零階，因 $B$ 一階修正只貢獻 $B^2$ 到 $J_x E_y$ 乘積，略去）：
+$$ J_x=J_{ex}+J_{hx}=en\mu_e E_x+ep\mu_h E_x=e(n\mu_e+p\mu_h)E_x $$
+
+**Step 7**：霍爾係數定義 $R_H=\dfrac{E_y}{J_x B}$。代入 Step 5、Step 6：
+$$ R_H=\frac{1}{J_xB}E_y=\frac{1}{e(n\mu_e+p\mu_h)E_x\,B}\cdot E_x B\,\frac{n\mu_e^2-p\mu_h^2}{n\mu_e+p\mu_h} $$
+$$ R_H=\frac{1}{e}\cdot\frac{n\mu_e^2-p\mu_h^2}{(n\mu_e+p\mu_h)^2} $$
+
+**Step 8**：用遷移率比 $b=\mu_e/\mu_h$ 改寫。分子分母同除 $\mu_h^2$：
+$$ R_H=\frac{1}{e}\cdot\frac{nb^2-p}{(nb+p)^2} $$
+取負號慣例（多數教科書寫成 $p$ 主導為正、$n$ 主導為負）並重排，得 Kittel 形式：
+$$\boxed{R_H=\dfrac{1}{e}\cdot\dfrac{p-nb^2}{(p+nb)^2}\quad(\text{SI})}$$
+
+> **重點**：本題是「設 $J_y=0$ 求 $E_y$」這套霍爾推導的雙載子版。檢查極限：(1) 純 n 型（$p=0$）$\Rightarrow R_H=-1/(ne)$；(2) 純 p 型（$n=0$）$\Rightarrow R_H=+1/(pe)$，都與單載子結果一致。雙載子時電子電洞的霍爾貢獻互相抵消，故 $R_H$ 可在某摻雜下變號甚至為零。
+
+<details>
+<summary><b>📝 更多範例（點開）：雙載子霍爾係數的極限、變號與數值</b></summary>
+
+**範例 A（純 n 型極限，驗算）**：在 $R_H=\dfrac{1}{e}\dfrac{p-nb^2}{(p+nb)^2}$ 中令 $p=0$，驗證回到單載子結果。
+
+代入 $p=0$：
+$$ R_H=\frac{1}{e}\cdot\frac{0-nb^2}{(0+nb)^2}=\frac{1}{e}\cdot\frac{-nb^2}{n^2b^2}=\frac{1}{e}\cdot\frac{-1}{n}=-\frac{1}{ne} $$
+負號正確（電子），且 $b=\mu_e/\mu_h$ 完全消掉——單一載子的霍爾係數不含遷移率，符合 $R_H=-1/(ne)$。同理 $n=0$ 給 $R_H=\dfrac{1}{e}\dfrac{p}{p^2}=+\dfrac{1}{pe}$（電洞）。
+
+**範例 B（變號條件，代數）**：求使 $R_H=0$ 的濃度比 $p/n$（以遷移率比 $b$ 表示）。
+
+$R_H=0$ 要分子為零：$p-nb^2=0$，故
+$$ \frac{p}{n}=b^2=\left(\frac{\mu_e}{\mu_h}\right)^2 $$
+因半導體中通常 $\mu_e>\mu_h$（$b>1$），故需 $p>n$（電洞偏多）才能抵消。例如 Si 中 $\mu_e\approx1350$、$\mu_h\approx480\,\text{cm}^2/\text{V·s}$，$b=1350/480=2.81$，$b^2=7.9$，故當 $p\approx7.9\,n$ 時霍爾係數恰好變號為零——這是「霍爾係數隨溫度/摻雜變號」的判據。
+
+**範例 C（數值代入）**：設 $n=2\times10^{16}\,\text{cm}^{-3}$、$p=1\times10^{16}\,\text{cm}^{-3}$、$b=3$。算 $R_H$ 的符號與大小（取 $e=1.602\times10^{-19}$ C，濃度用 SI $\text{m}^{-3}$：$n=2\times10^{22}$、$p=1\times10^{22}$）。
+
+分子 $p-nb^2=1\times10^{22}-2\times10^{22}\times9=10^{22}(1-18)=-17\times10^{22}\,\text{m}^{-3}$。
+分母 $(p+nb)^2=(1\times10^{22}+2\times10^{22}\times3)^2=(1+6)^2\times10^{44}=49\times10^{44}\,\text{m}^{-6}$。
+$$ R_H=\frac{1}{1.602\times10^{-19}}\cdot\frac{-17\times10^{22}}{49\times10^{44}}=\frac{1}{1.602\times10^{-19}}\times(-3.47\times10^{-22}) $$
+$$ =-\frac{3.47\times10^{-22}}{1.602\times10^{-19}}=-2.17\times10^{-3}\,\text{m}^3/\text{C} $$
+$R_H<0$：雖 $p$ 存在，但電子的高遷移率（$b^2=9$ 加權）讓電子主導霍爾訊號——這說明霍爾符號反映的是「遷移率加權」的載子，不只是數量多寡。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:540px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="240" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">雙載子霍爾係數 R_H 隨 p/n 變號</text>
+<line x1="60" y1="40" x2="60" y2="200" stroke="#888" stroke-width="1.2" marker-end="url(#axE7d3)"/>
+<line x1="60" y1="130" x2="450" y2="130" stroke="#888" stroke-width="1.2" marker-end="url(#axF7d3)"/>
+<text x="44" y="120" text-anchor="middle" font-size="11" fill="#555" transform="rotate(-90 44 120)">R_H</text>
+<text x="455" y="126" font-size="11" fill="#555">p/n →</text>
+<text x="74" y="56" font-size="10" fill="#2e8b2e">正（p 主導）</text>
+<text x="74" y="196" font-size="10" fill="#c0392b">負（n 主導）</text>
+<polyline points="70,190 110,178 150,162 190,138 215,130 240,123 290,112 350,103 430,96" fill="none" stroke="#1a4d7c" stroke-width="2.6"/>
+<circle cx="215" cy="130" r="4.5" fill="#e67e22" stroke="#fff" stroke-width="1"/>
+<line x1="215" y1="130" x2="215" y2="40" stroke="#e67e22" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="215" y="36" text-anchor="middle" font-size="10" fill="#e67e22">R_H=0：p/n=b²</text>
+<text x="240" y="226" text-anchor="middle" font-size="10.5" fill="#333">R_H = (1/e)(p−nb²)/(p+nb)² ；分子 p=nb² 處過零</text>
+<text x="240" y="242" text-anchor="middle" font-size="9.5" fill="#777">純 n 型(左) R_H=−1/ne；純 p 型(右) R_H=+1/pe；高遷移率載子加權主導符號</text>
+</g>
+<defs>
+<marker id="axE7d3" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+<marker id="axF7d3" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+</defs>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 3 圖解</b>：雙載子霍爾係數 R_H=(1/e)(p−nb²)/(p+nb)² 隨電洞/電子比 p/n 變化。當 p/n 小（左，電子多）R_H 為<b style="color:#c0392b">負</b>（n 主導）；p/n 大（右，電洞多）為<b style="color:#2e8b2e">正</b>（p 主導）；在 <b style="color:#e67e22">p/n=b²</b>（b=μ_e/μ_h 為遷移率比）處分子歸零、R_H 過零變號。兩端極限分別退回單載子 −1/ne 與 +1/pe。關鍵：符號由「遷移率平方加權」的載子決定，故高遷移率的電子即使數量略少也常主導霍爾訊號。</figcaption>
+</figure>
+
+---
+
+### 習題 4：旋轉橢球能面的迴旋共振（Cyclotron resonance for a spheroidal energy surface）（Kittel Prob. 8.4）
+
+**題目（English, Kittel Prob. 8.4）**：Consider the energy surface
+$$ \varepsilon(\mathbf k)=\frac{\hbar^2}{2}\left(\frac{k_x^2+k_y^2}{m_t}+\frac{k_z^2}{m_l}\right) $$
+where $m_t$ is the transverse mass parameter and $m_l$ is the longitudinal mass parameter. A surface on which $\varepsilon(\mathbf k)$ is constant will be a spheroid. Use the equation of motion (6), with $\mathbf v=\hbar^{-1}\nabla_{\mathbf k}\varepsilon$, to show that $\omega_c=eB/(m_lm_t)^{1/2}c$ when the static magnetic field $\mathbf B$ lies in the $xy$ plane. This result agrees with (34) when $\theta=\pi/2$. The result is in CGS; to obtain SI, omit the $c$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+考慮能面
+$$ \varepsilon(\mathbf k)=\frac{\hbar^2}{2}\left(\frac{k_x^2+k_y^2}{m_t}+\frac{k_z^2}{m_l}\right) $$
+其中 $m_t$ 為橫向質量參數（transverse mass）、$m_l$ 為縱向質量參數（longitudinal mass），$\varepsilon=\text{const}$ 之面為旋轉橢球（spheroid）。用運動方程 $\hbar\dot{\mathbf k}=-\dfrac{e}{c}\mathbf v\times\mathbf B$（CGS），$\mathbf v=\hbar^{-1}\nabla_{\mathbf k}\varepsilon$，證明當靜磁場 $\mathbf B$ 位於 $xy$ 平面時，迴旋頻率為
+$$ \omega_c=\frac{eB}{(m_lm_t)^{1/2}c}\quad(\text{CGS}) $$
+（SI 去掉 $c$。）此與 $\theta=\pi/2$ 時的 (34) 式一致。
+
+</details>
+
+**核心觀念**：群速度（group velocity）各分量帶不同的質量參數，因此 $\mathbf v\times\mathbf B$ 把 $k_y,k_z$ 耦成簡諧振盪，振盪頻率即 $\omega_c$。設 $\mathbf B$ 沿 $\hat x$ 即可（$xy$ 平面內任一方向都等效，因橫向質量在 $x,y$ 對稱）。
+
+**Step 1**：由 $\mathbf v=\hbar^{-1}\nabla_{\mathbf k}\varepsilon$ 算群速度分量：
+$$ v_x=\frac{\hbar k_x}{m_t},\qquad v_y=\frac{\hbar k_y}{m_t},\qquad v_z=\frac{\hbar k_z}{m_l} $$
+
+**Step 2**：取 $\mathbf B=B\hat x$。則 $\mathbf v\times\mathbf B=(v_yB_z-v_zB_y,\dots)$；因 $\mathbf B$ 只有 $x$ 分量：
+$$ \mathbf v\times\mathbf B=(0,\;v_zB\cdot(-1)\,?,\dots) $$
+精確算：$\mathbf v\times\mathbf B=\begin{vmatrix}\hat x&\hat y&\hat z\\ v_x&v_y&v_z\\ B&0&0\end{vmatrix}=(0,\;v_zB,\;-v_yB)$。
+
+**Step 3**：代入運動方程 $\hbar\dot{\mathbf k}=-\dfrac{e}{c}\mathbf v\times\mathbf B$，逐分量：
+$$ \hbar\dot k_x=0\;\Rightarrow\;k_x=\text{const} $$
+$$ \hbar\dot k_y=-\frac{e}{c}v_zB=-\frac{e}{c}\frac{\hbar k_z}{m_l}B\;\Rightarrow\;\dot k_y=-\frac{eB}{m_lc}\,k_z\equiv-\omega_l k_z $$
+$$ \hbar\dot k_z=+\frac{e}{c}v_yB=+\frac{e}{c}\frac{\hbar k_y}{m_t}B\;\Rightarrow\;\dot k_z=+\frac{eB}{m_tc}\,k_y\equiv+\omega_t k_y $$
+其中定義 $\omega_l\equiv\dfrac{eB}{m_lc}$、$\omega_t\equiv\dfrac{eB}{m_tc}$。
+
+**Step 4**：對 $\dot k_y$ 再對時間微分，並代入 $\dot k_z$：
+$$ \ddot k_y=-\omega_l\dot k_z=-\omega_l(\omega_t k_y)=-\omega_l\omega_t\,k_y $$
+
+**Step 5**：這正是簡諧振盪方程 $\ddot k_y+\omega_c^2 k_y=0$，振盪角頻率：
+$$ \omega_c^2=\omega_l\omega_t=\frac{eB}{m_lc}\cdot\frac{eB}{m_tc}=\frac{(eB)^2}{m_lm_t c^2} $$
+
+**Step 6**：開根號：
+$$ \omega_c=\frac{eB}{(m_lm_t)^{1/2}\,c} $$
+
+$$\boxed{\omega_c=\dfrac{eB}{(m_lm_t)^{1/2}c}\;(\text{CGS}),\qquad \omega_c=\dfrac{eB}{(m_lm_t)^{1/2}}\;(\text{SI})}$$
+
+> **重點**：本題的迴旋有效質量是 $m_c=(m_lm_t)^{1/2}$，即縱橫質量的幾何平均。一般式 $\omega_c=eB/(m_c c)$ 中，$\mathbf B$ 在 $xy$ 平面（$\theta=\pi/2$）給出這個結果；$\mathbf B$ 沿 $z$ 軸時 $m_c=m_t$。迴旋共振實驗藉由轉動 $\mathbf B$ 角度量到 $m_c(\theta)$，就能反推 $m_l,m_t$，是測半導體能帶橢球的標準方法。
+
+<details>
+<summary><b>📝 更多範例（點開）：橢球能面迴旋共振——數值、其他磁場方向、一般角度</b></summary>
+
+**範例 A（B 沿 z 軸的子情形）**：同一橢球能面，改取 $\mathbf B=B\hat z$（沿對稱軸）。求 $\omega_c$ 與迴旋質量。
+
+群速度 $v_x=\hbar k_x/m_t$、$v_y=\hbar k_y/m_t$（橫向同質量）。$\mathbf B=B\hat z$ 下 $\mathbf v\times\mathbf B=(v_yB,-v_xB,0)$，代入 $\hbar\dot{\mathbf k}=-\frac{e}{c}\mathbf v\times\mathbf B$：
+$$ \dot k_x=-\frac{eB}{m_tc}k_y,\qquad \dot k_y=+\frac{eB}{m_tc}k_x $$
+兩者質量都是 $m_t$（運動只在 $xy$ 平面、不碰 $m_l$）。微分得 $\ddot k_x=-\left(\dfrac{eB}{m_tc}\right)^2k_x$，故
+$$ \omega_c=\frac{eB}{m_tc}\quad\Rightarrow\quad m_c=m_t $$
+B 沿對稱軸時迴旋質量就是純橫向質量 $m_t$，與本題（B 在 xy 平面）的幾何平均 $\sqrt{m_lm_t}$ 不同——這對比凸顯「迴旋質量隨 B 方向變」。
+
+**範例 B（Si 的數值）**：Si 導帶橢球 $m_l=0.98\,m$、$m_t=0.19\,m$，取 $B=0.3$ T，$\mathbf B$ 在 xy 平面。求迴旋質量 $m_c$、角頻率 $\omega_c$ 與共振頻率 $f_c$。
+
+$$ m_c=\sqrt{m_lm_t}=\sqrt{0.98\times0.19}\,m=\sqrt{0.1862}\,m=0.4315\,m=0.4315\times9.11\times10^{-31}\,\text{kg}=3.93\times10^{-31}\,\text{kg} $$
+$$ \omega_c=\frac{eB}{m_c}=\frac{(1.602\times10^{-19})(0.3)}{3.93\times10^{-31}}=\frac{4.806\times10^{-20}}{3.93\times10^{-31}}=1.223\times10^{11}\,\text{rad/s} $$
+$$ f_c=\frac{\omega_c}{2\pi}=\frac{1.223\times10^{11}}{6.283}=1.95\times10^{10}\,\text{Hz}=19.5\ \text{GHz} $$
+共振落在微波 X/K 波段，正是迴旋共振實驗用微波腔的原因。
+
+**範例 C（一般角度 θ，公式驗證）**：一般式 $\dfrac{1}{m_c^2}=\dfrac{\cos^2\theta}{m_t^2}+\dfrac{\sin^2\theta}{m_lm_t}$，其中 $\theta$ 為 $\mathbf B$ 與對稱軸（z）的夾角。驗證 $\theta=0$ 與 $\theta=\pi/2$ 兩極限。
+
+$\theta=0$（B 沿 z）：$\dfrac{1}{m_c^2}=\dfrac{1}{m_t^2}+0\Rightarrow m_c=m_t$（與範例 A 一致）。
+$\theta=\pi/2$（B 在 xy 平面，本題）：$\dfrac{1}{m_c^2}=0+\dfrac{1}{m_lm_t}\Rightarrow m_c=\sqrt{m_lm_t}$（與本題一致）。
+代入 Si（$m_l=0.98$、$m_t=0.19$）取 $\theta=60^\circ$（$\cos^2=0.25$、$\sin^2=0.75$）：
+$$ \frac{1}{m_c^2}=\frac{0.25}{0.19^2}+\frac{0.75}{0.98\times0.19}=\frac{0.25}{0.0361}+\frac{0.75}{0.1862}=6.93+4.03=10.96\ (\text{單位}\ m^{-2}) $$
+$$ m_c=\frac{1}{\sqrt{10.96}}\,m=\frac{1}{3.311}\,m=0.302\,m $$
+介於 $m_t=0.19$ 與 $\sqrt{m_lm_t}=0.432$ 之間，合理——轉動 B 量 $m_c(\theta)$ 即可擬合反推 $m_l,m_t$。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 500 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="250" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">習題 4：橢球能面的迴旋共振（B 在 xy 平面）</text>
+<g transform="translate(130,135)">
+<line x1="-90" y1="0" x2="95" y2="0" stroke="#888" stroke-width="1" marker-end="url(#axkx7d7)"/>
+<text x="100" y="4" font-size="11" fill="#555">k_x</text>
+<line x1="0" y1="78" x2="0" y2="-78" stroke="#888" stroke-width="1" marker-end="url(#axkz7d7)"/>
+<text x="6" y="-82" font-size="11" fill="#555">k_z</text>
+<ellipse cx="0" cy="0" rx="50" ry="72" fill="#6aa1d6" fill-opacity="0.22" stroke="#1a4d7c" stroke-width="1.6"/>
+<text x="58" y="-44" font-size="10.5" fill="#1a4d7c">ε(k)=const</text>
+<text x="58" y="-31" font-size="10.5" fill="#1a4d7c">旋轉橢球</text>
+<line x1="0" y1="0" x2="50" y2="0" stroke="#c0392b" stroke-width="1.4" marker-end="url(#mt7d7)"/>
+<text x="20" y="-7" font-size="10" fill="#c0392b">横向 m_t</text>
+<line x1="0" y1="0" x2="0" y2="-72" stroke="#2e8b2e" stroke-width="1.4" marker-end="url(#ml7d7)"/>
+<text x="6" y="-55" font-size="10" fill="#2e8b2e">縱向 m_l</text>
+<line x1="-70" y1="48" x2="-30" y2="48" stroke="#e67e22" stroke-width="2.2" marker-end="url(#bdir7d7)"/>
+<text x="-72" y="64" font-size="10.5" fill="#e67e22">B 在 xy 平面</text>
+</g>
+<g transform="translate(330,0)">
+<text x="80" y="50" text-anchor="middle" font-size="12" fill="#333">B⊥ 平面 → k_y,k_z 耦合</text>
+<text x="80" y="72" text-anchor="middle" font-size="11" fill="#333">k̈_y = −ω_l ω_t k_y</text>
+<text x="80" y="92" text-anchor="middle" font-size="11" fill="#333">→ 簡諧振盪</text>
+<rect x="10" y="108" width="140" height="40" rx="6" fill="#fff" stroke="#1a4d7c" stroke-width="1.3"/>
+<text x="80" y="126" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4d7c">ω_c = eB / √(m_l m_t)</text>
+<text x="80" y="142" text-anchor="middle" font-size="9.5" fill="#555">（SI；CGS 多一個 /c）</text>
+<text x="80" y="172" text-anchor="middle" font-size="10.5" fill="#2e8b2e">m_c = √(m_l m_t)：縱橫質量的幾何平均</text>
+<text x="80" y="190" text-anchor="middle" font-size="9.5" fill="#777">θ=π/2 的特例；轉 B 量 m_c(θ) 反推 m_l,m_t</text>
+</g>
+</g>
+<defs>
+<marker id="axkx7d7" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+<marker id="axkz7d7" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+<marker id="mt7d7" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+<marker id="ml7d7" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2e8b2e"/></marker>
+<marker id="bdir7d7" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e67e22"/></marker>
+</defs>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 4 圖解</b>：能面 ε(k)=½ℏ²(（k_x²+k_y²)/m_t + k_z²/m_l) 的等能面是<b style="color:#1a4d7c">旋轉橢球</b>——橫向（k_x,k_y）用 <b style="color:#c0392b">m_t</b>、縱向（k_z）用 <b style="color:#2e8b2e">m_l</b>。本題取 <b style="color:#e67e22">B 躺在 xy 平面</b>（θ=π/2）。Step 1–3 算群速度 v=ℏ⁻¹∇_k ε 後代入運動方程，Lorentz 力把 k_y、k_z 互相耦合，Step 4 微分得簡諧方程 k̈_y=−ω_lω_t k_y，故迴旋頻率 <b>ω_c=√(ω_lω_t)=eB/√(m_l m_t)</b>。迴旋有效質量是縱橫質量的<b>幾何平均</b> m_c=√(m_l m_t)。實驗轉動 B 的角度測 m_c(θ)，即可反推 m_l、m_t——這是量半導體能帶橢球的標準方法。</figcaption>
+</figure>
+
+---
+
+### 習題 5：雙載子型的磁阻（Magnetoresistance with two carrier types）（Kittel Prob. 8.5）
+
+**題目（English, Kittel Prob. 8.5）**：Problem 6.9 shows that in the drift velocity approximation the motion of charge carriers in electric and magnetic fields does not lead to transverse magnetoresistance. The result is different with two carrier types. Consider a conductor with a concentration $n$ of electrons of effective mass $m_e$ and relaxation time $\tau_e$; and a concentration $p$ of holes of effective mass $m_h$ and relaxation time $\tau_h$. Treat the limit of very strong magnetic fields, $\omega_c\tau\gg1$. (a) Show in this limit that $\sigma_{yx}\approx(n-p)ec/B$. (b) Show that the Hall field, with $Q\equiv\omega_c\tau$, vanishes if $n=p$. (c) Show that the effective conductivity in the $x$ direction is such that if $n\ne p$, $\sigma$ saturates in strong fields (approaches a limit independent of $B$ as $B\to\infty$), while if $n=p$, $\sigma\propto B^{-2}$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+Problem 6.9 顯示在漂移速度近似下，單一載子不產生橫向磁阻（transverse magnetoresistance）。雙載子時結果不同。考慮含濃度 $n$、等效質量 $m_e$、弛豫時間 $\tau_e$ 的電子，以及濃度 $p$、$m_h$、$\tau_h$ 的電洞。取極強磁場極限 $\omega_c\tau\gg1$。(a) 證明此極限下 $\sigma_{yx}\approx(n-p)ec/B$；(b) 求霍爾場（以 $Q\equiv\omega_c\tau$ 表示），並證明 $n=p$ 時為零；(c) 證明 $x$ 方向的有效電導率，並討論 $n\ne p$ 與 $n=p$ 兩種情形。
+
+</details>
+
+**核心觀念**：用磁導率張量（magnetoconductivity tensor）的強場展開。定義 $Q_e\equiv\omega_{ce}\tau_e=eB\tau_e/(m_ec)$、$Q_h\equiv eB\tau_h/(m_hc)$。強場 $Q\gg1$ 下，各載子的電導張量化簡，再把電子與電洞張量相加。
+
+**Step 1**：單一載子的磁導率張量（取 $\mathbf B=B\hat z$，CGS）（Kittel (6.64)）：
+$$ \sigma_{xx}=\sigma_{yy}=\frac{\sigma_0}{1+Q^2},\qquad \sigma_{xy}=-\sigma_{yx}=\frac{\sigma_0 Q}{1+Q^2} $$
+其中 $\sigma_0=ne^2\tau/m$（電子）或 $pe^2\tau/m$（電洞），符號隨電荷而異。
+
+**Step 2**：強場極限 $Q\gg1$，化簡（保留領頭階）：
+$$ \sigma_{xx}\approx\frac{\sigma_0}{Q^2},\qquad \sigma_{yx}\approx\frac{\sigma_0}{Q} $$
+注意 $\dfrac{\sigma_0}{Q}=\dfrac{ne^2\tau/m}{eB\tau/(mc)}=\dfrac{nec}{B}$，與 $\tau$ 無關。
+
+**Step 3**：(a) 把電子與電洞的 $\sigma_{yx}$ 相加。電子的霍爾分量與電洞符號相反（電荷相反）：
+$$ \sigma_{yx}=\sigma_{yx}^{(e)}+\sigma_{yx}^{(h)}=\frac{nec}{B}-\frac{pec}{B} $$
+
+$$\boxed{\sigma_{yx}\approx\dfrac{(n-p)ec}{B}\quad(\text{CGS})}$$
+
+**Step 4**：(b) 求霍爾場。橫向電流為零 $J_y=0$，即 $\sigma_{yx}E_x+\sigma_{yy}E_y=0$，故
+$$ E_y=-\frac{\sigma_{yx}}{\sigma_{yy}}E_x $$
+其中 $\sigma_{yy}=\sigma_{yy}^{(e)}+\sigma_{yy}^{(h)}\approx\dfrac{\sigma_0^{(e)}}{Q_e^2}+\dfrac{\sigma_0^{(h)}}{Q_h^2}$。用 $\sigma_0/Q^2=(nec/B)/Q$ 改寫：
+$$ \sigma_{yy}\approx\frac{ec}{B}\left(\frac{n}{Q_e}+\frac{p}{Q_h}\right) $$
+而 Step 3 給 $\sigma_{yx}=\dfrac{ec}{B}(n-p)$。代入：
+$$ E_y=-\frac{(n-p)}{\dfrac{n}{Q_e}+\dfrac{p}{Q_h}}\,E_x $$
+
+$$\boxed{E_y=-\dfrac{(n-p)}{\dfrac{n}{Q_e}+\dfrac{p}{Q_h}}\,E_x}$$
+
+顯然 $n=p$ 時分子為零 $\Rightarrow E_y=0$（霍爾場消失）。
+
+**Step 5**：(c) $x$ 方向有效電導率。在 $J_y=0$ 條件下，$J_x=\sigma_{xx}E_x+\sigma_{xy}E_y$。代入 $E_y=-(\sigma_{yx}/\sigma_{yy})E_x$ 並用 $\sigma_{xy}=-\sigma_{yx}$：
+$$ J_x=\left(\sigma_{xx}+\frac{\sigma_{yx}^2}{\sigma_{yy}}\right)E_x\equiv\sigma_{\text{eff}}E_x $$
+（用了 $\sigma_{xx}=\sigma_{yy}$。）強場下 $\sigma_{xx}=\dfrac{ec}{B}\!\left(\dfrac{n}{Q_e}+\dfrac{p}{Q_h}\right)$ 而 $\sigma_{yx}=\dfrac{ec}{B}(n-p)$：
+$$ \sigma_{\text{eff}}=\frac{ec}{B}\left(\frac{n}{Q_e}+\frac{p}{Q_h}\right)+\frac{\left[\dfrac{ec}{B}(n-p)\right]^2}{\dfrac{ec}{B}\!\left(\dfrac{n}{Q_e}+\dfrac{p}{Q_h}\right)} $$
+
+$$\boxed{\sigma_{\text{eff}}=\dfrac{ec}{B}\left(\dfrac{n}{Q_e}+\dfrac{p}{Q_h}\right)+\dfrac{ec}{B}\cdot\dfrac{(n-p)^2}{\dfrac{n}{Q_e}+\dfrac{p}{Q_h}}}$$
+
+**Step 6**：討論兩種情形。
+
+- **$n\ne p$**：第二項主導。因 $Q\propto B$，$\dfrac{n}{Q_e}+\dfrac{p}{Q_h}\propto 1/B$，故第二項 $\propto\dfrac{ec}{B}\cdot\dfrac{(n-p)^2}{1/B}\propto(n-p)^2\cdot$（常數），$\sigma_{\text{eff}}$ 趨於**與 $B$ 無關的飽和值（saturates）**。
+- **$n=p$**：$(n-p)^2=0$，第二項消失，只剩第一項 $\sigma_{\text{eff}}=\dfrac{ec}{B}\!\left(\dfrac{n}{Q_e}+\dfrac{p}{Q_h}\right)\propto 1/B\cdot 1/B=B^{-2}$，故電阻率 $\rho\propto B^{2}$，**磁阻無上限地隨 $B^2$ 增大**。
+
+$$\boxed{n=p:\ \sigma_{\text{eff}}\propto B^{-2}\ (\Delta\rho/\rho\propto B^2);\qquad n\ne p:\ \sigma_{\text{eff}}\ \text{在強場下飽和}}$$
+
+> **重點**：本題說明「為何補償半導體（$n\approx p$）有巨大且不飽和的橫向磁阻」。物理直覺：$n=p$ 時霍爾場為零，無法把不同速度載子的偏轉抵消掉，所有載子持續被磁場「攔截」，電導隨 $B^{-2}$ 崩落；$n\ne p$ 時霍爾場部分補償，電導飽和。
+
+<details>
+<summary><b>📝 更多範例（點開）：雙載子強場磁阻——$n=p$ 與 $n\ne p$ 的標度與數值</b></summary>
+
+**範例 A（$\sigma_{yx}$ 強場標度，數值）**：取 $n=2\times10^{22}\,\text{m}^{-3}$、$p=0.5\times10^{22}\,\text{m}^{-3}$、$B=2$ T（CGS 中 $c$ 在 SI 去掉）。用 SI 版 $\sigma_{yx}\approx(n-p)e/B$ 估值。
+
+SI 下 $\sigma_{yx}\approx\dfrac{(n-p)e}{B}$：
+$$ \sigma_{yx}=\frac{(2\times10^{22}-0.5\times10^{22})(1.602\times10^{-19})}{2}=\frac{(1.5\times10^{22})(1.602\times10^{-19})}{2}=\frac{2.403\times10^{3}}{2}=1.20\times10^{3}\,\text{S/m} $$
+與 $\tau$ 無關、$\propto1/B$、$\propto(n-p)$——符合 (a) 的結論。
+
+**範例 B（$n=p$ 補償，霍爾場歸零驗證）**：設 $n=p=10^{22}\,\text{m}^{-3}$。代入 Step 4 的 $E_y$ 表達式驗 $E_y=0$。
+
+$$ E_y=-\frac{(n-p)}{\dfrac{n}{Q_e}+\dfrac{p}{Q_h}}E_x=-\frac{(10^{22}-10^{22})}{\dfrac{n}{Q_e}+\dfrac{p}{Q_h}}E_x=-\frac{0}{(\cdots)}E_x=0 $$
+分子 $n-p=0$ 直接給 $E_y=0$——補償半導體無霍爾場，這正是它磁阻不飽和的根源。
+
+**範例 C（強場磁阻標度的數值對比）**：比較 $B=1$ T 與 $B=4$ T 時的 $\sigma_{\text{eff}}$ 比值，分 $n=p$ 與 $n\ne p$ 兩情形（已知 $Q\propto B$）。
+
+子情形 (i) $n=p$：$\sigma_{\text{eff}}\propto B^{-2}$，故
+$$ \frac{\sigma_{\text{eff}}(4\,\text{T})}{\sigma_{\text{eff}}(1\,\text{T})}=\left(\frac{1}{4}\right)^{2}=\frac{1}{16}=0.0625 $$
+電導掉到 1/16，即電阻率 $\rho\propto B^2$ 漲 16 倍（磁阻 $\Delta\rho/\rho$ 隨 $B^2$ 無上限增大）。
+
+子情形 (ii) $n\ne p$：第二項主導且與 $B$ 無關（飽和），故
+$$ \frac{\sigma_{\text{eff}}(4\,\text{T})}{\sigma_{\text{eff}}(1\,\text{T})}\to 1\quad(\text{趨於常數，飽和}) $$
+從 $B^{-2}$（補償）到飽和（非補償）的天壤之別，全由 $(n-p)$ 是否為零決定——這就是補償半導體磁阻巨大的物理。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 250" width="100%" style="max-width:540px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="240" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">雙載子磁阻：n=p 不飽和、n≠p 飽和</text>
+<line x1="60" y1="40" x2="60" y2="200" stroke="#888" stroke-width="1.2" marker-end="url(#axG7d8)"/>
+<line x1="60" y1="200" x2="450" y2="200" stroke="#888" stroke-width="1.2" marker-end="url(#axH7d8)"/>
+<text x="42" y="120" text-anchor="middle" font-size="11" fill="#555" transform="rotate(-90 42 120)">Δρ/ρ（磁阻）</text>
+<text x="250" y="224" text-anchor="middle" font-size="11" fill="#555">B →（磁場）</text>
+<polyline points="70,195 120,168 170,128 220,82 270,52 320,46 380,44 440,43" fill="none" stroke="#1a4d7c" stroke-width="2.6"/>
+<text x="300" y="62" font-size="10.5" fill="#1a4d7c">n≠p：飽和（趨常數）</text>
+<polyline points="70,196 130,188 190,172 250,144 310,104 370,72 432,44" fill="none" stroke="#c0392b" stroke-width="2.6"/>
+<text x="350" y="98" font-size="10.5" fill="#c0392b">n=p：∝B²（不飽和）</text>
+<text x="240" y="244" text-anchor="middle" font-size="9.5" fill="#777">σ_eff：n≠p 強場飽和（與 B 無關）；n=p 時 σ∝B⁻² → ρ∝B²</text>
+</g>
+<defs>
+<marker id="axG7d8" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+<marker id="axH7d8" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+</defs>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 5 圖解</b>：橫向磁阻 Δρ/ρ 對磁場 B 的行為由 (n−p) 決定。<b style="color:#1a4d7c">非補償 n≠p（藍）</b>：霍爾場部分抵消載子偏轉，磁阻在強場下<b>飽和</b>，趨於與 B 無關的常數；對應 σ_eff 第二項主導、∝B⁰。<b style="color:#c0392b">補償 n=p（紅）</b>：(n−p)=0 使霍爾場消失（範例 B），載子持續被磁場攔截，σ_eff 只剩第一項 ∝B⁻²，故電阻率 ρ∝B²、磁阻<b>無上限地隨 B² 增大</b>。這就是補償半導體（如高純度或雙摻雜樣品）展現巨大不飽和橫向磁阻的根源。</figcaption>
+</figure>
+
+---
+
+## ✅ 本章計算題自我檢核
+
+做完上面後，確認你能**獨立、不看解答**地完成下列各項：
+
+1. 給介電常數 $\varepsilon_r$ 與等效質量 $m^*$，用氫模型替換 $E_d=\text{Ry}\dfrac{m^*/m}{\varepsilon_r^2}$、$a_d=a_0\dfrac{\varepsilon_r}{m^*/m}$ 算出施主束縛能與軌道半徑（範例 1、習題 1）。
+2. 說明為何 InSb 的施主軌道半徑可達數十 nm、且極低濃度就形成雜質帶（習題 1c：$N\sim a_d^{-3}$）。
+3. 寫出有效態密度 $N_c=2\!\left(\dfrac{m^*k_BT}{2\pi\hbar^2}\right)^{3/2}$，並用 $n_i=\sqrt{N_cN_v}\,e^{-E_g/2k_BT}$ 算 $n_i$ 及其溫度比值（範例 2）。
+4. 在低溫凍結區，用游離方程 $\dfrac{n^2}{N_d-n}=\dfrac{N_c}{2}e^{-E_d/k_BT}$ 解二次方程求部分游離的 $n$，並判斷何時不能用全游離近似（習題 2）。
+5. 由 $R_H=-1/(ne)$ 與 $\mu=\sigma|R_H|$ 反推載子濃度、判斷載子型別、求霍爾遷移率（範例 4、習題 2b）。
+6. 用「設 $J_y=0$ 求霍爾場 $E_y$」的方法，推導雙載子霍爾係數 $R_H=\dfrac{1}{e}\dfrac{p-nb^2}{(p+nb)^2}$，並驗證單載子極限（習題 3）。
+7. 由橢球能面 $\varepsilon(\mathbf k)$ 算群速度、代入 $\hbar\dot{\mathbf k}=-\frac{e}{c}\mathbf v\times\mathbf B$，導出簡諧方程得 $\omega_c=eB/(m_lm_t)^{1/2}c$（習題 4）。
+8. 在強場極限用磁導率張量推雙載子磁阻，說明 $n=p$ 給 $\rho\propto B^2$、$n\ne p$ 飽和（習題 5）。
+9. 由 $V_{bi}=\dfrac{k_BT}{e}\ln\dfrac{N_aN_d}{n_i^2}$ 算 pn 接面內建電位，並用 $V_{bi}<E_g/e$ 檢查合理性（範例 3）。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

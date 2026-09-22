@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理導論 2019 資格考 — 詳解</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">← 詳解目錄</a> &nbsp;·&nbsp; <a href="_共用觀念與公式.html">🧰 共用觀念與公式</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- source: 歷年原卷/固態物理導論_2019.md -->
+
+# 固態物理導論 2019 資格考 — 教學版逐題詳解（從普物起建 · 代數不跳步）
+
+> **這份卷的性格**：107 學年（=2019）closed-book，**8 個小題**分四區
+> （Crystal structure / Diffraction / Phonons / Electrons），多為**觀念 + 估算**，
+> 文字描述為主、幾乎不靠圖。真正會展成長推導的只有 **Q6（單原子鏈聲子，30%）**；
+> 其餘是短答／一個小計算。寫法對齊既有模板（`📋原題 → 🎯核心訊息 →(必要時)前情提要/符號說明 →
+> 解答 Step → ✅自我檢核 → 🔀變化 → 信心`）。共用觀念見 [`_共用觀念與公式.html`](_共用觀念與公式.html)，本檔只引用、不重抄。
+
+## 🧭 全卷約定
+- 2D 用 $\hat e_x$（右）、$\hat e_y$（上）；倒晶格 $\mathbf a_i\cdot\mathbf b_j=2\pi\delta_{ij}$。
+- 自由電子 / 無限井 $E=\hbar^2k^2/2m$；$\hbar=h/2\pi$。
+- 單原子鏈：質量 $m$、彈簧常數 $C$、間距 $a$、位移 $u_n$。
+- 配分：1(5) · 2(10) · 3(10+5) · 4(10) · 5(10) · 6(10+10+10) · 7(10+5) · 8(5)，共 100%。閉書，符號依 Kittel。
+
+---
+
+# 📘 第 1 題 — 晶體 vs 液體（Crystal structure · 5%）
+
+## 📋 原題
+> What properties make a crystal different from a liquid? (5%)
+
+## 🎯 核心訊息
+> 一句話：**晶體有「長程週期序」，液體只有「短程序」**——其餘所有差別（繞射尖峰、各向異性、剛性、熔點）都是這條的後果。
+
+## 解答
+
+晶體與液體的根本差異，是**對稱性與序（order）的層級**：
+
+| 性質 | 晶體（crystal） | 液體（liquid） |
+|---|---|---|
+| 序 | **長程週期序**（translational + orientational order） | 只有**短程序**（最近鄰大致有序，遠處隨機） |
+| 對稱性 | 連續平移/轉動對稱**破缺**，只剩離散晶格對稱 | 保有**完整連續**平移與轉動對稱（統計上均勻、各向同性） |
+| 繞射 | 給**離散 Bragg 尖峰**（sharp spots） | 給**寬而散的暈環**（diffuse halo），無尖峰 |
+| 各向異性 | **各向異性**（彈性、光學、導電隨方向不同） | **各向同性** |
+| 力學 | 有**有限剪切模數**、能抗剪、會解理（cleave）→ 剛性固體 | 靜態剪切模數為 0，會**流動** |
+| 相變 | 有**明確熔點**（一階相變、潛熱） | 升溫只是連續變稠/變稀，無結構相變點 |
+
+> **小結**：只要記住「晶體 = 原子排成可無限平移複製的格子」，上表每一格都能當場推出來。
+
+## ✅ 自我檢核
+「sharp Bragg peaks ⇔ 長程週期」是繞射的傅立葉鐵律：週期 → 倒空間 δ 函數尖峰；無週期 → 連續寬譜。✓
+
+## 🔀 變化的可能情況
+- 常延伸問「**準晶（quasicrystal）**」：有 sharp 繞射尖峰但**無週期**（有長程序、非週期）——介於兩者之間。
+- 也可問「玻璃（amorphous）vs 晶體」：玻璃像「凍住的液體」，仍只有短程序、無 Bragg 尖峰。
+
+## 信心：**高**（標準觀念，Kittel Ch1）。
+
+---
+
+# 📗 第 2 題 — 畫晶格（Crystal structure · 10%）
+
+## 📋 原題
+> Draw the lattice for a crystal with the three-atom basis $A=(0,1),\ B=(1,1),\ C=(0,0)$ and the lattice vectors $\mathbf r=(2,1),\ \mathbf s=(1,3)$. Draw in units of cm for an area of $6\times6$ cm and label the atoms A, B, C. (10%)
+
+## 🎯 核心訊息
+> **晶體 = 格子（lattice）× 花樣（basis）**。先用 $\mathbf r,\mathbf s$ 撒出格點 $\mathbf R=m\mathbf r+n\mathbf s$，再在「每一個格點」掛上同一組三顆原子（A、B、C 的相對位移固定）。
+
+## 解答
+
+**Step 1 — 算格點座標。**
+格點集合
+$$\mathbf R=m\,\mathbf r+n\,\mathbf s=m(2,1)+n(1,3)=(2m+n,\ m+3n),\quad m,n\in\mathbb Z.$$
+在 $6\times6$ cm 內（含邊界附近）的格點：
+$$(0,0),\ (2,1),\ (4,2),\ (6,3),\ (1,3),\ (3,4),\ (5,5),\ (0,5),\ (2,6),\ (5,0),\dots$$
+
+**Step 2 — 在每個格點掛 basis。**
+三顆原子相對**同一格點**的位移固定：
+$$C\ \text{在}\ \mathbf R+(0,0),\quad A\ \text{在}\ \mathbf R+(0,1),\quad B\ \text{在}\ \mathbf R+(1,1).$$
+（題目把 C 取在 $(0,0)$，等於把格點本身畫成 C；A 在其正上方 1 cm，B 在右上 $(1,1)$。）
+例如格點 $(0,0)$：$C(0,0),A(0,1),B(1,1)$；格點 $(2,1)$：$C(2,1),A(2,2),B(3,2)$；格點 $(1,3)$：$C(1,3),A(1,4),B(2,4)$。
+
+**Step 3 — 算原胞與密度（自我驗證用）。**
+原胞面積
+$$|\mathbf r\times\mathbf s|=|2\cdot3-1\cdot1|=\boxed{5\ \text{cm}^2},$$
+每個原胞含 **3 顆原子**（=basis 數）→ 面密度 $3/5\ \text{cm}^{-2}=0.6\ \text{atoms/cm}^2$。
+
+**Step 4 — 畫出來。** 下圖：綠=C（即格點）、紅=A、藍=B；黃色平行四邊形是一個原胞（邊為 $\mathbf r,\mathbf s$），虛線是 $6\times6$ 框。
+
+![2019 Q2 lattice](figs/固態_2019_Q2_lattice.png)
+
+> **判讀／自評**：圖中每個綠點（C）就是一個格點 $\mathbf R$；其正上方紅點（A）、右上藍點（B）構成該格點的三原子基元。整個圖 = 同一個「ABC 花樣」沿 $\mathbf r,\mathbf s$ 平移複製。
+
+下圖把「格點骨架 + 一個原胞 + 掛在每格點上的 ABC 花樣」的關係再示意一次（與上方 PNG 互補）：
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg id="svg-q2-lattice" viewBox="0 0 560 250" width="100%" style="max-width:600px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<text x="280" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">格點 R = m·r + n·s，每格點掛同一組 ABC 基元</text>
+<polygon points="60,210 134,173 171,99 97,136" fill="#fff6df" stroke="#e67e22" stroke-width="2"/>
+<line x1="60" y1="210" x2="134" y2="173" stroke="#c0392b" stroke-width="2.5"/>
+<line x1="60" y1="210" x2="97" y2="136" stroke="#2e8b2e" stroke-width="2.5"/>
+<text x="100" y="205" fill="#c0392b" font-weight="bold">r=(2,1)</text>
+<text x="62" y="160" fill="#2e8b2e" font-weight="bold">s=(1,3)</text>
+<circle cx="60" cy="210" r="6" fill="#2e8b2e"/>
+<circle cx="134" cy="173" r="6" fill="#2e8b2e"/>
+<circle cx="171" cy="99" r="6" fill="#2e8b2e"/>
+<circle cx="97" cy="136" r="6" fill="#2e8b2e"/>
+<circle cx="208" cy="136" r="6" fill="#2e8b2e"/>
+<circle cx="60" cy="210" r="6" fill="#2e8b2e"/>
+<circle cx="60" cy="173" r="5" fill="#c0392b"/>
+<rect x="93" y="166" width="9" height="9" fill="#1a4d7c"/>
+<text x="44" y="226" fill="#2e8b2e" font-weight="bold">C</text>
+<text x="44" y="170" fill="#c0392b" font-weight="bold">A</text>
+<text x="106" y="172" fill="#1a4d7c" font-weight="bold">B</text>
+<text x="320" y="100" fill="#2e8b2e">● C = 格點本身 (0,0)</text>
+<text x="320" y="125" fill="#c0392b">● A = 格點 + (0,1)</text>
+<text x="320" y="150" fill="#1a4d7c">■ B = 格點 + (1,1)</text>
+<text x="320" y="182" fill="#333">原胞面積 |r×s| = |2·3−1·1| = 5</text>
+<text x="320" y="204" fill="#333">每胞 3 原子 → 面密度 3/5 = 0.6 /cm²</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">綠點是格點 R（=花樣中的 C）；橙色平行四邊形是一個原胞，兩邊為 <b style="color:#c0392b">r</b>、<b style="color:#2e8b2e">s</b>。每個格點都「掛上」相同的 A（上方紅）、B（右上藍）。面積行列式 |2·3−1·1|=5，每胞 3 顆原子。</figcaption>
+</figure>
+
+$$\boxed{\mathbf R=m(2,1)+n(1,3);\ \text{每格點掛 } C(0,0),A(0,1),B(1,1);\ \text{原胞面積 }5\ \text{cm}^2,\ 3\text{ 原子/胞}.}$$
+
+<details>
+<summary><b>📝 更多範例（點開）：撒格點、算原胞面積、判某點屬於哪個格點</b></summary>
+
+**範例 A（撒格點：給 $(m,n)$ 求座標）**：本題 $\mathbf R=m(2,1)+n(1,3)=(2m+n,\ m+3n)$。逐一代入：
+
+$(m,n)=(0,0)\Rightarrow(2\cdot0+0,\ 0+3\cdot0)=(0,0)$；
+
+$(m,n)=(1,0)\Rightarrow(2\cdot1+0,\ 1+3\cdot0)=(2,1)$；
+
+$(m,n)=(0,1)\Rightarrow(2\cdot0+1,\ 0+3\cdot1)=(1,3)$；
+
+$(m,n)=(1,1)\Rightarrow(2\cdot1+1,\ 1+3\cdot1)=(3,4)$；
+
+$(m,n)=(2,1)\Rightarrow(2\cdot2+1,\ 2+3\cdot1)=(5,5)$。每個都落在 $6\times6$ 框內 ✓。
+
+**範例 B（原胞面積 = 2×2 行列式）**：把 $\mathbf r=(2,1),\ \mathbf s=(1,3)$ 排成矩陣 $A=\begin{pmatrix}2&1\\1&3\end{pmatrix}$（每列一個向量）。面積
+
+$$|\mathbf r\times\mathbf s|=|\det A|=|\,2\cdot3-1\cdot1\,|=|6-1|=5\ \text{cm}^2.$$
+
+換一組基底驗證不變：取 $\mathbf r'=\mathbf r+\mathbf s=(3,4),\ \mathbf s'=\mathbf s=(1,3)$，$\det\begin{pmatrix}3&4\\1&3\end{pmatrix}=3\cdot3-4\cdot1=9-4=5$ ✓——同一晶格、同一面積，因為換基底矩陣 $\det=1$。
+
+**範例 C（判某點屬於哪個格點 / 是不是同一個 basis）**：問 $(5,5)$ 是不是格點。解 $2m+n=5,\ m+3n=5$：由第一式 $n=5-2m$，代入第二式 $m+3(5-2m)=5\Rightarrow m+15-6m=5\Rightarrow-5m=-10\Rightarrow m=2$，$n=5-4=1$。$m=2,n=1\in\mathbb Z$ → **是格點** $(m,n)=(2,1)$ ✓。再問 A、B 相對位移 $(1,1)$ 是不是格點：解 $2m+n=1,\ m+3n=1$，得 $m=\tfrac{2}{5},\ n=\tfrac{1}{5}\notin\mathbb Z$ → **不是格點** → A、B 確實只是同一 basis 內的兩顆，不是兩個獨立格點 ✓。
+
+**範例 D（面密度與計數）**：一個原胞面積 5 cm²、含 3 顆原子（basis 數）。$6\times6=36\ \text{cm}^2$ 內約有 $36/5=7.2$ 個原胞 → 約 $7.2\times3\approx21.6$，即 21~22 顆原子（邊界顆數依切法微調）。面密度 $=3/5=0.6\ \text{atoms/cm}^2$。
+</details>
+
+## ✅ 自我檢核
+- 面積行列式 $|2\cdot3-1\cdot1|=5>0$ ✓（$\mathbf r,\mathbf s$ 線性獨立，是合法 primitive vectors）。
+- 任兩個同名原子（如兩顆 C）之間位移必為某 $\mathbf R$ ✓；A、B、C 彼此位移 $(0,1),(1,1)$ **不是** $\mathbf R$（不能寫成 $m(2,1)+n(1,3)$ 的整數組合）→ 三顆確實同屬一個 basis，basis = 3 ✓。
+
+## 🔀 變化的可能情況
+- 常改成「**求倒晶格 $\mathbf b_1,\mathbf b_2$**」：$\mathbf b_i=2\pi(A^{-1})^{\mathsf T}$，$A=\begin{pmatrix}2&1\\1&3\end{pmatrix}$（見 2025 Q2 同型矩陣法）。
+- 或「**數一個原胞內有幾顆原子**」（答 3）、「**畫 Wigner–Seitz cell**」。
+- 歷年同型：2024 認 Bravais＋畫 primitive cell；2025 Q1 兩套子晶格疊加判 basis。
+
+## 信心：**高**（格點＋basis 的標準作圖；座標已逐點核對）。
+
+---
+
+# 📙 第 3 題 — 能量–距離關係（Crystal structure · 10%+5%）
+
+## 📋 原題
+> Atoms in a crystal exhibit the energy–distance relation
+> $$E(r)=\frac{16\,\text{eV}}{\text{nm}}\left(r^2-2r-7\sqrt{r}\right)\quad(r\text{ in nm}).$$
+> **(a)** How much energy does it take to remove an atom from rest position? (10%)
+> **(b)** Can this formula predict thermal expansion? Why / why not? (5%)
+
+## 🎯 核心訊息
+> **「靜止位置」= 位能極小 $r_0$（$dE/dr=0$）；「移走」= 把它送到自由參考點 $E=0$。** 移走所需能量 = 井深 $|E(r_0)|$。能否描述熱膨脹，只看井**對稱不對稱**：對稱拋物線不行，非對稱（含三次以上項）才行。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 平衡位置 $r_0$、井深、與「非簡諧 ⇒ 熱膨脹」</b></summary>
+
+### 你普物學過的
+彈簧位能 $\tfrac12k x^2$ 的底就是平衡點；力 $=-dE/dr$，平衡 ⟺ 力為零 ⟺ $dE/dr=0$。
+
+### 為什麼要這個
+鍵能曲線的**極小**＝原子靜止處（rest position）；極小相對「分離開（$E=0$）」的落差＝把原子拔走要的能量（cohesive / binding energy）。井的**形狀**（對稱與否）則決定熱膨脹。
+
+### 定義
+- 平衡：$\left.\dfrac{dE}{dr}\right|_{r_0}=0$ 且 $\dfrac{d^2E}{dr^2}\Big|_{r_0}>0$（極小）。
+- 移走能量 $=E(\text{free})-E(r_0)=0-E(r_0)=|E(r_0)|$（取 $E=0$ 為「原子已分離」的參考）。
+- 把井在 $r_0$ 展開 $E\approx E_0+\tfrac12\kappa(r-r_0)^2+b(r-r_0)^3+\dots$；**$b\neq0$（非簡諧）才有熱膨脹**，平均位移 $\langle r-r_0\rangle\simeq -\dfrac{3b}{\kappa^2}k_BT$。
+
+**範例 1（熱身）**：$E=\tfrac12k(r-r_0)^2$ → 純簡諧 → $\langle r\rangle=r_0$ 與 $T$ 無關 → **無**熱膨脹。
+**範例 2（中階）**：Lennard–Jones $4\varepsilon[(\sigma/r)^{12}-(\sigma/r)^6]$ → 井不對稱（左陡右緩）→ 升溫 $\langle r\rangle$ 增 → 膨脹。
+**範例 3（本題）**：$E\propto r^2-2r-7\sqrt r$ 非拋物線 → 不對稱 → 可描述熱膨脹（見 (b)）。
+</details>
+
+## 解答
+
+### (a) 移走一個原子要多少能量
+
+**Step 1 — 找靜止位置 $r_0$（令一階導為零）。**
+$$\frac{dE}{dr}=\frac{16\,\text{eV}}{\text{nm}}\left(2r-2-\tfrac{7}{2}r^{-1/2}\right)=0
+\ \Longrightarrow\ 2r-2-\frac{7}{2\sqrt r}=0.$$
+這條方程沒有漂亮解析根，數值解：
+$$2(2.18)-2-\frac{3.5}{\sqrt{2.18}}=4.36-2-2.371\approx-0.01,\qquad
+2(2.19)-2-\frac{3.5}{\sqrt{2.19}}\approx+0.015,$$
+夾出 $\boxed{r_0\approx2.18\ \text{nm}}$。
+二階導 $\dfrac{d^2E}{dr^2}=\dfrac{16\,\text{eV}}{\text{nm}}\big(2+\tfrac74 r^{-3/2}\big)>0$ 處處成立 → 此點為**唯一極小** ✓。
+
+**Step 2 — 算極小處能量 $E(r_0)$。**
+$$r_0^2-2r_0-7\sqrt{r_0}=2.18^2-2(2.18)-7\sqrt{2.18}=4.77-4.36-10.34=-9.94,$$
+$$E(r_0)=16\times(-9.94)\ \text{eV}\approx-159\ \text{eV}.$$
+
+**Step 3 — 移走 = 抬到自由參考 $E=0$。**
+曲線在 $r\to0$ 與 $r\approx5.1$ nm 各通過一次 $E=0$（解 $r^2-2r-7\sqrt r=0$，即 $\sqrt r(\,r^{3/2}-2\sqrt r-7\,)=0$，非零根 $r\approx5.1$）；$E=0$ 即「原子分離、不再束縛」的能階。故把原子由 $r_0$ 移走所需能量
+$$\Delta E=0-E(r_0)=|E(r_0)|\approx\boxed{1.6\times10^{2}\ \text{eV}\ (\approx159\ \text{eV}).}$$
+> **小結**：步驟是固定的——**$dE/dr=0$ 定 $r_0$ → 代回得井底 → 與 $E=0$ 的落差就是 binding energy**。（這個 159 eV 數值大得不像真實鍵能，但它純由題目給的係數 16 與括號決定，照算即可。）
+
+下圖示意這個位能井：底在 $r_0$（靜止位置），井底到 $E=0$ 的落差就是「移走一顆原子」要的能量；井**左陡右緩**（非對稱）正是 (b) 能描述熱膨脹的原因。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg id="svg-q3-well" viewBox="0 0 520 280" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<text x="260" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">位能井 E(r)：底 r₀ = 靜止位置，井深 = 移走能量</text>
+<line x1="60" y1="90" x2="490" y2="90" stroke="#aaa" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="500" y="93" text-anchor="end" fill="#888">E = 0（原子分離）</text>
+<line x1="70" y1="40" x2="70" y2="250" stroke="#333" stroke-width="1.3"/>
+<line x1="70" y1="250" x2="490" y2="250" stroke="#333" stroke-width="1.3"/>
+<text x="58" y="46" text-anchor="end" fill="#333">E</text>
+<text x="486" y="266" text-anchor="end" fill="#333">r</text>
+<polyline points="92,48 100,70 110,100 124,140 142,178 165,205 190,218 210,221 230,220 255,212 290,196 330,176 370,156 410,138 450,121" fill="none" stroke="#1a4d7c" stroke-width="2.5"/>
+<line x1="218" y1="90" x2="218" y2="221" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="218" cy="221" r="5" fill="#c0392b"/>
+<text x="218" y="240" text-anchor="middle" fill="#c0392b" font-weight="bold">r₀ ≈ 2.18 nm</text>
+<line x1="300" y1="90" x2="300" y2="196" stroke="#2e8b2e" stroke-width="2"/>
+<text x="312" y="150" fill="#2e8b2e" font-weight="bold">ΔE = |E(r₀)|</text>
+<text x="312" y="166" fill="#2e8b2e">≈ 159 eV</text>
+<text x="120" y="115" fill="#6aa1d6">左陡（排斥硬）</text>
+<text x="380" y="200" fill="#e67e22">右緩（吸引軟）→ 熱膨脹</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">藍線是 E(r)。井底在 <b style="color:#c0392b">r₀≈2.18 nm</b>（靜止位置，dE/dr=0）；井底到虛線 E=0 的<b style="color:#2e8b2e">落差 ≈159 eV</b> 就是把原子移走（送到分離態）所需能量。井**不對稱**——左側陡（排斥）、右側緩（吸引）——升溫時平均位置往右偏，這就是 (b) 能描述熱膨脹的根。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：用 $dE/dr=0$ 找平衡、算井深、判非簡諧</b></summary>
+
+**範例 A（Lennard–Jones 找平衡距離）**：$E(r)=4\varepsilon\big[(\sigma/r)^{12}-(\sigma/r)^{6}\big]$。求 $r_0$：
+
+$$\frac{dE}{dr}=4\varepsilon\Big[-12\,\sigma^{12}r^{-13}+6\,\sigma^{6}r^{-7}\Big]=0.$$
+
+兩邊除以 $4\varepsilon\cdot6\,r^{-13}$（非零）：$-2\sigma^{12}+\sigma^{6}r^{6}=0\Rightarrow r^{6}=2\sigma^{6}\Rightarrow r_0=2^{1/6}\sigma\approx1.122\,\sigma$。代回求井深：$(\sigma/r_0)^6=\tfrac12$，故 $E(r_0)=4\varepsilon[(\tfrac12)^2-\tfrac12]=4\varepsilon(\tfrac14-\tfrac12)=4\varepsilon(-\tfrac14)=-\varepsilon$ → 結合能 $=\varepsilon$。
+
+**範例 B（本題逐步代入井深）**：$E(r)=16(r^2-2r-7\sqrt r)$ eV，$r_0\approx2.18$。
+
+$r_0^2=2.18^2=4.7524$；
+
+$2r_0=2\times2.18=4.36$；
+
+$7\sqrt{r_0}=7\sqrt{2.18}=7\times1.4765=10.335$。
+
+括號 $=4.7524-4.36-10.335=-9.943$。
+
+$E(r_0)=16\times(-9.943)=-159.1$ eV → 移走能量 $\Delta E=|E(r_0)|\approx159$ eV。
+
+**範例 C（判一個井能不能描述熱膨脹：看三階導）**：純簡諧 $E=\tfrac12\kappa(r-r_0)^2$，$E'''=0$ → 對稱拋物線 → $\langle r\rangle=r_0$ 與 $T$ 無關 → **不能**。本題 $E=16(r^2-2r-7r^{1/2})$：
+
+$$E'=16\big(2r-2-\tfrac72 r^{-1/2}\big),\quad E''=16\big(2+\tfrac74 r^{-3/2}\big),\quad E'''=16\big(-\tfrac{21}{8}r^{-5/2}\big)\ne0$$
+
+→ 非零三階導 → 非簡諧 → **能**描述熱膨脹。平均位移 $\langle r-r_0\rangle\simeq-\dfrac{3b}{\kappa^2}k_BT$，其中 $b=\tfrac16E'''(r_0)<0$，故 $\langle r\rangle>r_0$ 且隨 $T$ 增 → 膨脹。
+
+**範例 D（彈簧常數 = 井底曲率）**：把井在 $r_0$ 二階展開 $E\approx E_0+\tfrac12\kappa(r-r_0)^2$，則 $\kappa=E''(r_0)$。本題 $\kappa=16\big(2+\tfrac74(2.18)^{-3/2}\big)=16\big(2+\tfrac74\times0.3106\big)=16(2+0.5436)=16\times2.544\approx40.7$（eV/nm²）。這個 $\kappa$ 可串到聲子聲速 $v_s=a\sqrt{\kappa/m}$（見 Q6）。
+</details>
+
+### (b) 能否預測熱膨脹？
+
+**可以。** 理由：熱膨脹來自位能井的**非簡諧（非對稱）**。本題 $E(r)$ 不是對稱拋物線——把它在 $r_0$ 展開，三階項
+$$\frac{d^3E}{dr^3}=\frac{16\,\text{eV}}{\text{nm}}\left(-\tfrac{21}{8}r^{-5/2}\right)<0,$$
+非零 → 井**左陡右緩**（小 $r$ 側排斥硬、大 $r$ 側吸引軟）。升溫使振幅變大時，原子在較軟的「大 $r$」側停留時間較長，時間平均位置
+$$\langle r\rangle\simeq r_0-\frac{3b}{\kappa^2}k_BT\quad(b=\tfrac16E'''(r_0)<0)\ \Rightarrow\ \langle r\rangle>r_0\ \text{且隨 }T\text{ 增}$$
+→ 平均鍵長隨溫度增加 → **晶體膨脹**。
+（反例：若 $E$ 是純 $\tfrac12\kappa(r-r_0)^2$，振動對稱、$\langle r\rangle=r_0$ 不隨 $T$ 變，就**無法**預測熱膨脹。）
+
+## ✅ 自我檢核
+- 量綱／合理性：$r_0\approx2.18$ nm 落在曲線唯一極小，$E''>0$ ✓。
+- 取 $E=0$ 為自由參考是 cohesive energy 的標準定義；井深為正 → 「拔走」要吸能（$\Delta E>0$）合理 ✓。
+- (b)：$E'''\neq0$ ⇒ 非簡諧 ⇒ 有熱膨脹，與「簡諧近似無熱膨脹」的課本結論一致 ✓。
+
+## 🔀 變化的可能情況
+- 常改成 **Lennard–Jones / Morse** 給定，求平衡距離與結合能（見 2016 Q3 的 $R_0,\ U_0$ 完整極小化）。
+- 或反問「**為何簡諧近似下無熱膨脹**」「**熱膨脹係數 $\alpha\propto$ 非簡諧項**」。
+- 或加問「彈簧常數 $\kappa=E''(r_0)$ 與聲速 $v=a\sqrt{\kappa/m}$」串到聲子（Q6）。
+
+## 信心：**中高**
+（方法（$dE/dr=0$、井深、非簡諧⇒膨脹）完全標準、數值已獨立重算；唯一不確定是題目係數的量綱寫得鬆（$16\,\text{eV/nm}$ 乘上量綱不一致的括號），我採「括號以 nm 為單位的數值、整體乘 $16$ eV」的讀法，得 $r_0\approx2.18$ nm、$\Delta E\approx159$ eV。若閱卷者要求 $E=0$ 以外的參考點，數值會改、但方法不變。）
+
+---
+
+# 📕 第 4 題 — 電子雙狹縫（Diffraction · 10%）
+
+## 📋 原題
+> Electrons can be selectively transmitted through two closely spaced slits（double-slit）。Assuming electrons behave **particle-like** or **wave-like**, how would the electron distribution on a screen behind the double slit look? (10%)
+
+## 🎯 核心訊息
+> **粒子像 → 兩坨（兩條亮帶相加，無干涉）；波像 → 干涉條紋（明暗相間）。** 真實電子給的是後者（de Broglie 波），這就是波粒二象性的判決實驗。
+
+## 解答
+
+**(1) 若電子是「粒子」（古典子彈圖像）。**
+每個電子只能穿過其中**一條**狹縫，兩縫機率獨立相加。螢幕分布 = 兩個單縫分布之**和**：在兩條狹縫正後方各出現**一坨**（兩條亮帶），中間沒有條紋。
+$$P_{\text{particle}}(y)=P_1(y)+P_2(y)\quad(\text{無交叉項、無干涉}).$$
+
+**(2) 若電子是「波」（de Broglie，$\lambda=h/p$）。**
+電子以波的形式**同時**通過兩縫，兩路振幅**先相加再取模平方**：
+$$P_{\text{wave}}(y)=|\psi_1+\psi_2|^2=P_1+P_2+\underbrace{2\sqrt{P_1P_2}\cos\delta}_{\text{干涉項}}.$$
+螢幕出現**明暗相間的干涉條紋**：亮紋條件 $d\sin\theta=n\lambda$，條紋間距 $\Delta y\approx\dfrac{\lambda L}{d}$（$d$=縫距、$L$=縫到屏距離），整體再被單縫繞射包絡調制。
+
+**(3) 真實結果。** 即使一次只放**一個**電子，長時間累積仍堆出**干涉條紋**——電子是波（機率幅疊加），且「哪一縫」資訊一旦被測量，條紋消失。故答案是**波像**：明暗相間條紋。
+
+$$\boxed{\text{粒子像：兩條亮帶相加、無條紋；\ 波像：}\ \Delta y\approx\lambda L/d\ \text{的干涉條紋（實驗為此）}.}$$
+
+## ✅ 自我檢核
+$\Delta y=\lambda L/d$ 量綱 ✓；$d\to0$（縫極近）→ 條紋變寬、易觀察，符合題目「closely spaced」設定 ✓。
+
+## 🔀 變化的可能情況
+- 量化：給電子動能算 $\lambda=h/\sqrt{2mE}$，再算條紋間距（常見估算延伸）。
+- 「which-path / 退相干」：放偵測器知道走哪縫 → 干涉消失（互補原理）。
+- 換中子、原子、甚至大分子（C₆₀）都觀測到干涉。
+
+## 信心：**高**（波粒二象標準題）。
+
+---
+
+# 📒 第 5 題 — 繞射峰移向大角（Diffraction · 10%）
+
+## 📋 原題
+> X-ray diffraction：an intensity maximum **shifts to larger angles** after modification of a crystal. Explain the origin of this change and give **two** potential reasons. (10%)
+
+## 🎯 核心訊息
+> Bragg $2d\sin\theta=n\lambda$，$\lambda$ 固定。**峰移向大 $\theta$ ⟺ $\sin\theta$ 變大 ⟺ 面間距 $d$ 變小**（晶格收縮）。兩個讓 $d$ 變小的合理原因即可。
+
+## 解答
+
+**起因（origin）。** 由 Bragg 條件
+$$2d\sin\theta=n\lambda\quad(\lambda\ \text{固定})\ \Longrightarrow\ \sin\theta=\frac{n\lambda}{2d}.$$
+峰角 $\theta$ 變大 ⇒ $\sin\theta$ 變大 ⇒ **繞射面間距 $d$ 變小**——也就是晶格（沿該方向）**收縮**了。所有「modification → 峰右移」的物理，都歸結成「$d$ 減小」。
+
+**兩個可能原因（任選兩個）：**
+
+1. **物理收縮：降溫或加壓。** 晶體**冷卻**（熱收縮，晶格常數隨 $T$ 降而減小）或施加**外壓 / 應力**，使晶格常數 $a$ 變小 → $d=a/\sqrt{h^2+k^2+l^2}$ 變小 → 峰右移。
+
+2. **成分改變：摻入較小的原子。** 以**較小半徑**的原子做置換固溶（合金化 / 摻雜，Vegard's law），平均晶格常數縮小 → $d$ 變小。
+   （等價的第三選項：**相變到更緻密的結構**，堆積更密 → $d$ 變小。）
+
+$$\boxed{\text{峰右移 } \Leftrightarrow d\downarrow（晶格收縮）；\ 兩因：①\,降溫/加壓\ ②\,換較小原子/更緻密相}.$$
+
+下圖示意：$\lambda$ 固定下，$d$ 變小 → $\sin\theta=n\lambda/2d$ 變大 → 整個繞射峰往**大角**搬。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg id="svg-q5-bragg" viewBox="0 0 520 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<text x="260" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">d 變小 → 峰移向大角（λ 固定）</text>
+<line x1="60" y1="200" x2="490" y2="200" stroke="#333" stroke-width="1.3"/>
+<line x1="60" y1="200" x2="60" y2="45" stroke="#333" stroke-width="1.3"/>
+<text x="500" y="216" text-anchor="end" fill="#333">2θ（繞射角）</text>
+<text x="50" y="50" text-anchor="end" fill="#333">強度 I</text>
+<polyline points="150,200 165,196 178,180 188,130 196,75 204,130 214,180 227,196 245,200" fill="none" stroke="#6aa1d6" stroke-width="2.5"/>
+<line x1="196" y1="200" x2="196" y2="60" stroke="#6aa1d6" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="196" y="218" text-anchor="middle" fill="#6aa1d6" font-weight="bold">原始（大 d）</text>
+<polyline points="320,200 335,196 348,180 358,130 366,75 374,130 384,180 397,196 415,200" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<line x1="366" y1="200" x2="366" y2="60" stroke="#c0392b" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="366" y="218" text-anchor="middle" fill="#c0392b" font-weight="bold">收縮後（小 d）</text>
+<line x1="210" y1="100" x2="352" y2="100" stroke="#e67e22" stroke-width="2" marker-end="url(#arr5)"/>
+<defs><marker id="arr5" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#e67e22"/></marker></defs>
+<text x="281" y="92" text-anchor="middle" fill="#e67e22" font-weight="bold">右移</text>
+<text x="281" y="240" text-anchor="middle" fill="#555">sinθ = nλ/2d ↑（因 d↓）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">同一 X 光（λ 固定）。晶格沿該方向收縮使面間距 d 變小 → 由 2d sinθ = nλ，sinθ 必須變大 → 繞射峰整體往<b style="color:#e67e22">大角（右）</b>搬。<b style="color:#6aa1d6">藍峰</b>是原始、<b style="color:#c0392b">紅峰</b>是收縮後。反之 d 變大則左移。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：Bragg 條件微分、$\Delta d/d$ 反推、判左右移</b></summary>
+
+**範例 A（給 $\Delta\theta$ 反推 $\Delta d/d$）**：對 $2d\sin\theta=n\lambda$（$\lambda,n$ 固定）取對數再微分。$\ln d+\ln\sin\theta=\text{const}$，微分得
+
+$$\frac{\Delta d}{d}+\frac{\cos\theta}{\sin\theta}\,\Delta\theta=0\ \Longrightarrow\ \boxed{\frac{\Delta d}{d}=-\cot\theta\;\Delta\theta.}$$
+
+例：$\theta=30^\circ$、峰右移 $\Delta\theta=+0.2^\circ=+0.00349$ rad。$\cot30^\circ=1.732$，故 $\Delta d/d=-1.732\times0.00349=-0.00605$ → $d$ 減小約 0.6%。負號 = 峰右移對應 $d$ 縮。
+
+**範例 B（給兩個 $\theta$ 算 $d$ 比）**：原始峰 $\theta_1=20^\circ$，收縮後同一 (hkl) 峰 $\theta_2=20.5^\circ$。由 $d=\dfrac{n\lambda}{2\sin\theta}$，
+
+$$\frac{d_2}{d_1}=\frac{\sin\theta_1}{\sin\theta_2}=\frac{\sin20^\circ}{\sin20.5^\circ}=\frac{0.3420}{0.3502}=0.9766.$$
+
+$d$ 縮了約 2.3%，與「峰右移」一致 ✓。
+
+**範例 C（晶格常數變化 → 哪一面峰移多少）**：立方晶 $d_{hkl}=\dfrac{a}{\sqrt{h^2+k^2+l^2}}$。(100) 面 $d_{100}=a$；若 $a$ 由 $0.400$ nm 降溫縮到 $0.396$ nm（縮 1%），$\lambda=0.154$ nm（Cu Kα）：
+
+原始 $\sin\theta_1=\dfrac{\lambda}{2d_1}=\dfrac{0.154}{2\times0.400}=0.1925\Rightarrow\theta_1=11.10^\circ$；
+
+收縮 $\sin\theta_2=\dfrac{0.154}{2\times0.396}=0.1944\Rightarrow\theta_2=11.21^\circ$。
+
+$\Delta\theta=+0.11^\circ$（右移）✓。所有 (hkl) 都隨 $a$ 同比例縮 → 全部峰右移。
+
+**範例 D（判左移還是右移：升溫 vs 降溫）**：升溫膨脹 $a\uparrow\Rightarrow d\uparrow\Rightarrow\sin\theta=n\lambda/2d\downarrow\Rightarrow\theta\downarrow$ → 峰**左移**。降溫 / 加壓 / 摻小原子 $\Rightarrow d\downarrow\Rightarrow\theta\uparrow$ → 峰**右移**（本題）。記法：$\theta$ 與 $d$ 反向。
+</details>
+
+## ✅ 自我檢核
+- $\lambda$ 沒變（同一 X 光源），所以只能是 $d$ 在動 ✓。
+- 反向檢查：若改成峰**左移**（小角），則 $d$ 變大（升溫膨脹 / 換較大原子），邏輯自洽 ✓。
+
+## 🔀 變化的可能情況
+- 改問「峰**變寬**」：晶粒變小（Scherrer 展寬）或微應變增加，與「移位」不同機制。
+- 改問「峰**強度**改變」：那是**結構因子 $S_{\mathbf G}$ / 成分 / 溫度因子（Debye–Waller）**，不是峰位置。
+- 量化：給 $\Delta\theta$ 反推 $\Delta d/d=-\cot\theta\,\Delta\theta$。
+
+## 信心：**高**（Bragg 微分標準題）。
+
+---
+
+# 📓 第 6 題 — 單原子鏈聲子（Phonons · 10%+10%+10%）　★本卷重頭推導
+
+## 📋 原題
+> 1D chain of **identical masses** connected by **identical springs**.
+> **(a)** amplitude ratio and phase between neighboring masses? (10%)
+> **(b)** speed of a phonon in this example? (10%)
+> **(c)** sketch the relation between propagation speed and oscillation frequency. (10%)
+
+## 🎯 核心訊息
+> 一條色散關係 $\omega=2\sqrt{C/m}\,|\sin(ka/2)|$ 全包：**鄰居等振幅、相位差 $ka$**(a)；**聲子速度 = 群速 $v_g=d\omega/dk=a\sqrt{C/m}\cos(ka/2)$**(b)；**速度隨頻率增而降，到 $\omega_{\max}$ 歸零**(c)。
+
+## 📚 前情提要：從牛頓第二定律串到色散關係
+### 階段 1（普物）：耦合彈簧
+第 $n$ 顆質量只受左右兩彈簧的力，位移 $u_n$。胡克定律：$F_n=C(u_{n+1}-u_n)-C(u_n-u_{n-1})$。
+> **留存**：這就是「離散版的波動方程」，鄰居差分取代了二階空間微分。
+
+### 階段 2（試平面波）
+週期晶格 ⇒ 試 $u_n=A\,e^{i(kna-\omega t)}$（Bloch 在 1D 的版本）。代入運動方程，所有 $n$ 的方程塌成**一條** $\omega(k)$。
+> **留存**：$na$ 是第 $n$ 顆的平衡位置；相鄰只差相位 $e^{ika}$。
+
+### 階段 3（色散關係）
+解出 $\omega(k)=2\sqrt{C/m}\,|\sin(ka/2)|$：低 $k$ 線性（聲學支、像聲波），高 $k$ 到布里淵區邊界 $k=\pi/a$ 飽和於 $\omega_{\max}=2\sqrt{C/m}$。
+> **留存**：相速 $\omega/k$、群速 $d\omega/dk$ 都從這條長出來；群速才是「聲子跑多快」。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ 相速 vs 群速；為何「聲子速度」取群速</b></summary>
+
+### 你普物學過的
+波 $y=A\cos(kx-\omega t)$ 的波形以**相速** $v_p=\omega/k$ 前進；但「一包波」（wave packet）攜帶能量/訊號的速度是**群速** $v_g=d\omega/dk$。
+
+### 為什麼要這個
+聲子是**一份振動量子**＝局域化的波包，能量輸運速度 = 群速。色散非線性時 $v_p\neq v_g$。
+
+### 定義
+$v_p=\dfrac{\omega}{k}$（單一波前），$v_g=\dfrac{d\omega}{dk}$（波包/能量）。長波極限 $k\to0$ 兩者同 → 聲速 $v_s$。
+
+**範例 1（熱身）**：無色散弦 $\omega=v k$ → $v_p=v_g=v$（常數）。
+**範例 2（中階）**：本鏈長波 $\omega\approx a\sqrt{C/m}\,k$ → $v_p=v_g=a\sqrt{C/m}=v_s$。
+**範例 3（本題）**：區邊界 $k=\pi/a$ → $v_g=0$（駐波）但 $v_p=\dfrac{2\sqrt{C/m}}{\pi/a}\neq0$ → 必須用群速才對。
+</details>
+
+## 解答
+
+**Step 0 — 運動方程與色散關係（(a)(b)(c) 共用）。**
+第 $n$ 顆質量：
+$$m\ddot u_n=C(u_{n+1}-u_n)+C(u_{n-1}-u_n)=C(u_{n+1}+u_{n-1}-2u_n).$$
+代入 $u_n=A\,e^{i(kna-\omega t)}$：左邊 $=-m\omega^2 u_n$，右邊 $=C\big(e^{ika}+e^{-ika}-2\big)u_n=C(2\cos ka-2)u_n$。用 $2\cos ka-2=-4\sin^2(ka/2)$：
+$$-m\omega^2=-4C\sin^2\!\frac{ka}{2}\ \Longrightarrow\ \boxed{\omega(k)=2\sqrt{\frac{C}{m}}\,\Big|\sin\frac{ka}{2}\Big|.}$$
+> **小結**：一個試波 + 一行三角恆等式，就把無限多顆耦合方程壓成一條 $\omega(k)$。
+
+下圖畫出這條色散關係 $\omega(k)$：低 $k$ 線性（聲學支、像聲波），到布里淵區邊界 $k=\pi/a$ 飽和於 $\omega_{\max}=2\sqrt{C/m}$，斜率（=群速）在邊界歸零。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg id="svg-q6-disp" viewBox="0 0 520 270" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<text x="260" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">單原子鏈色散 ω(k) = 2√(C/m)·|sin(ka/2)|</text>
+<line x1="70" y1="230" x2="490" y2="230" stroke="#333" stroke-width="1.3"/>
+<line x1="70" y1="230" x2="70" y2="45" stroke="#333" stroke-width="1.3"/>
+<text x="486" y="248" text-anchor="end" fill="#333">k</text>
+<text x="58" y="50" text-anchor="end" fill="#333">ω</text>
+<line x1="70" y1="70" x2="450" y2="70" stroke="#c0392b" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="455" y="73" fill="#c0392b">ω_max = 2√(C/m)</text>
+<line x1="450" y1="230" x2="450" y2="45" stroke="#aaa" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="450" y="248" text-anchor="middle" fill="#555">π/a</text>
+<polyline points="70,230 102,205 134,182 166,160 198,140 230,123 262,108 294,96 326,87 358,80 390,75 418,72 450,70" fill="none" stroke="#1a4d7c" stroke-width="2.8"/>
+<line x1="70" y1="230" x2="150" y2="167" stroke="#2e8b2e" stroke-width="1.6" stroke-dasharray="5 3"/>
+<text x="130" y="205" fill="#2e8b2e">斜率 = v_s = a√(C/m)</text>
+<text x="120" y="120" fill="#6aa1d6">線性（聲學支）</text>
+<text x="345" y="108" fill="#e67e22">斜率→0（v_g=0）</text>
+<circle cx="450" cy="70" r="4.5" fill="#c0392b"/>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">色散曲線（藍）。原點附近斜率 = 長波聲速 <b style="color:#2e8b2e">v_s = a√(C/m)</b>（綠虛切線）；曲線爬升並在布里淵區邊界 k=π/a 飽和於 <b style="color:#c0392b">ω_max = 2√(C/m)</b>，此處切線水平 → 群速 v_g = dω/dk = 0（駐波）。低頻聲子跑得快、高頻越慢。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：代試波、求群速/相速、區邊界與長波極限</b></summary>
+
+**範例 A（代試波得色散，每步展開）**：運動方程 $m\ddot u_n=C(u_{n+1}+u_{n-1}-2u_n)$，試 $u_n=A\,e^{i(kna-\omega t)}$。
+
+左邊：$\ddot u_n=(-i\omega)^2 u_n=-\omega^2 u_n$ → $m\ddot u_n=-m\omega^2 u_n$。
+
+右邊三項各除以 $u_n=Ae^{i(kna-\omega t)}$：
+
+$\dfrac{u_{n+1}}{u_n}=e^{ik a}$，$\dfrac{u_{n-1}}{u_n}=e^{-ika}$，$\dfrac{u_n}{u_n}=1$。
+
+所以右邊 $=C\big(e^{ika}+e^{-ika}-2\big)u_n=C(2\cos ka-2)u_n$。
+
+用半角恆等式 $2\cos ka-2=-2(1-\cos ka)=-4\sin^2\tfrac{ka}{2}$：
+
+$$-m\omega^2=-4C\sin^2\tfrac{ka}{2}\Rightarrow\omega=2\sqrt{\tfrac{C}{m}}\big|\sin\tfrac{ka}{2}\big|.$$
+
+**範例 B（求群速，逐步微分）**：$\omega=2\sqrt{C/m}\,\sin\tfrac{ka}{2}$（取 $k>0$ 段）。
+
+$$v_g=\frac{d\omega}{dk}=2\sqrt{\frac{C}{m}}\cdot\frac{d}{dk}\sin\frac{ka}{2}=2\sqrt{\frac{C}{m}}\cdot\cos\frac{ka}{2}\cdot\frac{a}{2}=a\sqrt{\frac{C}{m}}\cos\frac{ka}{2}.$$
+
+代 $k\to0$：$\cos0=1\Rightarrow v_g=a\sqrt{C/m}=v_s$（聲速）。
+
+代 $k=\pi/a$：$\cos\tfrac{\pi}{2}=0\Rightarrow v_g=0$（駐波，能量不傳）。
+
+**範例 C（相速並與群速比較）**：相速 $v_p=\dfrac{\omega}{k}=\dfrac{2\sqrt{C/m}\sin(ka/2)}{k}=a\sqrt{\dfrac{C}{m}}\cdot\dfrac{\sin(ka/2)}{ka/2}$。
+
+長波 $k\to0$：$\dfrac{\sin x}{x}\to1\Rightarrow v_p\to a\sqrt{C/m}=v_s=v_g$（兩者相等）。
+
+區邊界 $k=\pi/a$：$v_p=a\sqrt{C/m}\cdot\dfrac{\sin(\pi/2)}{\pi/2}=a\sqrt{C/m}\cdot\dfrac{1}{\pi/2}=\dfrac{2}{\pi}a\sqrt{C/m}\ne0$，但 $v_g=0$ → 此處 $v_p\ne v_g$，故「聲子速度」必須取群速。
+
+**範例 D（鄰居振幅比與相位）**：$\dfrac{u_{n+1}}{u_n}=\dfrac{Ae^{i((n+1)ka-\omega t)}}{Ae^{i(nka-\omega t)}}=e^{ika}$。振幅比 $|e^{ika}|=1$（等振幅）；相位差 $\arg e^{ika}=ka$。代 $k=\pi/a$：相位差 $=\pi$ → 鄰居反相（一上一下）。代 $k\to0$：相位差 $\to0$ → 鄰居幾乎同相（整段一起晃，像聲波）。
+</details>
+
+### (a) 鄰居間的振幅比與相位
+
+由解 $u_n=A\,e^{i(kna-\omega t)}$，相鄰兩顆之比
+$$\frac{u_{n+1}}{u_n}=\frac{A\,e^{i((n+1)ka-\omega t)}}{A\,e^{i(nka-\omega t)}}=e^{ika}.$$
+- **振幅比**：$\left|\dfrac{u_{n+1}}{u_n}\right|=|e^{ika}|=\boxed{1}$——所有質量**振幅相同**（單原子鏈每顆等價）。
+- **相位差**：$\arg\dfrac{u_{n+1}}{u_n}=\boxed{ka}$——鄰居間固定落後/超前 $ka$。
+  - 長波 $k\to0$：$ka\to0$，鄰居**幾乎同相**（整段一起晃，像聲波）。
+  - 區邊界 $k=\pi/a$：相位差 $=\pi$，鄰居**反相**（一上一下，駐波）。
+> **小結**：等振幅、相位差 $=ka$，是「平面波在離散格點上」的直接讀數。
+
+### (b) 聲子的速度
+
+聲子＝波包，速度取**群速**：
+$$v_g=\frac{d\omega}{dk}=2\sqrt{\frac{C}{m}}\cdot\frac{a}{2}\cos\frac{ka}{2}=\boxed{a\sqrt{\frac{C}{m}}\,\cos\frac{ka}{2}.}$$
+- **長波極限**（$k\to0$，即一般說「聲子/聲波的速度」）：$\cos\to1$，
+  $$\boxed{v_s=a\sqrt{\frac{C}{m}}}\quad(\text{此時 }v_g=v_p=\omega/k,\ \text{即聲速}).$$
+- **區邊界** $k=\pi/a$：$\cos(\pi/2)=0\Rightarrow v_g=0$ → 駐波，不傳播能量。
+
+> **小結**：「這條鏈的聲子速度」= 群速 $a\sqrt{C/m}\cos(ka/2)$；其長波（聲學）值就是聲速 $v_s=a\sqrt{C/m}$，隨 $k$ 增而減、到區邊界歸零。
+
+### (c) 速度 vs 頻率 的草圖
+
+把 (a)(b) 兩式中的 $k$ 消掉。令 $\omega_{\max}=2\sqrt{C/m}$，則 $\sin(ka/2)=\omega/\omega_{\max}$，$\cos(ka/2)=\sqrt{1-(\omega/\omega_{\max})^2}$，代入 $v_g$：
+$$\boxed{v_g=a\sqrt{\frac{C}{m}}\sqrt{1-\Big(\frac{\omega}{\omega_{\max}}\Big)^2}=v_s\sqrt{1-\Big(\frac{\omega}{\omega_{\max}}\Big)^2}.}$$
+這是一條**四分之一橢圓（quarter-ellipse）**：$\omega=0$ 時 $v_g=v_s$（最大）；$\omega$ 增加時 $v_g$ **單調下降**；$\omega\to\omega_{\max}=2\sqrt{C/m}$ 時 $v_g\to0$。
+
+![2019 Q6c 群速 vs 頻率](figs/固態_2019_Q6c_vg.png)
+
+> **判讀**：縱軸 $v_g/v_s$、橫軸 $\omega/\omega_{\max}$；曲線從左上 $(0,1)$ 降到右下 $(1,0)$，凹向原點。**低頻聲子跑得快（接近聲速），高頻聲子越跑越慢，到截止頻率成駐波。**
+
+## ✅ 自我檢核
+- 量綱：$a\sqrt{C/m}$ 中 $\sqrt{C/m}$ 是頻率（$1/\text{s}$），乘 $a$（長度）→ 速度 ✓。
+- 極限：$k\to0$ 給線性色散 $\omega\approx v_s k$、$v_g=v_s$（聲速），與連續彈性介質一致 ✓。
+- 區邊界 $v_g=0$、鄰居反相（駐波）三項彼此自洽 ✓。
+- $(v_g/v_s)^2+(\omega/\omega_{\max})^2=1$ → 確為四分之一橢圓 ✓。
+
+## 🔀 變化的可能情況
+- **雙原子鏈**：開出 optical / acoustic 兩支，區邊界有頻率間隙（常見進階題）。
+- 改問**相速** $v_p=\omega/k=v_s\dfrac{\sin(ka/2)}{ka/2}$，或 **DOS** $g(\omega)$（區邊界 $v_g\to0$ → van Hove 發散）。
+- 加問「**長波 $\Rightarrow$ 連續彈性波、聲速 $v_s=\sqrt{Y/\rho}$**」把離散接回連續。
+
+## 信心：**高**（單原子鏈為 Kittel Ch4 標準推導，色散/群速/草圖皆完整重算）。
+
+---
+
+# 📔 第 7 題 — 一維量子井（Electrons · 10%+5%）
+
+## 📋 原題
+> 1D quantum well（無限井）。
+> **(a)** 1 nm 寬的井，電子由第 2 態落到第 1 態放紅光 $E=1.9$ eV。電子由第 3 態落到第 1 態放出多少能量？(10%)
+> **(b)** 若井寬加倍，發光能量如何變化？(5%)
+
+## 🎯 核心訊息
+> 無限井 $E_n=n^2E_1$（$E_1=\dfrac{\pi^2\hbar^2}{2mL^2}$）。**用能階比就夠**：$3E_1=1.9$ eV 定出 $E_1$，再算 $8E_1$。寬度進來只影響整體尺度（$\propto1/L^2$）。
+
+## 解答
+
+**Step 0 — 能階公式。** 一維無限深井（寬 $L$）：
+$$E_n=\frac{n^2\pi^2\hbar^2}{2mL^2}=n^2E_1,\qquad E_1=\frac{\pi^2\hbar^2}{2mL^2}.$$
+躍遷放光 $=\Delta E=(n_i^2-n_f^2)E_1$。
+
+### (a) 第 3 → 第 1 的放光能量
+
+**Step 1 — 用 $2\to1$ 定出 $E_1$。**
+$$E_2-E_1=(2^2-1^2)E_1=3E_1=1.9\ \text{eV}\ \Longrightarrow\ E_1=\frac{1.9}{3}\approx0.633\ \text{eV}.$$
+**Step 2 — 算 $3\to1$。**
+$$E_3-E_1=(3^2-1^2)E_1=8E_1=8\times0.633\ \text{eV}=\boxed{5.07\ \text{eV}\ (\approx5.1\ \text{eV}).}$$
+也可直接用比：$\dfrac{E_3-E_1}{E_2-E_1}=\dfrac{8}{3}\Rightarrow (E_3-E_1)=\dfrac83\times1.9=5.07$ eV。
+
+下圖畫出能階 $E_n=n^2E_1$（間距越往上越疏，$1:4:9$）與兩條躍遷：$2\to1$ 放 $3E_1=1.9$ eV，$3\to1$ 放 $8E_1=5.07$ eV。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg id="svg-q7-levels" viewBox="0 0 520 280" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11.5">
+<text x="260" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">無限井能階 Eₙ = n²E₁（間距 1 : 4 : 9）</text>
+<line x1="120" y1="45" x2="120" y2="250" stroke="#333" stroke-width="1.3"/>
+<line x1="320" y1="45" x2="320" y2="250" stroke="#333" stroke-width="1.3"/>
+<line x1="120" y1="250" x2="320" y2="250" stroke="#333" stroke-width="1.3"/>
+<text x="150" y="245" text-anchor="middle" fill="#888">井寬 L = 1 nm</text>
+<line x1="130" y1="230" x2="310" y2="230" stroke="#1a4d7c" stroke-width="2.5"/>
+<text x="100" y="234" text-anchor="end" fill="#1a4d7c">E₁</text>
+<line x1="130" y1="172" x2="310" y2="172" stroke="#1a4d7c" stroke-width="2.5"/>
+<text x="100" y="176" text-anchor="end" fill="#1a4d7c">E₂ = 4E₁</text>
+<line x1="130" y1="75" x2="310" y2="75" stroke="#1a4d7c" stroke-width="2.5"/>
+<text x="100" y="79" text-anchor="end" fill="#1a4d7c">E₃ = 9E₁</text>
+<line x1="200" y1="172" x2="200" y2="227" stroke="#c0392b" stroke-width="2" marker-end="url(#arr7a)"/>
+<defs><marker id="arr7a" markerWidth="9" markerHeight="9" refX="4" refY="7" orient="auto"><path d="M0,0 L7,0 L3.5,7 z" fill="#c0392b"/></marker></defs>
+<text x="210" y="200" fill="#c0392b" font-weight="bold">2→1 : 3E₁ = 1.9 eV</text>
+<line x1="270" y1="75" x2="270" y2="227" stroke="#2e8b2e" stroke-width="2" marker-end="url(#arr7b)"/>
+<defs><marker id="arr7b" markerWidth="9" markerHeight="9" refX="4" refY="7" orient="auto"><path d="M0,0 L7,0 L3.5,7 z" fill="#2e8b2e"/></marker></defs>
+<text x="280" y="140" fill="#2e8b2e" font-weight="bold">3→1 : 8E₁ = 5.07 eV</text>
+<text x="160" y="270" text-anchor="middle" fill="#555">E₁ = 1.9/3 ≈ 0.633 eV（由 2→1 定出）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">能階 Eₙ = n²E₁ 隨 n² 拉開（1 : 4 : 9）。<b style="color:#c0392b">2→1</b> 放出 3E₁ = 1.9 eV（紅光，題給）→ 定出 E₁ ≈ 0.633 eV；<b style="color:#2e8b2e">3→1</b> 放出 8E₁ = 8×0.633 ≈ 5.07 eV。答案只靠能階比 8 : 3，不需 L 或 m。</figcaption>
+</figure>
+
+> **小結**：答案只靠能階比 $8:3$，**不需要** $L$ 或 $m$。題目給的「1 nm」其實是干擾項——若用真實電子質量，$1$ nm 井的 $E_2-E_1=3E_1\approx3\times0.376=1.13$ eV，並非 $1.9$ eV；所以這題要以**給定的 1.9 eV 當尺度**（或視為有效質量），用比例法做。
+
+<details>
+<summary><b>📝 更多範例（點開）：能階比、寬度縮放、$\Delta E\leftrightarrow$ 波長換算</b></summary>
+
+**範例 A（任意躍遷用能階比）**：$E_n=n^2E_1$，躍遷 $\Delta E_{n_i\to n_f}=(n_i^2-n_f^2)E_1$。已知 $2\to1$ 為 $3E_1=1.9$ eV → $E_1=\tfrac{1.9}{3}=0.6333$ eV。
+
+$3\to2$：$(9-4)E_1=5E_1=5\times0.6333=3.17$ eV；
+
+$4\to1$：$(16-1)E_1=15E_1=15\times0.6333=9.50$ eV；
+
+$3\to1$：$(9-1)E_1=8E_1=8\times0.6333=5.07$ eV ✓（本題）。
+
+**範例 B（井寬加倍：能量 $\times1/4$）**：$E_n=\dfrac{n^2\pi^2\hbar^2}{2mL^2}\propto\dfrac{1}{L^2}$。$L\to2L$：每個 $E_n$、每個 $\Delta E$ 都 $\times\dfrac{1}{(2)^2}=\dfrac14$。
+
+原 $3\to1$ 的 $5.07$ eV → $\dfrac{5.07}{4}=1.27$ eV；原紅光 $1.9$ eV → $\dfrac{1.9}{4}=0.475$ eV（落到紅外）。寬井 → 能階密 → 紅移。
+
+**範例 C（井寬縮一半：能量 $\times4$）**：$L\to L/2$：$\Delta E\times\dfrac{1}{(1/2)^2}=\times4$。原 $1.9$ eV → $7.6$ eV（紫外）。窄井 → 能階疏 → 藍移。
+
+**範例 D（能量 ↔ 波長）**：用 $\lambda=\dfrac{hc}{\Delta E}=\dfrac{1240\ \text{eV·nm}}{\Delta E[\text{eV}]}$。
+
+$\Delta E=1.9$ eV → $\lambda=\dfrac{1240}{1.9}=653$ nm（紅光 ✓）；
+
+$\Delta E=5.07$ eV → $\lambda=\dfrac{1240}{5.07}=245$ nm（紫外）；
+
+加寬後 $\Delta E=0.475$ eV → $\lambda=\dfrac{1240}{0.475}=2611$ nm（近紅外）。能量越小波長越長，全自洽 ✓。
+</details>
+
+### (b) 井寬加倍，發光能量怎麼變
+
+$E_n\propto\dfrac{1}{L^2}$，所有能階與所有躍遷能量同比例縮放。$L\to2L$：
+$$\Delta E\to\frac{\Delta E}{2^2}=\frac{\Delta E}{4}.$$
+$$\boxed{\text{發光能量變為原來的 }\tfrac14（紅移）。}$$
+例如原本的紅光 $1.9$ eV → $0.475$ eV（落到紅外）。
+
+## ✅ 自我檢核
+- 比例自洽：$E_3-E_1=8E_1$、$E_2-E_1=3E_1$，比 $8/3\approx2.67$ → $5.07/1.9=2.67$ ✓。
+- (b) 量綱：$E\propto L^{-2}$，加倍→ $\times1/4$ ✓；越寬的井能階越密、發光越低能，物理合理 ✓。
+
+## 🔀 變化的可能情況
+- 改問「**波長**」：$\lambda=hc/\Delta E$（$1240\ \text{eV·nm}/\Delta E$）。
+- 給 $L$、$m$ 直接算 $E_1$（用 $\hbar^2/2m=0.0381$ eV·nm²）。
+- 3D 盒 $E\propto(n_x^2+n_y^2+n_z^2)$，或有限深井（能階略低、有限個束縛態）。
+
+## 信心：**高**（無限井標準題；比例法不依賴 $L$，已雙重檢核）。
+
+---
+
+# 📚 第 8 題 — 能隙加倍，電子平均能量（Electrons · 5%）
+
+## 📋 原題
+> How would the **mean energy of electrons** change if the band-gap in a crystal was somehow doubled? (5%)
+
+## 🎯 核心訊息
+> **絕大多數電子在（填滿的）價帶**，價帶能階不因能隙加倍而動；被影響的只有「被熱激發跨越能隙」那極少數電子。故平均能量**幾乎不變**（只微幅下降）。
+
+## 解答
+
+**Step 1 — 誰決定平均能量。** 電子的平均能量由**佔據態**決定，而佔據態的壓倒性多數在**填滿的價帶**。能隙是價帶之上的**空能量區間**；把能隙加倍＝把（幾乎空的）導帶整體往上推，**並不改動價帶已填能階的能量**。
+
+**Step 2 — 被影響的只有熱激發載子。** 唯一受能隙影響的是被熱激發到導帶的電子，其數目
+$$n\propto e^{-E_g/2k_BT}.$$
+能隙加倍 $E_g\to2E_g$ → 這個指數**急遽變小**，被推到高能導帶的電子變得更少。
+
+**Step 3 — 淨效果。** 高能導帶電子本就佔比 $\sim e^{-E_g/2k_BT}\ll1$；加倍能隙讓它們更少 → 移走了一丁點高能貢獻。
+$$\boxed{\text{平均電子能量}\ \textbf{幾乎不變}（僅因熱激發載子變少而微幅下降，量級 }\sim e^{-E_g/2k_BT}）。}$$
+（注意：被激發的那少數電子「每顆」其實坐得更高了 $\sim E_g$，但顆數以指數壓過，整體平均仍由不動的價帶主導。）
+
+## ✅ 自我檢核
+- 取 $T=0$ 極限：無熱激發，價帶全滿、導帶全空 → 平均能量**完全**不受 $E_g$ 影響 ✓。
+- 室溫半導體 $E_g\sim1$ eV $\gg k_BT\approx0.026$ eV → $e^{-E_g/2k_BT}$ 本就極小，修正可忽略 ✓。
+
+## 🔀 變化的可能情況
+- 若問的是「**載子濃度 / 本徵載子 $n_i$**」：$n_i\propto e^{-E_g/2k_BT}$ → 加倍能隙使 $n_i$ 指數下降（這才是 $E_g$ 的主要效應）。
+- 若問「**導電率**」：$\sigma=ne\mu$ 隨 $n$ 指數下降 → 更像絕緣體。
+- 若問「**單顆導帶電子的熱動能**」：非簡併 Boltzmann 下仍 $\sim\tfrac12k_BT$（每自由度），與 $E_g$ 無關。
+
+## 信心：**中**
+（題目「mean energy of electrons」措辭含糊，可能指「全體電子平均能量」或「導帶載子平均能量」。我採最穩健的「全體電子」讀法：由填滿價帶主導 → 幾乎不變。若閱卷者指的是**載子數 / 導電率**，則答「指數下降」。兩種讀法的物理我都已列出。）
+
+---
+
+## 📊 本卷信心總表（2019：觀念+估算為主，僅 Q6 為長推導）
+| 題 | 主題 | 信心 | 備註 |
+|---|---|---|---|
+| 1 | 晶體 vs 液體 | 高 | 長程週期序；繞射尖峰/各向異性/剛性 |
+| 2 | 畫晶格（lattice×basis） | 高 | 格點＋3 原子 basis，附圖；原胞面積 5 cm²、3 原子/胞 |
+| 3 | 能量–距離（$r_0$、井深、熱膨脹） | 中高 | $r_0\approx2.18$ nm、移走 $\approx159$ eV（取 $E=0$ 參考）；非簡諧⇒可述熱膨脹 |
+| 4 | 電子雙狹縫 | 高 | 粒子：兩坨；波：干涉條紋（實驗） |
+| 5 | 繞射峰移向大角 | 高 | $d$ 變小；降溫/加壓、換小原子兩因 |
+| 6 | 單原子鏈聲子 | 高 | **色散、等振幅相位差 $ka$、群速 $a\sqrt{C/m}\cos(ka/2)$、$v_g$–$\omega$ 四分橢圓**，附圖 |
+| 7 | 一維量子井 | 高 | 比例法 $8E_1=5.07$ eV；加寬一倍→能量 $\times1/4$ |
+| 8 | 能隙加倍→平均能量 | 中 | 措辭含糊；採「全體電子→幾乎不變」，另列載子數指數下降 |
+
+> **對照用**：本卷（2019，輕／觀念多）與 `固態_2025_詳解`（輕）同風格；想看長推導的硬年份見 `固態_2016_詳解`（Bloch 證明、Kronig–Penney、$U_0=\tfrac35NE_F$）。本卷唯一的長推導是 Q6 單原子鏈聲子。
+</content>
+</invoke>
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

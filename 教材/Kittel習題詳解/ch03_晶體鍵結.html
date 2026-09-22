@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 習題詳解 — 第3章 晶體鍵結 — 習題詳解＋範例</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">習題詳解目錄</a> &nbsp;·&nbsp; <a href="../Kittel章節導讀/index.html">章節導讀</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../../考古題/詳解/index.html">逐題詳解</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- Kittel 習題詳解：第3章 晶體鍵結 -->
+
+# Kittel 第3章 習題詳解 ＋ 加碼範例 — 晶體鍵結（Crystal Binding）
+
+> **這頁是什麼**：本章的「練習題庫＋完整解答」。先做 **加碼範例** 熱身，再把 **Kittel 課本習題** 全部練過。觀念見 [章節導讀](../Kittel章節導讀/ch03_晶體鍵結.html)、[單元學科](../../單元教學/unit03_晶體鍵結.html)；歷年考題見 [逐題詳解](../../考古題/詳解/index.html)。
+
+---
+
+## 本章必背工具箱（先看這個再做題）
+
+**1. 凡德瓦／Lennard–Jones 位能（van der Waals / Lennard–Jones potential）**：兩個惰性氣體原子間
+$$U(r)=4\varepsilon\left[\left(\frac{\sigma}{r}\right)^{12}-\left(\frac{\sigma}{r}\right)^{6}\right].$$
+$\varepsilon$（能量井深）與 $\sigma$（$U=0$ 的距離）是材料常數。$r^{-12}$ 是排斥項（電子雲重疊），$r^{-6}$ 是吸引項（誘發偶極—偶極）。
+
+**2. 晶體總位能（lattice sum）**：以最近鄰距離 $R$ 為變數，整個晶體（$N$ 個原子）的總位能
+$$U_{\text{tot}}(R)=2N\varepsilon\left[A_{12}\left(\frac{\sigma}{R}\right)^{12}-A_{6}\left(\frac{\sigma}{R}\right)^{6}\right],$$
+其中 $A_{12}=\sum_{j}'p_{ij}^{-12}$、$A_{6}=\sum_{j}'p_{ij}^{-6}$ 是**結構晶格和（structure lattice sums）**，$p_{ij}$ 是「第 $j$ 鄰距離／最近鄰距離」。常用值：
+
+| 結構 | $A_{12}$ | $A_{6}$ |
+|---|---|---|
+| fcc（面心立方） | $12.13188$ | $14.45392$ |
+| bcc（體心立方） | $9.11418$ | $12.2533$ |
+
+**3. 平衡距離與平衡能（對任意 LJ 晶體都一樣的代數）**：令 $\dfrac{dU_{\text{tot}}}{dR}=0$，平衡時 $\left(\dfrac{\sigma}{R_0}\right)^{6}=\dfrac{A_6}{2A_{12}}$，得
+$$\boxed{\ \frac{R_0}{\sigma}=\left(\frac{2A_{12}}{A_{6}}\right)^{1/6}\ },\qquad
+\boxed{\ U_{\text{tot}}(R_0)=-2N\varepsilon\,\frac{A_6^{2}}{4A_{12}}=-N\varepsilon\,\frac{A_6^{2}}{2A_{12}}\ }.$$
+（每原子內聚能 $=\dfrac{U_{\text{tot}}(R_0)}{N}=-\dfrac{A_6^{2}}{2A_{12}}\varepsilon$；fcc 為 $-8.61\,\varepsilon$、bcc 為 $-8.24\,\varepsilon$。）
+
+**4. 離子晶體（Born model）**：總位能
+$$U_{\text{tot}}(R)=N\left[z\lambda\,e^{-R/\rho}-\frac{\alpha q^{2}}{R}\right],$$
+$\alpha$ 是 **Madelung 常數（Madelung constant）**，$q^2\equiv e^2$（高斯制；SI 要把 $q^2\to q^2/4\pi\varepsilon_0$），$z$ 是最近鄰數，$\lambda,\rho$ 是排斥參數。平衡時的內聚能
+$$\boxed{\ U_{\text{tot}}(R_0)=-\frac{N\alpha q^{2}}{R_0}\left(1-\frac{\rho}{R_0}\right)\ }.$$
+常用：$e^{2}/4\pi\varepsilon_0=14.3996\ \text{eV·\AA}$；NaCl 結構 $\alpha=1.747565$、$z=6$；ZnS 結構 $\alpha=1.6381$、$z=4$。
+
+---
+
+## 🔥 加碼範例題目（先熱身）
+
+### 範例 A：Lennard–Jones 單分子平衡（最基本的微分）
+
+**題目**：兩個原子的交互作用 $U(r)=4\varepsilon\left[(\sigma/r)^{12}-(\sigma/r)^6\right]$。求 (i) 平衡間距 $r_0$；(ii) 平衡時的位能 $U(r_0)$。
+
+**Step 1**：令 $x=\sigma/r$，則 $U=4\varepsilon(x^{12}-x^{6})$。對 $r$ 微分等價於對 $x$ 微分（$x$ 隨 $r$ 單調遞減）。直接對 $r$ 算：
+$$\frac{dU}{dr}=4\varepsilon\left[-12\frac{\sigma^{12}}{r^{13}}+6\frac{\sigma^{6}}{r^{7}}\right].$$
+
+**Step 2**：令 $\dfrac{dU}{dr}=0$：
+$$12\frac{\sigma^{12}}{r^{13}}=6\frac{\sigma^{6}}{r^{7}}\ \Rightarrow\ 2\frac{\sigma^{12}}{r^{13}}=\frac{\sigma^{6}}{r^{7}}\ \Rightarrow\ r^{6}=2\sigma^{6}.$$
+
+**Step 3**：
+$$r_0=2^{1/6}\sigma\approx 1.122\,\sigma.$$
+
+**Step 4**：代回。此時 $(\sigma/r_0)^6=1/2$，$(\sigma/r_0)^{12}=1/4$：
+$$U(r_0)=4\varepsilon\left(\tfrac14-\tfrac12\right)=4\varepsilon\left(-\tfrac14\right)=-\varepsilon.$$
+
+$$\boxed{\,r_0=2^{1/6}\sigma\approx1.122\,\sigma,\qquad U(r_0)=-\varepsilon\,}$$
+
+> **重點**：LJ 位能井的「最低點正好是 $-\varepsilon$、位置正好在 $1.122\sigma$」是必背結論；它解釋了為什麼 $\varepsilon$ 叫「井深」。晶體版只是把 $1$ 換成晶格和 $A$。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 460 260" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arC3a" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#555"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="55" y1="30" x2="55" y2="225" stroke="#555" stroke-width="1.3" marker-end="url(#arC3a)"/>
+<line x1="55" y1="160" x2="440" y2="160" stroke="#555" stroke-width="1.3" marker-end="url(#arC3a)"/>
+<text x="40" y="36" fill="#555">U(r)</text>
+<text x="430" y="153" text-anchor="end" fill="#555">r</text>
+<polyline points="78,40 84,90 90,124 96,146 104,160 112,170 122,182 134,193 148,201 165,206 185,207 205,205 225,201 250,197 280,192 320,186 365,181 420,176" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<line x1="185" y1="160" x2="185" y2="207" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="4,3"/>
+<line x1="55" y1="207" x2="185" y2="207" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="4,3"/>
+<circle cx="185" cy="207" r="3.6" fill="#c0392b"/>
+<line x1="135" y1="160" x2="135" y2="166" stroke="#2e8b2e" stroke-width="1.4"/>
+<text x="135" y="178" text-anchor="middle" font-size="11" fill="#2e8b2e">σ</text>
+<text x="135" y="150" text-anchor="middle" font-size="10.5" fill="#2e8b2e">U=0</text>
+<text x="185" y="223" text-anchor="middle" font-size="11" fill="#c0392b">r₀=2¹ᐟ⁶σ≈1.122σ</text>
+<text x="50" y="211" text-anchor="end" font-size="11" fill="#c0392b">−ε</text>
+<text x="92" y="70" font-size="10.5" fill="#1a4d7c">∝ r⁻¹² 排斥</text>
+<text x="300" y="172" font-size="10.5" fill="#1a4d7c">∝ −r⁻⁶ 吸引</text>
+<text x="240" y="245" text-anchor="middle" font-size="11" fill="#888">U(r)=4ε[(σ/r)¹²−(σ/r)⁶]</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 A</b> 的 Lennard–Jones 位能曲線。<b style="color:#1a4d7c">藍線</b>是 U(r)：近距離被 r⁻¹² 排斥（陡升），遠距離被 −r⁻⁶ 吸引（緩升回 0）。Step 2–3 令 dU/dr=0 得井底在 <b style="color:#c0392b">r₀=2¹ᐟ⁶σ≈1.122σ</b>，Step 4 代回得井深恰為 <b style="color:#c0392b">−ε</b>（這就是「ε 叫井深」的由來）。σ 是 U=0 的距離（綠標）。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：LJ 位能微分、平衡距離、井深變化題</b></summary>
+
+**範例 A（一般化 $m$–$n$ 位能的平衡距離）**：把 LJ 換成 $U(r)=\dfrac{B}{r^{n}}-\dfrac{A}{r^{m}}$（排斥指數 $n$、吸引指數 $m$，$n>m$）。求 $r_0$。微分：
+$$\frac{dU}{dr}=-n\frac{B}{r^{n+1}}+m\frac{A}{r^{m+1}}=0\ \Rightarrow\ \frac{nB}{r^{n+1}}=\frac{mA}{r^{m+1}}\ \Rightarrow\ r^{n-m}=\frac{nB}{mA}.$$
+所以 $r_0=\left(\dfrac{nB}{mA}\right)^{1/(n-m)}$。**驗算**：取標準 LJ（$n=12,m=6$，$B=4\varepsilon\sigma^{12},A=4\varepsilon\sigma^{6}$），$r_0^{6}=\dfrac{12\cdot4\varepsilon\sigma^{12}}{6\cdot4\varepsilon\sigma^{6}}=2\sigma^{6}\Rightarrow r_0=2^{1/6}\sigma$ ✓ 回到範例 A 的答案。
+
+**範例 B（數值：求 Ar 的 $\sigma$ 由 $r_0$ 反推）**：Ar 固體實測最近鄰距 $r_0=3.76\ \text{Å}$（其實晶體版係數略不同，這裡用單分子模型示範代數）。由 $r_0=2^{1/6}\sigma$ 反解 $\sigma$：
+$$\sigma=\frac{r_0}{2^{1/6}}=\frac{3.76}{1.1225}=3.35\ \text{Å}.$$
+逐步：$2^{1/6}=e^{(\ln2)/6}=e^{0.6931/6}=e^{0.1155}=1.1225$，再 $3.76\div1.1225=3.35$。所得 $\sigma$ 與 Ar 的標準值 $3.40\ \text{Å}$ 接近。
+
+**範例 C（子情形：把井深算成數值並比較曲率）**：在 $r_0$ 處的二階導數（位井曲率）反映振動頻率。對標準 LJ 求 $U''(r_0)$：
+$$U''(r)=4\varepsilon\left[12\cdot13\frac{\sigma^{12}}{r^{14}}-6\cdot7\frac{\sigma^{6}}{r^{8}}\right]=4\varepsilon\left[\frac{156\sigma^{12}}{r^{14}}-\frac{42\sigma^{6}}{r^{8}}\right].$$
+在 $r_0$ 處 $(\sigma/r_0)^{6}=\tfrac12$，故 $\dfrac{\sigma^{12}}{r_0^{14}}=\dfrac{1}{4r_0^{2}}$、$\dfrac{\sigma^{6}}{r_0^{8}}=\dfrac{1}{2r_0^{2}}$：
+$$U''(r_0)=\frac{4\varepsilon}{r_0^{2}}\left[\frac{156}{4}-\frac{42}{2}\right]=\frac{4\varepsilon}{r_0^{2}}\left[39-21\right]=\frac{72\varepsilon}{r_0^{2}}.$$
+代 $r_0=2^{1/6}\sigma$（$r_0^{2}=2^{1/3}\sigma^{2}=1.2599\sigma^{2}$）：$U''(r_0)=\dfrac{72\varepsilon}{1.2599\sigma^{2}}=\dfrac{57.1\varepsilon}{\sigma^{2}}$。這個「彈簧常數」$\propto\varepsilon/\sigma^{2}$ 決定固體的振動頻率與聲速。
+</details>
+
+---
+
+### 範例 B：一維離子鏈的 Madelung 常數 $=2\ln 2$（必考經典）
+
+**題目**：一條無限長、間距為 $R$、正負電荷交替排列的離子鏈（$+,-,+,-,\dots$）。證明其 Madelung 常數 $\alpha=2\ln 2$（取最近鄰距離為參考）。
+
+**Step 1**：Madelung 常數定義為（以參考離子為原點，$r_j=p_j R$）
+$$\frac{\alpha}{R}=\sum_{j\neq 0}\frac{(\pm)}{r_j}\ \Rightarrow\ \alpha=\sum_{j\neq 0}\frac{(\pm)}{p_j},$$
+正號表示異號（吸引），負號表示同號（排斥）。
+
+**Step 2**：取某個正離子當原點。它兩側對稱，故只算一側再乘 2。一側的離子距離為 $R,2R,3R,\dots$，電荷符號交替：最近鄰（距離 $R$）是負電荷（吸引，貢獻 $+1/1$），次鄰（$2R$）是正電荷（排斥，$-1/2$），依此類推：
+$$\alpha=2\left(\frac{1}{1}-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\cdots\right).$$
+
+**Step 3**：括號內正是交錯調和級數（alternating harmonic series）。由 $\ln(1+x)=x-\dfrac{x^2}{2}+\dfrac{x^3}{3}-\cdots$，代 $x=1$：
+$$1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\cdots=\ln 2.$$
+
+**Step 4**：因此
+$$\alpha=2\ln 2\approx 1.386.$$
+
+$$\boxed{\,\alpha_{\text{1D}}=2\ln 2\approx 1.386\,}$$
+
+> **重點**：這是唯一能「手算到底」的 Madelung 常數，務必會推。注意級數要從吸引項（$+$）開始，符號搞反就得到負的（發散表面看似收斂，其實這裡因交錯而收斂）。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 200" width="100%" style="max-width:640px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="13">
+<line x1="20" y1="80" x2="540" y2="80" stroke="#ccc" stroke-width="1.1"/>
+<g text-anchor="middle">
+<circle cx="60" cy="80" r="15" fill="#1a4d7c"/><text x="60" y="85" fill="#fff" font-size="15">−</text>
+<circle cx="140" cy="80" r="15" fill="#c0392b"/><text x="140" y="85" fill="#fff" font-size="15">+</text>
+<circle cx="220" cy="80" r="15" fill="#1a4d7c"/><text x="220" y="85" fill="#fff" font-size="15">−</text>
+<circle cx="300" cy="80" r="17" fill="#e67e22"/><text x="300" y="86" fill="#fff" font-size="16">+</text>
+<circle cx="380" cy="80" r="15" fill="#1a4d7c"/><text x="380" y="85" fill="#fff" font-size="15">−</text>
+<circle cx="460" cy="80" r="15" fill="#c0392b"/><text x="460" y="85" fill="#fff" font-size="15">+</text>
+<circle cx="525" cy="80" r="13" fill="#1a4d7c"/><text x="525" y="85" fill="#fff" font-size="13">−</text>
+</g>
+<text x="300" y="115" text-anchor="middle" font-size="11" fill="#e67e22">參考離子（原點）</text>
+<line x1="300" y1="55" x2="380" y2="55" stroke="#2e8b2e" stroke-width="1.3"/><text x="340" y="48" text-anchor="middle" font-size="11" fill="#2e8b2e">R</text>
+<line x1="300" y1="38" x2="460" y2="38" stroke="#888" stroke-width="1.1"/><text x="380" y="31" text-anchor="middle" font-size="11" fill="#888">2R</text>
+<line x1="300" y1="135" x2="220" y2="135" stroke="#2e8b2e" stroke-width="1.3"/><text x="260" y="150" text-anchor="middle" font-size="11" fill="#2e8b2e">R</text>
+<line x1="300" y1="160" x2="140" y2="160" stroke="#888" stroke-width="1.1"/><text x="220" y="174" text-anchor="middle" font-size="11" fill="#888">2R</text>
+<text x="300" y="192" text-anchor="middle" font-size="12.5" fill="#1a4d7c">α = 2( 1/1 − 1/2 + 1/3 − 1/4 + ··· ) = 2 ln2 ≈ 1.386</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 B</b> 的一維離子鏈。以中央<b style="color:#e67e22">正參考離子（橘）</b>為原點，兩側對稱故只算一邊再乘 2。最近鄰（距 R）是<b style="color:#1a4d7c">異號（吸引，+1/1）</b>、次鄰（距 2R）是<b style="color:#c0392b">同號（排斥，−1/2）</b>，符號交替即 Step 2 的級數。Step 3 認出它是交錯調和級數收斂到 ln2，得 <b>α=2 ln2</b>。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：交錯級數求 Madelung、變體鏈、收斂技巧</b></summary>
+
+**範例 A（數值逼近，看它怎麼收斂）**：直接把 1D 鏈級數的部分和算出來，感受「交錯級數收斂慢」。$\alpha=2\sum_{k\ge1}\dfrac{(-1)^{k+1}}{k}$。逐項部分和（先不乘 2）：
+$$1=1.0000,\quad 1-\tfrac12=0.5000,\quad +\tfrac13=0.8333,\quad -\tfrac14=0.5833,\quad +\tfrac15=0.7833.$$
+持續到很多項才逼近 $\ln2=0.6931$；乘 2 得 $\alpha\to1.386$。**教訓**：交錯調和級數收斂極慢（誤差 $\sim1/k$），所以 3D Madelung 必須用 Ewald 法而非直接相加。
+
+**範例 B（變體：間距加倍的稀疏鏈）**：若把同一鏈的最近鄰距改成參考量 $R'=2R$（即用「次鄰距」當參考單位），則所有 $p_j$ 都減半，$\alpha'=\sum\dfrac{(\pm)}{p_j'}=2\sum\dfrac{(\pm)}{(2k)/(2)}$ 與原式同形——**Madelung 常數與選用的長度單位無關，只跟「幾何比例」有關**。這說明為何 $\alpha$ 是純數（無量綱）。
+
+**範例 C（子情形：只取最近鄰的粗估誤差）**：若偷懶只算最近兩鄰，$\alpha_{\text{粗}}=2(1-\tfrac12)=2\times0.5=1.000$，比真值 $1.386$ 低約 28%。再加一項 $2(1-\tfrac12+\tfrac13)=2\times0.8333=1.667$，又**過衝**到高 20%。交錯級數的部分和在真值上下來回擺盪，這就是「截斷必須成對取項」才不致系統性偏差的原因（Madelung 求和的實務重點）。
+</details>
+
+---
+
+### 範例 C：惰性氣體沸點／鍵結強弱比較（量級感）
+
+**題目**：Ne、Ar、Kr 的 LJ 井深 $\varepsilon$ 分別約 $0.0031$、$0.0104$、$0.0140\ \text{eV}$。不做精算，說明為何沸點（boiling point）依 Ne $<$ Ar $<$ Kr 遞增，並估算 Ar 的內聚能量級（fcc）。
+
+**Step 1**：惰性氣體靠凡德瓦力鍵結，鍵結強度由井深 $\varepsilon$ 決定。$\varepsilon$ 越大，原子越難被熱運動拉開，沸點越高。三者 $\varepsilon$ 遞增 $\Rightarrow$ 沸點遞增。**這是純粹的「$\varepsilon$ 越大越黏」邏輯。**
+
+**Step 2**：fcc 內聚能（每原子）由工具箱公式
+$$\frac{U(R_0)}{N}=-2\varepsilon\,\frac{A_6^{2}}{4A_{12}}=-\varepsilon\,\frac{A_6^{2}}{2A_{12}}=-\varepsilon\,\frac{(14.4539)^2}{2\times12.1319}=-8.61\,\varepsilon.$$
+
+**Step 3**：代 Ar 的 $\varepsilon=0.0104\ \text{eV}$：
+$$\frac{U(R_0)}{N}\approx -8.61\times0.0104\approx -0.0896\ \text{eV/atom}.$$
+
+$$\boxed{\,\text{沸點 }Ne<Ar<Kr;\quad U_{\text{Ar}}/N\approx-0.090\ \text{eV/atom}\,}$$
+
+> **重點**：fcc 的「$-8.61\,\varepsilon$」是必背數字；實驗 Ar 內聚能約 $0.080\ \text{eV/atom}$，理論偏高一點是因為忽略零點能（zero-point energy）。
+
+---
+
+### 範例 D：簡單彈性常數——靜水壓與體積彈性模數
+
+**題目**：立方晶體受均勻靜水壓力（hydrostatic pressure），三個正向應變相等 $e_{xx}=e_{yy}=e_{zz}=\delta$、剪應變為零。用 Kittel 的彈性能密度 $U=\tfrac12 C_{11}(e_{xx}^2+e_{yy}^2+e_{zz}^2)+C_{12}(e_{yy}e_{zz}+e_{zz}e_{xx}+e_{xx}e_{yy})+\tfrac12 C_{44}(e_{yz}^2+e_{zx}^2+e_{xy}^2)$，求體積彈性模數（bulk modulus）$B$ 與彈性勁度的關係。
+
+**Step 1**：均勻膨脹下，體積應變 $\Delta=e_{xx}+e_{yy}+e_{zz}=3\delta$，剪應變全為零。代入能密度：
+$$U=\tfrac12 C_{11}(3\delta^2)+C_{12}(3\delta^2)=\left(\tfrac32 C_{11}+3C_{12}\right)\delta^2.$$
+
+**Step 2**：用 $\Delta=3\delta$ 把 $\delta=\Delta/3$ 代入：
+$$U=\left(\tfrac32 C_{11}+3C_{12}\right)\frac{\Delta^2}{9}=\frac{C_{11}+2C_{12}}{6}\,\Delta^2.$$
+
+**Step 3**：體積彈性模數定義為 $U=\tfrac12 B\,\Delta^2$（能密度對體積應變的二次係數）。對照：
+$$\tfrac12 B=\frac{C_{11}+2C_{12}}{6}.$$
+
+**Step 4**：
+$$B=\frac{C_{11}+2C_{12}}{3}.$$
+
+$$\boxed{\,B=\dfrac{1}{3}\left(C_{11}+2C_{12}\right)\,}$$
+
+> **重點**：這把「三個勁度常數」和「一個體積模數」串起來；後面 Kittel 第14題的穩定性條件 $C_{11}+2C_{12}>0$ 正是要求 $B>0$（壓不垮）。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 440 230" width="100%" style="max-width:520px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arC3d" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="12">
+<path d="M120,80 200,80 240,52 160,52 Z" fill="none" stroke="#888" stroke-width="1.2" stroke-dasharray="4,3"/>
+<path d="M120,80 120,160 200,160 200,80 M200,160 240,132 240,52 M200,80 240,52 M120,80 160,52 160,132 200,160 M160,52 240,52" fill="#dfeaf5" stroke="#888" stroke-width="1.2" stroke-dasharray="4,3" fill-opacity="0.4"/>
+<path d="M135,95 195,95 225,74 165,74 Z" fill="none" stroke="#1a4d7c" stroke-width="1.5"/>
+<path d="M135,95 135,150 195,150 195,95 M195,150 225,129 225,74 M195,95 225,74 M135,95 165,74 165,129 195,150 M165,74 225,74" fill="#1a4d7c" fill-opacity="0.18" stroke="#1a4d7c" stroke-width="1.5"/>
+<g stroke="#c0392b" stroke-width="1.6" marker-end="url(#arC3d)">
+<line x1="180" y1="20" x2="180" y2="58"/><line x1="180" y1="200" x2="180" y2="162"/>
+<line x1="55" y1="118" x2="118" y2="118"/><line x1="335" y1="100" x2="272" y2="100"/>
+<line x1="245" y1="178" x2="218" y2="158"/>
+</g>
+<text x="20" y="225" text-anchor="start" font-size="12.5" fill="#1a4d7c">eₓₓ=e_yy=e_zz=δ，剪應變=0 → ΔV/V=3δ</text>
+<text x="290" y="40" text-anchor="middle" font-size="13" font-weight="bold" fill="#c0392b">B=(C₁₁+2C₁₂)/3</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 D</b> 的靜水壓形變。<b style="color:#c0392b">紅箭頭</b>代表各向同性壓力，三個正向應變相等（eₓₓ=e_yy=e_zz=δ）、剪應變全為零，立方體均勻縮成<b style="color:#1a4d7c">藍色小立方</b>，體積應變 Δ=3δ。Step 1–4 把能密度寫成 U=½BΔ²，對照係數即得體積模數 <b style="color:#c0392b">B=(C₁₁+2C₁₂)/3</b>，正是習題 14 穩定性條件 C₁₁+2C₁₂&gt;0 的物理來源。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：體積模數數值、單軸與各向同性的差異</b></summary>
+
+**範例 A（數值：銅的體積模數）**：銅的勁度常數約 $C_{11}=168$、$C_{12}=121\ \text{GPa}$。代入 $B=\tfrac13(C_{11}+2C_{12})$：
+$$B=\frac{168+2\times121}{3}=\frac{168+242}{3}=\frac{410}{3}=136.7\ \text{GPa}.$$
+與實測銅 $B\approx140\ \text{GPa}$ 接近 ✓。順帶剪切模數 $C'=\tfrac12(C_{11}-C_{12})=\tfrac12(168-121)=23.5\ \text{GPa}$，遠小於 $B$——金屬「壓得緊但剪得動」。
+
+**範例 B（變化題：壓縮率 $\kappa=1/B$）**：壓縮率定義為 $\kappa=-\dfrac1V\dfrac{dV}{dp}=\dfrac1B$。承上銅 $B=136.7\ \text{GPa}=1.367\times10^{11}\ \text{Pa}$：
+$$\kappa=\frac{1}{1.367\times10^{11}}=7.32\times10^{-12}\ \text{Pa}^{-1}.$$
+意思是每加 $1\ \text{GPa}$（$10^{9}\ \text{Pa}$）壓力，體積縮 $\kappa\times10^{9}=7.3\times10^{-3}=0.73\%$。
+
+**範例 C（子情形：單軸應變 ≠ 各向同性）**：若改成「只壓一個方向」$e_{xx}=\delta$、$e_{yy}=e_{zz}=0$（夾住側面），能密度只剩 $U=\tfrac12C_{11}\delta^{2}$，對應的模數是 $C_{11}$（稱 longitudinal modulus），**不是** $B$。對照本題的各向同性壓（三向同縮）得 $B=\tfrac13(C_{11}+2C_{12})$，可見「壓的方式不同，量到的彈性模數就不同」——這是分辨 $B$、$Y$、$C_{11}$ 的關鍵。
+</details>
+
+---
+
+## 📚 Kittel 第3章 課本習題 — 完整解答
+
+> 共 14 題。第 5 題在課本頁面缺漏，依解答手冊內容補上（線性離子晶體 Madelung）。
+
+---
+
+### 習題 1：量子固體（Quantum solid）（Kittel Prob. 3.1）
+
+**題目（English, Kittel Prob. 3.1）**：In a quantum solid the dominant repulsive energy is the zero-point energy of the atoms. Consider a crude one-dimensional model of crystalline $^4$He with each He atom confined to a line segment of length $L$. In the ground state the wave function within each segment is taken as a half wavelength of a free particle. Find the zero-point kinetic energy per particle.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+在量子固體中，主要的排斥能來自原子的零點能（zero-point energy）。考慮固態 $^4$He 的一維粗略模型：每個 He 原子被限制在長度 $L$ 的線段內，基態波函數取為自由粒子的「半個波長」。求每個粒子的零點動能。
+
+</details>
+
+**Step 1**：基態波函數是放進長度 $L$ 盒子的半波長駐波，故
+$$\frac{\lambda}{2}=L\ \Rightarrow\ \lambda=2L.$$
+
+**Step 2**：由德布羅意關係，動量大小
+$$p=\frac{h}{\lambda}=\frac{h}{2L}.$$
+
+**Step 3**：零點動能（kinetic energy）
+$$E=\frac{p^{2}}{2M}=\frac{1}{2M}\left(\frac{h}{2L}\right)^{2}=\frac{h^{2}}{8ML^{2}}.$$
+
+**Step 4**：改用 $\hbar=h/2\pi$ 表示（$h^2=4\pi^2\hbar^2$）：
+$$E=\frac{4\pi^{2}\hbar^{2}}{8ML^{2}}=\frac{\pi^{2}\hbar^{2}}{2ML^{2}}.$$
+
+$$\boxed{\,E=\dfrac{h^{2}}{8ML^{2}}=\dfrac{\pi^{2}\hbar^{2}}{2ML^{2}}\,}$$
+
+> **重點**：考的是「一維無限深位井基態能」的物理圖像。零點能 $\propto 1/M$，He 質量小所以零點能大，這就是為什麼 He 在常壓下不固化（量子固體）。
+
+---
+
+### 習題 2：bcc 與 fcc 氖的內聚能比（Cohesive energy of bcc and fcc neon）（Kittel Prob. 3.2）
+
+**題目（English, Kittel Prob. 3.2）**：Using the Lennard–Jones potential, calculate the ratio of the cohesive energies of neon in the bcc and fcc structures (Ans. $0.958$). The lattice sums for the bcc structure are $A_{12}=9.11418$, $A_{6}=12.2533$; for the fcc structure $A_{12}=12.13188$, $A_{6}=14.45392$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+用 Lennard–Jones 位能，計算 neon 在 bcc 與 fcc 結構下內聚能的比值（答案 $0.958$）。bcc 結構的晶格和為 $A_{12}=9.11418$、$A_{6}=12.2533$；fcc 為 $A_{12}=12.13188$、$A_{6}=14.45392$。
+
+</details>
+
+**Step 1**：任意 LJ 晶體的平衡內聚能（見工具箱）為
+$$U(R_0)=-2N\varepsilon\,\frac{A_6^{2}}{4A_{12}}=-N\varepsilon\,\frac{A_6^{2}}{2A_{12}}.$$
+推導：$U_{\text{tot}}=2N\varepsilon[A_{12}x^{12}-A_6 x^6]$（$x=\sigma/R$），令 $dU/dR=0$ 得 $x_0^6=\dfrac{A_6}{2A_{12}}$，代回 $A_{12}x_0^{12}-A_6 x_0^6=-\dfrac{A_6^2}{4A_{12}}$ 即得上式。
+
+**Step 2**：因為 $\varepsilon,\sigma$ 是同一種原子（Ne），求比值時兩者相消，且常數因子 $\tfrac12$ 也相消，只剩 $A_6^2/A_{12}$：
+$$\frac{U_{\text{bcc}}(R_0)}{U_{\text{fcc}}(R_0)}=\frac{A_{6,\text{bcc}}^{2}/A_{12,\text{bcc}}}{A_{6,\text{fcc}}^{2}/A_{12,\text{fcc}}}.$$
+
+**Step 3**：算分子（bcc）：
+$$\frac{A_{6,\text{bcc}}^{2}}{A_{12,\text{bcc}}}=\frac{(12.2533)^{2}}{9.11418}=\frac{150.14}{9.11418}=16.474.$$
+算分母（fcc）：
+$$\frac{A_{6,\text{fcc}}^{2}}{A_{12,\text{fcc}}}=\frac{(14.45392)^{2}}{12.13188}=\frac{208.92}{12.13188}=17.220.$$
+
+**Step 4**：取比值：
+$$\frac{U_{\text{bcc}}}{U_{\text{fcc}}}=\frac{16.474}{17.220}=0.9566\approx0.958.$$
+
+$$\boxed{\,\dfrac{U_{\text{bcc}}}{U_{\text{fcc}}}\approx 0.957\;(\approx0.958)\,}$$
+
+> **重點**：比值 $<1$ 表示 fcc 內聚能（絕對值）較大、較穩定——這正是惰性氣體固體都採 fcc 的理由。技巧在於「相同原子時 $\varepsilon,\sigma$ 消掉」。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 440 250" width="100%" style="max-width:520px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="70" y1="30" x2="70" y2="200" stroke="#555" stroke-width="1.3"/>
+<line x1="70" y1="200" x2="420" y2="200" stroke="#555" stroke-width="1.3"/>
+<text x="58" y="40" text-anchor="end" font-size="11" fill="#555">|U|/Nε</text>
+<line x1="66" y1="35" x2="70" y2="35" stroke="#555"/><text x="58" y="39" text-anchor="end" font-size="10" fill="#888">8.61</text>
+<rect x="120" y="35" width="80" height="165" fill="#6aa1d6" stroke="#1a4d7c" stroke-width="1"/>
+<text x="160" y="222" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">bcc</text>
+<text x="160" y="50" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">8.24</text>
+<text x="160" y="240" text-anchor="middle" font-size="10.5" fill="#555">A₆²/2A₁₂=8.24</text>
+<rect x="270" y="27" width="80" height="173" fill="#1a4d7c" stroke="#13395d" stroke-width="1"/>
+<text x="310" y="222" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">fcc</text>
+<text x="310" y="42" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">8.61</text>
+<text x="310" y="240" text-anchor="middle" font-size="10.5" fill="#555">A₆²/2A₁₂=8.61</text>
+<line x1="200" y1="35" x2="270" y2="27" stroke="#c0392b" stroke-width="1.4" stroke-dasharray="5,3"/>
+<text x="235" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#c0392b">比值 ≈ 0.957</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 2</b> 的內聚能比較。同種原子（Ne）時 ε、σ 相消，每原子內聚能只看 <b>A₆²/2A₁₂</b>：bcc 為 8.24、fcc 為 8.61。<b style="color:#1a4d7c">fcc 柱較高</b>＝絕對值更深、更穩定，故比值 8.24/8.61 ≈ <b style="color:#c0392b">0.957</b>（≈ 課本 0.958）&lt;1。這就是惰性氣體固體偏好 fcc 的原因。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：晶格和 A₆/A₁₂、平衡距離、內聚能數值</b></summary>
+
+**範例 A（fcc 平衡距離 $R_0/\sigma$）**：用 $\dfrac{R_0}{\sigma}=\left(\dfrac{2A_{12}}{A_6}\right)^{1/6}$。fcc：
+$$\frac{R_0}{\sigma}=\left(\frac{2\times12.13188}{14.45392}\right)^{1/6}=\left(\frac{24.2638}{14.4539}\right)^{1/6}=(1.6788)^{1/6}.$$
+逐步：$\ln1.6788=0.5181$，除 6 得 $0.08635$，$e^{0.08635}=1.0902$。故 $R_0=1.0902\,\sigma$。（與習題 3 的 H$_2$ 結果一致。）
+
+**範例 B（bcc 平衡距離，比 fcc 大）**：bcc：
+$$\frac{R_0}{\sigma}=\left(\frac{2\times9.11418}{12.2533}\right)^{1/6}=\left(\frac{18.2284}{12.2533}\right)^{1/6}=(1.4876)^{1/6}.$$
+$\ln1.4876=0.3970$，$\div6=0.06616$，$e^{0.06616}=1.0684$。故 bcc 的 $R_0=1.0684\,\sigma$，略小於 fcc——但 fcc 配位數高（12 vs 8），總吸引更強，所以仍是 fcc 較穩。
+
+**範例 C（每原子內聚能的完整數值）**：fcc：$\dfrac{U(R_0)}{N}=-\varepsilon\dfrac{A_6^{2}}{2A_{12}}=-\varepsilon\dfrac{(14.45392)^2}{2\times12.13188}=-\varepsilon\dfrac{208.916}{24.2638}=-8.610\,\varepsilon$。bcc：$-\varepsilon\dfrac{(12.2533)^2}{2\times9.11418}=-\varepsilon\dfrac{150.143}{18.2284}=-8.237\,\varepsilon$。比值 $\dfrac{8.237}{8.610}=0.9567$——與本題 0.958 一致，且看清「fcc 8.61 vs bcc 8.24」這兩個必背數字怎麼來。
+</details>
+
+---
+
+### 習題 3：固態分子氫（Solid molecular hydrogen）（Kittel Prob. 3.3）
+
+**題目（English, Kittel Prob. 3.3）**：For H$_2$ one finds from measurements on the gas that the Lennard–Jones parameters are $\varepsilon=50\times10^{-16}\ \text{erg}$ and $\sigma=2.96\ \text{\AA}$. Find the cohesive energy in kJ per mole of H$_2$; do the calculation for an fcc structure, treating each H$_2$ molecule as a sphere. The observed value of the cohesive energy is $0.751\ \text{kJ/mol}$, much less than we calculated; thus, quantum corrections must be very important.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+由氣態量測得 H$_2$ 的 LJ 參數 $\varepsilon=50\times10^{-16}\ \text{erg}$、$\sigma=2.96\ \text{\AA}$。求每莫耳 H$_2$ 的內聚能（單位 kJ），用 fcc 結構計算，並把每個 H$_2$ 分子當作球體。實驗值為 $0.751\ \text{kJ/mol}$，遠小於計算值，故量子修正很重要。
+
+</details>
+
+**Step 1（平衡內聚能公式）**：fcc 平衡內聚能，取 $N$ 為 H$_2$ 分子數。由工具箱
+$$\frac{U(R_0)}{N}=-2\varepsilon\,\frac{A_6^{2}}{4A_{12}}=-2\varepsilon\times4.305.$$
+其中 $\dfrac{A_6^2}{4A_{12}}=\dfrac{(14.45392)^2}{4\times12.13188}=4.305$（fcc）。亦即每分子內聚能 $=8.61\,\varepsilon$。
+
+**Step 2（代入 $\varepsilon$）**：$\varepsilon=50\times10^{-16}\ \text{erg}=5.0\times10^{-15}\ \text{erg}$：
+$$\frac{U(R_0)}{N}=-8.61\times\big(5.0\times10^{-15}\big)=-4.305\times10^{-14}\ \text{erg/molecule}.$$
+
+**Step 3（乘亞佛加厥常數）**：每莫耳（$n=1$ 對應 $N=N_A=6.022\times10^{23}$）：
+$$\frac{U(R_0)}{n}=-4.305\times10^{-14}\times6.022\times10^{23}=-2.592\times10^{10}\ \text{erg/mol}.$$
+
+**Step 4（單位換算）**：$1\ \text{erg}=10^{-7}\ \text{J}$：
+$$\frac{U(R_0)}{n}=-2.592\times10^{10}\times10^{-7}\ \text{J/mol}=-2.592\times10^{3}\ \text{J/mol}=-2.59\ \text{kJ/mol}.$$
+
+**Step 5（比較實驗）**：理論值 $2.59\ \text{kJ/mol}$ 遠大於實驗 $0.751\ \text{kJ/mol}$（約 $3.5$ 倍）。
+
+$$\boxed{\,U_{\text{coh}}\approx 2.59\ \text{kJ/mol}\;(\text{理論})\ \gg\ 0.751\ \text{kJ/mol}\;(\text{實驗})\,}$$
+
+**順帶**：平衡距離 $R_0/\sigma=(2A_{12}/A_6)^{1/6}=(2\times12.1319/14.4539)^{1/6}=1.0902$，故 $R_0=1.0902\times2.96=3.23\ \text{\AA}$。
+
+> **重點**：H$_2$ 質量小、零點能大，把實際內聚能壓到理論值的約 $1/3.5$。這題在示範「為何輕分子固體需要量子修正」，與習題 1 的零點能主題呼應。計數因子（每分子 vs 每對）是最常見的 $\times2$ 陷阱。
+
+---
+
+### 習題 4：$R^{+}R^{-}$ 離子晶體的可能性（Possibility of ionic crystals）（Kittel Prob. 3.4）
+
+**題目（English, Kittel Prob. 3.4）**：Imagine a crystal that exploits for binding the Coulomb attraction of the positive and negative ions of the same atom or molecule $R$. This is believed to occur with certain organic molecules, but it is not found when $R$ is a single atom. Use the data in Tables 5 and 6 to evaluate the stability of such a form of Na in the NaCl structure relative to normal metallic sodium. Evaluate the energy at the observed interatomic distance in metallic sodium, and use $0.78\ \text{eV}$ as the electron affinity of Na.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+設想一種晶體，靠「同種原子 R 的正、負離子間的庫侖吸引」鍵結。對某些有機分子確實如此，但 R 為單一原子時則否。用 Tables 5、6 的資料，評估在 NaCl 結構下這種「離子鈉」相對於正常金屬鈉的穩定性。在金屬鈉的觀測原子間距處計算能量，並取 Na 的電子親和能（electron affinity）為 $0.78\ \text{eV}$。
+
+</details>
+
+**Step 1（形成離子對的成本）**：把兩個中性 Na 變成 Na$^+$ 與 Na$^-$：
+- 游離（ionization）：$\text{Na}\to\text{Na}^{+}+e^{-}$，吸收游離能 $I=5.14\ \text{eV}$。
+- 親和（affinity）：$\text{Na}+e^{-}\to\text{Na}^{-}$，放出 $A=0.78\ \text{eV}$。
+
+淨成本
+$$\Delta E_{\text{form}}=I-A=5.14-0.78=4.36\ \text{eV（每對）}.$$
+
+**Step 2（Madelung 吸引能）**：金屬鈉為 bcc，晶格常數 $a=4.225\ \text{\AA}$，最近鄰距離
+$$R=\frac{\sqrt3}{2}a=\frac{\sqrt3}{2}\times4.225=3.66\ \text{\AA}.$$
+NaCl 結構 $\alpha=1.747565$，每離子對的 Madelung 能量
+$$U_M=\frac{\alpha e^{2}}{R}=\frac{1.747565\times14.3996}{3.66}=6.88\ \text{eV}.$$
+（解答手冊取 $6.89\ \text{eV}$。）
+
+**Step 3（淨內聚能）**：忽略排斥能，這個假想 Na$^+$Na$^-$ 晶體相對於「兩個分離中性 Na 原子」的鍵結能
+$$U_{\text{coh}}=U_M-\Delta E_{\text{form}}=6.89-4.36=2.53\ \text{eV（每對）}\approx2.52\ \text{eV}.$$
+換成每原子：$2.52/2=1.26\ \text{eV/atom}$。
+
+**Step 4（比較）**：金屬鈉的觀測內聚能為 $1.13\ \text{eV/atom}$。假想離子晶體的 $1.26\ \text{eV/atom}$ 表面上更穩定。
+
+$$\boxed{\,U_{\text{ionic}}\approx1.26\ \text{eV/atom}\ >\ U_{\text{metal}}=1.13\ \text{eV/atom}\,}$$
+
+> **重點**：表面上離子相「贏」，但我們**忽略了排斥能**（Na$^+$、Na$^-$ 半徑大、電子雲重疊強），補上後會把離子相壓下去——所以單原子 R 實際上不形成 $R^{+}R^{-}$ 離子晶體。考點是「Madelung $-$ 形成成本」的能量帳。
+
+---
+
+### 習題 5：線性離子晶體的 Madelung 能與彈性（Linear ionic crystal）（Kittel Prob. 3.5）
+
+**題目（English, Kittel Prob. 3.5）**：Consider a line of $2N$ ions of alternating charge $\pm q$ with a repulsive potential energy $A/R^{n}$ between nearest neighbors, so that the total energy of the chain may be written
+$$U(R)=N\left[-\frac{(2\ln2)\,q^{2}}{R}+\frac{A}{R^{n}}\right],$$
+where $2\ln2$ is the one-dimensional Madelung constant (see Example B) and $N$ is the number of ion pairs. (a) Find the equilibrium potential energy $U(R_0)$ per ion pair. (b) Let the crystal be compressed so that $R_0\to R_0(1-\delta)$; obtain the quantity related to the compressibility from $U''(R_0)$. To obtain the results in SI, replace $q^{2}$ by $q^{2}/4\pi\varepsilon_0$. Note: We should not expect to obtain this result from the expression for $U(R_0)$, but we must use the complete expression for $U(R)$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+（依解答手冊補）考慮一維離子鏈，最近鄰間以 $U(R)=-\dfrac{\alpha q^{2}}{R}+\dfrac{N\lambda}{R^{n}}$ 型（或指數型 Born 排斥）描述。(a) 求平衡時每離子對的位能 $U(R_0)$；(b) 由 $U''(R_0)$ 求與壓縮率有關的量。設總位能為
+$$U(R)=N\left[-\frac{(2\ln2)q^{2}}{R}+\frac{A}{R^{n}}\right],$$
+其中 $2\ln2$ 是一維 Madelung 常數（見範例 B），$N$ 為離子對數。
+
+</details>
+
+**Step 1（平衡條件）**：對 $R$ 微分並令為零：
+$$\frac{dU}{dR}=N\left[\frac{(2\ln2)q^{2}}{R^{2}}-\frac{nA}{R^{n+1}}\right]=0.$$
+解出
+$$\frac{nA}{R_0^{n+1}}=\frac{(2\ln2)q^{2}}{R_0^{2}}\ \Rightarrow\ A=\frac{(2\ln2)q^{2}}{n}R_0^{n-1}.$$
+
+**Step 2（平衡能量）**：代回 $U(R_0)$：
+$$U(R_0)=N\left[-\frac{(2\ln2)q^{2}}{R_0}+\frac{A}{R_0^{n}}\right]
+=N\left[-\frac{(2\ln2)q^{2}}{R_0}+\frac{(2\ln2)q^{2}}{nR_0}\right].$$
+
+**Step 3**：合併：
+$$U(R_0)=-\frac{N(2\ln2)q^{2}}{R_0}\left(1-\frac{1}{n}\right).$$
+
+$$\boxed{\,U(R_0)=-\dfrac{N(2\ln2)q^{2}}{R_0}\left(1-\dfrac{1}{n}\right)\,}$$
+
+**Step 4（曲率／壓縮率）**：在平衡點求二階導數。利用平衡條件可證
+$$\left.\frac{d^{2}U}{dR^{2}}\right|_{R_0}=N\left[-\frac{2(2\ln2)q^{2}}{R_0^{3}}+\frac{n(n+1)A}{R_0^{n+2}}\right]
+=\frac{N(2\ln2)q^{2}}{R_0^{3}}(n-1).$$
+（一維「彈簧常數」$\propto(n-1)$，$n>1$ 才穩定。）
+
+$$\boxed{\,\left.U''\right|_{R_0}=\dfrac{N(2\ln2)q^{2}}{R_0^{3}}\,(n-1)>0\,}$$
+
+> **重點**：這題把「一維 Madelung $=2\ln2$」（範例 B）和「Born 排斥指數 $n$ 控制井深與曲率」串起來。SI 制把 $q^{2}\to q^{2}/4\pi\varepsilon_0$。關鍵在平衡時不能直接用 $U(R_0)$ 的形式去算二階導（手冊提醒：要用完整的 $U(R)$ 再微分）。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 460 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="55" y1="25" x2="55" y2="200" stroke="#555" stroke-width="1.3"/>
+<line x1="55" y1="120" x2="430" y2="120" stroke="#555" stroke-width="1.3"/>
+<text x="48" y="32" text-anchor="end" font-size="11" fill="#555">U(R)</text>
+<text x="425" y="135" text-anchor="end" font-size="11" fill="#555">R</text>
+<polyline points="80,30 90,70 100,95 112,108 128,113 150,108 180,98 215,86 255,73 300,60 350,46 410,30" fill="none" stroke="#2e8b2e" stroke-width="1.8"/>
+<text x="92" y="48" font-size="10" fill="#2e8b2e">+A/Rⁿ 排斥</text>
+<polyline points="80,200 95,180 112,164 135,148 165,132 205,118 255,106 315,95 410,84" fill="none" stroke="#e67e22" stroke-width="1.8"/>
+<text x="330" y="100" font-size="10" fill="#e67e22">−αq²/R 吸引</text>
+<polyline points="80,38 95,72 112,98 135,118 160,134 185,144 210,148 235,147 270,141 320,130 380,116 410,108" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<text x="350" y="124" font-size="10.5" fill="#1a4d7c">U(R) 總和</text>
+<line x1="215" y1="120" x2="215" y2="148" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="4,3"/>
+<circle cx="215" cy="148" r="3.8" fill="#c0392b"/>
+<text x="215" y="166" text-anchor="middle" font-size="11" fill="#c0392b">R₀（井底）</text>
+<text x="240" y="190" text-anchor="middle" font-size="10.5" fill="#c0392b">U(R₀)=−(2ln2)Nq²/R₀·(1−1/n)</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 5</b> 的一維離子鏈位能。<b style="color:#e67e22">橘＝庫侖吸引 −αq²/R</b>、<b style="color:#2e8b2e">綠＝Born 排斥 +A/Rⁿ</b>，兩者相加為<b style="color:#1a4d7c">藍色 U(R)</b>。令 dU/dR=0 得井底 <b style="color:#c0392b">R₀</b>，代回得 U(R₀)=−(2ln2)Nq²/R₀·(1−1/n)；井底曲率 U″(R₀)∝(n−1) 即與壓縮率有關的量（n&gt;1 才穩定）。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：Born 指數 n、平衡能、曲率的代數變化</b></summary>
+
+**範例 A（$n=9$ 的平衡能占比）**：很多離子晶體 Born 指數 $n\approx9$。代入 $U(R_0)=-\dfrac{N(2\ln2)q^{2}}{R_0}\left(1-\dfrac1n\right)$：
+$$1-\frac1n=1-\frac19=\frac89=0.889.$$
+意思是排斥項把純庫侖吸引「打折」到 $88.9\%$；$n$ 越大（排斥越硬），折扣越小、越接近純庫侖。$n\to\infty$（硬球）時 $U(R_0)\to-\dfrac{N(2\ln2)q^{2}}{R_0}$。
+
+**範例 B（變化題：把 $A/R^{n}$ 換成指數型 $\lambda e^{-R/\rho}$）**：若 1D 鏈用 Born–Mayer 排斥 $U=N\left[-\dfrac{(2\ln2)q^{2}}{R}+\lambda e^{-R/\rho}\right]$。平衡 $\dfrac{dU}{dR}=0$：
+$$\frac{(2\ln2)q^{2}}{R_0^{2}}=\frac{\lambda}{\rho}e^{-R_0/\rho}.$$
+代回消排斥項得 $U(R_0)=-\dfrac{N(2\ln2)q^{2}}{R_0}\left(1-\dfrac{\rho}{R_0}\right)$。**對照**：冪次型的 $\left(1-\dfrac1n\right)$ 在指數型變成 $\left(1-\dfrac{\rho}{R_0}\right)$，故有效對應 $\dfrac1n\leftrightarrow\dfrac{\rho}{R_0}$——這就是習題 6 用的那個簡化式的來源。
+
+**範例 C（子情形：曲率的完整代入）**：驗證 $U''(R_0)=\dfrac{N(2\ln2)q^{2}}{R_0^{3}}(n-1)$。由 $U''(R)=N\left[-\dfrac{2(2\ln2)q^{2}}{R^{3}}+\dfrac{n(n+1)A}{R^{n+2}}\right]$，用平衡關係 $A=\dfrac{(2\ln2)q^{2}}{n}R_0^{n-1}$ 把第二項換掉：
+$$\frac{n(n+1)A}{R_0^{n+2}}=\frac{n(n+1)}{R_0^{n+2}}\cdot\frac{(2\ln2)q^{2}}{n}R_0^{n-1}=\frac{(n+1)(2\ln2)q^{2}}{R_0^{3}}.$$
+故 $U''(R_0)=\dfrac{N(2\ln2)q^{2}}{R_0^{3}}\big[-2+(n+1)\big]=\dfrac{N(2\ln2)q^{2}}{R_0^{3}}(n-1)$ ✓。$n=1$ 時曲率為 0（不穩定），印證「$n>1$ 才有束縛」。
+</details>
+
+---
+
+### 習題 6：立方 ZnS 結構（Cubic ZnS structure）（Kittel Prob. 3.6）
+
+**題目（English, Kittel Prob. 3.6）**：Using $\lambda$ and $\rho$ from Table 7 and the Madelung constants given in the text, calculate the cohesive energy of KCl in the cubic ZnS structure described in Chapter 1. Compare with the value calculated for KCl in the NaCl structure. (KCl parameters: $\lambda=0.34\times10^{-8}\ \text{erg}$, $\rho=0.326\ \text{\AA}$; ZnS structure $z=4$, $\alpha=1.638$.)
+
+<details>
+<summary>▸ 中文題目</summary>
+
+用 Table 7 的 $\lambda,\rho$ 和課文給的 Madelung 常數，計算 KCl 在「立方 ZnS 結構」下的內聚能，並與 NaCl 結構下的 KCl 比較。KCl 參數 $\lambda=0.34\times10^{-8}\ \text{erg}$、$\rho=0.326\ \text{\AA}$；ZnS 結構 $z=4$、$\alpha=1.638$。
+
+</details>
+
+**Step 1（總位能與平衡條件）**：Born 模型
+$$U(R)=N\left[z\lambda e^{-R/\rho}-\frac{\alpha q^{2}}{R}\right],\qquad \frac{dU}{dR}=0.$$
+微分：
+$$\frac{dU}{dR}=N\left[-\frac{z\lambda}{\rho}e^{-R/\rho}+\frac{\alpha q^{2}}{R^{2}}\right]=0
+\ \Rightarrow\ \frac{z\lambda}{\rho}e^{-R_0/\rho}=\frac{\alpha q^{2}}{R_0^{2}}.$$
+
+**Step 2（化成 $x=R_0/\rho$ 的超越方程）**：把平衡式兩邊乘 $\dfrac{\rho R_0^{2}}{z\lambda}$，並令 $x=R_0/\rho$（即 $R_0=x\rho$）：
+$$R_0^{2}e^{-R_0/\rho}=\frac{\alpha q^{2}\rho}{z\lambda}\ \Rightarrow\ x^{2}\rho^{2}e^{-x}=\frac{\alpha q^{2}\rho}{z\lambda}\ \Rightarrow\ x^{2}e^{-x}=\frac{\alpha q^{2}}{z\lambda\rho}.$$
+代數值（$q^{2}=e^{2}=14.3996\ \text{eV·\AA}=2.307\times10^{-19}\ \text{erg·cm}$，$\lambda=0.34\times10^{-8}\ \text{erg}$，$\rho=0.326\times10^{-8}\ \text{cm}$）：
+$$x^{2}e^{-x}=\frac{1.638\times2.307\times10^{-19}}{4\times0.34\times10^{-8}\times0.326\times10^{-8}}=8.52\times10^{-3}.$$
+
+**Step 3（試誤求根）**：解 $x^{2}e^{-x}=8.52\times10^{-3}$。試 $x=9$：$81\times e^{-9}=81\times1.23\times10^{-4}=9.99\times10^{-3}$（偏大）；試 $x=9.2$：$84.6\times1.01\times10^{-4}=8.55\times10^{-3}$（吻合）。故
+$$x\approx9.2\ \Rightarrow\ R_0=x\rho=9.2\times0.326=3.00\ \text{\AA}.$$
+（實際 KCl 為 NaCl 結構，$R_0^{\text{exp}}=3.15\ \text{\AA}$。）
+
+**Step 4（內聚能）**：用平衡關係可把排斥項換掉，得簡潔式
+$$U(R_0)=-\frac{N\alpha q^{2}}{R_0}\left(1-\frac{\rho}{R_0}\right).$$
+代入 ZnS（$\alpha=1.638$，$R_0=3.00\ \text{\AA}$）：
+$$\frac{U(R_0)}{N}=-\frac{1.638\times14.3996}{3.00}\left(1-\frac{0.326}{3.00}\right)
+=-7.86\times0.891=-7.01\ \text{eV/離子對}.$$
+
+**Step 5（比較 NaCl 結構）**：KCl 在 NaCl 結構（$\alpha=1.747565$，$R_0=3.147\ \text{\AA}$）：
+$$\frac{U(R_0)}{N}=-\frac{1.747565\times14.3996}{3.147}\left(1-\frac{0.326}{3.147}\right)=-7.99\times0.896=-7.17\ \text{eV/離子對}.$$
+
+$$\boxed{\,U_{\text{ZnS}}\approx-7.01\ \text{eV/pair},\quad U_{\text{NaCl}}\approx-7.17\ \text{eV/pair}\,}$$
+
+> **重點**：NaCl 結構（$\alpha$ 較大、$z=6$）比 ZnS 結構（$\alpha$ 小、$z=4$）稍穩定，但差距僅約 0.1–2%——這就是為什麼有些鹽類可在兩種結構間轉變。考點是「超越方程試誤求 $R_0$」＋「內聚能用 $\bigl(1-\rho/R_0\bigr)$ 簡化式」。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 460 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="55" y1="25" x2="55" y2="195" stroke="#555" stroke-width="1.3"/>
+<line x1="55" y1="195" x2="430" y2="195" stroke="#555" stroke-width="1.3"/>
+<text x="48" y="32" text-anchor="end" font-size="11" fill="#555">x²e⁻ˣ</text>
+<text x="425" y="212" text-anchor="end" font-size="11" fill="#555">x=R₀/ρ</text>
+<polyline points="70,190 95,120 120,80 145,60 165,55 185,60 210,75 240,98 275,124 315,148 360,166 415,180" fill="none" stroke="#1a4d7c" stroke-width="2.2"/>
+<text x="150" y="48" font-size="10.5" fill="#1a4d7c">x²e⁻ˣ</text>
+<line x1="55" y1="158" x2="430" y2="158" stroke="#e67e22" stroke-width="1.4" stroke-dasharray="5,3"/>
+<text x="430" y="152" text-anchor="end" font-size="10.5" fill="#e67e22">8.52×10⁻³</text>
+<line x1="335" y1="158" x2="335" y2="195" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="4,3"/>
+<circle cx="335" cy="158" r="3.6" fill="#c0392b"/>
+<text x="335" y="210" text-anchor="middle" font-size="11" fill="#c0392b">x≈9.2</text>
+<text x="335" y="225" text-anchor="middle" font-size="10.5" fill="#c0392b">R₀=xρ≈3.00 Å</text>
+<rect x="270" y="35" width="155" height="58" rx="5" fill="#f4f8fc" stroke="#c5d5e5"/>
+<text x="347" y="54" text-anchor="middle" font-size="11" fill="#444">U(R₀)/N =</text>
+<text x="347" y="72" text-anchor="middle" font-size="11" fill="#c0392b">−(αq²/R₀)(1−ρ/R₀)</text>
+<text x="347" y="88" text-anchor="middle" font-size="10.5" fill="#1a4d7c">≈ −7.01 eV/對</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 6</b> 的超越方程求根。平衡條件化簡成 <b>x²e⁻ˣ=αq²/(zλρ)</b>（<b style="color:#1a4d7c">藍曲線</b>），右邊算出 <b style="color:#e67e22">8.52×10⁻³（橘虛線）</b>。Step 3 試誤（x=9 偏大、x=9.2 吻合）得交點 <b style="color:#c0392b">x≈9.2 → R₀≈3.00 Å</b>。代入簡化式 U(R₀)/N=−(αq²/R₀)(1−ρ/R₀) 得 ZnS 結構內聚能 ≈ −7.01 eV/對（NaCl 結構則 −7.17，略穩）。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：超越方程試誤、內聚能簡化式、結構比較</b></summary>
+
+**範例 A（試誤逼近 x 的細節）**：解 $x^{2}e^{-x}=8.52\times10^{-3}$。把試誤過程算清楚——
+- $x=9$：$e^{-9}=1.234\times10^{-4}$，$81\times1.234\times10^{-4}=9.99\times10^{-3}$（偏大，要再加大 $x$ 讓 $e^{-x}$ 變小）。
+- $x=9.3$：$e^{-9.3}=9.14\times10^{-5}$，$86.49\times9.14\times10^{-5}=7.91\times10^{-3}$（偏小）。
+- $x=9.2$：$e^{-9.2}=1.010\times10^{-4}$，$84.64\times1.010\times10^{-4}=8.55\times10^{-3}$（吻合）。
+取 $x\approx9.2\Rightarrow R_0=9.2\times0.326=3.00\ \text{Å}$。**內插**：在 9.2 與 9.3 間，$8.52$ 落在 $8.55$ 旁，故 $x\approx9.20$ 已夠精。
+
+**範例 B（簡化式的推導，別硬代排斥項）**：為什麼內聚能能寫成 $-\dfrac{N\alpha q^{2}}{R_0}\left(1-\dfrac{\rho}{R_0}\right)$？由平衡式 $\dfrac{z\lambda}{\rho}e^{-R_0/\rho}=\dfrac{\alpha q^{2}}{R_0^{2}}$ 解出排斥項 $z\lambda e^{-R_0/\rho}=\dfrac{\alpha q^{2}\rho}{R_0^{2}}$，代回 $U(R_0)=N\!\left[z\lambda e^{-R_0/\rho}-\dfrac{\alpha q^{2}}{R_0}\right]$：
+$$U(R_0)=N\left[\frac{\alpha q^{2}\rho}{R_0^{2}}-\frac{\alpha q^{2}}{R_0}\right]=-\frac{N\alpha q^{2}}{R_0}\left(1-\frac{\rho}{R_0}\right).$$
+這裡 $\dfrac{\rho}{R_0}=\dfrac{1}{x}=\dfrac{1}{9.2}=0.109$，正是 Step 4 的 $\left(1-0.109\right)=0.891$ 折扣。
+
+**範例 C（數值：NaCl 結構直接代）**：KCl 在 NaCl 結構，$\alpha=1.747565$、$R_0=3.147\ \text{Å}$、$\rho=0.326\ \text{Å}$：
+$$\frac{U}{N}=-\frac{1.747565\times14.3996}{3.147}\left(1-\frac{0.326}{3.147}\right)=-\frac{25.164}{3.147}\times(1-0.1036)=-7.996\times0.8964=-7.17\ \text{eV/對}.$$
+比 ZnS 結構的 $-7.01$ 深約 $0.16\ \text{eV}$（2.3%）——所以 KCl 實際採 NaCl 結構。重點是 $\alpha$（NaCl 1.748 &gt; ZnS 1.638）與 $z$（6 vs 4）一起把吸引拉大。
+</details>
+
+---
+
+### 習題 7：二價離子晶體（Divalent ionic crystals）（Kittel Prob. 3.7）
+
+**題目（English, Kittel Prob. 3.7）**：Barium oxide has the NaCl structure. Estimate the cohesive energies per molecule of the hypothetical crystals Ba$^{+}$O$^{-}$ and Ba$^{++}$O$^{--}$ referred to separated neutral atoms. The observed nearest-neighbor internuclear distance is $R_0=2.76\ \text{\AA}$; the first and second ionization potentials of Ba are $5.19$ and $9.96\ \text{eV}$; and the electron affinities of the first and second electrons added to the neutral oxygen atom are $1.5$ and $9.0\ \text{eV}$. The first electron affinity of the neutral oxygen atom is the energy released in the reaction $\text{O}+e\to\text{O}^{-}$. The second electron affinity is the energy released in the reaction $\text{O}^{-}+e\to\text{O}^{--}$. Which valence state do you predict will occur? Assume $R_0$ is the same for both forms, and neglect the repulsive energy.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+BaO 為 NaCl 結構。估計假想晶體 Ba$^{+}$O$^{-}$ 與 Ba$^{++}$O$^{--}$（相對於分離的中性原子）每分子的內聚能。觀測最近鄰核間距 $R_0=2.76\ \text{\AA}$；Ba 第一、第二游離能為 $5.19$、$9.96\ \text{eV}$；O 第一、第二電子親和能為 $1.5$、$9.0\ \text{eV}$（第二親和為 $\text{O}^{-}+e\to\text{O}^{--}$ 放出的能量）。假設兩種形式 $R_0$ 相同並忽略排斥能，預測哪個價態出現？
+
+</details>
+
+**Step 1（一價 Ba$^{+}$O$^{-}$ 的 Madelung 能）**：每離子對
+$$U_M^{(1)}=\frac{\alpha q^{2}}{R_0}=\frac{1.747565\times14.3996}{2.76}=9.12\ \text{eV（吸引，取負號為鍵結）}.$$
+
+**Step 2（一價的形成成本）**：把中性 Ba、O 變成 Ba$^{+}$、O$^{-}$：
+$$\Delta E^{(1)}=\underbrace{5.19}_{\text{Ba 第一游離}}-\underbrace{1.5}_{\text{O 第一親和}}=3.7\ \text{eV}.$$
+
+**Step 3（一價淨鍵結）**：
+$$U_{\text{coh}}^{(1)}=U_M^{(1)}-\Delta E^{(1)}=9.12-3.7=5.42\ \text{eV}.$$
+
+**Step 4（二價 Ba$^{++}$O$^{--}$ 的 Madelung 能）**：電荷各變 $2e$，庫侖能 $\propto(2)(2)=4$ 倍：
+$$U_M^{(2)}=4\times\frac{\alpha q^{2}}{R_0}=4\times9.12=36.48\ \text{eV}.$$
+
+**Step 5（二價形成成本）**：要 Ba$^{++}$ 須付兩次游離 $5.19+9.96$；要 O$^{--}$ 時，第一個電子放出 $1.5\ \text{eV}$（吸引），但**第二個電子是加到已帶負電的 O$^{-}$ 上，反而要花 $9.0\ \text{eV}$**（第二電子親和為吸熱）。故淨成本
+$$\Delta E^{(2)}=\underbrace{5.19+9.96}_{\text{Ba 兩次游離}}\ \underbrace{-\,1.5}_{\text{O 第一親和放出}}\ \underbrace{+\,9.0}_{\text{O 第二親和吸熱}}=22.65\ \text{eV}.$$
+
+**Step 6（二價淨鍵結）**：
+$$U_{\text{coh}}^{(2)}=U_M^{(2)}-\Delta E^{(2)}=36.48-22.65=13.83\ \text{eV}.$$
+
+$$\boxed{\,U_{\text{coh}}^{(1)}\approx5.42\ \text{eV},\quad U_{\text{coh}}^{(2)}\approx13.83\ \text{eV}\ \Rightarrow\ \text{二價 Ba}^{++}\text{O}^{--}\text{ 較穩定}\,}$$
+
+> **重點**：雖然二價要付出更多游離／親和成本，但 Madelung 吸引隨電荷平方變 4 倍，遠勝成本增加，故 BaO 確實以 $\text{Ba}^{++}\text{O}^{--}$ 出現。這題的陷阱是 O 的第二電子親和其實是**吸熱**（$\text{O}^{-}$ 排斥再加電子要花 $9.0\ \text{eV}$），要計成成本而非放出。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 460 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<line x1="55" y1="20" x2="55" y2="200" stroke="#555" stroke-width="1.3"/>
+<line x1="55" y1="200" x2="430" y2="200" stroke="#555" stroke-width="1.3"/>
+<text x="48" y="28" text-anchor="end" font-size="10.5" fill="#555">eV</text>
+<text x="135" y="218" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">一價 Ba⁺O⁻</text>
+<rect x="100" y="118" width="70" height="82" fill="#2e8b2e" stroke="#236b23"/>
+<text x="135" y="113" text-anchor="middle" font-size="10.5" fill="#2e8b2e">Madelung 9.12</text>
+<rect x="100" y="118" width="70" height="34" fill="#c0392b" fill-opacity="0.55" stroke="#a02a1d"/>
+<text x="135" y="139" text-anchor="middle" font-size="10" fill="#fff">成本 3.7</text>
+<text x="135" y="180" text-anchor="middle" font-size="11" fill="#fff">淨 5.42</text>
+<text x="320" y="218" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">二價 Ba⁺⁺O⁻⁻</text>
+<rect x="285" y="38" width="70" height="162" fill="#2e8b2e" stroke="#236b23"/>
+<text x="320" y="33" text-anchor="middle" font-size="10.5" fill="#2e8b2e">Madelung 36.48 (×4)</text>
+<rect x="285" y="38" width="70" height="100" fill="#c0392b" fill-opacity="0.55" stroke="#a02a1d"/>
+<text x="320" y="92" text-anchor="middle" font-size="10" fill="#fff">成本 22.65</text>
+<text x="320" y="172" text-anchor="middle" font-size="11" fill="#fff">淨 13.83</text>
+<line x1="170" y1="118" x2="285" y2="38" stroke="#e67e22" stroke-width="1.4" stroke-dasharray="5,3"/>
+<text x="232" y="60" text-anchor="middle" font-size="10.5" fill="#e67e22">q²↑ → 吸引×4</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 7</b> 的能量帳（每分子）。每根柱：<b style="color:#2e8b2e">綠＝Madelung 吸引</b>、<b style="color:#c0392b">紅＝形成成本（游離−親和）</b>，露出的白字是淨鍵結能。二價時電荷各變 2e，<b style="color:#e67e22">Madelung 吸引 ∝ q² 暴增 4 倍</b>（9.12→36.48），遠勝成本由 3.7 升到 22.65（含 O 第二親和 +9.0 的吸熱陷阱）。故二價淨值 13.83 &gt; 一價 5.42，BaO 取 <b>Ba⁺⁺O⁻⁻</b>。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：離子內聚能能量帳、電荷平方效應、價態判斷</b></summary>
+
+**範例 A（一價 Madelung 能逐步代入）**：BaO 一價 $U_M^{(1)}=\dfrac{\alpha q^{2}}{R_0}$，$\alpha=1.747565$、$q^{2}=e^{2}=14.3996\ \text{eV·Å}$、$R_0=2.76\ \text{Å}$：
+$$U_M^{(1)}=\frac{1.747565\times14.3996}{2.76}=\frac{25.164}{2.76}=9.117\ \text{eV/對}.$$
+形成成本 $I_1-A_1=5.19-1.5=3.69\ \text{eV}$，淨鍵結 $9.117-3.69=5.43\ \text{eV}$。
+
+**範例 B（二價電荷平方效應的代數）**：把每個離子電荷由 $e$ 變 $2e$，庫侖能 $\propto q_+q_-\propto(2e)(2e)=4e^{2}$。故 $U_M^{(2)}=4\,U_M^{(1)}=4\times9.117=36.47\ \text{eV}$。形成成本 $\Delta E^{(2)}=(5.19+9.96)-1.5+9.0=22.65\ \text{eV}$（注意 O 第二親和是 +9.0 吸熱）。淨值 $36.47-22.65=13.82\ \text{eV}$ &gt; 一價 5.43，故 Ba$^{++}$O$^{--}$ 勝。
+
+**範例 C（變化題：假想三價會怎樣？）**：純看 Madelung，三價 $U_M^{(3)}\propto(3e)(3e)=9e^{2}=9\times9.117=82.05\ \text{eV}$。但成本要再加 Ba 第三游離（$\sim35\ \text{eV}$，剝到內殼層極貴）與 O 第三電子親和（強吸熱）。粗估 $\Delta E^{(3)}\gtrsim35+22.65=57.7\ \text{eV}$，淨值雖仍可能正，但**忽略的排斥能在電荷大時暴增**（電子雲嚴重重疊），實際把三價壓垮。這說明為何氧化物停在二價：Madelung（$\propto q^{2}$）與游離成本（隨剝殼層階梯式跳升）的拉鋸。
+</details>
+
+---
+
+### 習題 8：楊氏模數與帕松比（Young's modulus and Poisson's ratio）（Kittel Prob. 3.8）
+
+**題目（English, Kittel Prob. 3.8）**：A cubic crystal is subject to tension in the [100] direction. Find expressions in terms of the elastic stiffnesses $C_{ij}$ for Young's modulus $Y$ and Poisson's ratio $\sigma$ as defined in Fig. 21 (Young's modulus is stress/strain for a tensile stress acting in one direction with the specimen sides left free; Poisson's ratio is $\sigma=(\delta w/w)/(\delta l/l)$ for this situation).
+
+<details>
+<summary>▸ 中文題目</summary>
+
+立方晶體沿 [100] 方向受張力（tension）。以彈性勁度常數（elastic stiffness constants）$C_{ij}$ 表示楊氏模數 $Y$ 與帕松比 $\sigma$（如 Fig. 21 定義：$\sigma=(\delta w/w)/(\delta l/l)$，側面自由）。
+
+</details>
+
+**Step 1（應力條件）**：只有 $X_{xx}\neq0$，其餘應力分量為零。用彈性柔度（compliance）$S_{ij}$ 寫應變：
+$$e_{xx}=S_{11}X_{xx},\qquad e_{yy}=e_{zz}=S_{12}X_{xx}.$$
+
+**Step 2（楊氏模數定義）**：$Y=\dfrac{\text{應力}}{\text{縱向應變}}=\dfrac{X_{xx}}{e_{xx}}$：
+$$Y=\frac{X_{xx}}{S_{11}X_{xx}}=\frac{1}{S_{11}}.$$
+
+**Step 3（帕松比定義）**：$\sigma=-\dfrac{e_{yy}}{e_{xx}}$（橫向收縮／縱向伸長）：
+$$\sigma=-\frac{S_{12}X_{xx}}{S_{11}X_{xx}}=-\frac{S_{12}}{S_{11}}.$$
+
+**Step 4（柔度換成勁度）**：立方晶體中
+$$S_{11}=\frac{C_{11}+C_{12}}{(C_{11}-C_{12})(C_{11}+2C_{12})},\qquad
+S_{12}=\frac{-C_{12}}{(C_{11}-C_{12})(C_{11}+2C_{12})}.$$
+代入：
+$$Y=\frac{1}{S_{11}}=\frac{(C_{11}-C_{12})(C_{11}+2C_{12})}{C_{11}+C_{12}},$$
+$$\sigma=-\frac{S_{12}}{S_{11}}=\frac{C_{12}}{C_{11}+C_{12}}.$$
+
+$$\boxed{\,Y=\dfrac{(C_{11}-C_{12})(C_{11}+2C_{12})}{C_{11}+C_{12}},\qquad \sigma=\dfrac{C_{12}}{C_{11}+C_{12}}\,}$$
+
+> **重點**：核心是「只有一個應力分量時，用柔度 $S$ 寫應變最快」。立方晶體 $S\leftrightarrow C$ 的反轉公式要會。帕松比恆為正且 $<1/2$（穩定要求）。
+
+---
+
+### 習題 9：縱波波速（Longitudinal wave velocity）（Kittel Prob. 3.9）
+
+**題目（English, Kittel Prob. 3.9）**：Show that the velocity of a longitudinal wave in the [111] direction of a cubic crystal is given by
+$$v=\left[\frac{C_{11}+2C_{12}+4C_{44}}{3\rho}\right]^{1/2}.$$
+Hint: For such a wave $u=v=w$. Let $u=u_0\,e^{iK(x+y+z)/\sqrt3}e^{-i\omega t}$, and use Eq. (57a).
+
+<details>
+<summary>▸ 中文題目</summary>
+
+證明立方晶體中沿 [111] 方向傳播的縱波（longitudinal wave）波速為
+$$v=\left[\frac{C_{11}+2C_{12}+4C_{44}}{3\rho}\right]^{1/2}.$$
+提示：此波 $u=v=w$，令 $u=u_0\,e^{iK(x+y+z)/\sqrt3}e^{-i\omega t}$，用 Eq. (57a)。
+
+</details>
+
+**Step 1（運動方程 57a）**：立方晶體的彈性波方程（$x$ 分量）
+$$\rho\frac{\partial^{2}u}{\partial t^{2}}=C_{11}\frac{\partial^{2}u}{\partial x^{2}}+C_{44}\!\left(\frac{\partial^{2}u}{\partial y^{2}}+\frac{\partial^{2}u}{\partial z^{2}}\right)+(C_{12}+C_{44})\!\left(\frac{\partial^{2}v}{\partial x\partial y}+\frac{\partial^{2}w}{\partial x\partial z}\right).$$
+
+**Step 2（代入 [111] 平面波）**：對 $u=u_0 e^{iK(x+y+z)/\sqrt3}e^{-i\omega t}$，每個座標方向的波數分量都是 $K_x=K_y=K_z=K/\sqrt3$。各二階導數帶下因子 $-(K/\sqrt3)^{2}=-K^{2}/3$；交叉導數（如 $\partial^2/\partial x\partial y$）帶 $-K^2/3$。縱波 $u=v=w=u_0(\cdots)$。
+
+**Step 3（左式）**：$\rho\,\partial_t^2 u=-\rho\omega^{2}u$。
+
+**Step 4（右式逐項）**：
+- $C_{11}\partial_x^2 u\to -C_{11}\dfrac{K^2}{3}u$；
+- $C_{44}(\partial_y^2+\partial_z^2)u\to -2C_{44}\dfrac{K^2}{3}u$；
+- $(C_{12}+C_{44})(\partial_x\partial_y v+\partial_x\partial_z w)\to -2(C_{12}+C_{44})\dfrac{K^2}{3}u$（因 $v=w=u$）。
+
+**Step 5（合併）**：
+$$-\rho\omega^{2}u=-\frac{K^{2}}{3}\Big[C_{11}+2C_{44}+2(C_{12}+C_{44})\Big]u.$$
+括號內 $=C_{11}+2C_{44}+2C_{12}+2C_{44}=C_{11}+2C_{12}+4C_{44}$。
+
+**Step 6（波速）**：消去 $u$，用 $v^2=\omega^2/K^2$：
+$$\rho\omega^{2}=\frac{K^{2}}{3}\big(C_{11}+2C_{12}+4C_{44}\big)\ \Rightarrow\ v^{2}=\frac{\omega^{2}}{K^{2}}=\frac{C_{11}+2C_{12}+4C_{44}}{3\rho}.$$
+
+$$\boxed{\,v_{\text{long}}=\left[\dfrac{C_{11}+2C_{12}+4C_{44}}{3\rho}\right]^{1/2}\,}$$
+
+> **重點**：技巧是「縱波 $u=v=w$」讓三條耦合方程合而為一。記住交叉項 $(C_{12}+C_{44})$ 出現兩次（$xy$、$xz$）是關鍵，漏一個就錯。
+
+---
+
+### 習題 10：橫波波速（Transverse wave velocity）（Kittel Prob. 3.10）
+
+**題目（English, Kittel Prob. 3.10）**：Show that the velocity of transverse waves in the [111] direction of a cubic crystal is given by
+$$v=\left[\frac{C_{11}-C_{12}+C_{44}}{3\rho}\right]^{1/2}.$$
+Hint: See Problem 9.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+證明立方晶體中沿 [111] 方向的橫波（transverse wave）波速為
+$$v=\left[\frac{C_{11}-C_{12}+C_{44}}{3\rho}\right]^{1/2}.$$
+提示：同習題 9，但取垂直位移。
+
+</details>
+
+**Step 1（取橫向位移）**：橫波位移垂直於 [111]。取 $u=-w$、$v=0$（這向量 $(1,0,-1)$ 確實 $\perp(1,1,1)$）。同樣令各分量 $\propto e^{iK(x+y+z)/\sqrt3}e^{-i\omega t}$。
+
+**Step 2（用 57a 的 $x$ 分量）**：
+$$-\rho\omega^{2}u=-\frac{K^2}{3}\Big[C_{11}u+C_{44}(u+u)?\Big]+\cdots$$
+逐項代（$u$ 分量方程）：
+- $C_{11}\partial_x^2 u\to -C_{11}\dfrac{K^2}{3}u$；
+- $C_{44}(\partial_y^2+\partial_z^2)u\to -2C_{44}\dfrac{K^2}{3}u$；
+- $(C_{12}+C_{44})(\partial_x\partial_y v+\partial_x\partial_z w)$：$v=0$，$w=-u$，故 $\to -(C_{12}+C_{44})\dfrac{K^2}{3}(-u)=+(C_{12}+C_{44})\dfrac{K^2}{3}u$。
+
+**Step 3（合併 $x$ 分量）**：
+$$-\rho\omega^{2}u=-\frac{K^{2}}{3}\Big[C_{11}+2C_{44}-(C_{12}+C_{44})\Big]u.$$
+括號 $=C_{11}+2C_{44}-C_{12}-C_{44}=C_{11}-C_{12}+C_{44}$。
+
+**Step 4（波速）**：
+$$\rho\omega^{2}=\frac{K^{2}}{3}\big(C_{11}-C_{12}+C_{44}\big)\ \Rightarrow\ v^{2}=\frac{C_{11}-C_{12}+C_{44}}{3\rho}.$$
+
+$$\boxed{\,v_{\text{trans}}=\left[\dfrac{C_{11}-C_{12}+C_{44}}{3\rho}\right]^{1/2}\,}$$
+
+> **重點**：[111] 方向兩個橫波**簡併（degenerate）**——任何垂直 [111] 的位移波速都一樣。和習題 9 一比，縱波快、橫波慢（因 $4C_{44}$ vs $+C_{44}$）。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 470 220" width="100%" style="max-width:580px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arC3w" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a4d7c"/></marker>
+<marker id="arC3wt" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="12">
+<g transform="translate(0,0)">
+<text x="115" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">縱波 longitudinal</text>
+<line x1="30" y1="150" x2="200" y2="60" stroke="#888" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="205" y="58" font-size="11" fill="#888">[111] K</text>
+<g stroke="#1a4d7c" stroke-width="2" marker-end="url(#arC3w)">
+<line x1="65" y1="130" x2="95" y2="114"/><line x1="110" y1="106" x2="140" y2="90"/><line x1="155" y1="82" x2="185" y2="66"/>
+</g>
+<text x="100" y="175" text-anchor="middle" font-size="11" fill="#1a4d7c">位移 ∥ K（u=v=w）</text>
+<text x="115" y="195" text-anchor="middle" font-size="11.5" fill="#1a4d7c">v²=(C₁₁+2C₁₂+4C₄₄)/3ρ</text>
+</g>
+<g transform="translate(235,0)">
+<text x="115" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#c0392b">橫波 transverse</text>
+<line x1="30" y1="150" x2="200" y2="60" stroke="#888" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="205" y="58" font-size="11" fill="#888">[111] K</text>
+<g stroke="#c0392b" stroke-width="2" marker-end="url(#arC3wt)">
+<line x1="78" y1="108" x2="100" y2="138"/><line x1="123" y1="84" x2="145" y2="114"/></g>
+<text x="100" y="178" text-anchor="middle" font-size="11" fill="#c0392b">位移 ⊥ K（u=−w,v=0）</text>
+<text x="115" y="195" text-anchor="middle" font-size="11.5" fill="#c0392b">v²=(C₁₁−C₁₂+C₄₄)/3ρ</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 9 與 10</b> 的 [111] 彈性波。把平面波代進運動方程 (57a)：<b style="color:#1a4d7c">縱波</b>位移平行傳播方向 K（u=v=w），交叉項全加，得 v²=(C₁₁+2C₁₂+4C₄₄)/3ρ；<b style="color:#c0392b">橫波</b>位移垂直 K（取 u=−w、v=0），交叉項變號，得 v²=(C₁₁−C₁₂+C₄₄)/3ρ。比較分子可見<b>縱波較快、橫波較慢</b>，且兩個橫波簡併。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：不同方向波速、數值代入、縱橫比</b></summary>
+
+**範例 A（[100] 方向縱波，最簡單的驗算）**：沿 [100]（$K_x=K,K_y=K_z=0$）代入 (57a) 的 $x$ 分量。只有 $C_{11}\partial_x^2 u$ 留下，交叉項與 $C_{44}$ 橫向項都帶 $K_y,K_z=0$ 而消失：
+$$-\rho\omega^{2}u=-C_{11}K^{2}u\ \Rightarrow\ v_{\text{long}}^{2}=\frac{C_{11}}{\rho}.$$
+橫波（位移沿 $y$，$K$ 沿 $x$）：只剩 $C_{44}\partial_x^2 v\Rightarrow v_{\text{trans}}^{2}=\dfrac{C_{44}}{\rho}$。**這是最乾淨的「$C_{11}$ 配縱波、$C_{44}$ 配橫波」記法**，[111] 只是把它們依方向餘弦混合。
+
+**範例 B（數值：鋁的 [111] 縱波速）**：鋁 $C_{11}=108$、$C_{12}=62$、$C_{44}=28\ \text{GPa}$，密度 $\rho=2700\ \text{kg/m}^3$。[111] 縱波：
+$$v^{2}=\frac{C_{11}+2C_{12}+4C_{44}}{3\rho}=\frac{(108+124+112)\times10^{9}}{3\times2700}=\frac{344\times10^{9}}{8100}=4.247\times10^{7}\ \text{m}^2/\text{s}^2.$$
+$v=\sqrt{4.247\times10^{7}}=6517\ \text{m/s}\approx6.5\ \text{km/s}$，與鋁實測縱波速約 $6.4\ \text{km/s}$ 相符 ✓。
+
+**範例 C（子情形：縱橫波速比）**：用同一組鋁常數算 [111] 橫波：
+$$v_{T}^{2}=\frac{C_{11}-C_{12}+C_{44}}{3\rho}=\frac{(108-62+28)\times10^{9}}{8100}=\frac{74\times10^{9}}{8100}=9.14\times10^{6},$$
+$v_T=3023\ \text{m/s}$。縱橫比 $\dfrac{v_L}{v_T}=\dfrac{6517}{3023}=2.16$。一般固體 $v_L/v_T\approx1.7\!-\!2$，這裡略高，反映鋁的 $C_{44}$ 相對偏小。重點：分子 $C_{11}+2C_{12}+4C_{44}$（縱）恆大於 $C_{11}-C_{12}+C_{44}$（橫），故縱波恆快。
+</details>
+
+---
+
+### 習題 11：有效剪切常數（Effective shear constant）（Kittel Prob. 3.11）
+
+**題目（English, Kittel Prob. 3.11）**：Show that the shear constant $\tfrac12(C_{11}-C_{12})$ in a cubic crystal is defined by setting $e_{xx}=-e_{yy}=\tfrac12 e$ and all other strains equal to zero, as in Fig. 22. Hint: Consider the energy density (43); look for a $C'$ such that $U=\tfrac12 C' e^{2}$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+證明立方晶體中剪切常數 $\tfrac12(C_{11}-C_{12})$ 對應「$e_{xx}=-e_{yy}=\tfrac12 e$、其餘應變為零」的形變（如 Fig. 22）。提示：用能密度 (43)，找一個 $C'$ 使 $U=\tfrac12 C' e^{2}$。
+
+</details>
+
+**Step 1（代入能密度）**：彈性能密度
+$$U=\tfrac12 C_{11}(e_{xx}^2+e_{yy}^2+e_{zz}^2)+C_{12}(e_{yy}e_{zz}+e_{zz}e_{xx}+e_{xx}e_{yy})+\tfrac12 C_{44}(e_{yz}^2+e_{zx}^2+e_{xy}^2).$$
+取 $e_{xx}=\tfrac12 e$、$e_{yy}=-\tfrac12 e$、$e_{zz}=0$、所有剪應變為零。
+
+**Step 2（逐項）**：
+- $C_{11}$ 項：$\tfrac12 C_{11}\big[(\tfrac12 e)^2+(-\tfrac12 e)^2+0\big]=\tfrac12 C_{11}\cdot\tfrac12 e^2=\tfrac14 C_{11}e^2$。
+- $C_{12}$ 項：只有 $e_{xx}e_{yy}=(\tfrac12 e)(-\tfrac12 e)=-\tfrac14 e^2$（含 $e_{zz}$ 的兩項為零）。故 $C_{12}\times(-\tfrac14 e^2)=-\tfrac14 C_{12}e^2$。
+- $C_{44}$ 項：剪應變皆零，貢獻 $0$。
+
+**Step 3（合併）**：
+$$U=\tfrac14 C_{11}e^2-\tfrac14 C_{12}e^2=\tfrac14(C_{11}-C_{12})e^2.$$
+
+**Step 4（對照 $U=\tfrac12 C' e^2$）**：
+$$\tfrac12 C'=\tfrac14(C_{11}-C_{12})\ \Rightarrow\ C'=\tfrac12(C_{11}-C_{12}).$$
+
+$$\boxed{\,C'=\tfrac12\left(C_{11}-C_{12}\right)\,}$$
+
+> **重點**：這個「$\tfrac12(C_{11}-C_{12})$」就是 [110] 面內的有效剪切模數，也出現在橫波（習題 10）與穩定性（習題 14）。純代入＋對照係數，沒有微分。
+
+---
+
+### 習題 12：行列式法（Determinantal approach）（Kittel Prob. 3.12）
+
+**題目（English, Kittel Prob. 3.12）**：It is known that an $R$-dimensional square matrix with all elements equal to unity has roots $R$ and $0$, with the $R$ occurring once and the zero occurring $R-1$ times. If all elements have the value $p$, then the roots are $Rp$ and $0$. (a) Show that if the diagonal elements are $q$ and all other elements are $p$, then there is one root equal to $(R-1)p+q$ and $R-1$ roots equal to $q-p$. (b) Show from the elastic equation (57) for a wave in the [111] direction of a cubic crystal that the determinantal equation which gives $\omega^{2}$ as a function of $K$ has $q=\tfrac13 K^{2}(C_{11}+2C_{44})$ and $p=\tfrac13 K^{2}(C_{12}+C_{44})$. This expresses the condition that three linear homogeneous algebraic equations for the three displacement components $u,v,w$ have a solution. Use the result of part (a) to find the three roots of $\omega^{2}$; check with the results given for Problems 9 and 10.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 已知 $R$ 維方陣若對角元為 $q$、其餘元為 $p$，證明它有一個根 $(R-1)p+q$ 與 $R-1$ 個根 $q-p$。(b) 由 [111] 方向的彈性方程 (57) 證明決定 $\omega^{2}(K)$ 的行列式方程，其中 $q=\tfrac13 K^{2}(C_{11}+2C_{44})$、$p=\tfrac13 K^{2}(C_{12}+C_{44})$；用 (a) 的結果求 $\omega^{2}$ 的三個根，並與習題 9、10 對照。
+
+</details>
+
+**(a) Step 1**：把矩陣寫成 $a_{ij}=p+\delta_{ij}(q-p)$。定義 $\lambda'=\lambda-(q-p)$，則特徵問題化為「全 $p$ 矩陣」$a'_{ij}=p$ 的特徵值 $\lambda'$。
+
+**(a) Step 2**：全元素為 $p$ 的 $R\times R$ 矩陣，其根為 $Rp$（一次）與 $0$（$R-1$ 次）（因為它是秩 1 矩陣 $p\cdot\mathbf{1}\mathbf{1}^{T}$）。
+
+**(a) Step 3**：還原 $\lambda=\lambda'+(q-p)$：
+- $\lambda'=Rp\Rightarrow\lambda=Rp+q-p=(R-1)p+q$（一次）。
+- $\lambda'=0\Rightarrow\lambda=q-p$（$R-1$ 次）。
+
+$$\boxed{\,\text{根}=(R-1)p+q\ (\times1),\quad q-p\ (\times(R-1))\,}$$
+
+**(b) Step 1**：把三個位移分量 $u,v,w$ 的平面波代入 (57)，得 $3\times3$ 矩陣特徵方程 $\det(M-\rho\omega^{2}I)=0$。對 [111]，對稱性使矩陣對角元都等於 $q=\tfrac13 K^{2}(C_{11}+2C_{44})$、非對角元都等於 $p=\tfrac13 K^{2}(C_{12}+C_{44})$。
+
+**(b) Step 2**：套用 (a)（$R=3$，把 $\lambda=\rho\omega^2$）：
+- 一個根：$\rho\omega^{2}=(R-1)p+q=2p+q$。
+- 兩個（簡併）根：$\rho\omega^{2}=q-p$。
+
+**(b) Step 3（縱波根）**：
+$$\rho\omega^{2}=2p+q=\frac{K^{2}}{3}\big[2(C_{12}+C_{44})+(C_{11}+2C_{44})\big]=\frac{K^{2}}{3}\big(C_{11}+2C_{12}+4C_{44}\big).$$
+$\Rightarrow v^{2}=\dfrac{C_{11}+2C_{12}+4C_{44}}{3\rho}$，與**習題 9 完全一致**。
+
+**(b) Step 4（橫波根）**：
+$$\rho\omega^{2}=q-p=\frac{K^{2}}{3}\big[(C_{11}+2C_{44})-(C_{12}+C_{44})\big]=\frac{K^{2}}{3}\big(C_{11}-C_{12}+C_{44}\big).$$
+$\Rightarrow v^{2}=\dfrac{C_{11}-C_{12}+C_{44}}{3\rho}$，與**習題 10 完全一致**（且雙重簡併）。
+
+$$\boxed{\,\rho\omega^{2}=\{\,C_{11}+2C_{12}+4C_{44}\ (\times1),\ \ C_{11}-C_{12}+C_{44}\ (\times2)\,\}\cdot\tfrac{K^2}{3}\,}$$
+
+> **重點**：這題把習題 9、10 的「猜位移」做法升級為「行列式一次解三個模態」。秩 1 矩陣的特徵值 $(Rp,0)$ 是線性代數小定理，務必記住。
+
+---
+
+### 習題 13：一般傳播方向（General propagation direction）（Kittel Prob. 3.13）
+
+**題目（English, Kittel Prob. 3.13）**：(a) By substitution in (57) find the determinantal equation which expresses the condition that the displacement (a plane wave in an arbitrary direction $\mathbf{K}$) be a solution of the elastic wave equations in a cubic crystal. (b) The sum of the roots of a determinantal equation is equal to the sum of the diagonal elements $a_{ii}$. Show from part (a) that the sum of the squares of the three elastic wave velocities in any direction in a cubic crystal is
+$$v_1^2+v_2^2+v_3^2=\frac{C_{11}+2C_{44}}{\rho}.$$
+Recall that $v_s^2=\omega^{2}/K^{2}$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 代入 (57) 求「位移為平面波解」的行列式方程（立方晶體、任意方向 $\mathbf{K}$）。(b) 行列式方程根之和等於對角元之和 $\sum a_{ii}$。由此證明：立方晶體中任意方向上三個彈性波速度平方之和為
+$$v_1^2+v_2^2+v_3^2=\frac{C_{11}+2C_{44}}{\rho}.$$
+
+</details>
+
+**(a) Step 1**：令 $u=u_0 e^{i(\mathbf{K}\cdot\mathbf{r}-\omega t)}$（$v,w$ 同型），方向餘弦 $\hat K=(K_x,K_y,K_z)/K$。代入 (57a)：對角元（$uu$ 元素）
+$$a_{xx}=C_{11}K_x^{2}+C_{44}(K_y^{2}+K_z^{2}),$$
+其餘 $a_{yy},a_{zz}$ 由座標輪換得到；非對角元
+$$a_{xy}=(C_{12}+C_{44})K_xK_y,\quad\text{等}.$$
+行列式方程：$\det\big(a_{ij}-\rho\omega^{2}\delta_{ij}\big)=0$。
+
+**(a) Step 2**：三個根 $\rho\omega^2$ 對應三個模態（一縱兩橫，方向相關）。
+
+**(b) Step 1（根之和 = 跡）**：三個根之和 $=\sum_i \rho\omega_i^{2}=\text{tr}(a_{ij})=a_{xx}+a_{yy}+a_{zz}$。
+
+**(b) Step 2（算跡）**：
+$$\text{tr}=\big[C_{11}K_x^2+C_{44}(K_y^2+K_z^2)\big]+\big[C_{11}K_y^2+C_{44}(K_z^2+K_x^2)\big]+\big[C_{11}K_z^2+C_{44}(K_x^2+K_y^2)\big].$$
+
+**(b) Step 3（合併）**：$C_{11}$ 收集 $K_x^2+K_y^2+K_z^2=K^2$；$C_{44}$ 每個 $K_i^2$ 出現兩次，共 $2K^2$：
+$$\text{tr}=C_{11}K^{2}+2C_{44}K^{2}=(C_{11}+2C_{44})K^{2}.$$
+
+**(b) Step 4（轉成波速）**：$\sum_i\rho\omega_i^2=(C_{11}+2C_{44})K^2$。除以 $\rho K^2$，並用 $v_i^2=\omega_i^2/K^2$：
+$$\sum_i v_i^2=\frac{C_{11}+2C_{44}}{\rho}.$$
+
+$$\boxed{\,v_1^2+v_2^2+v_3^2=\dfrac{C_{11}+2C_{44}}{\rho}\quad(\text{與方向無關})\,}$$
+
+> **重點**：「速度平方和與方向無關」是漂亮的不變量，靠的是矩陣的跡不變。算跡時注意 $K_x^2+K_y^2+K_z^2=K^2$ 以及 $C_{44}$ 的兩倍計數。可用 [111] 結果（習題 12）驗證：$\tfrac13(C_{11}+2C_{12}+4C_{44})+\tfrac23(C_{11}-C_{12}+C_{44})=C_{11}+2C_{44}$，除以 $\rho$ 吻合。
+
+---
+
+### 習題 14：穩定性判據（Stability criteria）（Kittel Prob. 3.14）
+
+**題目（English, Kittel Prob. 3.14）**：The criterion that a cubic crystal with one atom in the primitive cell be stable against small homogeneous deformations is that the energy density (43) be positive for all combinations of strain components. What restrictions are thereby imposed on the elastic stiffness constants? (In mathematical language the problem is to find the conditions that a real symmetric quadratic form be positive definite.) Ans.: $C_{44}>0$, $C_{11}>0$, $C_{11}^2>C_{12}^2$, and $C_{11}+2C_{12}>0$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+立方晶體（基元胞一個原子）對微小均勻形變穩定的判據是：能密度 (43) 對所有應變組合皆為正。問這對彈性勁度常數施加了什麼限制？（即「實對稱二次型正定」的條件。）答案：$C_{44}>0$、$C_{11}>0$、$C_{11}^2>C_{12}^2$、$C_{11}+2C_{12}>0$。
+
+</details>
+
+**Step 1（寫成二次型矩陣）**：能密度 (43) 對 $(e_{xx},e_{yy},e_{zz},e_{yz},e_{zx},e_{xy})$ 為二次型。剪切部分對角化後給出三個 $C_{44}$（每個獨立剪應變一個）；正向應變部分由 $3\times3$ 矩陣
+$$\begin{pmatrix}C_{11}&C_{12}&C_{12}\\ C_{12}&C_{11}&C_{12}\\ C_{12}&C_{12}&C_{11}\end{pmatrix}$$
+描述。正定 $\Leftrightarrow$ 所有主子式（principal minors）為正。
+
+**Step 2（剪切部分）**：剪切對角元為 $C_{44}$，正定要求
+$$C_{44}>0.$$
+
+**Step 3（正向 $3\times3$ 的一階主子式）**：左上角 $1\times1$ 子式
+$$C_{11}>0.$$
+
+**Step 4（二階主子式）**：左上 $2\times2$
+$$\det\begin{pmatrix}C_{11}&C_{12}\\ C_{12}&C_{11}\end{pmatrix}=C_{11}^{2}-C_{12}^{2}>0\ \Rightarrow\ C_{11}^{2}>C_{12}^{2}\ \Leftrightarrow\ |C_{12}|<C_{11}.$$
+
+**Step 5（三階主子式／行列式）**：用 $a I+b J$ 結構（$a=C_{11}-C_{12}$，加上 $C_{12}$ 的全 1 矩陣），其行列式
+$$\det=(C_{11}-C_{12})^{2}(C_{11}+2C_{12})>0.$$
+由 Step 4 已知 $(C_{11}-C_{12})^2>0$，故須
+$$C_{11}+2C_{12}>0.$$
+
+$$\boxed{\,C_{44}>0,\quad C_{11}>0,\quad C_{11}^{2}>C_{12}^{2},\quad C_{11}+2C_{12}>0\,}$$
+
+> **重點**：四條判據各有物理意義——$C_{44}>0$（不能自發剪切）、$C_{11}+2C_{12}>0$（體積模數 $B=\tfrac13(C_{11}+2C_{12})>0$，壓不垮，呼應範例 D）、$|C_{12}|<C_{11}$（$\tfrac12(C_{11}-C_{12})$ 剪切模數 $>0$，呼應習題 11）。靠「二次型正定 $\Leftrightarrow$ 主子式全正」。
+
+---
+
+## ✅ 本章計算題自我檢核
+
+做完上面，你應該能**獨立**算出下列各項（蓋住答案自測）：
+
+1. 給 LJ 位能，徒手推出單分子平衡 $r_0=2^{1/6}\sigma$、井底 $U=-\varepsilon$。
+2. 寫出 fcc/bcc 的每原子內聚能公式 $U(R_0)/N=-\varepsilon\,A_6^2/(2A_{12})$（fcc $=-8.61\varepsilon$、bcc $=-8.24\varepsilon$），並算出 bcc/fcc 比值 $\approx0.957$。
+3. 由 $\varepsilon,\sigma$ 算出惰性氣體（或 H$_2$）的內聚能（kJ/mol 或 eV/atom），並解釋為何 H$_2$、He 需要量子（零點能）修正。
+4. 徒手證明一維離子鏈 Madelung 常數 $=2\ln2$（交錯調和級數）。
+5. 寫 Born 模型 $U(R)=N[z\lambda e^{-R/\rho}-\alpha q^2/R]$，令 $dU/dR=0$ 化成 $x^2 e^{-x}=$ 常數並試誤求 $R_0$，再用 $-\dfrac{N\alpha q^2}{R_0}(1-\rho/R_0)$ 算內聚能。
+6. 做「Madelung 能 $-$（游離能 $-$ 親和能）」的能量帳，判斷離子相 vs 金屬相、一價 vs 二價（BaO → Ba$^{++}$O$^{--}$）。
+7. 由柔度 $S_{11},S_{12}$ 寫出立方晶體的楊氏模數 $Y=1/S_{11}$、帕松比 $\sigma=-S_{12}/S_{11}$，並換成 $C_{ij}$。
+8. 把 [111] 平面波代入彈性波方程，推出縱波 $v^2=\dfrac{C_{11}+2C_{12}+4C_{44}}{3\rho}$、橫波 $v^2=\dfrac{C_{11}-C_{12}+C_{44}}{3\rho}$。
+9. 用秩 1 矩陣特徵值 $(Rp,0)$ 與「速度平方和 = 跡」求 $\sum v_i^2=(C_{11}+2C_{44})/\rho$。
+10. 由「二次型正定 ⇔ 主子式全正」寫出四條彈性穩定性條件，並說出各自的物理意義。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

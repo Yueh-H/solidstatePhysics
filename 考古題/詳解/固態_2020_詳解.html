@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理導論 2020 資格考 — 詳解</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">← 詳解目錄</a> &nbsp;·&nbsp; <a href="_共用觀念與公式.html">🧰 共用觀念與公式</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- source: 歷年原卷/固態物理導論_2020.md -->
+
+# 固態物理導論 2020 資格考 — 教學版逐題詳解（從普物起建 · 代數不跳步）
+
+> **這份的定位**：2020(108 學年;PDF 內頁誤標 "2019")是**四大主題各 25%** 的均衡卷——
+> Crystal structure / Diffraction / Phonons / Electrons,題型偏「**一個硬計算 + 一串觀念短答**」。
+> 寫法同 QFT tutorials:每大題走
+> `📋 原題 → 🎯 核心訊息 →(推導重的才放)📚 前情提要 → 🔍 符號說明(點開,熱身/中階/本題三範例) → 解答 Step(代數不跳,$\boxed{}$,重要步驟後小結) → ✅ 自我檢核 → 🔀 變化 → 信心`。
+> 共用觀念見 [`_共用觀念與公式.html`](_共用觀念與公式.html),引用不重抄。
+> **深度策略**:第 1 題(filling factor 全推 + 離子鍵 Madelung)當硬骨頭嚴格做;繞射/聲子/電子多為觀念短答,精簡但不偷工。
+
+## 🧭 全卷約定
+- **立方**慣用邊長 $a$;把原子當**剛性球**,沿「最近鄰相切方向」定半徑 $r$ 與 $a$ 的關係,再算 $\text{filling}=\dfrac{(\text{胞內原子數})\cdot\frac43\pi r^3}{a^3}$。
+- 倒晶格 $\mathbf a_i\cdot\mathbf b_j=2\pi\delta_{ij}$;繞射 Laue $\Delta\mathbf k=\mathbf G$、Bragg $2d\sin\theta=\lambda$。
+- 自由電子 $E=\hbar^2k^2/2m$,含自旋簡併 2;費米氣體平均動能 $\frac35E_F$。
+- 離子鍵估算用 $\dfrac{e^2}{4\pi\varepsilon_0}=14.4\ \text{eV·Å}$(由題給常數可自驗)。
+- 閉書;配分 **結構 25% · 繞射 25% · 聲子 25% · 電子 25%**。符號依 Kittel。
+
+---
+
+# 📘 第 1 題 — 晶體結構：堆積率與離子鍵能（25%）
+
+## 📋 原題
+> **1.** 算球狀原子排成下列**三種 cubic lattice**(sc, bcc, fcc)時能填滿的體積最大比例(filling factor)。
+> 　**1a.** Diamond 是已知最硬的材料——這能用它晶體結構的 packing density 來解釋嗎?
+> **2.** 估計 Li$^+$ 與 Cl$^-$ 結合成 LiCl 分子(間距 $a=5.14\,\text{Å}$)時釋放的能量。
+> 　**2a.** 實驗發現 LiCl **晶體**的能量比**分子**約高 75%(鍵長相近),為什麼?
+
+## 🎯 核心訊息
+> filling factor 全靠一條幾何:**「最近鄰相切」定出 $r(a)$**(sc 沿邊、bcc 沿體對角、fcc 沿面對角)→ 代進 $\frac43\pi r^3\times$ 胞內原子數 / $a^3$ → $0.52/0.68/0.74$。離子鍵則是純庫侖:**分子只有一對 $\Rightarrow e^2/4\pi\varepsilon_0 a$;晶體是整格求和 $\Rightarrow$ 乘上 Madelung 常數 $\alpha_{\text{NaCl}}\approx1.748$**,正好「高約 75%」。
+
+## 📚 前情提要：從普物一路串到本題
+### 階段 1（普物·密度）
+「裝球」問題:給定排法,問球佔多少體積。關鍵不是球多大,而是**球與盒子(晶格常數)的比例**——而那比例由「球互相剛好接觸」鎖死。
+> **留存**:filling factor 與 $a$、$r$ 的絕對值無關,只看「相切方向上 $r$ 是 $a$ 的幾分之幾」。
+
+### 階段 2（普物·庫侖位能）
+兩個點電荷 $+e,-e$ 相距 $r$,位能 $U=-\dfrac{e^2}{4\pi\varepsilon_0 r}$(負 = 束縛、放能)。
+> **留存**:離子分子的「結合能估計」= 把兩離子從無窮遠拉到 $a$ 所放的庫侖能。
+
+### 階段 3（晶體學·Madelung）
+在晶體裡,一個離子不是只對「一個」反離子,而是對**整個格子**所有離子求和:近的反號吸、稍遠的同號斥、再遠的反號吸……交錯級數收斂到 $-\alpha\dfrac{e^2}{4\pi\varepsilon_0 r}$,$\alpha$ = **Madelung 常數**(NaCl 型 $\approx1.748$)。分子的「等效 $\alpha$」= 1(只一對)。
+> **留存**:晶體 / 分子能量比 $\approx\alpha\approx1.748$,即「高約 75%」的來源。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ filling factor 的「相切定 $r(a)$」三步法 + Madelung 常數</b></summary>
+
+### 你普物學過的
+裝球的鬆緊、點電荷庫侖位能。
+
+### 為什麼要這個
+filling factor 是「閉書也要會默算」的標準題;Madelung 是離子晶體鍵能的核心常數。
+
+### 定義 + 三步法
+$$\text{filling}=\frac{n_{\text{cell}}\cdot\frac43\pi r^3}{a^3},\qquad r=r(a)\ \text{由「最近鄰相切方向」定。}$$
+$n_{\text{cell}}$ = 慣用立方胞內原子數(角 $\times\frac18$、面 $\times\frac12$、體心 $\times1$)。
+
+**範例 1（熱身·sc）**:原子沿**立方邊**相切 → $2r=a$,$r=\frac a2$;$n=8\times\frac18=1$。
+**範例 2（中階·bcc）**:沿**體對角線**相切($\sqrt3\,a=4r$)→ $r=\frac{\sqrt3}4a$;$n=8\times\frac18+1=2$。
+**範例 3（本題·fcc）**:沿**面對角線**相切($\sqrt2\,a=4r$)→ $r=\frac{\sqrt2}4a$;$n=8\times\frac18+6\times\frac12=4$。
+
+### Madelung
+$$U_{\text{ion pair}}=-\,\alpha\,\frac{e^2}{4\pi\varepsilon_0 r}\Big(1-\tfrac1n\Big),\quad \alpha_{\text{NaCl}}=1.7476,\ \alpha_{\text{molecule}}=1.$$
+排斥因子 $(1-\frac1n)$ 在分子與晶體**同形**,相除抵消 → 能量比 $\approx\alpha\approx1.75$。
+</details>
+
+## 解答
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 600 230" width="100%" style="max-width:680px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<clipPath id="sqP1"><rect x="40" y="40" width="120" height="120"/></clipPath>
+<radialGradient id="blP1" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#9cc3e6"/><stop offset="1" stop-color="#1a4d7c"/></radialGradient>
+<radialGradient id="reP1" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#f0a79b"/><stop offset="1" stop-color="#c0392b"/></radialGradient>
+</defs>
+<g font-family="-apple-system,sans-serif">
+<g transform="translate(0,0)">
+<text x="100" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">sc 沿邊 2r=a</text>
+<g clip-path="url(#sqP1)"><circle cx="40" cy="40" r="60" fill="url(#blP1)"/><circle cx="160" cy="40" r="60" fill="url(#blP1)"/><circle cx="40" cy="160" r="60" fill="url(#blP1)"/><circle cx="160" cy="160" r="60" fill="url(#blP1)"/></g>
+<rect x="40" y="40" width="120" height="120" fill="none" stroke="#555" stroke-width="1.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#c0392b" stroke-width="2.5"/>
+<text x="100" y="205" text-anchor="middle" font-size="13" fill="#2e8b2e" font-weight="bold">η = 0.52</text>
+</g>
+<g transform="translate(200,0)">
+<text x="100" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">bcc 沿體對角</text>
+<g clip-path="url(#sqP1)"><circle cx="40" cy="40" r="38" fill="url(#blP1)"/><circle cx="160" cy="40" r="38" fill="url(#blP1)"/><circle cx="40" cy="160" r="38" fill="url(#blP1)"/><circle cx="160" cy="160" r="38" fill="url(#blP1)"/><circle cx="100" cy="100" r="38" fill="url(#reP1)"/></g>
+<rect x="40" y="40" width="120" height="120" fill="none" stroke="#555" stroke-width="1.3"/>
+<line x1="40" y1="160" x2="160" y2="40" stroke="#c0392b" stroke-width="2"/>
+<text x="100" y="205" text-anchor="middle" font-size="13" fill="#2e8b2e" font-weight="bold">η = 0.68</text>
+</g>
+<g transform="translate(400,0)">
+<text x="100" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">fcc 沿面對角</text>
+<g clip-path="url(#sqP1)"><circle cx="40" cy="40" r="42" fill="url(#blP1)"/><circle cx="160" cy="40" r="42" fill="url(#blP1)"/><circle cx="40" cy="160" r="42" fill="url(#blP1)"/><circle cx="160" cy="160" r="42" fill="url(#blP1)"/><circle cx="100" cy="100" r="42" fill="url(#reP1)"/></g>
+<rect x="40" y="40" width="120" height="120" fill="none" stroke="#555" stroke-width="1.3"/>
+<line x1="40" y1="160" x2="160" y2="40" stroke="#c0392b" stroke-width="2"/>
+<text x="100" y="205" text-anchor="middle" font-size="13" fill="#2e8b2e" font-weight="bold">η = 0.74</text>
+</g>
+<text x="300" y="226" text-anchor="middle" font-size="11" fill="#888">紅線 = 相切方向（球剛好接觸）；diamond 同法得 η = 0.34（最鬆卻最硬）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">填充率只看一條幾何：球沿哪個方向相切，就由那條線把 r 鎖到 a。sc 沿立方邊（2r=a）、bcc 沿體對角線（4r=√3 a）、fcc 沿面對角線（4r=√2 a）。同一 a 下 fcc 最密（η=0.74），sc 最鬆（η=0.52）。鑽石是 fcc+basis 但 η 只有 0.34，反證「硬度 ≠ 堆積率」。</figcaption>
+</figure>
+
+### 1. 三種 cubic lattice 的 filling factor（完整推導）
+
+**Step 1 — simple cubic (sc)。**
+原子沿立方**邊**相切:$2r=a\Rightarrow r=\dfrac a2$。胞內原子數 $n=8\times\frac18=1$。
+$$\text{filling}_{\text{sc}}=\frac{1\cdot\frac43\pi(\frac a2)^3}{a^3}=\frac{\frac43\pi\frac{a^3}8}{a^3}=\frac{\pi}{6}=\boxed{0.524.}$$
+
+**Step 2 — body-centered cubic (bcc)。**
+體心原子與角原子沿**體對角線**相切;體對角線長 $\sqrt3\,a$,上面排「角—體心—角」共 $4r$:
+$$\sqrt3\,a=4r\Rightarrow r=\frac{\sqrt3}{4}a.$$
+$n=8\times\frac18+1=2$:
+$$\text{filling}_{\text{bcc}}=\frac{2\cdot\frac43\pi\big(\frac{\sqrt3}4a\big)^3}{a^3}=\frac{8}{3}\pi\cdot\frac{3\sqrt3}{64}=\frac{\sqrt3\,\pi}{8}=\boxed{0.680.}$$
+> **小結**:$\big(\frac{\sqrt3}4\big)^3=\frac{3\sqrt3}{64}$,乘 $\frac83\pi$ 後 $3$ 約掉 → $\frac{\sqrt3\pi}8$。
+
+**Step 3 — face-centered cubic (fcc)。**
+面心原子與相鄰角原子沿**面對角線**相切;面對角線長 $\sqrt2\,a$,排「角—面心—角」共 $4r$:
+$$\sqrt2\,a=4r\Rightarrow r=\frac{\sqrt2}{4}a.$$
+$n=8\times\frac18+6\times\frac12=4$:
+$$\text{filling}_{\text{fcc}}=\frac{4\cdot\frac43\pi\big(\frac{\sqrt2}4a\big)^3}{a^3}=\frac{16}{3}\pi\cdot\frac{2\sqrt2}{64}=\frac{\sqrt2\,\pi}{6}=\boxed{0.740.}$$
+> **小結**:三者 $\boxed{0.52<0.68<0.74}$;fcc(=hcp)是 cubic 中最密堆積。
+
+### 1a. Diamond 的硬度能用 packing density 解釋嗎?（**不能**）
+
+**Step 1 — 算 diamond 的 packing density。**
+diamond = fcc + 額外 basis,慣用胞含 $n=8$ 顆;最近鄰沿體對角線 $\frac14$ 處相觸,最近鄰距 $=\frac{\sqrt3}4a$,故 $2r=\frac{\sqrt3}4a\Rightarrow r=\frac{\sqrt3}8a$。
+$$\text{filling}_{\text{diamond}}=\frac{8\cdot\frac43\pi\big(\frac{\sqrt3}8a\big)^3}{a^3}=\frac{\sqrt3\,\pi}{16}=\boxed{0.340.}$$
+**Step 2 — 結論。** diamond 的 $0.34$ **遠低於** fcc 的 $0.74$,是最**鬆**的常見結構之一,卻最硬。
+$$\boxed{\text{硬度}\ne\text{堆積率}.}$$
+硬度來自 **C 之間強而具方向性的 $sp^3$ 共價鍵**(四面體鍵結、鍵能高、抗剪),不是把原子塞得多密。鬆堆積反而是強方向鍵「撐開」骨架的結果。
+> **小結**:packing density 高(如金屬 fcc)只代表「裝得密」,與抵抗形變的鍵強度無關;diamond 正是反例。
+
+### 2. Li$^+$–Cl$^-$ 結合成分子的能量估計
+
+**Step 1 — 模型。** 兩離子當點電荷 $+e,-e$,相距 $a=5.14\,\text{Å}$,結合放出的能量 = 庫侖吸引位能大小:
+$$|U|=\frac{e^2}{4\pi\varepsilon_0 a}.$$
+**Step 2 — 代數值(用 $\frac{e^2}{4\pi\varepsilon_0}=14.4\ \text{eV·Å}$)。**
+$$|U|=\frac{14.4\ \text{eV·Å}}{5.14\ \text{Å}}=\boxed{2.80\ \text{eV}.}$$
+(用題給 SI 常數直算:$\dfrac{(1.602\times10^{-19})^2}{4\pi(8.85\times10^{-12})(5.14\times10^{-10})}=4.49\times10^{-19}\,\text{J}=2.80\,\text{eV}$,一致。)
+> **小結**:結合放能 $\approx2.8$ eV/分子。這是**從已成形的離子**拉近所釋放的靜電能(尚未含短程排斥微修正)。
+
+### 2a. 為何晶體能量比分子高約 75%?（Madelung）
+
+**Step 1 — 分子 vs 晶體的差別。** 分子裡每個離子只「看到一個」反離子;晶體裡每個離子看到**整個格子**:6 個最近鄰反號(吸)、12 個次近鄰同號(斥)、8 個第三鄰反號(吸)……
+**Step 2 — 求和 = Madelung 常數。** 把整格庫侖能寫成
+$$U_{\text{crystal}}=-\,\alpha\,\frac{e^2}{4\pi\varepsilon_0 r},\qquad \alpha_{\text{NaCl}}=1.748.$$
+分子的等效 $\alpha=1$(僅一對)。
+**Step 3 — 取比。** 鍵長相近 $\Rightarrow r$ 相近、排斥因子相消:
+$$\frac{U_{\text{crystal}}}{U_{\text{molecule}}}\approx\frac{\alpha}{1}=1.748\ \Rightarrow\ \boxed{\text{高約 }74.8\%\approx75\%.}$$
+> **小結**:這「75%」幾乎就是 $\alpha_{\text{NaCl}}-1$。**長程庫侖求和(每個離子被整格穩定)**才是晶體比孤立分子更穩的原因,與鍵長無關。
+
+<details>
+<summary><b>📝 更多範例（點開）：填充率與離子鍵能逐步硬算</b></summary>
+
+**範例 A（hcp 的填充率 = fcc 同為 0.74，不需 $c/a$ 也能背）**:hcp 與 fcc 都是**最密堆積**,配位數 12、$\eta$ 相同。用 hcp 慣用胞(底面菱形邊 $a$、夾角 $120^\circ$、高 $c$,含 2 顆球)直接算:相切給 $2r=a$ 即 $r=\frac a2$;理想軸比 $c/a=\sqrt{8/3}$。胞體積 $V=(\text{底面積})\times c=\big(\frac{\sqrt3}2a^2\big)c=\frac{\sqrt3}2a^2\cdot\sqrt{\frac83}a=\frac{\sqrt3}2\cdot\frac{2\sqrt2}{\sqrt3}a^3=\sqrt2\,a^3$。
+$$\eta_{\text{hcp}}=\frac{2\cdot\frac43\pi r^3}{V}=\frac{\frac83\pi(\frac a2)^3}{\sqrt2\,a^3}=\frac{\frac83\pi\cdot\frac{a^3}8}{\sqrt2\,a^3}=\frac{\frac{\pi}3}{\sqrt2}=\frac{\pi}{3\sqrt2}=\frac{\sqrt2\,\pi}6\approx0.7405.$$
+和 fcc 完全一致 ✓——兩者只是密排層的堆疊順序不同(ABAB vs ABCABC)。
+
+**範例 B（CsCl 型不是 bcc！配位數 8 但兩種離子）**:CsCl 慣用胞 = 角放 Cs$^+$(8 個角 $\times\frac18=1$)、體心放 Cl$^-$(1 個),所以**每胞 1 個 Cs + 1 個 Cl**,不是「bcc 的 2 顆同種」。最近鄰是 Cs–Cl 沿**體對角線**相切:$2(r_++r_-)=\sqrt3\,a\Rightarrow r_++r_-=\frac{\sqrt3}2a$。若給離子半徑 $r_+=1.67,\ r_-=1.81\,\text{Å}$:
+$$a=\frac{2(r_++r_-)}{\sqrt3}=\frac{2(1.67+1.81)}{\sqrt3}=\frac{2\times3.48}{1.732}=\frac{6.96}{1.732}=4.02\,\text{Å}.$$
+> 提醒:離子晶體**不是剛性同球**,所以不套 $\eta$ 公式,而是用「異號離子沿最近鄰方向相切」定 $a$。
+
+**範例 C（含 Born 排斥求平衡鍵長 $r_0$ 與晶格能）**:單對離子能 $U(r)=-\dfrac{\alpha e^2}{4\pi\varepsilon_0 r}+\dfrac{B}{r^n}$(吸引 + 短程排斥)。平衡在 $\frac{dU}{dr}\big|_{r_0}=0$:
+$$\frac{dU}{dr}=\frac{\alpha e^2}{4\pi\varepsilon_0 r^2}-\frac{nB}{r^{n+1}}=0\ \Rightarrow\ \frac{\alpha e^2}{4\pi\varepsilon_0 r_0^2}=\frac{nB}{r_0^{n+1}}\ \Rightarrow\ B=\frac{\alpha e^2}{4\pi\varepsilon_0}\cdot\frac{r_0^{n-1}}{n}.$$
+代回 $U(r_0)$,把 $B$ 換掉:
+$$U(r_0)=-\frac{\alpha e^2}{4\pi\varepsilon_0 r_0}+\frac{1}{r_0^n}\cdot\frac{\alpha e^2}{4\pi\varepsilon_0}\frac{r_0^{n-1}}{n}=-\frac{\alpha e^2}{4\pi\varepsilon_0 r_0}+\frac{1}{n}\cdot\frac{\alpha e^2}{4\pi\varepsilon_0 r_0}=-\frac{\alpha e^2}{4\pi\varepsilon_0 r_0}\Big(1-\frac1n\Big).$$
+這就是 Madelung 段落用的「排斥因子 $(1-\frac1n)$」的來源。以 NaCl 數值 $\alpha=1.748,\ r_0=2.82\,\text{Å},\ n=8$:
+$$U(r_0)=-\frac{1.748\times14.4}{2.82}\Big(1-\tfrac18\Big)=-8.93\times0.875=-7.81\,\text{eV/離子對},$$
+與實驗晶格能($\approx-7.9$ eV)非常接近 ✓。
+</details>
+
+## ✅ 自我檢核
+- $0.524<0.680<0.740$,且 fcc=hcp 為最密 ✓;diamond $0.340$ 確實鬆 ✓。
+- $\frac{e^2}{4\pi\varepsilon_0}=14.4\,\text{eV·Å}$ 自驗:$\frac{(1.602\text{e-}19)^2}{4\pi\cdot8.85\text{e-}12}=2.31\text{e-}28\,\text{J·m}=14.4\,\text{eV·Å}$ ✓。
+- 75% $\approx\alpha_{\text{NaCl}}-1=0.748$ ✓,巧合得令人安心。
+
+## 🔀 變化的可能情況
+- **填充率**常單獨抽出考 sc/bcc/fcc/diamond 任一,或反問「最密堆積為何 0.74」(2016 第 1 題也碰結構因子)。
+- **離子鍵**常改問「為何 LiCl 用 NaCl 型而非 CsCl 型」(離子半徑比 / radius ratio)、或要你**含 Born 排斥** $\frac{B}{r^n}$ 求平衡 $r_0$ 與鍵能(2016 第 3 題 Lennard–Jones、2023/2024 Madelung 同精神)。
+- **硬度 vs 堆積**反向題:問「為何金屬延展、共價晶體脆硬」→ 答鍵的方向性。
+
+## 信心：**高**（filling factor 與 Madelung 全為標準完整推導;75%↔α 對得起來,Kittel Ch1、Ch3）。
+
+---
+
+# 📗 第 2 題 — 繞射（25%）
+
+## 📋 原題
+> **3.** 繞射源自晶體反射波的干涉。
+> 　**a.** 為何只看到建設性干涉的亮點,沒有暗點?
+> 　**b.** diamond 與 zincblende 晶體結構相同但 unit cell 內化學物種數不同——能否由繞射譜分辨?如何?
+> 　**c.** 繞射是彈性過程。若散射**不守恆能量**,繞射譜(峰位置、峰數…)會怎樣?
+> 　**d.** 列三種你能由「繞射譜改變」偵測到的晶體修改(例:能隙改變),並描述對應變化。
+
+## 🎯 核心訊息
+> 繞射只認**倒晶格(峰在哪)**與**結構因子(峰多強)**。亮點 = $\Delta\mathbf k=\mathbf G$ 處;非此處 $\sim10^{23}$ 個散射體互相抵消成「暗背景」(強度不可能為負,故無「暗點」)。diamond/zincblende 倒晶格相同,差在 $f_1\!=\!f_2$ vs $f_1\!\ne\!f_2$ → **(200)-型反射** diamond 消光、zincblende 現身。能量不守恆 → 峰位移 + 展寬糊掉。
+
+## 🔍 符號說明
+<details>
+<summary><b>▸ diamond / zincblende 的結構因子與消光</b></summary>
+
+### 為什麼要這個
+(b) 要靠結構因子才答得出「同結構卻能分辨」。
+
+### 定義
+兩者皆 fcc + basis $\{(0,0,0),(\tfrac14\tfrac14\tfrac14)\}$:
+$$S_{hkl}=\underbrace{S_{\text{fcc}}}_{=4\ (hkl\text{ 全奇或全偶}),\ 0\ (\text{混})}\times\big[f_1+f_2\,e^{-i\frac\pi2(h+k+l)}\big].$$
+
+**範例 1（熱身,全奇 (111)）**:$h{+}k{+}l=3$,括號 $=f_1+f_2e^{-i3\pi/2}=f_1+if_2$,$|\cdot|=\sqrt{f_1^2+f_2^2}\ne0$ → **兩者皆現**。
+**範例 2（中階,全偶且 $h{+}k{+}l\equiv2\ (\text{mod }4)$,如 (200)）**:$e^{-i\pi}= -1$,括號 $=f_1-f_2$。
+**範例 3（本題對比）**:diamond $f_1=f_2\Rightarrow(200)=0$ **消光**;zincblende $f_1\ne f_2\Rightarrow(200)\ne0$ **出現**(弱峰)。
+</details>
+
+## 解答
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 600 250" width="100%" style="max-width:680px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif">
+<text x="160" y="18" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">Diamond（f₁=f₂）</text>
+<text x="440" y="18" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#c0392b">Zincblende（f₁≠f₂）</text>
+<line x1="35" y1="200" x2="290" y2="200" stroke="#333" stroke-width="1.2"/>
+<line x1="35" y1="200" x2="35" y2="40" stroke="#333" stroke-width="1.2"/>
+<line x1="100" y1="200" x2="100" y2="55" stroke="#1a4d7c" stroke-width="3"/>
+<line x1="190" y1="200" x2="190" y2="90" stroke="#1a4d7c" stroke-width="3"/>
+<line x1="250" y1="200" x2="250" y2="110" stroke="#1a4d7c" stroke-width="3"/>
+<text x="100" y="215" text-anchor="middle" font-size="11" fill="#1a4d7c">111</text>
+<text x="155" y="215" text-anchor="middle" font-size="11" fill="#888">200✗</text>
+<text x="190" y="215" text-anchor="middle" font-size="11" fill="#1a4d7c">220</text>
+<text x="250" y="215" text-anchor="middle" font-size="11" fill="#1a4d7c">311</text>
+<text x="155" y="178" text-anchor="middle" font-size="10" fill="#888">(消光)</text>
+<line x1="315" y1="200" x2="570" y2="200" stroke="#333" stroke-width="1.2"/>
+<line x1="315" y1="200" x2="315" y2="40" stroke="#333" stroke-width="1.2"/>
+<line x1="380" y1="200" x2="380" y2="55" stroke="#c0392b" stroke-width="3"/>
+<line x1="435" y1="200" x2="435" y2="165" stroke="#e67e22" stroke-width="3"/>
+<line x1="470" y1="200" x2="470" y2="90" stroke="#c0392b" stroke-width="3"/>
+<line x1="530" y1="200" x2="530" y2="110" stroke="#c0392b" stroke-width="3"/>
+<text x="380" y="215" text-anchor="middle" font-size="11" fill="#c0392b">111</text>
+<text x="435" y="215" text-anchor="middle" font-size="11" fill="#e67e22">200✓</text>
+<text x="470" y="215" text-anchor="middle" font-size="11" fill="#c0392b">220</text>
+<text x="530" y="215" text-anchor="middle" font-size="11" fill="#c0392b">311</text>
+<text x="448" y="155" text-anchor="middle" font-size="10" fill="#e67e22">弱峰現身</text>
+<text x="300" y="245" text-anchor="middle" font-size="11" fill="#555">縱軸 = 峰強 ∝ |S|²　橫軸 = 散射角 2θ（峰位由倒晶格決定，兩者相同）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">同樣是 fcc+basis，倒晶格相同 → 允許反射的「峰位置」完全一樣。差別在結構因子:全偶且 h+k+l≡2 (mod 4) 的 (200) 反射 ∝ (f₁−f₂)。diamond 兩座位同種 (f₁=f₂) → (200) 消光;zincblende 異種 (f₁≠f₂) → (200) 以弱峰現身。看「是否多出這些禁制峰」即可分辨。</figcaption>
+</figure>
+
+### (a) 為何只有亮點、沒有暗點
+**Step 1.** 偵測器量的是**強度 $I\ge0$**。建設性干涉($\Delta\mathbf k=\mathbf G$)把振幅同相疊加 → 亮點;其餘方向 $\sim10^{23}$ 個原子的相位散開、振幅互相抵消 → **趨近零的暗背景**。
+**Step 2.** 「暗點」需要先有一片**均勻亮背景**再被挖掉一塊——但繞射沒有這種背景,非 Bragg 方向本來就是暗的。強度不能為負,**只能往上加亮、不能往下挖暗**。
+$$\boxed{\text{繞射 = 暗場上的離散亮點;沒有可被「變暗」的亮背景。}}$$
+> **小結**:條件 $\Delta\mathbf k=\mathbf G$ 極苛刻(只有離散倒晶格點),所以幾乎全空間都是暗的,例外處才亮。
+
+### (b) diamond vs zincblende 能否分辨?（**能**）
+**Step 1.** 兩者**晶格相同**(fcc)→ 允許反射的**峰位置完全一樣**,光看峰在哪分不出。
+**Step 2.** 差在 basis 的散射因子:diamond 兩座位同種($f_1=f_2$)、zincblende 異種($f_1\ne f_2$)。由結構因子,$h{+}k{+}l\equiv2\ (\text{mod }4)$ 的全偶反射(如 **(200)、(222)**)正比於 $f_1-f_2$:
+$$\boxed{\text{diamond:}(200)\text{ 消光};\quad \text{zincblende:}(200)\text{ 出現(弱峰)}.}$$
+**Step 3.** 故 zincblende 多出 diamond 所「禁止」的反射 → **由是否存在這些額外峰即可分辨**(亦可由各峰相對強度反推 $f_1,f_2$)。
+> **小結**:倒晶格(峰位)相同,是**結構因子(峰強/消光)**洩了 basis 的底。
+
+### (c) 若散射不守恆能量
+**Step 1.** 彈性($|\mathbf k'|=|\mathbf k|$)+ $\Delta\mathbf k=\mathbf G$ 才給**尖銳、定位精確**的 Bragg 峰。
+**Step 2.** 能量不守恆 ⇒ $|\mathbf k'|\ne|\mathbf k|$(波長改變)⇒
+- **峰位置移動且變得能量相依**:同一個 $\mathbf G$,$\sin\theta=|\mathbf G|/(|\mathbf k|+|\mathbf k'|)$ 改變,繞射角偏掉。
+- **峰展寬、糊成連續背景**:末態能量有一段分布 → $|\mathbf k'|$ 一段分布 → 角度散開,尖峰被抹成寬包+漫散背景,**清晰可數的峰變少**。
+$$\boxed{\text{尖銳 Bragg 峰需要彈性;不守恆 → 峰移、展寬、漫散背景。}}$$
+> **小結**:這正是真實**非彈性散射(聲子、Compton)**貢獻「漫散背景」的原因——它們不落在尖銳 Bragg 點上。
+
+### (d) 三種可由繞射譜偵測的晶體修改
+繞射直接看到的是**晶格幾何與原子種類/位置**(能隙是電子結構,常隨下列結構變化連帶改變,故由結構面被偵測):
+
+1. **晶格常數改變**(熱膨脹、應變、加壓、合金化):$d$ 變 → 由 $2d\sin\theta=\lambda$,峰**整體位移**。微分 $2\,\Delta d\sin\theta+2d\cos\theta\,\Delta\theta=0\Rightarrow\Delta\theta=-\tan\theta\,\frac{\Delta d}{d}$。壓縮($d\downarrow$)→ 峰移向**大角**。(應變工程同時改晶格與能隙。)
+2. **結構相變 / 對稱性改變**(如 cubic→tetragonal):原本簡併的峰**分裂**、出現/消失某些反射,對稱降低 → 峰數增多。(常伴隨能隙改變。)
+3. **成分 / 有序化改變**(換原子、order–disorder):結構因子變 → **峰強度改變**,有序超結構出現**超晶格峰**(原禁制反射現身)。
+
+> **小結**:繞射偵測「結構的改變」;能隙本身雖屬電子結構,但凡改能隙的手段(應變/相變/換組成)幾乎都伴隨可被繞射看到的晶格訊號。
+
+<details>
+<summary><b>📝 更多範例（點開）：結構因子與消光規則逐項展開</b></summary>
+
+**範例 A（bcc 的消光:$h+k+l$ 為奇數全消）**:bcc 慣用胞 basis $\{(0,0,0),(\frac12,\frac12,\frac12)\}$,結構因子
+$$S_{hkl}=f\Big[e^{0}+e^{-i2\pi(\frac h2+\frac k2+\frac l2)}\Big]=f\big[1+e^{-i\pi(h+k+l)}\big].$$
+令 $s=h+k+l$。$s$ 偶:$e^{-i\pi s}=+1\Rightarrow S=2f\ne0$(出現);$s$ 奇:$e^{-i\pi s}=-1\Rightarrow S=0$(消光)。
+$$\boxed{(100),(111),(210)\text{ 消};\ (110),(200),(211)\text{ 現}.}$$
+這就是為何鐵(bcc)第一個峰是 (110) 而不是 (100)。
+
+**範例 B（fcc 的消光:指標需「全奇或全偶」)**:fcc basis $\{(000),(\frac12\frac12 0),(\frac12 0\frac12),(0\frac12\frac12)\}$:
+$$S_{hkl}=f\big[1+e^{-i\pi(h+k)}+e^{-i\pi(h+l)}+e^{-i\pi(k+l)}\big].$$
+- **全偶或全奇**(如 (111)、(200)):三個指數皆 $e^{-i\pi(\text{偶})}=+1\Rightarrow S=4f$ → **現**。
+- **混奇偶**(如 (100):$h+k=1$ 奇、$h+l=1$ 奇、$k+l=0$ 偶):$S=f[1-1-1+1]=0$ → **消**。
+$$\boxed{\text{fcc 只准「全奇/全偶」反射;}(100),(110),(210)\text{ 全消}.}$$
+
+**範例 C（diamond 的 (200) 為何消、(111) 為何現:完整代入）**:diamond = fcc $\times\{(000),(\frac14\frac14\frac14)\}$,
+$$S_{hkl}=S_{\text{fcc}}\cdot\big[1+e^{-i\frac\pi2(h+k+l)}\big].$$
+取 $(200)$:$S_{\text{fcc}}=4$(全偶),括號 $=1+e^{-i\frac\pi2\cdot2}=1+e^{-i\pi}=1+(-1)=0\Rightarrow S=0$ **消光** ✓。
+取 $(111)$:$S_{\text{fcc}}=4$(全奇),括號 $=1+e^{-i\frac\pi2\cdot3}=1+e^{-i\frac{3\pi}2}=1+i$,$|1+i|=\sqrt2\Rightarrow|S|=4\sqrt2\ne0$ **現** ✓。
+取 $(220)$:括號 $=1+e^{-i\frac\pi2\cdot4}=1+e^{-i2\pi}=1+1=2\Rightarrow|S|=8$ **最強** ✓。
+> 對 zincblende 只需把括號改成 $f_1+f_2e^{-i\frac\pi2(h+k+l)}$:(200) 給 $f_1-f_2\ne0$,弱峰現身——正是分辨兩者的關鍵反射。
+</details>
+
+## ✅ 自我檢核
+- (a) $I\ge0$ → 暗是基線、亮是訊號,自洽 ✓。
+- (b) (111) 兩者皆現、(200) 只 zincblende 現 ✓(與 ZnS/Si 實測一致)。
+- (c) 非彈性 → 漫散背景,呼應真實 TDS(thermal diffuse scattering) ✓。
+
+## 🔀 變化的可能情況
+- **消光題**常換 bcc (100) 消、fcc (110) 消(2016 第 1 題、2018、2021 同型)。
+- **(c)** 可改問「Debye–Waller:升溫對峰強的影響」(峰強↓、背景↑)。
+- **(d)** 可改問「如何由繞射測熱膨脹係數 / 殘留應變 / 晶粒大小(Scherrer 展寬)」。
+
+## 信心：**高**（a–c 與結構因子全標準;d 為開放列舉,已給三個穩當且描述對應變化,Kittel Ch2）。
+
+---
+
+# 📙 第 3 題 — 聲子（25%）
+
+## 📋 原題
+> **4.** 聲子源自晶體中相鄰原子的集體振動。
+> 　**a.** 畫出理想晶體(相鄰諧振)在一側受**聲壓**驅動時,各原子的振幅分布。
+> 　**b.** 在哪種「原子間振幅分布」下,聲音**無法**穿透晶體?
+> 　**c.** 能否用此力學聲子圖像解釋「金屬(每胞一原子)為何不能透光」?
+> 　**d.** 為何聲子叫**準**粒子,電子卻算粒子?兩者的相同與相異?
+
+## 🎯 核心訊息
+> 單原子鏈色散 $\omega(k)=\omega_{\max}|\sin\frac{ka}2|$ 有**截止頻率 $\omega_{\max}$**。$\omega<\omega_{\max}$:$k$ 實 → 行進波,**振幅沿程不衰減(等幅)**;$\omega>\omega_{\max}$:$k$ 虛 → **倏逝波,振幅指數衰減 → 不透**。光頻 $\gg\omega_{\max}$,故由同一論證不被晶格傳遞(被反射)。聲子是「介質的集體激發」故為準粒子,電子是真粒子。
+
+## 📚 前情提要：單原子鏈(從普物彈簧串上來)
+質量 $M$、彈簧常數 $C$ 的一維單原子鏈,牛頓方程 $M\ddot u_n=C(u_{n+1}+u_{n-1}-2u_n)$,試 $u_n=Ae^{i(kna-\omega t)}$ 得
+$$\omega(k)=2\sqrt{\tfrac{C}{M}}\,\big|\sin\tfrac{ka}{2}\big|,\qquad \omega_{\max}=2\sqrt{\tfrac{C}{M}}\ (\text{在 }k=\pi/a).$$
+**每胞一原子 → 只有 acoustic branch**(無 optical branch)。$\omega>\omega_{\max}$ 時 $\sin\frac{ka}2>1$ 無實解 → $k$ 取複數 → 倏逝。
+> **留存**:晶格 = 機械**低通濾波器**;$\omega_{\max}$ 是通帶上限。(a)(b)(c) 全是這一句的三種讀法。
+
+## 解答
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 260" width="100%" style="max-width:680px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif">
+<line x1="60" y1="200" x2="420" y2="200" stroke="#333" stroke-width="1.2"/>
+<line x1="60" y1="225" x2="60" y2="40" stroke="#333" stroke-width="1.2"/>
+<line x1="60" y1="50" x2="360" y2="50" stroke="#888" stroke-width="1" stroke-dasharray="5,4"/>
+<line x1="360" y1="200" x2="360" y2="50" stroke="#888" stroke-width="1" stroke-dasharray="5,4"/>
+<polyline points="60,200 72,190 85,180 98,171 110,161 122,152 135,143 148,134 160,125 172,117 185,109 198,101 210,94 222,87 235,81 248,75 260,70 272,65 285,61 298,58 310,55 322,53 335,51 348,50 360,50" fill="none" stroke="#1a4d7c" stroke-width="2.6"/>
+<rect x="360" y="50" width="60" height="150" fill="#c0392b" fill-opacity="0.10"/>
+<line x1="380" y1="50" x2="380" y2="200" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="6,4"/>
+<polyline points="380,90 392,88 404,92 416,86" fill="none" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="3,3"/>
+<text x="48" y="55" text-anchor="end" font-size="11" fill="#333">ωmax</text>
+<text x="48" y="204" text-anchor="end" font-size="11" fill="#333">0</text>
+<text x="360" y="218" text-anchor="middle" font-size="11" fill="#333">π/a</text>
+<text x="60" y="218" text-anchor="middle" font-size="11" fill="#333">0</text>
+<text x="425" y="204" text-anchor="start" font-size="12" fill="#333">k</text>
+<text x="48" y="36" text-anchor="end" font-size="12" fill="#333">ω</text>
+<text x="200" y="155" text-anchor="middle" font-size="12" fill="#1a4d7c" font-weight="bold">通帶:k 實 → 行進波（等幅透過）</text>
+<text x="455" y="125" text-anchor="middle" font-size="11.5" fill="#c0392b" font-weight="bold">stop band</text>
+<text x="455" y="142" text-anchor="middle" font-size="10.5" fill="#c0392b">ω＞ωmax</text>
+<text x="455" y="158" text-anchor="middle" font-size="10.5" fill="#c0392b">k 虛 → 倏逝</text>
+<text x="455" y="174" text-anchor="middle" font-size="10.5" fill="#c0392b">指數衰減（不透）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">單原子鏈色散 ω(k)=ωmax|sin(ka/2)|。藍弧在 k∈[0,π/a] 從 0 升到截止頻率 ωmax。驅動頻率 ω＜ωmax:k 為實數 → 行進波,理想諧振晶體不耗散 → 振幅等幅穿透（(a)）。ω＞ωmax 落入紅色 stop band:無實 k 解,k 變複數 → 波倏逝、逐顆原子指數衰減 → 聲音不透（(b)）。光頻 ≫ ωmax,同理被反射（(c)）。</figcaption>
+</figure>
+
+### (a) 一側受聲壓驅動的振幅分布
+**驅動頻率 $\omega<\omega_{\max}$**:激發**行進波** $u_n(t)=A\cos(kna-\omega t)$,$k$ 為實數。理想(諧振、無耗散)晶體**不吸收**,故各原子振幅**相同**,只是相位隨位置線性遞移。
+- **瞬時位移** vs 位置 = 等幅正弦波;**振幅包絡** vs 位置 = **水平直線(不衰減)**。
+
+```
+振幅 A
+ │■  ■  ■  ■  ■  ■  ■  ■   ← 各原子等幅(包絡平直)
+ │ ╲ ╱╲ ╱╲ ╱╲ ╱╲ ╱        ← 瞬時位移呈行進正弦,相位隨 x 移
+ └──────────────────────► 位置
+```
+$$\boxed{\text{振幅沿晶體為常數(行進波,無衰減)。}}$$
+> **小結**:理想諧振晶體不耗散,聲波一路等幅穿過。
+
+### (b) 哪種振幅分布下聲音不透
+**Step 1.** 當驅動頻率 $\omega>\omega_{\max}$(超過聲子截止),色散無實 $k$ 解,$k=\frac\pi a+i\kappa$ → 波**倏逝**:
+$$u_n\propto e^{-\kappa n a}\quad(\text{逐顆原子振幅指數衰減}).$$
+**Step 2.** 此時無淨能量流(群速 $v_g=d\omega/dk\to0$),擾動只在表面附近幾層後死掉。
+$$\boxed{\text{振幅沿程指數衰減(倏逝波)→ 不透(stop band)。}}$$
+(臨界情形 $\omega=\omega_{\max}$,$k=\pi/a$:相鄰原子反相的**駐波**,$v_g=0$,亦不傳能。)
+> **小結**:等幅 = 透(a);指數衰減 = 不透(b)。差別只在 $\omega$ 是否越過 $\omega_{\max}$。
+
+### (c) 用聲子圖像解釋金屬為何不透光
+**Step 1.** 把光當高頻「驅動」加在離子上,沿用 (b):晶格是低通濾波器,通帶上限 $\omega_{\max}\sim10^{13}\,\text{Hz}$(THz)。
+**Step 2.** 可見光 $\omega\sim10^{15}\,\text{Hz}\gg\omega_{\max}$ → 落在 stop band → 倏逝 → **被反射,不透**。
+**Step 3.** 又因**每胞一原子只有 acoustic branch**(無 optical branch);光的波向量 $k\approx0$ 處 acoustic 模 $\omega\to0$,頻率對不上光,且沒有更高頻的 optical 通帶可承載光 → 晶格在光頻無可傳模式。
+$$\boxed{\omega_{\text{光}}\gg\omega_{\max},\ \text{且無 optical branch} \Rightarrow \text{倏逝、反射 → 金屬不透光(發亮)}.}$$
+> **小結(誠實註記)**:金屬反光的**嚴格**機制是**自由電子電漿**($\omega<\omega_p$ 時電磁波倏逝);本題要的是「力學聲子類比」,以上截止頻率論證是該圖像下的解釋。**信心:中**(類比成立,但非金屬反光的主因)。
+
+### (d) 聲子為準粒子、電子為粒子
+**聲子 = 準粒子**:它是晶格集體振動的**量子化激發**,只**存在於介質內**(無晶體就無聲子);**無靜止質量、無電荷、數目不守恆**(可被加熱任意生滅);攜帶的是**晶體動量 $\hbar q$**,只在「模一個倒晶格向量 $\mathbf G$」下守恆,非真動量。它是**玻色子**。
+**電子 = 真粒子**:基本粒子,**真空中也存在**;有靜止質量、電荷 $-e$、真動量、數目守恆;**費米子**(Pauli)。
+
+| | 相同 | 相異 |
+|---|---|---|
+| 能量–動量 | 都有色散 $E(k)/\omega(q)$、群速 $v_g$ | 聲子 $\hbar q$ 為晶體動量(守恆 mod $\mathbf G$);電子真動量 |
+| 統計 | 都可佔據態、相互散射(e–ph) | 聲子玻色子、數不守恆;電子費米子、數守恆 |
+| 存在性 | 都有波粒二象、可量子化 | 聲子僅存於晶體(集體激發);電子可獨立存在 |
+| 質量/電荷 | — | 聲子無質量無電荷;電子有 |
+
+> **小結**:準粒子 = 「**介質撐出來**的有效粒子」;脫離介質即不存在。(註:晶體中的 **Bloch 電子**也帶有效質量與晶體動量,亦屬準粒子;這裡對比的是裸電子。)
+
+<details>
+<summary><b>📝 更多範例（點開）：單原子鏈色散與群速逐步求</b></summary>
+
+**範例 A（從牛頓方程推出色散 $\omega(k)$,每步展開）**:第 $n$ 顆原子受左右鄰彈簧力,$M\ddot u_n=C(u_{n+1}+u_{n-1}-2u_n)$。試解 $u_n=Ae^{i(kna-\omega t)}$,則 $\ddot u_n=-\omega^2u_n$,$u_{n\pm1}=u_n e^{\pm ika}$:
+$$-M\omega^2=C\big(e^{ika}+e^{-ika}-2\big)=C\big(2\cos ka-2\big)=-2C(1-\cos ka).$$
+用半角 $1-\cos ka=2\sin^2\frac{ka}2$:
+$$M\omega^2=4C\sin^2\tfrac{ka}2\ \Rightarrow\ \boxed{\omega(k)=2\sqrt{\tfrac CM}\,\big|\sin\tfrac{ka}2\big|.}$$
+在 $k=\pi/a$ 取最大 $\omega_{\max}=2\sqrt{C/M}$。
+
+**範例 B（群速與相速,在區邊界為何 $v_g=0$）**:相速 $v_p=\omega/k$,群速 $v_g=\frac{d\omega}{dk}$。微分 $\omega=\omega_{\max}\sin\frac{ka}2$($0\le k\le\pi/a$):
+$$v_g=\frac{d\omega}{dk}=\omega_{\max}\cdot\frac a2\cos\tfrac{ka}2.$$
+- **長波極限** $k\to0$:$\cos\frac{ka}2\to1$,$v_g\to\frac a2\omega_{\max}=a\sqrt{C/M}=$ 聲速(常數,故 acoustic)。
+- **區邊界** $k=\pi/a$:$\cos\frac\pi2=0\Rightarrow v_g=0$ → **駐波,不傳能**(相鄰原子反相)。
+這正是 (b) 截止/反射的數學根:$v_g=0$ 表示能量無法繼續往前送。
+
+**範例 C（倏逝波:$\omega>\omega_{\max}$ 時 $k$ 取複數,求衰減長度）**:超過截止時 $\sin\frac{ka}2=\frac{\omega}{\omega_{\max}}>1$ 無實解。令 $k=\frac\pi a+i\kappa$,則 $\sin\frac{ka}2=\sin(\frac\pi2+i\frac{\kappa a}2)=\cos(i\frac{\kappa a}2)=\cosh\frac{\kappa a}2$。要求
+$$\cosh\tfrac{\kappa a}2=\frac{\omega}{\omega_{\max}}\ \Rightarrow\ \kappa=\frac2a\,\text{arccosh}\frac{\omega}{\omega_{\max}}.$$
+位移 $u_n\propto e^{ikna}=e^{i\frac{\pi}a na}e^{-\kappa na}=(-1)^n e^{-\kappa na}$,振幅每顆 $\times e^{-\kappa a}$ 衰減。例:$\omega=1.2\,\omega_{\max}$,$\text{arccosh}(1.2)=0.622\Rightarrow\kappa a=1.24$,故 $e^{-1.24}=0.29$ → 每往內一顆原子振幅只剩 29%,約 3 顆後就幾乎死掉 → 表面薄層後不透。
+</details>
+
+## ✅ 自我檢核
+- (a)(b) 一體兩面:$\omega\lessgtr\omega_{\max}$ ↔ 等幅/指數衰減 ✓。
+- (c) $\omega_{\text{光}}/\omega_{\max}\sim10^{15}/10^{13}=100\gg1$ → stop band ✓(力學類比);嚴格主因電漿,已標註。
+- (d) 晶體動量守恆 mod $\mathbf G$、數不守恆 = 準粒子招牌 ✓。
+
+## 🔀 變化的可能情況
+- **雙原子鏈**:出現 optical branch + 帶隙(聲子 gap);可問「為何 optical 模能耦合 IR 光(reststrahlen)」——正好補足 (c) 的對照(離子晶體有 optical 通帶能傳/反某段 IR)。
+- **(a)(b)** 可改問群速 $v_g=d\omega/dk$、區邊界駐波。
+- **(d)** 常延伸問「magnon、polariton、exciton 為何也是準粒子」。
+- 歷年:2016 第 6 題 Debye、雙原子鏈 optical/acoustic 為同家族。
+
+## 信心：**中高**（a/b/d 標準穩;c 為力學類比、金屬反光嚴格主因是電漿,已標 中并說明）。
+
+---
+
+# 📕 第 4 題 — 電子（25%）
+
+## 📋 原題
+> **5.** 「能隙」是半導體/絕緣體中分隔價帶與導帶的能量禁區。
+> 　**a.** 簡述能隙的來源。
+> 　**b.** 一個能量落在能隙內的電子被射入材料,會怎樣?
+> 　**c.** 若能隙加倍,完美晶體中電子的**平均能量**如何變?
+> **6.** 材料比熱含電子與聲子貢獻。
+> 　**a.** 金屬中電子的平均能量,從 0K 微升溫時如何變?從室溫起呢?
+> 　**b.** 聲子比熱 / 電子比熱的**比值**如何隨溫度變?
+
+## 🎯 核心訊息
+> 能隙 = 布里淵區邊界 Bragg 反射讓兩簡併平面波混成駐波,能量差 $=2|U_G|$(5a);隙內無傳播態 → 電子被反射、只能倏逝衰減(5b);加大隙 = 加大 $|U_G|$,佔據的低駐波被壓更低 → 平均能量**降**(5c)。費米氣體因 Pauli,只有 $E_F$ 附近 $\sim k_BT/E_F$ 比例的電子能被激發 → 平均能 $\propto T^2$、$C_{el}\propto T$(6a);低溫 $C_{ph}/C_{el}\propto T^2$ 升,高溫聲子飽和、$\propto1/T$ 降(6b)。
+
+## 解答
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 270" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif">
+<line x1="40" y1="245" x2="440" y2="245" stroke="#333" stroke-width="1.2"/>
+<line x1="240" y1="255" x2="240" y2="20" stroke="#333" stroke-width="1.2"/>
+<line x1="70" y1="20" x2="70" y2="255" stroke="#888" stroke-width="1" stroke-dasharray="5,4"/>
+<line x1="410" y1="20" x2="410" y2="255" stroke="#888" stroke-width="1" stroke-dasharray="5,4"/>
+<polyline points="70,178 78,179 87,183 96,188 104,193 112,198 121,203 130,207 138,211 146,215 155,219 164,222 172,225 180,227 189,230 198,231 206,233 214,234 223,235 232,235 240,236 248,235 257,235 266,234 274,233 282,231 291,230 300,227 308,225 316,222 325,219 334,215 342,211 350,207 359,203 368,198 376,193 384,188 393,183 402,179 410,178" fill="none" stroke="#1a4d7c" stroke-width="2.6"/>
+<polyline points="334,87 340,95 347,102 354,110 361,117 368,124 375,131 382,137 389,143 396,148 403,151 410,152" fill="none" stroke="#c0392b" stroke-width="2.6"/>
+<polyline points="70,152 77,151 84,148 91,143 98,137 105,131 112,124 119,117 126,110 133,102 140,95 146,87" fill="none" stroke="#c0392b" stroke-width="2.6"/>
+<line x1="410" y1="152" x2="410" y2="178" stroke="#2e8b2e" stroke-width="3"/>
+<line x1="404" y1="152" x2="416" y2="152" stroke="#2e8b2e" stroke-width="1.5"/>
+<line x1="404" y1="178" x2="416" y2="178" stroke="#2e8b2e" stroke-width="1.5"/>
+<text x="430" y="168" text-anchor="start" font-size="11.5" fill="#2e8b2e" font-weight="bold">Eg=2|UG|</text>
+<text x="160" y="215" text-anchor="middle" font-size="11.5" fill="#1a4d7c" font-weight="bold">下帶（成鍵·佔據）</text>
+<text x="180" y="60" text-anchor="middle" font-size="11.5" fill="#c0392b" font-weight="bold">上帶（反鍵·空）</text>
+<text x="70" y="262" text-anchor="middle" font-size="11" fill="#333">−π/a</text>
+<text x="410" y="262" text-anchor="middle" font-size="11" fill="#333">+π/a</text>
+<text x="240" y="262" text-anchor="middle" font-size="11" fill="#333">0</text>
+<text x="240" y="16" text-anchor="middle" font-size="12" fill="#333">E</text>
+<text x="448" y="248" text-anchor="start" font-size="12" fill="#333">k</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">近自由電子能帶:在區邊界 k=±π/a,Bragg 反射讓兩個簡併平面波混成駐波,自由電子拋物線被「撕開」一道能隙 Eg=2|UG|。下帶（藍,cos 駐波,電荷堆在離子上）能量低、被佔據;上帶（紅,sin 駐波,電荷在離子間）能量高、空著。5c「能隙加倍」= |UG| 變兩倍 → 下帶壓更深 → 佔據電子的平均能量下降。</figcaption>
+</figure>
+
+### 5a. 能隙的來源（Bragg 反射 / 近自由電子）
+在區邊界 $k=\pm\frac\pi a$,$\Delta k=G$ → 電子波被晶格 **Bragg 反射**,兩個簡併反向行進波 $e^{\pm i\pi x/a}$ 混成兩個駐波:$\psi_+\!\sim\!\cos\frac{\pi x}a$(電荷堆在離子上,能量低)、$\psi_-\!\sim\!\sin\frac{\pi x}a$(電荷在離子間,能量高)。兩者能量差即能隙:
+$$\boxed{E_g=2|U_G|}\quad(U_G=\text{週期位能的傅立葉分量})。$$
+> **小結**:gap 來自「週期位能在區邊界開出的禁帶」,非單一原子性質。
+
+### 5b. 射入能量落在隙內的電子
+隙內**無實 $k$ 的傳播 Bloch 態**($k$ 為複數)→ 電子無法在體內傳播:
+$$\boxed{\text{表面被(全)反射;進入體內只能成倏逝態 }\psi\propto e^{-\kappa x}\text{ 指數衰減}.}$$
+即材料對此能量的電子「不透明」,擾動只滲入表面薄層(類似金屬感生帶隙態/穿隧尾)後消失。
+> **小結**:與第 3 題 (b) 同一招——禁帶內波倏逝。
+
+### 5c. 能隙加倍 → 平均能量怎麼變（**下降**)
+**Step 1.** 近自由電子下,區邊界對稱開隙:低帶邊被壓低 $|U_G|$、高帶邊抬高 $|U_G|$,$E_g=2|U_G|$。
+**Step 2.** 隙加倍 ⇒ $|U_G|\to2|U_G|$:**被佔據的(價帶/成鍵)駐波再往下壓**,空的(導帶/反鍵)往上抬。完美晶體($T=0$,價帶全滿、導帶全空)下,佔據態多落在被壓低的那一支:
+$$\boxed{\text{電子平均能量下降(更束縛),量級 }\sim|U_G|\text{(集中在區邊界附近的態)}.}$$
+**Step 3(熱效應佐證)**:有限溫時本徵載子 $n\propto e^{-E_g/2k_BT}$,隙加倍 → 被熱激發到導帶的高能電子驟減 → 平均能量更貼近純價帶值,同樣**偏低**。
+> **小結**:加大能隙 = 把佔據的成鍵態壓更深 → 晶體更穩、電子平均能量下降。**信心:中高**(對稱開隙與佔據態下移為主因;$T=0$ 嚴格量值依模型,已說明)。
+
+### 6a. 金屬電子平均能量隨溫度（從 0K / 從室溫）
+**Step 1 — 0K 出發。** $T=0$ 平均能 $\frac35E_F$。微升溫只有 $E_F$ 附近 $\sim k_BT$ 寬度的電子能被激發(Pauli 阻擋),被激發比例 $\sim k_BT/E_F$,每個約得 $k_BT$:
+$$\Delta U\sim N\frac{k_BT}{E_F}\cdot k_BT\propto T^2\ \Rightarrow\ \boxed{\text{平均能}\propto T^2\text{(極緩)},\ C_{el}=\frac{dU}{dT}\propto T.}$$
+比經典等分 $\frac32k_BT$ 小得多——正是 Sommerfeld 對 Drude 比熱過大的修正。
+**Step 2 — 從室溫出發。** 室溫 $k_BT\approx0.025\,\text{eV}\ll E_F\sim$ 數 eV,電子氣**仍高度簡併**,物理完全相同:仍只有 $E_F$ 附近響應,$\Delta U\propto T^2$、$C_{el}\propto T$。
+$$\boxed{\text{從室溫起與從 0K 起行為同形(皆 }C_{el}\propto T\text{);差異微乎其微。}}$$
+要到 $k_BT\sim E_F$($\sim10^4$ K)才轉為經典 $\frac32k_B$——日常溫度遠不及。
+> **小結**:金屬電子在一切常溫都「幾乎凍住」,只有 $E_F$ 附近薄殼在動。
+
+### 6b. 聲子比熱 / 電子比熱 之比 隨溫度
+低溫:$C_{ph}=\beta T^3$(Debye)、$C_{el}=\gamma T$(費米氣體)。
+$$\frac{C_{ph}}{C_{el}}=\frac{\beta T^3}{\gamma T}=\frac\beta\gamma T^2.$$
+- **極低溫**:比值 $\propto T^2\to0$,**電子項主導**(比值 $<1$)。
+- 升溫至 $T^*=\sqrt{\gamma/\beta}$ 比值過 1,之後**聲子主導**,比值續以 $T^2$ 升,直到 $\sim\theta_D$。
+- **高溫**($T\gg\theta_D$):聲子飽和 $C_{ph}\to3Nk_B$(常數),電子仍 $\propto T$:
+$$\frac{C_{ph}}{C_{el}}=\frac{3Nk_B}{\gamma T}\propto\frac1T\ \text{(下降)}.$$
+$$\boxed{\text{低溫 }\propto T^2\text{ 上升(過峰)→ 高溫 }\propto1/T\text{ 下降;中段聲子壓倒電子}.}$$
+> **小結**:低溫量電子($\gamma$)、稍高量聲子($\beta$),正是 $C/T=\gamma+\beta T^2$ 作圖分離兩項的依據。
+
+<details>
+<summary><b>📝 更多範例（點開）：能隙、費米能與比熱的數值硬算</b></summary>
+
+**範例 A（自由電子氣的 $E_F$、平均能、$\frac35E_F$ 由何而來）**:三維自由電子,態密度 $g(E)\propto E^{1/2}$。費米能由電子數定:$N=\int_0^{E_F}g(E)\,dE$。平均能
+$$\langle E\rangle=\frac{\int_0^{E_F}E\,g(E)\,dE}{\int_0^{E_F}g(E)\,dE}=\frac{\int_0^{E_F}E\cdot E^{1/2}dE}{\int_0^{E_F}E^{1/2}dE}=\frac{\frac{E_F^{5/2}}{5/2}}{\frac{E_F^{3/2}}{3/2}}=\frac{2/5}{2/3}E_F=\boxed{\tfrac35E_F.}$$
+代數值:銅 $E_F=7.0\,\text{eV}\Rightarrow\langle E\rangle=\frac35\times7.0=4.2\,\text{eV/電子}$(即使 $T=0$ 仍有此巨大零點動能,Pauli 之故)。
+
+**範例 B（$C_{el}\propto T$ 的係數與「只有 $k_BT/E_F$ 比例參與」)**:Sommerfeld 給 $C_{el}=\frac{\pi^2}2 Nk_B\frac{k_BT}{E_F}=\gamma T$。物理估算:可被激發的電子比例 $\sim\frac{k_BT}{E_F}$,每個多得 $\sim k_BT$:
+$$\Delta U\sim N\frac{k_BT}{E_F}k_BT=\frac{N k_B^2}{E_F}T^2\ \Rightarrow\ C_{el}=\frac{d\Delta U}{dT}\sim\frac{2Nk_B^2}{E_F}T\propto T.$$
+室溫數值($E_F=7\,\text{eV}$,$k_BT=0.025\,\text{eV}$):比例 $\frac{k_BT}{E_F}=\frac{0.025}{7}=0.0036$ → 只有約 0.36% 的電子在動,故 $C_{el}\ll$ 經典 $\frac32Nk_B$,這正是 Drude 高估比熱被 Sommerfeld 修正之處。
+
+**範例 C（$C_{ph}/C_{el}$ 交叉溫度 $T^*$ 的求法）**:$C_{ph}=\beta T^3$、$C_{el}=\gamma T$。比值
+$$\frac{C_{ph}}{C_{el}}=\frac{\beta T^3}{\gamma T}=\frac\beta\gamma T^2.$$
+令比值 $=1$ 解交叉溫度:$\frac\beta\gamma (T^*)^2=1\Rightarrow T^*=\sqrt{\gamma/\beta}$。以銅典型值 $\gamma=0.7\,\text{mJ/(mol·K}^2)$、$\beta=0.05\,\text{mJ/(mol·K}^4)$:
+$$T^*=\sqrt{\frac{0.7}{0.05}}=\sqrt{14}=3.7\,\text{K}.$$
+故 $T<3.7\,\text{K}$ 電子比熱主導(這也是為何要在液氦溫度以下量 $\gamma$);高溫($T\gg\theta_D$)聲子飽和到 $3Nk_B$,$C_{ph}/C_{el}=\frac{3Nk_B}{\gamma T}\propto\frac1T$ 反轉下降。
+
+**範例 D（能隙加倍對本徵載子數的定量效應）**:本徵半導體 $n_i\propto T^{3/2}e^{-E_g/2k_BT}$。能隙 $E_g\to2E_g$,在固定 $T$ 下載子數比
+$$\frac{n_i(2E_g)}{n_i(E_g)}=\frac{e^{-2E_g/2k_BT}}{e^{-E_g/2k_BT}}=e^{-E_g/2k_BT}.$$
+取 Si 室溫 $E_g=1.1\,\text{eV}$,$k_BT=0.025\,\text{eV}$:指數 $=\frac{1.1}{2\times0.025}=22$,故 $e^{-22}\approx3\times10^{-10}$——載子數驟減十個數量級。被熱激發到高能導帶的電子幾乎消失 → 系統平均能更貼近純價帶值,佐證 5c「平均能下降」。
+</details>
+
+## ✅ 自我檢核
+- 5a $E_g=2|U_G|$、$P\to0$ 隙消回自由電子 ✓。
+- 6a $\Delta U\propto T^2\Rightarrow C_{el}\propto T$,且 $k_BT_{\text{室}}\ll E_F$ 故簡併不破 ✓。
+- 6b 低溫電子贏($T$ vs $T^3$)、高溫聲子飽和($1/T$)→ 比值先升後降,自洽 ✓。
+
+## 🔀 變化的可能情況
+- **5a** 常配 Kronig–Penney 求 $k=\pi/a$ 的 gap(2016 第 4 題)。
+- **5c** 可改問「絕緣 vs 金屬隨隙變化」「光吸收閾值 $\hbar\omega=E_g$」。
+- **6a** 常延伸推 $C_{el}=\frac{\pi^2}3 k_B^2 T\,g(E_F)$(Sommerfeld 展開)。
+- **6b** 常配「$C/T$ 對 $T^2$ 作圖取 $\gamma,\beta$」「Debye $T^3$ 律推導」(2016 第 6 題)。
+
+## 信心：**中高**（5a/5b/6a/6b 標準完整;5c 解釋方向穩、嚴格量值依模型已說明,Kittel Ch6–8）。
+
+---
+
+## 📊 本卷信心總表（2020：四主題各 25%·均衡卷）
+| 題 | 主題 | 信心 | 重頭推導 / 註記 |
+|---|---|---|---|
+| 1 | 晶體結構:堆積率 + 離子鍵 | **高** | sc/bcc/fcc/diamond filling 全推(0.52/0.68/0.74/0.34);LiCl 庫侖 2.8 eV、Madelung 解釋 75% |
+| 2 | 繞射 | **高** | 結構因子分辨 diamond/zincblende((200) 消光);能量不守恆 → 峰移展寬;d 為開放列舉 |
+| 3 | 聲子 | **中高** | 單原子鏈截止頻率 → 等幅/倏逝;**4c 金屬透光用力學類比(嚴格主因電漿,標 中)** |
+| 4 | 電子 | **中高** | 能隙 $=2|U_G|$、隙內倏逝;**5c 平均能下降(依模型,標 中高)**;費米氣體 $C_{el}\propto T$、$C_{ph}/C_{el}$ 先升後降 |
+
+> **對照**:本卷(均衡·觀念為主)介於 2016(`固態_2016_詳解`,硬·長推導)與 2025(`固態_2025_詳解`,輕·短答)之間;唯一硬計算集中在第 1 題,其餘為觀念短答。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

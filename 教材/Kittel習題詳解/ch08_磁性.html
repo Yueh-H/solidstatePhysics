@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 習題詳解 — 第11–12章 磁性 — 習題詳解＋範例</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">習題詳解目錄</a> &nbsp;·&nbsp; <a href="../Kittel章節導讀/index.html">章節導讀</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../../考古題/詳解/index.html">逐題詳解</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- Kittel 習題詳解：第08章 磁性（Kittel Ch11＋Ch12） -->
+
+# Kittel 第11–12章 習題詳解 ＋ 加碼範例 — 磁性（Magnetism）
+
+> **這頁是什麼**：本章的「練習題庫＋完整解答」，對應 Kittel 第 11 章（抗磁與順磁，Diamagnetism and Paramagnetism）與第 12 章（鐵磁與反鐵磁，Ferromagnetism and Antiferromagnetism）。先做 **加碼範例** 熱身，再把 **Kittel 課本習題** 全部練過。觀念見 [章節導讀](../Kittel章節導讀/ch08_磁性.html)、[單元學科](../../單元教學/unit08_磁性.html)；歷年考題見 [逐題詳解](../../考古題/詳解/index.html)。
+
+---
+
+## 🔥 加碼範例題目（先熱身）
+
+### 範例 A：Langevin–Curie 順磁律 $\chi=\dfrac{Nm^2}{3k_BT}$（高溫近似）
+
+**題目**：考慮 $N$ 個（單位體積）可自由轉向的古典磁矩（classical magnetic moment），每個大小為 $m$，置於磁場 $B$、溫度 $T$。在高溫弱場極限 $mB\ll k_BT$ 下，證明磁化率（susceptibility）為 $\chi=\dfrac{Nm^2}{3k_BT}$。
+
+**Step 1（寫下單一磁矩的能量）**：磁矩 $\vec m$ 與磁場 $\vec B$ 夾角 $\theta$ 時，位能（potential energy）為
+$$U=-\vec m\cdot\vec B=-mB\cos\theta.$$
+
+**Step 2（沿場方向的平均投影）**：依 Boltzmann 分布，取向 $\theta$ 的權重 $\propto e^{-U/k_BT}=e^{x\cos\theta}$，其中令
+$$x\equiv \frac{mB}{k_BT}.$$
+磁化強度（magnetization）是沿場分量 $m\cos\theta$ 的統計平均，乘上數密度 $N$：
+$$M=N\,m\,\langle\cos\theta\rangle.$$
+
+**Step 3（做球面積分）**：立體角積分 $d\Omega=2\pi\sin\theta\,d\theta$，故
+$$\langle\cos\theta\rangle=\frac{\displaystyle\int_0^\pi \cos\theta\,e^{x\cos\theta}\,\sin\theta\,d\theta}{\displaystyle\int_0^\pi e^{x\cos\theta}\,\sin\theta\,d\theta}.$$
+令 $u=\cos\theta$（$du=-\sin\theta\,d\theta$，範圍 $u:1\to-1$）：
+$$\langle\cos\theta\rangle=\frac{\displaystyle\int_{-1}^{1} u\,e^{xu}\,du}{\displaystyle\int_{-1}^{1} e^{xu}\,du}=\coth x-\frac1x\equiv L(x),$$
+這就是 **Langevin 函數（Langevin function）**。
+
+**Step 4（高溫弱場展開）**：當 $x\ll1$，用 $\coth x=\dfrac1x+\dfrac{x}{3}-\dfrac{x^3}{45}+\cdots$，得
+$$L(x)=\coth x-\frac1x\approx\frac{x}{3}.$$
+
+**Step 5（代回求 $M$ 與 $\chi$）**：
+$$M\approx N m\cdot\frac{x}{3}=\frac{N m}{3}\cdot\frac{mB}{k_BT}=\frac{N m^2 B}{3k_BT}.$$
+故磁化率 $\chi=M/B$：
+$$\boxed{\chi=\frac{N m^2}{3k_BT}}\qquad(\text{Curie 律，}\chi\propto 1/T)$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 620 240" width="100%" style="max-width:720px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="310" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">範例 A · Step 4：朗之萬函數 L(x)=coth x − 1/x 的飽和與弱場斜率</text>
+<line x1="60" y1="200" x2="575" y2="200" stroke="#888" stroke-width="1.2"/>
+<line x1="60" y1="200" x2="60" y2="28" stroke="#888" stroke-width="1.2"/>
+<text x="568" y="216" text-anchor="end" fill="#555">x = mB/k_B T</text>
+<text x="56" y="34" text-anchor="end" fill="#555">⟨cos θ⟩</text>
+<line x1="56" y1="30" x2="575" y2="30" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="50" y="34" text-anchor="end" fill="#c0392b">1（飽和）</text>
+<polyline points="60.0,200.0 80.8,185.9 101.7,172.1 122.5,159.0 143.3,146.8 164.2,135.6 185.0,125.5 205.8,116.6 226.7,108.7 247.5,101.7 268.3,95.7 289.2,90.4 310.0,85.8 330.8,81.8 351.7,78.3 372.5,75.1 393.3,72.4 414.2,69.9 435.0,67.7 455.8,65.8 476.7,64.0 497.5,62.4 518.3,60.9 539.2,59.6 560.0,58.3" fill="none" stroke="#1a4d7c" stroke-width="2.6"/>
+<polyline points="60.0,200.0 80.8,185.8 101.7,171.7 122.5,157.5 143.3,143.3 164.2,129.2 185.0,115.0 205.8,100.8 226.7,86.7 247.5,72.5 268.3,58.3 289.2,44.2 310.0,30.0" fill="none" stroke="#2e8b2e" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="300" y="195" fill="#1a4d7c" font-weight="bold">L(x)</text>
+<text x="245" y="62" fill="#2e8b2e">弱場切線 x/3</text>
+<text x="470" y="55" fill="#c0392b" font-weight="bold">x≫1：全部擺正 → M=Nm</text>
+<text x="120" y="120" fill="#e67e22">x≪1：L≈x/3</text>
+<text x="120" y="136" fill="#e67e22">→ χ=Nm²/3k_B T</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>範例 A（Langevin–Curie）</b>的核心一張圖。<b style="color:#1a4d7c">藍實線</b>是朗之萬函數 L(x)=coth x−1/x（沿場平均投影 ⟨cos θ⟩）。<b style="color:#2e8b2e">綠虛線</b>是 Step 4 的弱場切線 x/3：在 <b>x=mB/k_B T ≪ 1</b>（高溫弱場）兩者重合，給出 M≈Nm·x/3，即 <b style="color:#e67e22">居里律 χ=Nm²/3k_B T</b>。當 x≫1（強場低溫）L→1，磁矩<b style="color:#c0392b">全部擺正、磁化飽和</b> M=Nm。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：Langevin 函數展開、飽和、數值估磁化率</b></summary>
+
+**範例 A（把 $\coth x$ 展開到下一階，看 $x/3$ 從哪來）**：要證 $L(x)=\coth x-\dfrac1x\approx\dfrac x3$，先寫 $\coth x$ 的級數。由 $\coth x=\dfrac{\cosh x}{\sinh x}$，代 $\cosh x=1+\tfrac{x^2}{2}+\tfrac{x^4}{24}+\cdots$、$\sinh x=x+\tfrac{x^3}{6}+\tfrac{x^5}{120}+\cdots$：
+$$\coth x=\frac{1+\tfrac{x^2}{2}+\cdots}{x\big(1+\tfrac{x^2}{6}+\cdots\big)}=\frac1x\Big(1+\tfrac{x^2}{2}\Big)\Big(1-\tfrac{x^2}{6}+\cdots\Big)=\frac1x\Big(1+\tfrac{x^2}{2}-\tfrac{x^2}{6}+\cdots\Big).$$
+括號內 $\tfrac{x^2}{2}-\tfrac{x^2}{6}=\tfrac{3x^2-x^2}{6}=\tfrac{2x^2}{6}=\tfrac{x^2}{3}$，故 $\coth x=\dfrac1x+\dfrac x3+\cdots$。減去 $\dfrac1x$ 即 $L(x)=\dfrac x3+O(x^3)$。代回 $M=Nm\,L(x)=Nm\cdot\dfrac{mB}{3k_BT}=\dfrac{Nm^2B}{3k_BT}$，得 $\chi=\dfrac{Nm^2}{3k_BT}$。
+
+**範例 B（強場飽和：$x\gg1$）**：當 $mB\gg k_BT$，$x\to\infty$，$\coth x\to1$、$\dfrac1x\to0$，故 $L(x)\to1$，$M\to Nm$（每個磁矩全部擺正）。檢查中間一點 $x=1$：$\coth1=\dfrac{e+e^{-1}}{e-e^{-1}}=\dfrac{2.718+0.368}{2.718-0.368}=\dfrac{3.086}{2.350}=1.313$，故 $L(1)=1.313-1=0.313$。而弱場切線給 $x/3=0.333$——已偏離 6%，說明 $x=1$ 已不算「弱場」，必須真用 Langevin 函數。
+
+**範例 C（數值估順磁磁化率）**：取 $m=\mu_B=9.27\times10^{-24}\ \mathrm{J/T}$、數密度 $N=6\times10^{28}\ \mathrm{m^{-3}}$（典型固體）、室溫 $T=300\ \mathrm K$、$k_B=1.38\times10^{-23}\ \mathrm{J/K}$。先算分子 $Nm^2=6\times10^{28}\times(9.27\times10^{-24})^2=6\times10^{28}\times8.59\times10^{-47}=5.16\times10^{-18}$。分母 $3k_BT=3\times1.38\times10^{-23}\times300=1.24\times10^{-20}$。故
+$$\chi=\frac{Nm^2}{3k_BT}=\frac{5.16\times10^{-18}}{1.24\times10^{-20}}=4.2\times10^{2}\ (\text{SI 體積磁化率，無因次})?$$
+注意 SI 中 $\chi=\mu_0 Nm^2/3k_BT$，補上 $\mu_0=4\pi\times10^{-7}$：$\chi=4\pi\times10^{-7}\times4.2\times10^2=5.3\times10^{-4}$。這正是典型順磁體室溫磁化率量級 $10^{-3}\sim10^{-4}$，與實驗相符。
+</details>
+
+> **重點**：Curie 律的物理核心是「磁能 $mB$ 與熱能 $k_BT$ 的競爭」，因子 $\tfrac13$ 來自三維空間取向平均。量子版本把 $m^2\to g^2J(J+1)\mu_B^2$，形狀不變。
+
+---
+
+### 範例 B：Landau 能階間距（迴旋能量量子，cyclotron quantum）
+
+**題目**：自由電子在均勻磁場 $B$ 中，運動量子化為 **Landau 能階（Landau levels）**，相鄰能階間距為 $\hbar\omega_c$。(a) 寫出迴旋頻率（cyclotron frequency）$\omega_c$；(b) 計算 $B=1\ \mathrm{T}$ 時的能階間距（以 eV 與 K 表示）。
+
+**Step 1（迴旋頻率）**：電子（電荷量 $e$，質量 $m$）受 Lorentz 力做圓周運動，$evB=mv^2/r$ 給出角頻率
+$$\omega_c=\frac{eB}{m}.$$
+
+**Step 2（能階間距）**：Landau 能階 $E_n=(n+\tfrac12)\hbar\omega_c$，故間距
+$$\Delta E=\hbar\omega_c=\frac{\hbar eB}{m}=2\mu_B B,$$
+其中 $\mu_B=\dfrac{e\hbar}{2m}$ 為玻爾磁子（見範例 C）。
+
+**Step 3（代數值，$B=1\ \mathrm T$）**：用 $\mu_B=9.274\times10^{-24}\ \mathrm{J/T}$，
+$$\Delta E=2\mu_B B=2\times9.274\times10^{-24}\times1=1.855\times10^{-23}\ \mathrm J.$$
+
+**Step 4（換算 eV 與 K）**：
+$$\Delta E=\frac{1.855\times10^{-23}}{1.602\times10^{-19}}=1.16\times10^{-4}\ \mathrm{eV},$$
+$$T_{\text{對應}}=\frac{\Delta E}{k_B}=\frac{1.855\times10^{-23}}{1.381\times10^{-23}}\approx1.34\ \mathrm K.$$
+
+$$\boxed{\Delta E=\hbar\omega_c=2\mu_B B\approx1.16\times10^{-4}\ \mathrm{eV}\approx1.34\ k_B\,\mathrm{K}\ (B=1\ \mathrm T)}$$
+
+> **重點**：Landau 量子間距極小（$1\ \mathrm T$ 才約 $1\ \mathrm K$），所以量子振盪（de Haas–van Alphen）只在低溫強場才看得到。注意 $\hbar\omega_c=2\mu_B B$ 恰是自旋 Zeeman 分裂的兩倍（自由電子 $g\approx2$）。
+
+---
+
+### 範例 C：玻爾磁子（Bohr magneton）的數值
+
+**題目**：玻爾磁子定義為 $\mu_B=\dfrac{e\hbar}{2m_e}$。(a) 算出 $\mu_B$ 的 SI 數值；(b) 用它估計 1 mol 自旋全部排齊的飽和磁矩。
+
+**Step 1（代入常數）**：$e=1.602\times10^{-19}\ \mathrm C$，$\hbar=1.055\times10^{-34}\ \mathrm{J\,s}$，$m_e=9.109\times10^{-31}\ \mathrm{kg}$。
+$$\mu_B=\frac{(1.602\times10^{-19})(1.055\times10^{-34})}{2\times9.109\times10^{-31}}.$$
+
+**Step 2（算分子分母）**：分子 $=1.690\times10^{-53}$，分母 $=1.822\times10^{-30}$，
+$$\mu_B=\frac{1.690\times10^{-53}}{1.822\times10^{-30}}=9.27\times10^{-24}\ \mathrm{J/T}.$$
+
+**Step 3（1 mol 飽和磁矩）**：每自旋磁矩約 $1\,\mu_B$，$N_A=6.022\times10^{23}$，
+$$M_{\text{mol}}=N_A\,\mu_B=6.022\times10^{23}\times9.27\times10^{-24}=5.58\ \mathrm{J\,T^{-1}\,mol^{-1}}.$$
+這就是 1 玻爾磁子/原子的莫耳磁矩 $\approx5585\ \mathrm{erg\,G^{-1}\,mol^{-1}}$（CGS），即 1 個「玻爾磁子數（Bohr-magneton number）」。
+
+$$\boxed{\mu_B=9.27\times10^{-24}\ \mathrm{J/T},\qquad N_A\mu_B\approx5.58\ \mathrm{J\,T^{-1}\,mol^{-1}}}$$
+
+> **重點**：$\mu_B$ 是電子磁矩的自然單位。所有順磁/鐵磁的「有效磁矩」都用 $p\,\mu_B$ 表示，$p=g\sqrt{J(J+1)}$（順磁）或 $p=gJ$（飽和）。
+
+---
+
+### 範例 D：磁振子色散 $\omega\propto k^2$（spin-wave dispersion）
+
+**題目**：一維鐵磁自旋鏈，最近鄰交換（exchange）哈密頓量 $U=-2J\sum_p \vec S_p\cdot\vec S_{p+1}$（$J>0$），自旋 $S$，晶格常數 $a$。用半古典運動方程（small-amplitude）證明長波極限下磁振子（magnon）頻率 $\omega\propto k^2$。
+
+**Step 1（單一自旋的力矩方程）**：自旋 $\vec S_p$ 感受到鄰居造成的「有效磁場」$\vec B_p=-\dfrac{2J}{g\mu_B}(\vec S_{p-1}+\vec S_{p+1})$。角動量 $\hbar\vec S_p$ 的進動：
+$$\hbar\frac{d\vec S_p}{dt}=\vec\mu_p\times\vec B_p=(-g\mu_B\vec S_p)\times\Big(-\frac{2J}{g\mu_B}(\vec S_{p-1}+\vec S_{p+1})\Big).$$
+化簡：
+$$\hbar\frac{d\vec S_p}{dt}=2J\,\vec S_p\times(\vec S_{p-1}+\vec S_{p+1}).$$
+
+**Step 2（線性化，small deviation）**：基態自旋全沿 $\hat z$，$S_p^z\approx S$ 為常數，$S_p^x,S_p^y\ll S$。取叉積的 $x,y$ 分量並只保留一階小量：
+$$\hbar\frac{dS_p^x}{dt}=2JS\big(2S_p^y-S_{p-1}^y-S_{p+1}^y\big),$$
+$$\hbar\frac{dS_p^y}{dt}=-2JS\big(2S_p^x-S_{p-1}^x-S_{p+1}^x\big).$$
+
+**Step 3（行波試解）**：令 $S_p^x=u\,e^{i(pka-\omega t)}$、$S_p^y=v\,e^{i(pka-\omega t)}$。代入後 $S_{p\pm1}=e^{\pm ika}S_p$，括號變
+$$2-e^{-ika}-e^{+ika}=2(1-\cos ka).$$
+得線性方程組
+$$-i\hbar\omega\,u=2JS\cdot2(1-\cos ka)\,v,\qquad -i\hbar\omega\,v=-2JS\cdot2(1-\cos ka)\,u.$$
+
+**Step 4（解久期方程）**：兩式相乘消去 $u,v$：
+$$(\hbar\omega)^2=[4JS(1-\cos ka)]^2\ \Rightarrow\ \hbar\omega=4JS(1-\cos ka).$$
+
+**Step 5（長波展開）**：$ka\ll1$ 時 $1-\cos ka\approx\tfrac12(ka)^2$，故
+$$\hbar\omega\approx4JS\cdot\tfrac12 (ka)^2=2JSa^2k^2.$$
+
+$$\boxed{\hbar\omega=4JS(1-\cos ka)\ \xrightarrow{ka\ll1}\ \hbar\omega\approx 2JSa^2\,k^2\quad(\omega\propto k^2)}$$
+
+> **重點**：鐵磁磁振子是 $\omega\propto k^2$（二次型），與聲子 $\omega\propto k$（線性）截然不同。這個 $k^2$ 正是 Ch12 Prob.2 推出 $C\propto T^{3/2}$（Bloch $T^{3/2}$ 定律）的根源。
+
+---
+
+## 📚 Kittel 第11章 課本習題 — 完整解答（抗磁與順磁）
+
+### 習題 11.1：原子氫的抗磁磁化率（Diamagnetic susceptibility of atomic hydrogen）（Kittel Prob. 11.1）
+
+**題目（English, Kittel Prob. 11.1）**：The wave function of the hydrogen atom in its ground state (1s) is $\psi=(\pi a_0^3)^{-1/2}\exp(-r/a_0)$, where $a_0=\hbar^2/me^2=0.529\times10^{-8}\ \mathrm{cm}$. The charge density is $\rho(x,y,z)=-e|\psi|^2$, according to the statistical interpretation of the wave function. Show that for this state $\langle r^2\rangle=3a_0^2$, and calculate the molar diamagnetic susceptibility of atomic hydrogen ($-2.36\times10^{-6}\ \mathrm{cm^3/mol}$).
+
+<details>
+<summary>▸ 中文題目</summary>
+
+氫原子基態（1s）波函數為 $\psi=(\pi a_0^3)^{-1/2}\exp(-r/a_0)$，其中 $a_0=\hbar^2/me^2=0.529\times10^{-8}\ \mathrm{cm}$。電荷密度 $\rho=-e|\psi|^2$。試證此態 $\langle r^2\rangle=3a_0^2$，並計算原子氫的莫耳抗磁磁化率（答案 $\approx-2.36\times10^{-6}\ \mathrm{cm^3/mol}$）。
+
+</details>
+
+**Step 1（抗磁磁化率公式，Langevin 抗磁性）**：對球對稱原子，每原子（CGS）
+$$\chi_{\text{atom}}=-\frac{e^2}{6mc^2}\langle r^2\rangle ,$$
+對 $N$ 個原子的莫耳磁化率（取 $N=N_A$）
+$$\chi_{\text{mol}}=-\frac{N_A e^2}{6mc^2}\langle r^2\rangle .$$
+
+**Step 2（計算 $\langle r^2\rangle$）**：$|\psi|^2=\dfrac{1}{\pi a_0^3}e^{-2r/a_0}$，球對稱故
+$$\langle r^2\rangle=\int r^2|\psi|^2\,d^3r=\frac{1}{\pi a_0^3}\int_0^\infty r^2\,e^{-2r/a_0}\,4\pi r^2\,dr=\frac{4}{a_0^3}\int_0^\infty r^4 e^{-2r/a_0}\,dr.$$
+
+**Step 3（套用 $\int_0^\infty r^n e^{-\alpha r}dr=n!/\alpha^{n+1}$）**：取 $n=4$、$\alpha=2/a_0$：
+$$\int_0^\infty r^4 e^{-2r/a_0}\,dr=\frac{4!}{(2/a_0)^5}=\frac{24\,a_0^5}{32}=\frac{3}{4}a_0^5.$$
+代回：
+$$\langle r^2\rangle=\frac{4}{a_0^3}\cdot\frac34 a_0^5=3a_0^2.\qquad\checkmark$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 620 240" width="100%" style="max-width:720px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="310" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">習題 11.1 · Step 2–3：⟨r²⟩ 被積函數 r⁴e^(−2r/a₀) 的峰</text>
+<line x1="60" y1="200" x2="575" y2="200" stroke="#888" stroke-width="1.2"/>
+<line x1="60" y1="200" x2="60" y2="28" stroke="#888" stroke-width="1.2"/>
+<text x="568" y="216" text-anchor="end" fill="#555">r / a₀</text>
+<polyline points="60.0,30.0 80.0,86.0 100.0,123.6 120.0,148.8 140.0,165.7 160.0,177.0 180.0,184.6 200.0,189.7 220.0,193.1 240.0,195.4 260.0,196.9 280.0,197.9 300.0,198.6 320.0,199.1 340.0,199.4 360.0,199.6 380.0,199.7 400.0,199.8 420.0,199.9 440.0,199.9 460.0,199.9 480.0,200.0 500.0,200.0 520.0,200.0 540.0,200.0 560.0,200.0" fill="none" stroke="#6aa1d6" stroke-width="2" stroke-dasharray="5 4"/>
+<polyline points="60.0,200.0 80.0,199.4 100.0,193.3 120.0,177.4 140.0,152.0 160.0,121.5 180.0,90.9 200.0,64.5 220.0,45.0 240.0,33.6 260.0,30.0 280.0,33.2 300.0,41.6 320.0,53.8 340.0,68.1 360.0,83.5 380.0,98.9 400.0,113.7 420.0,127.3 440.0,139.5 460.0,150.2 480.0,159.4 500.0,167.2 520.0,173.8 540.0,179.1 560.0,183.5" fill="none" stroke="#c0392b" stroke-width="2.6"/>
+<line x1="260" y1="200" x2="260" y2="36" stroke="#2e8b2e" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="260" y="48" text-anchor="middle" fill="#2e8b2e">峰在 r=2a₀</text>
+<text x="350" y="170" fill="#c0392b" font-weight="bold">r⁴e^(−2r/a₀)（被積函數）</text>
+<text x="92" y="60" fill="#6aa1d6">|ψ|² ∝ e^(−2r/a₀)</text>
+<text x="300" y="110" fill="#555">∫₀^∞ r⁴e^(−2r/a₀)dr = 4!/(2/a₀)⁵ = ¾a₀⁵</text>
+<text x="300" y="128" fill="#1a4d7c" font-weight="bold">→ ⟨r²⟩ = (4/a₀³)·¾a₀⁵ = 3a₀²</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 11.1</b> 算 ⟨r²⟩ 時容易被「<b style="color:#6aa1d6">|ψ|² 在 r=0 最大</b>」誤導。但真正要積的是<b style="color:#c0392b">被積函數 r⁴e^(−2r/a₀)</b>（含球殼體積因子 4πr²·r²）——它在 <b style="color:#2e8b2e">r=2a₀</b> 才有峰，因為靠近原子核處球殼體積趨於 0。套公式 ∫₀^∞ rⁿe^(−αr)dr = n!/α^(n+1)（n=4, α=2/a₀）得 ¾a₀⁵，代回 Step 3 即 <b style="color:#1a4d7c">⟨r²⟩=3a₀²</b>。</figcaption>
+</figure>
+
+**Step 4（代入常數，CGS）**：$e=4.80\times10^{-10}\ \mathrm{esu}$，$m=9.11\times10^{-28}\ \mathrm g$，$c=3.00\times10^{10}\ \mathrm{cm/s}$，$a_0=0.529\times10^{-8}\ \mathrm{cm}$，$N_A=6.02\times10^{23}$。
+$$\langle r^2\rangle=3a_0^2=3\times(0.529\times10^{-8})^2=8.40\times10^{-17}\ \mathrm{cm^2}.$$
+
+**Step 5（組合各因子）**：先算 $e^2/(6mc^2)$：
+$$\frac{e^2}{6mc^2}=\frac{(4.80\times10^{-10})^2}{6\times(9.11\times10^{-28})(3.00\times10^{10})^2}=\frac{2.30\times10^{-19}}{4.92\times10^{-6}}=4.69\times10^{-14}\ \mathrm{cm}.$$
+
+**Step 6（乘上 $N_A$ 與 $\langle r^2\rangle$）**：
+$$\chi_{\text{mol}}=-N_A\cdot\frac{e^2}{6mc^2}\langle r^2\rangle=-(6.02\times10^{23})(4.69\times10^{-14})(8.40\times10^{-17}).$$
+$$\chi_{\text{mol}}=-2.37\times10^{-6}\ \mathrm{cm^3/mol}.$$
+
+$$\boxed{\langle r^2\rangle=3a_0^2,\qquad \chi_{\text{mol}}\approx-2.36\times10^{-6}\ \mathrm{cm^3/mol}}$$
+
+<details>
+<summary><b>📝 更多範例（點開）：$\langle r^n\rangle$ 矩積分、被積函數峰、其他軌道</b></summary>
+
+**範例 A（同法算 $\langle r\rangle$ 與峰位）**：用同一個公式 $\int_0^\infty r^n e^{-\alpha r}dr=\dfrac{n!}{\alpha^{n+1}}$。求平均半徑 $\langle r\rangle=\displaystyle\int r\,|\psi|^2 d^3r$，被積 $r\cdot4\pi r^2=4\pi r^3$，故
+$$\langle r\rangle=\frac{4\pi}{\pi a_0^3}\int_0^\infty r^3 e^{-2r/a_0}dr=\frac{4}{a_0^3}\cdot\frac{3!}{(2/a_0)^4}=\frac{4}{a_0^3}\cdot\frac{6\,a_0^4}{16}=\frac{4\times6}{16}a_0=\frac{24}{16}a_0=\frac32 a_0.$$
+被積函數 $r^2 e^{-2r/a_0}$（含球殼）的峰由 $\dfrac{d}{dr}(r^2 e^{-2r/a_0})=0$：$2r e^{-2r/a_0}-\tfrac2{a_0}r^2 e^{-2r/a_0}=0\Rightarrow 2-\tfrac{2r}{a_0}=0\Rightarrow r=a_0$（最可能半徑，即玻爾半徑）。注意 $\langle r\rangle=\tfrac32 a_0>a_0$：因尾巴拖長，平均大於峰位。
+
+**範例 B（$\langle r^2\rangle$ 被積函數的峰在 $r=2a_0$）**：算 $\langle r^2\rangle$ 要積 $r^4 e^{-2r/a_0}$。求其峰：$\dfrac{d}{dr}(r^4 e^{-2r/a_0})=4r^3 e^{-2r/a_0}-\tfrac2{a_0}r^4 e^{-2r/a_0}=0$，提出 $r^3 e^{-2r/a_0}$：
+$$4-\frac{2r}{a_0}=0\ \Rightarrow\ r=2a_0.$$
+這就是上方圖中紅線峰位 $r=2a_0$ 的來源——比 $\langle r\rangle$ 的權重函數峰（$r=a_0$）更靠外，因為多乘了 $r^2$。
+
+**範例 C（換一個原子半徑，磁化率怎麼縮放）**：抗磁磁化率 $\chi\propto-\langle r^2\rangle$。對類氫離子（核電荷 $Z$），$a\to a_0/Z$，故 $\langle r^2\rangle=3(a_0/Z)^2=3a_0^2/Z^2$，抗磁磁化率縮小 $Z^2$ 倍。舉例 $\mathrm{He}^+$（$Z=2$）：$\langle r^2\rangle=3a_0^2/4=2.1\times10^{-17}\ \mathrm{cm^2}$，比氫小 4 倍，故 $\chi_{\mathrm{He^+}}\approx-2.36\times10^{-6}/4=-0.59\times10^{-6}\ \mathrm{cm^3/mol}$。電子被拉得越緊（$Z$ 越大），抗磁越弱。
+</details>
+
+> **重點**：Langevin 抗磁性，$\chi<0$ 且與 $T$ 無關，量級 $10^{-6}$。關鍵積分公式 $\int_0^\infty r^n e^{-\alpha r}dr=n!/\alpha^{n+1}$ 必背。
+
+---
+
+### 習題 11.2：Hund 規則決定基態（Hund rules）（Kittel Prob. 11.2）
+
+**題目（English, Kittel Prob. 11.2）**：Apply the Hund rules to find the ground state (the basic level in the notation of Table 1) of (a) $\mathrm{Eu}^{++}$, in the configuration $4f^7 5s^2 p^6$; (b) $\mathrm{Yb}^{3+}$; (c) $\mathrm{Tb}^{3+}$. The results for (b) and (c) are in Table 1, but you should give the separate steps in applying the rules.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+用 Hund 規則找出基態譜項 $^{2S+1}L_J$：(a) $\mathrm{Eu}^{++}$，組態 $4f^7 5s^2p^6$；(b) $\mathrm{Yb}^{3+}$；(c) $\mathrm{Tb}^{3+}$。寫出每步。
+
+</details>
+
+**Hund 規則回顧**：(1) 先讓總自旋 $S=\sum m_s$ 最大；(2) 在 $S$ 最大下讓總軌道 $L=\sum m_l$ 最大；(3) 殼層未滿一半 $J=|L-S|$，超過一半 $J=L+S$。譜項符號 $^{2S+1}L_J$（$L=0,1,2,3,\dots$ 寫 $S,P,D,F,\dots$）。$f$ 殼層 $l=3$，$m_l=3,2,1,0,-1,-2,-3$（共 7 個軌道，最多 14 電子）。
+
+**(a) $\mathrm{Eu}^{++}$：$4f^7$（半滿）**
+
+**Step 1**：7 個電子，每軌道各放 1 個（自旋全朝上）。$S=7\times\tfrac12=\tfrac72$，故 $2S+1=8$。
+
+**Step 2**：$m_l$ 從 $+3$ 到 $-3$ 各占一個，$L=\sum m_l=3+2+1+0-1-2-3=0$，故為 $S$ 項。
+
+**Step 3**：殼層恰半滿，$J=|L-S|=L+S=\tfrac72$。
+$$\boxed{\mathrm{Eu}^{++}:\ {}^{8}S_{7/2}}$$
+
+**(b) $\mathrm{Yb}^{3+}$：$4f^{13}$（差一個滿，1 個電洞）**
+
+**Step 1**：13 個電子 = 14 滿殼少 1。等價於 1 個電洞，$S=\tfrac12$，$2S+1=2$。
+
+**Step 2**：電洞落在 $|m_l|=3$ 的軌道，$L=3$，故為 $F$ 項。
+
+**Step 3**：殼層超過半滿，$J=L+S=3+\tfrac12=\tfrac72$。
+$$\boxed{\mathrm{Yb}^{3+}:\ {}^{2}F_{7/2}}$$
+
+**(c) $\mathrm{Tb}^{3+}$：$4f^{8}$（比半滿多 1）**
+
+**Step 1**：先半滿 7 個自旋朝上（$S=\tfrac72$），第 8 個必須朝下配對。$S=\tfrac72-\tfrac12=3$，$2S+1=7$。
+
+**Step 2**：第 8 個電子放回 $m_l=+3$ 軌道，$L=\sum m_l=(0)+3=3$（半滿那 7 個總和為 0，再加 $+3$），故為 $F$ 項。
+
+**Step 3**：超過半滿，$J=L+S=3+3=6$。
+$$\boxed{\mathrm{Tb}^{3+}:\ {}^{7}F_{6}}$$
+
+> **重點**：未滿一半 $J=|L-S|$、超過一半 $J=L+S$、恰半滿 $L=0$（純自旋）。這三句口訣是稀土離子磁矩計算的核心。
+
+---
+
+### 習題 11.3：三重態激發態（Triplet excited states）（Kittel Prob. 11.3）
+
+**題目（English, Kittel Prob. 11.3）**：Some organic molecules have a triplet ($S=1$) excited state at an energy $k_B\Delta$ above a singlet ($S=0$) ground state. (a) Find an expression for the magnetic moment $\langle\mu\rangle$ in a field $B$. (b) Show that the susceptibility for $T\gg\Delta$ is approximately independent of $\Delta$. (c) With the help of a diagram of energy levels versus field and a rough sketch of entropy versus field, explain how this system might be cooled by isentropic magnetization (not demagnetization).
+
+<details>
+<summary>▸ 中文題目</summary>
+
+某有機分子有一三重態（$S=1$）激發態，比單重態（$S=0$）基態高 $k_B\Delta$。(a) 求磁場 $B$ 中平均磁矩 $\langle\mu\rangle$ 的表達式；(b) 證明 $T\gg\Delta$ 時磁化率近似與 $\Delta$ 無關；(c) 解釋為何此系統可用「等熵磁化（isentropic magnetization）」冷卻。
+
+</details>
+
+**Step 1（列能階）**：基態 $S=0$，能量取為 $0$，只有 1 個態。激發三重態 $S=1$，能量 $k_B\Delta$，在磁場中 Zeeman 分裂成三條 $m_S=+1,0,-1$，能量
+$$E(m_S)=k_B\Delta - m_S\,\mu B,\qquad \mu\equiv g\mu_B\ (g\approx2).$$
+
+**Step 2（配分函數，partition function）**：令 $x=\mu B/k_BT$、$\delta=\Delta/T$：
+$$Z=\underbrace{1}_{S=0}+e^{-\delta}\big(e^{x}+1+e^{-x}\big).$$
+
+**Step 3（平均磁矩）**：只有三重態貢獻磁矩 $\mu m_S$：
+$$\langle\mu\rangle=\frac{\mu\,e^{-\delta}\,(e^{x}-e^{-x})}{Z}=\frac{2\mu\,e^{-\delta}\sinh x}{1+e^{-\delta}(2\cosh x+1)}.$$
+$$\boxed{\langle\mu\rangle=\frac{2\mu\,e^{-\Delta/T}\sinh(\mu B/k_BT)}{1+e^{-\Delta/T}\big[2\cosh(\mu B/k_BT)+1\big]}}$$
+
+**Step 4（(b) 高溫 $T\gg\Delta$、弱場展開）**：此時 $e^{-\delta}\to1$。分母 $\to 1+(2+1)=4$（取 $x\to0$ 主導項）。分子用 $\sinh x\approx x$：
+$$\langle\mu\rangle\approx\frac{2\mu\,e^{-\delta}\,x}{4}=\frac{\mu x}{2}e^{-\delta}.$$
+磁化率 $\chi=n\langle\mu\rangle/B$，代 $x=\mu B/k_BT$：
+$$\chi\approx\frac{n\mu^2}{2k_BT}\,e^{-\Delta/T}.$$
+當 $T\gg\Delta$，$e^{-\Delta/T}\approx1-\Delta/T\to1$，故
+$$\chi\approx\frac{n\mu^2}{2k_BT}\quad(\text{與 }\Delta\text{ 無關}).\qquad\checkmark$$
+
+**Step 5（(c) 等熵磁化冷卻）**：
+
+- 零場時，基態（$S=0$，1 態）與三重態（3 態）能量差僅 $k_B\Delta$。若 $T\gtrsim\Delta$，四個態幾乎等可能，自旋熵 $\approx N k_B\ln4$（高）。
+- 加場後，三重態分裂，$m_S=+1$ 那條被拉到很低（甚至低於 $S=0$ 態），系統幾乎只占一個態，自旋熵 $\to0$（低）。
+- 在**等總熵**（隔熱）下加場：自旋熵下降 → 晶格熵必須上升以補償？不對——是反過來：自旋系統被迫進入有序低熵態，它「吸收」晶格的熵以保持總熵守恆，但因自旋此時是被磁場「整理」，故晶格被迫降溫。Kittel 解答指出：把系統從 a（低場）帶到 b（高場），自旋熵由 $\approx N\ln2$ 降低，若維持總熵不變，晶格熵須增加，亦即**溫度下降**。
+- 與一般順磁鹽「絕熱去磁（demagnetization）」冷卻相反，這裡是「絕熱磁化（magnetization）」冷卻，因為此系統零場基態是單態（低熵），加場才升熵再做有序化。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 620 250" width="100%" style="max-width:720px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="310" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">習題 11.3(c)：能階 vs 磁場 B — 三重態 Zeeman 分裂</text>
+<line x1="55" y1="215" x2="560" y2="215" stroke="#888" stroke-width="1.2"/>
+<line x1="55" y1="215" x2="55" y2="35" stroke="#888" stroke-width="1.2"/>
+<text x="553" y="231" text-anchor="end" fill="#555">磁場 B →</text>
+<text x="50" y="42" text-anchor="end" fill="#555">能量 E</text>
+<line x1="55" y1="150" x2="560" y2="150" stroke="#888" stroke-width="1.5" stroke-dasharray="2 0"/>
+<text x="62" y="146" fill="#888">S=0 單態（1 態，E=0）</text>
+<line x1="120" y1="95" x2="120" y2="215" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="120" y="90" text-anchor="middle" fill="#555">k_B Δ</text>
+<line x1="120" y1="100" x2="540" y2="55" stroke="#c0392b" stroke-width="2.4"/>
+<line x1="120" y1="100" x2="540" y2="100" stroke="#e67e22" stroke-width="2.4"/>
+<line x1="120" y1="100" x2="540" y2="170" stroke="#1a4d7c" stroke-width="2.4"/>
+<text x="545" y="55" fill="#c0392b">m_S=−1（升）</text>
+<text x="545" y="103" fill="#e67e22">m_S=0</text>
+<text x="545" y="173" fill="#1a4d7c">m_S=+1（被拉低）</text>
+<circle cx="120" cy="100" r="3.5" fill="#555"/>
+<text x="80" y="95" text-anchor="end" fill="#555">三重態</text>
+<text x="200" y="200" fill="#2e8b2e">a：弱場，四態近簡併</text>
+<text x="200" y="216" fill="#2e8b2e">自旋熵高 ≈ k_B ln4</text>
+<text x="350" y="200" fill="#1a4d7c">b：強場，幾乎只占</text>
+<text x="350" y="216" fill="#1a4d7c">最低態 → 自旋熵 →0</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 11.3(c) 等熵磁化冷卻</b>的能階圖。零場時 <b style="color:#888">S=0 基態</b>與 <b style="color:#555">S=1 三重態</b>只差 k_B Δ；若 T≳Δ，四個態幾近等可能，<b style="color:#2e8b2e">自旋熵高（≈k_B ln4）</b>。加場後三重態 Zeeman 分裂，<b style="color:#1a4d7c">m_S=+1 那條被拉到最低</b>（甚至低於 S=0 態），系統幾乎只占一個態、<b style="color:#1a4d7c">自旋熵 →0</b>。等總熵（隔熱）下從 a→b：自旋熵下降，晶格被迫降溫——這就是「絕熱磁化（不是去磁）」冷卻。</figcaption>
+</figure>
+
+$$\boxed{T\gg\Delta:\ \chi\approx\dfrac{n\mu^2}{2k_BT}\ \text{（與}\Delta\text{無關）；可由等熵磁化降溫}}$$
+
+<details>
+<summary><b>📝 更多範例（點開）：絕熱去磁的熵守恆、自旋熵公式、降溫倍率</b></summary>
+
+**範例 A（一般順磁鹽的絕熱去磁，$S=\tfrac12$ 熵函數）**：標準絕熱去磁（不是本題的磁化）：$N$ 個 $S=\tfrac12$ 自旋在場 $B$、溫度 $T$ 下，每自旋熵只依賴比值 $b\equiv\mu B/k_BT$。由二能階配分 $Z=2\cosh b$，自由能 $F=-k_BT\ln Z$，熵
+$$\frac{S}{Nk_B}=\ln(2\cosh b)-b\tanh b.$$
+高溫弱場 $b\to0$：$\cosh b\to1$、$\tanh b\to0$，故 $S\to Nk_B\ln2$（完全無序，每自旋兩態等可能）。強場低溫 $b\to\infty$：$\ln(2\cosh b)\to b$、$b\tanh b\to b$，相減 $\to0$，故 $S\to0$（全部排齊）。**關鍵**：$S$ 只是 $B/T$ 的函數。
+
+**範例 B（絕熱 ⟹ $B/T=$ 常數，算終溫）**：絕熱（隔熱）過程熵不變，即 $b=\mu B/k_BT$ 不變。從 $(B_i,T_i)$ 降場到 $(B_f,T_f)$，由 $\dfrac{B_i}{T_i}=\dfrac{B_f}{T_f}$ 得
+$$T_f=T_i\,\frac{B_f}{B_i}.$$
+例：起始 $B_i=1\ \mathrm T$、$T_i=1\ \mathrm K$，降到 $B_f=0.01\ \mathrm T$（留一點殘餘場代表離子間偶極場），則 $T_f=1\times\dfrac{0.01}{1}=0.01\ \mathrm K=10\ \mathrm{mK}$。降場 100 倍 ⟹ 降溫 100 倍。這就是順磁鹽絕熱去磁可達 mK 的原理。
+
+**範例 C（本題的「反向」：絕熱磁化降溫，熵差驅動）**：本題零場基態是 $S=0$ 單態（低熵），加場才讓三重態 $m_S=+1$ 降到最低、重新有序。設零場時 $T\gtrsim\Delta$，四態近簡併，自旋熵 $S_i\approx Nk_B\ln4$；強場下幾乎只占一態，$S_f\approx0$。等總熵 $S_{\text{spin}}+S_{\text{lattice}}=$ 常數：自旋熵下降 $\Delta S=Nk_B\ln4$，晶格須吸入這份熵。晶格熱容 $C_L$ 小，吸熵 $\Delta S=\int C_L\,dT/T$ 會使其升溫？——不，注意號：自旋被磁場「整理」進低熵態，是自旋向晶格**釋放**有序化能、晶格反而被冷卻。定量上由 $\Delta S_{\text{lattice}}=-\Delta S_{\text{spin}}<0$，晶格熵下降即溫度下降，這就是「絕熱磁化冷卻」與一般「絕熱去磁」相反之處。
+</details>
+
+> **重點**：先寫能階 → 配分函數 → 平均量。高溫展開時指數因子退化為 1，是「與 $\Delta$ 無關」的來源。
+
+---
+
+### 習題 11.4：二能階系統的熱容（Schottky 異常）（Kittel Prob. 11.4）
+
+**題目（English, Kittel Prob. 11.4）**：(a) Consider a two-level system with an energy splitting $k_B\Delta$ between upper and lower states; the splitting may arise from a magnetic field or in other ways. Show that the heat capacity per system is
+$$C=k_B\left(\frac{\Delta}{T}\right)^2\frac{e^{\Delta/T}}{(e^{\Delta/T}+1)^2}.$$
+Peaks of this type in the heat capacity are often known as Schottky anomalies. The maximum heat capacity is quite high, but for $T\ll\Delta$ and for $T\gg\Delta$ the heat capacity is low. (b) Show that for $T\gg\Delta$ we have $C\approx k_B(\Delta/2T)^2+\dots$. The hyperfine interaction between nuclear and electronic magnetic moments in paramagnetic salts (and in systems having electron spin order) causes splittings detected by a $1/T^2$ term in the heat capacity in the region $T\gg\Delta$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 二能階系統，上下能階間距 $k_B\Delta$，證明每系統熱容
+$$C=k_B\left(\frac{\Delta}{T}\right)^2\frac{e^{\Delta/T}}{(e^{\Delta/T}+1)^2}.$$
+(b) 證明 $T\gg\Delta$ 時 $C\approx k_B(\Delta/2T)^2$。
+
+</details>
+
+**Step 1（配分函數與能量）**：下階能量 $0$、上階能量 $k_B\Delta$。令 $\beta=1/k_BT$、$\varepsilon=k_B\Delta$：
+$$Z=1+e^{-\beta\varepsilon}=1+e^{-\Delta/T}.$$
+平均能量
+$$U=\frac{0\cdot1+\varepsilon\,e^{-\beta\varepsilon}}{Z}=\frac{\varepsilon\,e^{-\Delta/T}}{1+e^{-\Delta/T}}=\frac{\varepsilon}{e^{\Delta/T}+1}.$$
+
+**Step 2（對 $T$ 微分求 $C=dU/dT$）**：令 $y=\Delta/T$，則 $dy/dT=-\Delta/T^2$。
+$$U=\frac{\varepsilon}{e^{y}+1},\qquad \frac{dU}{dy}=\varepsilon\cdot\frac{-e^{y}}{(e^{y}+1)^2}.$$
+$$C=\frac{dU}{dT}=\frac{dU}{dy}\cdot\frac{dy}{dT}=\varepsilon\cdot\frac{-e^{y}}{(e^{y}+1)^2}\cdot\Big(-\frac{\Delta}{T^2}\Big).$$
+
+**Step 3（代回 $\varepsilon=k_B\Delta$）**：
+$$C=\frac{k_B\Delta\cdot\Delta}{T^2}\cdot\frac{e^{\Delta/T}}{(e^{\Delta/T}+1)^2}=k_B\Big(\frac{\Delta}{T}\Big)^2\frac{e^{\Delta/T}}{(e^{\Delta/T}+1)^2}.\qquad\checkmark$$
+$$\boxed{C=k_B\Big(\frac{\Delta}{T}\Big)^2\dfrac{e^{\Delta/T}}{(e^{\Delta/T}+1)^2}}$$
+
+**Step 4（(b) 高溫極限 $T\gg\Delta$，$y\to0$）**：$e^{y}\to1$，分子 $\to1$，分母 $\to(1+1)^2=4$：
+$$C\to k_B\Big(\frac{\Delta}{T}\Big)^2\cdot\frac14=k_B\Big(\frac{\Delta}{2T}\Big)^2.\qquad\checkmark$$
+$$\boxed{T\gg\Delta:\ C\approx k_B\Big(\frac{\Delta}{2T}\Big)^2\propto\frac{1}{T^2}}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 620 240" width="100%" style="max-width:720px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="310" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">習題 11.4：二能階熱容的 Schottky 異常（先升後降）</text>
+<line x1="60" y1="200" x2="575" y2="200" stroke="#888" stroke-width="1.2"/>
+<line x1="60" y1="200" x2="60" y2="28" stroke="#888" stroke-width="1.2"/>
+<text x="568" y="216" text-anchor="end" fill="#555">T / Δ →</text>
+<text x="54" y="40" text-anchor="end" fill="#555">C / k_B</text>
+<polyline points="60.0,200.0 65.0,200.0 75.0,193.7 85.0,137.6 95.0,72.5 105.0,40.2 115.0,35.7 125.0,45.4 135.0,60.5 145.0,76.6 155.0,91.5 165.0,104.8 175.0,116.3 185.0,126.1 195.0,134.5 205.0,141.7 215.0,147.9 225.0,153.1 235.0,157.7 245.0,161.7 255.0,165.1 265.0,168.1 275.0,170.8 285.0,173.1 295.0,175.2 305.0,177.1 315.0,178.7 325.0,180.2 335.0,181.6 345.0,182.8 355.0,183.9 365.0,184.9 375.0,185.8 385.0,186.6 395.0,187.4 405.0,188.1 415.0,188.7 425.0,189.3 435.0,189.8 445.0,190.4 455.0,190.8 465.0,191.3 475.0,191.7 485.0,192.0 495.0,192.4 505.0,192.7 515.0,193.0 525.0,193.3 535.0,193.6 545.0,193.9 555.0,194.1" fill="none" stroke="#c0392b" stroke-width="2.6"/>
+<line x1="110" y1="36" x2="110" y2="200" stroke="#2e8b2e" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="110" y="48" text-anchor="middle" fill="#2e8b2e">峰 T≈0.42Δ</text>
+<text x="130" y="120" fill="#1a4d7c">T≪Δ：凍結，C→0</text>
+<text x="340" y="160" fill="#e67e22">高溫尾巴 C≈k_B(Δ/2T)² ∝ 1/T²</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 11.4 的 Schottky 異常</b>：兩能階系統的熱容 C=k_B(Δ/T)²·e^(Δ/T)/(e^(Δ/T)+1)² 對 T 畫出來是個<b>駝峰</b>。<b style="color:#1a4d7c">T≪Δ</b>（低溫）熱能不夠激發、上階凍結 → C→0；<b style="color:#2e8b2e">T≈0.42Δ</b> 附近達峰；<b style="color:#e67e22">T≫Δ</b>（高溫）兩階近乎等佔據，熱容掉成 Step 4 的尾巴 <b>C≈k_B(Δ/2T)² ∝ 1/T²</b>。這個 1/T² 尾巴正是低溫熱容中超精細分裂的指紋。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：低溫尾巴、峰位求解、簡併度推廣</b></summary>
+
+**範例 A（低溫 $T\ll\Delta$ 尾巴：指數凍結）**：在 $y=\Delta/T\gg1$ 時，$e^{y}\gg1$，故 $(e^y+1)^2\approx e^{2y}$，熱容
+$$C=k_B y^2\frac{e^y}{(e^y+1)^2}\approx k_B y^2\frac{e^y}{e^{2y}}=k_B y^2 e^{-y}=k_B\Big(\frac\Delta T\Big)^2 e^{-\Delta/T}.$$
+這是「指數壓抑」：$T\to0$ 時 $e^{-\Delta/T}\to0$ 壓過 $T^{-2}$ 發散，故 $C\to0$。對比高溫尾巴 $C\approx k_B(\Delta/2T)^2$ 是冪次衰減——兩側都趨於 0，中間必有峰，這就是 Schottky 駝峰。
+
+**範例 B（峰位數值求解 $T_{\max}\approx0.417\,\Delta$）**：令 $f(y)=y^2\dfrac{e^y}{(e^y+1)^2}$，對 $y$ 求極大（$y=\Delta/T$，故 $y$ 大對應 $T$ 小）。設 $g=\ln f=2\ln y+y-2\ln(e^y+1)$，$\dfrac{dg}{dy}=\dfrac2y+1-\dfrac{2e^y}{e^y+1}=0$。整理 $\dfrac2y=\dfrac{2e^y}{e^y+1}-1=\dfrac{2e^y-(e^y+1)}{e^y+1}=\dfrac{e^y-1}{e^y+1}=\tanh\dfrac y2$。數值解超越方程 $\dfrac2y=\tanh\dfrac y2$：試 $y=2.4$，左 $=0.833$、右 $\tanh1.2=0.834$ ✓。故 $y_{\max}=\Delta/T_{\max}\approx2.4\Rightarrow T_{\max}\approx\Delta/2.4\approx0.417\,\Delta$（與圖中 $0.42\Delta$ 一致）。
+
+**範例 C（推廣到簡併度 $g_0,g_1$）**：若下階簡併度 $g_0$、上階 $g_1$（能差 $k_B\Delta$），$Z=g_0+g_1 e^{-\Delta/T}$，平均能 $U=\dfrac{g_1\varepsilon e^{-\Delta/T}}{g_0+g_1 e^{-\Delta/T}}$。同樣微分（過程同 Step 2）得
+$$C=k_B\Big(\frac\Delta T\Big)^2\frac{(g_1/g_0)e^{\Delta/T}}{\big[(g_1/g_0)+e^{\Delta/T}\big]^2}\cdot\frac{g_1}{g_0}?$$
+更乾淨地寫成 $C=k_B(\Delta/T)^2\dfrac{(g_0/g_1)e^{\Delta/T}}{[(g_0/g_1)e^{\Delta/T}+1]^2}$；當 $g_0=g_1$ 退回 Step 3 標準式。高溫極限 $C\to k_B(\Delta/T)^2\dfrac{g_0 g_1}{(g_0+g_1)^2}$，對 $g_0=g_1$ 給 $\tfrac14$ 即 $k_B(\Delta/2T)^2$，自洽。
+</details>
+
+> **重點**：Schottky 異常——熱容隨 $T$ 先升後降，峰在 $T\sim\Delta$。高溫尾巴 $C\propto1/T^2$ 正是超精細分裂在低溫熱容中留下的「$1/T^2$ 項」來源。
+
+---
+
+### 習題 11.5：Pauli 自旋磁化率（Pauli spin susceptibility）（Kittel Prob. 11.5）
+
+**題目（English, Kittel Prob. 11.5）**：The spin susceptibility of a conduction electron gas at absolute zero may be approached by another method. Let $n_\uparrow=\tfrac12 N(1+\zeta)$ and $n_\downarrow=\tfrac12 N(1-\zeta)$ be the concentrations of spin-up and spin-down electrons. (a) Show that in a magnetic field $B$ the total energy of the spin-up band in a free electron gas is $E_\uparrow=E_0(1+\zeta)^{5/3}-\tfrac12 N\mu B(1+\zeta)$, where $E_0=\tfrac{3}{10}N\varepsilon_F$ in terms of the Fermi energy $\varepsilon_F$ in zero magnetic field. Find a similar expression for $E_\downarrow$. (b) Minimize $E_{\text{tot}}=E_\uparrow+E_\downarrow$ with respect to $\zeta$ and solve for the equilibrium value of $\zeta$ in the approximation $\zeta\ll1$. Go on to show that the magnetization is $M=\dfrac{3N\mu^2 B}{2\varepsilon_F}$, in agreement with Eq. (45).
+
+<details>
+<summary>▸ 中文題目</summary>
+
+以「能帶位移」法求傳導電子氣在絕對零度的自旋磁化率。設自旋向上/向下濃度為 $n_\uparrow=\tfrac12 N(1+\zeta)$、$n_\downarrow=\tfrac12 N(1-\zeta)$。(a) 證磁場 $B$ 中自旋向上能帶總能 $E_\uparrow=E_0(1+\zeta)^{5/3}-\tfrac12 N\mu B(1+\zeta)$，其中 $E_0=\tfrac{3}{10}N\varepsilon_F$；給出 $E_\downarrow$。(b) 對 $\zeta$ 最小化 $E_{\text{tot}}$（取 $\zeta\ll1$），證明 $M=\dfrac{3N\mu^2 B}{2\varepsilon_F}$。
+
+</details>
+
+**Step 1（單一自旋帶的動能）**：自由電子氣動能總和 $E_{\text{kin}}=\tfrac35 n\varepsilon_F(n)$，而 $\varepsilon_F\propto n^{2/3}$。若一條自旋帶有 $\tfrac12 N(1+\zeta)$ 個電子（佔總電子的比例改變），其動能相對零場值放大 $(1+\zeta)^{5/3}$ 倍（$\propto n\cdot n^{2/3}=n^{5/3}$）。故
+$$E_\uparrow^{\text{kin}}=E_0(1+\zeta)^{5/3},\qquad E_0=\tfrac{3}{10}N\varepsilon_F.$$
+
+**Step 2（磁能 Zeeman 項）**：自旋向上磁矩沿場，能量 $-\mu B$ 每電子，共 $\tfrac12 N(1+\zeta)$ 個：
+$$E_\uparrow^{\text{mag}}=-\tfrac12 N\mu B(1+\zeta).$$
+合計
+$$\boxed{E_\uparrow=E_0(1+\zeta)^{5/3}-\tfrac12 N\mu B(1+\zeta)}$$
+同理（自旋向下反號、濃度 $1-\zeta$）：
+$$E_\downarrow=E_0(1-\zeta)^{5/3}+\tfrac12 N\mu B(1-\zeta).$$
+
+**Step 3（總能與展開）**：$E_{\text{tot}}=E_\uparrow+E_\downarrow$。用 $(1\pm\zeta)^{5/3}\approx1\pm\tfrac53\zeta+\tfrac59\zeta^2$，兩者相加奇次抵消：
+$$E_0\big[(1+\zeta)^{5/3}+(1-\zeta)^{5/3}\big]\approx E_0\big[2+\tfrac{10}{9}\zeta^2\big].$$
+磁項相加：$-\tfrac12 N\mu B(1+\zeta)+\tfrac12 N\mu B(1-\zeta)=-N\mu B\zeta$。故
+$$E_{\text{tot}}\approx 2E_0+\tfrac{10}{9}E_0\zeta^2-N\mu B\zeta.$$
+
+**Step 4（對 $\zeta$ 最小化）**：$\dfrac{dE_{\text{tot}}}{d\zeta}=\tfrac{20}{9}E_0\zeta-N\mu B=0$。代 $E_0=\tfrac{3}{10}N\varepsilon_F$：
+$$\frac{20}{9}\cdot\frac{3}{10}N\varepsilon_F\,\zeta=N\mu B\ \Rightarrow\ \frac{2}{3}\varepsilon_F\,\zeta=\mu B\ \Rightarrow\ \zeta=\frac{3\mu B}{2\varepsilon_F}.$$
+
+**Step 5（磁化強度）**：淨磁矩 $M=\mu\,(n_\uparrow-n_\downarrow)=\mu\,N\zeta$：
+$$M=N\mu\cdot\frac{3\mu B}{2\varepsilon_F}=\frac{3N\mu^2 B}{2\varepsilon_F}.\qquad\checkmark$$
+$$\boxed{M=\frac{3N\mu^2 B}{2\varepsilon_F},\qquad \chi_{\text{Pauli}}=\frac{3N\mu^2}{2\varepsilon_F}}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 600 250" width="100%" style="max-width:700px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="300" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">習題 11.5–11.6：兩自旋帶相對位移 ±μB → 淨磁化</text>
+<line x1="40" y1="220" x2="40" y2="40" stroke="#888" stroke-width="1.2"/>
+<text x="34" y="46" text-anchor="end" fill="#555">能量</text>
+<text x="155" y="238" text-anchor="middle" fill="#1a4d7c" font-weight="bold">自旋 ↑（沿場 −μB）</text>
+<text x="430" y="238" text-anchor="middle" fill="#c0392b" font-weight="bold">自旋 ↓（逆場 +μB）</text>
+<path d="M155,210 L100,210 Q100,128 155,118 L155,210 Z" fill="#cfe0f0" stroke="#1a4d7c" stroke-width="1.6"/>
+<path d="M155,210 L210,210 Q210,128 155,118 L155,210 Z" fill="#cfe0f0" stroke="#1a4d7c" stroke-width="1.6"/>
+<path d="M430,210 L375,210 Q375,140 430,130 L430,210 Z" fill="#f3d2cd" stroke="#c0392b" stroke-width="1.6"/>
+<path d="M430,210 L485,210 Q485,140 430,130 L430,210 Z" fill="#f3d2cd" stroke="#c0392b" stroke-width="1.6"/>
+<line x1="90" y1="148" x2="500" y2="148" stroke="#2e8b2e" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="505" y="152" fill="#2e8b2e">ε_F（共同）</text>
+<line x1="155" y1="118" x2="155" y2="148" stroke="#1a4d7c" stroke-width="1.2" stroke-dasharray="2 2"/>
+<line x1="430" y1="130" x2="430" y2="148" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="2 2"/>
+<text x="245" y="112" fill="#1a4d7c">↑ 帶下移 μB</text>
+<text x="245" y="128" fill="#1a4d7c">→ 多裝電子</text>
+<text x="490" y="120" text-anchor="end" fill="#c0392b">↓ 帶上移 μB</text>
+<text x="490" y="136" text-anchor="end" fill="#c0392b">→ 少裝電子</text>
+<text x="300" y="200" text-anchor="middle" fill="#e67e22" font-weight="bold">n↑−n↓ = Nζ ≠ 0 → M = Nμζ</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 11.5（Pauli）與 11.6（Stoner）</b>共用的物理圖像。外場讓<b style="color:#1a4d7c">自旋 ↑ 帶（沿場）整體下移 μB</b>、<b style="color:#c0392b">自旋 ↓ 帶上移 μB</b>，但兩帶必須填到<b style="color:#2e8b2e">同一個 ε_F</b>。於是 ↑ 帶多裝、↓ 帶少裝，產生不平衡 <b style="color:#e67e22">ζ=(n↑−n↓)/N</b>，淨磁化 M=Nμζ=3Nμ²B/2ε_F。只有 ε_F 附近的電子能翻轉，所以 χ_Pauli 比居里律小一個因子 ~k_BT/ε_F。<b>11.6</b> 再加交換能 −¼VN²ζ²，把回復係數變小，磁化被放大（Stoner 增強）。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：$(1\pm\zeta)^{5/3}$ 展開、態密度法、數值估 $\chi$</b></summary>
+
+**範例 A（仔細展開 $(1\pm\zeta)^{5/3}$ 到 $\zeta^2$）**：用二項式 $(1+\zeta)^p=1+p\zeta+\dfrac{p(p-1)}{2}\zeta^2+\cdots$，取 $p=\tfrac53$：一階係數 $p=\tfrac53$；二階係數 $\dfrac{p(p-1)}{2}=\dfrac{\tfrac53\cdot\tfrac23}{2}=\dfrac{10/9}{2}=\dfrac{5}{9}$。故
+$$(1+\zeta)^{5/3}\approx1+\tfrac53\zeta+\tfrac59\zeta^2,\qquad(1-\zeta)^{5/3}\approx1-\tfrac53\zeta+\tfrac59\zeta^2.$$
+相加：奇次 $\pm\tfrac53\zeta$ 抵消，偶次留 $2+\tfrac{10}{9}\zeta^2$。乘 $E_0$ 即 Step 3 的 $E_0[2+\tfrac{10}{9}\zeta^2]$——這就是動能回復項 $\tfrac{10}{9}E_0\zeta^2$ 的來歷。
+
+**範例 B（態密度法驗算同一個 $\chi$）**：另一條路（Eq.45 走法）：外場使 ↑、↓ 帶相對移 $\mu B$，Fermi 面附近翻轉的電子數 $\approx D(\varepsilon_F)\cdot\mu B$（$D$ 為單自旋態密度，每自旋）。淨磁矩
+$$M=\mu\cdot 2\cdot[D(\varepsilon_F)\mu B]=2\mu^2 D(\varepsilon_F)B.$$
+自由電子 $D(\varepsilon_F)=\dfrac{3N}{4\varepsilon_F}$（每自旋，總態密度 $\tfrac{3N}{2\varepsilon_F}$ 的一半），代入 $M=2\mu^2\cdot\dfrac{3N}{4\varepsilon_F}B=\dfrac{3N\mu^2 B}{2\varepsilon_F}$——與 Step 5 能帶位移法**完全一致** ✓。
+
+**範例 C（數值估 Pauli 磁化率，與 Curie 比）**：取 $N=6\times10^{28}\ \mathrm{m^{-3}}$、$\varepsilon_F=5\ \mathrm{eV}=8\times10^{-19}\ \mathrm J$、$\mu=\mu_B=9.27\times10^{-24}$。$\chi_{\text{Pauli}}=\dfrac{3N\mu^2}{2\varepsilon_F}\mu_0$（SI）：先 $3N\mu^2=3\times6\times10^{28}\times8.59\times10^{-47}=1.55\times10^{-17}$，除 $2\varepsilon_F=1.6\times10^{-18}$ 得 $9.7$，乘 $\mu_0=4\pi\times10^{-7}$ 得 $\chi_{\text{Pauli}}\approx1.2\times10^{-5}$。對比同 $N$、$T=300\ \mathrm K$ 的 Curie $\chi=\mu_0 N\mu^2/k_BT\approx\mu_0\times6\times10^{28}\times8.59\times10^{-47}/(4.14\times10^{-21})\approx1.6\times10^{-3}$。比值 $\chi_{\text{Pauli}}/\chi_{\text{Curie}}\sim10^{-2}\sim k_BT/\varepsilon_F$（$0.026/5=0.005$ 同量級），印證「只有 Fermi 面薄殼能翻轉」。
+</details>
+
+> **重點**：Pauli 順磁與 $T$ 無關（Fermi 簡併），且 $\chi\sim N\mu^2/\varepsilon_F$，比 Curie 律 $N\mu^2/k_BT$ 小一個因子 $\sim k_BT/\varepsilon_F$——因為只有 Fermi 面附近的電子能翻轉。
+
+---
+
+### 習題 11.6：傳導電子鐵磁性（Stoner 判據）（Conduction electron ferromagnetism）（Kittel Prob. 11.6）
+
+**題目（English, Kittel Prob. 11.6）**：We approximate the effect of exchange interactions among the conduction electrons if we assume that electrons with parallel spins interact with each other with energy $-V$, and $V$ is positive, while electrons with antiparallel spins do not interact with each other. (a) Show with the help of Problem 5 that the total energy of the spin-up band is $E_\uparrow=E_0(1+\zeta)^{5/3}-\tfrac12 N\mu B(1+\zeta)-\tfrac18 VN^2(1+\zeta)^2$; find a similar expression for $E_\downarrow$. (b) Minimize the total energy and solve for $\zeta$ in the limit $\zeta\ll1$. Show that the magnetization is enhanced, so that the exchange interaction enhances the susceptibility. (c) Show that with $B=0$ the total energy is unstable at $\zeta=0$ when $V>4\varepsilon_F/3N$. If this is satisfied, a ferromagnetic state ($\zeta\neq0$) will have a lower energy than the paramagnetic state. Because of the assumption $\zeta\ll1$, this is a sufficient condition for ferromagnetism, but it may not be a necessary condition. It is known as the Stoner condition.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+近似考慮交換作用：平行自旋電子間以能量 $-V$（$V>0$）相互作用，反平行不作用。(a) 借 Prob.5，證自旋向上帶總能含交換項 $E_\uparrow=E_0(1+\zeta)^{5/3}-\tfrac12 N\mu B(1+\zeta)-\tfrac18 VN^2(1+\zeta)^2$；給 $E_\downarrow$。(b) 最小化求 $\zeta$（$\zeta\ll1$），得磁化。(c) 證 $B=0$ 時 $\zeta=0$ 在 $V>4\varepsilon_F/3N$ 時不穩定（Stoner 條件）。
+
+</details>
+
+**Step 1（交換能）**：自旋向上帶有 $N_\uparrow=\tfrac12 N(1+\zeta)$ 個電子，兩兩配對數 $\binom{N_\uparrow}{2}\approx\tfrac12 N_\uparrow^2$，每對能量 $-V$：
+$$E_\uparrow^{\text{ex}}=-\tfrac12 V N_\uparrow^2=-\tfrac12 V\Big[\tfrac12 N(1+\zeta)\Big]^2=-\tfrac18 VN^2(1+\zeta)^2.$$
+連同 Prob.5 結果：
+$$\boxed{E_\uparrow=E_0(1+\zeta)^{5/3}-\tfrac12 N\mu B(1+\zeta)-\tfrac18 VN^2(1+\zeta)^2}$$
+$$E_\downarrow=E_0(1-\zeta)^{5/3}+\tfrac12 N\mu B(1-\zeta)-\tfrac18 VN^2(1-\zeta)^2.$$
+
+**Step 2（總能展開，$\zeta\ll1$）**：動能項如 Prob.5 給 $2E_0+\tfrac{10}{9}E_0\zeta^2$；磁能給 $-N\mu B\zeta$；交換項相加：
+$$-\tfrac18 VN^2\big[(1+\zeta)^2+(1-\zeta)^2\big]=-\tfrac18 VN^2(2+2\zeta^2)=-\tfrac14 VN^2-\tfrac14 VN^2\zeta^2.$$
+故
+$$E_{\text{tot}}\approx \text{const}+\Big(\tfrac{10}{9}E_0-\tfrac14 VN^2\Big)\zeta^2-N\mu B\zeta.$$
+
+**Step 3（(b) 最小化）**：$\dfrac{dE_{\text{tot}}}{d\zeta}=2\Big(\tfrac{10}{9}E_0-\tfrac14 VN^2\Big)\zeta-N\mu B=0$。代 $E_0=\tfrac{3}{10}N\varepsilon_F$，故 $\tfrac{10}{9}E_0=\tfrac13 N\varepsilon_F$：
+$$2\Big(\tfrac13 N\varepsilon_F-\tfrac14 VN^2\Big)\zeta=N\mu B\ \Rightarrow\ \zeta=\frac{N\mu B}{2N(\tfrac13\varepsilon_F-\tfrac14 VN)}=\frac{\mu B}{\tfrac23\varepsilon_F-\tfrac12 VN}.$$
+磁化 $M=N\mu\zeta$：
+$$\boxed{M=\frac{N\mu^2 B}{\tfrac23\varepsilon_F-\tfrac12 VN}=\frac{3N\mu^2 B}{2\varepsilon_F}\cdot\frac{1}{1-\tfrac{3VN}{4\varepsilon_F}}}$$
+與 Pauli 結果 $\dfrac{3N\mu^2B}{2\varepsilon_F}$ 相比，分母多了 $\big(1-\tfrac{3VN}{4\varepsilon_F}\big)^{-1}>1$——交換作用**放大**了磁化率（Stoner 增強）。
+
+**Step 4（(c) 不穩定判據）**：$B=0$ 時 $E_{\text{tot}}\approx\text{const}+\big(\tfrac13 N\varepsilon_F-\tfrac14 VN^2\big)\zeta^2$。$\zeta=0$ 為極小須係數 $>0$；當係數 $<0$ 時 $\zeta=0$ 不穩定、偏好 $\zeta\neq0$（鐵磁）：
+$$\tfrac13 N\varepsilon_F-\tfrac14 VN^2<0\ \Rightarrow\ V>\frac{4\varepsilon_F}{3N}.$$
+$$\boxed{\text{Stoner 條件：}\ V>\dfrac{4\varepsilon_F}{3N}\ \Rightarrow\ \text{自發鐵磁}}$$
+
+> **重點**：交換能 $\propto\zeta^2$（負），動能 $\propto\zeta^2$（正）。當交換贏過動能成本，$\zeta=0$ 變不穩 → 自發磁化。這是 itinerant（巡遊）鐵磁的微觀判據。
+
+---
+
+### 習題 11.7：二能階系統的另一形式（Two-level system）（Kittel Prob. 11.7）
+
+**題目（English, Kittel Prob. 11.7）**：The result of Problem 4 is often seen in another form. (a) If the two energy levels are at $\Delta$ and $-\Delta$, show that the energy and heat capacity are
+$$U=-\Delta\tanh\frac{\Delta}{\tau},\qquad C=k_B\Big(\frac{\Delta}{\tau}\Big)^2\operatorname{sech}^2\frac{\Delta}{\tau},\quad \tau\equiv k_BT.$$
+(b) If the system has a random composition such that all values of $\Delta$ are equally likely up to some limit $\Delta_0$, show that the heat capacity is linearly proportional to the temperature, provided $k_BT\ll\Delta_0$. This result was applied to the heat capacity of dilute magnetic alloys by W. Marshall, Phys. Rev. 118, 1519 (1960). It is also used in the theory of glasses.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+Prob.4 常寫成另一形式。(a) 若兩能階位於 $\pm\Delta$（對稱於中點），證能量與熱容
+$$U=-\Delta\tanh\frac{\Delta}{\tau},\qquad C=k_B\Big(\frac{\Delta}{\tau}\Big)^2\operatorname{sech}^2\frac{\Delta}{\tau},\quad \tau\equiv k_BT.$$
+(b) 若 $\Delta$ 在 $0$ 到 $\Delta_0$ 間均勻隨機分布，證 $k_BT\ll\Delta_0$ 時熱容線性正比於 $T$。
+
+</details>
+
+**Step 1（對稱二能階的配分函數）**：能階 $-\Delta,+\Delta$：
+$$Z=e^{\Delta/\tau}+e^{-\Delta/\tau}=2\cosh\frac{\Delta}{\tau}.$$
+平均能量
+$$U=\frac{(-\Delta)e^{\Delta/\tau}+(+\Delta)e^{-\Delta/\tau}}{2\cosh(\Delta/\tau)}=-\Delta\frac{e^{\Delta/\tau}-e^{-\Delta/\tau}}{e^{\Delta/\tau}+e^{-\Delta/\tau}}=-\Delta\tanh\frac{\Delta}{\tau}.\qquad\checkmark$$
+
+**Step 2（求熱容 $C=dU/dT$）**：用 $\dfrac{d}{dx}\tanh x=\operatorname{sech}^2 x$。令 $x=\Delta/\tau=\Delta/k_BT$，$\dfrac{dx}{dT}=-\dfrac{\Delta}{k_BT^2}$：
+$$C=\frac{dU}{dT}=-\Delta\operatorname{sech}^2x\cdot\frac{dx}{dT}=-\Delta\operatorname{sech}^2x\cdot\Big(-\frac{\Delta}{k_BT^2}\Big)=\frac{\Delta^2}{k_BT^2}\operatorname{sech}^2\frac{\Delta}{\tau}.$$
+寫成
+$$C=k_B\Big(\frac{\Delta}{\tau}\Big)^2\operatorname{sech}^2\frac{\Delta}{\tau}.\qquad\checkmark$$
+$$\boxed{U=-\Delta\tanh\dfrac{\Delta}{\tau},\qquad C=k_B\Big(\dfrac{\Delta}{\tau}\Big)^2\operatorname{sech}^2\dfrac{\Delta}{\tau}}$$
+
+**Step 3（(b) 對 $\Delta$ 平均，均勻分布）**：機率密度 $P(\Delta)d\Delta=d\Delta/\Delta_0$（$0<\Delta<\Delta_0$）。平均熱容
+$$\bar C=\int_0^{\Delta_0}C(\Delta)\frac{d\Delta}{\Delta_0}=\frac{k_B}{\Delta_0}\int_0^{\Delta_0}\Big(\frac{\Delta}{\tau}\Big)^2\operatorname{sech}^2\frac{\Delta}{\tau}\,d\Delta.$$
+
+**Step 4（換元 $x=\Delta/\tau$）**：$d\Delta=\tau\,dx$，上限 $\Delta_0/\tau$。當 $k_BT\ll\Delta_0$，上限 $\to\infty$（積分主要貢獻來自 $x\lesssim1$，因 $\operatorname{sech}^2x$ 指數衰減）：
+$$\bar C=\frac{k_B\tau}{\Delta_0}\int_0^{\infty}x^2\operatorname{sech}^2x\,dx.$$
+
+**Step 5（定積分為常數）**：$\displaystyle\int_0^\infty x^2\operatorname{sech}^2x\,dx=\frac{\pi^2}{12}$。代回 $\tau=k_BT$：
+$$\bar C=\frac{k_B(k_BT)}{\Delta_0}\cdot\frac{\pi^2}{12}=\frac{\pi^2 k_B^2}{12\,\Delta_0}\,T\ \propto\ T.\qquad\checkmark$$
+$$\boxed{k_BT\ll\Delta_0:\ \bar C=\dfrac{\pi^2 k_B^2}{12\,\Delta_0}\,T\ \propto\ T}$$
+
+> **重點**：單一二能階給 $1/T^2$ 尾巴；但「能隙隨機分布」一平均，就得到線性 $C\propto T$——這正是稀薄磁合金與玻璃低溫線性熱容的模型來源（Marshall 1960）。
+
+---
+
+### 習題 11.8：$S=1$ 系統的順磁性（Paramagnetism of $S=1$ system）（Kittel Prob. 11.8）
+
+**題目（English, Kittel Prob. 11.8）**：(a) Find the magnetization as a function of magnetic field and temperature for a system of spins with $S=1$, moment $\mu$, and concentration $n$. (b) Show that in the limit $\mu B\ll kT$ the result is $M=(2n\mu^2/3kT)B$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 求自旋 $S=1$、磁矩 $\mu$、濃度 $n$ 的系統，磁化強度對 $B$、$T$ 的函數。(b) 證 $\mu B\ll kT$ 時 $M=\dfrac{2n\mu^2}{3kT}B$。
+
+</details>
+
+**Step 1（列三條能階）**：$S=1$ 的 $m_S=+1,0,-1$，磁矩沿場分量 $\mu m_S$，Zeeman 能量 $E=-\mu m_S B$。令 $x=\mu B/k_BT$，三條 Boltzmann 因子為 $e^{x},\,1,\,e^{-x}$。
+
+**Step 2（配分函數）**：
+$$Z=e^{x}+1+e^{-x}=1+2\cosh x.$$
+
+**Step 3（平均磁矩）**：
+$$\langle\mu_z\rangle=\frac{\mu(1)e^{x}+\mu(0)\cdot1+\mu(-1)e^{-x}}{Z}=\frac{\mu(e^{x}-e^{-x})}{1+2\cosh x}=\frac{2\mu\sinh x}{1+2\cosh x}.$$
+磁化強度 $M=n\langle\mu_z\rangle$：
+$$\boxed{M=\frac{2n\mu\sinh(\mu B/k_BT)}{1+2\cosh(\mu B/k_BT)}}$$
+（這等價於 $S=1$ 的 Brillouin 函數 $M=n g\mu_B\,B_1(y)$。）
+
+**Step 4（(b) 弱場展開 $x\ll1$）**：$\sinh x\approx x$，$\cosh x\approx1$，分母 $\to1+2=3$：
+$$M\approx\frac{2n\mu\,x}{3}=\frac{2n\mu}{3}\cdot\frac{\mu B}{k_BT}=\frac{2n\mu^2}{3k_BT}B.\qquad\checkmark$$
+$$\boxed{\mu B\ll k_BT:\ M=\dfrac{2n\mu^2}{3k_BT}B,\qquad \chi=\dfrac{2n\mu^2}{3k_BT}}$$
+
+> **重點**：與範例 A 的 Curie 律同型 $\chi\propto1/T$。因子 $\tfrac23$ 來自 $S=1$ 的 $\langle m_S^2\rangle$（$=\tfrac23 S(S+1)=\tfrac43$？實際上一般式 $\chi=\frac{n\mu^2 S(S+1)}{3k_BT}\cdot\frac{?}{}$——這裡 $\mu$ 已定義為「每單位 $m_S$ 的磁矩」，故係數 $\tfrac23$ 直接對應）。
+
+---
+
+## 📚 Kittel 第12章 課本習題 — 完整解答（鐵磁與反鐵磁）
+
+### 習題 12.1：磁振子色散關係（Magnon dispersion relation）（Kittel Prob. 12.1）
+
+**題目（English, Kittel Prob. 12.1）**：Derive the magnon dispersion relation (24) for a spin $S$ on a simple cubic lattice, $z=6$. Hint: Show first that (18a) is replaced by
+$$\frac{dS_\mathbf{p}^x}{dt}=\frac{2JS}{\hbar}\sum_{\boldsymbol\delta}\big(S_{\mathbf{p}+\boldsymbol\delta}^y-S_\mathbf{p}^y\big),$$
+where the central atom is at $\mathbf p$ and the six nearest neighbors are connected to it by six vectors $\boldsymbol\delta$. Look for solutions of the equations for $dS_\mathbf{p}^x/dt$ and $dS_\mathbf{p}^y/dt$ of the form $\exp(i\mathbf k\cdot\mathbf p-i\omega t)$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+對簡單立方晶格（$z=6$）上自旋 $S$，推導磁振子色散關係 (24)。提示：先證 (18a) 改寫為
+$$\frac{dS_\mathbf{p}^x}{dt}=\frac{2JS}{\hbar}\sum_{\boldsymbol\delta}\big(S_{\mathbf{p}+\boldsymbol\delta}^y-S_\mathbf{p}^y\big),$$
+中心原子在 $\mathbf p$，六個最近鄰由六個向量 $\boldsymbol\delta$ 連接。試解 $\exp(i\mathbf k\cdot\mathbf p-i\omega t)$。
+
+</details>
+
+**Step 1（單自旋力矩方程）**：交換哈密頓量 $U=-2J\sum\vec S_\mathbf{p}\cdot\vec S_{\mathbf p+\boldsymbol\delta}$，中心自旋感受有效場 $\vec B_\mathbf{p}=-\dfrac{2J}{g\mu_B}\sum_{\boldsymbol\delta}\vec S_{\mathbf p+\boldsymbol\delta}$。進動方程 $\hbar\dfrac{d\vec S_\mathbf p}{dt}=2J\,\vec S_\mathbf p\times\sum_{\boldsymbol\delta}\vec S_{\mathbf p+\boldsymbol\delta}$。
+
+**Step 2（線性化，$S^z\approx S$）**：取 $x$ 分量，只留一階小量（$\vec S_{\mathbf p+\boldsymbol\delta}$ 的 $z$ 分量 $\approx S$）：
+$$\hbar\frac{dS_\mathbf p^x}{dt}=2JS\sum_{\boldsymbol\delta}\big(S_{\mathbf p+\boldsymbol\delta}^y-S_\mathbf p^y\big),$$
+即提示式（六個鄰居求和）。同理
+$$\hbar\frac{dS_\mathbf p^y}{dt}=-2JS\sum_{\boldsymbol\delta}\big(S_{\mathbf p+\boldsymbol\delta}^x-S_\mathbf p^x\big).$$
+
+**Step 3（平面波試解）**：令 $S_\mathbf p^x=u\,e^{i(\mathbf k\cdot\mathbf p-\omega t)}$、$S_\mathbf p^y=v\,e^{i(\mathbf k\cdot\mathbf p-\omega t)}$。對簡單立方，六個 $\boldsymbol\delta=(\pm a,0,0),(0,\pm a,0),(0,0,\pm a)$，故
+$$\sum_{\boldsymbol\delta}e^{i\mathbf k\cdot\boldsymbol\delta}=2(\cos k_xa+\cos k_ya+\cos k_za).$$
+代入 $\sum_{\boldsymbol\delta}(S_{\mathbf p+\boldsymbol\delta}^y-S_\mathbf p^y)=v\,e^{i(\cdots)}\big[\sum_{\boldsymbol\delta}e^{i\mathbf k\cdot\boldsymbol\delta}-6\big]$。
+
+**Step 4（化成本徵問題）**：定義
+$$F(\mathbf k)\equiv 6-\sum_{\boldsymbol\delta}e^{i\mathbf k\cdot\boldsymbol\delta}=6-2(\cos k_xa+\cos k_ya+\cos k_za).$$
+方程組成
+$$-i\hbar\omega\,u=-2JS\,F\,v,\qquad -i\hbar\omega\,v=+2JS\,F\,u.$$
+
+**Step 5（久期方程）**：相乘消 $u,v$：$(\hbar\omega)^2=(2JS\,F)^2$，故
+$$\hbar\omega=2JS\,F(\mathbf k)=2JS\big[6-2(\cos k_xa+\cos k_ya+\cos k_za)\big].$$
+$$\boxed{\hbar\omega=2JS\big[\,6-2(\cos k_xa+\cos k_ya+\cos k_za)\,\big]}$$
+
+**Step 6（長波極限驗證）**：$ka\ll1$，$\cos k_ia\approx1-\tfrac12 k_i^2a^2$，故 $6-2\sum\cos\approx (k_x^2+k_y^2+k_z^2)a^2=k^2a^2$：
+$$\hbar\omega\approx 2JS\,a^2 k^2\quad(\omega\propto k^2,\ \text{Eq. 24}).$$
+
+> **重點**：磁振子是「自旋進動的集體波」，色散 $\hbar\omega=2JS\,F(\mathbf k)$，長波 $\omega\propto k^2$。久期方程那一步用到 $\hbar\omega=2JS\,F$（取正根）。
+
+---
+
+### 習題 12.2：磁振子的熱容（Heat capacity of magnons）（Kittel Prob. 12.2）
+
+**題目（English, Kittel Prob. 12.2）**：Use the approximate magnon dispersion relation $\omega=Ak^2$ to find the leading term in the heat capacity of a three-dimensional ferromagnet at low temperatures $k_BT\ll J$. The result is $0.113\,k_B(k_BT/\hbar A)^{3/2}$, per unit volume. The zeta function that enters the result may be estimated numerically; it is tabulated in Jahnke-Emde.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+用近似色散 $\hbar\omega=Ak^2$（注意 $\hbar\omega$，下文寫 $\omega=(A/\hbar)k^2$，或直接 $\hbar\omega=Ak^2$），求三維鐵磁體低溫 $k_BT\ll J$ 的熱容首項。結果為每單位體積 $0.113\,k_B\big(k_BT/\hbar A\big)^{3/2}$。
+
+</details>
+
+> 說明：依 Kittel 記號令磁振子能量 $\hbar\omega=Ak^2$（這裡 $A$ 含 $\hbar$；下面用 $\varepsilon=\hbar\omega=Ak^2$ 較清楚，最後對回 Kittel 形式）。
+
+**Step 1（態密度，3D）**：磁振子數密度由 $\mathbf k$ 空間積分。每模佔 Bose 分布 $\langle n\rangle=\dfrac{1}{e^{\hbar\omega/k_BT}-1}$。內能（每體積）
+$$U=\int\frac{d^3k}{(2\pi)^3}\,\frac{\hbar\omega}{e^{\hbar\omega/k_BT}-1},\qquad \hbar\omega=Ak^2.$$
+用 $d^3k=4\pi k^2\,dk$：
+$$U=\frac{1}{2\pi^2}\int_0^\infty \frac{k^2\,(Ak^2)}{e^{Ak^2/k_BT}-1}\,dk.$$
+
+**Step 2（無因次化）**：令 $x=\dfrac{Ak^2}{k_BT}$，則 $k=\big(\tfrac{k_BT}{A}\big)^{1/2}x^{1/2}$，$dk=\tfrac12\big(\tfrac{k_BT}{A}\big)^{1/2}x^{-1/2}dx$。代入後 $k^2\,dk\propto x^{1/2}dx$，而 $Ak^2=k_BT\,x$：
+$$U=\frac{1}{2\pi^2}\Big(\frac{k_BT}{A}\Big)^{3/2}(k_BT)\cdot\frac12\int_0^\infty\frac{x^{1/2}\cdot x}{e^{x}-1}\,x^{-1/2}\,dx?$$
+細算指數：$k^2\,dk=\big(\tfrac{k_BT}{A}\big)^{1/2}x^{1/2}\cdot\tfrac12\big(\tfrac{k_BT}{A}\big)^{1/2}x^{-1/2}dx=\tfrac12\big(\tfrac{k_BT}{A}\big)x^{0}\cdot? $——重做：
+
+$$k^2\,dk=\Big[\Big(\tfrac{k_BT}{A}\Big)^{1/2}x^{1/2}\Big]^2\cdot\tfrac12\Big(\tfrac{k_BT}{A}\Big)^{1/2}x^{-1/2}\,dx=\tfrac12\Big(\tfrac{k_BT}{A}\Big)^{3/2}x^{1/2}\,dx.$$
+而 $Ak^2=k_BT\,x$。故
+$$U=\frac{1}{2\pi^2}\cdot\tfrac12\Big(\frac{k_BT}{A}\Big)^{3/2}(k_BT)\int_0^\infty\frac{x^{1/2}\cdot x}{e^{x}-1}\,dx=\frac{k_BT}{4\pi^2}\Big(\frac{k_BT}{A}\Big)^{3/2}\int_0^\infty\frac{x^{3/2}}{e^{x}-1}dx.$$
+
+**Step 3（Bose 積分）**：標準結果
+$$\int_0^\infty\frac{x^{3/2}}{e^x-1}\,dx=\Gamma(\tfrac52)\,\zeta(\tfrac52)=\frac{3\sqrt\pi}{4}\times1.341=1.783.$$
+
+**Step 4（內能）**：
+$$U=\frac{k_BT}{4\pi^2}\Big(\frac{k_BT}{A}\Big)^{3/2}\times1.783=\frac{1.783}{4\pi^2}\,k_BT\Big(\frac{k_BT}{A}\Big)^{3/2}=0.0451\,k_BT\Big(\frac{k_BT}{A}\Big)^{3/2}.$$
+故 $U\propto T^{5/2}$。
+
+**Step 5（求熱容 $C=dU/dT$）**：$U=0.0451\,k_B\,A^{-3/2}(k_B)^{3/2}\,T^{5/2}$，微分得因子 $\tfrac52$：
+$$C=\frac52\times0.0451\,k_B\Big(\frac{k_BT}{A}\Big)^{3/2}=0.113\,k_B\Big(\frac{k_BT}{A}\Big)^{3/2}.\qquad\checkmark$$
+（此處 $A=\hbar\cdot A_{\text{Kittel}}$；對回 Kittel 寫法 $\omega=A_K k^2$，$\hbar A_K\to A$，即 $C=0.113\,k_B(k_BT/\hbar A_K)^{3/2}$。）
+$$\boxed{C=0.113\,k_B\Big(\frac{k_BT}{\hbar A}\Big)^{3/2}\propto T^{3/2}\quad(\text{Bloch }T^{3/2}\text{ 定律})}$$
+
+> **重點**：磁振子色散 $\omega\propto k^2$ ⟹ 態密度 $\propto\varepsilon^{1/2}$ ⟹ 內能 $\propto T^{5/2}$ ⟹ 熱容 $\propto T^{3/2}$。對比聲子（$\omega\propto k$）的 $C\propto T^3$，這是區分磁振子貢獻的指紋。
+
+---
+
+### 習題 12.3：Néel 溫度（Néel temperature）（Kittel Prob. 12.3）
+
+**題目（English, Kittel Prob. 12.3）**：Taking the effective fields on the two-sublattice model of an antiferromagnet as
+$$B_A=B_a-\mu M_B,\qquad B_B=B_a-\mu M_A,$$
+(with $\mu>0$ the molecular-field constant, and subscripts $A,B$ labeling the two sublattices), show that the Néel temperature is $T_N=\mu C$ and that the susceptibility in the paramagnetic region $T>T_N$ has the Curie–Weiss form $\chi=2C/(T+T_N)$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+取反鐵磁雙子晶格（two-sublattice）模型的有效場為
+$$B_A=B_a-\mu M_B,\qquad B_B=B_a-\mu M_A,$$
+（$\mu>0$ 為分子場常數，下標 $A,B$ 為兩子晶格）試證 Néel 溫度 $T_N$ 與居里–外斯（Curie–Weiss）行為，並求 $T>T_N$ 的磁化率
+
+</details>
+$$\chi=\frac{2C}{T+\theta},\qquad T_N=\theta=\mu C.$$
+
+**Step 1（各子晶格的 Curie 響應）**：每子晶格在其有效場下呈 Curie 律 $M=\dfrac{C}{T}B_{\text{eff}}$（$C$ 為單一子晶格的 Curie 常數）：
+$$M_A=\frac{C}{T}(B_a-\mu M_B),\qquad M_B=\frac{C}{T}(B_a-\mu M_A).$$
+
+**Step 2（求 $T_N$：零外場的自發解）**：令 $B_a=0$，方程為
+$$M_A=-\frac{C\mu}{T}M_B,\qquad M_B=-\frac{C\mu}{T}M_A.$$
+寫成矩陣
+$$\begin{pmatrix}1 & C\mu/T\\ C\mu/T & 1\end{pmatrix}\begin{pmatrix}M_A\\M_B\end{pmatrix}=0.$$
+非平庸解須行列式為零：
+$$1-\Big(\frac{C\mu}{T}\Big)^2=0\ \Rightarrow\ \frac{C\mu}{T}=1\ \Rightarrow\ T_N=\mu C.$$
+$$\boxed{T_N=\mu C}$$
+
+**Step 3（求 $T>T_N$ 磁化率：加 $B_a$）**：兩式相加，令 $M=M_A+M_B$：
+$$M_A+M_B=\frac{C}{T}\big[2B_a-\mu(M_A+M_B)\big]\ \Rightarrow\ M=\frac{C}{T}(2B_a-\mu M).$$
+
+**Step 4（解出 $M$）**：
+$$M+\frac{C\mu}{T}M=\frac{2C}{T}B_a\ \Rightarrow\ M\Big(1+\frac{C\mu}{T}\Big)=\frac{2C}{T}B_a\ \Rightarrow\ M=\frac{2C\,B_a}{T+C\mu}.$$
+
+**Step 5（磁化率）**：$\chi=M/B_a$，代 $\mu C=T_N\equiv\theta$：
+$$\chi=\frac{2C}{T+C\mu}=\frac{2C}{T+\theta},\qquad \theta=T_N=\mu C.$$
+$$\boxed{\chi=\dfrac{2C}{T+T_N}\quad(T>T_N),\qquad T_N=\mu C}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 620 250" width="100%" style="max-width:720px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="310" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">習題 12.3：1/χ 對 T 的截距分辨三種磁性</text>
+<line x1="200" y1="210" x2="585" y2="210" stroke="#888" stroke-width="1.2"/>
+<line x1="200" y1="210" x2="200" y2="32" stroke="#888" stroke-width="1.2"/>
+<text x="578" y="226" text-anchor="end" fill="#555">溫度 T →</text>
+<text x="196" y="42" text-anchor="end" fill="#555">1/χ</text>
+<text x="200" y="226" text-anchor="middle" fill="#555">0</text>
+<line x1="200" y1="210" x2="560" y2="40" stroke="#1a4d7c" stroke-width="2.4"/>
+<line x1="280" y1="210" x2="560" y2="78" stroke="#c0392b" stroke-width="2.4"/>
+<line x1="120" y1="210" x2="560" y2="55" stroke="#2e8b2e" stroke-width="2.4"/>
+<line x1="120" y1="210" x2="200" y2="210" stroke="#2e8b2e" stroke-width="2.4" stroke-dasharray="5 4"/>
+<line x1="280" y1="200" x2="280" y2="220" stroke="#c0392b" stroke-width="1.4"/>
+<text x="280" y="236" text-anchor="middle" fill="#c0392b">+T_N</text>
+<line x1="120" y1="200" x2="120" y2="220" stroke="#2e8b2e" stroke-width="1.4"/>
+<text x="120" y="236" text-anchor="middle" fill="#2e8b2e">−θ</text>
+<text x="470" y="58" fill="#1a4d7c">順磁 χ=C/T（過原點）</text>
+<text x="430" y="92" fill="#c0392b">反鐵磁 χ=2C/(T+T_N)</text>
+<text x="350" y="50" fill="#2e8b2e">鐵磁 χ=C/(T−θ)</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 12.3</b> 的判讀技巧：把 <b>1/χ 對 T 畫成直線</b>，看它與 T 軸的截距就分辨出磁性種類。<b style="color:#1a4d7c">純順磁</b>（居里律 χ=C/T）<b>過原點</b>；<b style="color:#2e8b2e">鐵磁</b>（Curie–Weiss χ=C/(T−θ)）截距在 <b>正側 +θ</b>，外推到 T=θ 才發散（自發磁化）；<b style="color:#c0392b">反鐵磁</b>（本題 χ=2C/(T+T_N)）截距落在 <b>負側 −T_N</b>，要到 T=−T_N 才發散。本題用兩子晶格自洽方程、令行列式為零得 T_N=μC，正是 +T_N 截距的來源。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：$1/\chi$ 截距讀法、鐵磁對照、數值與 $T_N$ 反推</b></summary>
+
+**範例 A（把本題結果寫成 $1/\chi$ 直線、讀截距）**：本題 $\chi=\dfrac{2C}{T+T_N}$，取倒數
+$$\frac1\chi=\frac{T+T_N}{2C}=\frac{1}{2C}T+\frac{T_N}{2C}.$$
+這是 $1/\chi$ 對 $T$ 的直線：斜率 $\dfrac{1}{2C}$、$1/\chi$ 軸截距 $\dfrac{T_N}{2C}>0$。令 $1/\chi=0$ 解 $T$ 軸截距：$T=-T_N$（在負溫側）——這正是上圖紅線外推到 $-T_N$ 才發散的代數來源。
+
+**範例 B（鐵磁對照：同法但符號相反）**：鐵磁分子場 $B_{\text{eff}}=B_a+\lambda M$（同向耦合，$+$ 號），單一磁化 $M=\dfrac CT(B_a+\lambda M)$。解 $M\big(1-\dfrac{C\lambda}{T}\big)=\dfrac CT B_a$，得 $\chi=\dfrac{M}{B_a}=\dfrac{C}{T-C\lambda}=\dfrac{C}{T-\theta}$（$\theta=C\lambda=T_c$）。對比反鐵磁分母 $T+T_N$：差別純粹來自子晶格耦合是「$-\mu M$」（反平行）vs 鐵磁「$+\lambda M$」（平行）。鐵磁 $1/\chi$ 截在 $+\theta$，反鐵磁截在 $-T_N$。
+
+**範例 C（給數據反推 $T_N$ 與 $C$）**：某反鐵磁體量到 $1/\chi$-$T$ 直線：斜率 $0.02\ \mathrm{mol/(cm^3\,K)}$、$T$ 軸截距 $-30\ \mathrm K$。由斜率 $=\dfrac1{2C}=0.02\Rightarrow C=\dfrac1{2\times0.02}=25\ \mathrm{cm^3\,K/mol}$。由 $T$ 軸截距 $=-T_N=-30\Rightarrow T_N=30\ \mathrm K$。驗證自洽：分子場常數 $\mu=\dfrac{T_N}{C}=\dfrac{30}{25}=1.2$。順便：若同材料另測得實際磁序消失溫度（Néel 點）也約 $30\ \mathrm K$，則平均場與實驗一致；通常實驗 $T_N$ 略低於 $\theta$（漲落使序更易破壞）。
+</details>
+
+> **重點**：反鐵磁的 Curie–Weiss 律是 $\chi=\dfrac{2C}{T+\theta}$（分母「$+\theta$」，與鐵磁的「$-\theta$」相反），外推到 $T=-\theta=-T_N$ 才發散。$\theta=T_N$ 是「子晶格間反平行耦合」的特徵。
+
+---
+
+### 習題 12.4：磁彈耦合與磁致伸縮（Magnetoelastic coupling）（Kittel Prob. 12.4）
+
+**題目（English, Kittel Prob. 12.4）**：In a cubic crystal the elastic energy density in terms of the usual strain components $e_{ij}$ is (Chapter 3)
+$$U_{\text{el}}=\tfrac12 C_{11}(e_{xx}^2+e_{yy}^2+e_{zz}^2)+\tfrac12 C_{44}(e_{xy}^2+e_{yz}^2+e_{zx}^2)+C_{12}(e_{yy}e_{zz}+e_{zz}e_{xx}+e_{xx}e_{yy}),$$
+and the leading term in the magnetic anisotropy energy density is, from (54), $U_K=K_1(\alpha_1^2\alpha_2^2+\alpha_2^2\alpha_3^2+\alpha_3^2\alpha_1^2)$, where the $\alpha_i$ are the direction cosines of the magnetization. Coupling between elastic strain and magnetization direction may be taken formally into account by including in the total energy density a term
+$$U_{c}=B_1(\alpha_1^2 e_{xx}+\alpha_2^2 e_{yy}+\alpha_3^2 e_{zz})+B_2(\alpha_1\alpha_2 e_{xy}+\alpha_2\alpha_3 e_{yz}+\alpha_3\alpha_1 e_{zx}),$$
+arising from the strain dependence of $U_K$; here $B_1$ and $B_2$ are called magnetoelastic coupling constants. Show that the total energy is a minimum when
+$$e_{xx}=\frac{B_1\big[C_{12}-\alpha_1^2(C_{11}+2C_{12})\big]}{(C_{11}-C_{12})(C_{11}+2C_{12})}\quad(\text{and cyclic permutations},\ e_{xy}=-\tfrac{B_2\alpha_1\alpha_2}{C_{44}}\ \text{etc.}).$$
+This explains the origin of magnetostriction, the change of length on magnetization.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+立方晶體的彈性能密度（Chapter 3）
+$$U_{\text{el}}=\tfrac12 C_{11}(e_{xx}^2+e_{yy}^2+e_{zz}^2)+\tfrac12 C_{44}(e_{xy}^2+e_{yz}^2+e_{zx}^2)+C_{12}(e_{yy}e_{zz}+e_{zz}e_{xx}+e_{xx}e_{yy}),$$
+磁各向異性能首項 $U_K=K_1(\alpha_1^2\alpha_2^2+\alpha_2^2\alpha_3^2+\alpha_3^2\alpha_1^2)$（$\alpha_i$ 為磁化方向餘弦），磁彈耦合項
+$$U_{c}=B_1(\alpha_1^2 e_{xx}+\alpha_2^2 e_{yy}+\alpha_3^2 e_{zz})+B_2(\alpha_1\alpha_2 e_{xy}+\alpha_2\alpha_3 e_{yz}+\alpha_3\alpha_1 e_{zx}).$$
+證明總能對應變最小時，
+$$e_{xx}=\frac{B_1\big[C_{12}-\alpha_1^2(C_{11}+2C_{12})\big]}{(C_{11}-C_{12})(C_{11}+2C_{12})}\quad(\text{及循環},\ e_{xy}=-\tfrac{B_2\alpha_1\alpha_2}{C_{44}}\ \text{等}).$$
+
+</details>
+
+**Step 1（挑出含 $e_{xx}$ 的項）**：總能 $U=U_{\text{el}}+U_c+U_K$ 中含 $e_{xx}$ 者：
+$$\tfrac12 C_{11}e_{xx}^2+C_{12}e_{xx}(e_{yy}+e_{zz})+B_1\alpha_1^2 e_{xx}.$$
+
+**Step 2（對 $e_{xx}$ 偏微分令為零）**：
+$$\frac{\partial U}{\partial e_{xx}}=C_{11}e_{xx}+C_{12}(e_{yy}+e_{zz})+B_1\alpha_1^2=0.$$
+同理對 $e_{yy},e_{zz}$：
+$$C_{11}e_{yy}+C_{12}(e_{zz}+e_{xx})+B_1\alpha_2^2=0,$$
+$$C_{11}e_{zz}+C_{12}(e_{xx}+e_{yy})+B_1\alpha_3^2=0.$$
+
+**Step 3（三式相加，利用 $\sum\alpha_i^2=1$）**：令 $e\equiv e_{xx}+e_{yy}+e_{zz}$：
+$$C_{11}e+C_{12}\cdot2e+B_1(\alpha_1^2+\alpha_2^2+\alpha_3^2)=0\ \Rightarrow\ (C_{11}+2C_{12})e+B_1=0.$$
+故
+$$e=-\frac{B_1}{C_{11}+2C_{12}}.$$
+
+**Step 4（單獨解 $e_{xx}$）**：由 Step 2 第一式，$e_{yy}+e_{zz}=e-e_{xx}$：
+$$C_{11}e_{xx}+C_{12}(e-e_{xx})+B_1\alpha_1^2=0\ \Rightarrow\ (C_{11}-C_{12})e_{xx}=-C_{12}e-B_1\alpha_1^2.$$
+
+**Step 5（代入 $e$）**：
+$$(C_{11}-C_{12})e_{xx}=-C_{12}\Big(-\frac{B_1}{C_{11}+2C_{12}}\Big)-B_1\alpha_1^2=B_1\Big[\frac{C_{12}}{C_{11}+2C_{12}}-\alpha_1^2\Big].$$
+$$e_{xx}=\frac{B_1\big[C_{12}-\alpha_1^2(C_{11}+2C_{12})\big]}{(C_{11}-C_{12})(C_{11}+2C_{12})}.\qquad\checkmark$$
+
+**Step 6（剪應變）**：含 $e_{xy}$ 的項 $\tfrac12 C_{44}e_{xy}^2+B_2\alpha_1\alpha_2 e_{xy}$，對 $e_{xy}$ 微分：
+$$C_{44}e_{xy}+B_2\alpha_1\alpha_2=0\ \Rightarrow\ e_{xy}=-\frac{B_2\alpha_1\alpha_2}{C_{44}}\quad(\text{及循環}).$$
+$$\boxed{e_{xx}=\dfrac{B_1[C_{12}-\alpha_1^2(C_{11}+2C_{12})]}{(C_{11}-C_{12})(C_{11}+2C_{12})},\qquad e_{xy}=-\dfrac{B_2\alpha_1\alpha_2}{C_{44}}}$$
+
+> **重點**：平衡應變依賴磁化方向 $\alpha_i$——這就是磁致伸縮（magnetostriction）：磁化方向改變 ⟹ 晶體長度改變。技巧是「只挑含目標應變的項、令偏微分為零」。
+
+---
+
+### 習題 12.5：小顆粒的矯頑力（Coercive force of a small particle）（Kittel Prob. 12.5）
+
+**題目（English, Kittel Prob. 12.5）**：(a) Consider a small spherical single-domain particle of a uniaxial ferromagnet. Show that the reverse field along the axis required to reverse the magnetization is $B_a=2K/M_s$, in CGS units. The coercive force of single-domain particles is observed to be of this magnitude. Take $U_K=K\sin^2\theta$ as the anisotropy energy density and $U_M=-B_aM_s\cos\theta$ as the interaction energy density with the external field; here $\theta$ is the angle between $\mathbf B_a$ and $\mathbf M$. Hint: Expand the energies for small angles about $\theta=\pi$, and find the value of $B_a$ for which $U_K+U_M$ does not have a minimum near $\theta=\pi$. (b) Show that the magnetic energy of a saturated sphere of diameter $d$ is $\sim M_s^2 d^3$. An arrangement with appreciably less magnetic energy has a single wall in an equatorial plane. The domain wall energy will be $\pi\sigma_w d^2/4$, where $\sigma_w$ is the wall energy per unit area. Estimate for cobalt the critical radius below which the particles are stable as single domains, taking the value of $JS^2/a$ as for iron.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+(a) 單軸鐵磁的單疇球形小顆粒，證沿軸反轉磁化所需反向場 $B_a=2K/M_s$（CGS）。取各向異性能密度 $U_K=K\sin^2\theta$、外場交互作用能密度 $U_M=-B_aM_s\cos\theta$，$\theta$ 為 $\mathbf B_a$ 與 $\mathbf M$ 夾角。提示：對 $\theta=\pi$ 附近展開，找 $U_K+U_M$ 在 $\theta=\pi$ 附近失去極小值的 $B_a$。(b) 證飽和球磁能 $\sim M_s^2 d^3$；單疇穩定臨界半徑估計（鈷，取 $JS^2/a$ 同鐵）。
+
+</details>
+
+**Step 1（總能密度）**：磁化沿 $\theta$，外場沿 $\theta=0$（$\mathbf B_a$ 方向），初始磁化沿 $\theta=\pi$（與場反平行）。
+$$U(\theta)=K\sin^2\theta-B_aM_s\cos\theta.$$
+
+**Step 2（在 $\theta=\pi$ 附近展開）**：令 $\theta=\pi-\phi$（$\phi$ 小）。$\sin\theta=\sin\phi\approx\phi$，$\cos\theta=-\cos\phi\approx-1+\tfrac12\phi^2$：
+$$U\approx K\phi^2-B_aM_s\big(-1+\tfrac12\phi^2\big)=B_aM_s+\big(K-\tfrac12 B_aM_s\big)\phi^2.$$
+
+**Step 3（極小存在條件）**：$\theta=\pi$（$\phi=0$）為極小需 $\phi^2$ 係數 $>0$：
+$$K-\tfrac12 B_aM_s>0\ \Rightarrow\ B_a<\frac{2K}{M_s}.$$
+
+**Step 4（臨界反轉場）**：當 $B_a$ 增至係數變號，$\theta=\pi$ 不再是極小，磁化失穩反轉：
+$$\boxed{B_a=\frac{2K}{M_s}\quad(\text{CGS}),\ \text{反向矯頑場}}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 620 250" width="100%" style="max-width:720px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="310" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">習題 12.5(a)：能量 U(θ)=K sin²θ − B_a M_s cos θ 隨反向場失穩</text>
+<line x1="60" y1="231" x2="575" y2="231" stroke="#888" stroke-width="1.2"/>
+<line x1="60" y1="231" x2="60" y2="28" stroke="#888" stroke-width="1.2"/>
+<text x="60" y="246" text-anchor="middle" fill="#555">0</text>
+<text x="310" y="246" text-anchor="middle" fill="#555">π/2</text>
+<text x="560" y="246" text-anchor="middle" fill="#c0392b" font-weight="bold">θ=π（初始 M 逆場）</text>
+<text x="52" y="40" text-anchor="end" fill="#555">U/K</text>
+<polyline points="60.0,115.0 72.5,114.7 85.0,114.0 97.5,112.7 110.0,111.0 122.5,108.8 135.0,106.3 147.5,103.5 160.0,100.5 172.5,97.3 185.0,94.0 197.5,90.7 210.0,87.5 222.5,84.5 235.0,81.7 247.5,79.2 260.0,77.0 272.5,75.3 285.0,74.0 297.5,73.3 310.0,73.0 322.5,73.3 335.0,74.0 347.5,75.3 360.0,77.0 372.5,79.2 385.0,81.7 397.5,84.5 410.0,87.5 422.5,90.7 435.0,94.0 447.5,97.3 460.0,100.5 472.5,103.5 485.0,106.3 497.5,108.8 510.0,111.0 522.5,112.7 535.0,114.0 547.5,114.7 560.0,115.0" fill="none" stroke="#2e8b2e" stroke-width="2.2"/>
+<polyline points="60.0,157.0 72.5,156.6 85.0,155.5 97.5,153.6 110.0,150.9 122.5,147.7 135.0,143.8 147.5,139.3 160.0,134.5 172.5,129.2 185.0,123.7 197.5,118.0 210.0,112.2 222.5,106.4 235.0,100.7 247.5,95.2 260.0,90.0 272.5,85.1 285.0,80.6 297.5,76.6 310.0,73.0 322.5,70.0 335.0,67.5 347.5,65.5 360.0,64.0 372.5,63.1 385.0,62.6 397.5,62.5 410.0,62.8 422.5,63.4 435.0,64.3 447.5,65.3 460.0,66.5 472.5,67.7 485.0,68.9 497.5,70.0 510.0,71.0 522.5,71.9 535.0,72.5 547.5,72.9 560.0,73.0" fill="none" stroke="#e67e22" stroke-width="2.2"/>
+<polyline points="60.0,199.0 85.0,196.9 110.0,190.9 135.0,181.2 160.0,168.4 185.0,153.4 210.0,136.9 235.0,119.8 260.0,103.0 285.0,87.2 310.0,73.0 335.0,60.9 360.0,51.1 385.0,43.5 410.0,38.1 435.0,34.6 460.0,32.5 485.0,31.5 510.0,31.1 535.0,31.0 560.0,31.0" fill="none" stroke="#c0392b" stroke-width="2.6"/>
+<circle cx="560" cy="115" r="4" fill="#2e8b2e"/>
+<text x="200" y="60" fill="#2e8b2e">B_a=0：θ=π 是極小（穩定）</text>
+<text x="200" y="200" fill="#c0392b">B_a=2K/M_s：θ=π 不再是極小 → 反轉</text>
+<text x="200" y="120" fill="#e67e22">B_a 中等：極小變淺</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 12.5(a) 矯頑力</b>的能量地形。磁化初始在 θ=π（與反向場逆平行）。<b style="color:#2e8b2e">B_a=0</b> 時 θ=π 是個能量極小（綠點，穩定）；<b style="color:#e67e22">B_a 中等</b>時此井變淺；當 <b style="color:#c0392b">B_a 增到 2K/M_s</b>，在 θ=π 附近展開 U≈B_a M_s+(K−½B_a M_s)φ² 的二階係數變號，極小消失，磁化沿斜坡<b>滑向 θ=0 翻轉</b>。臨界反向場即矯頑場 <b style="color:#c0392b">B_a=2K/M_s</b>。</figcaption>
+</figure>
+
+**Step 5（(b) 飽和球的磁能）**：均勻磁化球外部有偶極場，磁靜能 $\sim\dfrac{1}{2}\int B^2/8\pi\,dV\sim M_s^2\times(\text{體積})$。體積 $\sim d^3$，故
+$$U_{\text{mag}}\sim M_s^2\,d^3.$$
+
+**Step 6（單疇 vs. 雙疇臨界尺寸）**：分成兩疇（赤道面一道壁）可消去大部分磁靜能，但付出壁能 $\sim\sigma_w\cdot(\text{壁面積})\sim\sigma_w d^2$（Kittel 取 $\pi\sigma_w d^2/4$）。兩者相等給臨界直徑：
+$$M_s^2 d^3\sim\sigma_w d^2\ \Rightarrow\ d_c\sim\frac{\sigma_w}{M_s^2}.$$
+對鈷：壁能 $\sigma_w\approx3\ \mathrm{erg/cm^2}$（比鐵高約 10 倍，因 $K_1$ 較大），$M_s\approx1400\ \mathrm{G}$ 故 $M_s^2\approx2\times10^6\ \mathrm{erg/cm^3}$：
+$$d_c\approx\frac{3}{2\times10^6}\approx1.5\times10^{-6}\ \mathrm{cm}\approx100\ \text{Å}.$$
+$$\boxed{B_a=\dfrac{2K}{M_s};\quad d_c\sim\dfrac{\sigma_w}{M_s^2}\approx100\ \text{Å（鈷，粗估）}}$$
+
+<details>
+<summary><b>📝 更多範例（點開）：二階係數判穩、數值矯頑場、臨界尺寸換材料</b></summary>
+
+**範例 A（嚴格用二階導數判穩，驗 $B_a=2K/M_s$）**：不靠展開，直接對 $U(\theta)=K\sin^2\theta-B_aM_s\cos\theta$ 求導。一階 $U'=2K\sin\theta\cos\theta+B_aM_s\sin\theta=\sin\theta(2K\cos\theta+B_aM_s)$。在 $\theta=\pi$：$\sin\pi=0$ 故 $U'=0$（是駐點）。二階 $U''=2K\cos2\theta+B_aM_s\cos\theta$（由 $2K\sin\theta\cos\theta=K\sin2\theta$ 微分得 $2K\cos2\theta$）。代 $\theta=\pi$：$\cos2\pi=1$、$\cos\pi=-1$：
+$$U''(\pi)=2K-B_aM_s.$$
+極小需 $U''>0\Rightarrow B_a<2K/M_s$；臨界 $B_a=2K/M_s$ 時 $U''=0$（極小消失）。與 Step 3 小角展開完全一致。
+
+**範例 B（數值算矯頑場，鈷）**：CGS 取鈷 $K\approx4.5\times10^6\ \mathrm{erg/cm^3}$、$M_s\approx1400\ \mathrm{G}$（emu/cm³）。
+$$B_a=\frac{2K}{M_s}=\frac{2\times4.5\times10^6}{1400}=\frac{9\times10^6}{1400}\approx6.4\times10^3\ \mathrm{G}=6.4\ \mathrm{kG}\approx0.64\ \mathrm T.$$
+這就是單疇鈷顆粒的理論矯頑場量級（kG），與實驗觀測的「硬磁」顆粒相符。換軟磁鐵（$K\approx5\times10^5$、$M_s\approx1700$）：$B_a=2\times5\times10^5/1700\approx590\ \mathrm G\approx0.06\ \mathrm T$，小一個量級——矯頑力直接由各向異性 $K$ 主導。
+
+**範例 C（臨界尺寸換材料，看 $\sigma_w/M_s^2$ 縮放）**：單疇臨界直徑 $d_c\sim\sigma_w/M_s^2$。鈷：$\sigma_w\approx3\ \mathrm{erg/cm^2}$、$M_s^2\approx(1400)^2\approx2\times10^6$，$d_c\approx3/(2\times10^6)=1.5\times10^{-6}\ \mathrm{cm}=150\ \text{Å}$。改鐵（$\sigma_w\approx1\ \mathrm{erg/cm^2}$、$M_s\approx1700$，$M_s^2\approx2.9\times10^6$）：$d_c\approx1/(2.9\times10^6)\approx3.4\times10^{-7}\ \mathrm{cm}\approx34\ \text{Å}$。鈷臨界尺寸大於鐵，因鈷各向異性大、壁能 $\sigma_w$ 高 ⟹ 較大顆粒仍保持單疇，這是鈷適合做高密度磁記錄顆粒的原因之一。
+</details>
+
+> **重點**：(a) 是「能量極小失穩」的標準操作——展開、看二階係數變號。(b) 單疇臨界尺寸來自「磁靜能 $\propto d^3$」與「壁能 $\propto d^2$」的競爭，小顆粒（$d<d_c$）保持單疇。
+
+---
+
+### 習題 12.6：$T_c$ 附近的飽和磁化（Saturation magnetization near $T_c$）（Kittel Prob. 12.6）
+
+**題目（English, Kittel Prob. 12.6）**：Show that in the mean field approximation the saturation magnetization just below the Curie temperature has the dominant temperature dependence $(T_c-T)^{1/2}$. Assume the spin is $S=\tfrac12$. The result is the same as that for a second-order transition in a ferroelectric crystal, as discussed in Chapter 16. The experimental data for ferromagnets (Table 1) suggest that the exponent is closer to 0.33.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+證明在分子場（mean-field）近似下，居里溫度 $T_c$ 略下方的飽和磁化主導溫度相依為 $(T_c-T)^{1/2}$。設自旋 $S=\tfrac12$。
+
+</details>
+
+**Step 1（分子場自洽方程，$S=\tfrac12$）**：磁化 $m=M/M_s$（無因次）滿足
+$$m=\tanh\Big(\frac{T_c}{T}\,m\Big),$$
+其中 $T_c=\dfrac{\mu C}{?}$ 由分子場常數定，自洽條件來自 Brillouin 函數（$S=\tfrac12$ 即 $\tanh$），零外場時自旋感受到自身分子場 $\propto m$。
+
+**Step 2（$T\to T_c^-$ 時 $m$ 小，展開 $\tanh$）**：令 $t=T/T_c$，方程 $m=\tanh(m/t)$。用 $\tanh x=x-\tfrac13 x^3+\cdots$：
+$$m=\frac{m}{t}-\frac13\Big(\frac{m}{t}\Big)^3+\cdots.$$
+
+**Step 3（移項）**：
+$$m\Big(1-\frac1t\Big)=-\frac{1}{3t^3}m^3\ \Rightarrow\ \Big(\frac1t-1\Big)=\frac{1}{3t^3}m^2\quad(\text{除以 }m,\ m\neq0).$$
+
+**Step 4（解 $m^2$）**：
+$$m^2=3t^3\Big(\frac1t-1\Big)=3t^2(1-t).$$
+當 $T\to T_c$，$t\to1$，故 $t^2\to1$：
+$$m^2\approx3(1-t)=3\,\frac{T_c-T}{T_c}.$$
+
+**Step 5（開根號）**：
+$$m\approx\sqrt3\Big(\frac{T_c-T}{T_c}\Big)^{1/2}\ \propto\ (T_c-T)^{1/2}.\qquad\checkmark$$
+$$\boxed{m=\frac{M}{M_s}\approx\sqrt{3}\,\Big(\frac{T_c-T}{T_c}\Big)^{1/2}\ \propto\ (T_c-T)^{1/2}}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 620 240" width="100%" style="max-width:720px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="310" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">習題 12.6：分子場自發磁化 M(T)，T_c 略下方 ∝ (T_c−T)^½</text>
+<line x1="60" y1="200" x2="585" y2="200" stroke="#888" stroke-width="1.2"/>
+<line x1="60" y1="200" x2="60" y2="22" stroke="#888" stroke-width="1.2"/>
+<text x="578" y="216" text-anchor="end" fill="#555">溫度 T →</text>
+<text x="54" y="34" text-anchor="end" fill="#555">M/M_s</text>
+<line x1="56" y1="30" x2="445" y2="30" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="50" y="34" text-anchor="end" fill="#555">1</text>
+<polyline points="60.0,30.0 79.2,30.0 98.5,30.0 117.7,30.0 136.9,30.0 156.2,30.1 175.4,30.4 194.6,31.2 213.8,32.4 233.1,34.4 252.3,37.2 271.5,41.0 290.8,45.8 310.0,51.7 329.2,59.1 348.5,68.2 367.7,79.2 386.9,93.0 406.2,110.7 425.4,135.5 444.6,200.0" fill="none" stroke="#1a4d7c" stroke-width="2.6"/>
+<polyline points="329.2,38.7 340.8,47.0 352.3,55.8 363.8,65.1 375.4,75.1 386.9,86.0 398.5,98.0 410.0,111.7 421.5,127.9 433.1,149.0 444.6,200.0" fill="none" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 4"/>
+<line x1="444.6" y1="200" x2="444.6" y2="36" stroke="#2e8b2e" stroke-width="1.3" stroke-dasharray="3 3"/>
+<text x="444.6" y="50" text-anchor="middle" fill="#2e8b2e">T_C</text>
+<line x1="444.6" y1="200" x2="560" y2="200" stroke="#888" stroke-width="2.6"/>
+<text x="500" y="190" fill="#888">T&gt;T_C：M=0</text>
+<text x="150" y="60" fill="#1a4d7c">M(T)=M_s·tanh(T_c m/T)</text>
+<text x="300" y="160" fill="#c0392b">近 T_C：m≈√3((T_C−T)/T_C)^½</text>
+<text x="300" y="176" fill="#c0392b">→ 垂直切線（β=½）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 12.6 的自發磁化曲線</b>。<b style="color:#1a4d7c">藍實線</b>是分子場自洽解 m=tanh(T_c m/T)：低溫飽和 m→1，升溫漸降，到 <b style="color:#2e8b2e">居里溫度 T_C</b> 連續歸零（二階相變），T&gt;T_C 則 M=0。重點在 <b style="color:#c0392b">T_C 略下方</b>：展開 tanh 到三次方得 m≈√3·((T_C−T)/T_C)^½，<b style="color:#c0392b">以平方根趨近、在 T_C 處切線垂直</b>，即臨界指數 β=½（平均場值；實驗約 0.33）。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：$\tanh$ 三次展開、Landau 自由能法、其他臨界指數</b></summary>
+
+**範例 A（仔細展開 $\tanh$，補回每一步）**：要解 $m=\tanh(m/t)$（$t=T/T_c$）近 $t=1$。設 $u=m/t$ 小，$\tanh u=u-\tfrac13 u^3+\tfrac{2}{15}u^5-\cdots$，只留前兩項：
+$$m=\frac mt-\frac13\frac{m^3}{t^3}.$$
+移 $\dfrac mt$ 到左：$m-\dfrac mt=-\dfrac{m^3}{3t^3}$，即 $m\Big(1-\dfrac1t\Big)=-\dfrac{m^3}{3t^3}$。除以 $m$（取 $m\neq0$ 解）並乘 $-1$：$\Big(\dfrac1t-1\Big)=\dfrac{m^2}{3t^3}$，故 $m^2=3t^3\Big(\dfrac1t-1\Big)=3t^2(1-t)$。近 $t\to1$，$t^2\to1$，$m^2\approx3(1-t)=3\dfrac{T_c-T}{T_c}$，開根 $m\approx\sqrt3\big(\tfrac{T_c-T}{T_c}\big)^{1/2}$——逐步無跳。
+
+**範例 B（Landau 自由能法，同得 $\beta=\tfrac12$）**：二階相變的自由能展開 $F(m)=F_0+a(T-T_c)m^2+b m^4$（$a,b>0$，奇次因對稱禁止）。平衡 $\dfrac{dF}{dm}=2a(T-T_c)m+4bm^3=0$。非零解：$m^2=-\dfrac{a(T-T_c)}{2b}=\dfrac{a(T_c-T)}{2b}$（$T<T_c$ 才有實解）。故
+$$m=\Big[\frac{a}{2b}(T_c-T)\Big]^{1/2}\propto(T_c-T)^{1/2}.$$
+與分子場 $\tanh$ 展開給出**完全相同**的 $\beta=\tfrac12$——因 $\tanh$ 展開的 $m^2$ 項正對應 Landau 的 $m^4$ 項，二者同型。
+
+**範例 C（不同臨界指數的定義與數值對照）**：臨界指數族刻畫相變奇異性：序參量 $m\propto(T_c-T)^\beta$；零場磁化率 $\chi\propto|T-T_c|^{-\gamma}$；臨界等溫線 $m\propto B^{1/\delta}$。平均場值：$\beta=\tfrac12$、$\gamma=1$、$\delta=3$。驗 $\delta$：在 $T=T_c$ 解 $m=\tanh(m+\tilde b)$ 含外場 $\tilde b\propto B$，展開 $m=(m+\tilde b)-\tfrac13(m+\tilde b)^3$，$T_c$ 處 $m$ 項抵消，留 $\tilde b\approx\tfrac13 m^3$，故 $m\propto B^{1/3}$ ⟹ $\delta=3$ ✓。實驗（3D Heisenberg）：$\beta\approx0.36$、$\gamma\approx1.39$、$\delta\approx4.8$——平均場系統性高估/低估，因忽略臨界漲落。
+</details>
+
+> **重點**：分子場（平均場）給臨界指數 $\beta=\tfrac12$。實驗值約 $0.33$（三維 Heisenberg），平均場高估——因為它忽略了臨界漲落。此與鐵電二階相變、Landau 理論同型。
+
+---
+
+### 習題 12.7：Néel 壁（Néel wall）（Kittel Prob. 12.7）
+
+**題目（English, Kittel Prob. 12.7）**：The direction of magnetization change in a domain wall goes from that of the Bloch wall to that of a Néel wall (Fig. 36) in thin films of material of negligible crystalline anisotropy energy, such as Permalloy. The intercept of the Bloch wall with the surface of the film creates a surface region of high demagnetization energy. The Néel wall avoids this intercept contribution, but at the expense of a demagnetization contribution throughout the volume of the wall. The Néel wall becomes energetically favorable when the film becomes sufficiently thin. Consider, however, the energetics of the Néel wall in bulk material of negligible crystalline anisotropy energy. There is now a demagnetization contribution to the wall energy density. By a qualitative argument similar to (56), show that
+$$\sigma_w\approx\frac{\pi^2 JS^2}{Na^2}+2\pi M_s^2 Na,$$
+(where $N$ is the wall thickness measured in lattice constants $a$). Find $N$ for which $\sigma_w$ is a minimum. Estimate the order of magnitude of $\sigma_w$ for typical values of $J$, $M_s$, and $a$.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+在可忽略晶體各向異性能的塊材中，Néel 壁有退磁（demagnetization）貢獻。用類似 (56) 的定性論證，證壁能密度
+$$\sigma_w\approx\frac{\pi^2 JS^2}{Na^2}+2\pi M_s^2 Na,$$
+（$N$ 為壁厚以晶格常數 $a$ 計的層數）並求使 $\sigma_w$ 最小的 $N$，估計 $\sigma_w$ 量級。
+
+</details>
+
+**Step 1（交換能貢獻）**：壁內自旋逐層轉角 $\pi/N$，每對相鄰自旋交換能增加 $JS^2(\pi/N)^2$（小角展開 $1-\cos\theta\approx\theta^2/2$，係數吸收）。每單位面積有 $N$ 對、每 $a^2$ 一條鏈：
+$$\sigma_{\text{ex}}\approx N\cdot\frac{JS^2(\pi/N)^2}{a^2}=\frac{\pi^2 JS^2}{Na^2}.$$
+（壁越厚 $N$ 越大，交換能越小——自旋轉得越緩。）
+
+**Step 2（退磁能貢獻）**：Néel 壁中磁化平行表面，壁內產生退磁場，最大退磁能密度 $\sim\tfrac12(4\pi M_s)M_s=2\pi M_s^2$。壁厚 $Na$，故每單位面積
+$$\sigma_{\text{demag}}\approx2\pi M_s^2\cdot Na.$$
+（壁越厚，退磁能越大——與交換能相反。）
+
+**Step 3（總壁能）**：
+$$\sigma_w\approx\frac{\pi^2 JS^2}{Na^2}+2\pi M_s^2 Na.\qquad\checkmark$$
+
+**Step 4（對 $N$ 最小化）**：$\dfrac{d\sigma_w}{dN}=-\dfrac{\pi^2 JS^2}{N^2a^2}+2\pi M_s^2 a=0$：
+$$\frac{\pi^2 JS^2}{N^2 a^2}=2\pi M_s^2 a\ \Rightarrow\ N^2=\frac{\pi^2 JS^2}{2\pi M_s^2 a^3}=\frac{\pi JS^2}{2M_s^2 a^3}.$$
+$$\boxed{N=\Big(\frac{\pi JS^2}{2M_s^2 a^3}\Big)^{1/2}}$$
+
+**Step 5（最小壁能）**：兩項在最小處相等（AM–GM），$\sigma_w^{\min}=2\sqrt{(\pi^2JS^2/a^2)(2\pi M_s^2 a)/a}$，整理
+$$\sigma_w^{\min}=2\Big(\frac{\pi^2 JS^2}{a^2}\cdot\frac{2\pi M_s^2 a}{1}\Big)^{1/2}\cdot\frac{1}{?}\ \approx\ 2\pi\Big(\frac{2\pi JS^2 M_s^2}{a}\Big)^{1/2}.$$
+代典型值（$J\sim k_B T_c$、$M_s\sim10^3\ \mathrm{G}$、$a\sim3\ \text{Å}$）量級約 $\sigma_w\sim1\ \mathrm{erg/cm^2}$（比鐵的 Bloch 壁大）。
+
+> **重點**：壁能永遠是「交換能（$\propto1/N$，偏好厚壁）」與「另一項（偏好薄壁）」的競爭。Bloch 壁的第二項是各向異性能 $\propto N$；Néel 壁在塊材中換成退磁能 $\propto N$。最小化 $1/N$ 與 $N$ 之和用 AM–GM 立得。
+
+---
+
+### 習題 12.8：巨磁阻（Giant magnetoresistance, GMR）（Kittel Prob. 12.8）
+
+**題目（English, Kittel Prob. 12.8）**：In a ferromagnetic metal, the conductivity $\sigma_p$ for electrons whose magnetic moments are oriented parallel to the magnetization is typically larger than $\sigma_a$ for those antiparallel to the magnetization. Consider a ferromagnetic conductor consisting of two separate regions of identical dimensions in series whose magnetizations can be independently controlled. Electrons of a given spin flow first through one region and then through the other. It is observed that the resistance when both magnetizations point upwards, $R_{\uparrow\uparrow}$, is lower than the resistance when they point opposite, $R_{\uparrow\downarrow}$. This resistance change can be large for $\sigma_p/\sigma_a\gg1$, and the phenomenon is called giant magnetoresistance (GMR). A small external magnetic field can switch the resistance from $R_{\uparrow\downarrow}$ to $R_{\uparrow\uparrow}$ by reorienting the magnetization of the second layer. This effect is increasingly used in magnetic storage applications such as the magnetic bit readout in hard drives. The giant magnetoresistance ratio is defined as $\mathrm{GMRR}=\dfrac{R_{\uparrow\downarrow}-R_{\uparrow\uparrow}}{R_{\uparrow\uparrow}}$. (a) If there is no spin-flip scattering for the conduction electrons, show the expression for GMRR (in terms of $\sigma_p,\sigma_a$). (Hint: Treat the spin-up and spin-down conduction electrons as independent conducting channels in parallel.) (b) If $\sigma_a\to0$, explain physically why the resistance in the $\uparrow\downarrow$ magnetization configuration is infinite.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+鐵磁金屬中，磁矩平行於磁化的電子電導率 $\sigma_p$ 通常大於反平行的 $\sigma_a$。兩段可獨立控制磁化方向的相同區段串聯。觀察到雙磁化同向電阻 $R_{\uparrow\uparrow}$ 低於反向 $R_{\uparrow\downarrow}$。GMR 比定義為 $\mathrm{GMRR}=\dfrac{R_{\uparrow\downarrow}-R_{\uparrow\uparrow}}{R_{\uparrow\uparrow}}$。(a) 若無自旋翻轉散射，證 GMRR 表達式（用 $\sigma_p,\sigma_a$）。(b) 若 $\sigma_a\to0$，物理解釋為何 $R_{\uparrow\downarrow}$ 無限大。
+
+</details>
+
+**Step 1（兩通道模型，two-current model）**：自旋向上與向下電子為兩條獨立並聯通道。每段電阻 $\propto1/\sigma$。令每段長度、截面積給出比例常數 $\kappa$（兩段相同），單段「平行電阻」$R_p=\kappa/\sigma_p$、「反平行電阻」$R_a=\kappa/\sigma_a$。
+
+**Step 2（同向組態 $\uparrow\uparrow$）**：兩段磁化同向。
+- 自旋向上電子：兩段都平行 ⟹ 串聯 $R_p+R_p=2R_p$。
+- 自旋向下電子：兩段都反平行 ⟹ $2R_a$。
+兩通道並聯：
+$$R_{\uparrow\uparrow}=\frac{(2R_p)(2R_a)}{2R_p+2R_a}=\frac{2R_pR_a}{R_p+R_a}.$$
+
+**Step 3（反向組態 $\uparrow\downarrow$）**：第二段磁化反轉。
+- 自旋向上電子：第一段平行、第二段反平行 ⟹ $R_p+R_a$。
+- 自旋向下電子：第一段反平行、第二段平行 ⟹ $R_a+R_p$。
+兩通道（各 $R_p+R_a$）並聯：
+$$R_{\uparrow\downarrow}=\frac{(R_p+R_a)(R_p+R_a)}{(R_p+R_a)+(R_p+R_a)}=\frac{R_p+R_a}{2}.$$
+
+**Step 4（計算 GMRR）**：
+$$\mathrm{GMRR}=\frac{R_{\uparrow\downarrow}-R_{\uparrow\uparrow}}{R_{\uparrow\uparrow}}=\frac{\dfrac{R_p+R_a}{2}-\dfrac{2R_pR_a}{R_p+R_a}}{\dfrac{2R_pR_a}{R_p+R_a}}.$$
+通分分子：$\dfrac{(R_p+R_a)^2-4R_pR_a}{2(R_p+R_a)}=\dfrac{(R_p-R_a)^2}{2(R_p+R_a)}$。除以 $R_{\uparrow\uparrow}$：
+$$\mathrm{GMRR}=\frac{(R_p-R_a)^2}{2(R_p+R_a)}\cdot\frac{R_p+R_a}{2R_pR_a}=\frac{(R_p-R_a)^2}{4R_pR_a}.$$
+
+**Step 5（換回電導率）**：$R_p=\kappa/\sigma_p$、$R_a=\kappa/\sigma_a$，$R_p-R_a=\kappa\big(\tfrac{1}{\sigma_p}-\tfrac1{\sigma_a}\big)=\kappa\dfrac{\sigma_a-\sigma_p}{\sigma_p\sigma_a}$，$R_pR_a=\kappa^2/(\sigma_p\sigma_a)$：
+$$\mathrm{GMRR}=\frac{\kappa^2(\sigma_a-\sigma_p)^2/(\sigma_p\sigma_a)^2}{4\kappa^2/(\sigma_p\sigma_a)}=\frac{(\sigma_p-\sigma_a)^2}{4\sigma_p\sigma_a}.$$
+$$\boxed{\mathrm{GMRR}=\frac{(\sigma_p-\sigma_a)^2}{4\sigma_p\sigma_a}=\frac{(R_p-R_a)^2}{4R_pR_a}}$$
+
+**Step 6（(b) $\sigma_a\to0$）**：若反平行電導 $\sigma_a\to0$（$R_a\to\infty$）。在 $\uparrow\downarrow$ 組態下，**每一個**自旋方向的電子都必定經過「一段與其磁化反平行」的區域，該段電阻無限大。兩條並聯通道**都**含一個無限電阻段，故兩通道皆斷路：
+$$R_{\uparrow\downarrow}=\frac{R_p+R_a}{2}\to\infty.$$
+$$\boxed{\sigma_a\to0\ \Rightarrow\ R_{\uparrow\downarrow}\to\infty\ (\text{兩自旋通道皆被反平行段阻斷})}$$
+
+> **重點**：GMR 的核心是「兩自旋通道並聯」。同向時自旋向上走低阻捷徑（短路效應）；反向時每條通道都被迫吃一個高阻段，沒有捷徑可走 ⟹ 總電阻升高。這是硬碟讀寫頭與自旋電子學的物理基礎。
+
+---
+
+## ✅ 本章計算題自我檢核
+
+做完上面後，你應該能**獨立**完成下列每一項（蓋住解答自己重算）：
+
+1. **Curie 律推導**：從 Langevin 函數 $L(x)=\coth x-1/x$ 展開到 $x/3$，導出 $\chi=Nm^2/3k_BT$；並能換成量子版 $\chi=\frac{N g^2 J(J+1)\mu_B^2}{3k_BT}$。
+2. **玻爾磁子數值**：背 $\mu_B=9.27\times10^{-24}\ \mathrm{J/T}$，$\hbar\omega_c=2\mu_B B$，能算 $B=1\ \mathrm T$ 的 Landau 間距 $\sim1\ \mathrm K$。
+3. **Hund 規則**：給任意 $d^n$ 或 $f^n$ 組態，3 步寫出 $^{2S+1}L_J$（記得「未滿一半 $J=|L-S|$、超過 $J=L+S$」）。
+4. **氫原子抗磁**：用 $\int_0^\infty r^n e^{-\alpha r}dr=n!/\alpha^{n+1}$ 算 $\langle r^2\rangle=3a_0^2$，代 $\chi=-\frac{N_Ae^2}{6mc^2}\langle r^2\rangle$ 得 $-2.36\times10^{-6}\ \mathrm{cm^3/mol}$。
+5. **二能階熱容**：寫出 $C=k_B(\Delta/T)^2\frac{e^{\Delta/T}}{(e^{\Delta/T}+1)^2}$，並取高溫 $C\propto1/T^2$、隨機分布平均後 $C\propto T$。
+6. **Pauli 與 Stoner**：用「能帶位移」法導 $\chi_{\text{Pauli}}=3N\mu^2/2\varepsilon_F$，加交換項得放大因子，寫出 Stoner 條件 $V>4\varepsilon_F/3N$。
+7. **磁振子色散**：對簡單立方寫 $\hbar\omega=2JS[6-2\sum\cos k_ia]$，長波 $\omega\propto k^2$，並導出 Bloch $C\propto T^{3/2}$。
+8. **反鐵磁 Néel 溫度**：兩子晶格自洽方程，行列式為零得 $T_N=\mu C$，$T>T_N$ 磁化率 $\chi=2C/(T+T_N)$。
+9. **臨界指數**：分子場 $m\propto(T_c-T)^{1/2}$（$\beta=\tfrac12$）；矯頑場 $B_a=2K/M_s$；單疇臨界尺寸 $d_c\sim\sigma_w/M_s^2$。
+10. **GMR**：兩通道並聯算 $R_{\uparrow\uparrow}$、$R_{\uparrow\downarrow}$，得 $\mathrm{GMRR}=(\sigma_p-\sigma_a)^2/4\sigma_p\sigma_a$；理解 $\sigma_a\to0$ 時 $R_{\uparrow\downarrow}\to\infty$。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

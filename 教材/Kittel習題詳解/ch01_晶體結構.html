@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 習題詳解 — 第1章 晶體結構 — 習題詳解＋範例</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">習題詳解目錄</a> &nbsp;·&nbsp; <a href="../Kittel章節導讀/index.html">章節導讀</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../../考古題/詳解/index.html">逐題詳解</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- Kittel 習題詳解：第1章 晶體結構 -->
+
+# Kittel 第1章 習題詳解 ＋ 加碼範例 — 晶體結構（Crystal Structure）
+
+> **這頁是什麼**：本章的「練習題庫＋完整解答」。先做 **加碼範例** 熱身，再把 **Kittel 課本習題** 全部練過。觀念見 [章節導讀](../Kittel章節導讀/ch01_晶體結構.html)、[單元學科](../../單元教學/unit01_晶體結構.html)；歷年考題見 [逐題詳解](../../考古題/詳解/index.html)。
+
+---
+
+## 🔥 加碼範例題目（先熱身）
+
+本章資格考最常考的是「幾何填充計算」：**填充率（packing fraction / filling factor）**、**面間距（interplanar spacing）$d_{hkl}$**、**配位數（coordination number）與空隙（void / interstitial）幾何**。以下四題由淺到深。
+
+---
+
+### 加碼範例 1：bcc 與 fcc 的填充率（packing fraction）
+
+**題目**：分別計算體心立方（body-centered cubic, bcc）與面心立方（face-centered cubic, fcc）結構的填充率（原子視為剛球 hard sphere、彼此接觸）。立方邊長（cube edge / lattice constant）為 $a$。
+
+**Step 1（填充率的定義）**
+填充率 = 一個傳統立方晶胞（conventional cubic cell）內所有原子實際佔的體積 ÷ 晶胞體積：
+$$
+f = \frac{N \cdot \frac{4}{3}\pi r^3}{a^3}
+$$
+其中 $N$ 是晶胞內原子數、$r$ 是原子半徑。我們要先找出每種結構的 $N$ 與 $r$ 跟 $a$ 的關係。
+
+**Step 2（bcc：數原子數 $N$）**
+bcc 在 8 個角各有 1 個原子（每個被 8 個晶胞共用，記 $1/8$），加上正中央 1 個（完整屬於此晶胞）：
+$$
+N_{\text{bcc}} = 8\times\frac{1}{8} + 1 = 2
+$$
+
+**Step 3（bcc：找接觸方向求 $r$）**
+bcc 最近鄰（nearest neighbour）沿**體對角線（body diagonal）**接觸。體對角線長 $\sqrt{3}\,a$，上面排了「角—心—角」共 4 個半徑：
+$$
+\sqrt{3}\,a = 4r \quad\Rightarrow\quad r = \frac{\sqrt{3}}{4}a
+$$
+
+**Step 4（bcc：代入）**
+$$
+f_{\text{bcc}} = \frac{2\cdot\frac{4}{3}\pi r^3}{a^3}
+= \frac{8\pi}{3}\cdot\frac{1}{a^3}\left(\frac{\sqrt{3}}{4}a\right)^3
+= \frac{8\pi}{3}\cdot\frac{3\sqrt{3}}{64}
+= \frac{\sqrt{3}\,\pi}{8}
+$$
+數值：$\dfrac{\sqrt{3}\,\pi}{8} = \dfrac{1.7320\times 3.1416}{8} = 0.6802$。
+
+**Step 5（fcc：數原子數 $N$）**
+fcc 在 8 個角（各 $1/8$）＋ 6 個面心（face centre，每個被 2 個晶胞共用，記 $1/2$）：
+$$
+N_{\text{fcc}} = 8\times\frac{1}{8} + 6\times\frac{1}{2} = 1 + 3 = 4
+$$
+
+**Step 6（fcc：找接觸方向求 $r$）**
+fcc 最近鄰沿**面對角線（face diagonal）**接觸。面對角線長 $\sqrt{2}\,a$，上面排了「角—面心—角」共 4 個半徑：
+$$
+\sqrt{2}\,a = 4r \quad\Rightarrow\quad r = \frac{\sqrt{2}}{4}a
+$$
+
+**Step 7（fcc：代入）**
+$$
+f_{\text{fcc}} = \frac{4\cdot\frac{4}{3}\pi r^3}{a^3}
+= \frac{16\pi}{3}\cdot\frac{1}{a^3}\left(\frac{\sqrt{2}}{4}a\right)^3
+= \frac{16\pi}{3}\cdot\frac{2\sqrt{2}}{64}
+= \frac{\sqrt{2}\,\pi}{6}
+$$
+數值：$\dfrac{\sqrt{2}\,\pi}{6} = \dfrac{1.4142\times 3.1416}{6} = 0.7405$。
+
+$$\boxed{f_{\text{bcc}} = \frac{\sqrt{3}\,\pi}{8}\approx 0.680,\qquad f_{\text{fcc}} = \frac{\sqrt{2}\,\pi}{6}\approx 0.740}$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 540 210" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<clipPath id="sqE1"><rect x="40" y="40" width="120" height="120"/></clipPath>
+<radialGradient id="bE1" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#9cc3e6"/><stop offset="1" stop-color="#2f6ba3"/></radialGradient>
+<radialGradient id="rE1" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#f0a79b"/><stop offset="1" stop-color="#c0392b"/></radialGradient>
+</defs>
+<g font-family="-apple-system,sans-serif">
+<g transform="translate(20,0)">
+<text x="100" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">bcc：沿體對角線相切</text>
+<rect x="40" y="40" width="120" height="120" fill="none" stroke="#555" stroke-width="1.3"/>
+<line x1="40" y1="160" x2="160" y2="40" stroke="#c0392b" stroke-width="2"/>
+<circle cx="40" cy="160" r="24" fill="url(#bE1)" stroke="#2f6ba3" stroke-width="0.6"/>
+<circle cx="100" cy="100" r="24" fill="url(#rE1)" stroke="#c0392b" stroke-width="0.6"/>
+<circle cx="160" cy="40" r="24" fill="url(#bE1)" stroke="#2f6ba3" stroke-width="0.6"/>
+<text x="40" y="186" text-anchor="middle" font-size="10.5" fill="#333">角</text>
+<text x="100" y="186" text-anchor="middle" font-size="10.5" fill="#c0392b">體心</text>
+<text x="160" y="186" text-anchor="middle" font-size="10.5" fill="#333">角</text>
+<text x="100" y="205" text-anchor="middle" font-size="13" fill="#333">4r = √3 a → N=2</text>
+</g>
+<g transform="translate(280,0)">
+<text x="100" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">fcc：沿面對角線相切</text>
+<g clip-path="url(#sqE1)"><circle cx="40" cy="40" r="42" fill="url(#bE1)"/><circle cx="160" cy="40" r="42" fill="url(#bE1)"/><circle cx="40" cy="160" r="42" fill="url(#bE1)"/><circle cx="160" cy="160" r="42" fill="url(#bE1)"/><circle cx="100" cy="100" r="42" fill="url(#rE1)"/></g>
+<rect x="40" y="40" width="120" height="120" fill="none" stroke="#555" stroke-width="1.3"/>
+<line x1="40" y1="160" x2="160" y2="40" stroke="#c0392b" stroke-width="2"/>
+<text x="100" y="186" text-anchor="middle" font-size="10.5" fill="#333">角—面心—角</text>
+<text x="100" y="205" text-anchor="middle" font-size="13" fill="#333">4r = √2 a → N=4</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>加碼範例 1（bcc / fcc 填充率）Step 3 與 6：</b>填充率全在「球沿哪個方向相切」。<b style="color:#c0392b">紅線是相切方向</b>。bcc 沿體對角線排「角—體心—角」共 4 個半徑：4r=√3·a；fcc 沿正方面的對角線排「角—面心—角」：4r=√2·a。配合每胞原子數 N（bcc 8×⅛+1=2、fcc 8×⅛+6×½=4）代入，得 0.680 與 0.740。</figcaption>
+</figure>
+
+> **重點**：填充率三步驟——數 $N$、找接觸方向定 $r(a)$、代入。fcc（與 hcp 並列）的 $0.74$ 是剛球最密堆積（closest packing）的理論上限。
+
+<details>
+<summary><b>📝 更多範例（點開）：bcc／fcc 填充率的變化題與數值代入</b></summary>
+
+**範例 A（bcc 用「原子半徑」反求晶格常數 $a$）**：已知鉻（Cr）是 bcc，原子半徑 $r=1.25\,$Å，求邊長 $a$ 與一胞體積。
+由 bcc 接觸條件 $4r=\sqrt3\,a$，反解：
+$$a=\frac{4r}{\sqrt3}=\frac{4\times1.25}{1.7320}=\frac{5.000}{1.7320}=2.887\ \text{Å}.$$
+一個傳統胞體積 $a^3=2.887^3=24.07\,$Å$^3$。胞內 $N=2$ 顆，故每顆佔 $24.07/2=12.03\,$Å$^3$。代回驗算填充率：
+$$f=\frac{2\cdot\frac43\pi r^3}{a^3}=\frac{2\cdot\frac43\pi(1.25)^3}{24.07}=\frac{2\cdot\frac43\times3.1416\times1.9531}{24.07}=\frac{16.36}{24.07}=0.680\ \checkmark$$
+與公式 $\sqrt3\pi/8$ 完全一致，確認反解無誤。
+
+**範例 B（fcc 數值：用 $a$ 算原子半徑與最近鄰距）**：銅（Cu）是 fcc，邊長 $a=3.61\,$Å，求原子半徑 $r$ 與最近鄰距離 $d_{nn}$。
+fcc 沿面對角線接觸 $4r=\sqrt2\,a$：
+$$r=\frac{\sqrt2}{4}a=\frac{1.4142}{4}\times3.61=0.35355\times3.61=1.276\ \text{Å}.$$
+最近鄰距離 = 兩相切球心距 $=2r=2.553\,$Å（也等於 $\tfrac{\sqrt2}{2}a=0.7071\times3.61=2.553\,$Å，兩法一致）。
+
+**範例 C（子情形：把 bcc 與 fcc 填充率「相除」比較空間利用）**：不必算到數值，直接比兩公式：
+$$\frac{f_{\text{fcc}}}{f_{\text{bcc}}}=\frac{\sqrt2\,\pi/6}{\sqrt3\,\pi/8}=\frac{\sqrt2}{6}\times\frac{8}{\sqrt3}=\frac{8\sqrt2}{6\sqrt3}=\frac{4\sqrt2}{3\sqrt3}=\frac{4}{3}\sqrt{\frac23}=\frac43\times0.8165=1.0887.$$
+即 fcc 比 bcc 多裝約 $8.9\%$ 的球。數值核對：$0.7405/0.6802=1.0887\ \checkmark$。這解釋了為何最密堆積（fcc/hcp）的 $0.74$ 是上限，而 bcc 的 $0.68$ 略低。
+
+**範例 D（bcc 第二近鄰也參與時的陷阱）**：有人誤以為 bcc 沿「立方邊」相切（$a=2r$）。檢查：若 $a=2r$，則體對角線 $\sqrt3\,a=2\sqrt3\,r\approx3.46r$，但角—心—角實際需 $4r$，$4r>3.46r$ → 球會重疊，矛盾。故 bcc 必沿**體對角線**接觸（$4r=\sqrt3\,a$），立方邊上的角原子彼此其實**不相切**（邊上只排 $2r=\frac{\sqrt3}{2}a\approx0.87a<a$，留有空隙）。
+</details>
+
+---
+
+### 加碼範例 2：simple cubic 與 diamond 的填充率對照
+
+**題目**：計算簡單立方（simple cubic, sc）與鑽石（diamond）結構的填充率，並與 fcc 比較。立方邊長為 $a$。
+
+**Step 1（sc：數原子數）**
+sc 只有 8 個角原子：$N_{\text{sc}} = 8\times\frac{1}{8} = 1$。
+
+**Step 2（sc：接觸方向）**
+sc 最近鄰沿**立方邊（cube edge）**接觸，邊長 $a$ 上排兩個半徑：
+$$
+a = 2r \quad\Rightarrow\quad r = \frac{a}{2}
+$$
+
+**Step 3（sc：代入）**
+$$
+f_{\text{sc}} = \frac{1\cdot\frac{4}{3}\pi (a/2)^3}{a^3}
+= \frac{4}{3}\pi\cdot\frac{1}{8} = \frac{\pi}{6} \approx 0.524
+$$
+
+**Step 4（diamond：數原子數）**
+鑽石 = fcc 空間晶格 ＋ 每格點 2 個原子的基底（basis），傳統立方晶胞含 $2\times 4 = 8$ 個原子：
+$$
+N_{\text{dia}} = 8
+$$
+
+**Step 5（diamond：接觸方向）**
+鑽石最近鄰沿**體對角線的 $1/4$** 接觸。基底兩原子分別在 $000$ 與 $\frac14\frac14\frac14$，間距為體對角線長 $\sqrt{3}\,a$ 的 $1/4$：
+$$
+2r = \frac{\sqrt{3}}{4}a \quad\Rightarrow\quad r = \frac{\sqrt{3}}{8}a
+$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 460 250" width="100%" style="max-width:500px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="bD2" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#9cc3e6"/><stop offset="1" stop-color="#2f6ba3"/></radialGradient>
+<radialGradient id="rD2" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#f0a79b"/><stop offset="1" stop-color="#c0392b"/></radialGradient>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="230" y="22" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">鑽石：basis 兩原子沿體對角線 ¼ 處接觸</text>
+<g fill="none" stroke="#999" stroke-width="1.1">
+<path d="M70,90 270,90 330,52 130,52 z"/>
+<path d="M70,210 270,210 330,172 130,172 z"/>
+<path d="M70,90 70,210 M270,90 270,210 M330,52 330,172 M130,52 130,172"/>
+</g>
+<line x1="70" y1="210" x2="330" y2="52" stroke="#c0392b" stroke-width="1.4" stroke-dasharray="5,4"/>
+<text x="300" y="92" font-size="10.5" fill="#c0392b">體對角線 √3·a</text>
+<circle cx="70" cy="210" r="16" fill="url(#bD2)" stroke="#2f6ba3" stroke-width="0.6"/>
+<text x="62" y="232" text-anchor="end" font-size="10.5" fill="#2f6ba3">000</text>
+<circle cx="135" cy="170.5" r="16" fill="url(#rD2)" stroke="#c0392b" stroke-width="0.6"/>
+<text x="135" y="148" text-anchor="middle" font-size="10.5" fill="#c0392b">¼ ¼ ¼</text>
+<line x1="70" y1="210" x2="135" y2="170.5" stroke="#e67e22" stroke-width="2.6"/>
+<text x="92" y="208" font-size="11" fill="#e67e22" font-weight="bold">2r = ¼·√3·a</text>
+<text x="230" y="240" text-anchor="middle" font-size="10.5" fill="#555">兩原子相隔體對角線的 ¼ → r = (√3/8)a</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>加碼範例 2（鑽石填充率）Step 5：</b>鑽石 = fcc 空間晶格 + 每格點 2 原子的 basis（<b style="color:#2f6ba3">藍 000</b>、<b style="color:#c0392b">紅 ¼¼¼</b>）。最近鄰是 basis 內這兩顆，間距 = 體對角線 √3·a 的 <b style="color:#e67e22">¼</b>，即 2r=√3·a/4 → r=(√3/8)a。因為只有 4 個最近鄰（四面體鍵），鑽石很「空」：填充率僅 0.340，是 fcc 的 46%。</figcaption>
+</figure>
+
+**Step 6（diamond：代入）**
+$$
+f_{\text{dia}} = \frac{8\cdot\frac{4}{3}\pi r^3}{a^3}
+= \frac{32\pi}{3}\cdot\frac{1}{a^3}\left(\frac{\sqrt{3}}{8}a\right)^3
+= \frac{32\pi}{3}\cdot\frac{3\sqrt{3}}{512}
+= \frac{\sqrt{3}\,\pi}{16}
+$$
+數值：$\dfrac{\sqrt{3}\,\pi}{16} = \dfrac{1.7320\times 3.1416}{16} = 0.3401$。
+
+**Step 7（與 fcc 比較）**
+$$
+\frac{f_{\text{dia}}}{f_{\text{fcc}}} = \frac{0.3401}{0.7405} = 0.459 \approx 46\%
+$$
+
+$$\boxed{f_{\text{sc}} = \frac{\pi}{6}\approx 0.524,\qquad f_{\text{dia}} = \frac{\sqrt{3}\,\pi}{16}\approx 0.340\ (\text{為 fcc 的}\ 46\%)}$$
+
+> **重點**：鑽石「很空」（$0.34$）源於四面體共價鍵（tetrahedral covalent bond）只有 4 個最近鄰，方向性換取了低空間利用率；課本明寫此值是密堆積的 46%。
+
+<details>
+<summary><b>📝 更多範例（點開）：sc／diamond 填充率的子情形與數值</b></summary>
+
+**範例 A（sc 用「邊長與密度」反推，以 Po 為例）**：釙（Po）是唯一常溫 sc 金屬，邊長 $a=3.36\,$Å。
+原子半徑：sc 沿立方邊接觸 $a=2r\Rightarrow r=\tfrac a2=1.68\,$Å。
+一胞 $N=1$，胞體積 $a^3=3.36^3=37.93\,$Å$^3$。填充率再算一次：
+$$f=\frac{1\cdot\frac43\pi r^3}{a^3}=\frac{\frac43\times3.1416\times1.68^3}{37.93}=\frac{\frac43\times3.1416\times4.742}{37.93}=\frac{19.86}{37.93}=0.524\ \checkmark$$
+與 $\pi/6$ 一致——填充率與 $a$ 無關（$r\propto a$，分子分母同 $\propto a^3$）。
+
+**範例 B（diamond：把 8 顆原子拆成「fcc 4 顆 + 內部 4 顆」數清楚）**：鑽石傳統胞 $N=8$ 的來源。
+- fcc 框架：角 $8\times\tfrac18=1$ ＋ 面心 $6\times\tfrac12=3$，共 $4$ 顆。
+- 內部 4 顆（位於 $\tfrac14\tfrac14\tfrac14$ 等四個「交錯」四面體位）完整在胞內，各算 $1$，共 $4$ 顆。
+合計 $4+4=8=N_{\text{dia}}\ \checkmark$。每個格點掛 basis 2 顆，$4\text{(fcc 點)}\times2=8$ 也得同值，兩種數法互相印證。
+
+**範例 C（子情形：若把鑽石誤當「填滿」會錯多少）**：若有人用 sc 接觸條件 $r=\tfrac a2$ 硬套鑽石 $N=8$：
+$$f_{\text{錯}}=\frac{8\cdot\frac43\pi(a/2)^3}{a^3}=8\times\frac{\pi}{6}=\frac{8\pi}{6}=4.19>1,$$
+得到大於 $1$ 的荒謬值 → 立刻知道「接觸方向選錯」。鑽石真正接觸是 basis 兩原子沿體對角線 $\tfrac14$ 處，$r=\tfrac{\sqrt3}{8}a$ 遠小於 $\tfrac a2$，才得合理的 $0.340$。
+
+**範例 D（數值：鑽石碳的實際半徑與鍵長）**：金剛石 $a=3.567\,$Å。
+共價半徑 $r=\tfrac{\sqrt3}{8}a=\tfrac{1.7320}{8}\times3.567=0.2165\times3.567=0.7717\,$Å。
+最近鄰鍵長 $=2r=1.543\,$Å（實驗 C–C 鍵長約 $1.54\,$Å，吻合）。可見 $\tfrac{\sqrt3}{8}a$ 不只是抽象公式，直接給出真實鍵長。
+</details>
+
+---
+
+### 加碼範例 3：立方系的面間距 $d_{hkl}$ 與 fcc 的最大繞射 $d$
+
+**題目**：(a) 推導立方晶系（cubic system）面間距公式 $d_{hkl}=\dfrac{a}{\sqrt{h^2+k^2+l^2}}$。(b) 對 $a=4.00\,\text{Å}$ 的立方晶體，求 $(111)$ 與 $(200)$ 的面間距。
+
+**Step 1（面的法向量）**
+立方系中，密勒指標（Miller indices）$(hkl)$ 的平面，其法線方向就是 $[hkl]$，即向量 $\mathbf{n}\parallel (h,k,l)$。最靠近原點的那片 $(hkl)$ 平面，在三軸上的截距為 $\dfrac{a}{h},\dfrac{a}{k},\dfrac{a}{l}$。
+
+**Step 2（點到平面距離）**
+面間距 $d$ = 原點到「最近那片平面」的垂直距離。平面方程式可寫成
+$$
+\frac{x}{a/h}+\frac{y}{a/k}+\frac{z}{a/l}=1
+\quad\Longleftrightarrow\quad
+hx+ky+lz = a
+$$
+原點 $(0,0,0)$ 到平面 $hx+ky+lz=a$ 的距離：
+$$
+d_{hkl} = \frac{|{-a}|}{\sqrt{h^2+k^2+l^2}} = \frac{a}{\sqrt{h^2+k^2+l^2}}
+$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 540 220" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="12">
+<g transform="translate(0,0)">
+<text x="135" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">(111)：三軸都截於 a</text>
+<g fill="none" stroke="#999" stroke-width="1.1">
+<path d="M60,160 200,160 250,128 110,128 z"/>
+<path d="M60,160 60,70 M200,160 200,70 M250,128 250,38 M110,128 110,38"/>
+<path d="M60,70 200,70 250,38 110,38 z"/>
+</g>
+<polygon points="200,160 60,70 110,128" fill="#6aa1d6" fill-opacity="0.45" stroke="#1a4d7c" stroke-width="1.4"/>
+<circle cx="60" cy="160" r="3.5" fill="#333"/>
+<text x="54" y="176" text-anchor="end" font-size="10" fill="#333">O</text>
+<circle cx="200" cy="160" r="4.5" fill="#e67e22"/>
+<circle cx="60" cy="70" r="4.5" fill="#e67e22"/>
+<circle cx="110" cy="128" r="4.5" fill="#e67e22"/>
+<text x="135" y="206" text-anchor="middle" font-size="11" fill="#555">截距 a,a,a → d=a/√3</text>
+</g>
+<line x1="270" y1="30" x2="270" y2="195" stroke="#e2e2e2" stroke-width="1"/>
+<g transform="translate(270,0)">
+<text x="135" y="20" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">(200)：x 截 a/2，平行 y,z</text>
+<g fill="none" stroke="#999" stroke-width="1.1">
+<path d="M60,160 200,160 250,128 110,128 z"/>
+<path d="M60,160 60,70 M200,160 200,70 M250,128 250,38 M110,128 110,38"/>
+<path d="M60,70 200,70 250,38 110,38 z"/>
+</g>
+<polygon points="130,160 130,70 180,38 180,128" fill="#6aa1d6" fill-opacity="0.45" stroke="#1a4d7c" stroke-width="1.4"/>
+<circle cx="60" cy="160" r="3.5" fill="#333"/>
+<text x="54" y="176" text-anchor="end" font-size="10" fill="#333">O</text>
+<circle cx="130" cy="160" r="4.5" fill="#e67e22"/>
+<text x="130" y="206" text-anchor="middle" font-size="11" fill="#555">截距 a/2,∞,∞ → d=a/2</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>加碼範例 3（立方面間距）：</b>d 是原點到「最近那片平面」的垂直距離。<b style="color:#1a4d7c">(111)（左）</b>在三軸各截於 a（橘點），代 d=a/√(1+1+1)=a/√3。<b style="color:#1a4d7c">(200)（右）</b>只截 x 軸於 a/2、平行 y,z（截距 ∞），代 d=a/√(2²)=a/2；它正好把 (100) 間距對半切，是 fcc 真正有繞射的那一片。</figcaption>
+</figure>
+
+**Step 3（代入 (111)）**
+$$
+d_{111} = \frac{4.00}{\sqrt{1+1+1}} = \frac{4.00}{\sqrt{3}} = \frac{4.00}{1.7320} = 2.309\,\text{Å}
+$$
+
+**Step 4（代入 (200)）**
+$$
+d_{200} = \frac{4.00}{\sqrt{2^2+0+0}} = \frac{4.00}{2} = 2.000\,\text{Å}
+$$
+
+$$\boxed{d_{hkl}=\frac{a}{\sqrt{h^2+k^2+l^2}};\quad d_{111}=2.31\,\text{Å},\quad d_{200}=2.00\,\text{Å}}$$
+
+> **重點**：$d_{hkl}$ 公式只對立方系成立（一般晶系要用倒晶格 reciprocal lattice）。注意 fcc 的 $(200)$ 才有繞射（$(100)$ 因結構因子 structure factor 消光），下一章會用到。
+
+<details>
+<summary><b>📝 更多範例（點開）：立方面間距 $d_{hkl}$ 多算幾題與反推</b></summary>
+
+**範例 A（$(110)$ 與 $(220)$，看「倍指標→半間距」）**：仍取 $a=4.00\,$Å。
+$$d_{110}=\frac{4.00}{\sqrt{1^2+1^2+0}}=\frac{4.00}{\sqrt2}=\frac{4.00}{1.4142}=2.828\ \text{Å},$$
+$$d_{220}=\frac{4.00}{\sqrt{2^2+2^2+0}}=\frac{4.00}{\sqrt8}=\frac{4.00}{2.8284}=1.414\ \text{Å}.$$
+注意 $d_{220}=\tfrac12 d_{110}$：把每個指標乘 $n$，$d$ 變成 $1/n$（$\sqrt{(nh)^2+\cdots}=n\sqrt{h^2+\cdots}$）。這就是 $n$ 階繞射等價於 $(nh,nk,nl)$ 的一階繞射。
+
+**範例 B（$(321)$ 一般指標）**：
+$$d_{321}=\frac{4.00}{\sqrt{3^2+2^2+1^2}}=\frac{4.00}{\sqrt{9+4+1}}=\frac{4.00}{\sqrt{14}}=\frac{4.00}{3.7417}=1.069\ \text{Å}.$$
+
+**範例 C（反推晶格常數 $a$）**：X 光量到某立方晶體 $(110)$ 面的 $d=2.55\,$Å，求 $a$。
+$$a=d_{110}\sqrt{1^2+1^2+0}=2.55\times\sqrt2=2.55\times1.4142=3.61\ \text{Å}$$
+（正是銅的邊長）。一般式：$a=d_{hkl}\sqrt{h^2+k^2+l^2}$。
+
+**範例 D（用 $d$ 比值反認指標）**：同一晶體量到兩面 $d_1=2.31\,$Å、$d_2=2.00\,$Å，比值 $\dfrac{d_1}{d_2}=\dfrac{2.31}{2.00}=1.155=\dfrac{\sqrt4}{\sqrt3}=\sqrt{\tfrac43}$。
+由 $d\propto 1/\sqrt{h^2+k^2+l^2}$，比值平方 $=\dfrac{h_2^2+k_2^2+l_2^2}{h_1^2+k_1^2+l_1^2}=\dfrac43$ → 取 $(h_1^2+\cdots)=3,\ (h_2^2+\cdots)=4$ → 對應 $(111)$ 與 $(200)$。光看間距比就能反認晶面。
+</details>
+
+---
+
+### 加碼範例 4：fcc 的八面體空隙比（octahedral void ratio）
+
+**題目**：在 fcc（如 NaCl 中的陰離子骨架）的**八面體空隙（octahedral hole）**塞入一個剛球而恰好「卡住」（與周圍 6 個大球同時接觸），求可塞入小球半徑 $r$ 與大球半徑 $R$ 之比 $r/R$。
+
+**Step 1（空隙位置）**
+fcc 大球半徑 $R$，最近鄰沿面對角線接觸：$4R=\sqrt{2}\,a\Rightarrow R=\dfrac{\sqrt2}{4}a$。八面體空隙位於**立方體中心** $(\tfrac12,\tfrac12,\tfrac12)$ 與**各邊中點**；取邊中點 $(\tfrac12,0,0)$ 的空隙來算。
+
+**Step 2（小球—大球接觸條件）**
+邊中點 $(\tfrac12,0,0)$ 的空隙，其最近的大球在邊端點，例如角原子 $(0,0,0)$。沿立方邊方向，從邊中點到角的距離為 $\dfrac{a}{2}$，此距離須等於兩球半徑和：
+$$
+R + r = \frac{a}{2}
+$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 420 250" width="100%" style="max-width:460px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="rO4" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#f0a79b"/><stop offset="1" stop-color="#c0392b"/></radialGradient>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="210" y="22" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">八面體空隙：小球恰卡在 6 大球中央</text>
+<circle cx="120" cy="80" r="46" fill="#dce9f5" stroke="#2f6ba3" stroke-width="1.1"/>
+<circle cx="300" cy="80" r="46" fill="#dce9f5" stroke="#2f6ba3" stroke-width="1.1"/>
+<circle cx="120" cy="200" r="46" fill="#dce9f5" stroke="#2f6ba3" stroke-width="1.1"/>
+<circle cx="300" cy="200" r="46" fill="#dce9f5" stroke="#2f6ba3" stroke-width="1.1"/>
+<circle cx="210" cy="140" r="22" fill="url(#rO4)" stroke="#7d2418" stroke-width="0.8"/>
+<line x1="210" y1="140" x2="120" y2="80" stroke="#1a4d7c" stroke-width="1.6"/>
+<text x="158" y="100" font-size="11" fill="#1a4d7c" font-weight="bold">R + r</text>
+<text x="120" y="84" text-anchor="middle" font-size="11" fill="#2f6ba3" font-weight="bold">R</text>
+<text x="210" y="144" text-anchor="middle" font-size="11" fill="#fff" font-weight="bold">r</text>
+<text x="210" y="244" text-anchor="middle" font-size="11" fill="#555">R+r = a/2，且 4R = √2·a → r/R = √2 − 1 ≈ 0.414</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>加碼範例 4（八面體空隙比）Step 1–2：</b>fcc 的<b style="color:#2f6ba3">大球（淺藍，半徑 R）</b>密堆，中間的八面體空隙塞進<b style="color:#c0392b">小球（紅，半徑 r）</b>。卡住時小球同時碰到周圍大球，球心距 = R+r，而從空隙到最近大球心 = a/2，故 R+r=a/2。再用 fcc 的 4R=√2·a 消去 a，得臨界半徑比 r/R=√2−1≈0.414——這正是 NaCl 型（6 配位）穩定的下界。</figcaption>
+</figure>
+
+**Step 3（消去 $a$）**
+由 $R=\dfrac{\sqrt2}{4}a$ 得 $a=\dfrac{4}{\sqrt2}R=2\sqrt2\,R$。代入：
+$$
+R + r = \frac{a}{2} = \frac{2\sqrt2\,R}{2} = \sqrt2\,R
+$$
+$$
+r = (\sqrt2 - 1)R
+$$
+
+**Step 4（數值）**
+$$
+\frac{r}{R} = \sqrt2 - 1 = 1.4142 - 1 = 0.4142
+$$
+
+$$\boxed{\frac{r}{R} = \sqrt2 - 1 \approx 0.414}$$
+
+> **重點**：$0.414$ 是「離子半徑比規則（radius ratio rule）」中八面體配位的臨界值——當 $r/R$ 大於它，NaCl 型（6 配位）才穩定；小於它則傾向 4 配位（zinc blende 型）。
+
+<details>
+<summary><b>📝 更多範例（點開）：四面體空隙、立方空隙與半徑比應用</b></summary>
+
+**範例 A（四面體空隙 $r/R$ 的完整推導）**：把 4 個大球放在「小立方體（邊 $\ell$）交錯的 4 個角」（= 正四面體頂點），空隙在小立方體中心。
+- 相鄰兩大球連線 = 小立方體**面對角線** $=\sqrt2\,\ell=2R$（兩球相切）$\Rightarrow R=\tfrac{\sqrt2}{2}\ell$。
+- 空隙中心到大球中心 = 半條**體對角線** $=\tfrac{\sqrt3}{2}\ell=R+r$。
+
+兩式相除消去 $\ell$：
+$$\frac{R+r}{R}=\frac{\tfrac{\sqrt3}{2}\ell}{\tfrac{\sqrt2}{2}\ell}=\frac{\sqrt3}{\sqrt2}=\sqrt{\frac32}=1.2247\ \Rightarrow\ \frac rR=\sqrt{\tfrac32}-1=0.2247\approx0.225.$$
+比八面體的 $0.414$ 小，因為四面體洞只 4 球圍、較緊。
+
+**範例 B（立方空隙 $r/R$，CsCl 型 8 配位）**：8 個大球放在立方體 8 角、空隙在體心。
+- 大球沿立方邊相切：$2R=\ell\Rightarrow R=\tfrac\ell2$。
+- 空隙到角的距離 = 半條體對角線 $=\tfrac{\sqrt3}{2}\ell=R+r$。
+$$\frac{R+r}{R}=\frac{\tfrac{\sqrt3}{2}\ell}{\tfrac\ell2}=\sqrt3=1.7320\ \Rightarrow\ \frac rR=\sqrt3-1=0.732.$$
+這就是 $0.732$ 上界：$r/R>0.732$ 偏好立方 8 配位（CsCl）。
+
+**範例 C（把三個臨界值排成「半徑比規則」一覽）**：
+$$0.225\ (\sqrt{\tfrac32}-1)\ \xrightarrow{\text{四面體}}\ 0.414\ (\sqrt2-1)\ \xrightarrow{\text{八面體}}\ 0.732\ (\sqrt3-1)\ \xrightarrow{\text{立方}}$$
+配位數隨半徑比上升：$4\to6\to8$。三值分別來自體對角線比上「面對角線、邊、邊」的幾何，記法統一。
+
+**範例 D（數值代入：NaCl 落在哪一格）**：Na$^+$ 半徑 $r=0.95\,$Å、Cl$^-$ 半徑 $R=1.81\,$Å。
+$$\frac rR=\frac{0.95}{1.81}=0.525.$$
+$0.414<0.525<0.732$ → 落在**八面體**區間 → 預測 6 配位（NaCl 型），與實驗一致 $\checkmark$。再看 ZnS：Zn$^{2+}$ $0.74\,$Å、S$^{2-}$ $1.84\,$Å，$r/R=0.402$，落在 $0.225$–$0.414$ → 4 配位（zinc blende），亦吻合。
+</details>
+
+---
+
+## 📚 Kittel 第1章 課本習題 — 完整解答
+
+> 本章 Kittel 共 3 題（Prob. 1.1 ~ 1.3），全部完整逐步解如下。
+
+---
+
+### 習題 1：四面體角（Tetrahedral angles）（Kittel Prob. 1.1）
+
+**題目（English, Kittel Prob. 1.1）**：The angles between the tetrahedral bonds of diamond are the same as the angles between the body diagonals of a cube, as in Fig. 10. Use elementary vector analysis to find the value of the angle.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+鑽石（diamond）中四面體鍵（tetrahedral bond）之間的夾角，等於一個立方體**體對角線（body diagonals）**之間的夾角。用基本向量分析求此角度。
+
+</details>
+
+**Step 1（取兩條體對角線當向量）**
+把立方體放在以中心為原點、頂點在 $(\pm1,\pm1,\pm1)$ 的座標系。體對角線即連接「對角頂點」的線。取兩條從中心發出的體對角線方向向量：
+$$
+\mathbf{u} = (1,1,1) = \hat{x}+\hat{y}+\hat{z}
+$$
+$$
+\mathbf{v} = (-1,-1,1) = -\hat{x}-\hat{y}+\hat{z}
+$$
+（這兩條對應到中心原子指向兩個相鄰鍵結原子的方向。）
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 470 250" width="100%" style="max-width:520px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arT1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1a4d7c"/></marker>
+<marker id="arT2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="235" y="22" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">立方體中心 → 兩條體對角線的夾角 θ</text>
+<g fill="none" stroke="#888" stroke-width="1.2">
+<path d="M120,90 320,90 380,55 180,55 z"/>
+<path d="M120,200 320,200 380,165 180,165 z"/>
+<path d="M120,90 120,200 M320,90 320,200 M380,55 380,165 M180,55 180,165"/>
+</g>
+<g font-size="10" fill="#666">
+<text x="118" y="216" text-anchor="end">(−1,−1,1)</text>
+<text x="386" y="55" text-anchor="start">(1,1,1)</text>
+<text x="174" y="52" text-anchor="end">(1,−1,1)</text>
+<text x="324" y="216" text-anchor="start">(−1,1,1)</text>
+</g>
+<circle cx="250" cy="128" r="3.5" fill="#333"/>
+<text x="250" y="148" text-anchor="middle" font-size="10.5" fill="#333">中心 O (原點)</text>
+<line x1="250" y1="128" x2="380" y2="55" stroke="#1a4d7c" stroke-width="2.4" marker-end="url(#arT1)"/>
+<line x1="250" y1="128" x2="120" y2="200" stroke="#c0392b" stroke-width="2.4" marker-end="url(#arT2)"/>
+<text x="345" y="78" fill="#1a4d7c" font-weight="bold">u = (1,1,1)</text>
+<text x="120" y="190" text-anchor="end" fill="#c0392b" font-weight="bold">v = (−1,−1,1)</text>
+<path d="M276,113 A30,30 0 0 0 224,144" fill="none" stroke="#e67e22" stroke-width="1.6"/>
+<text x="250" y="105" text-anchor="middle" font-size="13" fill="#e67e22" font-weight="bold">θ ≈ 109.47°</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 1（四面體角）Step 1：</b>把立方體中心放在原點，8 個頂點取 (±1,±1,±1)。<b style="color:#1a4d7c">u=(1,1,1)（藍）</b> 與 <b style="color:#c0392b">v=(−1,−1,1)（紅）</b> 是兩條從中心射向對角頂點的體對角線——它們正是鑽石中心原子指向兩個鍵結原子的方向。關鍵在挑「只差一個座標符號」的一對，這樣內積才會是 −1，夾出 <b style="color:#e67e22">θ=cos⁻¹(−⅓)≈109.47°</b>。</figcaption>
+</figure>
+
+**Step 2（算內積 dot product）**
+$$
+\mathbf{u}\cdot\mathbf{v} = (1)(-1)+(1)(-1)+(1)(1) = -1-1+1 = -1
+$$
+
+**Step 3（算各自長度）**
+$$
+|\mathbf{u}| = \sqrt{1^2+1^2+1^2} = \sqrt3,\qquad
+|\mathbf{v}| = \sqrt{(-1)^2+(-1)^2+1^2} = \sqrt3
+$$
+
+**Step 4（用夾角公式）**
+$$
+\cos\theta = \frac{\mathbf{u}\cdot\mathbf{v}}{|\mathbf{u}|\,|\mathbf{v}|}
+= \frac{-1}{\sqrt3\cdot\sqrt3} = -\frac{1}{3}
+$$
+
+**Step 5（取反餘弦）**
+$$
+\theta = \cos^{-1}\!\left(-\frac{1}{3}\right)
+$$
+$-1/3 = -0.3333$，$\cos^{-1}(0.3333)=70.53^\circ$，故 $\theta = 180^\circ-70.53^\circ = 109.47^\circ$。換成度分：$0.47^\circ\times 60 = 28'$。
+
+$$\boxed{\theta = \cos^{-1}\!\left(-\tfrac{1}{3}\right) \approx 109.47^\circ = 109^\circ 28'}$$
+
+> **重點**：這就是有名的「四面體角（tetrahedral angle）$109.47^\circ$」。關鍵在於選對兩條會夾出此角的對角線——挑「只差一個座標符號」的一對，內積才會是 $-1$。
+
+<details>
+<summary><b>📝 更多範例（點開）：四面體角的不同向量取法與相關角度</b></summary>
+
+**範例 A（改用「中心→四個鍵」的標準四向量）**：鑽石中心原子的 4 個鍵指向
+$$\mathbf b_1=(1,1,1),\ \mathbf b_2=(1,-1,-1),\ \mathbf b_3=(-1,1,-1),\ \mathbf b_4=(-1,-1,1).$$
+任取兩條，例如 $\mathbf b_1,\mathbf b_2$：
+$$\mathbf b_1\cdot\mathbf b_2=(1)(1)+(1)(-1)+(1)(-1)=1-1-1=-1,$$
+$$|\mathbf b_1|=|\mathbf b_2|=\sqrt3,\qquad\cos\theta=\frac{-1}{\sqrt3\cdot\sqrt3}=-\frac13\ \Rightarrow\ \theta=109.47^\circ.$$
+無論挑哪一對都得 $-\tfrac13$（任兩條都「差兩個符號」，內積恆 $=-1$），印證四面體 4 鍵彼此等角。
+
+**範例 B（陷阱：挑成「只差一個符號」的錯配）**：若誤取 $\mathbf u=(1,1,1)$ 與 $\mathbf w=(1,1,-1)$（只差一個符號）：
+$$\mathbf u\cdot\mathbf w=1+1-1=1,\quad\cos\theta=\frac{1}{3}\ \Rightarrow\ \theta=70.53^\circ.$$
+得到的是 $109.47^\circ$ 的**補角** $180^\circ-109.47^\circ=70.53^\circ$（這是兩條體對角線「另一側」的夾角）。可見必須挑指向真正鍵方向的那一對。
+
+**範例 C（H–C–H 鍵角數值與度分換算）**：甲烷 CH$_4$ 也是四面體，鍵角同為 $\theta=\cos^{-1}(-\tfrac13)$。
+$$\cos\theta=-0.33333,\quad \theta=109.4712^\circ.$$
+化度分秒：$0.4712^\circ\times60=28.27'$，$0.27'\times60\approx16''$ → $\theta\approx109^\circ28'16''$，常記為 $109^\circ28'$。
+
+**範例 D（用半角驗算：鍵到「軸」的角）**：四面體鍵與通過它的 $C_3$ 對稱軸（即 $(1,1,1)$ 方向）夾角的 2 倍即鍵角。鍵 $(1,1,1)$ 與軸 $(1,1,1)$ 同向夾 $0°$ 沒意義；改看鍵 $(1,1,1)$ 與「反方向軸」$(−1,−1,−1)$：$\cos\alpha=\tfrac{-3}{3}=-1$ 也退化。正解是直接用兩鍵：上面 A 已給 $-\tfrac13$。這題的教訓——四面體角只能由「兩條真鍵」內積得到，不能用單鍵對軸湊。
+</details>
+
+---
+
+### 習題 2：面指標（Indices of planes）（Kittel Prob. 1.2）
+
+**題目（English, Kittel Prob. 1.2）**：Consider the planes with indices $(100)$ and $(001)$; the lattice is fcc, and the indices refer to the conventional cubic cell. What are the indices of these planes when referred to the primitive axes of Fig. 11?
+
+<details>
+<summary>▸ 中文題目</summary>
+
+考慮指標為 $(100)$ 與 $(001)$ 的平面；晶格為 fcc，這些指標是相對於**傳統立方晶胞（conventional cubic cell）**而言。當改用 Fig. 11 的**原始軸（primitive axes）**來描述時，這兩個平面的指標各是多少？
+
+</details>
+
+**Step 1（寫下 fcc 原始平移向量，Fig. 11）**
+Kittel Fig. 11 給的 fcc 原始軸（以立方邊 $a$、正交單位向量 $\hat{x},\hat{y},\hat{z}$ 表示）為：
+$$
+\mathbf{a}_1' = \frac{a}{2}(\hat{x}+\hat{y}),\quad
+\mathbf{a}_2' = \frac{a}{2}(\hat{y}+\hat{z}),\quad
+\mathbf{a}_3' = \frac{a}{2}(\hat{z}+\hat{x})
+$$
+（每條都從原點指向一個面心。）
+
+**Step 2（理解「求指標」要做的事）**
+給定一個平面，它在某組軸上的截距（intercepts）若為 $p\mathbf{a}_1',\,q\mathbf{a}_2',\,s\mathbf{a}_3'$，則該平面相對此組軸的密勒指標 = $\left(\dfrac{1}{p}:\dfrac{1}{q}:\dfrac{1}{s}\right)$ 化成最簡整數比。所以只要求出新軸上的三個截距即可。
+
+**Step 3（處理 $(100)$ 平面：先定出它的幾何）**
+傳統晶胞中 $(100)$ 平面**垂直於 $x$ 軸**。取通過格點、最靠近原點且不過原點的那片平面，它的方程式是
+$$
+x = a
+$$
+（即在 $x$ 方向截距 $a$，與 $y,z$ 軸平行不相交。）
+
+**Step 4（$(100)$：求它在 $\mathbf{a}_1'$ 軸上的截距）**
+沿 $\mathbf{a}_1'$ 方向走，點為 $t\,\mathbf{a}_1' = t\cdot\frac{a}{2}(\hat{x}+\hat{y})$，其 $x$ 座標為 $\frac{a}{2}t$。令它落在平面 $x=a$ 上：
+$$
+\frac{a}{2}t = a \;\Rightarrow\; t = 2
+$$
+所以 $(100)$ 在 $\mathbf{a}_1'$ 軸的截距為 $2\mathbf{a}_1'$。
+
+**Step 5（$(100)$：求它在 $\mathbf{a}_2'$、$\mathbf{a}_3'$ 軸上的截距）**
+沿 $\mathbf{a}_2' = \frac{a}{2}(\hat{y}+\hat{z})$ 方向走，點的 $x$ 座標恆為 $0$，永遠到不了 $x=a$ ⟹ **與 $\mathbf{a}_2'$ 軸平行**，截距 $=\infty$。
+沿 $\mathbf{a}_3' = \frac{a}{2}(\hat{z}+\hat{x})$ 方向走，點為 $s\cdot\frac{a}{2}(\hat z+\hat x)$，$x$ 座標 $\frac{a}{2}s = a \Rightarrow s=2$，截距為 $2\mathbf{a}_3'$。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 270" width="100%" style="max-width:520px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arP2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2e8b2e"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="12">
+<text x="240" y="22" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1a4d7c">(100) 面 在 fcc 原始軸上的截距</text>
+<g fill="none" stroke="#999" stroke-width="1.1">
+<path d="M90,110 290,110 350,72 150,72 z"/>
+<path d="M90,230 290,230 350,192 150,192 z"/>
+<path d="M90,110 90,230 M290,110 290,230 M350,72 350,192 M150,72 150,192"/>
+</g>
+<polygon points="290,110 350,72 350,192 290,230" fill="#e67e22" fill-opacity="0.22" stroke="#e67e22" stroke-width="1.4"/>
+<text x="320" y="58" text-anchor="middle" font-size="11" fill="#e67e22" font-weight="bold">(100) 面：x = a</text>
+<circle cx="90" cy="230" r="3.5" fill="#333"/>
+<text x="84" y="246" text-anchor="end" font-size="10.5" fill="#333">原點 O</text>
+<line x1="90" y1="230" x2="290" y2="170" stroke="#2e8b2e" stroke-width="2.2" marker-end="url(#arP2)"/>
+<line x1="90" y1="230" x2="150" y2="132" stroke="#2e8b2e" stroke-width="2.2" stroke-dasharray="5,4"/>
+<line x1="90" y1="230" x2="170" y2="230" stroke="#6aa1d6" stroke-width="1.6" stroke-dasharray="3,3"/>
+<circle cx="190" cy="200" r="4.5" fill="#c0392b"/>
+<circle cx="290" cy="170" r="4.5" fill="#c0392b"/>
+<text x="200" y="218" font-size="10.5" fill="#2e8b2e">a₁′ → x=a/2</text>
+<text x="296" y="172" font-size="10.5" fill="#c0392b" font-weight="bold">交點 t=2</text>
+<text x="118" y="155" font-size="10.5" fill="#2e8b2e">a₃′ 也交 → s=2</text>
+<text x="240" y="262" text-anchor="middle" font-size="11" fill="#555">a₂′ 全程 x=0 → 平行不交 → ∞</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 2（面指標換軸）Step 3–6：</b>fcc 原始軸 <b style="color:#2e8b2e">a₁′,a₂′,a₃′</b> 各從原點指向一個面心。(100) 面就是<b style="color:#e67e22">橘色 x=a 平面</b>。沿 a₁′ 走，x 座標每步 +a/2，走到 x=a 需 <b style="color:#c0392b">t=2</b>；沿 a₃′ 同理 s=2；沿 a₂′ 的 x 永遠是 0，平行該面 → 截距 ∞。三軸截距 (2:∞:2) 取倒數化整數得 (101)。</figcaption>
+</figure>
+
+**Step 6（$(100)$：取倒數化整數）**
+截距比為 $(2:\infty:2)$，取倒數：
+$$
+\left(\frac{1}{2}:\frac{1}{\infty}:\frac{1}{2}\right) = \left(\frac{1}{2}:0:\frac{1}{2}\right)
+$$
+乘 2 化最簡整數 $\Rightarrow (1\,0\,1)$。
+
+**Step 7（處理 $(001)$ 平面：定出幾何）**
+傳統晶胞中 $(001)$ 平面**垂直於 $z$ 軸**，最近的那片為
+$$
+z = a
+$$
+
+**Step 8（$(001)$：求三個新軸截距）**
+- 沿 $\mathbf{a}_1' = \frac{a}{2}(\hat x+\hat y)$：$z$ 座標恆為 $0$，到不了 $z=a$ ⟹ 截距 $=\infty$。
+- 沿 $\mathbf{a}_2' = \frac{a}{2}(\hat y+\hat z)$：$z$ 座標 $\frac{a}{2}t = a \Rightarrow t=2$，截距 $2\mathbf{a}_2'$。
+- 沿 $\mathbf{a}_3' = \frac{a}{2}(\hat z+\hat x)$：$z$ 座標 $\frac{a}{2}s = a \Rightarrow s=2$，截距 $2\mathbf{a}_3'$。
+
+**Step 9（$(001)$：取倒數化整數）**
+截距比 $(\infty:2:2)$，取倒數 $\left(0:\frac12:\frac12\right)$，乘 2 $\Rightarrow (0\,1\,1)$。
+
+$$\boxed{(100)\to(101),\qquad (001)\to(011)\quad(\text{相對於 fcc 原始軸})}$$
+
+> **重點**：同一個物理平面，換不同基底（傳統 vs. 原始軸）指標會變。方法固定：求新軸截距 → 取倒數 → 化最簡整數。與解答手冊一致。
+
+<details>
+<summary><b>📝 更多範例（點開）：再練「面指標換到 fcc 原始軸」</b></summary>
+
+fcc 原始軸 $\mathbf a_1'=\tfrac a2(\hat x+\hat y),\ \mathbf a_2'=\tfrac a2(\hat y+\hat z),\ \mathbf a_3'=\tfrac a2(\hat z+\hat x)$。一般作法：把傳統指標 $(hkl)$ 的法向 $\mathbf G\parallel(h,k,l)$，用 $h_j'=\mathbf G\cdot\mathbf a_j'$（取整數比）即得新指標。
+
+**範例 A（$(010)$ 面）**：$\mathbf G=(0,1,0)$。
+$$h_1'=\mathbf G\cdot\tfrac a2(\hat x+\hat y)=\tfrac a2(0+1)=\tfrac a2,$$
+$$h_2'=\tfrac a2(\hat y+\hat z)\cdot(0,1,0)=\tfrac a2(1+0)=\tfrac a2,$$
+$$h_3'=\tfrac a2(\hat z+\hat x)\cdot(0,1,0)=\tfrac a2(0+0)=0.$$
+比值 $(\tfrac12:\tfrac12:0)$ 乘 $2$ → $(110)$。即傳統 $(010)\to(110)$。
+
+**範例 B（$(111)$ 面）**：$\mathbf G=(1,1,1)$。
+$$h_1'=\tfrac a2(1+1)=a,\quad h_2'=\tfrac a2(1+1)=a,\quad h_3'=\tfrac a2(1+1)=a.$$
+比值 $(1:1:1)$ → $(111)$。$(111)$ 換軸後指標不變，因為它正好沿三條原始軸對稱。
+
+**範例 C（截距法驗算 $(010)$）**：$(010)$ 面取最近一片 $y=a$。
+- 沿 $\mathbf a_1'$：$y$ 座標 $\tfrac a2 t=a\Rightarrow t=2$，截距 $2\mathbf a_1'$。
+- 沿 $\mathbf a_2'$：$y$ 座標 $\tfrac a2 t=a\Rightarrow t=2$，截距 $2\mathbf a_2'$。
+- 沿 $\mathbf a_3'=\tfrac a2(\hat z+\hat x)$：$y$ 座標恆 $0$，平行 → $\infty$。
+截距 $(2:2:\infty)$ 取倒數 $(\tfrac12:\tfrac12:0)$ 乘 $2$ → $(110)$，與範例 A 的點積法**完全一致**。
+
+**範例 D（$(\bar1 1 0)$ 含負指標）**：$\mathbf G=(-1,1,0)$。
+$$h_1'=\tfrac a2(-1+1)=0,\quad h_2'=\tfrac a2(1+0)=\tfrac a2,\quad h_3'=\tfrac a2(0-1)=-\tfrac a2.$$
+比值 $(0:\tfrac12:-\tfrac12)$ 乘 $2$ → $(0\,1\,\bar1)$。負號隨之保留，方法不變。
+</details>
+
+---
+
+### 習題 3：hcp 結構（Hcp structure）的理想 $c/a$（Kittel Prob. 1.3）
+
+**題目（English, Kittel Prob. 1.3）**：Show that the $c/a$ ratio for an ideal hexagonal close-packed structure is $\left(\dfrac{8}{3}\right)^{1/2}\approx 1.633$. If $c/a$ is significantly larger than this value, the crystal structure may be thought of as composed of planes of closely packed atoms, the planes being loosely stacked.
+
+<details>
+<summary>▸ 中文題目</summary>
+
+證明理想六方最密堆積（hexagonal close-packed, hcp）結構的 $c/a$ 比為 $\sqrt{\dfrac{8}{3}}\approx 1.633$。若 $c/a$ 明顯大於此值，可把晶體看成「密堆積原子層之間鬆散堆疊」。
+
+</details>
+
+**Step 1（hcp 幾何設定）**
+hcp 是 $ABAB\ldots$ 堆疊。底面（basal plane）是密堆積的等邊三角晶格，最近鄰距離 $=a$（剛球接觸 $a=2r$）。$c$ 是沿堆疊軸、相隔一層 $A$ 到下一層 $A$ 的距離。$A$ 層之間夾著一層 $B$。B 層原子坐落在 A 層三角形所圍的空隙正上方。理想情況：每個原子與**同層 6 個＋上下兩層各 3 個 = 12 個**最近鄰全部等距，皆為 $a$。
+
+**Step 2（找 B 原子在底面上的投影位置）**
+取底面一個正三角形，三頂點是 A 層三原子，邊長 $a$。B 原子投影到底面時落在此正三角形的**形心（centroid）**。形心到任一頂點的距離 = 正三角形外接圓半徑：
+$$
+R_{\triangle} = \frac{a}{\sqrt3}
+$$
+（推導：邊長 $a$ 正三角形，形心到頂點距離 $=\dfrac{a}{2}\div\cos30^\circ = \dfrac{a}{2}\cdot\dfrac{2}{\sqrt3} = \dfrac{a}{\sqrt3}$。）
+
+**Step 3（B 原子到 A 原子的三維距離 = $a$）**
+B 原子在底面之上高度 $\dfrac{c}{2}$（恰在兩個 A 層中間）。B 到上層某 A 原子的距離 = $a$（最近鄰、剛球接觸）。用畢氏定理，水平分量 $R_\triangle$、垂直分量 $\dfrac{c}{2}$：
+$$
+a^2 = R_\triangle^2 + \left(\frac{c}{2}\right)^2 = \left(\frac{a}{\sqrt3}\right)^2 + \frac{c^2}{4}
+$$
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 230" width="100%" style="max-width:640px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="bH3" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#9cc3e6"/><stop offset="1" stop-color="#2f6ba3"/></radialGradient>
+<radialGradient id="rH3" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#f0a79b"/><stop offset="1" stop-color="#c0392b"/></radialGradient>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="12">
+<g transform="translate(0,0)">
+<text x="120" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">底面 A 層（俯視）</text>
+<polygon points="120,55 60,160 180,160" fill="none" stroke="#1a4d7c" stroke-width="1.4"/>
+<circle cx="120" cy="55" r="15" fill="url(#bH3)" stroke="#2f6ba3" stroke-width="0.6"/>
+<circle cx="60" cy="160" r="15" fill="url(#bH3)" stroke="#2f6ba3" stroke-width="0.6"/>
+<circle cx="180" cy="160" r="15" fill="url(#bH3)" stroke="#2f6ba3" stroke-width="0.6"/>
+<circle cx="120" cy="125" r="3" fill="#c0392b"/>
+<g stroke="#c0392b" stroke-width="1.3" stroke-dasharray="4,3"><line x1="120" y1="125" x2="120" y2="55"/></g>
+<text x="148" y="50" fill="#1a4d7c">邊長 a</text>
+<text x="128" y="95" fill="#c0392b">R△ = a/√3</text>
+<text x="120" y="195" text-anchor="middle" font-size="10.5" fill="#666">B 投影在形心(紅)，到頂點 = a/√3</text>
+</g>
+<line x1="280" y1="30" x2="280" y2="205" stroke="#e2e2e2" stroke-width="1"/>
+<g transform="translate(300,0)">
+<text x="125" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">側視：直角三角形</text>
+<polygon points="60,170 210,170 60,60" fill="#6aa1d6" fill-opacity="0.18" stroke="#1a4d7c" stroke-width="1.6"/>
+<rect x="60" y="155" width="15" height="15" fill="none" stroke="#1a4d7c" stroke-width="1"/>
+<circle cx="60" cy="60" r="12" fill="url(#bH3)" stroke="#2f6ba3" stroke-width="0.6"/>
+<circle cx="210" cy="170" r="12" fill="url(#rH3)" stroke="#c0392b" stroke-width="0.6"/>
+<line x1="60" y1="170" x2="210" y2="170" stroke="#c0392b" stroke-width="2"/>
+<line x1="60" y1="60" x2="60" y2="170" stroke="#2e8b2e" stroke-width="2"/>
+<line x1="60" y1="60" x2="210" y2="170" stroke="#e67e22" stroke-width="2.2"/>
+<text x="135" y="188" text-anchor="middle" fill="#c0392b" font-weight="bold">R△ = a/√3</text>
+<text x="48" y="118" text-anchor="end" fill="#2e8b2e" font-weight="bold">c/2</text>
+<text x="148" y="105" fill="#e67e22" font-weight="bold">斜邊 = a</text>
+<text x="56" y="52" text-anchor="end" font-size="10.5" fill="#2f6ba3">上層 A</text>
+<text x="216" y="172" font-size="10.5" fill="#c0392b">B 球</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em"><b>習題 3（hcp 理想 c/a）Step 1–3：</b>左圖 B 原子投影到底面正三角形的<b style="color:#c0392b">形心</b>，到任一頂點距離 <b style="color:#c0392b">R△=a/√3</b>。右圖把「B 球到上層 A 球」的距離拆成直角三角形：水平股 <b style="color:#c0392b">a/√3</b>、垂直股 <b style="color:#2e8b2e">c/2</b>、斜邊 <b style="color:#e67e22">=a</b>（剛球接觸）。畢氏定理 a²=(a/√3)²+(c/2)² 解出 c/a=√(8/3)≈1.633，純幾何鎖死、與材料無關。</figcaption>
+</figure>
+
+**Step 4（代入並整理）**
+$$
+a^2 = \frac{a^2}{3} + \frac{c^2}{4}
+$$
+$$
+a^2 - \frac{a^2}{3} = \frac{c^2}{4}
+\;\Rightarrow\;
+\frac{2a^2}{3} = \frac{c^2}{4}
+$$
+
+**Step 5（解出 $c^2$）**
+$$
+c^2 = \frac{8}{3}a^2
+$$
+
+**Step 6（開根號得 $c/a$）**
+$$
+\frac{c}{a} = \sqrt{\frac{8}{3}}
+$$
+數值：$\dfrac{8}{3}=2.6667$，$\sqrt{2.6667}=1.6330$。
+
+$$\boxed{\dfrac{c}{a} = \sqrt{\dfrac{8}{3}} \approx 1.633}$$
+
+> **重點**：理想 $c/a=1.633$ 的關鍵幾何是「形心到頂點距離 $a/\sqrt3$」與「層間半高 $c/2$」。真實金屬（如 Zn 約 1.86、Mg 約 1.62）偏離此值，反映非理想堆疊。
+
+<details>
+<summary><b>📝 更多範例（點開）：hcp 的 $c$、體積、密度與真實金屬比較</b></summary>
+
+**範例 A（由 $a$ 算理想 $c$，以 Mg 為例）**：鎂 hcp，$a=3.21\,$Å，求理想 $c$。
+$$c=a\sqrt{\frac83}=3.21\times1.6330=5.242\ \text{Å}.$$
+實測 Mg 的 $c=5.21\,$Å，$c/a=5.21/3.21=1.623$，非常接近理想 $1.633$ → Mg 幾乎理想堆疊。
+
+**範例 B（hcp 傳統胞體積與原子數）**：hcp 慣用胞是底面為 $120^\circ$ 菱形（邊 $a$）、高 $c$ 的角柱。
+底面積 $=a^2\sin120^\circ=a^2\cdot\tfrac{\sqrt3}{2}$，體積
+$$V=\frac{\sqrt3}{2}a^2 c=\frac{\sqrt3}{2}a^2\cdot a\sqrt{\tfrac83}=\frac{\sqrt3}{2}\sqrt{\tfrac83}\,a^3=\frac{\sqrt3}{2}\times1.6330\,a^3=1.4142\,a^3=\sqrt2\,a^3.$$
+此胞含 $N=2$ 顆原子（菱柱版 hcp 原胞含 2 顆）。
+
+**範例 C（驗算 hcp 填充率 $=0.74$）**：剛球 $r=\tfrac a2$，$N=2$，$V=\sqrt2\,a^3$：
+$$f=\frac{2\cdot\frac43\pi(a/2)^3}{\sqrt2\,a^3}=\frac{2\cdot\frac43\pi\cdot\frac{a^3}{8}}{\sqrt2\,a^3}=\frac{\frac{\pi}{3}}{\sqrt2}=\frac{\pi}{3\sqrt2}=\frac{3.1416}{4.2426}=0.7405.$$
+與 fcc 的 $\sqrt2\pi/6$ 同值 $0.740$——hcp 與 fcc 都是最密堆積，只是堆疊序 $ABAB$ vs. $ABCABC$ 不同。
+
+**範例 D（子情形：$c/a$ 偏離理想代表什麼）**：鋅（Zn）實測 $c/a=1.856$，明顯 $>1.633$。
+$$\frac{1.856}{1.633}=1.137,$$
+表示堆疊軸方向被「拉長」約 $14\%$——層內仍密堆、但層與層間距變大、鍵較弱，正是題目末句「平面密堆、層間鬆散堆疊」所指。反之 $c/a<1.633$（如 Be 的 $1.568$）則層間被壓。
+</details>
+
+---
+
+## ✅ 本章計算題自我檢核
+
+做完本章，你應該能**獨立、不看書**完成下列每一條：
+
+1. 直接寫出 sc / bcc / fcc / diamond 四種結構的**每晶胞原子數** $N=1,2,4,8$，並說明角／面心／體心的共用分數。
+2. 由「沿哪個方向剛球接觸」推出各結構的 $r$–$a$ 關係，得到填充率 $f_{\text{sc}}=\dfrac{\pi}{6}$、$f_{\text{bcc}}=\dfrac{\sqrt3\pi}{8}$、$f_{\text{fcc}}=\dfrac{\sqrt2\pi}{6}$、$f_{\text{dia}}=\dfrac{\sqrt3\pi}{16}$，並記得對應數值 $0.524/0.680/0.740/0.340$。
+3. 推導並使用立方系面間距 $d_{hkl}=\dfrac{a}{\sqrt{h^2+k^2+l^2}}$，代數值求任意 $(hkl)$。
+4. 用八面體/四面體空隙幾何求半徑比，背得臨界值 $r/R=\sqrt2-1\approx0.414$（八面體）。
+5. 用向量內積求四面體角 $\cos^{-1}(-\tfrac13)=109.47^\circ$，並能解釋為何選「差一個符號」的兩條體對角線。
+6. 把同一平面在「傳統立方軸 ↔ fcc 原始軸」之間互換指標：$(100)\leftrightarrow(101)$、$(001)\leftrightarrow(011)$，方法為「新軸截距 → 取倒數 → 化整數」。
+7. 從頭推導 hcp 理想 $c/a=\sqrt{8/3}\approx1.633$，並說明形心距 $a/\sqrt3$ 的來源。
+8. 解釋鑽石填充率僅為 fcc 的 46%（$0.340/0.740$）的物理原因——四面體共價鍵的方向性換取低密度。
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

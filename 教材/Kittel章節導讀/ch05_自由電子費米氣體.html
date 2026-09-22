@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 章節導讀 — Kittel 第6章 — 自由電子費米氣體（Free Electron Fermi Gas）</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">章節導讀目錄</a> &nbsp;·&nbsp; <a href="../Kittel_翻譯.html">完整翻譯</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../../考古題/詳解/index.html">逐題詳解</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- Kittel 章節導讀：第6章 自由電子費米氣體（Free Electron Fermi Gas） -->
+
+# Kittel 第6章 對照導讀 — 自由電子費米氣體（Free Electron Fermi Gas）
+
+> **這頁是什麼**：讀 Kittel 這一章時的對照地圖——概念橋（高中→大學→固態）＋術語速查。完整課文見 [Kittel 翻譯本對應章節](../Kittel_翻譯.html)；想看完整推導與考題，見 [單元教學 unit05](../../單元教學/unit05_自由電子費米氣體.html)。
+
+## 🗺️ 這一章在講什麼（白話）
+
+這章只做一件事：**把金屬裡的價電子，當成一團「不會互撞、但要遵守包立不相容原理」的自由電子氣**，看能解釋金屬的哪些性質。
+
+主線順序（對齊 Kittel 節次）：
+
+1. **一維能階**：先把電子關進一條長度 $L$ 的線上，量子化能階 $\varepsilon_n$，引出「軌域（orbital）」「費米能（Fermi energy）」。
+2. **溫度的影響**：用費米–狄拉克分布（Fermi–Dirac distribution）描述有限溫度下能階被佔據的機率。
+3. **三維電子氣**：升級成立方體，得到費米球（Fermi sphere）、費米波數 $k_F$、態密度（density of states）$D(\varepsilon)$。
+4. **電子熱容**：解決古典理論最大的失敗——為什麼電子幾乎不貢獻熱容？答案：只有 $E_F$ 附近約 $k_BT$ 寬的電子是「活的」，所以 $C_{el}\propto T$。
+5. **電導與歐姆定律**：費米球在電場中整體平移，導出 $\sigma=ne^2\tau/m$。
+6. **磁場中的運動**：迴旋頻率（cyclotron frequency）、霍爾效應（Hall effect）。
+7. **熱導與維德曼–夫蘭茲定律**（Wiedemann–Franz law）。
+
+> 一句話總結：**古典理論能解釋「載電」（歐姆定律、霍爾），但解釋不了「載熱與比熱」；換成費米–狄拉克統計＋包立原理就全對了。** 這不是自由電子模型的失敗，是古典馬克士威分布的失敗。
+
+## 🌉 概念三層對應表（高中 → 大學普物 → 本章固態物理）
+
+| 高中你學過的 | 大學普物的版本 | 本章固態物理變成 |
+|---|---|---|
+| 動能 $T=\tfrac12mv^2$、動量 $p=mv$ | 一維無限位能井能階 $E_n=\dfrac{n^2h^2}{8mL^2}$ | 一維電子氣能階 $\varepsilon_n=\dfrac{\hbar^2}{2m}\!\left(\dfrac{n\pi}{L}\right)^{\!2}$ |
+| 「每層軌道只能站幾個電子」（填電子規則） | 包立不相容原理（Pauli exclusion）：一態最多 2 電子（自旋上下） | 由低到高填 $N$ 個電子→最高佔據態能量 = 費米能 $E_F$ |
+| 機率＝有利情形／全部 | 馬克士威–玻茲曼分布 $e^{-E/k_BT}$ | 費米–狄拉克分布 $f(\varepsilon)=\dfrac{1}{e^{(\varepsilon-\mu)/k_BT}+1}$ |
+| 圓面積 $\pi r^2$、球體積 $\tfrac43\pi r^3$ | 相空間／座標計數 | 在 $k$ 空間數費米球內的點：$N=\dfrac{V}{3\pi^2}k_F^3$ |
+| 理想氣體每分子能量 $\propto T$ | 能量均分定理 $\tfrac32k_BT$、$C_V=\tfrac32Nk_B$ | 電子熱容 $C_{el}=\tfrac12\pi^2 N k_B\,(T/T_F)\propto T$（被壓低約 100 倍） |
+| 歐姆定律 $V=IR$ | 電流密度 $\mathbf j=\sigma\mathbf E$ | 費米球整體平移 $\delta\mathbf k=-e\mathbf E\tau/\hbar$ → $\sigma=\dfrac{ne^2\tau}{m}$ |
+| 帶電粒子在磁場中轉圈 | 勞侖茲力 $\mathbf F=q\mathbf v\times\mathbf B$、圓周運動 | 迴旋頻率 $\omega_c=eB/mc$、霍爾係數 $R_H=-\dfrac{1}{nec}$ |
+
+## 🔑 專有名詞 × 範例（速查）
+
+<details>
+<summary><b>▸ 軌域（orbital）</b></summary>
+
+**白話**：「單一電子」的薛丁格方程解，不是整個 $N$ 電子系統的精確態。
+**高中接點**：你說的「電子的軌道」，就是一個電子能待的位置／狀態。
+**定義**：把 $N$ 個電子各自塞進一個 $\varepsilon_n$ 的單電子解（忽略電子間交互作用）。
+**範例**：一維線上量子數 $(n,m_s)$ 標一個軌域；$(1,\uparrow)$ 與 $(1,\downarrow)$ 是兩個不同軌域，可裝兩個電子。
+**在 Kittel 哪裡**：「一維的能階」節，特別強調「只有電子間無交互作用時，軌域模型才精確」。
+</details>
+
+<details>
+<summary><b>▸ 費米能（Fermi energy）$\varepsilon_F$</b></summary>
+
+**白話**：絕對零度時，「填到最頂那顆電子」的能量。
+**高中接點**：像把水倒進杯子，水面高度＝費米能；杯底到水面間全填滿。
+**定義**：三維 $\varepsilon_F=\dfrac{\hbar^2}{2m}\!\left(3\pi^2\dfrac{N}{V}\right)^{\!2/3}$，**只由電子密度 $n=N/V$ 決定**。
+**範例**：鈉 $\varepsilon_F\approx3.2$ eV，對應費米溫度 $T_F=\varepsilon_F/k_B\approx3.7\times10^4$ K（遠高於室溫，所以電子氣是「簡併」的）。
+**在 Kittel 哪裡**：一維節定義，三維節用費米球給出與密度的關係。
+</details>
+
+<details>
+<summary><b>▸ 費米球 / 費米面（Fermi sphere / Fermi surface）</b></summary>
+
+**白話**：$T=0$ 時，所有被佔據的 $\mathbf k$ 態，在 $k$ 空間裡填成一顆實心球；球面就是費米面。
+**高中接點**：球體積 $\tfrac43\pi r^3$，只是這裡的 $r$ 是 $k_F$。
+**定義**：費米面上波數大小 $k_F$，費米速度 $v_F=\hbar k_F/m$。
+**範例**：銅 $v_F\approx1.57\times10^8$ cm/s（約光速的 0.5%）——即使在 $T=0$，最快的電子也跑很快，純量子效應。
+**在 Kittel 哪裡**：「三維自由電子氣」節，圖 4。
+</details>
+
+![$T=0$ 費米球：$k<k_F$ 全填](../../figs/f05_fermi_sphere.svg)
+
+<details>
+<summary><b>▸ 費米–狄拉克分布（Fermi–Dirac distribution）$f(\varepsilon)$</b></summary>
+
+**白話**：有限溫度下，能量 $\varepsilon$ 的軌域被佔據的機率。
+**高中接點**：把「機率分布」從古典 $e^{-E/k_BT}$ 升級，分母多一個 $+1$。
+**定義**：$f(\varepsilon)=\dfrac{1}{\exp[(\varepsilon-\mu)/k_BT]+1}$。
+**範例**：在 $\varepsilon=\mu$ 處恆有 $f=\tfrac12$（分母 $=2$）；$T\to0$ 時退化成階梯函數（佔據 1 / 空 0）。
+**在 Kittel 哪裡**：「溫度對費米–狄拉克分佈的影響」節，圖 3。
+</details>
+
+![費米–狄拉克分布：升溫只把 $E_F$ 附近 $\sim k_BT$ 抹開](../../figs/f05_fermi_dirac.svg)
+
+<details>
+<summary><b>▸ 化學勢（chemical potential）$\mu$</b></summary>
+
+**白話**：調整這個旋鈕，讓系統粒子總數正好等於 $N$。
+**高中接點**：沒直接學過；可想成「決定填到哪的水位參數」。
+**定義**：$f(\varepsilon)$ 中的 $\mu$；$T=0$ 時 $\mu=\varepsilon_F$。
+**範例**：一般金屬室溫下 $\mu/\varepsilon_F$ 偏離 1 不到 0.01，所以常直接用 $\varepsilon_F$ 取代 $\mu$。
+**在 Kittel 哪裡**：同上節；翻譯本「化學位勢／化學位」就是這個。
+</details>
+
+<details>
+<summary><b>▸ 態密度（density of states）$D(\varepsilon)$</b></summary>
+
+**白話**：每單位能量範圍內有幾個軌域。
+**高中接點**：像「每一公分高度能裝幾顆球」。
+**定義**：三維 $D(\varepsilon)=\dfrac{V}{2\pi^2}\!\left(\dfrac{2m}{\hbar^2}\right)^{\!3/2}\!\sqrt{\varepsilon}\;\propto\sqrt{\varepsilon}$；可寫成 $D(\varepsilon_F)=\dfrac{3N}{2\varepsilon_F}$。
+**範例**：在 $\varepsilon_F$ 處每單位能量的軌域數，大約等於「總電子數除以費米能」——量級上很合理。
+**在 Kittel 哪裡**：三維節末，圖 5（嚴格說是「單粒子態密度／軌道密度」）。
+</details>
+
+![能態密度維度依賴：3D $\propto\sqrt E$、2D 常數、1D $\propto 1/\sqrt E$](../../figs/f05_dos_dims.svg)
+
+<details>
+<summary><b>▸ 電子熱容（electronic heat capacity）$C_{el}$</b></summary>
+
+**白話**：加熱金屬時，電子貢獻的比熱——遠比古典預期小，且 $\propto T$。
+**高中接點**：理想氣體 $C_V=\tfrac32Nk_B$（與 $T$ 無關）；這裡完全不同。
+**定義**：$C_{el}=\dfrac{\pi^2}{2}Nk_B\dfrac{T}{T_F}=\dfrac{\pi^2}{3}D(\varepsilon_F)k_B^2T\equiv\gamma T$。
+**範例**：室溫下電子貢獻常不到古典值的 0.01；只有 $\sim T/T_F$ 比例的電子被熱激發。
+**在 Kittel 哪裡**：「電子氣的熱容量」節；$\gamma$ 即 Sommerfeld 參數。
+</details>
+
+<details>
+<summary><b>▸ 有效質量（effective mass）$m^*$ / 熱有效質量 $m_{th}$</b></summary>
+
+**白話**：實測 $\gamma$ 換算出來的「電子看起來像多重」，不一定等於真質量。
+**高中接點**：$F=ma$ 裡的 $m$，在晶體裡會被環境改寫。
+**定義**：$\dfrac{m_{th}}{m}=\dfrac{\gamma(\text{觀測})}{\gamma(\text{自由電子})}$。
+**範例**：偏離 1 的三大原因——能帶有效質量、電子–聲子交互作用、電子–電子交互作用。重費米子（heavy fermion）化合物如 $\mathrm{CeAl_3}$ 可達 $\sim1000\,m$。
+**在 Kittel 哪裡**：「金屬的實驗熱容」與「重費米子」段。
+</details>
+
+<details>
+<summary><b>▸ 電導率（electrical conductivity）$\sigma$ / 弛豫時間（relaxation time）$\tau$</b></summary>
+
+**白話**：費米球被電場整體推一點點，產生淨電流。
+**高中接點**：歐姆定律 $V=IR$ 的微觀版。
+**定義**：$\sigma=\dfrac{ne^2\tau}{m}$，電阻率 $\rho=1/\sigma$；平均自由程 $\ell=v_F\tau$。
+**範例**：超純銅在 4 K，$\ell$ 可達數 cm（$\sim10^8$ 個原子間距）——古典圖像解釋不了，要靠 Bloch（下一章）。
+**在 Kittel 哪裡**：「電導率與歐姆定律」節，圖 10。
+</details>
+
+<details>
+<summary><b>▸ 馬西森定則（Matthiessen's rule）</b></summary>
+
+**白話**：總電阻 ≈ 聲子散射部分 ＋ 缺陷散射部分，兩者相加。
+**高中接點**：像兩個電阻串聯各自貢獻。
+**定義**：$\rho=\rho_L(T)+\rho_i$；$\rho_i(0)$ 是殘餘電阻率（外推到 0 K）。
+**範例**：電阻率比（室溫/殘餘）是純度指標；超純銅可達 $10^6$，合金 manganin 低至 1.1。
+**在 Kittel 哪裡**：「金屬的實驗電阻率」節，圖 12。
+</details>
+
+<details>
+<summary><b>▸ 霍爾係數（Hall coefficient）$R_H$ / 迴旋頻率 $\omega_c$</b></summary>
+
+**白話**：電流加磁場，會在側面累積電荷形成橫向電場；$R_H$ 量到的就是載子濃度與符號。
+**高中接點**：勞侖茲力 $q\mathbf v\times\mathbf B$ 把電子推向一側。
+**定義**：（CGS）$R_H=-\dfrac{1}{nec}$；迴旋頻率 $\omega_c=eB/mc$。
+**範例**：Na、K 量到的 $R_H$ 與「每原子一個電子」吻合；但 Al、In 的 $R_H$ **為正**——自由電子模型解釋不了，要靠能帶理論的「電洞（hole）」（下一章）。
+**在 Kittel 哪裡**：「磁場中的運動」「霍爾效應」節，表 4，圖 14。
+</details>
+
+<details>
+<summary><b>▸ 維德曼–夫蘭茲定律（Wiedemann–Franz law）/ 勞侖茲數（Lorenz number）$L$</b></summary>
+
+**白話**：金屬的熱導率與電導率之比正比於溫度，比例常數與材料無關。
+**高中接點**：金屬既導電又導熱，因為「同一群電子」載兩者。
+**定義**：$L=\dfrac{K}{\sigma T}=\dfrac{\pi^2}{3}\!\left(\dfrac{k_B}{e}\right)^{\!2}\approx2.45\times10^{-8}\ \mathrm{W\,\Omega\,K^{-2}}$。
+**範例**：表 5 各金屬 0°C、100°C 實測值多落在 2.2–2.6，與理論值吻合；妙在結果**不含 $n$ 也不含 $m$**。
+**在 Kittel 哪裡**：「熱傳導率與電導率之比」節。
+</details>
+
+## ⚠️ 讀這章常卡的點 ＋ 翻譯雷區
+
+- **符號 $\varepsilon$ vs $E$**：Kittel 用 $\varepsilon_F$ 表費米能，單元教學用 $E_F$，是同一個東西。翻譯本亂碼常把 $\varepsilon$ 顯示成 `�` 或斜體 `_�_`，看到能量符號自己腦補成 $\varepsilon$。
+- **「化學位／化學位勢」就是 $\mu$**（chemical potential），不是別的東西。$T=0$ 時它才等於 $\varepsilon_F$；翻譯本有時兩詞混用，別被嚇到。
+- **$T_F$ 不是「電子的溫度」**：費米溫度 $T_F=\varepsilon_F/k_B$ 只是個換算參考符號，與電子氣實際溫度無關。Kittel 在「電子氣熱容」節特別叮嚀過。
+- **CGS vs SI 單位陷阱**：迴旋頻率 $\omega_c=eB/mc$（CGS）裡有個 $c$；霍爾係數 $R_H=-1/nec$ 也是。翻譯本標了 (CGS)/(SI)，SI 版把 $c$ 換成 1。算題前先確認單位制。
+- **「為什麼凝聚態對電子透明？」的兩個原因別搞混**：(a) 週期晶格不偏折物質波（這是**下一章**的結果，本章只是預告）；(b) 包立不相容原理壓抑電子–電子散射。本章真正用到的是 (b)。
+- **古典理論失敗的點要記準**：失敗在「熱容與磁化率」（用錯統計），成功在「歐姆定律與電導/熱導關係」。考試愛考 Drude 的成就與失敗清單。
+- **亂碼提醒**：本章大量公式被轉成 `==> picture ... omitted <==`（如 $\varepsilon_F$ 三維表達式、$\sigma$ 推導、熱容積分），圖片裡的式子翻譯本全沒了。需要完整算式請對照 [單元教學 unit05](../../單元教學/unit05_自由電子費米氣體.html) 或 Kittel 原文。
+
+## 📝 實際範例（Worked Examples）
+
+> 常數備用：$\hbar=1.055\times10^{-34}\,\mathrm{J\,s}$、$m_e=9.11\times10^{-31}\,\mathrm{kg}$、$k_B=1.381\times10^{-23}\,\mathrm{J\,K^{-1}}$、$e=1.602\times10^{-19}\,\mathrm{C}$、$1\ \mathrm{eV}=1.602\times10^{-19}\,\mathrm{J}$。
+
+### 例題 1：鈉（Na）的費米能（Fermi energy）與費米溫度（Fermi temperature）
+
+**題目**：鈉的傳導電子密度（conduction electron density）$n=2.65\times10^{28}\,\mathrm{m^{-3}}$。用 $E_F=\dfrac{\hbar^2}{2m}\left(3\pi^2 n\right)^{2/3}$ 求費米能 $E_F$（以 eV 表示），並求費米溫度 $T_F=E_F/k_B$。
+
+**Step 1**：先算括號內的 $3\pi^2 n$。
+$$3\pi^2 n=3\times9.8696\times(2.65\times10^{28})=7.85\times10^{29}\ \mathrm{m^{-3}}.$$
+
+**Step 2**：取 $2/3$ 次方。先開立方根再平方：
+$$\left(7.85\times10^{29}\right)^{1/3}=9.22\times10^{9}\ \mathrm{m^{-1}},\qquad
+\left(7.85\times10^{29}\right)^{2/3}=(9.22\times10^{9})^2=8.50\times10^{19}\ \mathrm{m^{-2}}.$$
+
+**Step 3**：算前因子 $\dfrac{\hbar^2}{2m}$。
+$$\frac{\hbar^2}{2m}=\frac{(1.055\times10^{-34})^2}{2\times9.11\times10^{-31}}=\frac{1.113\times10^{-68}}{1.822\times10^{-30}}=6.11\times10^{-39}\ \mathrm{J\,m^2}.$$
+
+**Step 4**：相乘得 $E_F$（焦耳），再換成 eV。
+$$E_F=6.11\times10^{-39}\times8.50\times10^{19}=5.19\times10^{-19}\ \mathrm{J}=\frac{5.19\times10^{-19}}{1.602\times10^{-19}}\ \mathrm{eV}=3.24\ \mathrm{eV}.$$
+
+**Step 5**：費米溫度 $T_F=E_F/k_B$（用焦耳值）。
+$$T_F=\frac{5.19\times10^{-19}}{1.381\times10^{-23}}=3.76\times10^{4}\ \mathrm{K}.$$
+
+$$\boxed{E_F\approx3.2\ \mathrm{eV},\qquad T_F\approx3.8\times10^{4}\ \mathrm{K}}$$
+
+> 物理意義：$T_F\gg$ 室溫（$300$ K），所以室溫下電子氣是高度**簡併（degenerate）**的——這正是電子熱容被壓低約 $T/T_F\sim10^{-2}$ 的原因。
+
+### 例題 2：費米波向量（Fermi wavevector）$k_F$ 與費米速度（Fermi velocity）$v_F$
+
+**題目**：沿用例題 1 的鈉（$n=2.65\times10^{28}\,\mathrm{m^{-3}}$、$E_F=5.19\times10^{-19}\,\mathrm{J}$）。求費米波向量 $k_F$ 與費米速度 $v_F=\hbar k_F/m$。
+
+**Step 1**：由 $k_F=(3\pi^2 n)^{1/3}$，直接取例題 1 Step 2 的立方根結果：
+$$k_F=\left(3\pi^2 n\right)^{1/3}=\left(7.85\times10^{29}\right)^{1/3}=9.22\times10^{9}\ \mathrm{m^{-1}}.$$
+
+> 檢核：也可由 $E_F=\hbar^2 k_F^2/2m$ 反推 $k_F=\sqrt{2mE_F}/\hbar=\sqrt{2\times9.11\times10^{-31}\times5.19\times10^{-19}}/1.055\times10^{-34}=9.22\times10^{9}\ \mathrm{m^{-1}}$，一致。
+
+**Step 2**：算費米速度 $v_F=\hbar k_F/m$。
+$$v_F=\frac{(1.055\times10^{-34})\times(9.22\times10^{9})}{9.11\times10^{-31}}=\frac{9.73\times10^{-25}}{9.11\times10^{-31}}=1.07\times10^{6}\ \mathrm{m\,s^{-1}}.$$
+
+$$\boxed{k_F\approx9.2\times10^{9}\ \mathrm{m^{-1}},\qquad v_F\approx1.1\times10^{6}\ \mathrm{m\,s^{-1}}}$$
+
+> 物理意義：$v_F\sim10^{6}\,\mathrm{m\,s^{-1}}$（約光速的 $0.4\%$）。即使在 $T=0$，費米面上的電子仍以這個速度運動——純量子（包立原理）效應，非熱運動。
+
+### 例題 3：維德曼–夫蘭茲定律（Wiedemann–Franz law）與勞侖茲數（Lorenz number）
+
+**題目**：自由電子理論預測 $\dfrac{K}{\sigma T}=L=\dfrac{\pi^2}{3}\left(\dfrac{k_B}{e}\right)^2$（$K$ 為熱導率，$\sigma$ 為電導率）。請代入數字驗證勞侖茲數 $L\approx2.45\times10^{-8}\,\mathrm{W\,\Omega\,K^{-2}}$。
+
+**Step 1**：先算 $\left(\dfrac{k_B}{e}\right)^2$。
+$$\frac{k_B}{e}=\frac{1.381\times10^{-23}}{1.602\times10^{-19}}=8.62\times10^{-5}\ \mathrm{V\,K^{-1}},\qquad
+\left(\frac{k_B}{e}\right)^2=7.43\times10^{-9}\ \mathrm{V^2\,K^{-2}}.$$
+
+**Step 2**：乘上前因子 $\dfrac{\pi^2}{3}=3.29$。
+$$L=3.29\times7.43\times10^{-9}=2.45\times10^{-8}\ \mathrm{V^2\,K^{-2}}.$$
+
+**Step 3**：核對單位。$\mathrm{V^2\,K^{-2}}=\mathrm{V}\cdot(\mathrm{V/A})\cdot\mathrm{A}\cdot\mathrm{K^{-2}}$；而 $K/\sigma T$ 的單位為 $\dfrac{\mathrm{W\,m^{-1}K^{-1}}}{(\Omega\,\mathrm{m})^{-1}\,\mathrm{K}}=\mathrm{W\,\Omega\,K^{-2}}$，故 $L$ 的單位即 $\mathrm{W\,\Omega\,K^{-2}}$。
+
+$$\boxed{L=\frac{\pi^2}{3}\left(\frac{k_B}{e}\right)^2\approx2.45\times10^{-8}\ \mathrm{W\,\Omega\,K^{-2}}}$$
+
+> 物理意義：$L$ **不含 $n$、不含 $m$、不含 $\tau$**——只由基本常數組成。這解釋了為何各種金屬實測的 $L$（表 5）都緊貼此理論值（約 $2.2$–$2.6\times10^{-8}$）。
+
+## 🔗 延伸
+
+- 完整課文：[Kittel 翻譯本](../Kittel_翻譯.html)（搜尋「自由電子費米氣體」即可定位）
+- 深入推導＋考題：[單元教學 unit05](../../單元教學/unit05_自由電子費米氣體.html)
+- 練歷年題：[逐題詳解](../../考古題/詳解/index.html)
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

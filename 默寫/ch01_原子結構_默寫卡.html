@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>默寫卡 — Kittel 第1章／Atomic structure</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  :root{--blue:#1a4d7c;--blue2:#2b6ca0;--soft:#eef5fb;--border:#c5d5e5;--ink:#1c2733;--muted:#6b7c90;--ok:#1e7a46;--warn:#b26a00}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+       max-width:980px;margin:1.4em auto 5em;padding:0 1.15em;line-height:1.7;color:var(--ink);background:#fafafa}
+  h1{color:var(--blue);border-bottom:3px solid var(--blue);padding-bottom:.3em;font-size:1.45em}
+  h2{color:var(--blue);font-size:1.08em;margin:0 0 .35em}
+  a{color:var(--blue2)}
+  .nav{font-size:.92em;margin:0 0 1em;display:flex;flex-wrap:wrap;gap:.5em}
+  .nav a{text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.3em .7em;color:#234}
+  .nav a:hover{background:var(--soft);border-color:var(--blue)}
+  .lede{background:var(--soft);border-left:4px solid #6aa1d6;border-radius:4px;padding:.75em 1em;margin:0 0 1em;font-size:.95em}
+  .warn{background:#fff8ee;border-left:4px solid #e0b97a;border-radius:4px;padding:.75em 1em;margin:0 0 1em;font-size:.95em;color:#5c3d00}
+  .toolbar{display:flex;flex-wrap:wrap;gap:.5em;margin:0 0 1.1em;position:sticky;top:0;z-index:20;
+           background:rgba(250,250,250,.94);padding:.45em 0;backdrop-filter:blur(6px);border-bottom:1px solid #e3eaf1}
+  .toolbar button{font:inherit;font-size:.9em;padding:.35em .9em;border:1px solid var(--border);background:#fff;
+        border-radius:999px;cursor:pointer;color:#234}
+  .toolbar button:hover{border-color:var(--blue);background:var(--soft)}
+  .toolbar button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1em 1.15em;margin:0 0 .9em}
+  .card .n{display:inline-grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:8px;
+           background:var(--blue);color:#fff;font-size:.82rem;font-weight:700;margin-right:.45em}
+  .prompt{background:#f4f7fb;border:1px dashed #b7c9db;border-radius:8px;padding:.7em .9em;margin:.5em 0;min-height:3.2em}
+  .prompt b{color:var(--blue)}
+  .ans{margin-top:.55em;padding:.7em .9em;background:#f7fbf8;border:1px solid #c5ddc8;border-radius:8px}
+  body.hide-ans .ans{display:none}
+  body.hide-ans .prompt{min-height:6.5em}
+  table{border-collapse:collapse;width:100%;margin:.5em 0;font-size:.9em}
+  th,td{border:1px solid #dde3e9;padding:.4em .55em;text-align:left}
+  th{background:var(--soft);color:var(--blue)}
+  .boxed{display:block;margin:.6em 0;padding:.55em .8em;border:2px solid var(--blue);border-radius:8px;
+         background:#fff;font-weight:700;color:var(--blue)}
+  figcaption{font-size:.88em;color:#555;margin:.35em 0 0}
+  footer{color:#888;font-size:.85em;margin-top:2em;border-top:1px solid #ddd;padding-top:1em}
+  @media print{
+    .toolbar,.nav,.lede,.warn{display:none!important}
+    body.hide-ans .ans{display:none!important}
+    .card{break-inside:avoid;box-shadow:none}
+    .prompt{min-height:7em}
+  }
+</style>
+</head>
+<body class="hide-ans">
+<div class="nav">
+  <a href="../index.html">← 總入口</a>
+  <a href="ch01_練習題.html">手寫練習題</a>
+  <a href="../教材/課程指定參考書.html">五本參考書怎麼用</a>
+  <a href="../單元教學/unit01_晶體結構.html">單元 01</a>
+  <a href="../教材/Kittel章節導讀/ch01_晶體結構.html">導讀 1</a>
+  <a href="../數學lab/lab_packing.html">Lab packing</a>
+</div>
+
+<h1>默寫卡 — Atomic structure（Kittel 第 1 章）</h1>
+<p class="lede">
+<b>用法</b>：先按「藏答案」→ 白紙手寫 12 格（圖一定要自己畫）→ 再揭開對。能默畫 sc／bcc／fcc 並推出三個填充率，Week 1–4 過線。<br>
+這<b>不是</b>五本教科書全文。主線只有 Kittel Ch.1；Simon Ch.12 當課前；Ashcroft Ch.4／7 卡住再翻。見 <a href="../教材/課程指定參考書.html">參考書對照</a>。
+</p>
+<div class="warn">
+蜜月規劃寫 <b>9/11–9/29</b>。若仍準，Week 2–3 的課會缺；原子結構能趕上的最後一堂是 <b>10/2（五）</b>。這張卡是補課卷。quiz 20% 不補考，跟 TA 問缺席怎麼計。
+</div>
+
+<div class="toolbar">
+  <button type="button" id="btnHide" class="on">藏答案（考試模式）</button>
+  <button type="button" id="btnShow">揭答案</button>
+  <button type="button" id="btnPrint">列印空白卷</button>
+  <span style="color:var(--muted);font-size:.88em">目標：12 格都能不看書寫完，限時 40 分鐘。</span>
+</div>
+
+<!-- ① -->
+<div class="card" id="c1">
+  <h2><span class="n">1</span>一句話：晶體是什麼</h2>
+  <div class="prompt">寫出「晶體結構＝？×？」、晶格平移向量 $\mathbf T$ 的式子，並用一句話分清 lattice 與 basis。</div>
+  <div class="ans">
+    <span class="boxed">晶體結構 $=$ 晶格（lattice，怎麼重複）$\times$ 基元（basis，每格放什麼）</span>
+    $$\mathbf T = n_1\mathbf a_1 + n_2\mathbf a_2 + n_3\mathbf a_3,\qquad n_i\in\mathbb Z$$
+    平移 $\mathbf T$ 後晶體看起來一模一樣。lattice 是數學點陣；basis 才是掛在每個格點上的原子。數「每胞幾顆原子」＝數 basis。
+  </div>
+</div>
+
+<!-- ② -->
+<div class="card" id="c2">
+  <h2><span class="n">2</span>三種胞</h2>
+  <div class="prompt">原胞／慣用晶胞／Wigner–Seitz 胞各含幾個格點？fcc、bcc 慣用立方各含幾個？原胞體積公式？</div>
+  <div class="ans">
+    <table>
+      <tr><th></th><th>格點數</th><th>用途</th></tr>
+      <tr><td>原胞 primitive cell</td><td><b>1</b></td><td>最小重複單元</td></tr>
+      <tr><td>慣用晶胞 conventional</td><td>可 &gt;1</td><td>看清對稱：bcc＝2，fcc＝4，sc＝1</td></tr>
+      <tr><td>Wigner–Seitz</td><td>1（最對稱的原胞）</td><td>連到鄰點作中垂面</td></tr>
+    </table>
+    $$V_c=\lvert\mathbf a_1\cdot(\mathbf a_2\times\mathbf a_3)\rvert$$
+    分數法：角 $\tfrac18$、面 $\tfrac12$、邊 $\tfrac14$、體心 $1$。
+    fcc：$8\times\tfrac18+6\times\tfrac12=4$。bcc：$8\times\tfrac18+1=2$。
+  </div>
+</div>
+
+<!-- ③ SVG cubes -->
+<div class="card" id="c3">
+  <h2><span class="n">3</span>默畫 sc／bcc／fcc</h2>
+  <div class="prompt">白紙畫三個慣用立方。標角／體心／面心。寫每胞原子數、配位數、相切方向（$2r$ 或 $4r$ 等於什麼）。</div>
+  <div class="ans">
+<figure style="margin:.6em 0;text-align:center">
+<svg viewBox="0 0 600 205" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="blA" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#84b4df"/><stop offset="1" stop-color="#1a4d7c"/></radialGradient>
+<radialGradient id="reA" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#f0a79b"/><stop offset="1" stop-color="#c0392b"/></radialGradient>
+</defs>
+<g font-family="-apple-system,sans-serif">
+<g transform="translate(0,0)">
+<text x="90" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a4d7c">sc</text>
+<path d="M25,150 115,150 M115,150 155,122 M25,60 115,60 M115,60 155,32 M155,32 65,32 M65,32 25,60 M25,150 25,60 M115,150 115,60 M155,122 155,32" fill="none" stroke="#666" stroke-width="1.4"/>
+<path d="M155,122 65,122 M65,122 25,150 M65,122 65,32" fill="none" stroke="#bbb" stroke-width="1.1" stroke-dasharray="4,3"/>
+<g fill="url(#blA)" stroke="#13395d" stroke-width="0.7"><circle cx="25" cy="150" r="8"/><circle cx="115" cy="150" r="8"/><circle cx="115" cy="60" r="8"/><circle cx="25" cy="60" r="8"/><circle cx="65" cy="122" r="8"/><circle cx="155" cy="122" r="8"/><circle cx="155" cy="32" r="8"/><circle cx="65" cy="32" r="8"/></g>
+<text x="90" y="193" text-anchor="middle" font-size="12.5" fill="#333">N=1　CN=6　2r=a</text>
+</g>
+<g transform="translate(200,0)">
+<text x="90" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a4d7c">bcc</text>
+<path d="M25,150 115,150 M115,150 155,122 M25,60 115,60 M115,60 155,32 M155,32 65,32 M65,32 25,60 M25,150 25,60 M115,150 115,60 M155,122 155,32" fill="none" stroke="#666" stroke-width="1.4"/>
+<path d="M155,122 65,122 M65,122 25,150 M65,122 65,32" fill="none" stroke="#bbb" stroke-width="1.1" stroke-dasharray="4,3"/>
+<line x1="25" y1="150" x2="155" y2="32" stroke="#c0392b" stroke-width="0.9" stroke-dasharray="3,3" opacity="0.7"/>
+<g fill="url(#blA)" stroke="#13395d" stroke-width="0.7"><circle cx="25" cy="150" r="8"/><circle cx="115" cy="150" r="8"/><circle cx="115" cy="60" r="8"/><circle cx="25" cy="60" r="8"/><circle cx="65" cy="122" r="8"/><circle cx="155" cy="122" r="8"/><circle cx="155" cy="32" r="8"/><circle cx="65" cy="32" r="8"/></g>
+<circle cx="90" cy="91" r="8" fill="url(#reA)" stroke="#7d2418" stroke-width="0.7"/>
+<text x="90" y="193" text-anchor="middle" font-size="12.5" fill="#333">N=2　CN=8　4r=√3 a</text>
+</g>
+<g transform="translate(400,0)">
+<text x="90" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a4d7c">fcc</text>
+<path d="M25,150 115,150 M115,150 155,122 M25,60 115,60 M115,60 155,32 M155,32 65,32 M65,32 25,60 M25,150 25,60 M115,150 115,60 M155,122 155,32" fill="none" stroke="#666" stroke-width="1.4"/>
+<path d="M155,122 65,122 M65,122 25,150 M65,122 65,32" fill="none" stroke="#bbb" stroke-width="1.1" stroke-dasharray="4,3"/>
+<g fill="url(#blA)" stroke="#13395d" stroke-width="0.7"><circle cx="25" cy="150" r="8"/><circle cx="115" cy="150" r="8"/><circle cx="115" cy="60" r="8"/><circle cx="25" cy="60" r="8"/><circle cx="65" cy="122" r="8"/><circle cx="155" cy="122" r="8"/><circle cx="155" cy="32" r="8"/><circle cx="65" cy="32" r="8"/></g>
+<g fill="url(#reA)" stroke="#7d2418" stroke-width="0.7"><circle cx="70" cy="105" r="8"/><circle cx="110" cy="77" r="8"/><circle cx="90" cy="136" r="8"/><circle cx="90" cy="46" r="8"/><circle cx="45" cy="91" r="8"/><circle cx="135" cy="91" r="8"/></g>
+<text x="90" y="193" text-anchor="middle" font-size="12.5" fill="#333">N=4　CN=12　4r=√2 a</text>
+</g>
+</g>
+</svg>
+<figcaption>藍＝角（各 ⅛）。紅＝bcc 體心（算 1）或 fcc 面心（各 ½）。bcc 虛線＝體對角線＝最近鄰。</figcaption>
+</figure>
+  </div>
+</div>
+
+<!-- ④ packing -->
+<div class="card" id="c4">
+  <h2><span class="n">4</span>填充率：從相切推到 $\eta$</h2>
+  <div class="prompt">寫 $\eta$ 定義。分別推 sc、bcc、fcc 的 $\eta$（要有 $r$ 與 $a$ 的關係，不要只背小數）。</div>
+  <div class="ans">
+    $$\eta=\frac{N_{\mathrm{cell}}\cdot\frac43\pi r^3}{V_{\mathrm{cell}}}$$
+    <table>
+      <tr><th></th><th>相切</th><th>$r$</th><th>$N$</th><th>$\eta$</th></tr>
+      <tr><td>sc</td><td>沿邊 $2r=a$</td><td>$a/2$</td><td>1</td><td>$\pi/6\approx0.524$</td></tr>
+      <tr><td>bcc</td><td>沿體對角 $4r=\sqrt3\,a$</td><td>$\sqrt3\,a/4$</td><td>2</td><td>$\pi\sqrt3/8\approx0.680$</td></tr>
+      <tr><td>fcc／hcp</td><td>沿面對角 $4r=\sqrt2\,a$</td><td>$\sqrt2\,a/4$</td><td>4</td><td>$\pi/(3\sqrt2)\approx0.740$</td></tr>
+      <tr><td>diamond</td><td>四面體鍵</td><td>—</td><td>8／慣用立方</td><td>$\approx0.34$（鬆，硬度不是靠填滿）</td></tr>
+    </table>
+    fcc 推導：$N=4$，$r=a/(2\sqrt2)$，
+    $\eta=4\cdot\frac43\pi r^3/a^3=\pi/(3\sqrt2)$。
+    最近鄰距離 $d_{\mathrm{nn}}=2r$：sc $=a$，bcc $=\frac{\sqrt3}{2}a$，fcc $=\frac{a}{\sqrt2}$。
+  </div>
+</div>
+
+<!-- ⑤ why 14 -->
+<div class="card" id="c5">
+  <h2><span class="n">5</span>為什麼是 14 種 Bravais、沒有五重軸</h2>
+  <div class="prompt">寫允許的旋轉重數。一句話解釋五邊形鋪不滿。2D 幾種、3D 幾種。立方晶系三種名字。</div>
+  <div class="ans">
+    週期點陣只允許旋轉 $1,2,3,4,6$ 重（$2\pi/n$ 且平移後仍落在格點上）。<b>沒有 5 重</b>：正五邊形不能密鋪平面。<br>
+    2D：5 種。3D：14 種 Bravais。立方三種：sc、bcc、fcc。
+    置心很多能換基底化簡，所以不是「想置心就多一種」。
+  </div>
+</div>
+
+<!-- ⑥ Miller -->
+<div class="card" id="c6">
+  <h2><span class="n">6</span>Miller 指標</h2>
+  <div class="prompt">寫手順：截距 → ？ → 最小整數。面 $(hkl)$、方向 $[uvw]$、面族 $\{hkl\}$。截距 $3,2,2$ 是哪一面？平行某軸怎麼寫？立方 $d_{hkl}$ 公式。$d_{200}$ 若 $a=3.61$ Å？</div>
+  <div class="ans">
+    手順：軸截距（以 $a_i$ 為單位）→ <b>取倒數</b> → 化最小整數比。<br>
+    面 $(hkl)$；方向 $[uvw]$；等價面 $\{hkl\}$；負指標 $\bar h$。<br>
+    截距 $3,2,2$ → 倒數 $\frac13,\frac12,\frac12$ → $(233)$。<br>
+    平面平行某軸 → 該指標 $0$。例：$(100)$ 垂直 $x$ 軸。<br>
+    立方：$\displaystyle d_{hkl}=\frac{a}{\sqrt{h^2+k^2+l^2}}$。
+    $a=3.61$ Å，$d_{200}=a/2=1.805$ Å。
+    Cu fcc 最近鄰 $a/\sqrt2\approx2.55$ Å。
+  </div>
+</div>
+
+<!-- ⑦ primitive fcc -->
+<div class="card" id="c7">
+  <h2><span class="n">7</span>fcc／bcc 原胞向量（常考偽裝題）</h2>
+  <div class="prompt">寫出 fcc 三條原胞向量。它們等長嗎、夾角幾度、體積？bcc 的三條呢？</div>
+  <div class="ans">
+    fcc 原胞（從一角連到三個鄰近面心）：
+    $$\mathbf a_1=\tfrac a2(\hat x+\hat y),\quad
+      \mathbf a_2=\tfrac a2(\hat y+\hat z),\quad
+      \mathbf a_3=\tfrac a2(\hat z+\hat x)$$
+    $|\mathbf a_i|=\frac a2\sqrt2$，夾角 $60^\circ$，體積 $a^3/4$。<br>
+    bcc：
+    $$\mathbf a_1=\tfrac a2(-\hat x+\hat y+\hat z),\ \ldots
+      \quad|\mathbf a_i|=\tfrac{\sqrt3}2 a,\ \cos\theta=-\tfrac13,\ V=a^3/2$$
+    看起來不像立方，但就是 bcc／fcc。用「每立方幾點」分辨。
+  </div>
+</div>
+
+<!-- ⑧ structures -->
+<div class="card" id="c8">
+  <h2><span class="n">8</span>NaCl／CsCl／diamond／ZnS — 先講晶格再講 basis</h2>
+  <div class="prompt">各寫「Bravais 是哪種 + basis 是哪幾顆」。特別標出：CsCl 為什麼不是 bcc。</div>
+  <div class="ans">
+    <table>
+      <tr><th>結構</th><th>Bravais</th><th>basis</th><th>陷阱</th></tr>
+      <tr><td>NaCl</td><td>fcc</td><td>Na 在 $000$，Cl 在 $\tfrac12 00$（兩套 fcc）</td><td>不是 sc</td></tr>
+      <tr><td>CsCl</td><td><b>sc</b></td><td>Cs + Cl（角與體心不同種）</td><td><b>不是 bcc</b>：bcc 要求角＝體心環境相同、同種</td></tr>
+      <tr><td>diamond（Si, Ge）</td><td>fcc</td><td>$000$ 與 $\tfrac14\tfrac14\tfrac14$ 同種</td><td>慣用立方 8 原子；CN＝4</td></tr>
+      <tr><td>ZnS zincblende（GaAs）</td><td>fcc</td><td>同上但兩種原子</td><td>無反演對稱</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ⑨ hcp -->
+<div class="card" id="c9">
+  <h2><span class="n">9</span>hcp 與堆疊</h2>
+  <div class="prompt">ABAB 是什麼、ABCABC 是什麼。理想 $c/a$ 推到 $\sqrt{8/3}$。填充率跟 fcc 比？</div>
+  <div class="ans">
+    密堆層：$ABAB\cdots$＝hcp；$ABCABC\cdots$＝fcc。兩者 $\eta$ 都是 $0.74$，CN 都是 12。<br>
+    理想 hcp：底面 $2r=a$；上層坐凹洞，四球心成正四面體；層間高 $h=a\sqrt{2/3}$；$c=2h$
+    $$\frac{c}{a}=\sqrt{\frac83}\approx1.633$$
+    Mg 的 $c/a\approx1.623$，接近理想。
+  </div>
+</div>
+
+<!-- ⑩ density -->
+<div class="card" id="c10">
+  <h2><span class="n">10</span>由密度反推 $a$</h2>
+  <div class="prompt">寫密度公式。銅 fcc、$M=63.5\,\mathrm{g\,mol^{-1}}$、$\rho=8.96\,\mathrm{g\,cm^{-3}}$，求 $a$。</div>
+  <div class="ans">
+    $$\rho=\frac{N_{\mathrm{cell}}\,M}{N_A\,V_{\mathrm{cell}}}$$
+    fcc：$N=4$，$V=a^3$。
+    $$a=\left(\frac{4M}{N_A\rho}\right)^{1/3}
+      =\left(\frac{4\times63.5}{6.022\times10^{23}\times8.96}\right)^{1/3}\approx3.61\times10^{-8}\,\mathrm{cm}=3.61\,\text{Å}$$
+    （Kittel 表列 Cu $a=3.61$ Å，用來對答案。）
+  </div>
+</div>
+
+<!-- ⑪ why no 5 + WS one-liner -->
+<div class="card" id="c11">
+  <h2><span class="n">11</span>WS cell 三步驟（倒空間會再用）</h2>
+  <div class="prompt">寫畫 Wigner–Seitz 原胞的三步驟。bcc、fcc 的 WS 各是什麼多面體？</div>
+  <div class="ans">
+    ① 選一格點當中心，連到最近（及次近）鄰點。<br>
+    ② 每條連線作中垂面。<br>
+    ③ 中垂面包起來的最小凸多面體＝WS cell。<br>
+    bcc 的 WS＝截角八面體；fcc 的 WS＝菱形十二面體。倒空間裡第一布里淵區就是倒晶格的 WS cell（unit 02）。
+  </div>
+</div>
+
+<!-- ⑫ self test -->
+<div class="card" id="c12">
+  <h2><span class="n">12</span>限時自測（40 分鐘，全對才過）</h2>
+  <div class="prompt">
+    合上答案，按序做：<br>
+    (a) 畫 sc／bcc／fcc，標 $N$、CN、相切條件。<br>
+    (b) 推出三個 $\eta$。<br>
+    (c) 截距 $4,1,2$ 的 Miller 指標。<br>
+    (d) 為什麼 CsCl 不是 bcc。<br>
+    (e) 理想 hcp 的 $c/a$。<br>
+    (f) Cu fcc $a=3.61$ Å 的 $d_{\mathrm{nn}}$ 與 $d_{200}$。
+  </div>
+  <div class="ans">
+    (a) 見卡 ③。(b) $\pi/6$、$\pi\sqrt3/8$、$\pi/(3\sqrt2)$。<br>
+    (c) 倒數 $\frac14,1,\frac12$ → $(142)$。<br>
+    (d) 角與體心是不同種原子，環境不同；晶格是 sc + 兩原子 basis。<br>
+    (e) $\sqrt{8/3}\approx1.633$。<br>
+    (f) $d_{\mathrm{nn}}=a/\sqrt2\approx2.55$ Å，$d_{200}=a/2=1.805$ Å。
+  </div>
+</div>
+
+<footer>
+主線 Kittel Ch.1 · 課前 Simon Ch.12 · 卡住 Ashcroft Ch.4／7。<br>
+詳細推導在 <a href="../單元教學/unit01_晶體結構.html">單元 01</a>；數字例在 <a href="../教材/Kittel章節導讀/ch01_晶體結構.html">導讀 1</a>。<br>
+2026-09-15
+</footer>
+<script>
+(function(){
+  var hide=document.getElementById('btnHide'), show=document.getElementById('btnShow');
+  function setHide(on){
+    document.body.classList.toggle('hide-ans', on);
+    hide.classList.toggle('on', on);
+    show.classList.toggle('on', !on);
+  }
+  hide.onclick=function(){ setHide(true); };
+  show.onclick=function(){ setHide(false); };
+  document.getElementById('btnPrint').onclick=function(){
+    setHide(true);
+    window.print();
+  };
+})();
+</script>
+</body>
+</html>

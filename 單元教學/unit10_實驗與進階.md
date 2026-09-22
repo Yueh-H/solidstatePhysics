@@ -1,0 +1,856 @@
+<!-- 固態物理 單元10：實驗技術／進階主題（Experimental Techniques / Advanced） · 從高中到資格考 -->
+
+# 固態物理 單元10 — 實驗技術／進階主題（Experimental Techniques / Advanced）
+### 從高中概念建到資格考
+
+> **使用說明**：本篇從你高中會的東西（指數函數、波的干涉、單狹縫繞射暗紋、$E=p^2/2m$ 與光速 $c$）出發，一路接到 Kittel 跨章的「實驗量測」與幾個近年愛考的進階主題。符號點 `▸` 就地展開（你高中學過的→為什麼→定義→範例1/2/3）。專有名詞第一次出現用「中文（English）」對照。配套：[單元整理](../考古題/單元整理.html)（出題頻率）、[逐題詳解](../考古題/詳解/index.html)、[教材直讀](../教材/index.html)。
+> **慣例（本篇符號）**：穿隧電流（tunneling current）$I$、針尖–樣品距離 $z$（或 $d$）、衰減常數（decay constant）$\kappa$、位障高度（barrier height）$\phi$；倒晶格 $\mathbf a_i\cdot\mathbf b_j=2\pi\delta_{ij}$、倒晶格點 $\mathbf G$；結構因子（structure factor）$F$、電子密度（electron density）$\rho(\mathbf r)$；費米速度（Fermi velocity）$v_F$、光速 $c$、約化普朗克常數 $\hbar$、波茲曼常數 $k_B$；迴旋頻率（cyclotron frequency）$\omega_c=eB/m$。
+>
+> 📖 **本單元權威出處與教材對照（Textbook & Reference Alignment）**：
+> - **Kittel 原文 8e**：跨章精選（Ch. 1 穿隧顯微鏡、Ch. 2 X 光反射率、Ch. 9 費米面量測、Ch. 18 二維碳材料與石墨烯）。
+> - **林盛煇《固態物理導論》**：第 10 章（§10.1 STM/AFM 探針、§10.2 多層膜 X 光反射率、§10.3 石墨烯與 Dirac 錐）。
+> - **Ashcroft & Mermin**：Ch. 14（Determination of the Fermi Surface）。
+> - **臺大資格考真題對照**：2013–2025 共 3 次命題（2013 Q15–Q17, 2018 Q5, 2022 Q6），結合理論與實驗技術的綜合考題。
+
+---
+
+## 🧭 為什麼要這個單元？（在解決什麼問題、與其他章節的關係）
+
+### 為什麼要學「實驗技術／進階」？
+
+前面 1–9 單元算出的東西——晶格、能帶、能態密度、費米面——都必須**量得到**才算數。這單元講「怎麼量」：掃描探針（STM/AFM/MFM）、X 光反射率、量 DOS、量費米面，再加上幾個進階題材（graphene/Dirac point、蛋白質結晶）。第四梯隊，是把整門課**收束驗收**的一章。
+
+### 在解決什麼問題？
+
+> **核心問題**：前面那些抽象的理論量，**實驗上怎麼「看見」**？
+
+每個技術都對應一個前面的核心量：STM 量表面與**局域 DOS**、AFM 量形貌、XRD 反射率量**層厚/晶格**、量子振盪量**費米面**、穿隧/光譜量**能隙與色散**。
+
+### 與其他章節的關係
+
+| 相關章節 | 關係 |
+|---|---|
+| **02 倒晶格（驗收）** | XRD、反射率、蛋白質結晶都用繞射原理 |
+| **05–06 電子／能帶（驗收）** | STM/穿隧量 DOS 與能隙；graphene 線性色散接能帶 |
+| **08 磁性（驗收）** | 朗道能階量子振盪量費米面 |
+| **01 晶體結構（驗收）** | graphene 蜂巢結構 = unit01 的 basis-2 範例 |
+
+> **一句話**：1–9 單元是「算出來」，unit10 是「量出來」——每個實驗技術都在驗證前面某一章的核心結果。
+
+---
+
+## 🎯 這個單元在考什麼（出題地位）
+
+這是**第四梯隊（零星但近年回溫）**單元：2013–2025 共 13 卷裡明確出現 **3 次**（2013、2018、2022），但它的特性是「**夾在別的大題裡當一小段**」——例如石墨烯接在能帶題後、量 DOS 接在自由電子題後。題型很雜，但每一招都「短、可背、好拿分」，是 CP 值高的補槍區。
+
+| 最常見題型 | 出過的年份 | 對應本篇章節 |
+|---|---|---|
+| 掃描探針三兄弟 STM / AFM / MFM 縮寫與原理；量 tunneling barrier height 用哪種模式 | 2013 | §1, §2 |
+| X 光反射率（X-ray reflectivity）多層膜為何每第三峰消失（數學證明） | 2013 | §3 |
+| 石墨烯（graphene）Dirac point 線性色散 ⇒ massless（有效質量為零） | 2018 | §4 |
+| 蛋白質結晶（protein crystallography）X 光如何定形狀 | 2022 | §5 |
+| 量電子態密度（DOS）的實驗技術（光電子能譜、穿隧能譜、比熱） | 2022 | §6 |
+| 朗道能階（Landau level）量測費米面（接單元 08 磁性） | 2018 | §7 |
+
+> **一句話**：本單元的共同主旋律其實只有兩條——「**探針靠『指數敏感的穿隧／力』看原子**」與「**繞射的強度（結構因子）藏著樣品長相**」。其餘是把前面單元（能帶、磁性、DOS）的物理「拿去做實驗」。
+
+## 🧗 高中起點：你已經會的
+
+- **指數函數 $e^{-x}$ 衰減很快**：$x$ 每增一點，值就掉一大截。← STM 穿隧電流對距離極敏感的核心。
+- **波的干涉**：路徑差 = 整數倍波長 → 亮（建設性）；單狹縫繞射的暗紋條件 $a\sin\theta=m\lambda$。← 多層膜「每第三峰消失」就是這個 sinc 零點。
+- **傅立葉的直覺**：一個週期函數可以拆成一堆正弦／餘弦疊加。← 結構因子＝電子密度的傅立葉係數。
+- **光子無質量、$E=pc$**：光速 $c$ 恆定、能量正比於動量。← 石墨烯 Dirac 電子「像光」的類比。
+- **牛頓 $F=ma$、圓周運動 $mv^2/r=evB$**：磁場中帶電粒子轉圈。← 朗道能階的迴旋運動。
+- **能量量子化（波耳模型）**：軌道「裝得下整數個波」→ 能階離散。← 朗道能階、磁通量子化。
+
+---
+
+## 📚 主線：從高中一路推到考試級
+
+### 1. 掃描探針顯微術（Scanning Probe Microscopy, SPM）三兄弟：STM / AFM / MFM
+
+**你高中學過的**：要「看見」很小的東西，光學顯微鏡受限於光波長（幾百奈米），看不到單顆原子。要看原子，得換一種完全不靠透鏡的方法。
+
+**為什麼需要新東西**：掃描探針的點子是——拿一根**極尖的針**在表面上方逐點掃，量「針尖與樣品之間某個對距離超敏感的物理量」，邊掃邊記，就拼出一張表面地圖。對距離愈敏感、解析度愈高。三兄弟的差別只在「量哪個量」。
+
+**定義（中英對照）**：
+
+| 縮寫 | 全名 | 量的物理量 | 看到什麼 |
+|---|---|---|---|
+| **STM** | 掃描穿隧顯微術（Scanning Tunneling Microscopy） | 量子**穿隧電流（tunneling current）** $I$ | 表面形貌＋局域電子態密度（需導電樣品） |
+| **AFM** | 原子力顯微術（Atomic Force Microscopy） | 針尖與樣品間的**原子力（atomic force）**（凡得瓦／接觸力） | 表面形貌（絕緣體也可，不需導電） |
+| **MFM** | 磁力顯微術（Magnetic Force Microscopy） | 磁性針尖感受的**磁力（magnetic force）**梯度 | 表面**磁疇／磁化分布**（記憶體位元） |
+
+STM 是 1981 年 Binnig 與 Rohrer 發明（拿了 1986 諾貝爾物理獎）；AFM 把它推廣到不導電的樣品；MFM 則把針尖鍍磁性材料，專看磁。
+
+<details>
+<summary><b>▸ 穿隧電流 I ∝ exp(-2κz)（對距離的指數敏感）</b></summary>
+
+### 你高中學過的
+量子穿隧：電子可以穿過「古典上不該過得去」的位能壘，穿透機率隨壁的「厚度」與「高度」**指數**下降。指數函數 $e^{-x}$ 掉得非常快。
+
+### 為什麼要這個
+這正是 STM 能達到**原子級解析度**的原因：針尖最尖那一顆原子離樣品最近，貢獻的穿隧電流壓倒性地大於旁邊稍遠的原子。距離只差一個原子半徑（約 1 Å），電流就差約一個數量級。
+
+### 定義
+針尖與樣品間距 $z$、有效位障高度（功函數量級）$\phi$，穿隧電流
+$$I\propto e^{-2\kappa z},\qquad \kappa=\frac{\sqrt{2m\phi}}{\hbar}.$$
+$\kappa$ 是位障內波函數的衰減常數（decay constant）；$m$ 為電子質量。典型 $\phi\sim4$ eV → $\kappa\sim1\,\text{Å}^{-1}$。
+
+**範例 1（熱身）**：$\phi=4$ eV → $\kappa\approx1.02\,\text{Å}^{-1}$，故 $z$ 增加 $1$ Å，$I$ 變成 $e^{-2}\approx0.135$ 倍（掉到約 1/7.4）。一個原子的高低差就讓電流差一個量級——這就是原子解析度的來源。
+
+**範例 2（中階）**：對數化 $\ln I = \text{const}-2\kappa z$，故 $I$–$z$ 曲線在半對數圖上是**直線**，斜率 $=-2\kappa$。量斜率就量到 $\kappa$，進而反推 $\phi$（見 §2）。
+
+**範例 3（對到考題）**：2013 第 15 題要量「有效位障高度」，正是用這個指數的對數斜率：$\phi=\dfrac{\hbar^2}{8m}\left(\dfrac{d\ln I}{dz}\right)^2$。
+</details>
+
+> **小結**：三兄弟＝「掃描＋量一個對距離敏感的量」。STM 量穿隧電流（$\propto e^{-2\kappa z}$，最敏感、需導電）、AFM 量力（不需導電）、MFM 量磁力（看磁疇）。
+
+<details>
+<summary><b>📝 更多範例（點開）：STM 穿隧電流 I ∝ exp(-2κz) 的代數練習</b></summary>
+
+**範例 A（從 $\phi$ 算 $\kappa$，逐步代數）**：給功函數量級的位障高度 $\phi=4.0$ eV，求衰減常數 $\kappa=\dfrac{\sqrt{2m\phi}}{\hbar}$。
+先把單位都化成 SI：電子質量 $m=9.11\times10^{-31}$ kg，$\phi=4.0\,\text{eV}\times1.602\times10^{-19}\,\text{J/eV}=6.41\times10^{-19}$ J，$\hbar=1.055\times10^{-34}$ J·s。
+分子先算 $2m\phi=2\times(9.11\times10^{-31})\times(6.41\times10^{-19})=1.168\times10^{-48}$（kg·J $=$ kg²·m²·s⁻²）。
+開根號：$\sqrt{2m\phi}=\sqrt{1.168\times10^{-48}}=1.081\times10^{-24}$ kg·m·s⁻¹。
+再除以 $\hbar$：$\kappa=\dfrac{1.081\times10^{-24}}{1.055\times10^{-34}}=1.024\times10^{10}\ \text{m}^{-1}=1.02\ \text{Å}^{-1}$。
+所以 $\kappa\approx1.0\,\text{Å}^{-1}$——這就是「典型 $\phi\sim4$ eV 給 $\kappa\sim1\,\text{Å}^{-1}$」的由來。
+
+**範例 B（距離增量 → 電流比，不跳步）**：針尖抬高 $\Delta z=1$ Å，電流變幾倍？由 $I\propto e^{-2\kappa z}$，
+$$\frac{I(z+\Delta z)}{I(z)}=\frac{e^{-2\kappa(z+\Delta z)}}{e^{-2\kappa z}}=e^{-2\kappa\,\Delta z}.$$
+代 $\kappa=1.02\,\text{Å}^{-1}$、$\Delta z=1\,\text{Å}$：指數 $=-2\times1.02\times1=-2.04$，故比值 $=e^{-2.04}=0.130$。
+所以抬高 1 Å，電流掉到約 $0.13$ 倍（約 $1/7.7$，將近一個量級）。若 $\Delta z=2$ Å：指數 $-4.08$、比值 $e^{-4.08}=0.0169$，掉到約 $1.7\%$（近兩個量級）——指數對距離的放大效果一目了然。
+
+**範例 C（反推 $\phi$，量到電流比就回推位障）**：實驗量到抬高 $\Delta z=0.5$ Å 時電流變成 $0.35$ 倍，求 $\phi$。
+由 $\dfrac{I_2}{I_1}=e^{-2\kappa\Delta z}=0.35$，兩邊取自然對數：$-2\kappa\Delta z=\ln 0.35=-1.050$。
+解 $\kappa=\dfrac{1.050}{2\times0.5\,\text{Å}}=1.050\ \text{Å}^{-1}=1.050\times10^{10}\ \text{m}^{-1}$。
+再由 $\kappa=\dfrac{\sqrt{2m\phi}}{\hbar}\Rightarrow\phi=\dfrac{\hbar^2\kappa^2}{2m}$。
+代入：$\hbar^2\kappa^2=(1.055\times10^{-34})^2\times(1.050\times10^{10})^2=(1.113\times10^{-68})\times(1.103\times10^{20})=1.228\times10^{-48}$。
+除以 $2m=1.822\times10^{-30}$：$\phi=\dfrac{1.228\times10^{-48}}{1.822\times10^{-30}}=6.74\times10^{-19}$ J $=\dfrac{6.74\times10^{-19}}{1.602\times10^{-19}}=4.2$ eV。
+合理（功函數量級）——量電流隨距離的衰減就回推出位障高度。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 250" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="atom10a" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#84b4df"/><stop offset="1" stop-color="#1a4d7c"/></radialGradient>
+<marker id="arr10a" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#555"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="130" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4d7c">STM 針尖–樣品</text>
+<polygon points="100,30 160,30 138,118 122,118" fill="#cfd6dd" stroke="#888" stroke-width="1"/>
+<circle cx="130" cy="124" r="8" fill="url(#atom10a)" stroke="#13395d" stroke-width="0.7"/>
+<text x="178" y="80" fill="#555">針尖 (tip)</text>
+<g fill="url(#atom10a)" stroke="#13395d" stroke-width="0.6"><circle cx="40" cy="172" r="9"/><circle cx="70" cy="172" r="9"/><circle cx="100" cy="172" r="9"/><circle cx="130" cy="172" r="9"/><circle cx="160" cy="172" r="9"/><circle cx="190" cy="172" r="9"/><circle cx="220" cy="172" r="9"/></g>
+<rect x="28" y="182" width="204" height="14" fill="#dce4ec" stroke="#999" stroke-width="0.7"/>
+<text x="130" y="216" text-anchor="middle" fill="#555">樣品表面 (需導電)</text>
+<line x1="250" y1="124" x2="250" y2="163" stroke="#c0392b" stroke-width="1" marker-start="url(#arr10a)" marker-end="url(#arr10a)"/>
+<text x="256" y="148" fill="#c0392b" font-size="11">z</text>
+<text x="118" y="150" fill="#c0392b" font-size="14">↯</text>
+<line x1="320" y1="50" x2="320" y2="200" stroke="#888" stroke-width="1.2"/>
+<line x1="320" y1="200" x2="525" y2="200" stroke="#888" stroke-width="1.2"/>
+<text x="312" y="48" text-anchor="end" font-size="11" fill="#333">I</text>
+<text x="528" y="204" font-size="11" fill="#333">z</text>
+<polyline points="328,58 343,74 358,92 373,110 388,128 403,143 418,156 433,167 448,176 463,183 478,188 493,192 508,195" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<line x1="343" y1="74" x2="343" y2="200" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,3"/>
+<line x1="373" y1="110" x2="373" y2="200" stroke="#bbb" stroke-width="0.8" stroke-dasharray="3,3"/>
+<text x="343" y="214" text-anchor="middle" font-size="10" fill="#777">z₀</text>
+<text x="373" y="214" text-anchor="middle" font-size="10" fill="#777">z₀+1Å</text>
+<text x="430" y="92" font-size="13" fill="#c0392b" font-weight="bold">I ∝ e꜀⁻²ᵏᶻ</text>
+<text x="430" y="110" font-size="10.5" fill="#777">每 +1Å ≈ ×0.135</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">STM 把<b style="color:#1a4d7c">極尖針尖</b>放在表面上方，量穿過真空隙的<b style="color:#c0392b">穿隧電流 I</b>。右圖：I 隨距離 z 呈<b>指數衰減</b> $I\propto e^{-2\kappa z}$（$\kappa\approx1\,\text{Å}^{-1}$），z 每增 1 Å 電流就掉到約 0.135 倍（≈ 一個量級）。所以針尖最尖那一顆原子貢獻壓倒性電流 → <b>原子級解析度</b>。樣品須導電（電流才流得通）。</figcaption>
+</figure>
+
+![STM 穿隧電流 $I\propto e^{-2\kappa d}$，對距離極敏感](../figs/f10_stm_tunnel.svg)
+
+---
+
+### 2. 用 STM 量穿隧位障高度（tunneling barrier height）：該開還是關回饋？（對 2013）
+
+> 📖 **本節核心出處與說明（Ref）**：
+> - **權威教材**：Kittel 8e Ch. 1 p. 20 ｜ 林盛煇 §10.1
+> - **歷年考題**：[NTU 2013 Q15（15分）](../考古題/詳解/固態_2013_詳解.html)
+> - **觀念說明**：穿隧電流 $I \propto e^{-2\kappa z}$，$\kappa = \sqrt{2m\phi}/\hbar$。量測位障高度必須關閉高度回饋電路（feedback OFF），掃描 $I(z)$ 並由對數斜率解得 $\phi = \frac{\hbar^2}{8m}(d\ln I / dz)^2$。
+
+
+**你高中學過的**：要量一條曲線 $I(z)$，必須能**自由改變自變量 $z$** 並記錄 $I$。如果有個自動系統一直偷偷調 $z$，你就掃不出這條曲線。
+
+**為什麼需要新東西**：STM 平常工作在「**定電流模式**」：一個 **Z 回饋（Z feedback）**電路時時調整針尖高度 $z$，讓 $I$ 維持定值，藉此描出等電流的表面形貌。但這時 $z$ 是被回饋鎖住的、不能當自變量。要量位障高度 $\phi$，得反過來做。
+
+#### Step 1 — 寫下要量的關係式
+
+由 §1，$I\propto e^{-2\kappa z}$，$\kappa=\dfrac{\sqrt{2m\phi}}{\hbar}$。取自然對數：
+$$\ln I=\text{const}-2\kappa z.$$
+> **小結**：$\ln I$ 對 $z$ 是直線，**斜率 $=-2\kappa$**，而 $\kappa$ 只跟位障高度 $\phi$ 有關。
+
+#### Step 2 — 由對數斜率解出位障高度 $\phi$
+
+把斜率記成 $\dfrac{d\ln I}{dz}=-2\kappa=-\dfrac{2\sqrt{2m\phi}}{\hbar}$，平方再整理：
+$$\left(\frac{d\ln I}{dz}\right)^2=\frac{8m\phi}{\hbar^2}\;\Rightarrow\;\boxed{\phi=\frac{\hbar^2}{8m}\left(\frac{d\ln I}{dz}\right)^2.}$$
+> **小結**：只要量到 $I$ 隨 $z$ 變化的對數斜率，就能算出有效位障高度 $\phi$。
+
+#### Step 3 — 所以該選哪種模式？
+
+要量 $\phi$ 必須**主動掃 $z$、記錄 $I(z)$**（即 $I$–$Z$ 譜），而且：
+$$\boxed{\text{用 }(I)\text{ vs }(Z)\text{ 譜，Z feedback }\mathbf{OFF}.}$$
+**為什麼關回饋**：若 Z feedback 開著，它會為了維持定電流而自動改 $z$，$z$ 就無法當自由掃描的自變量——量不到 $I(z)$ 的斜率。關掉回饋，固定在某點上方，主動掃 $z$、記 $I$，取對數斜率即得 $\phi$。
+
+> **小結**（對 2013 第 15 題）：答案是「**$I$–$Z$ spectroscopy，Z feedback OFF**」，因為要自由變 $z$ 才量得到指數衰減的對數斜率 $\Rightarrow\phi=\dfrac{\hbar^2}{8m}(d\ln I/dz)^2$。
+
+<details>
+<summary><b>📝 更多範例（點開）：用對數斜率反推位障高度 ϕ</b></summary>
+
+**範例 A（從斜率算 $\phi$，全程 SI）**：半對數圖 $\ln I$ 對 $z$ 量到斜率 $\dfrac{d\ln I}{dz}=-2.0\ \text{Å}^{-1}=-2.0\times10^{10}\ \text{m}^{-1}$，求 $\phi=\dfrac{\hbar^2}{8m}\left(\dfrac{d\ln I}{dz}\right)^2$。
+先平方斜率：$\left(\dfrac{d\ln I}{dz}\right)^2=(2.0\times10^{10})^2=4.0\times10^{20}\ \text{m}^{-2}$。
+分子 $\hbar^2=(1.055\times10^{-34})^2=1.113\times10^{-68}$，乘斜率平方：$1.113\times10^{-68}\times4.0\times10^{20}=4.452\times10^{-48}$。
+分母 $8m=8\times9.11\times10^{-31}=7.288\times10^{-30}$。
+相除：$\phi=\dfrac{4.452\times10^{-48}}{7.288\times10^{-30}}=6.109\times10^{-19}$ J $=\dfrac{6.109\times10^{-19}}{1.602\times10^{-19}}=3.81$ eV。位障高度約 $3.8$ eV——典型金屬功函數量級 ✓。
+
+**範例 B（兩點取斜率，再算 $\phi$）**：實驗只記到兩點：$z_1=5.0$ Å 時 $I_1=2.00$ nA，$z_2=6.0$ Å 時 $I_2=0.27$ nA。
+斜率 $=\dfrac{\ln I_2-\ln I_1}{z_2-z_1}=\dfrac{\ln(0.27)-\ln(2.00)}{6.0-5.0}=\dfrac{(-1.309)-(0.693)}{1.0\,\text{Å}}=\dfrac{-2.002}{1.0\,\text{Å}}=-2.00\ \text{Å}^{-1}$。
+與範例 A 同一斜率 → $\phi\approx3.8$ eV。重點：只要兩點就能定斜率（因為 $\ln I$–$z$ 是直線），但多點線性回歸更穩。
+
+**範例 C（先得 $\kappa$、再得 $\phi$，串起 §1）**：斜率 $\dfrac{d\ln I}{dz}=-2\kappa$，故 $\kappa=\dfrac{1}{2}\times2.00\,\text{Å}^{-1}=1.00\ \text{Å}^{-1}=1.00\times10^{10}\ \text{m}^{-1}$。
+代 $\phi=\dfrac{\hbar^2\kappa^2}{2m}$：分子 $\hbar^2\kappa^2=1.113\times10^{-68}\times(1.00\times10^{10})^2=1.113\times10^{-68}\times10^{20}=1.113\times10^{-48}$。
+分母 $2m=1.822\times10^{-30}$，相除 $\phi=6.11\times10^{-19}$ J $=3.81$ eV——與範例 A 完全一致，驗證 $\phi=\dfrac{\hbar^2}{8m}(d\ln I/dz)^2=\dfrac{\hbar^2(2\kappa)^2}{8m}=\dfrac{\hbar^2\kappa^2}{2m}$ 兩種寫法等價（因 $(2\kappa)^2/8=\kappa^2/2$）。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 520 230" width="100%" style="max-width:620px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="120" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">線性座標：I 對 z</text>
+<line x1="50" y1="40" x2="50" y2="180" stroke="#888" stroke-width="1.2"/>
+<line x1="50" y1="180" x2="225" y2="180" stroke="#888" stroke-width="1.2"/>
+<text x="44" y="44" text-anchor="end" fill="#333">I</text>
+<text x="228" y="184" fill="#333">z</text>
+<polyline points="58,48 73,66 88,86 103,106 118,124 133,140 148,153 163,163 178,170 193,175 208,178" fill="none" stroke="#c0392b" stroke-width="2.4"/>
+<text x="150" y="70" font-size="12" fill="#c0392b">I ∝ e꜀⁻²ᵏᶻ</text>
+<text x="120" y="210" text-anchor="middle" font-size="10.5" fill="#777">曲線，難讀斜率</text>
+<text x="375" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">半對數：ln I 對 z</text>
+<line x1="300" y1="40" x2="300" y2="180" stroke="#888" stroke-width="1.2"/>
+<line x1="300" y1="180" x2="490" y2="180" stroke="#888" stroke-width="1.2"/>
+<text x="294" y="44" text-anchor="end" fill="#333">ln I</text>
+<text x="493" y="184" fill="#333">z</text>
+<polyline points="310,52 470,172" fill="none" stroke="#c0392b" stroke-width="2.6"/>
+<line x1="360" y1="89" x2="430" y2="89" stroke="#1a4d7c" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="430" y1="89" x2="430" y2="142" stroke="#1a4d7c" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="395" y="84" text-anchor="middle" font-size="10.5" fill="#1a4d7c">Δz</text>
+<text x="442" y="118" font-size="10.5" fill="#1a4d7c">Δ(ln I)</text>
+<text x="375" y="206" text-anchor="middle" font-size="12" fill="#2e8b2e">斜率 = −2κ → φ</text>
+<text x="375" y="222" text-anchor="middle" font-size="10.5" fill="#777">直線！斜率好讀</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">量位障高度的技巧：把指數曲線（左）取對數變成<b style="color:#c0392b">直線</b>（右），$\ln I=\text{const}-2\kappa z$。直線<b style="color:#2e8b2e">斜率 = −2κ</b>，由 $\phi=\dfrac{\hbar^2}{8m}\left(\dfrac{d\ln I}{dz}\right)^2$ 反推位障高度。<b>關鍵考點</b>：量這條斜率必須<b>主動掃 z、記 I</b>，所以 <b>Z feedback 要 OFF</b>（開著的話回饋會鎖死 z，掃不出曲線）。</figcaption>
+</figure>
+
+---
+
+### 3. X 光反射率多層膜（X-ray reflectivity multilayer）：為何「每第三峰」消失（對 2013）
+
+> 📖 **本節核心出處與說明（Ref）**：
+> - **權威教材**：Kittel 8e Ch. 2 p. 44 ｜ 林盛煇 §10.2
+> - **歷年考題**：[NTU 2013 Q17（20分）](../考古題/詳解/固態_2013_詳解.html)
+> - **觀念說明**：週期性多層膜結構因子等效於單胞厚度傅立葉轉換，當厚度比滿足 $D_1/D = 1/n$ 時，形狀因子 $\sin(\pi m D_1/D) = 0$ 導致每第 $n$ 階反射峰系統性消光。
+
+
+**你高中學過的**：單狹縫繞射有「暗紋」——當狹縫寬 $a$ 與角度滿足 $a\sin\theta=m\lambda$（$m$ 整數）時，狹縫內各點的波兩兩抵消、強度為零。「子結構的尺寸」會在某些級數造成零點。
+
+**為什麼需要新東西**：多層膜（multilayer）是把兩種材料一層一層交疊（如 Mo/Si，做極紫外光反射鏡），週期 $D=D_1+D_2$。它就像一個「人工晶體」：**超晶格週期 $D$ 決定布拉格峰的位置**，而**一個週期內的密度輪廓決定每個峰的強度**。當週期內子層比例剛好，某些峰的強度會歸零——這跟晶體「結構因子消光」是同一招。
+
+<details>
+<summary><b>▸ 多層膜 form factor F_m（單週期密度的傅立葉係數）</b></summary>
+
+### 你高中學過的
+週期函數可拆成傅立葉級數 $\rho(z)=\sum_m F_m e^{iq_m z}$；每一項對應一個諧波（harmonic），$q_m=2\pi m/D$。
+
+### 為什麼要這個
+反射率的布拉格峰只出現在動量轉移 $q=q_m$（超晶格的繞射條件），而**第 $m$ 峰的振幅 $\propto|F_m|$**。$F_m=0$ 的那一階就看不到峰——這就是「消光」。$F_m$ 完全由一個週期內 $\rho(z)$ 的形狀（即子層比例）決定。
+
+### 定義
+$$F_m=\frac1D\int_0^D \rho(z)\,e^{iq_m z}\,dz,\qquad q_m=\frac{2\pi m}{D}.$$
+這跟晶體結構因子 $S_{\mathbf G}=\sum_j f_j e^{i\mathbf G\cdot\mathbf r_j}$ 同構，只是「basis」換成「一層 $\rho_1$＋一層 $\rho_2$」。
+
+**範例 1（熱身）**：若 $\rho_1=\rho_2$（均勻、無對比），則 $\rho(z)$ 是常數，所有 $m\ne0$ 的 $F_m=0$ → 沒有任何超晶格峰。**有密度對比才有峰。**
+**範例 2（中階）**：對稱方波 $D_1/D=1/2$ → 偶次諧波 $F_2,F_4,\dots$ 全為零（每第二峰消失），這正是「對稱方波無偶次諧波」的同一數學。
+**範例 3（對到考題）**：$D_1/D=1/3$（Mo 佔 1/3）→ $|F_m|\propto|\sin(\pi m/3)|=0$ 於 $m=3,6,9,\dots$ → 每第三峰消失。
+</details>
+
+#### Step 1 — 寫單週期的密度輪廓
+
+一個週期 $0\le z<D$ 內，材料 1（密度 $\rho_1$，厚 $D_1$）疊材料 2（密度 $\rho_2$，厚 $D_2$）：
+$$\rho(z)=\begin{cases}\rho_1 & 0\le z<D_1\\ \rho_2 & D_1\le z<D\end{cases}\qquad(D=D_1+D_2).$$
+
+#### Step 2 — 算第 $m$ 階 form factor（兩段積分）
+
+$q_m=2\pi m/D$，用 $e^{iq_m D}=e^{i2\pi m}=1$：
+$$F_m=\frac1D\Big[\rho_1\!\int_0^{D_1}\!e^{iq_m z}dz+\rho_2\!\int_{D_1}^{D}\!e^{iq_m z}dz\Big],$$
+$$\int_0^{D_1}e^{iq_m z}dz=\frac{e^{iq_m D_1}-1}{iq_m},\qquad \int_{D_1}^{D}e^{iq_m z}dz=\frac{1-e^{iq_m D_1}}{iq_m}.$$
+
+#### Step 3 — 合併，密度對比浮現
+
+$$F_m=\frac{1}{D\,iq_m}\Big[\rho_1(e^{iq_m D_1}-1)+\rho_2(1-e^{iq_m D_1})\Big]=\frac{(\rho_1-\rho_2)}{D\,iq_m}\big(e^{iq_m D_1}-1\big).$$
+> **小結**：只有**密度對比** $\rho_1-\rho_2$ 才散射——均勻層不貢獻峰，合理。
+
+#### Step 4 — 取模，得 sinc 型零點
+
+用 $|e^{i\varphi}-1|=2|\sin(\varphi/2)|$，且 $q_m D_1=2\pi m\,\dfrac{D_1}{D}$：
+$$|F_m|=\frac{|\rho_1-\rho_2|}{D\,q_m}\cdot2\Big|\sin\!\Big(\pi m\frac{D_1}{D}\Big)\Big|\;\Rightarrow\;\boxed{|F_m|\propto\Big|\sin\!\Big(\pi m\,\frac{D_1}{D}\Big)\Big|.}$$
+
+#### Step 5 — 代 $D_1/D=1/3$，找零點
+
+$$|F_m|\propto\Big|\sin\frac{\pi m}{3}\Big|=0\;\Longleftrightarrow\;\frac{m}{3}\in\mathbb Z\;\Longleftrightarrow\;m=3,6,9,\dots$$
+$$\boxed{\text{每第三個反射峰}(m=3,6,9,\dots)\text{ 的 form factor 為零，峰消失。}\ \blacksquare}$$
+
+> **小結**：消失條件只看比例 $D_1/D$。用 Si 那層 $D_2/D=2/3$ 算也一致（$\sin(2\pi m/3)$ 與 $\sin(\pi m/3)$ 零點相同）。推廣：$D_1/D=1/n$ → 每第 $n$ 峰消失。物理上等同「單矩形脈衝寬 $D_1$」的單狹縫暗紋 $D_1\cdot q=2\pi\times$整數。
+
+<details>
+<summary><b>📝 更多範例（點開）：不同子層比例 D₁/D 的消峰位置</b></summary>
+
+**範例 A（$D_1/D=1/2$，對稱方波）**：由 $|F_m|\propto\left|\sin\!\left(\pi m\dfrac{D_1}{D}\right)\right|=\left|\sin\dfrac{\pi m}{2}\right|$。
+逐 $m$ 代入：$m=1\Rightarrow\sin\dfrac{\pi}{2}=1$（有峰）；$m=2\Rightarrow\sin\pi=0$（消）；$m=3\Rightarrow\sin\dfrac{3\pi}{2}=-1$，取絕對值 $=1$（有峰）；$m=4\Rightarrow\sin2\pi=0$（消）。
+所以零點在 $m=2,4,6,\dots$ → **每第二個峰消失**。這正是「對稱方波沒有偶次諧波」的同一件事。
+
+**範例 B（$D_1/D=1/4$，求前八階哪些消）**：$|F_m|\propto\left|\sin\dfrac{\pi m}{4}\right|$，零點條件 $\dfrac{m}{4}\in\mathbb Z\Leftrightarrow m=4,8,12,\dots$。
+列前八階：
+$m=1:\sin\dfrac{\pi}{4}=0.707$；$m=2:\sin\dfrac{\pi}{2}=1$；$m=3:\sin\dfrac{3\pi}{4}=0.707$；$m=4:\sin\pi=0$（消）；
+$m=5:\sin\dfrac{5\pi}{4}=-0.707\to0.707$；$m=6:\sin\dfrac{3\pi}{2}=-1\to1$；$m=7:\sin\dfrac{7\pi}{4}=-0.707\to0.707$；$m=8:\sin2\pi=0$（消）。
+→ 每第四峰（$m=4,8$）消失，其餘峰強度按 $|\sin(\pi m/4)|$ 起伏。
+
+**範例 C（反問：第 5 峰消失，求 $D_1/D$）**：要 $m=5$ 是最低階零點，需 $\sin\!\left(5\pi\dfrac{D_1}{D}\right)=0$ 且 $m=1,2,3,4$ 都不為零。
+零點通式 $5\pi\dfrac{D_1}{D}=k\pi\ (k\in\mathbb Z)\Rightarrow\dfrac{D_1}{D}=\dfrac{k}{5}$。取 $k=1$：$\dfrac{D_1}{D}=\dfrac15$。
+驗證最低階：$|F_m|\propto\left|\sin\dfrac{\pi m}{5}\right|$，零點 $m=5,10,\dots$，而 $m=1,2,3,4$ 的 $\sin\dfrac{\pi m}{5}\ne0$ ✓。所以「每第五峰消失」對應子層比 $1/5$——與「$1/n\Rightarrow$ 每第 $n$ 峰消失」一致。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 240" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arr10c" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#555"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="95" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">多層膜（週期 D）</text>
+<g>
+<rect x="55" y="40" width="80" height="15" fill="#1a4d7c"/><rect x="55" y="55" width="80" height="30" fill="#9cc3e6"/>
+<rect x="55" y="85" width="80" height="15" fill="#1a4d7c"/><rect x="55" y="100" width="80" height="30" fill="#9cc3e6"/>
+<rect x="55" y="130" width="80" height="15" fill="#1a4d7c"/><rect x="55" y="145" width="80" height="30" fill="#9cc3e6"/>
+</g>
+<rect x="55" y="40" width="80" height="135" fill="none" stroke="#666" stroke-width="0.8"/>
+<line x1="145" y1="40" x2="145" y2="85" stroke="#c0392b" stroke-width="1" marker-start="url(#arr10c)"/>
+<text x="150" y="66" font-size="10.5" fill="#c0392b">D</text>
+<text x="148" y="50" font-size="9.5" fill="#1a4d7c">Mo (1/3)</text>
+<text x="148" y="76" font-size="9.5" fill="#5a86b0">Si (2/3)</text>
+<text x="95" y="195" text-anchor="middle" font-size="10.5" fill="#777">Dꜰ:D = 1/3</text>
+<text x="370" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">反射率峰 |Fₘ| ∝ |sin(πm/3)|</text>
+<line x1="245" y1="180" x2="540" y2="180" stroke="#888" stroke-width="1.2"/>
+<line x1="245" y1="40" x2="245" y2="180" stroke="#888" stroke-width="1.2"/>
+<text x="540" y="196" text-anchor="end" font-size="10.5" fill="#333">m (階)</text>
+<g stroke="#2e8b2e" stroke-width="9">
+<line x1="275" y1="180" x2="275" y2="98"/>
+<line x1="305" y1="180" x2="305" y2="98"/>
+<line x1="365" y1="180" x2="365" y2="98"/>
+<line x1="395" y1="180" x2="395" y2="98"/>
+<line x1="455" y1="180" x2="455" y2="98"/>
+<line x1="485" y1="180" x2="485" y2="98"/>
+</g>
+<g fill="#333" font-size="10" text-anchor="middle">
+<text x="275" y="194">1</text><text x="305" y="194">2</text>
+<text x="335" y="194" fill="#c0392b" font-weight="bold">3</text>
+<text x="365" y="194">4</text><text x="395" y="194">5</text>
+<text x="425" y="194" fill="#c0392b" font-weight="bold">6</text>
+<text x="455" y="194">7</text><text x="485" y="194">8</text>
+</g>
+<g><circle cx="335" cy="180" r="3.5" fill="#c0392b"/><circle cx="425" cy="180" r="3.5" fill="#c0392b"/></g>
+<text x="335" y="118" text-anchor="middle" font-size="11" fill="#c0392b">✗</text>
+<text x="425" y="118" text-anchor="middle" font-size="11" fill="#c0392b">✗</text>
+<text x="385" y="60" text-anchor="middle" font-size="11" fill="#c0392b">m=3,6,9… 消失</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">把兩種材料（<b style="color:#1a4d7c">Mo</b> 佔 1/3、<b style="color:#5a86b0">Si</b> 佔 2/3）一層層交疊成「人工晶體」，週期 D 決定布拉格峰位置，<b>單週期的密度輪廓</b>決定各峰強度 $|F_m|\propto|\sin(\pi m/3)|$。當 $m=3,6,9,\dots$ 時 $\sin(\pi m/3)=0$ → <b style="color:#c0392b">每第三個峰消失</b>（紅 ✗）。推廣：子層比 $1/n$ → 每第 $n$ 峰消失，與單狹縫暗紋同一數學。</figcaption>
+</figure>
+
+---
+
+### 4. 石墨烯 / Dirac point：線性色散 ⇒ 無質量（massless）（對 2018）
+
+> 📖 **本節核心出處與說明（Ref）**：
+> - **權威教材**：Kittel 8e Ch. 9/18 ｜ 林盛煇 §10.3
+> - **歷年考題**：[NTU 2018 Q5（15分）](../考古題/詳解/固態_2018_詳解.html)
+> - **觀念說明**：石墨烯布里淵區角點（K 點）具有無能隙線性色散 $E(\mathbf q) = \pm \hbar v_F |\mathbf q|$，群速度為常數 $v_F \approx 10^6 \, \text{m/s}$，有效迴旋質量 $m_c = E/v_F^2 \to 0$ 呈現無質量狄拉克費米子行為。
+
+
+**你高中學過的**：光子無靜止質量、能量 $E=pc$（線性、過原點、無能隙）；有質量的非相對論粒子 $E=p^2/2m$（拋物線）。相對論完整式 $E=\sqrt{(pc)^2+(mc^2)^2}$。
+
+**為什麼需要新東西**：大多數固體的能帶在能帶底是**拋物線** $E\approx E_0+\hbar^2 k^2/2m^*$，電子有有效質量（effective mass）$m^*$。但石墨烯（graphene，單層碳原子蜂巢晶格）在費米能附近的能帶是**線性**的——這讓電子表現得像「無質量的光」。
+
+**定義（中英對照）**：石墨烯的緊束縛（tight-binding）能帶在六角布里淵區（hexagonal BZ）的角點 K、K′（稱 **Dirac points**）相接，且費米能恰落在接觸點。展開到一階：
+$$\boxed{E(\mathbf q)=\pm\hbar v_F|\mathbf q|,\qquad \mathbf q=\mathbf k-\mathbf K,\quad v_F\approx1\times10^6\ \text{m/s}.}$$
+$+$ 為導帶（電子）、$-$ 為價帶（電洞），兩個錐面在 $E=0$ 尖點相觸 → **Dirac cone**。
+
+<details>
+<summary><b>▸ 費米速度 v_F 與三種「質量」（群速、曲率質量、迴旋質量）對線性色散的反應</b></summary>
+
+### 你高中學過的
+$E=pc$（光子）；$E=p^2/2m$（有質量）。
+
+### 為什麼要這個
+要驗證「無質量」，得看幾種質量定義：群速（group velocity）$v_g=\hbar^{-1}dE/dk$、曲率質量（curvature mass）$1/m^*=\hbar^{-2}d^2E/dk^2$、迴旋質量（cyclotron mass）$m_c$。線性色散會讓它們呈現「非普通粒子」的特徵。
+
+### 定義
+$v_g=\dfrac1\hbar\dfrac{dE}{dk}$；$\dfrac1{m^*}=\dfrac1{\hbar^2}\dfrac{d^2E}{dk^2}$；迴旋質量 $m_c=\dfrac{\hbar^2}{2\pi}\dfrac{\partial A(E)}{\partial E}$（$A$＝$k$ 空間等能線面積）。
+
+**範例 1（熱身）**：拋物線 $E=\hbar^2k^2/2m$ → $v_g=\hbar k/m$（隨 $k$ 變）、$m^*=m$（常數）。
+**範例 2（中階）**：能帶頂 $d^2E/dk^2<0$ → $m^*<0$ → 用電洞描述（接單元 06/07）。
+**範例 3（對到考題）**：線性 $E=\hbar v_F|q|$ → $v_g=v_F$（**常數！與能量無關，像光速**）、$d^2E/dq^2=0$（曲率質量發散）、$m_c=E/v_F^2$（在 Dirac 點 $E\to0$ 時 $m_c\to0$）。
+</details>
+
+#### Step 1 — 與光子類比，看出 $m=0$
+
+光子：$E=\hbar c|\mathbf k|=cp$（線性、無質量）。石墨烯：$E=\hbar v_F|\mathbf q|=v_F p$（$p=\hbar q$ 為從 Dirac 點量起的晶體動量）。**兩式同形，只把 $c\to v_F$。** 對照相對論
+$$E=\sqrt{(pv_F)^2+(mv_F^2)^2}.$$
+石墨烯實測色散嚴格線性、在 Dirac 點**無能隙**；要讓上式退化成 $E=v_F p$，必須
+$$mv_F^2=0\;\Rightarrow\;\boxed{m=0\ (\text{靜止質量為零，massless}).}$$
+反證：若 $m\ne0$，會在 $q=0$ 開一條能隙 $E_g=2mv_F^2$，與「兩錐相觸無 gap」矛盾。
+
+#### Step 2 — 迴旋質量也指向零（有效質量為零的另一驗證）
+
+$k$ 空間等能圓面積 $A(E)=\pi q^2=\pi(E/\hbar v_F)^2$，
+$$m_c=\frac{\hbar^2}{2\pi}\frac{\partial A}{\partial E}=\frac{\hbar^2}{2\pi}\cdot\frac{2\pi E}{\hbar^2 v_F^2}=\frac{E}{v_F^2}.$$
+這正是 $E=m_c v_F^2$（固態版的 $E=mc^2$）：載子質量純由能量提供，**在 Dirac 點 $E\to0$ 時 $m_c\to0$**。
+
+> **小結**（對 2018 第 5 題）：石墨烯 Dirac 點線性色散 $E=\hbar v_F|q|$ 與光子 $E=cp$ 同形，群速恆為 $v_F$、靜止質量＝0、有效質量＝0 → Dirac 電子是「速度 $v_F$ 的光」，由 2D 無質量 Dirac 方程 $H=v_F\,\boldsymbol\sigma\cdot\mathbf p$ 描述。
+
+<details>
+<summary><b>📝 更多範例（點開）：Dirac 色散 E = ℏ v_F |q| 的數值與群速</b></summary>
+
+**範例 A（給 $q$ 算能量，逐步代數）**：石墨烯費米速度 $v_F=1.0\times10^6$ m/s，求離 Dirac 點 $q=0.10\ \text{Å}^{-1}=0.10\times10^{10}=1.0\times10^9\ \text{m}^{-1}$ 處的能量 $E=\hbar v_F q$。
+先乘 $\hbar v_F=(1.055\times10^{-34})\times(1.0\times10^6)=1.055\times10^{-28}$ J·m。
+再乘 $q$：$E=1.055\times10^{-28}\times1.0\times10^9=1.055\times10^{-19}$ J。
+換成 eV：$E=\dfrac{1.055\times10^{-19}}{1.602\times10^{-19}}=0.659$ eV。
+所以離 Dirac 點 $0.1\,\text{Å}^{-1}$ 約 $0.66$ eV——線性，加倍 $q$ 就加倍 $E$（範例驗證：$q=0.20\,\text{Å}^{-1}\Rightarrow E=1.32$ eV）。
+
+**範例 B（群速與能量無關，逐步求導）**：群速 $v_g=\dfrac1\hbar\dfrac{dE}{dq}$。對 $E=\hbar v_F q$（$q>0$）求導：$\dfrac{dE}{dq}=\hbar v_F$。
+代回 $v_g=\dfrac1\hbar\cdot\hbar v_F=v_F$。**與 $q$（即與能量）無關**，恆為 $v_F$，正像光速恆定。
+對照拋物線 $E=\dfrac{\hbar^2 q^2}{2m}$：$\dfrac{dE}{dq}=\dfrac{\hbar^2 q}{m}$，$v_g=\dfrac{\hbar q}{m}$ 隨 $q$ 線性增加——這才是「有質量」的特徵。兩相比較凸顯 Dirac 電子的「無質量」。
+
+**範例 C（迴旋質量趨零，完整推導）**：等能圓面積 $A(E)=\pi q^2$，而 $q=\dfrac{E}{\hbar v_F}$，故 $A(E)=\pi\left(\dfrac{E}{\hbar v_F}\right)^2=\dfrac{\pi E^2}{\hbar^2 v_F^2}$。
+求導：$\dfrac{\partial A}{\partial E}=\dfrac{\pi}{\hbar^2 v_F^2}\cdot 2E=\dfrac{2\pi E}{\hbar^2 v_F^2}$。
+代入迴旋質量 $m_c=\dfrac{\hbar^2}{2\pi}\dfrac{\partial A}{\partial E}=\dfrac{\hbar^2}{2\pi}\cdot\dfrac{2\pi E}{\hbar^2 v_F^2}=\dfrac{E}{v_F^2}$。
+數值：$E=0.659$ eV $=1.055\times10^{-19}$ J，$v_F^2=(10^6)^2=10^{12}$，得 $m_c=\dfrac{1.055\times10^{-19}}{10^{12}}=1.055\times10^{-31}$ kg $\approx0.12\,m_e$。
+當 $E\to0$（趨近 Dirac 點）$m_c\to0$——這就是「有效質量為零」的定量證據。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 250" width="100%" style="max-width:640px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="150" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">線性（石墨烯）Dirac cone</text>
+<line x1="150" y1="35" x2="150" y2="215" stroke="#888" stroke-width="1.2"/>
+<line x1="40" y1="125" x2="265" y2="125" stroke="#888" stroke-width="1.2"/>
+<text x="144" y="44" text-anchor="end" font-size="11" fill="#333">E</text>
+<text x="268" y="129" font-size="11" fill="#333">k</text>
+<line x1="60" y1="45" x2="150" y2="125" stroke="#c0392b" stroke-width="2.4"/>
+<line x1="240" y1="45" x2="150" y2="125" stroke="#c0392b" stroke-width="2.4"/>
+<line x1="60" y1="205" x2="150" y2="125" stroke="#1a4d7c" stroke-width="2.4"/>
+<line x1="240" y1="205" x2="150" y2="125" stroke="#1a4d7c" stroke-width="2.4"/>
+<ellipse cx="150" cy="49" rx="90" ry="13" fill="none" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<ellipse cx="150" cy="201" rx="90" ry="13" fill="none" stroke="#1a4d7c" stroke-width="1" stroke-dasharray="3,3"/>
+<circle cx="150" cy="125" r="4" fill="#2e8b2e"/>
+<text x="170" y="118" font-size="11" fill="#2e8b2e">Dirac 點</text>
+<text x="200" y="70" font-size="11" fill="#c0392b">導帶 +ℏ vꜰ|k|</text>
+<text x="55" y="195" font-size="11" fill="#1a4d7c">價帶 −ℏ vꜰ|k|</text>
+<text x="150" y="240" text-anchor="middle" font-size="11" fill="#777">無能隙，斜率固定 → vᵍ = vꜰ（像光）</text>
+<text x="430" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#888">一般固體（拋物線）</text>
+<line x1="430" y1="35" x2="430" y2="215" stroke="#888" stroke-width="1.2"/>
+<line x1="335" y1="180" x2="540" y2="180" stroke="#888" stroke-width="1.2"/>
+<text x="424" y="44" text-anchor="end" font-size="11" fill="#333">E</text>
+<text x="543" y="184" font-size="11" fill="#333">k</text>
+<polyline points="350,52 365,76 380,98 395,118 410,136 425,152 430,165 435,152 450,136 465,118 480,98 495,76 510,52" fill="none" stroke="#6aa1d6" stroke-width="2.4"/>
+<text x="430" y="208" text-anchor="middle" font-size="10.5" fill="#777">E ≈ E₀ + ℏ²k²/2m* （有質量）</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">石墨烯在 K 點附近能帶是<b style="color:#c0392b">兩個線性錐</b>在 $E=0$ 尖點相觸（<b style="color:#2e8b2e">Dirac 點</b>），$E=\pm\hbar v_F|k|$——和光子 $E=cp$ 同形，只把 $c$ 換成 $v_F\approx10^6$ m/s。斜率（群速）固定為 $v_F$、<b>無能隙</b> → 靜止質量＝0、有效質量＝0（massless）。對照右邊一般固體的<b style="color:#6aa1d6">拋物線</b>能帶（有有效質量 $m^*$）。</figcaption>
+</figure>
+
+![石墨烯線性色散 $E=\hbar v_F|k|$（無質量）](../figs/f10_dirac_cone.svg)
+
+---
+
+### 5. 蛋白質結晶（protein crystallography）：X 光如何定出「形狀」（對 2022）
+
+> 📖 **本節核心出處與說明（Ref）**：
+> - **權威教材**：Kittel 8e Ch. 2 p. 48 ｜ 林盛煇 §2.5
+> - **歷年考題**：[NTU 2022 Q6（15分）](../考古題/詳解/固態_2022_詳解.html)
+> - **觀念說明**：X 光繞射探測電子雲密度傅立葉變換 $F(\mathbf G) = \int \rho(\mathbf r)e^{i\mathbf G \cdot \mathbf r}d^3r$。實驗僅能測量強度 $|F|^2$，遺失相位資訊（Phase problem），需透過同晶型置換重原子或反常散射還原分子實空間結構。
+
+
+**你高中學過的**：繞射的「亮點位置」由「晶格的週期」決定，「亮點亮度」由「每個重複單元裡長什麼樣」決定。
+
+**為什麼需要新東西**：單一蛋白質分子太小、散射太弱，量不到訊號。把上百萬個**同向**的蛋白質排成晶體，訊號就被相干放大（$\propto N^2$）到可量。但題目問的不是「晶體種類」（對生物功能不重要），而是「**蛋白質的形狀**」——形狀藏在哪？
+
+**定義（中英對照）**：把分工講清楚——
+- **峰的位置 ← 晶格（lattice）**：Bragg 峰位置給出倒晶格 → 晶胞大小、對稱、空間群 → 知道是哪種晶體。
+- **峰的強度 ← 基底（basis）**：晶胞內的電子密度 $\rho(\mathbf r)$ 就是「蛋白質本體的形狀」，編碼在結構因子的強度裡。
+
+<details>
+<summary><b>▸ 結構因子 F(G)（晶胞電子密度的傅立葉變換）與相位問題</b></summary>
+
+### 你高中學過的
+一個函數可以由它的傅立葉係數完全重建（反傅立葉）。
+
+### 為什麼要這個
+形狀＝電子密度 $\rho(\mathbf r)$。若能拿到 $\rho$ 的所有傅立葉係數 $F(\mathbf G)$，反傅立葉就還原出形狀。麻煩在繞射只量到**強度** $|F|^2$，丟了相位。
+
+### 定義
+$$F(\mathbf G)=\int_{\text{cell}}\rho(\mathbf r)\,e^{i\mathbf G\cdot\mathbf r}\,d^3r,\qquad \rho(\mathbf r)=\frac1V\sum_{\mathbf G}F(\mathbf G)\,e^{-i\mathbf G\cdot\mathbf r}.$$
+繞射量到的是 $I(\mathbf G)\propto|F(\mathbf G)|^2$ → 只得 $|F|$，**相位 $\phi$（$F=|F|e^{i\phi}$）遺失**＝相位問題。
+
+**範例 1（位置＝lattice）**：晶格常數／對稱由 Bragg 峰位置定 → 知道是哪種晶體。
+**範例 2（強度＝basis）**：每段電子密度貢獻 $e^{i\mathbf G\cdot\mathbf r}$ → 強度編碼「晶胞內長什麼樣」。
+**範例 3（補相位）**：同晶置換（MIR，浸重原子）、異常散射（MAD/SAD，調波長）、分子置換（MR，用已知相似結構）→ 取回 $\phi$。
+</details>
+
+#### Step 1 — 形狀＝晶胞內電子密度 $\rho(\mathbf r)$
+
+蛋白質佔據晶胞內部（basis），其電子密度就是「形狀」。每個反射強度 $I(hkl)\propto|F(hkl)|^2$ 是 $\rho$ 的一個傅立葉係數（模）。**收集大量 $(hkl)$ 反射＝收集 $\rho$ 的大量傅立葉分量。**
+
+#### Step 2 — 反傅立葉重建電子密度圖
+
+$$\boxed{\rho(\mathbf r)=\frac1V\sum_{hkl}|F(hkl)|\,e^{i\phi(hkl)}\,e^{-i\mathbf G_{hkl}\cdot\mathbf r}.}$$
+把所有反射加總 → 3D 電子密度圖 → 描出主鏈／側鏈 → **蛋白質形狀**。
+
+#### Step 3 — 相位問題與解法
+
+繞射只給 $|F|$、丟了 $\phi$，光有強度無法唯一反推 $\rho$。實務補相位：同晶置換（MIR）、異常散射（MAD/SAD）、分子置換（MR）。補回 $\phi$ 後做反傅立葉 → 電子密度圖 → 建模 → 形狀。
+
+> **小結**（對 2022 第 3 題）：**形狀在「強度」（結構因子）裡，不在峰位置裡；反傅立葉 $|F|e^{i\phi}$ 還原 $\rho(\mathbf r)$，但要先解決相位問題。** 結晶的目的是把 $N$ 個同向分子訊號相干放大才量得到。
+
+<details>
+<summary><b>📝 更多範例（點開）：結構因子、相干放大與相位問題的算式</b></summary>
+
+**範例 A（兩原子基底的結構因子，逐步代數）**：晶胞內兩原子，散射因子相同 $f$，位置 $\mathbf r_1=0$、$\mathbf r_2=\tfrac12\mathbf a$（沿 $a$ 軸半格）。對反射 $\mathbf G=\dfrac{2\pi h}{a}\hat x$，求 $F(\mathbf G)=\sum_j f_j e^{i\mathbf G\cdot\mathbf r_j}$。
+$\mathbf G\cdot\mathbf r_1=0$，$\mathbf G\cdot\mathbf r_2=\dfrac{2\pi h}{a}\cdot\dfrac{a}{2}=\pi h$。
+故 $F=f\,e^{i0}+f\,e^{i\pi h}=f(1+e^{i\pi h})=f(1+(-1)^h)$。
+逐 $h$：$h$ 偶 $\Rightarrow F=2f$（亮）；$h$ 奇 $\Rightarrow F=f(1-1)=0$（消光）。這就是「半格基底 → 奇數階消失」，與 §3 多層膜消峰同一機制——形狀（basis）藏在強度裡。
+
+**範例 B（相干放大 $\propto N^2$，逐步代數）**：$N$ 個同向分子，總散射振幅是各分子振幅 $A_1$ 的同相疊加 $A_{\rm tot}=N A_1$。
+量到的是強度 $I\propto|A_{\rm tot}|^2=|NA_1|^2=N^2|A_1|^2=N^2 I_1$。
+代數值：$N=10^6$ 個分子 → $I=（10^6)^2 I_1=10^{12}I_1$，訊號放大一兆倍。
+對比「不相干」（隨機相位）只得 $I\propto N I_1=10^6 I_1$。差了 $N=10^6$ 倍——這就是「為何非結晶不可」：把單分子量不到的弱訊號相干放大到可量。
+
+**範例 C（相位問題：同振幅不同相 → 不同形狀）**：取兩個傅立葉分量，振幅都是 $|F|=1$，但相位不同。
+密度（取 1D 示意）$\rho(x)=\dfrac1L\big[F_0+|F_1|\cos(G_1 x-\phi_1)\big]$。
+若 $\phi_1=0$：峰落在 $x=0$；若 $\phi_1=\pi$：$\cos(G_1x-\pi)=-\cos(G_1 x)$，峰移到 $x=L/2$。
+**同樣的 $|F|$（同樣的繞射強度）卻給出位置相反的密度**——這證明光有強度 $|F|^2$ 無法唯一定形狀，必須補回相位 $\phi$（MIR／MAD／MR）才行。這就是相位問題的本質。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 240" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="140" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">結晶相干放大 (I ∝ N²)</text>
+<g fill="#1a4d7c"><circle cx="55" cy="70" r="6"/><circle cx="95" cy="70" r="6"/><circle cx="135" cy="70" r="6"/><circle cx="175" cy="70" r="6"/><circle cx="215" cy="70" r="6"/><circle cx="55" cy="110" r="6"/><circle cx="95" cy="110" r="6"/><circle cx="135" cy="110" r="6"/><circle cx="175" cy="110" r="6"/><circle cx="215" cy="110" r="6"/><circle cx="55" cy="150" r="6"/><circle cx="95" cy="150" r="6"/><circle cx="135" cy="150" r="6"/><circle cx="175" cy="150" r="6"/><circle cx="215" cy="150" r="6"/></g>
+<text x="140" y="184" text-anchor="middle" font-size="10.5" fill="#777">N 個同向分子 → 訊號 ×N²</text>
+<text x="140" y="202" text-anchor="middle" font-size="10" fill="#c0392b">峰位置 ← 晶格；峰強度 ← 形狀(ρ)</text>
+<text x="420" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">相位問題</text>
+<line x1="300" y1="120" x2="540" y2="120" stroke="#888" stroke-width="1.2"/>
+<line x1="300" y1="50" x2="300" y2="195" stroke="#888" stroke-width="1.2"/>
+<text x="294" y="58" text-anchor="end" font-size="10.5" fill="#333">ρ</text>
+<text x="543" y="116" font-size="11" fill="#333">x</text>
+<polyline points="300,80 320,84 340,96 360,112 380,128 400,140 420,144 440,140 460,128 480,112 500,96 520,84 540,80" fill="none" stroke="#c0392b" stroke-width="2.2"/>
+<polyline points="300,144 320,140 340,128 360,112 380,96 400,84 420,80 440,84 460,96 480,112 500,128 520,140 540,144" fill="none" stroke="#2e8b2e" stroke-width="2.2" stroke-dasharray="4,3"/>
+<text x="375" y="74" font-size="10" fill="#c0392b">φ=0：峰在 x=0</text>
+<text x="400" y="170" font-size="10" fill="#2e8b2e">φ=π：峰移到 x=L/2</text>
+<text x="420" y="210" text-anchor="middle" font-size="10" fill="#777">同 |F|、不同相位 → 不同形狀</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">左：把 $N$ 個<b style="color:#1a4d7c">同向分子</b>排成晶體，訊號相干放大到 $\propto N^2$（$N\sim10^6$ → 放大一兆倍）才量得到；峰<b>位置</b>由晶格定、峰<b>強度</b>由電子密度 $\rho$（形狀）定。右：<b>相位問題</b>——同樣的繞射強度 $|F|$、不同相位 $\phi$（<b style="color:#c0392b">$\phi=0$</b> vs <b style="color:#2e8b2e">$\phi=\pi$</b>）給出位置相反的密度，故必須補回相位（MIR／MAD／MR）才能唯一還原形狀。</figcaption>
+</figure>
+
+---
+
+### 6. 量電子態密度（density of states, DOS）的實驗技術（對 2022）
+
+**你高中學過的**：要量「在某能量附近有多少可填的電子態」，得找一個「能量分辨」的探針——能把不同能量的電子分開來數。
+
+**為什麼需要新東西**：DOS $g(E)$ 是固態的核心量（接單元 05），但它不是直接讀得到的數。常考的有三種互補實驗：
+
+**技術一 — 光電子能譜（Photoemission Spectroscopy, PES / ARPES）**
+- **原理**：光電效應。光子 $h\nu$ 把電子打出，量出射電子動能 $E_{\rm kin}=h\nu-\phi-E_B$（$\phi$＝功函數、$E_B$＝結合能）。出射電子的**能量分布**直接映照樣品的**占據態 DOS**（$E_F$ 以下）。
+- **重要部件**：光子源（UV 燈／X 光／同步輻射）、半球形電子能量分析儀、超高真空。**ARPES**（角解析）另量出射角，由 $k_\parallel=\tfrac1\hbar\sqrt{2mE_{\rm kin}}\sin\theta$ 還原能帶 $E(\mathbf k)$。
+- **量到什麼**：占據態 DOS；ARPES 給能帶色散、費米面、能隙。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 250" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arr10b" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e67e22"/></marker>
+<marker id="arr10d" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#555"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="135" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">ARPES 量測幾何</text>
+<rect x="45" y="150" width="180" height="55" fill="#dce4ec" stroke="#888" stroke-width="1"/>
+<text x="135" y="182" text-anchor="middle" font-size="11" fill="#555">樣品</text>
+<line x1="40" y1="60" x2="130" y2="148" stroke="#e67e22" stroke-width="2.2" marker-end="url(#arr10b)"/>
+<text x="45" y="58" font-size="11" fill="#e67e22">光子 hν</text>
+<line x1="135" y1="150" x2="205" y2="62" stroke="#c0392b" stroke-width="2.2" marker-end="url(#arr10d)"/>
+<text x="200" y="58" font-size="11" fill="#c0392b">e꜀⁻ (Eₖᵢₙ,θ)</text>
+<line x1="135" y1="150" x2="135" y2="80" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+<path d="M135,110 A40,40 0 0,0 156,124" fill="none" stroke="#333" stroke-width="0.9"/>
+<text x="150" y="108" font-size="10.5" fill="#333">θ</text>
+<text x="135" y="232" text-anchor="middle" font-size="10" fill="#777">k∥ = (1/ℏ)√(2mEₖᵢₙ) sinθ</text>
+<text x="420" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">還原能帶 E(k)</text>
+<line x1="320" y1="40" x2="320" y2="200" stroke="#888" stroke-width="1.2"/>
+<line x1="320" y1="130" x2="540" y2="130" stroke="#888" stroke-width="1.2"/>
+<text x="314" y="48" text-anchor="end" font-size="11" fill="#333">E</text>
+<text x="543" y="126" font-size="11" fill="#333">k∥</text>
+<text x="326" y="128" font-size="9.5" fill="#777">Eꜰ</text>
+<line x1="320" y1="130" x2="540" y2="130" stroke="#c0392b" stroke-width="0.8" stroke-dasharray="4,3"/>
+<polyline points="330,196 360,182 390,168 420,150 435,138 450,138 465,150 495,168 525,182" fill="none" stroke="#1a4d7c" stroke-width="2.4"/>
+<g fill="#c0392b"><circle cx="390" cy="168" r="3.5"/><circle cx="450" cy="138" r="3.5"/></g>
+<text x="430" y="218" text-anchor="middle" font-size="10" fill="#777">每個出射 (Eₖᵢₙ,θ) → 一個 (E,k) 點</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">ARPES（角解析光電子能譜）用<b style="color:#e67e22">光子 hν</b> 把電子打出，量出射<b style="color:#c0392b">電子的動能 $E_{\rm kin}$ 與角度 θ</b>。能量守恆給結合能（→ 縱軸 E），平行動量守恆 $k_\parallel=\tfrac1\hbar\sqrt{2mE_{\rm kin}}\sin\theta$ 給橫軸 k。掃過所有角度就把出射電子一個個對應回<b style="color:#1a4d7c">能帶色散 $E(k)$</b>——這是直接「看見」能帶、費米面、能隙的標準手法。$E_F$ 以上沒有占據電子（紅虛線）。</figcaption>
+</figure>
+
+<details>
+<summary><b>📝 更多範例（點開）：ARPES 由 E_kin、θ 還原 E(k)</b></summary>
+
+**範例 A（求結合能 $E_B$，逐步代數）**：光子能量 $h\nu=21.2$ eV（He-I 共振線），功函數 $\phi=4.5$ eV，量到出射電子動能 $E_{\rm kin}=15.0$ eV。求結合能 $E_B$。
+由能量守恆 $E_{\rm kin}=h\nu-\phi-E_B$，解 $E_B=h\nu-\phi-E_{\rm kin}$。
+逐步代入：$E_B=21.2-4.5-15.0=1.7$ eV。
+結合能 $1.7$ eV 表示此電子來自 $E_F$ 以下 $1.7$ eV 的占據態（縱軸位置）。$E_{\rm kin}$ 最大者（$=h\nu-\phi$，這裡 $16.7$ eV）對應 $E_B=0$，即費米面。
+
+**範例 B（求平行動量 $k_\parallel$，全程 SI）**：同一電子 $E_{\rm kin}=15.0$ eV、出射角 $\theta=30^\circ$。求 $k_\parallel=\dfrac1\hbar\sqrt{2mE_{\rm kin}}\sin\theta$。
+先化 $E_{\rm kin}=15.0\times1.602\times10^{-19}=2.403\times10^{-18}$ J。
+算 $2mE_{\rm kin}=2\times9.11\times10^{-31}\times2.403\times10^{-18}=4.378\times10^{-48}$。
+開根號 $\sqrt{2mE_{\rm kin}}=2.092\times10^{-24}$ kg·m·s⁻¹。
+除以 $\hbar$：$\dfrac{2.092\times10^{-24}}{1.055\times10^{-34}}=1.983\times10^{10}\ \text{m}^{-1}$。
+乘 $\sin30^\circ=0.5$：$k_\parallel=1.983\times10^{10}\times0.5=9.92\times10^{9}\ \text{m}^{-1}=0.99\ \text{Å}^{-1}$。
+一組 $(E_{\rm kin},\theta)$ 就定出 $(E,k_\parallel)$ 平面上一個點——掃過所有角度就描出能帶 $E(k)$。
+
+**範例 C（求最大可達動量範圍）**：固定 $E_{\rm kin}=15.0$ eV，問掃 $\theta$ 從 $0$ 到 $90^\circ$ 能涵蓋的 $k_\parallel$ 最大值。
+$k_\parallel$ 在 $\theta=90^\circ$ 最大（$\sin90^\circ=1$），即 $k_\parallel^{\max}=\dfrac1\hbar\sqrt{2mE_{\rm kin}}=1.983\times10^{10}\ \text{m}^{-1}=1.98\ \text{Å}^{-1}$。
+這說明：**光子能量愈高（$E_{\rm kin}$ 愈大）→ 可量到的 $k$ 範圍愈廣**。若要覆蓋整個布里淵區（邊界 $\sim\pi/a$，$a\approx2.5$ Å → $\sim1.26\,\text{Å}^{-1}$），此能量已足夠（$1.98>1.26$）。這就是 ARPES 選光源能量的考量。
+</details>
+
+**技術二 — 掃描穿隧能譜（Scanning Tunneling Spectroscopy, STS）**
+- **原理**：量子穿隧。針尖加偏壓 $V$，穿隧電流 $I(V)\propto\int_0^{eV}g(E)\,dE$，故
+$$\frac{dI}{dV}\propto g(E_F+eV).$$
+微分電導 $dI/dV$ 正比於**費米能附近的局域 DOS**（偏壓正負分別探空態／占據態）。
+- **重要部件**：原子級尖銳金屬探針、壓電掃描器＋回饋、偏壓源＋低雜訊電流放大器。
+- **量到什麼**：原子尺度的局域 DOS（可看能隙、雜質態、超導 coherence peak）。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 480 230" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="240" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">STS：dI/dV 對偏壓 V → 局域 DOS</text>
+<line x1="60" y1="40" x2="60" y2="190" stroke="#888" stroke-width="1.2"/>
+<line x1="60" y1="190" x2="445" y2="190" stroke="#888" stroke-width="1.2"/>
+<text x="54" y="48" text-anchor="end" font-size="11" fill="#1a4d7c">dI/dV ∝ g(Eꜰ+eV)</text>
+<text x="448" y="206" font-size="11" fill="#333">V (偏壓)</text>
+<line x1="252" y1="40" x2="252" y2="190" stroke="#c0392b" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="252" y="208" text-anchor="middle" font-size="10.5" fill="#c0392b">V=0 (Eꜰ)</text>
+<text x="150" y="208" text-anchor="middle" font-size="10" fill="#777">V&lt;0 占據態</text>
+<text x="355" y="208" text-anchor="middle" font-size="10" fill="#777">V&gt;0 空態</text>
+<polyline points="70,150 95,140 120,118 140,95 152,150 168,182 200,184 252,184 304,184 336,182 352,150 364,95 384,118 409,140 434,150" fill="none" stroke="#2e8b2e" stroke-width="2.4"/>
+<rect x="168" y="184" width="168" height="6" fill="#6aa1d6" fill-opacity="0.3"/>
+<text x="252" y="178" text-anchor="middle" font-size="10.5" fill="#1a4d7c">能隙 (dI/dV≈0)</text>
+<text x="150" y="88" font-size="10.5" fill="#2e8b2e">峰</text>
+<text x="370" y="88" font-size="10.5" fill="#2e8b2e">峰</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">STS（掃描穿隧能譜）固定針尖、掃<b style="color:#c0392b">偏壓 V</b>，量微分電導 $dI/dV\propto g(E_F+eV)$——它正比於<b style="color:#2e8b2e">費米能附近的局域 DOS</b>。$V=0$ 對應 $E_F$；$V&gt;0$ 探空態、$V&lt;0$ 探占據態。圖中 $E_F$ 兩側 $dI/dV\approx0$ 的<b style="color:#1a4d7c">平台</b>就是<b>能隙</b>（如半導體或超導），兩肩的峰是態密度峰。原子級探針 → 看單一雜質、超導 coherence peak。</figcaption>
+</figure>
+
+**技術三（備選）— 低溫電子比熱（Sommerfeld $\gamma$）**
+- **原理**：金屬電子比熱 $C_{\rm el}=\gamma T$，$\gamma=\dfrac{\pi^2}{3}k_B^2\,g(E_F)$。作 $C/T$ 對 $T^2$ 的圖（$C/T=\gamma+\beta T^2$），**截距 $\gamma$** 直接給 $g(E_F)$。
+- **量到什麼**：只給費米面那一點的 DOS $g(E_F)$。
+
+> **小結**（對 2022 第 7 題）：題目要兩種 → **PES/ARPES（占據態 DOS、能帶）＋ STS（$E_F$ 附近局域 DOS）** 即足；低溫比熱可當第三例補強。一個給能帶全貌、一個給局域與費米面細節、一個給 $g(E_F)$ 數值。
+
+---
+
+### 7. 朗道能階（Landau level）量測費米面（Fermi surface）（接單元 08，對 2018）
+
+**你高中學過的**：磁場中帶電粒子受勞侖茲力（Lorentz force）做圓周運動，$mv^2/r=evB$；波耳模型用「軌道裝整數個波」把能量量子化。
+
+**為什麼需要新東西**：在磁場 $\mathbf B$ 下，原本連續分布的電子橫向能量會**塌縮成一條條離散、高度簡併的能階**——朗道能階。這把費米面變成可量的東西：隨 $B$ 改變，這些能階依序掃過費米面，造成各種物理量對 $1/B$ 週期振盪，量這週期就還原費米面截面積。
+
+#### Step 1 — 能階公式（解薛丁格＝諧振子）
+
+電荷 $-e$ 在 $\mathbf B=B\hat z$ 中，選 Landau 規範後哈密頓量化成一個頻率 $\omega_c=eB/m$ 的諧振子（外加沿 $z$ 自由運動）：
+$$\boxed{E_{n,k_z}=\Big(n+\tfrac12\Big)\hbar\omega_c+\frac{\hbar^2k_z^2}{2m},\qquad \omega_c=\frac{eB}{m},\ n=0,1,2,\dots}$$
+等間距 $\hbar\omega_c$ 的離散能階就是朗道能階；每階高度簡併。
+
+#### Step 2 — 軌道磁通量子化（半古典，題目提示的路）
+
+對閉合迴旋軌道做 Bohr–Sommerfeld 量子化，軌道包住的磁通也量子化：
+$$\Phi=(n+\gamma)\frac{h}{e}=(n+\gamma)\Phi_0,\qquad \Phi_0=\frac he\ (\text{正常金屬磁通量子}).$$
+由 $\Phi=B\pi r_n^2$ 回推能量同樣得 $E_n=(n+\tfrac12)\hbar\omega_c$（取 $\gamma=\tfrac12$）——兩條路互相驗證。
+
+> **注意**：正常金屬磁通量子是 $\Phi_0=h/e$；超導因 Cooper pair 帶 $2e$，磁通量子是 $h/2e$（單元 09）——別搞混。
+
+#### Step 3 — 連回費米面：de Haas–van Alphen 振盪
+
+半古典下，$k$ 空間等能線所圍面積量子化（Onsager 關係）。$B$ 增大時這些「朗道管」依序與費米面極值截面 $A_{\rm ext}$ 相切，每相切一次，磁化率／電阻就振盪一次，對 $1/B$ 呈週期
+$$\Delta\!\Big(\frac1B\Big)=\frac{2\pi e}{\hbar\,A_{\rm ext}}.$$
+量這週期 → 反推費米面極值截面積 $A_{\rm ext}$。
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 560 250" width="100%" style="max-width:660px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arr10e" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#555"/></marker>
+</defs>
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="135" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">朗道能階（等間距 ℏ ωᵪ）</text>
+<line x1="55" y1="35" x2="55" y2="200" stroke="#888" stroke-width="1.2"/>
+<text x="49" y="44" text-anchor="end" font-size="11" fill="#333">E</text>
+<g stroke="#1a4d7c" stroke-width="2">
+<line x1="60" y1="180" x2="215" y2="180"/>
+<line x1="60" y1="150" x2="215" y2="150"/>
+<line x1="60" y1="120" x2="215" y2="120"/>
+<line x1="60" y1="90" x2="215" y2="90"/>
+<line x1="60" y1="60" x2="215" y2="60"/>
+</g>
+<g fill="#555" font-size="9.5">
+<text x="220" y="184">n=0</text><text x="220" y="154">1</text><text x="220" y="124">2</text><text x="220" y="94">3</text><text x="220" y="64">4</text>
+</g>
+<line x1="120" y1="120" x2="120" y2="90" stroke="#c0392b" stroke-width="1" marker-start="url(#arr10e)" marker-end="url(#arr10e)"/>
+<text x="126" y="108" font-size="10.5" fill="#c0392b">ℏ ωᵪ</text>
+<text x="135" y="220" text-anchor="middle" font-size="10.5" fill="#777">Eₙ = (n+½)ℏ ωᵪ, ωᵪ = eB/m</text>
+<text x="410" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">dHvA：物理量對 1/B 週期振盪</text>
+<line x1="300" y1="130" x2="540" y2="130" stroke="#888" stroke-width="1.2"/>
+<line x1="300" y1="50" x2="300" y2="200" stroke="#888" stroke-width="1.2"/>
+<text x="295" y="58" text-anchor="end" font-size="10.5" fill="#333">M</text>
+<text x="543" y="126" font-size="11" fill="#333">1/B</text>
+<polyline points="305,130 318,95 331,130 344,165 357,130 370,95 383,130 396,165 409,130 422,95 435,130 448,165 461,130 474,95 487,130 500,165 513,130 526,95 539,130" fill="none" stroke="#2e8b2e" stroke-width="2.2"/>
+<line x1="318" y1="80" x2="370" y2="80" stroke="#c0392b" stroke-width="1" marker-start="url(#arr10e)" marker-end="url(#arr10e)"/>
+<text x="344" y="74" text-anchor="middle" font-size="10.5" fill="#c0392b">Δ(1/B)</text>
+<text x="420" y="222" text-anchor="middle" font-size="10" fill="#777">Δ(1/B) = 2π e /(ℏ Aₑₓₜ) → 費米面截面</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">磁場把橫向運動變成<b>諧振子</b>：能量塌縮成等間距 $\hbar\omega_c$ 的<b style="color:#1a4d7c">朗道能階</b> $E_n=(n+\tfrac12)\hbar\omega_c$。$B$ 增大時這些能階（朗道管）依序掃過費米面，使磁化率 M 等物理量對 $1/B$ <b style="color:#2e8b2e">週期振盪</b>（de Haas–van Alphen 效應）。量週期 $\Delta(1/B)=\dfrac{2\pi e}{\hbar A_{\rm ext}}$ → 反推<b style="color:#c0392b">費米面極值截面積 $A_{\rm ext}$</b>。這是直接量費米面幾何的標準方法。</figcaption>
+</figure>
+
+> **小結**（對 2018 第 4 題）：磁場把橫向自由度變諧振子 → 朗道能階 $(n+\tfrac12)\hbar\omega_c$、磁通量子化 $\Phi=(n+\gamma)h/e$；它在費米面上的可觀測後果＝**de Haas–van Alphen 振盪**，是直接量費米面幾何的標準方法。完整推導見單元 08 與 [2018 詳解 Q4]。
+
+<details>
+<summary><b>📝 更多範例（點開）：朗道能階間距與 dHvA 週期 → 費米面截面</b></summary>
+
+**範例 A（迴旋頻率與能階間距，逐步代數）**：自由電子質量 $m=9.11\times10^{-31}$ kg，磁場 $B=10$ T，求 $\omega_c=\dfrac{eB}{m}$ 與能階間距 $\hbar\omega_c$。
+$\omega_c=\dfrac{(1.602\times10^{-19})\times10}{9.11\times10^{-31}}=\dfrac{1.602\times10^{-18}}{9.11\times10^{-31}}=1.759\times10^{12}\ \text{rad/s}$。
+能階間距 $\hbar\omega_c=(1.055\times10^{-34})\times(1.759\times10^{12})=1.855\times10^{-22}$ J $=\dfrac{1.855\times10^{-22}}{1.602\times10^{-19}}=1.16\times10^{-3}$ eV $\approx1.16$ meV。
+所以 10 T 下朗道能階只間隔約 1 meV——這就是為何 dHvA 必須**低溫**（讓 $k_BT\lesssim\hbar\omega_c$，$1.16$ meV 對應約 13 K）才看得到振盪。
+
+**範例 B（由 dHvA 週期反推費米面截面，逐步代數）**：量到磁化率對 $1/B$ 的振盪週期 $\Delta(1/B)=2.0\times10^{-5}\ \text{T}^{-1}$，求極值截面積 $A_{\rm ext}=\dfrac{2\pi e}{\hbar\,\Delta(1/B)}$。
+分子 $2\pi e=2\times3.1416\times1.602\times10^{-19}=1.006\times10^{-18}$ C。
+分母 $\hbar\,\Delta(1/B)=(1.055\times10^{-34})\times(2.0\times10^{-5})=2.110\times10^{-39}$。
+相除：$A_{\rm ext}=\dfrac{1.006\times10^{-18}}{2.110\times10^{-39}}=4.77\times10^{20}\ \text{m}^{-2}=4.77\ \text{Å}^{-2}$。
+費米面極值截面積約 $4.8\,\text{Å}^{-2}$——dHvA 把抽象的費米面變成可量的數字。
+
+**範例 C（由截面回推等效費米波數）**：把費米面截面近似為圓 $A_{\rm ext}=\pi k_F^2$，求 $k_F$。
+$k_F=\sqrt{\dfrac{A_{\rm ext}}{\pi}}=\sqrt{\dfrac{4.77\times10^{20}}{3.1416}}=\sqrt{1.518\times10^{20}}=1.232\times10^{10}\ \text{m}^{-1}=1.23\ \text{Å}^{-1}$。
+合理的金屬費米波數量級（$\sim1\,\text{Å}^{-1}$）。再串回單元 05：由 $k_F$ 可估電子密度 $n=\dfrac{k_F^3}{3\pi^2}$（3D 球）——量子振盪量到的截面就這樣接回自由電子氣的核心量。
+</details>
+
+<figure style="margin:1.3em 0;text-align:center">
+<svg viewBox="0 0 520 250" width="100%" style="max-width:560px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box" xmlns="http://www.w3.org/2000/svg">
+<g font-family="-apple-system,sans-serif" font-size="11">
+<text x="130" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">費米圓 vs 第一布里淵區</text>
+<rect x="50" y="40" width="160" height="160" fill="#f4f8fc" stroke="#1a4d7c" stroke-width="1.5"/>
+<text x="130" y="34" text-anchor="middle" font-size="9.5" fill="#1a4d7c">第一 BZ（方形）</text>
+<circle cx="130" cy="120" r="92" fill="#6aa1d6" fill-opacity="0.2" stroke="#c0392b" stroke-width="2"/>
+<circle cx="130" cy="120" r="3" fill="#333"/>
+<text x="136" y="132" font-size="10" fill="#333">Γ</text>
+<text x="190" y="80" font-size="10.5" fill="#c0392b">費米圓 kꜰ</text>
+<text x="130" y="224" text-anchor="middle" font-size="10" fill="#777">圓伸出方框 → 角落落入第二 BZ</text>
+<text x="395" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4d7c">折回 → 真實費米面</text>
+<rect x="310" y="40" width="160" height="160" fill="#f4f8fc" stroke="#1a4d7c" stroke-width="1.5"/>
+<path d="M310,82 A92,92 0 0,1 352,40" fill="#6aa1d6" fill-opacity="0.25" stroke="#c0392b" stroke-width="2"/>
+<path d="M428,40 A92,92 0 0,1 470,82" fill="#6aa1d6" fill-opacity="0.25" stroke="#c0392b" stroke-width="2"/>
+<path d="M310,158 A92,92 0 0,0 352,200" fill="#6aa1d6" fill-opacity="0.25" stroke="#c0392b" stroke-width="2"/>
+<path d="M428,200 A92,92 0 0,0 470,158" fill="#6aa1d6" fill-opacity="0.25" stroke="#c0392b" stroke-width="2"/>
+<text x="390" y="124" text-anchor="middle" font-size="10.5" fill="#777">超出的部分平移回 BZ 內</text>
+<text x="390" y="224" text-anchor="middle" font-size="10" fill="#777">→ 形成「口袋」狀費米面截面</text>
+</g>
+</svg>
+<figcaption style="font-size:0.9em;color:#555;margin-top:0.5em">為什麼要量費米面：自由電子的<b style="color:#c0392b">費米圓</b>（半徑 $k_F$）若大過<b style="color:#1a4d7c">第一布里淵區</b>，四個角會伸入第二區（左）。把超出的部分用倒晶格向量平移「折回」第一區（右），就得到真實的費米面截面——常呈「口袋」狀。dHvA 振盪量的 $A_{\rm ext}$ 正是這些口袋的極值截面積。這就是 §7 的朗道能階／量子振盪最終「看見」的對象，把整門課的能帶與磁性收束在一張圖。</figcaption>
+</figure>
+
+![自由電子費米圓伸入第二布里淵區](../figs/f10_fermi_surface.svg)
+
+---
+
+## 🔑 必背公式速查（考前最後看）
+
+| 公式與物理主題 | $\boxed{\ }$ 數學形式 | 物理說明與何時用 | 權威出處（Ref） |
+|---|---|---|---|
+| STM 量子穿隧電流 | $I \propto e^{-2\kappa z},\quad \kappa = \frac{\sqrt{2m\phi}}{\hbar} \approx 1 \, \text{Å}^{-1}$ | 電流對針尖–樣品間距 $z$ 呈指數敏感，奠定原子級縱向解析度 | Kittel 8e Ch. 1 p. 20 ｜ 林盛煇 §10.1 ｜ 2013 Q15 (15分) |
+| 功函數位障高度量測 | $\phi = \frac{\hbar^2}{8m}\left(\frac{d\ln I}{dz}\right)^2$ | 量測穿隧位障高度：掃描 $I(z)$、feedback **OFF**、取對數斜率 | Kittel 8e Ch. 1 p. 20 ｜ 林盛煇 §10.1 ｜ 2013 Q15 |
+| SPM 探針技術對比 | STM（穿隧電流/導電樣品）、AFM（凡得瓦原子力/絕緣體）、MFM（磁偶極力/磁疇） | 三種掃描探針顯微鏡的物理信號來源與適用樣品 | Kittel 8e Ch. 1 p. 21 ｜ 林盛煇 §10.1 ｜ 2013 Q16 |
+| 多層膜 X 光反射率消光 | $|F_m| \propto \left|\sin\left(\frac{\pi m D_1}{D}\right)\right| \implies \frac{D_1}{D}=\frac{1}{n} \implies m=n,2n,\dots \text{ 消光}$ | 週期性多層膜（如 Mo/Si）形狀因子零點與結構因子消光之等價性 | Kittel 8e Ch. 2 p. 44 ｜ 林盛煇 §10.2 ｜ 2013 Q17 (20分) |
+| 石墨烯狄拉克錐線性色散 | $E(\mathbf q) = \pm \hbar v_F |\mathbf q|,\quad v_F \approx 10^6 \, \text{m/s}$ | 線性色散、有效質量為零、群速度為常數的相對論性 Dirac 費米子 | Kittel 8e Ch. 9/18 ｜ 林盛煇 §10.3 ｜ 2018 Q5 (15分) |
+| 蛋白質結晶與相位問題 | $F(\mathbf G)=\int \rho(\mathbf r)e^{i\mathbf G\cdot\mathbf r}d^3r,\ I \propto |F|^2$ | X 光繞射僅能測得強度 $|F|^2$，遺失相位資訊，需藉重原子衍生物還原 $\rho$ | Kittel 8e Ch. 2 p. 48 ｜ 林盛煇 §2.5 ｜ 2022 Q6 (15分) |
+| 能態密度（DOS）實驗量測法 | STS（$\frac{dI}{dV}\propto D(E)$）、PES（光電子能譜）、比熱截距（$\gamma \propto D(E_F)$） | 局域與整體能態密度的三種主要實驗量測手段 | Kittel 8e Ch. 6 p. 145 ｜ 林盛煇 §5.4 ｜ 2022 Q4 |
+| De Haas–van Alphen 效應 | $\Delta\left(\frac{1}{B}\right) = \frac{2\pi e}{\hbar}\frac{1}{A_{\text{ext}}}$ | 磁化率隨 $1/B$ 振盪週期精確量測費米面極值截面積 $A_{\text{ext}}$ | Kittel 8e Ch. 9 Eq. (18) p. 240 ｜ 林盛煇 §8.5 ｜ 2018 Q4 |
+
+## 📚 本單元權威參考文獻與出處對照（References）
+
+1. **Charles Kittel, *Introduction to Solid State Physics***, 8th Edition, John Wiley & Sons, 2005.
+   - **Chapter 1: Scanning Tunneling Microscopy (STM)**: pp. 20–21
+   - **Chapter 2: X-ray Scattering & Structure Factor**: pp. 41–48
+   - **Chapter 9: Fermi Surfaces of Metals & De Haas-van Alphen Effect**: pp. 238–244, Eq. (18)
+   - **Chapter 18: Nanostructures & Graphene Dirac Dispersion**: pp. 535–548
+2. **林盛煇,《固態物理導論》**, 新文京開發出版.
+   - **第 10 章：表面分析與新穎二維材料** (pp. 413–450)
+     - §10.1 表面結構分析技術（STM 穿隧機制、AFM 原子力感測）
+     - §10.2 多層膜結構與薄膜 X 光反射率消光
+     - §10.3 二維石墨烯晶格、狄拉克錐與無質量狄拉克費米子
+3. **Neil W. Ashcroft & N. David Mermin, *Solid State Physics***, Saunders College Publishing, 1976.
+   - **Chapter 14: Determination of the Fermi Surface** (pp. 263–282)
+4. **國立臺灣大學應用物理學研究所博士班資格考試題**：
+   - 2022 Q6 (15分): 蛋白質晶體 X 光繞射、強度與相位問題（Phase problem）還原分子形貌
+   - 2018 Q5 (15分): 石墨烯 Dirac point 線性色散、$E=\pm\hbar v_F q$ 證明有效質量為零
+   - 2013 Q15 (15分): STM 穿隧電流指數距離依賴、位障高度量測技術（feedback OFF 取對數斜率）
+   - 2013 Q16 (10分): STM、AFM、MFM 三種探針顯微鏡信號源與適用樣品比較
+   - 2013 Q17 (20分): Mo/Si 多層膜 X-ray 反射率每第三峰消光之微觀傅立葉數學證明
+
+---
+
+## 📝 歷年考題實戰
+
+- **[2013 Q15]** STM/AFM/MFM 縮寫與原理；量 tunneling barrier height 該用哪種模式（$I$–$Z$、feedback ON/OFF）。→ §1, §2。[2013 詳解](../考古題/詳解/固態_2013_詳解.html)
+- **[2013 Q17·20pts]** Mo/Si 多層膜 X 光反射率為何每第三峰消失（數學證明）。→ §3。[2013 詳解](../考古題/詳解/固態_2013_詳解.html)
+- **[2018 Q5·10%]** 舉線性色散（Dirac point）的固態系統，證明電子可視為無質量粒子（與光子類比）。→ §4。[2018 詳解](../考古題/詳解/固態_2018_詳解.html)
+- **[2018 Q4·20%]** 磁場下費米面上 Landau level 的存在（定性＋定量；軌道磁通量子化）。→ §7。[2018 詳解](../考古題/詳解/固態_2018_詳解.html)
+- **[2022 Q3]** 蛋白質結晶 X 光繞射如何定出形狀。→ §5。[2022 詳解](../考古題/詳解/固態_2022_詳解.html)
+- **[2022 Q7]** 描述兩種量電子態密度（DOS）的實驗技術。→ §6。[2022 詳解](../考古題/詳解/固態_2022_詳解.html)
+
+## ✅ 自我檢核 ＋ 常見陷阱
+
+你應該能默寫／回答：
+1. 為什麼 STM 有原子級解析度？（$I\propto e^{-2\kappa z}$，距離差 1 Å 電流差約一個量級）
+2. STM / AFM / MFM 各量什麼？哪個需要導電樣品？（STM 量穿隧電流、需導電；AFM 量力、不需；MFM 量磁力、看磁疇）
+3. 量 tunneling barrier height 該開還是關 Z feedback？為什麼？（**關**，才能自由掃 $z$ 記 $I(z)$）
+4. $D_1/D=1/3$ 為何每第三峰消失？（form factor $\propto\sin(\pi m/3)$，$m=3,6,9$ 為零）
+5. 「線性色散 ⇒ 無質量」的論證鏈？（與光子 $E=cp$ 同形、無 gap ⇒ $mv_F^2=0$；$m_c=E/v_F^2\to0$）
+6. 蛋白質「形狀」藏在峰位置還是峰強度裡？（強度＝結構因子；反傅立葉還原 $\rho$；相位問題）
+7. 列兩種量 DOS 的技術與各自量到什麼？（PES＝占據態 DOS／能帶；STS＝$E_F$ 附近局域 DOS）
+8. 朗道能階怎麼量到費米面？（dHvA 對 $1/B$ 週期 $\to A_{\rm ext}$）
+
+常見陷阱：
+- **指數的因子 2**（factor of 2）：穿隧**機率** $\propto e^{-2\kappa z}$（電流亦然），但波函數振幅 $\propto e^{-\kappa z}$。別把 2 漏掉或多寫。
+- **feedback 開關搞反**：要量 $\phi$ 必須 feedback **OFF**（開著的話 $z$ 被鎖死）。
+- **磁通量子（flux quantum）**：正常金屬 $\Phi_0=h/e$、超導 $\Phi_0=h/2e$（Cooper pair 帶 $2e$）——常考的對比陷阱。
+- **「位置 vs 強度」分工搞混**：晶體種類／晶胞看**峰位置**（lattice），蛋白質形狀／消光看**峰強度**（basis）。這條同時管 §3 與 §5。
+- **線性色散的「曲率質量」**：$d^2E/dq^2=0$ 讓曲率質量發散（$m^*\to\infty$），別誤以為這代表「很重」——它只是說拋物線那套質量定義失效，真正的物理是 $m_c\to0$（無質量）。
+
+## 🔭 信心評估 ＋ 下一步
+
+信心：**中短單元、CP 值高**——本單元每招都短、可背、好拿分，但題目雜，建議「逐招過一遍、各記一個關鍵式」即可，不必深挖。
+
+下一步：本單元是前面物理的「實驗化身」，相鄰連到——
+- 結構因子／繞射（§3、§5）接 **unit02 倒晶格與繞射**；
+- 石墨烯線性色散、有效質量（§4）接 **unit06 能帶與 Bloch 電子**；
+- 量 DOS（§6）接 **unit05 自由電子費米氣體**；
+- 朗道能階、費米面（§7）接 **unit08 磁性**；
+- STM 量超導 coherence peak／磁通量子接 **unit09 超導**。

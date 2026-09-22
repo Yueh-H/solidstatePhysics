@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模擬① 聲子色散 ω(k)</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 模擬首頁</a>
+  <a class="here" href="sim_dispersion.html">① 色散</a>
+  <a href="sim_bragg_ewald.html">② Ewald</a>
+  <a href="sim_nfe_gap.html">③ NFE</a>
+  <a href="../單元教學/unit04_聲子與晶格振動.html">unit04</a>
+</div>
+
+<h1>① 單原子／雙原子鏈色散（Phonon dispersion）</h1>
+<p class="intro">
+  1D 彈簧–質量鏈的簡正模頻率 ω 對波數 k。
+  單原子鏈只有聲學支；雙原子鏈多出光學支，兩者中間可有<strong>頻率能隙</strong>。
+</p>
+
+<div class="layout">
+  <div class="panel">
+    <h2>參數</h2>
+    <div class="switch-row">
+      <button type="button" id="modeMono" class="on">單原子鏈</button>
+      <button type="button" id="modeDia">雙原子鏈</button>
+    </div>
+
+    <div class="control">
+      <label>彈簧常數 C <span class="val" data-for="C">1</span></label>
+      <input id="C" type="range" min="0.2" max="4" step="0.05" value="1" data-digits="2">
+      <div class="hint">C 愈大 → 整體 ω 上移（更硬）</div>
+    </div>
+    <div class="control">
+      <label>質量 M（重） <span class="val" data-for="M">1</span></label>
+      <input id="M" type="range" min="0.3" max="3" step="0.05" value="1" data-digits="2">
+    </div>
+    <div class="control" id="mRow" style="display:none">
+      <label>質量 m（輕） <span class="val" data-for="m">0.5</span></label>
+      <input id="m" type="range" min="0.2" max="2.5" step="0.05" value="0.5" data-digits="2">
+      <div class="hint">m ≠ M 時光學／聲學之間出現能隙</div>
+    </div>
+    <div class="control">
+      <label>晶格常數 a <span class="val" data-for="a">1</span></label>
+      <input id="a" type="range" min="0.5" max="2" step="0.05" value="1" data-digits="2">
+      <div class="hint">第一布里淵區：k ∈ [−π/a, π/a]</div>
+    </div>
+
+    <div class="formula">
+      <b>單原子鏈</b>
+      <span class="eq">ω(k) = 2 √(C/M) |sin(k a / 2)|</span>
+      <b>雙原子鏈（原胞長 a，兩種質量 M, m）</b>
+      <span class="eq">ω²± = C(1/M+1/m) ± C √[(1/M+1/m)² − 4 sin²(ka/2)/(M m)]</span>
+      <span class="eq">+ → 光學支（optical）；− → 聲學支（acoustic）</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="plot-wrap">
+      <svg id="plot"></svg>
+    </div>
+    <div class="legend">
+      <span style="color:#1a4d7c" id="legAc">聲學支 ω−</span>
+      <span style="color:#c0392b" id="legOp">光學支 ω+</span>
+    </div>
+    <div class="kpi" id="kpi"></div>
+    <div class="readout" id="readout"></div>
+  </div>
+</div>
+
+<footer>公式為 1D 最近鄰彈簧模型（Kittel Ch.4–5）。單位制 C,M,a 為教學用，看形狀與極限即可。</footer>
+<script src="shared.js"></script>
+<script>
+(function () {
+  const plot = new SSP.Plot2D(document.getElementById("plot"), {
+    width: 680, height: 420,
+    xDomain: [-Math.PI, Math.PI],
+    yDomain: [0, 4],
+    xLabel: "k · a  （第一 BZ：−π … +π）",
+    yLabel: "ω  (arb.)",
+  });
+
+  let mode = "mono"; // mono | dia
+  const btnMono = document.getElementById("modeMono");
+  const btnDia = document.getElementById("modeDia");
+  const mRow = document.getElementById("mRow");
+
+  btnMono.onclick = () => { mode = "mono"; btnMono.classList.add("on"); btnDia.classList.remove("on"); mRow.style.display = "none"; redraw(); };
+  btnDia.onclick = () => { mode = "dia"; btnDia.classList.add("on"); btnMono.classList.remove("on"); mRow.style.display = ""; redraw(); };
+
+  const R = SSP.bindAll(["C", "M", "m", "a"], redraw);
+
+  function omegaMono(k, C, M, a) {
+    return 2 * Math.sqrt(C / M) * Math.abs(Math.sin((k * a) / 2));
+  }
+  function omegaDia(k, C, M, m, a) {
+    // cell length a contains M and m; nearest neighbor springs C
+    const s = Math.sin((k * a) / 2);
+    const A = C * (1 / M + 1 / m);
+    const disc = A * A - (4 * C * C * s * s) / (M * m);
+    const root = Math.sqrt(Math.max(0, disc));
+    return {
+      ac: Math.sqrt(Math.max(0, A - root)),
+      op: Math.sqrt(Math.max(0, A + root)),
+    };
+  }
+
+  function redraw() {
+    const C = R.C(), M = R.M(), m = R.m(), a = R.a();
+    const ks = SSP.linspace(-Math.PI / a, Math.PI / a, 220);
+
+    let yMax = 0.5;
+    let ptsAc = [], ptsOp = [];
+
+    if (mode === "mono") {
+      ptsAc = ks.map((k) => {
+        const w = omegaMono(k, C, M, a);
+        yMax = Math.max(yMax, w);
+        return [k * a, w]; // x = k*a so BZ is ±π
+      });
+      document.getElementById("legOp").style.display = "none";
+      document.getElementById("legAc").textContent = "聲學支（唯一支）ω(k)";
+    } else {
+      ptsAc = []; ptsOp = [];
+      ks.forEach((k) => {
+        const w = omegaDia(k, C, M, m, a);
+        yMax = Math.max(yMax, w.op, w.ac);
+        ptsAc.push([k * a, w.ac]);
+        ptsOp.push([k * a, w.op]);
+      });
+      document.getElementById("legOp").style.display = "";
+      document.getElementById("legAc").textContent = "聲學支 ω−";
+    }
+
+    plot.setDomains([-Math.PI, Math.PI], [0, yMax * 1.15]);
+    plot.clear();
+    plot.vline(0, { stroke: "#aaa", dash: "2 3" });
+    plot.vline(Math.PI, { stroke: "#888", dash: "3 3" });
+    plot.vline(-Math.PI, { stroke: "#888", dash: "3 3" });
+    plot.label(Math.PI * 0.92, yMax * 0.05, "π", { fill: "#666", "font-size": 11, "text-anchor": "middle" });
+
+    if (mode === "mono") {
+      plot.polyline(ptsAc, { stroke: "#1a4d7c", width: 2.6 });
+      const wMax = 2 * Math.sqrt(C / M);
+      const wPi = omegaMono(Math.PI / a, C, M, a);
+      document.getElementById("kpi").innerHTML = `
+        <div class="box"><div class="k">ω_max (k=±π/a)</div><div class="v">${SSP.fmt(wPi, 3)}</div></div>
+        <div class="box"><div class="k">2√(C/M)</div><div class="v">${SSP.fmt(wMax, 3)}</div></div>
+        <div class="box"><div class="k">群速度 @k=0</div><div class="v">最大</div></div>`;
+      document.getElementById("readout").innerHTML = `
+        <strong>你應該看到</strong>
+        <ul>
+          <li>k=0 時 ω=0：整條鏈剛體平移，沒有恢復力。</li>
+          <li>在 BZ 邊界 k=±π/a，ω 最大且 dω/dk=0（駐波、群速度 0）。</li>
+          <li>加大 C 或減小 M → 整條曲線向上拉高。</li>
+        </ul>`;
+    } else {
+      plot.polyline(ptsAc, { stroke: "#1a4d7c", width: 2.6 });
+      plot.polyline(ptsOp, { stroke: "#c0392b", width: 2.6 });
+      const w0 = omegaDia(0, C, M, m, a);
+      const wPi = omegaDia(Math.PI / a, C, M, m, a);
+      const gap = wPi.op - wPi.ac;
+      // shade gap at zone boundary region
+      plot.fillBetween(
+        [[Math.PI * 0.75, wPi.ac], [Math.PI, wPi.ac]],
+        [[Math.PI * 0.75, wPi.op], [Math.PI, wPi.op]],
+        { fill: "rgba(192,57,43,0.12)" }
+      );
+      document.getElementById("kpi").innerHTML = `
+        <div class="box"><div class="k">ω_op(0)</div><div class="v">${SSP.fmt(w0.op, 3)}</div></div>
+        <div class="box"><div class="k">ω_ac(π/a)</div><div class="v">${SSP.fmt(wPi.ac, 3)}</div></div>
+        <div class="box"><div class="k">ω_op(π/a)</div><div class="v">${SSP.fmt(wPi.op, 3)}</div></div>
+        <div class="box"><div class="k">邊界能隙</div><div class="v">${SSP.fmt(gap, 3)}</div></div>`;
+      const equal = Math.abs(M - m) < 0.02;
+      document.getElementById("readout").innerHTML = `
+        <strong>你應該看到</strong>
+        <ul>
+          <li>藍色聲學支：k→0 時 ω∝|k|（聲波）。</li>
+          <li>紅色光學支：k→0 時 ω 仍有限——兩種原子反向振動。</li>
+          <li>BZ 邊界 ω_op − ω_ac ${equal ? "≈ 0（M≈m，能隙關閉）" : `= ${SSP.fmt(gap, 3)}（質量差愈大能隙愈大）`}。</li>
+          <li>試著把 m 拉近 M：能隙關閉，兩支在邊界相接。</li>
+        </ul>`;
+    }
+  }
+
+  redraw();
+})();
+</script>
+</body>
+</html>

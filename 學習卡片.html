@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>固態物理 — 從零學習卡片</title>
+<style>
+  /* --- 站內共用樣式（內嵌，self-contained） --- */
+  :root {
+    --blue: #1a4d7c; --blue2: #2b6ca0; --blue-soft: #eef5fb; --border: #c5d5e5;
+    --bg: #fafafa; --card: #fff; --text: #222;
+    --math: #b8860b; --concept: #1e7a46;
+    --bad: #c0392b; --mid: #c47a12; --good: #1e7a46;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC",
+      "Microsoft JhengHei", sans-serif;
+    max-width: 980px; margin: 1.5em auto 4em; padding: 0 1.2em; line-height: 1.7;
+    color: var(--text); background: var(--bg);
+  }
+  h1 { color: var(--blue); border-bottom: 3px solid var(--blue); padding-bottom: 0.3em; font-size: 1.55em; }
+  h2 { color: var(--blue); font-size: 1.15em; margin-top: 1.6em; border-bottom: 1px solid #ddd; padding-bottom: 0.2em; }
+  a { color: var(--blue2); }
+  .nav { display: flex; flex-wrap: wrap; gap: 0.5em; align-items: center; margin: 0.6em 0 1.2em; font-size: 0.92em; }
+  .nav a { text-decoration: none; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 0.35em 0.75em; color: #234; }
+  .nav a:hover { background: var(--blue-soft); border-color: var(--blue); }
+  .nav a.here { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .nav .home { font-weight: 600; }
+  .intro { background: var(--blue-soft); border-left: 4px solid #6aa1d6; border-radius: 4px; padding: 0.75em 1em; color: #334; font-size: 0.95em; margin: 0.8em 0 1.2em; }
+
+  /* --- 控制列 --- */
+  .modes, .chips { display: flex; flex-wrap: wrap; gap: 0.5em; margin: 0.7em 0; align-items: center; }
+  .modes button, .chips button, .toolbtn {
+    border: 1px solid var(--border); background: #fff; border-radius: 999px;
+    padding: 0.3em 0.9em; cursor: pointer; font-size: 0.9em; color: #234;
+  }
+  .modes button:hover, .chips button:hover, .toolbtn:hover { border-color: var(--blue); background: var(--blue-soft); }
+  .modes button.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .chips button.on { background: #234; color: #fff; border-color: #234; }
+  .chips button .n { font-size: 0.8em; opacity: 0.75; margin-left: 0.25em; }
+  select.deckpick {
+    border: 1px solid var(--border); border-radius: 8px; padding: 0.3em 0.5em;
+    font-size: 0.9em; background: #fff; color: #234; max-width: 100%;
+  }
+  .statusline { font-size: 0.88em; color: #556; margin: 0.4em 0.2em; display:flex; flex-wrap:wrap; gap:1em; align-items:center; }
+  .statusline .bar { flex: 1 1 160px; height: 8px; background: #e4eaf0; border-radius: 4px; overflow: hidden; min-width: 120px; }
+  .statusline .bar i { display: block; height: 100%; background: var(--good); border-radius: 4px; transition: width .3s; }
+
+  /* --- 卡片 --- */
+  .stage { perspective: 1400px; margin: 1em 0 0.6em; }
+  .flashcard {
+    position: relative; min-height: 320px; cursor: pointer;
+    transform-style: preserve-3d; transition: transform 0.45s;
+  }
+  .flashcard.flipped { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 1.2em 1.4em; box-shadow: 0 2px 10px rgba(26,77,124,0.10);
+    display: flex; flex-direction: column; overflow-y: auto;
+  }
+  .face.back { transform: rotateY(180deg); }
+  .face .tags { display: flex; flex-wrap: wrap; gap: 0.45em; margin-bottom: 0.7em; font-size: 0.78em; }
+  .face .tags span { border-radius: 999px; padding: 0.12em 0.65em; color: #fff; }
+  .face .tags .deck { background: var(--blue2); }
+  .face .tags .kind-math { background: var(--math); }
+  .face .tags .kind-concept { background: var(--concept); }
+  .face .tags .yrs { background: #fff; color: #977129; border: 1px solid #e0c890; font-family: "SF Mono", Menlo, monospace; }
+  .face .tags .box { background: #fff; color: #667; border: 1px solid var(--border); }
+  .face .q { font-size: 1.18em; font-weight: 700; color: #17395c; margin: auto 0; white-space: pre-line; }
+  .face .hintflip { text-align: center; color: #9ab; font-size: 0.82em; margin-top: 1em; }
+  .face .a { font-size: 0.98em; color: #223; white-space: pre-line; }
+  .face .a b { color: var(--blue); }
+  .face .use {
+    margin-top: 0.9em; background: #fff8ee; border: 1px solid #e0b97a; border-radius: 10px;
+    padding: 0.55em 0.8em; font-size: 0.88em; color: #3a2e1a; white-space: pre-line;
+  }
+  .face .use b { color: #9a6a1e; }
+  .face .cardlinks { margin-top: 0.6em; }
+  .face .cardlinks a {
+    display: inline-block; margin: 0.15em 0.3em 0 0; font-size: 0.82em;
+    background: #fff; border: 1px solid var(--border); border-radius: 8px;
+    padding: 0.15em 0.6em; text-decoration: none;
+  }
+  .eq {
+    display: block; background: #f7fafd; border: 1px dashed #a8c0d8; border-radius: 8px;
+    padding: 0.4em 0.8em; margin: 0.45em 0;
+    font-family: "SF Mono", Menlo, Consolas, "Times New Roman", serif; font-size: 0.95em; color: #123;
+    white-space: pre-line;
+  }
+
+  /* --- 評分列 --- */
+  .gradebar { display: flex; gap: 0.6em; justify-content: center; margin: 0.8em 0; flex-wrap: wrap; }
+  .gradebar button {
+    border: none; border-radius: 12px; padding: 0.55em 1.2em; cursor: pointer;
+    font-size: 0.95em; color: #fff; font-weight: 700; opacity: 0.92;
+  }
+  .gradebar button:hover { opacity: 1; transform: translateY(-1px); }
+  .gradebar .g1 { background: var(--bad); }
+  .gradebar .g2 { background: var(--mid); }
+  .gradebar .g3 { background: var(--good); }
+  .gradebar button small { display: block; font-weight: 400; font-size: 0.72em; opacity: 0.85; }
+  .navrow { display: flex; justify-content: space-between; align-items: center; font-size: 0.88em; color: #667; margin: 0.3em 0.2em; }
+  .navrow button { border: 1px solid var(--border); background: #fff; border-radius: 8px; padding: 0.25em 0.8em; cursor: pointer; color: #234; }
+  .navrow button:hover { background: var(--blue-soft); border-color: var(--blue); }
+  .kbd { font-size: 0.78em; color: #9ab; text-align: center; margin-top: 0.2em; }
+  .kbd code { background: #eef2f6; border-radius: 4px; padding: 0 0.35em; }
+
+  /* --- 牌組總覽 --- */
+  .decks { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0.7em; margin: 0.8em 0 1.5em; }
+  .deckcard {
+    background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 0.7em 0.9em;
+    cursor: pointer; transition: border-color .12s, box-shadow .12s;
+  }
+  .deckcard:hover { border-color: var(--blue); box-shadow: 0 2px 8px rgba(26,77,124,0.12); }
+  .deckcard .t { font-weight: 700; font-size: 0.92em; color: #17395c; }
+  .deckcard .t .kindtag { font-size: 0.72em; color: #fff; border-radius: 999px; padding: 0.08em 0.5em; margin-right: 0.35em; vertical-align: 1px; }
+  .deckcard .d { font-size: 0.8em; color: #667; margin: 0.2em 0 0.4em; }
+  .deckcard .bar { height: 7px; background: #e4eaf0; border-radius: 4px; overflow: hidden; display: flex; }
+  .deckcard .bar i { display: block; height: 100%; }
+  .deckcard .cnt { font-size: 0.75em; color: #889; margin-top: 0.25em; font-family: "SF Mono", Menlo, monospace; }
+  footer { color: #888; font-size: 0.85em; margin-top: 2.5em; border-top: 1px solid #ddd; padding-top: 1em; }
+</style>
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 備考總入口</a>
+  <a href="知識地圖.html">知識地圖</a>
+  <a class="here" href="學習卡片.html">學習卡片</a>
+  <a href="數學lab/index.html">數學 Lab</a>
+  <a href="單元教學/index.html">單元教學</a>
+  <a href="考古題/單元整理.html">單元整理</a>
+</div>
+
+<h1>🃏 從零學習卡片（數學工具 × 必背概念）</h1>
+<p class="intro">
+  <b>正面是問題，點卡片翻面看「從零講起」的答案</b>，然後自評：😵 還不會／🤔 模糊／✅ 會了。
+  評分存在瀏覽器裡（localStorage），<b>「抽認測驗」模式會優先抽你不熟的卡</b>。
+  數學軌 M1–M6 從高中程度起步，按順序讀完就是固態要用的全部數學；
+  概念軌 U1–U9 是 13 卷考古題整理出的必背清單，卡上的年份＝這張卡實際考過的年。
+  想推得更細，卡背有直達 <a href="數學lab/index.html">數學 Lab</a>（互動推導填空）與單元教學的連結。
+</p>
+
+<div class="modes" id="modes">
+  <button data-mode="study" class="on">📚 學習順序</button>
+  <button data-mode="quiz">🔀 抽認測驗（不熟優先）</button>
+  <span style="flex:1"></span>
+  <button class="toolbtn" id="resetBtn">🗑 清除進度</button>
+</div>
+<div class="chips" id="chips"></div>
+<div class="statusline">
+  <span id="deckLabel"></span>
+  <div class="bar"><i id="progFill" style="width:0%"></i></div>
+  <span id="progText"></span>
+</div>
+
+<div class="stage">
+  <div class="flashcard" id="fc">
+    <div class="face front">
+      <div class="tags" id="tagsF"></div>
+      <div class="q" id="qText"></div>
+      <div class="hintflip">點卡片（或按空白鍵）翻面</div>
+    </div>
+    <div class="face back">
+      <div class="tags" id="tagsB"></div>
+      <div class="a" id="aText"></div>
+      <div class="use" id="useText"></div>
+      <div class="cardlinks" id="linkRow"></div>
+    </div>
+  </div>
+</div>
+<div class="gradebar" id="gradebar" style="visibility:hidden">
+  <button class="g1">😵 還不會<small>明天再遇到</small></button>
+  <button class="g2">🤔 有點模糊<small>之後再抽</small></button>
+  <button class="g3">✅ 會了<small>少抽這張</small></button>
+</div>
+<div class="navrow">
+  <button id="prevBtn">← 上一張</button>
+  <span id="posText"></span>
+  <button id="nextBtn">下一張 →</button>
+</div>
+<div class="kbd">快捷鍵：<code>空白鍵</code> 翻面 · <code>1</code>/<code>2</code>/<code>3</code> 自評 · <code>←</code>/<code>→</code> 上一張/下一張</div>
+
+<h2>牌組總覽（點任一組開始）</h2>
+<div class="decks" id="deckGrid"></div>
+
+<footer>
+  評分只存在這台瀏覽器（localStorage）。內容依 <a href="考古題/單元整理.html">考古題單元整理</a>（2013–2025 · 13 卷）；
+  數學軌對應 <a href="知識地圖.html">知識地圖</a> 的六門外部學問輸入管道。
+</footer>
+
+<script>
+/* ================= 卡片資料 ================= */
+/* q=正面問題, a=背面從零解釋, use=固態用在哪, yrs=考古題年份, link=[文字,href] */
+const DECKS = [
+{ id:'m1', kind:'math', name:'M1 向量與晶格幾何', desc:'內積、外積、三重積 → 原胞體積與 packing', cards:[
+  { q:'內積 a·b 的幾何意義是什麼？\n什麼時候等於零？',
+    a:'<b>a·b = |a||b|cosθ</b>：把 b 投影到 a 方向再相乘。\n・θ=90° 時 cosθ=0 → <b>內積為零＝互相垂直</b>。\n・內積是「兩向量多同向」的量尺：同向最大、反向最負。',
+    use:'<b>固態用在：</b>相位 k·r（波往 r 方向走了幾個弧度）、證明 [hkl]⊥(hkl)、繞射條件 Δk·R=2πn。', yrs:'13–16', link:['Lab：倒晶格','數學lab/lab_reciprocal.html'] },
+  { q:'外積 a×b 的大小和方向各代表什麼？',
+    a:'・<b>大小 |a×b| = |a||b|sinθ ＝兩向量張出的平行四邊形面積</b>。\n・方向：右手四指從 a 轉向 b，拇指方向；<b>同時垂直於 a 和 b</b>。\n・a∥b 時面積為零 → 外積為零。',
+    use:'<b>固態用在：</b>倒晶格基底 b₁=2π(a₂×a₃)/V —— 分子的外積保證 b₁ 垂直於 a₂、a₃，這正是「倒晶格向量垂直於晶面」的來源。', yrs:'15·22·24·25', link:['Lab：倒晶格','數學lab/lab_reciprocal.html'] },
+  { q:'三重積 a₁·(a₂×a₃) 是什麼？\n為什麼它是「體積」？',
+    a:'拆兩步看：\n① a₂×a₃ ＝底面（平行四邊形）面積，方向是底面法向。\n② 再與 a₁ 內積＝把 a₁ 投影到法向 → <b>底面積 × 高 ＝ 平行六面體體積</b>。\n<span class="eq">V = |a₁·(a₂×a₃)|</span>循環換序不變：a₁·(a₂×a₃)=a₂·(a₃×a₁)。',
+    use:'<b>固態用在：</b>primitive cell 體積（2024 直接考）、倒晶格公式的分母、密度計算。', yrs:'24', link:['Lab：倒晶格','數學lab/lab_reciprocal.html'] },
+  { q:'「基底＋線性組合」怎麼生出整個晶格？\nprimitive 的意思是？',
+    a:'選兩三個不共線（不共面）的向量 a₁,a₂,a₃，所有整數組合\n<span class="eq">R = n₁a₁ + n₂a₂ + n₃a₃</span>就是全部格點——晶格＝一組基底的整數張成。\n<b>primitive ＝ 這組基底張出的 cell 恰含 1 個格點</b>（最小單位）；conventional cell 可含多個（bcc 含 2、fcc 含 4）。',
+    use:'<b>固態用在：</b>2024/2025 開卷第一題都是「給 lattice vectors 認 Bravais、寫 basis」；答題時先問「這組向量的整數組合能不能生出所有點」。', yrs:'24·25', link:['單元教學 U1','單元教學/unit01_晶體結構.html'] },
+  { q:'算 packing fraction 的萬用三步驟是什麼？\n（sc、bcc、fcc 各在哪個方向相切？）',
+    a:'<b>① 找相切方向</b>：球在哪個方向剛好碰到 → 給出 r 與 a 的關係。\n・sc：邊上相切 a=2r\n・bcc：體對角線 √3a=4r\n・fcc：面對角線 √2a=4r\n<b>② 數 cell 裡有幾顆球</b>（角原子算 1/8、面原子算 1/2…）\n<b>③ 填充率 = 球總體積 ÷ cell 體積</b>\n<span class="eq">sc 0.52 · bcc 0.68 · fcc=hcp 0.74 · diamond 0.34</span>',
+    use:'<b>固態用在：</b>近年最愛考（含變形題：2024「隔層半徑減半」照樣走這三步）。', yrs:'20·21·23·24', link:['Lab：packing','數學lab/lab_packing.html'] },
+]},
+{ id:'m2', kind:'math', name:'M2 複數與波', desc:'e^{iθ} → 平面波 → 干涉 → 複數 k＝衰減', cards:[
+  { q:'e^{iθ} = cosθ + i·sinθ 該怎麼「看」？',
+    a:'把它看成<b>單位圓上的一個點（箭頭）</b>：θ 是轉角。\n・θ 增加＝箭頭逆時針轉，永遠長度 1。\n・cos 是它的影子（實部）、sin 是側影（虛部）。\n所以「乘上 e^{iθ}」＝「轉 θ 角」——複數是旋轉的語言，比 sin/cos 分開算好用得多。',
+    use:'<b>固態用在：</b>所有波（X-ray、電子、聲子）一律寫成複指數，加波＝加箭頭。', yrs:'—', link:['單元教學 U2','單元教學/unit02_倒晶格與繞射.html'] },
+  { q:'平面波 e^{i(kx−ωt)} 裡，k 和 ω 分別是什麼「轉速」？',
+    a:'箭頭的角度是 kx−ωt：\n・<b>k＝空間轉速</b>：每走 1 公尺轉 k 弧度 → 轉一整圈的距離＝波長 λ=2π/k。\n・<b>ω＝時間轉速</b>：每秒轉 ω 弧度 → 週期 T=2π/ω。\n三維就是 e^{i(k·r−ωt)}，k 變成向量：波往 k 方向前進。',
+    use:'<b>固態用在：</b>聲子 ansatz u_n=e^{i(Kna−ωt)}、Bloch 波 e^{ik·r}——考卷上一切「猜波解」的起手式。', yrs:'19·21·25', link:['Lab：色散','數學lab/lab_dispersion.html'] },
+  { q:'兩個波相加，什麼時候變強、什麼時候抵消？\n「相位差」跟「路徑差」是什麼關係？',
+    a:'兩支箭頭相加：\n・<b>同向（相位差 0, 2π, 4π…）→ 長度相加＝亮</b>\n・<b>反向（相位差 π, 3π…）→ 抵消＝暗</b>\n走不同路的兩個波，相位差＝<b>路徑差 × k</b> ＝ 2π×(路徑差/λ)。\n所以「路徑差＝整數個波長」⟺ 建設性干涉。',
+    use:'<b>固態用在：</b>Bragg 2d sinθ=nλ 就是「相鄰晶面反射的路徑差＝nλ」一句話。', yrs:'21·23·25', link:['單元教學 U2','單元教學/unit02_倒晶格與繞射.html'] },
+  { q:'N 個原子的散射波相加，為什麼「幾乎全滅、只有特定方向亮」？',
+    a:'每個格點 R 貢獻一支箭頭 e^{iΔk·R}，全加起來是幾何級數。\n・一般方向：箭頭角度亂轉一圈圈 → <b>互相抵消 ≈ 0</b>。\n・但若 <b>Δk·R＝2π×整數（對所有格點 R）</b>：所有箭頭同向 → 加出 N 倍巨大振幅。\n這個條件就是 <b>Δk＝G（倒晶格向量）</b>——繞射峰的唯一來源。',
+    use:'<b>固態用在：</b>2023 由 Δk=G 推 Bragg law；「為何只有亮點沒有暗點」(2020)。', yrs:'20·23', link:['Lab：結構因子','數學lab/lab_structure_factor.html'] },
+  { q:'波向量 k 變成複數 k′+iκ 時，波長什麼樣子？',
+    a:'代進去拆開：\n<span class="eq">e^{ikx} = e^{i(k′+iκ)x} = e^{ik′x} · e^{−κx}</span>・e^{ik′x}：照樣振盪\n・<b>e^{−κx}：振幅隨距離指數衰減</b>\n→ 複數 k ＝「進不去、只能在表皮衰減」的 evanescent 波。虛部越大，死得越快。',
+    use:'<b>固態用在：</b>ω>ω_max 的聲波（2021/2024 考「傳播方程與物理意義」）、能隙內的電子態、金屬反光。', yrs:'21·24', link:['Lab：色散','數學lab/lab_dispersion.html'] },
+]},
+{ id:'m3', kind:'math', name:'M3 傅立葉與倒晶格', desc:'週期函數 → 只含 G 的展開 → structure factor', cards:[
+  { q:'傅立葉級數在說什麼？\n（用聲音類比）',
+    a:'任何週期 a 的函數都能拆成「基頻＋泛音」：\n<span class="eq">f(x) = Σ c_n e^{i(2πn/a)x}</span>像一個音色＝基音＋各次泛音的配方；c_n 就是第 n 個泛音的份量。\n<b>週期越短的成分（大 n）負責越尖銳的細節</b>。',
+    use:'<b>固態用在：</b>晶體的電子密度、位能 U(x) 全是週期函數 → 都用這招拆。', yrs:'—', link:['Lab：結構因子','數學lab/lab_structure_factor.html'] },
+  { q:'為什麼晶格的週期函數「只含」倒晶格向量 G 的成分？',
+    a:'要求 f(x+a)=f(x)，代入某個成分 e^{iqx}：\n<span class="eq">e^{iq(x+a)} = e^{iqx} ⟺ e^{iqa}=1 ⟺ qa=2πn</span>→ <b>只有 q=2πn/a（即 q∈倒晶格）的成分活得下來</b>，其他全被週期性禁止。\n三維同理：G 滿足 e^{iG·R}=1 對所有格點 R —— 這就是倒晶格的定義。',
+    use:'<b>固態用在：</b>為何繞射只在 Δk=G、為何能帶以 G 為週期、central equation 只耦合差 G 的平面波。', yrs:'13–16·18', link:['Lab：倒晶格','數學lab/lab_reciprocal.html'] },
+  { q:'structure factor S_G 是什麼？\n為什麼會有「消光」？',
+    a:'一個 cell 裡有好幾顆 basis 原子，各自散射一支箭頭：\n<span class="eq">S_G = Σ_j f_j e^{−iG·r_j}</span>（r_j＝第 j 顆原子位置，f_j＝它的散射本事）\n<b>消光＝這幾支箭頭剛好互相抵消 → S_G=0 → 該繞射峰消失</b>。\n・bcc（角+體心）：h+k+l 奇數 → 兩支箭頭反向 → 消光\n・fcc：hkl 必須全奇或全偶才亮\n・diamond：fcc 規則之上再多一層條件',
+    use:'<b>固態用在：</b>年年考的消光規則；2021「bcc (110) 可見、fcc (110) 不可見」；2020 diamond vs zincblende。', yrs:'13–16·20·21', link:['Lab：結構因子','數學lab/lab_structure_factor.html'] },
+  { q:'（進階）「晶體＝晶格 ⊛ basis」的觀點，繞射圖上怎麼分工？',
+    a:'晶體密度＝把 basis 複製到每個格點上（卷積）。傅立葉變換把卷積變乘法：\n<span class="eq">繞射振幅 = （倒晶格上的 δ 峰） × S_G</span>・<b>峰的位置</b>由晶格決定（只在 G 上）\n・<b>峰的亮暗</b>由 basis 決定（S_G，可能消光）\n「位置看晶格、強度看 basis」——讀繞射圖的總綱。',
+    use:'<b>固態用在：</b>2023「四種探針峰位相同、強度不同」的深層原因（f_j 不同、G 相同）。', yrs:'23', link:['單元教學 U2','單元教學/unit02_倒晶格與繞射.html'] },
+]},
+{ id:'m4', kind:'math', name:'M4 微積分工具', desc:'泰勒展開 → 曲率 → 極值 → 換元（DOS）', cards:[
+  { q:'泰勒展開為什麼是固態物理的「萬能鑰匙」？\n（平衡點附近的 U(r) 長什麼樣？）',
+    a:'任何光滑函數在點 r₀ 附近都可以近似成多項式：\n<span class="eq">U(r) ≈ U(r₀) + U′(r₀)δr + ½U″(r₀)δr²</span>在<b>平衡點</b> U′(r₀)=0，所以第一個活的項是 δr² 項：\n<b>任何位能井的底部都是拋物線＝彈簧</b>，彈簧常數 C=U″(r₀)。\n這就是「萬物皆諧振子」的數學原因。',
+    use:'<b>固態用在：</b>鍵結曲線 → 聲子彈簧常數（2023 由聲速反推 C）；2019「E(r) 能不能預測熱膨脹」——不能，因為拋物線是對稱的，要靠三次項（非諧）。', yrs:'19·23', link:['單元教學 U3','單元教學/unit03_晶體鍵結.html'] },
+  { q:'二階導數＝曲率，這件事怎麼變出「有效質量」？',
+    a:'自由電子 E=ℏ²k²/2m → 對 k 微分兩次：d²E/dk²=ℏ²/m → <b>質量藏在能帶的彎曲程度裡</b>。\n把邏輯反過來，對任何能帶定義：\n<span class="eq">1/m* = (1/ℏ²) · d²E/dk²</span>・彎得急（曲率大）→ m* 小 → 好推動\n・接近平（曲率小）→ m* 大 → 笨重\n・<b>band 頂往下彎（曲率負）→ m*&lt;0</b> → 用「hole」重新描述。',
+    use:'<b>固態用在：</b>2017/2021 直接考定義與負質量；2021 由 E=−10⁻³⁷k² 算 hole 的 m*。', yrs:'17·21', link:['Lab：NFE','數學lab/lab_nfe.html'] },
+  { q:'找平衡距離的標準動作是什麼？\n（以 Lennard-Jones 為例）',
+    a:'<b>極值條件：dU/dr = 0</b>（力＝−dU/dr＝0 的點）。\nL-J：U=4ε[(σ/r)¹²−(σ/r)⁶]，微分設零解出：\n<span class="eq">r₀ = 2^{1/6}σ ≈ 1.12σ</span>再把 r₀ 代回 U 得結合能 U(r₀)=−ε。\n檢查 U″(r₀)>0 確認是谷底不是山頂。',
+    use:'<b>固態用在：</b>2014–2016 年年考 L-J 平衡距離與 cohesive energy。', yrs:'14·15·16', link:['單元教學 U3','單元教學/unit03_晶體鍵結.html'] },
+  { q:'DOS 換元：已知 k 空間裡態是均勻的，怎麼變出 g(E)？',
+    a:'兩步：\n① <b>k 空間數格點</b>：能量低於 E 的態數 N(E) ＝（半徑 k(E) 的球體積）×（格點密度）。\n② <b>對 E 微分</b>：g(E)=dN/dE —— 用鏈鎖律出現 dk/dE：\n<span class="eq">g(E) = g(k) · dk/dE</span>色散越平（dE/dk 小）→ dk/dE 大 → <b>態擠在一起、DOS 大</b>。\n維度只改第①步的「球」：3D 球→√E、2D 圓→常數、1D 線→1/√E。',
+    use:'<b>固態用在：</b>2023（1D 兩種色散）、2024（各向異性）、2025（2D spin-up）連三年考換元本身。', yrs:'23·24·25', link:['Lab：DOS','數學lab/lab_dos.html'] },
+]},
+{ id:'m5', kind:'math', name:'M5 振動與微分方程', desc:'諧振子 → 耦合鏈 → 色散 → 群速 → 邊界量子化', cards:[
+  { q:'單一諧振子從 F=ma 到 ω=√(C/M)，中間發生什麼？',
+    a:'彈簧力 F=−Cx（回復力，離平衡越遠拉越大力），牛頓第二定律：\n<span class="eq">M·ẍ = −Cx</span>猜 x=A·cos(ωt) 代入：−Mω²＝−C →\n<span class="eq">ω = √(C/M)</span><b>勁（C 大）→ 快；重（M 大）→ 慢</b>。整個固態的振動都是這句話的變奏。',
+    use:'<b>固態用在：</b>一切聲子問題的地基；Einstein 模型＝N 個獨立諧振子。', yrs:'—', link:['Lab：色散','數學lab/lab_dispersion.html'] },
+  { q:'一維原子鏈的運動方程怎麼寫？\n怎麼從它解出 ω(K)＝2√(C/M)|sin(Ka/2)|？',
+    a:'第 n 顆原子被左右鄰居拉：\n<span class="eq">M·ü_n = C(u_{n+1} + u_{n−1} − 2u_n)</span>猜波解 u_n = e^{i(Kna−ωt)}（每顆原子同一支波、相位差 Ka）代入：\n<span class="eq">−Mω² = C(e^{iKa}+e^{−iKa}−2) = −4C·sin²(Ka/2)</span>→ <b>ω(K) = 2√(C/M)·|sin(Ka/2)|</b>\n長波極限 sin≈Ka/2 → ω≈(a√(C/M))K＝直線＝聲速；K=π/a 時 ω 最大＝ω_max。',
+    use:'<b>固態用在：</b>13·19·21·23 反覆考；2023 給聲速反推 C 與 ω_max。', yrs:'13·19·21·23', link:['Lab：色散','數學lab/lab_dispersion.html'] },
+  { q:'群速和相速差在哪？\n為什麼 zone boundary 上群速＝0？',
+    a:'・<b>相速 ω/K</b>：單一波峰移動的速度（單支正弦波）。\n・<b>群速 dω/dK</b>：波包（能量、訊號）移動的速度＝色散曲線的<b>斜率</b>。\nzone boundary（K=π/a）上 ω(K) 曲線到頂、斜率為零：\n<b>相鄰原子反相振動 → 往右與往左的波疊成駐波 → 能量不流動</b>。',
+    use:'<b>固態用在：</b>2019 畫「速度—頻率」關係；「最高頻聲波不傳」(2021) 的原因。', yrs:'19·21', link:['Lab：色散','數學lab/lab_dispersion.html'] },
+  { q:'Born–von Kármán 週期邊界條件怎麼把 k「量子化」？',
+    a:'把長 L 的鏈頭尾接成環，波必須繞一圈回到自己：\n<span class="eq">e^{ikL} = 1 ⟺ k = 2πm/L（m 整數）</span>→ <b>k 不連續，是間距 2π/L 的格點</b>。\n・L 越大格點越密，宏觀下幾乎連續，但「每個態佔 2π/L」這件事永遠成立。\n・三維：每個 k 態佔體積 (2π)³/V —— 一切「數態」的起點。',
+    use:'<b>固態用在：</b>2025 開考直接問 k 間距；2017 由填 k 球推 N 與 k_F 關係；Debye 模型數模態。', yrs:'17·25', link:['Lab：DOS','數學lab/lab_dos.html'] },
+]},
+{ id:'m6', kind:'math', name:'M6 統計直覺', desc:'Boltzmann 權重 → 佔據數 → Fermi 海 → DOS 的角色', cards:[
+  { q:'e^{−E/kT} 這個「Boltzmann 權重」在說什麼？\nkT 扮演什麼角色？',
+    a:'熱平衡下，系統處在能量 E 的狀態的機率 ∝ <b>e^{−E/kT}</b>。\n・<b>kT＝熱能的匯率</b>（室溫 ≈ 1/40 eV）。\n・E ≪ kT：權重≈1，隨便到達；E ≫ kT：指數壓死，幾乎不發生。\n一切「溫度 vs 能量尺度」的比較（熔點 vs 鍵能、載子激發 vs 能隙）都是這一句。',
+    use:'<b>固態用在：</b>Langevin 順磁（2013 由 Boltzmann factor 推 M(H)）、n_i∝e^{−E_g/2kT}、惰性氣體沸點排序。', yrs:'13·14·15·25', link:['Lab：Langevin','數學lab/lab_langevin.html'] },
+  { q:'玻色子和費米子的「佔據規則」差在哪？\n聲子和電子各用哪一種？',
+    a:'・<b>玻色子（聲子、光子）：一個模態想擠幾顆都行</b>\n → 佔據數 n(ω)=1/(e^{ℏω/kT}−1)（Planck 分布）。\n・<b>費米子（電子）：一個態最多一顆</b>（Pauli）\n → 佔據機率 f(E)=1/(e^{(E−μ)/kT}+1)（Fermi–Dirac）。\n高溫下兩者都退化回 Boltzmann；差別在低溫才劇烈。',
+    use:'<b>固態用在：</b>聲子比熱走 Planck → Debye T³；電子比熱走 FD → γT。同一張考卷的兩兄弟。', yrs:'13·14·16·20', link:['單元教學 U5','單元教學/unit05_自由電子費米氣體.html'] },
+  { q:'「Fermi 海」的圖像：為什麼電子比熱只有 γT、遠小於古典預期？',
+    a:'0K 時電子把態從低到高<b>填滿到 E_F</b>（海面）。\n溫度 T 時，只有<b>海面附近 ~kT 厚的一層</b>電子搬得動——海底的電子四周全滿，Pauli 不准動。\n・能動的電子比例 ~ kT/E_F（金屬常溫 ≈ 1%）\n・所以 C_el ≈ (kT/E_F)·(3/2 Nk_B) ∝ <b>T</b>，比古典 3/2 Nk_B 小兩個數量級。',
+    use:'<b>固態用在：</b>2016 畫不同溫度的 f(E)；2020 電子 vs 聳子熱容溫度行為。', yrs:'16·20', link:['Lab：DOS','數學lab/lab_dos.html'] },
+  { q:'DOS g(E) 在所有統計計算裡的角色是什麼？\n（萬用公式長怎樣？）',
+    a:'把「對所有量子態求和」換成「對能量積分」的翻譯官：\n<span class="eq">總數 N = ∫ g(E)·f(E) dE\n總能 U = ∫ E·g(E)·f(E) dE</span>・g(E)＝每單位能量有幾個座位（材料性質）\n・f(E)＝每個座位坐人的機率（溫度性質）\n<b>材料 × 統計分開處理</b>——比熱、載子數、磁化率全是這個模板。',
+    use:'<b>固態用在：</b>幾乎每年電子段的第一步；2022 問「測 DOS 的實驗」。', yrs:'22·23·24·25', link:['Lab：DOS','數學lab/lab_dos.html'] },
+]},
+/* ---------------- 概念必背軌 ---------------- */
+{ id:'u1', kind:'concept', name:'U1 晶體結構必背', desc:'packing 數值、hcp、bcc↔fcc、Miller', cards:[
+  { q:'背誦卡：sc / bcc / fcc / diamond / hcp 的 packing fraction 各是多少？\n各自在哪個方向相切？',
+    a:'<span class="eq">sc 0.52（邊 a=2r）\nbcc 0.68（體對角線 √3a=4r）\nfcc 0.74（面對角線 √2a=4r）\nhcp 0.74（理想堆積，同 fcc）\ndiamond 0.34（體對角線 1/4 處成鍵）</span>fcc/hcp 是等球最密堆積（ABCABC vs ABAB）；diamond 鬆是因為共價鍵有方向性，只接 4 個鄰居。',
+    use:'<b>考過：</b>2020（三種 cubic＋鑽石硬度）、2021（hcp）、2023（sc 證明）、2024（hcp 變形）。', yrs:'20·21·23·24', link:['Lab：packing','數學lab/lab_packing.html'] },
+  { q:'hcp 的理想 c/a 是多少？怎麼推？',
+    a:'<span class="eq">c/a = √(8/3) ≈ 1.633</span>推法：上層球坐在下層三顆球的凹槽裡，四顆球心成<b>正四面體</b>（邊長 a=2r）。四面體高 h=a√(2/3)，而 c=2h →\nc = 2a√(2/3) → c/a=√(8/3)。\n<b>石墨 c/a≈2.4 遠大於理想值</b> → 層內強共價、層間弱 vdW → 易剝離、潤滑。',
+    use:'<b>考過：</b>2015、2021（石墨力學性質）、2024。', yrs:'15·21·24', link:['單元教學 U1','單元教學/unit01_晶體結構.html'] },
+  { q:'bcc 和 fcc 的倒晶格分別是什麼？\nWigner–Seitz cell 和第一 BZ 的關係是？',
+    a:'<b>bcc ↔ fcc 互為倒晶格</b>（bcc 的倒晶格是 fcc，反之亦然）；hcp 的倒晶格仍是 simple hexagonal。\n・Wigner–Seitz cell：實空間中「離這個格點最近的區域」（垂直平分面圍出）。\n・<b>第一 Brillouin zone ＝ 倒空間的 Wigner–Seitz cell</b>——同一招換空間用。',
+    use:'<b>考過：</b>2015（hcp 倒晶格）、2018（BZ＝WS 建構）、2022/2024（畫第一 BZ）。', yrs:'15·18·22·24', link:['Lab：倒晶格','數學lab/lab_reciprocal.html'] },
+  { q:'Miller 指標 (hkl) 怎麼定？\n[hkl] ⊥ (hkl) 和面間距公式是什麼？',
+    a:'(hkl)：面在三軸的截距取<b>倒數、化最簡整數</b>。\n・G_hkl = h b₁+k b₂+l b₃ <b>垂直於 (hkl) 面</b>（立方晶系中即 [hkl] 方向）。\n・面間距：\n<span class="eq">d_hkl = 2π/|G_hkl|；立方晶系 d = a/√(h²+k²+l²)</span>證明思路：相鄰面相位差 G·d=2π。',
+    use:'<b>考過：</b>2013/2014/2016 證明題；2015 換基底後的面指標。', yrs:'13–16', link:['單元教學 U1','單元教學/unit01_晶體結構.html'] },
+]},
+{ id:'u2', kind:'concept', name:'U2 繞射必背', desc:'Bragg、消光三件套、Δk=G、三探針', cards:[
+  { q:'Bragg 定律怎麼「一句話」推出來？\n公式和適用限制是？',
+    a:'相鄰兩晶面（間距 d）反射的波，<b>路徑差＝2d sinθ</b>；同相加強要求路徑差＝整數個波長：\n<span class="eq">2d·sinθ = nλ</span>限制：λ ≤ 2d 才有解 → <b>可見光（λ~500nm）照晶體（d~0.3nm）永遠繞射不出來</b>，要用 X-ray/電子/中子。\n最高階數 n_max＝⌊2d/λ⌋（2021 考過）。',
+    use:'<b>考過：</b>2021（NaCl 數值）、2023（由 Δk=G 推 Bragg）、2025（λ=2a/5 算夾角）。', yrs:'21·23·25', link:['單元教學 U2','單元教學/unit02_倒晶格與繞射.html'] },
+  { q:'背誦卡：bcc、fcc、diamond 的消光規則各是什麼？',
+    a:'<span class="eq">bcc：h+k+l ＝奇數 → 消光\nfcc：h,k,l 需全奇或全偶，混雜 → 消光\ndiamond：fcc 規則 ＋ 全偶時需 h+k+l=4 的倍數</span>來源都是 basis 原子的相位箭頭互相抵消（S_G=0）。\n經典例：<b>bcc (110) 亮、fcc (110) 滅</b>（2021）；diamond vs zincblende 可由「diamond 多消掉的峰」區分（2020）。',
+    use:'<b>考過：</b>13–16 年年推導；2018（bcc (100)/(111)/(300)）；2020、2021 應用題。', yrs:'13–16·18·20·21', link:['Lab：結構因子','數學lab/lab_structure_factor.html'] },
+  { q:'繞射條件 Δk=G 為什麼「就是」BZ 邊界條件？',
+    a:'彈性散射 |k′|=|k|，條件 k′=k+G 兩邊平方：\n<span class="eq">2k·G + G² = 0 ⟺ k·(Ĝ) = −G/2</span>幾何翻譯：<b>k 在 G 的垂直平分面上</b>——而第一 BZ 的邊界正是這些垂直平分面！\n→ 撞到 BZ 邊界的波（X-ray 或電子）都被晶格反射：繞射峰與能帶開隙是同一件事的兩面。',
+    use:'<b>考過：</b>2018 完整證明題；是連接 U2 與 U6 的關鍵橋。', yrs:'18', link:['Lab：NFE','數學lab/lab_nfe.html'] },
+  { q:'X-ray、中子、電子三種繞射探針差在哪？\n為什麼峰位相同、強度不同？',
+    a:'・<b>X-ray</b>：打<b>電子雲</b> → f 隨原子序 Z 增大，輕元素（H）幾乎看不見。\n・<b>中子</b>：打<b>原子核</b>（＋磁矩）→ 對輕元素靈敏、能看磁性結構；穿透深。\n・<b>電子</b>：帶電、交互作用強 → 穿透淺，適合表面/薄膜。\n<b>峰位置只由晶格（G）決定 → 三者相同；強度由各自的 f_j 決定 → 不同</b>。',
+    use:'<b>考過：</b>2014/2016 比較題；2023「為何峰同強度異」。', yrs:'14·16·23', link:['單元教學 U2','單元教學/unit02_倒晶格與繞射.html'] },
+]},
+{ id:'u3', kind:'concept', name:'U3 鍵結必背', desc:'五種鍵、L-J、Madelung', cards:[
+  { q:'五種鍵結各是什麼機制？各舉一個例子。',
+    a:'・<b>van der Waals</b>：漲落偶極互感應，−1/r⁶，最弱（惰性氣體固體、石墨層間）\n・<b>離子鍵</b>：電子整顆轉移＋庫侖吸引（NaCl）\n・<b>共價鍵</b>：共享電子對、有方向性（diamond、Si）\n・<b>金屬鍵</b>：價電子離域成電子海（Na、Cu）\n・<b>氫鍵</b>：H 夾在兩個電負原子間（冰、DNA）\n強度排序大致：共價/離子 > 金屬 > 氫 > vdW。',
+    use:'<b>考過：</b>2013–2016 年年開場題（各舉例）；2019/2020 應用。', yrs:'13–16·19·20', link:['單元教學 U3','單元教學/unit03_晶體鍵結.html'] },
+  { q:'Lennard-Jones 位能的兩項各是什麼物理？\n平衡距離和結合能是多少？',
+    a:'<span class="eq">U(r) = 4ε[(σ/r)¹² − (σ/r)⁶]</span>・<b>−(σ/r)⁶：vdW 吸引</b>（漲落偶極，有理論根據）\n・<b>+(σ/r)¹²：Pauli 排斥</b>（電子雲重疊；12 次方是好算的經驗式）\n・dU/dr=0 → <b>r₀=2^{1/6}σ、U(r₀)=−ε</b>\n晶體中要對所有原子對求和 → fcc 的格和給 cohesive energy ≈ −8.6ε/顆。',
+    use:'<b>考過：</b>2014–2016 完整計算；「四種惰性氣體沸點為何不同」＝ε 隨極化率變大。', yrs:'14·15·16', link:['單元教學 U3','單元教學/unit03_晶體鍵結.html'] },
+  { q:'Madelung 常數是什麼？\n1D 交錯離子鏈的 α 怎麼算出 2ln2？',
+    a:'離子晶體的庫侖能 ＝ −α·e²/(4πε₀R)，<b>α 把「全晶格的正負貢獻」濃縮成一個幾何常數</b>。\n1D 鏈（+−+−…，間距 R）對一顆正離子：\n<span class="eq">α = 2[1 − 1/2 + 1/3 − 1/4 + …] = 2·ln2 ≈ 1.386</span>（交錯級數＝ln2；乘 2 因為左右兩邊）\nNaCl 結構 α≈1.7476（2024 用過）。',
+    use:'<b>考過：</b>2023（1D 推導）、2024（LiCl 用 α≈1.7476 算鍵能）。', yrs:'23·24', link:['Lab：Madelung','數學lab/lab_madelung.html'] },
+]},
+{ id:'u4', kind:'concept', name:'U4 聲子必背', desc:'色散、兩支、Debye/Einstein、evanescent', cards:[
+  { q:'背誦卡：單原子鏈色散 ω(K) 的公式、兩個極限行為？',
+    a:'<span class="eq">ω(K) = 2√(C/M)·|sin(Ka/2)|</span>・<b>長波 K→0</b>：ω ≈ (a√(C/M))·K 直線 → 斜率＝聲速 v=a√(C/M)\n・<b>zone boundary K=π/a</b>：ω_max=2√(C/M)、斜率 0 ＝駐波（相鄰原子反相）\n・ω>ω_max：K 變複數 → 衰減不傳（evanescent）。',
+    use:'<b>考過：</b>13·19·21·23·24 —— 聲子段的核心公式。', yrs:'13·19·21·23·24', link:['Lab：色散','數學lab/lab_dispersion.html'] },
+  { q:'acoustic branch 和 optical branch 差在哪？\n為什麼雙原子鏈會多出 optical 支？',
+    a:'雙原子鏈（M₁≠M₂）每個 K 有兩個解：\n・<b>acoustic</b>：兩種原子<b>同向</b>擺動，K→0 時 ω→0（整體平移不花力氣）\n・<b>optical</b>：兩種原子<b>反向</b>擺動，K→0 時 ω 有限大（正負離子反向 → 產生振盪偶極 → 可被光激發，故名 optical）\n兩支之間有<b>頻率禁帶</b>：該範圍的振動不能在晶體中傳播。',
+    use:'<b>考過：</b>2018（聲子 vs 電子能帶比較）；概念常混進四段式。', yrs:'18', link:['單元教學 U4','單元教學/unit04_聲子與晶格振動.html'] },
+  { q:'Debye 模型 vs Einstein 模型：假設差在哪？\n低溫比熱各預測什麼？',
+    a:'・<b>Einstein</b>：3N 個振子全同頻 ω_E → 低溫 C ∝ e^{−ℏω_E/kT}（掉太快）\n・<b>Debye</b>：聲子＝聲波，ω=vK 線性到截止頻率 ω_D → 低溫能激發的模態數 ∝ (kT/ℏω_D)³ →\n<span class="eq">C ∝ T³（Debye T³ 定律）</span>・<b>高溫兩者都回到 Dulong–Petit：C = 3Nk_B</b>（每個振子分 kT）。\n直覺：低溫 k 空間裡「半徑 ~kT 的球」內的聲子才醒著。',
+    use:'<b>考過：</b>2013/2016（兩模型比較）、2014/2015（C/T=γ+AT² 定性推 T³）。', yrs:'13·14·15·16', link:['單元教學 U4','單元教學/unit04_聲子與晶格振動.html'] },
+  { q:'熱膨脹為什麼需要「非諧」？\n純諧振（拋物線位能）為什麼不會膨脹？',
+    a:'拋物線位能<b>左右對稱</b>：溫度升高振幅變大，但平均位置仍在井底正中央 → <b>平均鍵長不變 → 不膨脹</b>。\n真實鍵結曲線（如 L-J）<b>左陡右緩</b>（壓縮難、拉伸易）：振幅變大時往外side 待得久 → <b>平均位置外移 → 熱膨脹</b>。\n數學上：要靠泰勒展開的三次項（非諧項）。',
+    use:'<b>考過：</b>2019（E(r) 能否預測熱膨脹—不能）、2021（微觀過程敘述）。', yrs:'19·21', link:['單元教學 U4','單元教學/unit04_聲子與晶格振動.html'] },
+]},
+{ id:'u5', kind:'concept', name:'U5 電子氣必背', desc:'E_F、DOS 表、γT、Wiedemann-Franz', cards:[
+  { q:'背誦卡：E_F 公式與推導鏈（n → k_F → E_F）？',
+    a:'0K 填 k 球：N = 2 ×（球體積 ÷ 每態體積）\n<span class="eq">N = 2·(4πk_F³/3)/(2π/L)³ → k_F = (3π²n)^{1/3}</span>（因子 2＝自旋）再代 E=ℏ²k²/2m：\n<span class="eq">E_F = (ℏ²/2m)(3π²n)^{2/3}</span>金屬典型值：E_F ~ 2–10 eV、T_F ~ 5 萬 K ≫ 室溫 → 電子氣永遠是「冷」的簡併氣體。',
+    use:'<b>考過：</b>2017（推導）、2022（Al 帶數值算 E_F、T_F）。', yrs:'17·22', link:['Lab：DOS','數學lab/lab_dos.html'] },
+  { q:'背誦卡：1D／2D／3D 自由電子的 DOS 各長什麼樣？',
+    a:'<span class="eq">3D：g(E) ∝ √E\n2D：g(E) ＝ 常數（m/πℏ² 每單位面積）\n1D：g(E) ∝ 1/√E</span>來源：k 空間「殼」的幾何（球殼 4πk²↔圓周 2πk↔兩點）配上換元 dk/dE。\n<b>2D 是常數</b>這件事最常考（2025 spin-up 版：去掉自旋因子 2、再除 2）。',
+    use:'<b>考過：</b>2016（2D 全套）、2023（1D 兩種色散）、2025（2D spin-up）。', yrs:'16·23·25', link:['Lab：DOS','數學lab/lab_dos.html'] },
+  { q:'σ=ne²τ/m 怎麼從 Drude 圖像推出來？\nmobility 是什麼？',
+    a:'電場 E 加速電子、碰撞（平均間隔 τ）歸零重來 → 平均漂移速度：\n<span class="eq">v_d = −eEτ/m</span>電流密度 j = −nev_d = (ne²τ/m)E →\n<span class="eq">σ = ne²τ/m；mobility μ = |v_d|/E = eτ/m</span>金屬升溫 → 聲子變多 → τ 變短 → 電阻上升（半導體相反：載子數指數增加壓過 τ）。',
+    use:'<b>考過：</b>2014/2015 完整推導；2016（金屬 vs 半導體溫度趨勢）。', yrs:'14·15·16', link:['單元教學 U5','單元教學/unit05_自由電子費米氣體.html'] },
+  { q:'Wiedemann–Franz 定律說什麼？\nLorentz number 是多少？',
+    a:'金屬的熱導 K 與電導 σ 比值只跟溫度成正比、材料無關：\n<span class="eq">K/(σT) = L = π²k_B²/3e² ≈ 2.44×10⁻⁸ WΩ/K²</span>原因：<b>載熱和載電的是同一群 Fermi 面電子</b>，τ 在比值中約掉。\n推導鏈：K=⅓C_el·v_F·ℓ 配 C_el=γT 與 σ=ne²τ/m 相除。',
+    use:'<b>考過：</b>2014/2015 推導題（含 thermoelectric 延伸）。', yrs:'14·15', link:['單元教學 U5','單元教學/unit05_自由電子費米氣體.html'] },
+]},
+{ id:'u6', kind:'concept', name:'U6 能帶必背', desc:'Bloch、gap=2|U_G|、m*、tight-binding', cards:[
+  { q:'Bloch 定理的陳述是什麼？\n兩種證法的核心一句話？',
+    a:'週期位勢中的電子波函數必為：\n<span class="eq">ψ_k(r) = u_k(r)·e^{ik·r}，u_k(r+R)=u_k(r)</span>（平面波 × 晶格週期函數）\n・<b>證法一（對稱）</b>：平移算符 T_R 與 H 對易 → 共同本徵態；T_R 的本徵值必為 e^{ik·R}。\n・<b>證法二（Kittel/傅立葉）</b>：把 ψ 與 U 都展開成平面波，central equation 只耦合差 G 的分量 → 解自然帶 e^{ikr} 因子。',
+    use:'<b>考過：</b>2013–2016 年年考證明、2025 又考陳述——本科最高頻證明題。', yrs:'13–16·25', link:['Lab：NFE','數學lab/lab_nfe.html'] },
+  { q:'能隙為什麼恰好在 BZ 邊界打開？\ngap 大小為什麼是 2|U_G|？',
+    a:'BZ 邊界上 k 與 k−G 能量相同（簡併）→ 微擾 U_G 把兩支平面波混成兩個駐波：\n・cos 型：電子密度堆在<b>離子上</b> → 能量壓低 −|U_G|\n・sin 型：密度堆在<b>離子之間</b> → 能量抬高 +|U_G|\n<span class="eq">E_gap = 2|U_G|</span>同一句話：撞到 BZ 邊界的電子波被晶格 Bragg 反射 → 行波活不了，只剩兩種駐波。',
+    use:'<b>考過：</b>2013（U=2Ucos Gx 完整算）、2016、2018、2020、2021（吸收邊定 gap）。', yrs:'13·16·18·20·21', link:['Lab：NFE','數學lab/lab_nfe.html'] },
+  { q:'crystal momentum ℏk 為什麼「不是」真動量？\n為什麼 k 可以限制在第一 BZ？',
+    a:'・Bloch 態不是動量本徵態（u_k(r) 讓 −iℏ∇ψ ≠ ℏkψ）；晶格會吸收/提供 ℏG 的「動量」，所以碰撞只保證 <b>k 守恆到差一個 G</b>。\n・k 與 k+G 標記<b>同一個物理態</b>（把 e^{iG·r} 吸進 u_k 即可）→ 所有不重複的標籤都裝得進第一 BZ（reduced zone scheme）。',
+    use:'<b>考過：</b>2016 兩小題直接問；2018（聲子/電子在 BZ 中動量的意義）。', yrs:'16·18', link:['單元教學 U6','單元教學/unit06_能帶與Bloch電子.html'] },
+  { q:'tight-binding 能帶 E(k)=−α−2γcos(ka) 裡，α、γ 各是什麼？\n帶寬是多少？',
+    a:'從「電子幾乎被綁在原子上、偶爾跳到鄰居」出發：\n・<b>α</b>：待在原地的能量（on-site）\n・<b>γ</b>:跳到隔壁的傾向（hopping／重疊積分）\n<span class="eq">E(k) = −α − 2γ·cos(ka)，帶寬 = 4γ</span>・跳得越容易（γ 大）→ 帶越寬、m* 越小。\n・1s 軌道 γ>0 → <b>能帶最低點在 k=0、最高點在 BZ 邊界 k=±π/a</b>（2025 考點）。',
+    use:'<b>考過：</b>2025（1s tight-binding 最高能量位置）。與 NFE 是互補的兩個極限。', yrs:'25', link:['單元教學 U6','單元教學/unit06_能帶與Bloch電子.html'] },
+]},
+{ id:'u7', kind:'concept', name:'U7 半導體必背', desc:'n_i(T)、direct/indirect、pn、Hall', cards:[
+  { q:'本徵載子濃度 n_i 的溫度公式？\n為什麼指數上是 E_g/2？',
+    a:'<span class="eq">n_i ∝ T^{3/2}·e^{−E_g/(2k_BT)}</span>「2」的來源：n·p = (常數)·e^{−E_g/kT}（質量作用律），本徵時 n=p=n_i → 開根號分一半。\n・半導體導電 ↑ 隨 T：載子數指數成長壓過散射變差\n・金屬相反：n 固定、τ 變短 → 導電 ↓。',
+    use:'<b>考過：</b>2016（金屬 vs 半導體溫度趨勢）、2023（degenerate 判準的對照）。', yrs:'16·23', link:['單元教學 U7','單元教學/unit07_半導體.html'] },
+  { q:'direct gap 和 indirect gap 差在哪？\n吸收/發光過程有什麼不同？',
+    a:'・<b>direct</b>（GaAs）：導帶底與價帶頂在<b>同一個 k</b> → 光子（k≈0）可直接跨 → 吸收/發光強 → 雷射、LED。\n・<b>indirect</b>（Si、Ge）：兩者在不同 k → 跨越需<b>同時借聲子補動量</b>（三方過程）→ 效率低 → Si 不會發光。\n判斷句：光子動量 ≈ 0，動量差額只能由聲子出。',
+    use:'<b>考過：</b>2016（各舉例＋吸收過程）。', yrs:'16', link:['單元教學 U7','單元教學/unit07_半導體.html'] },
+  { q:'pn junction 的 built-in voltage 從哪來？\n圖像上發生了什麼？',
+    a:'接觸瞬間：n 側電子往 p 側擴散（濃度差），留下不可動的施體正離子/受體負離子 → 形成<b>空乏區與內建電場</b>，電場反過來擋住繼續擴散 → 平衡時兩側化學勢（Fermi level）拉平：\n<span class="eq">eV_bi = E_F(n) − E_F(p)（接觸前之差）\n≈ k_BT·ln(N_dN_a/n_i²)</span>能帶圖：整條能帶在空乏區<b>彎曲</b> eV_bi。',
+    use:'<b>考過：</b>2022（Si、N_d=N_a=10¹⁷ 完整計算＋畫電場分布）。', yrs:'22', link:['單元教學 U7','單元教學/unit07_半導體.html'] },
+  { q:'Hall 效應怎麼測出載子「正負」和「濃度」？',
+    a:'電流 j 沿 x、磁場 B 沿 z → Lorentz 力 qv×B 把載子往 y 推 → 側面堆電荷 → 橫向電壓 V_H。\n<span class="eq">R_H = E_y/(j_xB) = −1/(ne)（電子）；+1/(pe)（hole）</span>・<b>符號直接判定載子種類</b>（p 型半導體 R_H>0——hole 是真的可測的）\n・大小給濃度 n。',
+    use:'<b>考過：</b>2016（mobility 測量）；hole 實在性的標準論據。', yrs:'16', link:['單元教學 U7','單元教學/unit07_半導體.html'] },
+]},
+{ id:'u8', kind:'concept', name:'U8 磁性必背', desc:'Langevin、Curie、Landau level', cards:[
+  { q:'Langevin 順磁：M(H) 的推導骨架和結果？',
+    a:'N 個磁矩 m 在場 H 中，能量 U=−mH·cosθ，取向機率 ∝ e^{−U/kT}。對所有方向做 Boltzmann 平均：\n<span class="eq">M = Nm·L(α)，L(α)=cothα − 1/α，α=mH/k_BT</span>・弱場 α≪1：L≈α/3 → M ∝ H/T → <b>Curie law χ=C/T</b>\n・強場 α≫1：L→1 → 飽和 M=Nm。\n溫度是「亂」的來源、場是「齊」的來源，α 是兩者的比。',
+    use:'<b>考過：</b>2013（完整推導 20 分）、2025（T>T_C 鐵磁變順磁）。', yrs:'13·25', link:['Lab：Langevin','數學lab/lab_langevin.html'] },
+  { q:'Landau level 是什麼？\n能量公式與「磁通量子化」的關聯？',
+    a:'磁場 B 中電子做迴旋運動（頻率 ω_c=eB/m），量子力學把這個圓周運動諧振子化：\n<span class="eq">E_n = (n+½)ℏω_c</span>→ 原本連續的 k 平面（垂直 B 的分量）<b>塌縮成一圈圈分立的 Landau 環</b>。\n每個 level 容納的態數 ∝ B（磁通量子 Φ₀=h/e 決定）→ B 越強 level 越稀、越能裝。',
+    use:'<b>考過：</b>2018（20 分：磁場下 Fermi surface 的量子化，提示軌道磁通量子化）。', yrs:'18', link:['單元教學 U8','單元教學/unit08_磁性.html'] },
+]},
+{ id:'u9', kind:'concept', name:'U9 超導必背', desc:'Meissner、type I/II、vortex', cards:[
+  { q:'為什麼「Meissner 效應 ≠ 只是電阻為零」？',
+    a:'完美導體只保證 <b>dB/dt=0</b>（磁通凍結：先進場再冷卻，磁場留在體內）。\n超導體卻是 <b>B=0</b>：不管先冷卻還是先加場，<b>都主動把磁場排出去</b>——這是獨立於零電阻的熱力學平衡性質（表面屏蔽電流維持）。\n→ 超導是一個新的相，不是「很會導電的金屬」。',
+    use:'<b>考過：</b>2013（電性與磁性）；概念判斷題常客。', yrs:'13', link:['單元教學 U9','單元教學/unit09_超導.html'] },
+  { q:'type I 和 type II 超導體差在哪？\nvortex state 是什麼？',
+    a:'・<b>type I</b>：場到臨界值 H_c 前完全排斥，超過直接整塊變正常。\n・<b>type II</b>：兩個臨界場。H_c1<H<H_c2 之間進入 <b>vortex state</b>：磁場以<b>量子化磁通管（每管 Φ₀=h/2e）</b>穿過，管芯是正常態、<b>周圍仍然超導</b>。\n實用超導磁鐵（NbTi 等）全是 type II——能扛大場。',
+    use:'<b>考過：</b>2025（哪種允許磁場穿透成 vortex——type II）。', yrs:'25', link:['單元教學 U9','單元教學/unit09_超導.html'] },
+]},
+];
+
+/* ================= 狀態 ================= */
+const LS_KEY = 'ssp-cards-v1';
+let boxes = {};
+try { boxes = JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch (e) { boxes = {}; }
+function saveBoxes() { try { localStorage.setItem(LS_KEY, JSON.stringify(boxes)); } catch (e) {} }
+
+const ALL = [];
+DECKS.forEach(d => d.cards.forEach((c, i) => {
+  c.id = d.id + '-' + i; c.deck = d; ALL.push(c);
+}));
+
+let mode = 'study';      /* study | quiz */
+let filterId = 'all';    /* all | math | concept | deck id */
+let pool = [];           /* 目前牌池（有序） */
+let idx = 0;
+let flipped = false;
+
+function poolFor(fid) {
+  if (fid === 'all') return ALL.slice();
+  if (fid === 'math' || fid === 'concept') return ALL.filter(c => c.deck.kind === fid);
+  return ALL.filter(c => c.deck.id === fid);
+}
+function weightedShuffle(cards) {
+  /* 不熟優先：box0(沒看過)/box1 排最前，box2 次之，box3 墊底；同層內隨機 */
+  const rank = c => (boxes[c.id] || 0) >= 3 ? 2 : ((boxes[c.id] || 0) === 2 ? 1 : 0);
+  return cards.map(c => [c, rank(c) * 10 + Math.random()])
+              .sort((a, b) => a[1] - b[1]).map(x => x[0]);
+}
+function rebuild(keepIdx) {
+  pool = poolFor(filterId);
+  if (mode === 'quiz') pool = weightedShuffle(pool);
+  if (!keepIdx) idx = 0;
+  if (idx >= pool.length) idx = 0;
+  flipped = false;
+  render();
+}
+
+/* ================= 渲染 ================= */
+const fc = document.getElementById('fc');
+const gradebar = document.getElementById('gradebar');
+const BOXNAME = ['尚未看過', '😵 還不會', '🤔 模糊', '✅ 會了'];
+
+function tagsHTML(c) {
+  const kindCls = c.deck.kind === 'math' ? 'kind-math' : 'kind-concept';
+  const kindTxt = c.deck.kind === 'math' ? '數學從零' : '概念必背';
+  const b = boxes[c.id] || 0;
+  return `<span class="deck">${c.deck.name}</span><span class="${kindCls}">${kindTxt}</span>` +
+    (c.yrs && c.yrs !== '—' ? `<span class="yrs">考過 ${c.yrs}</span>` : '') +
+    `<span class="box">${BOXNAME[b]}</span>`;
+}
+function render() {
+  const total = pool.length;
+  const learned = pool.filter(c => (boxes[c.id] || 0) >= 3).length;
+  document.getElementById('progFill').style.width = total ? (100 * learned / total) + '%' : '0%';
+  document.getElementById('progText').textContent = `會了 ${learned} / ${total}`;
+  const fname = filterId === 'all' ? '全部' : filterId === 'math' ? '數學從零軌' :
+    filterId === 'concept' ? '概念必背軌' : DECKS.find(d => d.id === filterId).name;
+  document.getElementById('deckLabel').textContent = `牌池：${fname}`;
+  document.getElementById('posText').textContent = total ? `第 ${idx + 1} / ${total} 張` : '—';
+
+  if (!total) return;
+  const c = pool[idx];
+  document.getElementById('tagsF').innerHTML = tagsHTML(c);
+  document.getElementById('tagsB').innerHTML = tagsHTML(c);
+  document.getElementById('qText').innerHTML = c.q;
+  document.getElementById('aText').innerHTML = c.a;
+  document.getElementById('useText').innerHTML = c.use;
+  document.getElementById('linkRow').innerHTML =
+    (c.link ? `<a href="${c.link[1]}">🔗 ${c.link[0]}</a>` : '') +
+    `<a href="考古題/詳解/index.html">歷年詳解</a>`;
+  fc.classList.toggle('flipped', flipped);
+  gradebar.style.visibility = flipped ? 'visible' : 'hidden';
+  renderDecks();
+}
+function renderDecks() {
+  const grid = document.getElementById('deckGrid');
+  grid.innerHTML = '';
+  DECKS.forEach(d => {
+    const n = d.cards.length;
+    const g3 = d.cards.filter(c => (boxes[c.id] || 0) >= 3).length;
+    const g2 = d.cards.filter(c => (boxes[c.id] || 0) === 2).length;
+    const g1 = d.cards.filter(c => (boxes[c.id] || 0) === 1).length;
+    const el = document.createElement('div');
+    el.className = 'deckcard';
+    const kc = d.kind === 'math' ? 'var(--math)' : 'var(--concept)';
+    const kt = d.kind === 'math' ? '數學' : '概念';
+    el.innerHTML = `<div class="t"><span class="kindtag" style="background:${kc}">${kt}</span>${d.name}</div>
+      <div class="d">${d.desc}</div>
+      <div class="bar">
+        <i style="width:${100 * g3 / n}%;background:var(--good)"></i>
+        <i style="width:${100 * g2 / n}%;background:var(--mid)"></i>
+        <i style="width:${100 * g1 / n}%;background:var(--bad)"></i>
+      </div>
+      <div class="cnt">✅${g3} 🤔${g2} 😵${g1} ／ ${n} 張</div>`;
+    el.addEventListener('click', () => {
+      filterId = d.id; syncChips(); rebuild();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    grid.appendChild(el);
+  });
+}
+
+/* ================= 控制 ================= */
+document.getElementById('modes').querySelectorAll('button[data-mode]').forEach(b => {
+  b.addEventListener('click', () => {
+    mode = b.dataset.mode;
+    document.querySelectorAll('#modes button[data-mode]').forEach(x => x.classList.toggle('on', x === b));
+    rebuild();
+  });
+});
+const CHIP_DEFS = [['all', '全部'], ['math', '🧮 數學從零'], ['concept', '📌 概念必背']];
+const chipsDiv = document.getElementById('chips');
+CHIP_DEFS.forEach(([id, name]) => {
+  const b = document.createElement('button');
+  const n = poolFor(id).length;
+  b.innerHTML = `${name}<span class="n">${n}</span>`;
+  b.dataset.f = id;
+  if (id === 'all') b.classList.add('on');
+  b.addEventListener('click', () => { filterId = id; syncChips(); rebuild(); });
+  chipsDiv.appendChild(b);
+});
+const sel = document.createElement('select');
+sel.className = 'deckpick';
+sel.innerHTML = `<option value="">— 指定牌組 —</option>` +
+  DECKS.map(d => `<option value="${d.id}">${d.name}（${d.cards.length}）</option>`).join('');
+sel.addEventListener('change', () => { if (sel.value) { filterId = sel.value; syncChips(); rebuild(); } });
+chipsDiv.appendChild(sel);
+function syncChips() {
+  chipsDiv.querySelectorAll('button').forEach(x => x.classList.toggle('on', x.dataset.f === filterId));
+  sel.value = (filterId in DECKS.reduce((m, d) => (m[d.id] = 1, m), {})) ? filterId : '';
+}
+
+fc.addEventListener('click', () => { flipped = !flipped; render(); });
+function grade(g) {
+  if (!flipped || !pool.length) return;
+  boxes[pool[idx].id] = g; saveBoxes();
+  next();
+}
+gradebar.querySelector('.g1').addEventListener('click', e => { e.stopPropagation(); grade(1); });
+gradebar.querySelector('.g2').addEventListener('click', e => { e.stopPropagation(); grade(2); });
+gradebar.querySelector('.g3').addEventListener('click', e => { e.stopPropagation(); grade(3); });
+function next() { if (!pool.length) return; idx = (idx + 1) % pool.length; flipped = false; render(); }
+function prev() { if (!pool.length) return; idx = (idx - 1 + pool.length) % pool.length; flipped = false; render(); }
+document.getElementById('nextBtn').addEventListener('click', next);
+document.getElementById('prevBtn').addEventListener('click', prev);
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (confirm('清除所有卡片的熟練度紀錄？')) { boxes = {}; saveBoxes(); render(); }
+});
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT') return;
+  if (e.code === 'Space' || e.code === 'Enter') { e.preventDefault(); flipped = !flipped; render(); }
+  else if (e.key === '1') grade(1);
+  else if (e.key === '2') grade(2);
+  else if (e.key === '3') grade(3);
+  else if (e.key === 'ArrowRight') next();
+  else if (e.key === 'ArrowLeft') prev();
+});
+
+rebuild();
+</script>
+</body>
+</html>

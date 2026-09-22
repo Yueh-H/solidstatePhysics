@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模擬④ 費米–狄拉克 / DOS</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 模擬首頁</a>
+  <a href="sim_nfe_gap.html">③ NFE</a>
+  <a class="here" href="sim_fermi_dos.html">④ FD/DOS</a>
+  <a href="sim_semiconductor.html">⑥ 半導體</a>
+  <a href="../單元教學/unit05_自由電子費米氣體.html">unit05</a>
+</div>
+
+<h1>④ 費米–狄拉克分佈 ＋ 能態密度（DOS）</h1>
+<p class="intro">
+  調溫度 T 與化學勢 μ（≈E_F 低溫）看 f(E)。
+  右側示意 3D 自由電子 DOS g(E)∝√E 與占據 g(E)f(E)。
+  電子熱容來自費米面附近 ~kT 窗口的激發 → <b>C_el = γ T</b>。
+</p>
+
+<div class="layout">
+  <div class="panel">
+    <h2>參數</h2>
+    <div class="control">
+      <label>溫度 T (E_F 單位) <span class="val" data-for="T">0.08</span></label>
+      <input id="T" type="range" min="0.005" max="0.6" step="0.005" value="0.08" data-digits="3">
+      <div class="hint">T→0：f 變成階梯；T 升高：窗口變寬</div>
+    </div>
+    <div class="control">
+      <label>化學勢 μ / E_F <span class="val" data-for="mu">1</span></label>
+      <input id="mu" type="range" min="0.4" max="1.4" step="0.01" value="1" data-digits="2">
+      <div class="hint">固定粒子數時 μ 會隨 T 微降；此處獨立調以便觀察</div>
+    </div>
+    <div class="control">
+      <label>維度（DOS 形狀） <span class="val" data-for="dim">3</span></label>
+      <input id="dim" type="range" min="1" max="3" step="1" value="3" data-digits="0">
+      <div class="hint">1D ∝ E^{−1/2}；2D 常數；3D ∝ √E</div>
+    </div>
+
+    <div class="formula">
+      <span class="eq">f(E) = 1 / [ exp((E−μ)/kT) + 1 ]</span>
+      <span class="eq">g_3D(E) ∝ √E ， g_2D 常數， g_1D ∝ 1/√E</span>
+      <span class="eq">C_el ≈ (π²/3) g(E_F) k_B² T  ≡ γ T</span>
+      <span class="eq">只有 |E−E_F| ≲ few kT 的態能被熱激發</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="plot-wrap"><svg id="plot"></svg></div>
+    <div class="legend">
+      <span style="color:#1a4d7c">f(E)</span>
+      <span style="color:#1e7a46">g(E)（歸一）</span>
+      <span style="color:#c0392b">g(E)f(E) 占據</span>
+    </div>
+    <div class="kpi" id="kpi"></div>
+    <div class="readout" id="readout"></div>
+  </div>
+</div>
+
+<footer>能量以 E_F=1 為單位；k_B=1。γ 的數值係示意比例，強調 ∝ T 與 g(E_F)。</footer>
+<script src="shared.js"></script>
+<script>
+(function () {
+  const plot = new SSP.Plot2D(document.getElementById("plot"), {
+    width: 680, height: 430,
+    xDomain: [0, 2.2],
+    yDomain: [0, 1.15],
+    xLabel: "E / E_F",
+    yLabel: "f · g (arb.)",
+  });
+
+  const R = SSP.bindAll(["T", "mu", "dim"], redraw);
+
+  function fFD(E, mu, T) {
+    if (T < 1e-6) return E < mu ? 1 : E === mu ? 0.5 : 0;
+    const x = (E - mu) / T;
+    if (x > 40) return 0;
+    if (x < -40) return 1;
+    return 1 / (Math.exp(x) + 1);
+  }
+
+  function gDOS(E, dim) {
+    if (E <= 0) return dim === 1 ? 50 : 0;
+    if (dim === 3) return Math.sqrt(E);           // ∝ √E
+    if (dim === 2) return 1;                      // const
+    return 1 / Math.sqrt(E);                      // ∝ E^{-1/2}
+  }
+
+  function redraw() {
+    const T = R.T(), mu = R.mu(), dim = Math.round(R.dim());
+    const Es = SSP.linspace(0.001, 2.2, 280);
+    // normalize g so max in window ~ 1 for display
+    let gmax = 0;
+    Es.forEach((E) => { gmax = Math.max(gmax, gDOS(E, dim)); });
+    const ptsF = [], ptsG = [], ptsOcc = [];
+    Es.forEach((E) => {
+      const f = fFD(E, mu, T);
+      const g = gDOS(E, dim) / (gmax || 1);
+      ptsF.push([E, f]);
+      ptsG.push([E, g * 0.9]);
+      ptsOcc.push([E, g * 0.9 * f]);
+    });
+
+    plot.setDomains([0, 2.2], [0, 1.15]);
+    plot.clear();
+    plot.vline(mu, { stroke: "#c47a12", dash: "4 3" });
+    plot.label(mu + 0.03, 1.08, "μ", { fill: "#c47a12", "font-size": 12, "font-weight": 700 });
+
+    // thermal window band
+    const lo = Math.max(0, mu - 2 * T), hi = Math.min(2.2, mu + 2 * T);
+    plot.fillBetween([[lo, 0], [hi, 0]], [[lo, 1.15], [hi, 1.15]], {
+      fill: "rgba(196,122,18,0.08)",
+    });
+
+    plot.polyline(ptsG, { stroke: "#1e7a46", width: 1.8, dash: "4 3" });
+    plot.polyline(ptsOcc, { stroke: "#c0392b", width: 2.4 });
+    plot.polyline(ptsF, { stroke: "#1a4d7c", width: 2.6 });
+
+    // proxy for γ ∝ g(EF) and C = γT
+    const gEF = gDOS(Math.max(mu, 1e-6), dim);
+    const gamma = gEF; // relative
+    const Cel = gamma * T;
+    // "excited fraction" rough: integral weight in window
+    let excited = 0;
+    Es.forEach((E) => {
+      const f = fFD(E, mu, T);
+      excited += gDOS(E, dim) * f * (1 - f);
+    });
+
+    document.getElementById("kpi").innerHTML = `
+      <div class="box"><div class="k">kT / E_F</div><div class="v">${SSP.fmt(T, 3)}</div></div>
+      <div class="box"><div class="k">g(μ) 相對</div><div class="v">${SSP.fmt(gEF, 3)}</div></div>
+      <div class="box"><div class="k">γ ∝ g(E_F)</div><div class="v">${SSP.fmt(gamma, 3)}</div></div>
+      <div class="box"><div class="k">C_el ∼ γT</div><div class="v">${SSP.fmt(Cel, 3)}</div></div>`;
+
+    const dimName = { 1: "1D ∝ E^{−1/2}", 2: "2D 常數", 3: "3D ∝ √E" }[dim];
+    document.getElementById("readout").innerHTML = `
+      <strong>你應該看到</strong>
+      <ul>
+        <li>藍線 f(E)：T 很小時是 μ 處的硬階梯；升溫後在 μ 附近變斜。</li>
+        <li>橘帶 ≈ 熱窗口 |E−μ|≲2kT——只有這裡的電子能被激發、貢獻熱容。</li>
+        <li>綠虛線 DOS（${dimName}）；紅線 = 占據譜 g f。</li>
+        <li>C_el∼γT 隨 T <b>線性</b>：因為可激發態數目 ∝ g(E_F)·kT，每個帶能量 ~kT → 總能 ∝ T² → C=dU/dT∝T。</li>
+        <li>把 T 拉大：窗口變寬、C_el 讀數上升；把 dim 改 2/1 看 DOS 形狀。</li>
+      </ul>`;
+  }
+
+  redraw();
+})();
+</script>
+</body>
+</html>

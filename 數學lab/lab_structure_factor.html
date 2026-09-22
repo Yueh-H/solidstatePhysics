@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab ③ 結構因子與消光</title>
+<link rel="stylesheet" href="../模擬/shared.css">
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 數學 Lab</a>
+  <a href="lab_packing.html">② packing</a>
+  <a class="here" href="lab_structure_factor.html">③ 結構因子</a>
+  <a href="lab_dispersion.html">④ 色散</a>
+</div>
+
+<h1>③ 結構因子 Structure factor 與消光</h1>
+<div class="goal">
+  <strong>S = Σ fⱼ exp(iG·dⱼ)</strong>。用<strong>相位向量相加模擬</strong>看消光；附 bcc/fcc 計算範例。
+</div>
+<div class="lab-progress" id="progress"></div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 1</span>定義</h3>
+  <div class="eqbox">S_{hkl} = Σ_j f_j exp[2πi(hx_j+ky_j+ℓz_j)]</div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A · 單原子 sc</div>只有 (0,0,0) → S=f，永不消光（強度可仍弱）。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>峰位由 G（lattice）定；S=0 則該峰消失。</div>
+    <div class="ex-card"><div class="ex-h">範例 C · NaCl</div>兩種 f 不同：即使「像 fcc 規則」也可能弱峰而非全消。</div>
+  </div>
+  <div class="blank-row">
+    <span>S=0 時該 (hkl)</span>
+    <input id="s1" type="text" data-answers="消失|消光|沒有|absence|extinct|zero|不可見" placeholder="？">
+    <button type="button" data-check="s1" data-answers="消失|消光|沒有|absence|extinct|zero|不可見">檢查</button>
+    <div class="fb" id="s1Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 2</span>bcc + 相位模擬</h3>
+  <div class="eqbox">S = f[1 + (−1)^{h+k+ℓ}]</div>
+  <div class="viz-panel">
+    <div class="viz-title">互動：選 (hkl) → 兩個散射振幅向量是否相消</div>
+    <svg id="vizSF" viewBox="0 0 520 280"></svg>
+    <div class="viz-controls">
+      <div>
+        <label>h <span class="v" data-val="hS">1</span></label>
+        <input id="hS" type="range" min="0" max="3" step="1" value="1" data-digits="0">
+      </div>
+      <div>
+        <label>k <span class="v" data-val="kS">1</span></label>
+        <input id="kS" type="range" min="0" max="3" step="1" value="1" data-digits="0">
+      </div>
+      <div>
+        <label>ℓ <span class="v" data-val="lS">0</span></label>
+        <input id="lS" type="range" min="0" max="3" step="1" value="0" data-digits="0">
+      </div>
+    </div>
+    <div class="viz-kpi" id="sfKpi"></div>
+    <p class="note-tip">藍 = 原子 (000) 相位 0；紅 = (½½½) 相位 π(h+k+ℓ)。和為 0 ⇒ 消光。</p>
+  </div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A · (100)</div>h+k+ℓ=1 奇 → S=0。bcc 看不到 (100)。</div>
+    <div class="ex-card"><div class="ex-h">範例 B · (110)</div>1+1+0=2 偶 → S=2f，可見。</div>
+    <div class="ex-card"><div class="ex-h">範例 C · (200)</div>偶 → 可見。考古常比對 bcc/fcc 的 (110)。</div>
+  </div>
+  <div class="choice-row">
+    <span style="width:100%">h+k+ℓ 奇時 S=</span>
+    <button type="button" data-choice="1" data-okmsg="✓ 消光">0</button>
+    <button type="button" data-choice="0">2f</button>
+    <button type="button" data-choice="0">f</button>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 3</span>fcc 規則</h3>
+  <div class="eqbox">全奇或全偶 → S=4f；混奇偶 → S=0</div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A · (111)</div>全奇 → 可見（鑽石/半導體常見強峰）。</div>
+    <div class="ex-card"><div class="ex-h">範例 B · (110)</div>混 → 消光。對照 bcc (110) 可見。</div>
+    <div class="ex-card"><div class="ex-h">範例 C · (200)</div>全偶 → 可見。</div>
+  </div>
+  <div class="blank-row">
+    <span>fcc 的 (110) 可見？</span>
+    <input id="s3" type="text" data-answers="否|不可見|消失|no|0|不能" placeholder="是/否">
+    <button type="button" data-check="s3" data-answers="否|不可見|消失|no|0|不能">檢查</button>
+    <div class="fb" id="s3Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 4</span>相位相消圖像</h3>
+  <div class="viz-panel">
+    <div class="viz-title">兩個等長向量：夾角 φ 時 |合| = 2 cos(φ/2)（示意）</div>
+    <svg id="vizPhase" viewBox="0 0 520 260"></svg>
+    <div class="viz-controls">
+      <div>
+        <label>相位差 φ（度） <span class="v" data-val="phiS">180</span>°</label>
+        <input id="phiS" type="range" min="0" max="180" step="5" value="180" data-digits="0" data-suffix="°">
+      </div>
+    </div>
+    <div class="viz-kpi" id="phaseKpi"></div>
+  </div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>φ=0 → 建設性，|S| 最大。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>φ=180° → 完全相消。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>多原子 = 多邊形向量封閉則消光。</div>
+  </div>
+  <div class="blank-row">
+    <span>消光本質是</span>
+    <input id="s4" type="text" data-answers="相位相消|干涉相消|destructive|相消干涉|向量和為0|相消" placeholder="？">
+    <button type="button" data-check="s4" data-answers="相位相消|干涉相消|destructive|相消干涉|向量和為0|相消">檢查</button>
+    <div class="fb" id="s4Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 5</span>位置 vs 強度</h3>
+  <table class="tiny">
+    <tr><th>誰決定</th><th>物理量</th></tr>
+    <tr><td>峰位置</td><td>lattice → G</td></tr>
+    <tr><td>峰有無／相對強度</td><td>basis → S_G、原子 f</td></tr>
+  </table>
+  <div class="choice-row">
+    <span style="width:100%">峰位主要由誰定？</span>
+    <button type="button" data-choice="1" data-okmsg="✓ Bravais lattice">lattice</button>
+    <button type="button" data-choice="0">只有 basis</button>
+    <button type="button" data-choice="0">只有溫度</button>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="done-banner" id="doneBanner">
+  <h3>完成</h3>
+  <p><a href="lab_dispersion.html">④ 色散</a> · <a href="../模擬/sim_bragg_ewald.html">Ewald</a></p>
+</div>
+<div class="nav-steps">
+  <button type="button" id="btnPrev">← 上一步</button>
+  <button type="button" id="btnNext" class="primary">下一步 →</button>
+  <button type="button" id="btnReveal">一次展開全部</button>
+  <span class="meta" id="stepMeta"></span>
+</div>
+<footer>Lab ③ · 結構因子相位模擬</footer>
+<script src="lab.js"></script>
+<script src="viz.js"></script>
+<script>
+new MathLab.StepLab({});
+(function () {
+  const svg = document.getElementById("vizSF");
+  const rh = LabViz.bindRange("hS", draw);
+  const rk = LabViz.bindRange("kS", draw);
+  const rl = LabViz.bindRange("lS", draw);
+  function draw() {
+    const h = Math.round(rh()), k = Math.round(rk()), l = Math.round(rl());
+    const sum = h + k + l;
+    const even = sum % 2 === 0;
+    const S = even ? 2 : 0;
+    LabViz.clear(svg);
+    svg.setAttribute("viewBox", "0 0 520 280");
+    LabViz.el(svg, "rect", { x: 0, y: 0, width: 520, height: 280, fill: "#fcfdff" });
+    LabViz.el(svg, "text", { x: 16, y: 24, fill: "#1a4d7c", "font-size": 13, "font-weight": 700 },
+      `bcc  (${h}${k}${l})  ·  h+k+ℓ=${sum}  ·  ${even ? "偶 → 可見" : "奇 → 消光"}`);
+    const ox = 200, oy = 150, L = 90;
+    // atom1 phase 0 → right
+    LabViz.arrow(svg, ox, oy, ox + L, oy, "#1a4d7c", "f e^{0}");
+    // atom2 phase π*sum
+    const phase = Math.PI * sum;
+    const x2 = ox + L * Math.cos(phase);
+    const y2 = oy - L * Math.sin(phase);
+    LabViz.arrow(svg, ox, oy, x2, y2, "#c0392b", "f e^{iπ(h+k+ℓ)}");
+    // sum
+    const sx = ox + L + L * Math.cos(phase);
+    const sy = oy - L * Math.sin(phase);
+    LabViz.el(svg, "line", {
+      x1: ox, y1: oy, x2: sx, y2: sy,
+      stroke: "#1e7a46", "stroke-width": 3, "stroke-dasharray": even ? "0" : "4 3",
+    });
+    LabViz.el(svg, "circle", { cx: sx, cy: sy, r: 5, fill: "#1e7a46" });
+    LabViz.el(svg, "text", { x: 320, y: 100, fill: "#1e7a46", "font-size": 13, "font-weight": 700 },
+      `|S| ∝ ${S}f`);
+    document.getElementById("sfKpi").innerHTML =
+      `<span>(hkl)=<b>${h}${k}${l}</b></span>` +
+      `<span>h+k+ℓ=<b>${sum}</b> ${even ? "偶" : "奇"}</span>` +
+      `<span>S=<b>${S}f</b> ${S === 0 ? "消光" : "可見"}</span>`;
+  }
+  draw();
+})();
+(function () {
+  const svg = document.getElementById("vizPhase");
+  const rphi = LabViz.bindRange("phiS", draw);
+  function draw() {
+    const deg = rphi();
+    const phi = (deg * Math.PI) / 180;
+    const L = 100;
+    const ox = 180, oy = 140;
+    LabViz.clear(svg);
+    svg.setAttribute("viewBox", "0 0 520 260");
+    LabViz.el(svg, "rect", { x: 0, y: 0, width: 520, height: 260, fill: "#fcfdff" });
+    LabViz.arrow(svg, ox, oy, ox + L, oy, "#1a4d7c", "A₁");
+    const x2 = ox + L * Math.cos(phi);
+    const y2 = oy - L * Math.sin(phi);
+    LabViz.arrow(svg, ox, oy, x2, y2, "#c0392b", "A₂");
+    const sx = ox + L + L * Math.cos(phi);
+    const sy = oy - L * Math.sin(phi);
+    LabViz.el(svg, "line", {
+      x1: ox, y1: oy, x2: sx, y2: sy,
+      stroke: "#1e7a46", "stroke-width": 3,
+    });
+    LabViz.el(svg, "circle", { cx: sx, cy: sy, r: 5, fill: "#1e7a46" });
+    const mag = 2 * Math.cos(phi / 2);
+    LabViz.el(svg, "text", { x: 320, y: 80, fill: "#234", "font-size": 13 },
+      `|A₁+A₂| / |A| = ${LabViz.fmt(Math.abs(mag), 3)}`);
+    LabViz.el(svg, "text", { x: 320, y: 105, fill: "#567", "font-size": 12 },
+      deg === 180 ? "完全相消" : deg === 0 ? "完全建設" : "部分干涉");
+    document.getElementById("phaseKpi").innerHTML =
+      `<span>φ=<b>${deg}°</b></span>` +
+      `<span>相對合振幅 <b>${LabViz.fmt(Math.abs(mag), 3)}</b></span>`;
+  }
+  draw();
+})();
+</script>
+</body>
+</html>

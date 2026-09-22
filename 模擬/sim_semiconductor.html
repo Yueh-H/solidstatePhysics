@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模擬⑥ 半導體載子</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 模擬首頁</a>
+  <a href="sim_fermi_dos.html">④ FD</a>
+  <a class="here" href="sim_semiconductor.html">⑥ 半導體</a>
+  <a href="sim_langevin_curie.html">⑦ 磁性</a>
+  <a href="../單元教學/unit07_半導體.html">unit07</a>
+</div>
+
+<h1>⑥ 半導體載子濃度：本質 vs 外質</h1>
+<p class="intro">
+  本質載子 n_i ∝ T^{3/2} exp(−E_g / 2kT)。
+  n 型摻雜 N_d 時，低溫～中溫 n ≈ N_d（外質區），高溫被 n_i 超越（本質區）。
+  圖為 log n–1/T 示意（Arrhenius 味）。
+</p>
+
+<div class="layout">
+  <div class="panel">
+    <h2>參數</h2>
+    <div class="control">
+      <label>能隙 E_g (eV) <span class="val" data-for="Eg">1.1</span></label>
+      <input id="Eg" type="range" min="0.2" max="2.5" step="0.05" value="1.1" data-digits="2">
+      <div class="hint">Si≈1.1 eV；愈大 n_i 愈小</div>
+    </div>
+    <div class="control">
+      <label>施主濃度 N_d (cm⁻³ 對數) <span class="val" data-for="logNd">16</span></label>
+      <input id="logNd" type="range" min="13" max="18" step="0.1" value="16" data-digits="1">
+      <div class="hint">N_d = 10^{logNd}；0 可視為未摻雜極限請拉到 13 並看 ni</div>
+    </div>
+    <div class="control">
+      <label>目前溫度 T (K) <span class="val" data-for="T">300</span></label>
+      <input id="T" type="range" min="80" max="800" step="5" value="300" data-digits="0">
+    </div>
+    <div class="control">
+      <label>預因子 log10(n0) <span class="val" data-for="logN0">19.4</span></label>
+      <input id="logN0" type="range" min="18" max="20" step="0.05" value="19.4" data-digits="2">
+      <div class="hint">n_i = n0 (T/300)^{3/2} exp(−Eg/2kT)；n0=10^{logN0} 示意有效 DOS 積</div>
+    </div>
+
+    <div class="formula">
+      <span class="eq">n_i(T) = n0 (T/300)^{3/2} exp(−E_g / 2 k_B T)</span>
+      <span class="eq">n 型（完全電離近似）：n ≈ ½ N_d + √[ (N_d/2)² + n_i² ]</span>
+      <span class="eq">p = n_i² / n ， 高 T：n ≈ n_i（本質）</span>
+      <span class="eq">k_B = 8.617×10⁻⁵ eV/K</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="plot-wrap"><svg id="plot"></svg></div>
+    <div class="legend">
+      <span style="color:#1a4d7c">n(T) 電子濃度</span>
+      <span style="color:#1e7a46">n_i(T) 本質</span>
+      <span style="color:#c47a12">N_d 施主</span>
+    </div>
+    <div class="kpi" id="kpi"></div>
+    <div class="readout" id="readout"></div>
+  </div>
+</div>
+
+<footer>忽略凍結區（freeze-out）細結構與補償；重點在「外質平台 vs 本質指數上升」。</footer>
+<script src="shared.js"></script>
+<script>
+(function () {
+  const plot = new SSP.Plot2D(document.getElementById("plot"), {
+    width: 680, height: 430,
+    xDomain: [1, 8],
+    yDomain: [10, 20],
+    xLabel: "1000 / T  (K⁻¹)",
+    yLabel: "log10(n)  [cm⁻³]",
+  });
+
+  const kB = 8.617333262145e-5; // eV/K
+  const R = SSP.bindAll(["Eg", "logNd", "T", "logN0"], redraw);
+
+  function ni(T, Eg, n0) {
+    return n0 * Math.pow(T / 300, 1.5) * Math.exp(-Eg / (2 * kB * T));
+  }
+  function nType(T, Eg, Nd, n0) {
+    const i = ni(T, Eg, n0);
+    return 0.5 * Nd + Math.sqrt(Math.pow(0.5 * Nd, 2) + i * i);
+  }
+
+  function redraw() {
+    const Eg = R.Eg(), logNd = R.logNd(), T0 = R.T(), n0 = Math.pow(10, R.logN0());
+    const Nd = Math.pow(10, logNd);
+
+    // T from 80 to 900
+    const Ts = SSP.linspace(90, 900, 200);
+    const ptsN = [], ptsNi = [], ptsNd = [];
+    let yMin = 30, yMax = 5;
+    Ts.forEach((T) => {
+      const x = 1000 / T;
+      const n = nType(T, Eg, Nd, n0);
+      const i = ni(T, Eg, n0);
+      const ln = Math.log10(Math.max(n, 1e-30));
+      const li = Math.log10(Math.max(i, 1e-30));
+      ptsN.push([x, ln]);
+      ptsNi.push([x, li]);
+      ptsNd.push([x, logNd]);
+      yMin = Math.min(yMin, ln, li, logNd);
+      yMax = Math.max(yMax, ln, li, logNd);
+    });
+    yMin = Math.floor(yMin - 0.3);
+    yMax = Math.ceil(yMax + 0.3);
+
+    plot.setDomains([1000 / 900, 1000 / 90], [yMin, yMax]);
+    plot.clear();
+    plot.polyline(ptsNd, { stroke: "#c47a12", width: 1.6, dash: "5 4" });
+    plot.polyline(ptsNi, { stroke: "#1e7a46", width: 2.2, dash: "4 3" });
+    plot.polyline(ptsN, { stroke: "#1a4d7c", width: 2.7 });
+
+    const x0 = 1000 / T0;
+    const nNow = nType(T0, Eg, Nd, n0);
+    const niNow = ni(T0, Eg, n0);
+    const pNow = (niNow * niNow) / nNow;
+    plot.vline(x0, { stroke: "#c0392b", dash: "3 3" });
+    plot.circle(x0, Math.log10(nNow), 5, { fill: "#c0392b" });
+
+    const regime = nNow < 1.3 * Nd && niNow < 0.3 * Nd ? "外質區（n≈N_d 平台）" :
+      niNow > 0.7 * nNow ? "本質區（n≈n_i）" : "過渡區";
+
+    document.getElementById("kpi").innerHTML = `
+      <div class="box"><div class="k">T</div><div class="v">${SSP.fmt(T0, 0)} K</div></div>
+      <div class="box"><div class="k">n_i</div><div class="v">${niNow.toExponential(2)}</div></div>
+      <div class="box"><div class="k">n</div><div class="v">${nNow.toExponential(2)}</div></div>
+      <div class="box"><div class="k">p = n_i²/n</div><div class="v">${pNow.toExponential(2)}</div></div>`;
+
+    document.getElementById("readout").innerHTML = `
+      <strong>你應該看到 · 目前：${regime}</strong>
+      <ul>
+        <li>橫軸 1000/T：右 = 低溫，左 = 高溫。</li>
+        <li>綠虛線 n_i：斜率由 E_g/2k_B 決定——E_g 愈大，低溫 n_i 掉愈深。</li>
+        <li>橘線 N_d：外質平台高度。藍線 n 在中溫貼橘線，高溫貼綠線。</li>
+        <li>紅豎線 = 你選的 T。試：升溫直到藍線離開平台；或加大 E_g 看本質區更難到達。</li>
+        <li>n p = n_i² 永遠成立（非簡併、熱平衡）。</li>
+      </ul>`;
+  }
+
+  redraw();
+})();
+</script>
+</body>
+</html>

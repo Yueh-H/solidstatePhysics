@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kittel 章節導讀 — Kittel 第7章 — 能帶（Energy Bands）</title>
+<script>
+window.MathJax = {
+  loader: { load: ['[tex]/boldsymbol'] },
+  tex: { packages: {'[+]': ['boldsymbol']}, inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true, tags: 'none' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1.2em 4em; line-height: 1.75; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #1a4d7c; margin-top: 1.6em; line-height: 1.35; }
+  h1 { border-bottom: 3px solid #1a4d7c; padding-bottom: 0.3em; }
+  h2 { border-bottom: 1px solid #999; padding-bottom: 0.2em; }
+  h3 { color: #2b6ca0; }
+  h4 { color: #2b6ca0; }
+  blockquote { border-left: 4px solid #6aa1d6; background: #eef5fb; margin: 0.8em 0; padding: 0.6em 1em; color: #334; border-radius: 4px; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.92em; }
+  pre { background: #f5f5f5; padding: 1em; overflow-x: auto; border-radius: 6px; border: 1px solid #ddd; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fff; padding: 4px; }
+  table { border-collapse: collapse; margin: 1em 0; overflow-x: auto; display: block; }
+  th, td { border: 1px solid #bbb; padding: 6px 12px; text-align: left; }
+  th { background: #e8eef4; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 2.5em 0; }
+  #loading { text-align: center; padding: 3em; color: #888; font-size: 1.1em; }
+  details { background: #f7fafd; border: 1px solid #c5d5e5; border-radius: 8px; padding: 0.5em 1em; margin: 0.6em 0; }
+  details[open] { background: #fff; border-color: #6aa1d6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  summary { cursor: pointer; padding: 0.4em 0; color: #1a4d7c; font-size: 1.05em; user-select: none; }
+  summary:hover { color: #2b6ca0; }
+  .MathJax_Display, mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  details[open] > :not(summary) { animation: fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .nav { font-size: 0.92em; margin: 0 0 1em; color: #555; }
+  .nav a { color: #1a4d7c; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">章節導讀目錄</a> &nbsp;·&nbsp; <a href="../Kittel_翻譯.html">完整翻譯</a> &nbsp;·&nbsp; <a href="../../單元教學/index.html">🎓 單元學科</a> &nbsp;·&nbsp; <a href="../../考古題/詳解/index.html">逐題詳解</a></div>
+<div id="loading">載入中… 正在渲染數學式</div>
+<div id="content" style="display:none;"></div>
+<script id="md-source" type="text/markdown">
+<!-- Kittel 章節導讀：第7章 能帶（Energy Bands） -->
+
+# Kittel 第7章 對照導讀 — 能帶（Energy Bands）
+
+> **這頁是什麼**：讀 Kittel 這一章時的對照地圖——概念橋（高中→大學→固態）＋術語速查。完整課文見 [Kittel 翻譯本對應章節](../Kittel_翻譯.html)；想看完整推導與考題，見 [單元教學 unit06](../../單元教學/unit06_能帶與Bloch電子.html)。
+
+## 🗺️ 這一章在講什麼（白話）
+
+上一章把電子當「完全自由」，能量從 0 連續到無限大。**這章只加一件事：讓電子感受到離子核的「週期性」勢場**，結果冒出全新性質——**能隙（energy gap）**。能隙的有無，直接決定一個固體是金屬、半導體、半金屬還是絕緣體。
+
+主線順序（對齊 Kittel 節次）：
+
+1. **近自由電子模型**（nearly free electron model）：把週期勢當成微小擾動，幾乎能定性回答金屬電子的所有問題。
+2. **能隙的起源**：在布里淵區邊界 $k=\pm\pi/a$，電子波發生布拉格反射（Bragg reflection），形成駐波；兩種駐波（堆在離子上 / 堆在離子間）能量差就是能隙。
+3. **布洛赫函數與布洛赫定理**（Bloch theorem）：週期勢下的解必為「平面波 × 晶格週期函數」。
+4. **克羅寧–潘尼模型**（Kronig–Penney model）：可解的方勢阱例子，看清能帶與能隙怎麼長出來。
+5. **中心方程**（central equation）：把微分方程改寫成 $\mathbf k$ 空間裡的代數方程組。
+6. **空晶格近似、能帶邊界附近的解**：把自由電子能帶折回第一布里淵區，看能隙大小 $=2|U_G|$。
+7. **能帶中的軌域數、金屬與絕緣體**：每個原胞每能帶提供 $2N$ 個軌域，由「每原胞價電子數」奇偶判定金屬/絕緣體。
+
+> 一句話總結：**週期勢 → 布拉格反射 → 駐波 → 能隙；能帶填滿與否（看每原胞價電子數的奇偶）→ 金屬還是絕緣體。**
+
+## 🌉 概念三層對應表（高中 → 大學普物 → 本章固態物理）
+
+| 高中你學過的 | 大學普物的版本 | 本章固態物理變成 |
+|---|---|---|
+| 波的反射、駐波（兩端固定的弦） | 平面波 $e^{ikx}$、疊加成駐波 | 布拉格反射在 $k=\pm\pi/a$ 把右行波變左行波 → 駐波 $\psi(\pm)$ |
+| 週期性圖案（壁紙、晶體排列） | 傅立葉級數展開週期函數 | 週期勢 $U(x)=\sum_G U_G\,e^{iGx}$（用倒格向量 $G$ 展開） |
+| 自由電子能量 $\propto v^2$ | 色散 $\varepsilon=\dfrac{\hbar^2k^2}{2m}$（拋物線） | 拋物線在 $k=\pm\pi/a$ 被「撬開」成能帶＋能隙 $E_g$ |
+| 機率＝有利／全部 | 波函數機率密度 $\rho=|\psi|^2$ | $|\psi(+)|^2\propto\cos^2\!\tfrac{\pi x}{a}$ 堆在離子上、$|\psi(-)|^2\propto\sin^2$ 堆在離子間 |
+| 「軌道只能站 2 電子」 | 包立不相容原理 | 每能帶 $2N$ 個軌域（$N$ = 原胞數，×2 自旋） |
+| 整數倍規律（n 倍） | 量子數 $n$ | 每原胞每能帶恰好 1 個獨立 $k$ 值；偶數價電子 → 可填滿 → 絕緣體 |
+| $F=ma$ 裡的質量 | 牛頓第二定律 | 有效質量 $m^*$ 可大、可小、甚至為負（解釋 $R_H>0$） |
+
+## 🔑 專有名詞 × 範例（速查）
+
+<details>
+<summary><b>▸ 能帶 / 能隙（energy band / energy gap, $E_g$）</b></summary>
+
+**白話**：允許電子存在的能量區間叫能帶；中間「沒有波狀解」的禁區叫能隙（帶隙）。
+**高中接點**：原子能階是一條條線；固體裡這些線拓寬成「帶」，帶與帶之間有空隙。
+**定義**：能隙是「不存在布洛赫解」的能量範圍；一維中 $E_g=2|U_G|$（晶體勢的傅立葉分量大小的兩倍）。
+**範例**：矽（Si）能隙約 1.1 eV → 半導體；好絕緣體電阻率可達 $10^{22}\,\Omega\cdot\mathrm{cm}$，好金屬可低至 $10^{-10}$，跨度 $10^{32}$。
+**在 Kittel 哪裡**：章首、「能隙的起源」「能隙的大小」節，圖 1、圖 2。
+</details>
+
+<details>
+<summary><b>▸ 近自由電子模型（nearly free electron model）</b></summary>
+
+**白話**：把離子核的週期勢當「很小的擾動」，從自由電子出發微調。
+**高中接點**：先算簡單情形，再加小修正——逐次逼近的精神。
+**定義**：假設傅立葉分量 $U_G$ 遠小於電子在區邊界的動能。
+**範例**：除了區邊界附近，能帶幾乎還是自由電子拋物線；只在 $k=\pm\pi/a$ 撬開 $2|U_G|$ 的縫。
+**在 Kittel 哪裡**：「近自由電子模型」節。
+</details>
+
+![近自由電子在 BZ 邊界開能隙 $=2|U_G|$](../../figs/f06_nfe_gap.svg)
+
+<details>
+<summary><b>▸ 布拉格反射（Bragg reflection）→ 駐波（standing wave）</b></summary>
+
+**白話**：當電子波長對上晶格間距（$k=\pm\pi/a$），右行波被反射成左行波，反覆來回 → 不再前進，變駐波。
+**高中接點**：兩端固定的弦只能有特定駐波；這裡是電子波。
+**定義**：滿足 $k=\pm\pi/a$（即 $(k+G)^2=k^2$，$G=2\pi n/a$）時發生。
+**範例**：兩個駐波 $\psi(+)=\cos\tfrac{\pi x}{a}$（電荷堆在 $x=0,a,2a$ 的正離子上，勢能低）與 $\psi(-)=\sin\tfrac{\pi x}{a}$（堆在離子間，勢能高），能量差 $=E_g$。
+**在 Kittel 哪裡**：「能隙的由來」節，圖 3。
+</details>
+
+<details>
+<summary><b>▸ 布洛赫函數 / 布洛赫定理（Bloch function / theorem）</b></summary>
+
+**白話**：週期勢下的電子波，必定是「平面波」乘上「跟晶格同週期的函數」。
+**高中接點**：自由電子是純平面波 $e^{ikx}$；現在多乘一個週期調變 $u_k$。
+**定義**：$\psi_{\mathbf k}(\mathbf r)=e^{i\mathbf k\cdot\mathbf r}\,u_{\mathbf k}(\mathbf r)$，其中 $u_{\mathbf k}(\mathbf r+\mathbf T)=u_{\mathbf k}(\mathbf r)$（$\mathbf T$ 為晶格平移向量）。
+**範例**：晶格平移 $\mathbf r\to\mathbf r+\mathbf T$ 只讓波函數乘上相位 $e^{i\mathbf k\cdot\mathbf T}$——這就是 Bloch 定理的指紋。
+**在 Kittel 哪裡**：「布洛赫函數」「布洛赫定理的重述」節。
+</details>
+
+<details>
+<summary><b>▸ 晶體動量（crystal momentum）$\hbar\mathbf k$</b></summary>
+
+**白話**：標記布洛赫函數的 $\mathbf k$，在碰撞守恆律裡扮演「動量」的角色，但不是真動量。
+**高中接點**：動量守恆 $p_1+p_2=p_1'+p_2'$；這裡多了個 $\mathbf G$。
+**定義**：電子吸收波數 $\mathbf q$ 的聲子，選擇規則 $\mathbf k+\mathbf q=\mathbf k'+\mathbf G$（$\mathbf G$ 為倒格向量）。
+**範例**：把 $\mathbf k$ 任意加一個 $\mathbf G$ 不改變物理；所以通常選第一布里淵區內的 $\mathbf k$ 當標籤。
+**在 Kittel 哪裡**：「電子的晶格動量」節。
+</details>
+
+<details>
+<summary><b>▸ 克羅寧–潘尼模型（Kronig–Penney model）</b></summary>
+
+**白話**：用一排方形勢阱（或週期 δ 函數）當週期勢，能用初等函數解出能帶結構的教學範例。
+**高中接點**：方形位能井——你普物算過單一井，這裡排成一列。
+**定義**：δ 極限下得 $\dfrac{P}{Ka}\sin Ka+\cos Ka=\cos ka$，$P=\dfrac{mAa^2}{2\hbar^2}$（$P$ 衡量勢壘強度）。
+**範例**：左式只在 $[-1,1]$ 內才有解；落在區間外的能量 → 禁帶。能隙出現在 $ka=\pi,2\pi,3\pi,\dots$。
+**在 Kittel 哪裡**：「KRONIG–PENNEY 模型」「倒空間的 Kronig–Penney」節，圖 5、6。
+</details>
+
+![Kronig–Penney：$|f|\le1$ 才是允許帶，其餘為禁帶](../../figs/f06_kronig_penney.svg)
+
+<details>
+<summary><b>▸ 中心方程（central equation）</b></summary>
+
+**白話**：把週期勢下的薛丁格方程，從微分方程改寫成 $\mathbf k$ 空間裡一組代數方程（聯立方程組）。
+**高中接點**：解聯立方程比解微分方程直觀；行列式 = 0 才有非零解。
+**定義**：$(\lambda_k-\varepsilon)C(\mathbf k)+\sum_G U_G\,C(\mathbf k-\mathbf G)=0$，其中 $\lambda_k=\dfrac{\hbar^2k^2}{2m}$。
+**範例**：原則上有無窮多個係數 $C$，但實務上常只需保留 2 或 4 個就夠準。
+**在 Kittel 哪裡**：「週期性位勢中的電子波動方程式」「中央方程的解」節。
+</details>
+
+<details>
+<summary><b>▸ 第一布里淵區 / 約化區方案（first Brillouin zone / reduced zone scheme）</b></summary>
+
+**白話**：所有 $\mathbf k$ 都用「相差一個 $\mathbf G$」折回 $-\pi/a$ 到 $\pi/a$ 的範圍來標記與畫圖。
+**高中接點**：角度都化到 0–360° 之間；這裡是把 $k$ 化到第一區。
+**定義**：一維第一區 $-\pi/a\le k\le\pi/a$；能隙就出現在區邊界 $k=\pm\pi/a$。
+**範例**：空晶格近似就是把自由電子拋物線 $\varepsilon=\hbar^2(\mathbf k+\mathbf G)^2/2m$ 各個分支折回第一區疊著畫（圖 8）。
+**在 Kittel 哪裡**：「空晶格近似」節，圖 7、8。
+</details>
+
+<details>
+<summary><b>▸ 能隙的大小（gap size）$E_g=2|U_G|$</b></summary>
+
+**白話**：在區邊界，能隙大小恰等於晶體勢傅立葉分量大小的兩倍。
+**高中接點**：擾動越強（勢場起伏越大），縫撬得越開。
+**定義**：兩項近似下，能量兩根為 $\lambda_k\pm|U_G|$，故間隙 $=2|U_G|$。
+**範例**：$U_G$ 隨 $G$ 增大而快速變小（裸庫侖勢 $\propto1/G^2$），所以高階能隙越來越窄。
+**在 Kittel 哪裡**：「能隙的大小」「接近能帶邊界的近似解」節，圖 9、10。
+</details>
+
+<details>
+<summary><b>▸ 能帶中的軌域數（orbitals per band）$2N$</b></summary>
+
+**白話**：一個能帶能裝的電子數＝原胞數 $N$ ×2（自旋）。
+**高中接點**：「每軌道 2 電子」放大到整條能帶。
+**定義**：每原胞每能帶恰好提供 1 個獨立 $k$ 值；加自旋 → 每能帶 $2N$ 個軌域。
+**範例**：每原胞 1 個價電子 → 能帶半滿 → 金屬；每原胞 2 個 → 可剛好填滿。
+**在 Kittel 哪裡**：「能帶中的軌域數」節。
+</details>
+
+<details>
+<summary><b>▸ 金屬 vs 絕緣體（metal / insulator）判據</b></summary>
+
+**白話**：能帶要嘛全滿要嘛全空 → 絕緣體；有能帶部分填滿（約 10%–90%）→ 金屬。
+**高中接點**：滿座的車廂沒人能動（不導電）；半滿才能流動。
+**定義**：晶體成為絕緣體的**必要條件**是每原胞價電子數為偶數（且能帶不重疊）。
+**範例**：鹼金屬（1 價）必為金屬；鹼土金屬（2 價）本該絕緣，但能帶重疊 → 變（不太好的）金屬；金剛石/Si/Ge 每原胞 8 價電子、能帶不重疊 → $T=0$ 時絕緣體。
+**在 Kittel 哪裡**：「金屬與絕緣體」節，圖 11。
+</details>
+
+<details>
+<summary><b>▸ 有效質量（effective mass）$m^*$ 與電洞（hole）</b></summary>
+
+**白話**：電子在週期勢中響應外場時，「看起來」的質量；可大、可小、甚至為負——負質量等價於帶正電的電洞。
+**高中接點**：$F=ma$ 的 $m$ 被晶體環境改寫。
+**定義**：本章先定性提出（細節在第 8 章半導體）。
+**範例**：Al、In 霍爾係數 $R_H>0$（上一章自由電子模型無解），正是因為載子表現得像帶正電的電洞——能帶理論才能自然解釋。
+**在 Kittel 哪裡**：章首引言段（與第 6 章霍爾反常呼應，細節留待第 8–9 章）。
+</details>
+
+![緊束縛能帶 $E(k)=-\alpha-2\gamma\cos(ka)$；帶底 $m^*>0$、帶頂 $m^*<0$](../../figs/f06_tight_binding.svg)
+
+## ⚠️ 讀這章常卡的點 ＋ 翻譯雷區
+
+- **$k$（布洛赫指標）vs $K$（Kronig–Penney 裡的波數）別搞混**：$k$ 是標記布洛赫函數、落在第一區的「好量子數」；$K=\sqrt{2m\varepsilon}/\hbar$ 是井內波數，由能量決定。Kittel 明說「$k$ 才是重要指標，不是 $K$」。
+- **「布拉格反射在區邊界」是整章的物理心臟**：能隙不是憑空冒出，而是 $k=\pm\pi/a$ 處駐波形成、兩種駐波在離子場中勢能不同所致。圖 3 是「理解能隙來源的關鍵」（Kittel 原話）。
+- **$\psi(+)$ 在下、$\psi(-)$ 在上？要看 $U$ 的符號**：哪個駐波能量低取決於勢的符號。常見約定下 $\psi(+)=\cos$ 把電荷堆在正離子上、能量低（能隙底，圖 2 的 A 點）；$\psi(-)=\sin$ 堆在離子間、能量高（能隙頂，B 點）。翻譯本符號標記常亂碼成 `(�)`，對照原文確認 ＋／－。
+- **「絕緣體必要條件是偶數價電子」不是充分條件**：偶數價電子但能帶重疊，仍會是金屬（鹼土金屬就是例子）。考試愛在這裡設陷阱。
+- **空晶格近似 = 先把自由電子折回第一區**：別誤以為這是新物理，它只是「自由電子能帶的約化區畫法」，是看能帶長相的暖身。
+- **中心方程的代數 vs 微分**：翻譯本說「這組方程似乎不悅目且令人畏懼」——它把連續的微分方程換成離散的 $C(\mathbf k-\mathbf G)$ 聯立式，原則上無窮多項，實務上保留 2–4 項即可。
+- **亂碼提醒**：本章核心式子（布拉格條件、駐波、中心方程、$2U\cos Gx$ 產生 $2U$ 能隙、能量兩根）大量落在 `==> picture ... omitted <==` 與斜體亂碼 `_�_` 裡，翻譯本看不到完整算式。完整推導請對照 [單元教學 unit06](../../單元教學/unit06_能帶與Bloch電子.html) 或 Kittel 原文。
+
+## 📝 實際範例（Worked Examples）
+
+> 常數備用：$\hbar=1.055\times10^{-34}\,\mathrm{J\,s}$、$m_e=9.11\times10^{-31}\,\mathrm{kg}$、$1\ \mathrm{eV}=1.602\times10^{-19}\,\mathrm{J}$、$1\ \text{\AA}=10^{-10}\,\mathrm{m}$。
+
+### 例題 1：近自由電子（nearly free electron）在布里淵區邊界的能隙（energy gap）
+
+**題目**：在一維近自由電子模型中，布里淵區邊界（$k=\pm\pi/a$）的能隙為 $E_g=2|U_G|$，其中 $U_G$ 是晶體勢的傅立葉分量（Fourier component）。若 $U_G=1.5$ eV，求能隙 $E_g$。
+
+**Step 1**：寫下能隙公式。兩項近似下，邊界處能量兩根為 $\lambda_k\pm|U_G|$（$\lambda_k=\hbar^2k^2/2m$），故
+$$E_g=(\lambda_k+|U_G|)-(\lambda_k-|U_G|)=2|U_G|.$$
+
+**Step 2**：代入 $U_G=1.5$ eV。
+$$E_g=2\times1.5\ \mathrm{eV}=3.0\ \mathrm{eV}.$$
+
+$$\boxed{E_g=2|U_G|=3.0\ \mathrm{eV}}$$
+
+> 物理意義：能隙正比於勢的起伏強度。$U_G$ 隨倒格向量 $G$ 增大而快速變小（裸庫侖勢 $\propto1/G^2$），所以高階能隙越來越窄。
+
+### 例題 2：緊束縛模型（tight-binding model）的帶寬（bandwidth）與有效質量（effective mass）
+
+**題目**：一維緊束縛能帶 $E(k)=-\alpha-2\gamma\cos(ka)$（$\alpha$ 為位能項、$\gamma$ 為近鄰跳躍積分（hopping/overlap integral））。(a) 求帶寬；(b) 在 $k=0$ 附近的有效質量 $m^*=\dfrac{\hbar^2}{2\gamma a^2}$。取 $\gamma=1$ eV、$a=3\ \text{\AA}$，求 $m^*$（並與 $m_e$ 比較）。
+
+**Step 1（帶寬）**：$\cos(ka)$ 在 $k=0$ 取最小能量 $E_{\min}=-\alpha-2\gamma$，在 $ka=\pi$ 取最大能量 $E_{\max}=-\alpha+2\gamma$。
+$$\text{帶寬}=E_{\max}-E_{\min}=4\gamma=4\times1\ \mathrm{eV}=4\ \mathrm{eV}.$$
+
+**Step 2（推有效質量）**：在 $k=0$ 附近展開 $\cos(ka)\approx1-\tfrac12(ka)^2$，得
+$$E(k)\approx-\alpha-2\gamma+\gamma a^2 k^2.$$
+與 $E=\text{常數}+\dfrac{\hbar^2k^2}{2m^*}$ 比較係數，$\dfrac{\hbar^2}{2m^*}=\gamma a^2$，即 $m^*=\dfrac{\hbar^2}{2\gamma a^2}$。
+
+**Step 3（代數字）**：$\gamma=1\ \mathrm{eV}=1.602\times10^{-19}\,\mathrm{J}$、$a^2=(3\times10^{-10})^2=9\times10^{-20}\,\mathrm{m^2}$。
+$$m^*=\frac{(1.055\times10^{-34})^2}{2\times(1.602\times10^{-19})\times(9\times10^{-20})}=\frac{1.113\times10^{-68}}{2.88\times10^{-38}}=3.86\times10^{-31}\ \mathrm{kg}.$$
+
+**Step 4（比較）**：$\dfrac{m^*}{m_e}=\dfrac{3.86\times10^{-31}}{9.11\times10^{-31}}=0.42.$
+
+$$\boxed{\text{帶寬}=4\gamma=4\ \mathrm{eV},\qquad m^*=\frac{\hbar^2}{2\gamma a^2}\approx3.9\times10^{-31}\ \mathrm{kg}\approx0.42\,m_e}$$
+
+> 物理意義：跳躍積分 $\gamma$ 越大（軌道重疊越強）→ 帶寬越寬、有效質量越小（電子越「輕」、越易移動）。窄帶（小 $\gamma$）則對應大 $m^*$、重載子。
+
+### 例題 3：由能帶曲率（band curvature）反推有效質量
+
+**題目**：有效質量的一般定義是 $\dfrac{1}{m^*}=\dfrac{1}{\hbar^2}\dfrac{d^2E}{dk^2}$。對拋物線型能帶 $E=\dfrac{\hbar^2k^2}{2m^*}$，若實驗（或能帶計算）測得帶底的曲率 $\dfrac{d^2E}{dk^2}=2.44\times10^{-38}\,\mathrm{J\,m^2}$，求 $m^*$。
+
+**Step 1**：對 $E=\dfrac{\hbar^2k^2}{2m^*}$ 微分兩次，確認曲率與 $m^*$ 的關係。
+$$\frac{dE}{dk}=\frac{\hbar^2k}{m^*},\qquad \frac{d^2E}{dk^2}=\frac{\hbar^2}{m^*}.$$
+
+**Step 2**：解出 $m^*=\dfrac{\hbar^2}{d^2E/dk^2}$，代入數字。
+$$m^*=\frac{1.113\times10^{-68}}{2.44\times10^{-38}}=4.56\times10^{-31}\ \mathrm{kg}.$$
+
+**Step 3（比較）**：$\dfrac{m^*}{m_e}=\dfrac{4.56\times10^{-31}}{9.11\times10^{-31}}=0.50.$
+
+$$\boxed{m^*=\frac{\hbar^2}{\,d^2E/dk^2\,}\approx4.6\times10^{-31}\ \mathrm{kg}\approx0.50\,m_e}$$
+
+> 物理意義：能帶**越彎（曲率大）→ $m^*$ 越小**；能帶平坦（曲率小）→ $m^*$ 大。若曲率為負（帶頂附近），則 $m^*<0$，等價於帶正電的**電洞（hole）**——這正是 Al、In 霍爾係數 $R_H>0$ 的根源。
+
+## 🔗 延伸
+
+- 完整課文：[Kittel 翻譯本](../Kittel_翻譯.html)（搜尋「能帶」即可定位）
+- 深入推導＋考題：[單元教學 unit06](../../單元教學/unit06_能帶與Bloch電子.html)
+- 練歷年題：[逐題詳解](../../考古題/詳解/index.html)
+
+</script>
+<script>
+function renderMarkdownWithMath(md) {
+  const mathBlocks = [];
+  function escapeHtmlChars(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, m => {
+    let clean = m.replace(/\n\s*>\s*/g, '\n');
+    mathBlocks.push(escapeHtmlChars(clean));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  md = md.replace(/\$([^\$\n]+?)\$/g, m => {
+    mathBlocks.push(escapeHtmlChars(m));
+    return '@@MATHBLK' + (mathBlocks.length-1) + '@@';
+  });
+  let html = marked.parse(md);
+  html = html.replace(/@@MATHBLK(\d+)@@/g, (_, i) => mathBlocks[parseInt(i,10)]);
+  return html;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const md = document.getElementById('md-source').textContent;
+  document.getElementById('content').innerHTML = renderMarkdownWithMath(md);
+  document.getElementById('content').style.display = '';
+  const loading = document.getElementById('loading');
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open && !d.dataset.rendered) {
+        d.dataset.rendered = '1';
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([d]);
+      }
+    });
+  });
+  function typeset() {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('content')])
+        .then(() => { loading.style.display = 'none'; })
+        .catch(e => { loading.textContent = 'MathJax error: ' + e; });
+    } else setTimeout(typeset, 300);
+  }
+  typeset();
+});
+</script>
+<!-- toc-sidebar -->
+<button id="toc-toggle" type="button" aria-label="開關目錄">☰ 目錄</button>
+<nav id="toc" aria-label="本頁目錄"></nav>
+<style>
+  #toc-toggle { position: fixed; top: 12px; left: 12px; z-index: 1001; background: #1a4d7c; color: #fff;
+    border: none; border-radius: 6px; padding: 6px 11px; font-size: 0.9em; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); opacity: 0.9; }
+  #toc-toggle:hover { opacity: 1; }
+  #toc { position: fixed; top: 0; left: 0; width: 250px; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    background: #f4f8fc; border-right: 1px solid #c5d5e5; padding: 3.4em 0.7em 2em; z-index: 1000;
+    transform: translateX(-100%); transition: transform 0.2s ease; font-size: 0.9em; }
+  #toc.open { transform: translateX(0); box-shadow: 2px 0 14px rgba(0,0,0,0.15); }
+  #toc .toc-title { font-weight: 700; color: #1a4d7c; font-size: 1.0em; margin: 0 0 0.5em; padding: 0 0.4em; }
+  #toc a { display: block; text-decoration: none; color: #34506b; padding: 3px 0.5em; border-radius: 4px;
+    line-height: 1.4; border-left: 2px solid transparent; }
+  #toc a:hover { background: #e3eef8; color: #1a4d7c; }
+  #toc a.h3 { padding-left: 1.5em; font-size: 0.92em; color: #5d728a; }
+  #toc a.h4 { padding-left: 2.7em; font-size: 0.86em; color: #6f8197; }
+  #toc a.active { background: #e8f0f9; color: #1a4d7c; border-left-color: #1a4d7c; font-weight: 600; }
+  @media (min-width: 1280px) {
+    #toc { transform: none; box-shadow: none; }
+    #toc-toggle { display: none; }
+    body { margin-left: 290px; }
+  }
+  @media print { #toc, #toc-toggle { display: none !important; } body { margin-left: auto !important; } }
+</style>
+<script>
+(function () {
+  function buildTOC() {
+    var content = document.getElementById('content');
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('toc-toggle');
+    if (!content || !toc) return;
+    var heads = content.querySelectorAll('h2, h3, h4');
+    var frag = document.createDocumentFragment();
+    var title = document.createElement('div');
+    title.className = 'toc-title'; title.textContent = '本頁目錄';
+    frag.appendChild(title);
+    var items = [];
+    heads.forEach(function (h, i) {
+      if (h.closest('details')) return;
+      if (!h.id) h.id = 'sec-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      a.innerHTML = label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      a.className = h.tagName.toLowerCase();
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+        if (window.matchMedia('(max-width: 1279px)').matches) toc.classList.remove('open');
+      });
+      frag.appendChild(a);
+      items.push({ el: h, link: a });
+    });
+    if (!items.length) { toc.style.display = 'none'; if (toggle) toggle.style.display = 'none'; return; }
+    toc.innerHTML = ''; toc.appendChild(frag);
+    if (toggle) toggle.addEventListener('click', function () { toc.classList.toggle('open'); });
+    var ticking = false;
+    function spy() {
+      ticking = false;
+      var y = window.scrollY + 120, cur = items[0];
+      for (var k = 0; k < items.length; k++) {
+        if (items[k].el.getBoundingClientRect().top + window.scrollY <= y) cur = items[k];
+      }
+      items.forEach(function (it) { it.link.classList.toggle('active', it === cur); });
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
+    (function typesetTOC() {
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([toc]).catch(function () {}); }
+      else { setTimeout(typesetTOC, 300); }
+    })();
+  }
+  function whenReady() {
+    var content = document.getElementById('content');
+    if (content && content.querySelector('h1, h2, h3')) { buildTOC(); return; }
+    var tries = 0;
+    var timer = setInterval(function () {
+      var c = document.getElementById('content');
+      if ((c && c.querySelector('h1, h2, h3')) || ++tries > 100) { clearInterval(timer); buildTOC(); }
+    }, 50);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', whenReady);
+  else whenReady();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模擬⑦ 朗之萬／居里</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 模擬首頁</a>
+  <a href="sim_semiconductor.html">⑥ 半導體</a>
+  <a class="here" href="sim_langevin_curie.html">⑦ 磁性</a>
+  <a href="sim_dispersion.html">① 色散</a>
+  <a href="../單元教學/unit08_磁性.html">unit08</a>
+</div>
+
+<h1>⑦ 朗之萬函數 ＋ 居里定律（Langevin / Curie）</h1>
+<p class="intro">
+  經典順磁：磁化 M = N μ L(α)，α = μB / kT，L(α)=coth α − 1/α。
+  高溫小場 L(α)≈α/3 → χ = C/T（居里定律）。
+  加上平均場（示意）可看到 T&gt;T_C 自發磁化消失。
+</p>
+
+<div class="layout">
+  <div class="panel">
+    <h2>參數</h2>
+    <div class="switch-row">
+      <button type="button" id="modePara" class="on">順磁 Langevin</button>
+      <button type="button" id="modeFerro">鐵磁平均場（示意）</button>
+    </div>
+    <div class="control">
+      <label>溫度 T <span class="val" data-for="T">1.2</span></label>
+      <input id="T" type="range" min="0.15" max="3.5" step="0.05" value="1.2" data-digits="2">
+    </div>
+    <div class="control" id="rowB">
+      <label>外場 B <span class="val" data-for="B">0.4</span></label>
+      <input id="B" type="range" min="0" max="3" step="0.05" value="0.4" data-digits="2">
+    </div>
+    <div class="control">
+      <label>磁矩 μ（=1 單位） <span class="val" data-for="mu">1</span></label>
+      <input id="mu" type="range" min="0.4" max="2" step="0.05" value="1" data-digits="2">
+    </div>
+    <div class="control" id="rowTc" style="display:none">
+      <label>居里溫度 T_C <span class="val" data-for="Tc">1</span></label>
+      <input id="Tc" type="range" min="0.3" max="2.5" step="0.05" value="1" data-digits="2">
+      <div class="hint">T&lt;T_C 可有自發 M；T→T_C⁻ 自發 M→0</div>
+    </div>
+
+    <div class="formula">
+      <span class="eq">L(α) = coth(α) − 1/α ， α = μ B / kT</span>
+      <span class="eq">M = N μ L(α) ； α≪1 ⇒ L≈α/3 ⇒ χ = N μ² / 3kT = C/T</span>
+      <span class="eq">平均場示意：解 m = L( m·(T_C/T) + μB/kT )（歸一 m=M/M_sat）</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="plot-wrap"><svg id="plot"></svg></div>
+    <div class="legend" id="legend"></div>
+    <div class="kpi" id="kpi"></div>
+    <div class="readout" id="readout"></div>
+  </div>
+</div>
+
+<footer>k_B=1、N=1 教學單位。鐵磁分支用簡易固定點迭代，展示自發磁化隨 T 消失的定性行為。</footer>
+<script src="shared.js"></script>
+<script>
+(function () {
+  const plot = new SSP.Plot2D(document.getElementById("plot"), {
+    width: 680, height: 430,
+    xDomain: [0, 3],
+    yDomain: [0, 1.05],
+    xLabel: "α = μB/kT   或   T",
+    yLabel: "L 或 m = M/M_sat",
+  });
+
+  let mode = "para";
+  const btnP = document.getElementById("modePara");
+  const btnF = document.getElementById("modeFerro");
+  const rowB = document.getElementById("rowB");
+  const rowTc = document.getElementById("rowTc");
+  btnP.onclick = () => { mode = "para"; btnP.classList.add("on"); btnF.classList.remove("on"); rowB.style.display = ""; rowTc.style.display = "none"; redraw(); };
+  btnF.onclick = () => { mode = "ferro"; btnF.classList.add("on"); btnP.classList.remove("on"); rowB.style.display = ""; rowTc.style.display = ""; redraw(); };
+
+  const R = SSP.bindAll(["T", "B", "mu", "Tc"], redraw);
+
+  function coth(x) {
+    if (Math.abs(x) < 1e-8) return 1 / x; // will cancel in L
+    return (Math.exp(2 * x) + 1) / (Math.exp(2 * x) - 1);
+  }
+  function langevin(a) {
+    if (Math.abs(a) < 1e-5) return a / 3 - (a * a * a) / 45;
+    return coth(a) - 1 / a;
+  }
+
+  function solveMF(T, Tc, alphaExt) {
+    // m = L( m * Tc/T + alphaExt )
+    let m = T < Tc ? Math.sqrt(Math.max(0, 3 * (1 - T / Tc))) : 0; // seed
+    if (alphaExt > 0) m = Math.max(m, 0.1);
+    for (let i = 0; i < 80; i++) {
+      const arg = m * (Tc / T) + alphaExt;
+      const m2 = langevin(arg);
+      m = 0.5 * m + 0.5 * m2;
+    }
+    return SSP.clamp(m, 0, 1);
+  }
+
+  function redraw() {
+    const T = R.T(), B = R.B(), mu = R.mu(), Tc = R.Tc();
+
+    if (mode === "para") {
+      const alphas = SSP.linspace(0.01, 8, 200);
+      const ptsL = alphas.map((a) => [a, langevin(a)]);
+      const ptsLin = alphas.map((a) => [a, a / 3]);
+      const aNow = (mu * B) / T;
+      const Lnow = langevin(aNow);
+      const chi = (mu * mu) / (3 * T); // N=1,k=1
+
+      plot.setDomains([0, 8], [0, 1.05]);
+      plot.xLabel = "α = μB / kT";
+      plot.yLabel = "L(α)";
+      plot.clear();
+      plot.polyline(ptsLin, { stroke: "#c47a12", width: 1.7, dash: "5 4" });
+      plot.polyline(ptsL, { stroke: "#1a4d7c", width: 2.7 });
+      plot.circle(Math.min(aNow, 8), langevin(Math.min(aNow, 8)), 5, { fill: "#c0392b" });
+      plot.vline(aNow, { stroke: "#c0392b", dash: "3 3", opacity: aNow > 8 ? 0.3 : 0.9 });
+
+      document.getElementById("legend").innerHTML = `
+        <span style="color:#1a4d7c">L(α) 朗之萬</span>
+        <span style="color:#c47a12">α/3 高溫線性</span>`;
+
+      document.getElementById("kpi").innerHTML = `
+        <div class="box"><div class="k">α = μB/kT</div><div class="v">${SSP.fmt(aNow, 3)}</div></div>
+        <div class="box"><div class="k">L(α)</div><div class="v">${SSP.fmt(Lnow, 3)}</div></div>
+        <div class="box"><div class="k">M / M_sat</div><div class="v">${SSP.fmt(Lnow, 3)}</div></div>
+        <div class="box"><div class="k">χ ∼ C/T</div><div class="v">${SSP.fmt(chi, 3)}</div></div>`;
+
+      document.getElementById("readout").innerHTML = `
+        <strong>你應該看到</strong>
+        <ul>
+          <li>小 α（高 T 或小 B）：L 貼橘線 α/3 → 居里 χ∝1/T。</li>
+          <li>大 α（低 T 或大 B）：L→1，磁化飽和，不能再用線性 χ。</li>
+          <li>升 T：同一 B 下 α 變小，工作點往左滑，M 下降。</li>
+          <li>經典模型無量子自旋；資格考常考 L 的定義與高溫展開。</li>
+        </ul>`;
+    } else {
+      // M(T) spontaneous + with field
+      const Ts = SSP.linspace(0.05, 3.2, 160);
+      const pts0 = [], ptsB = [];
+      Ts.forEach((t) => {
+        const aext = (mu * B) / t;
+        pts0.push([t, solveMF(t, Tc, 0)]);
+        ptsB.push([t, solveMF(t, Tc, aext)]);
+      });
+      const mNow0 = solveMF(T, Tc, 0);
+      const mNowB = solveMF(T, Tc, (mu * B) / T);
+
+      plot.setDomains([0, 3.2], [0, 1.05]);
+      plot.xLabel = "T";
+      plot.yLabel = "m = M / M_sat";
+      plot.clear();
+      plot.vline(Tc, { stroke: "#888", dash: "4 3" });
+      plot.label(Tc + 0.05, 0.95, "T_C", { fill: "#555", "font-size": 12 });
+      plot.polyline(pts0, { stroke: "#1a4d7c", width: 2.6 });
+      plot.polyline(ptsB, { stroke: "#c0392b", width: 2.2, dash: "4 3" });
+      plot.circle(T, mNowB, 5, { fill: "#c47a12" });
+      plot.vline(T, { stroke: "#c47a12", dash: "3 3" });
+
+      document.getElementById("legend").innerHTML = `
+        <span style="color:#1a4d7c">自發 m(B=0)</span>
+        <span style="color:#c0392b">有外場 m(B)</span>`;
+
+      document.getElementById("kpi").innerHTML = `
+        <div class="box"><div class="k">T / T_C</div><div class="v">${SSP.fmt(T / Tc, 3)}</div></div>
+        <div class="box"><div class="k">m 自發</div><div class="v">${SSP.fmt(mNow0, 3)}</div></div>
+        <div class="box"><div class="k">m (有 B)</div><div class="v">${SSP.fmt(mNowB, 3)}</div></div>
+        <div class="box"><div class="k">狀態</div><div class="v">${T < Tc ? "T&lt;T_C" : "T&gt;T_C"}</div></div>`;
+
+      document.getElementById("readout").innerHTML = `
+        <strong>你應該看到</strong>
+        <ul>
+          <li>藍線：B=0 時，T&lt;T_C 有自發磁化；T→T_C⁻ 時 m→0；T&gt;T_C 自發 m=0。</li>
+          <li>紅虛線：外場把 T&gt;T_C 的順磁區「拉」出一點磁化，並讓過渡變圓滑。</li>
+          <li>這是平均場示意，不是完整 Heisenberg 解；考試重點是 <b>T_C 以上自發磁化消失</b> 與 χ 在 T_C 附近變大。</li>
+          <li>對照順磁頁：鐵磁的「有效場」= 外場 + 分子場 ∝ M。</li>
+        </ul>`;
+    }
+  }
+
+  redraw();
+})();
+</script>
+</body>
+</html>

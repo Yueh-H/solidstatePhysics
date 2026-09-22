@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab ⑧ Langevin / Curie</title>
+<link rel="stylesheet" href="../模擬/shared.css">
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<div class="nav">
+  <a class="home" href="index.html">← 數學 Lab</a>
+  <a href="lab_madelung.html">⑦ Madelung</a>
+  <a class="here" href="lab_langevin.html">⑧ Langevin</a>
+  <a href="../模擬/sim_langevin_curie.html">完整模擬</a>
+</div>
+
+<h1>⑧ 朗之萬 → 居里定律</h1>
+<div class="goal">
+  L(α)=cothα−1/α；α≪1 → α/3 → χ∝1/T。內嵌<strong>L(α) 曲線與工作點</strong>。
+</div>
+<div class="lab-progress" id="progress"></div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 1</span>α = μB/kT + 示意</h3>
+  <div class="eqbox">E = −μB cosθ ， α = μB/kT</div>
+  <div class="viz-panel">
+    <div class="viz-title">SVG：磁矩在磁場中的角度（示意）</div>
+    <svg viewBox="0 0 420 160" xmlns="http://www.w3.org/2000/svg">
+      <rect width="420" height="160" fill="#fcfdff"/>
+      <line x1="80" y1="120" x2="280" y2="120" stroke="#c47a12" stroke-width="2"/>
+      <polygon points="280,120 268,114 268,126" fill="#c47a12"/>
+      <text x="200" y="145" fill="#c47a12" font-size="12">B</text>
+      <line x1="80" y1="120" x2="200" y2="50" stroke="#1a4d7c" stroke-width="2.5"/>
+      <polygon points="200,50 188,54 196,64" fill="#1a4d7c"/>
+      <text x="210" y="70" fill="#1a4d7c" font-size="13">μ</text>
+      <path d="M130 120 A50 50 0 0 0 160 80" fill="none" stroke="#888"/>
+      <text x="145" y="95" fill="#555" font-size="12">θ</text>
+      <text x="300" y="60" fill="#234" font-size="13">E=−μB cosθ</text>
+      <text x="300" y="85" fill="#567" font-size="12">對齊 B 能量最低</text>
+    </svg>
+  </div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>高 T → α 小 → 幾乎不排序。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>大 B → α 大 → 趨近飽和。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>經典連續角；量子自旋用 Brillouin。</div>
+  </div>
+  <div class="blank-row">
+    <span>高 T 或小 B 時 α 變</span>
+    <input id="l1" type="text" data-answers="小|很小|<<1|小於1|small" placeholder="大/小">
+    <button type="button" data-check="l1" data-answers="小|很小|<<1|小於1|small">檢查</button>
+    <div class="fb" id="l1Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 2–3</span>L(α) 曲線模擬</h3>
+  <div class="eqbox">L(α) = coth α − 1/α ≈ α/3 &nbsp;(α≪1)</div>
+  <div class="viz-panel">
+    <div class="viz-title">互動：調 α，對照 L 與 α/3</div>
+    <svg id="vizL"></svg>
+    <div class="viz-controls">
+      <div>
+        <label>α = μB/kT <span class="v" data-val="alphaL">1</span></label>
+        <input id="alphaL" type="range" min="0.05" max="8" step="0.05" value="1" data-digits="2">
+      </div>
+      <div>
+        <label>或：T（B,μ 固定） <span class="v" data-val="Tfrom">1</span></label>
+        <input id="Tfrom" type="range" min="0.2" max="5" step="0.05" value="1" data-digits="2">
+      </div>
+    </div>
+    <div class="viz-kpi" id="Lkpi"></div>
+    <p class="note-tip">第二滑桿假設 μB=1，α=1/T。升溫 = 工作點往左滑向線性區。</p>
+  </div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>α=0.3 → L≈0.1，α/3=0.1（貼合）。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>α=3 → L≈0.67，α/3=1（線性失效）。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>α→∞ → L→1 飽和。</div>
+  </div>
+  <div class="blank-row">
+    <span>小 α：L≈</span>
+    <input id="l3" type="text" data-answers="alpha/3|α/3|a/3" placeholder="α/3">
+    <button type="button" data-check="l3" data-answers="alpha/3|α/3|a/3">檢查</button>
+    <div class="fb" id="l3Fb"></div>
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 4</span>居里 χ∝1/T</h3>
+  <div class="viz-panel">
+    <div class="viz-title">χ ∝ 1/T（示意）</div>
+    <svg id="vizChi"></svg>
+  </div>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>M≈Nμ²B/(3kT) ⇒ χ=C/T。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>鐵磁 T&gt;T_C 亦近似 Curie–Weiss χ∝1/(T−T_C)。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>2025 考古：T&gt;T_C 自發 M=0。</div>
+  </div>
+  <div class="choice-row">
+    <span style="width:100%">升溫（小場）χ</span>
+    <button type="button" data-choice="1" data-okmsg="✓ ∝1/T">下降</button>
+    <button type="button" data-choice="0">上升</button>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="step">
+  <h3><span class="step-tag">Step 5</span>飽和與 T_C</h3>
+  <div class="examples">
+    <div class="ex-card"><div class="ex-h">範例 A</div>大 α：不能再用 χ 線性。</div>
+    <div class="ex-card"><div class="ex-h">範例 B</div>平均場：T→T_C⁻ 自發 m→0。</div>
+    <div class="ex-card"><div class="ex-h">範例 C</div>完整曲線見全站磁性模擬。</div>
+  </div>
+  <div class="blank-row">
+    <span>T&gt;T_C 自發 M</span>
+    <input id="l5" type="text" data-answers="0|零|消失|none|zero" placeholder="？">
+    <button type="button" data-check="l5" data-answers="0|零|消失|none|zero">檢查</button>
+    <div class="fb" id="l5Fb"></div>
+  </div>
+</div>
+
+<div class="done-banner" id="doneBanner">
+  <h3>數學 Lab 全套完成</h3>
+  <p><a href="index.html">Lab 首頁</a> · <a href="../模擬/sim_langevin_curie.html">磁性模擬</a> · <a href="../考點地圖.html">考點地圖</a></p>
+</div>
+<div class="nav-steps">
+  <button type="button" id="btnPrev">← 上一步</button>
+  <button type="button" id="btnNext" class="primary">下一步 →</button>
+  <button type="button" id="btnReveal">一次展開全部</button>
+  <span class="meta" id="stepMeta"></span>
+</div>
+<footer>Lab ⑧ Langevin 曲線模擬</footer>
+<script src="lab.js"></script>
+<script src="viz.js"></script>
+<script>
+new MathLab.StepLab({});
+function langevin(a) {
+  if (Math.abs(a) < 1e-5) return a / 3;
+  const e = Math.exp(2 * a);
+  const coth = (e + 1) / (e - 1);
+  return coth - 1 / a;
+}
+(function () {
+  const svg = document.getElementById("vizL");
+  const plot = new LabViz.Plot(svg, {
+    w: 520, h: 280, xD: [0, 8], yD: [0, 1.05],
+    xLabel: "α", yLabel: "L(α)",
+  });
+  const rA = LabViz.bindRange("alphaL", () => { syncFromAlpha(); draw(); });
+  const rT = LabViz.bindRange("Tfrom", () => { syncFromT(); draw(); });
+  let lock = false;
+  function syncFromAlpha() {
+    if (lock) return;
+    lock = true;
+    const a = rA();
+    const T = 1 / a;
+    const tEl = document.getElementById("Tfrom");
+    if (T >= 0.2 && T <= 5) {
+      tEl.value = T;
+      const val = document.querySelector('[data-val="Tfrom"]');
+      if (val) val.textContent = LabViz.fmt(T, 2);
+    }
+    lock = false;
+  }
+  function syncFromT() {
+    if (lock) return;
+    lock = true;
+    const T = rT();
+    const a = 1 / T;
+    const aEl = document.getElementById("alphaL");
+    aEl.value = Math.min(8, Math.max(0.05, a));
+    const val = document.querySelector('[data-val="alphaL"]');
+    if (val) val.textContent = LabViz.fmt(parseFloat(aEl.value), 2);
+    lock = false;
+  }
+  function draw() {
+    const a = parseFloat(document.getElementById("alphaL").value);
+    const ptsL = LabViz.linspace(0.05, 8, 160).map((x) => [x, langevin(x)]);
+    const ptsLin = LabViz.linspace(0.05, 3, 80).map((x) => [x, x / 3]);
+    plot.setDomain([0, 8], [0, 1.05]);
+    plot.poly(ptsLin, { stroke: "#c47a12", width: 1.6, dash: "5 4" });
+    plot.poly(ptsL, { stroke: "#1a4d7c", width: 2.5 });
+    const La = langevin(a);
+    plot.vline(a, { stroke: "#c0392b" });
+    plot.dot(a, La, 5, "#c0392b");
+    document.getElementById("Lkpi").innerHTML =
+      `<span>α=<b>${LabViz.fmt(a, 2)}</b></span>` +
+      `<span>L=<b>${LabViz.fmt(La, 3)}</b></span>` +
+      `<span>α/3=<b>${LabViz.fmt(a / 3, 3)}</b></span>` +
+      `<span>相對誤差 <b>${LabViz.fmt(Math.abs(La - a / 3) / Math.max(La, 0.01) * 100, 1)}%</b></span>`;
+  }
+  draw();
+})();
+(function () {
+  const svg = document.getElementById("vizChi");
+  const plot = new LabViz.Plot(svg, {
+    w: 520, h: 240, xD: [0.2, 4], yD: [0, 5],
+    xLabel: "T", yLabel: "χ ∝ 1/T",
+  });
+  const pts = LabViz.linspace(0.25, 4, 80).map((T) => [T, 1 / T]);
+  plot.poly(pts, { stroke: "#1a4d7c", width: 2.5 });
+  plot.label(2.5, 0.5, "Curie", { fill: "#1a4d7c", size: 12 });
+})();
+</script>
+</body>
+</html>
